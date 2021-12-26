@@ -34,6 +34,9 @@ $how_it_works_title = $fields['how_it_works_title'];
 
 $choose_event = $fields['choose_event'];
 
+/* Carousel */
+$stripe = $fields['new_stripe'];
+//$carousel = $fields['carusela'];
 ?>
 
 <!--Banner area-->
@@ -60,6 +63,46 @@ $choose_event = $fields['choose_event'];
     </div>
     <!--End Banner area-->
 <?php endif; ?>
+<!--Test Stripe-->
+<?php if ($stripe): ?>
+    <?php
+    $carousel = $stripe[0];
+
+//        var_dump($carousel);
+        foreach ($carousel as $courses):
+//        var_dump($courses);?>
+
+        <div class="courses-stripe" style="display: flex; flex-direction: row;width: 80%; align-items: baseline ; justify-content: center; margin: 20px auto">
+
+        <?php
+            foreach ($courses as $course):
+//                print_r($course);
+            $id = $course->ID;
+//             $title = $course->post_title;
+             $post = get_post($id);
+             $title = get_the_title($id);
+             $url = $post->guid;
+             $institution = get_field('org',$id);
+             $institution_name = $institution->post_title;
+//             print_r($institution->post_title);
+            $thumb = get_the_post_thumbnail_url($id);
+
+             ?>
+            <div class="course-stripe-item" style="width: 253px; height: 277px; margin: 0 15px">
+                <div class="course-img" style="background-image: url(<?= $thumb ?>);background-position: center center;background-repeat: no-repeat;background-size: cover; width: 253px; height: 124px; border-radius: 10px;box-shadow: 0 5px 15px rgba(40, 40, 40, 0.2);">
+                </div>
+                    <h3><a href="<?= $url ?>"><?= $title ?></a></h3>
+                    <p><?= $institution_name?></p>
+            </div>
+            <?php
+            endforeach;?>
+                    </div>
+        <?php
+        endforeach;
+//        var_dump($title);
+        ?>
+<?php endif; ?>
+
 <!--academic institution slider-->
 <?php if ($academic_institutions) : ?>
     <?= get_academic_institution_slider($academic_institutions); ?>
