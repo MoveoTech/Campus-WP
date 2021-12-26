@@ -1,0 +1,1267 @@
+
+@media(max-width: 1439px) {
+    nav.header-nav ul {
+        padding: 0;
+        height: 31px;
+        line-height: 38px;
+    }
+    .menu-header ul li {
+        padding: 0 4px;
+    }
+    .login_lang_wrap {
+        bottom: 5px;
+    }
+    .login a, a.link-my-courses, .user-information {
+        font-size: 15px;
+    }
+    .social-equality-logo{
+        width: 136px;
+    }
+    /*New Header*/
+}
+@media(max-width: 1405px) {
+    .gray-on-banner.gray-part:after {
+        width: 80%;
+    }
+}
+@media(max-width: 1399px){
+    .text-on-banner h1 {
+        font-size: 48px;
+    }
+    .text-on-banner.about-course{
+        max-width: 45%;
+    }
+    /*popup*/
+    .popup_left_side {
+        padding: 0;
+        margin-top: 20px;
+        padding-right: 0px;
+        text-align: right;
+        padding-bottom: 2px;
+    }
+    .pupup_text {
+        font-size: 19px;
+        left: 112px;
+    }
+    .p_border-bottom {
+        font-size: 14px;
+        margin: 7px 0px 8px;
+        border-bottom: 1px solid #F2F2F2;
+        padding-bottom: 12px;
+    }
+    .mediapupup {
+        border-bottom: 1px solid #F2F2F2;
+        padding-bottom: 15px;
+        margin-bottom: 12px;
+    }
+    .img-circle {
+        border-radius: 50%;
+        height: 50px;
+        width: 50px;
+    }
+    .mediapupup-heading {
+        margin: 0px 0 6px 0;
+        font-size: 19px;
+    }
+    .mediapupup-body {
+        margin: 0;
+        font-size: 14px;
+    }
+    .rounded-rectangle-16 {
+        position: static;
+        transform: none;
+    }
+}
+@media(max-width: 1250px) {
+    /*academic institution slider*/
+    /*campus-section*/
+    .school-item a {
+        display: block;
+        border-radius: 25px;
+        width: 100%;
+    }
+    .school-item h4 {
+        font-size: 26px;
+        margin-bottom: 12px;
+    }
+    .school-item {
+        padding: 28px;
+    }
+    .category-section p{
+        max-width: 80%;
+    }
+}
+@media(max-width: 1199px) {
+    .social-equality-logo {
+        width: 94px;
+        height: 87px;
+    }
+    .gray-on-banner.gray-part:after {
+        width: 86%;
+    }
+    .about-course .title-course {
+        margin-bottom: 15px;
+    }
+    .excerpt-course {
+        line-height: 26px;
+    }
+    .text-bar-course{
+        font-size: 20px;
+    }
+    /*404*/
+    .link-banner.button_404_page{
+    margin-top: 22px;
+    }
+    /*popuptext*/
+    .pupup_text {
+        padding-top: 15px;
+    }
+    /*home page*/
+    /*banner*/
+    .text-on-banner h1 {
+        margin-bottom: 21px;
+        font-size: 48px;
+    }
+    /*footer*/
+    .inners-footer-items {
+        margin-top: 6px;
+    }
+    .open_yt_lightbox {
+        padding-left: 29px;
+    }
+    /*how-it-work-section*/
+    .video_boxes_wrap:before {
+        background-size: 53px;
+    }
+}
+@media(max-width: 1025px) {
+    /*home page*/
+    /*banner*/
+    .text-on-banner.about-course {
+        max-width: 45%;
+    }
+    .text-on-banner h1 {
+        font-size: 40px;
+    }
+    .text-on-banner a{
+        font-size: 21px;
+        font-weight: 400;
+    }
+    .category-section h3{
+        font-size: 31px;
+    }
+    .category-section p{
+        max-width: 100%;
+    }
+
+}
+
+@media(max-width: 991px) {
+    .search-form-header{
+        width: 79px;
+    }
+    .login ul, ul.user-connect {
+        line-height: 29px;
+    }
+    nav.header-nav ul {
+        line-height: 39px;
+        height: 100%;
+    }
+    .social-equality-logo {
+        width: 47px;
+        height: 42px;
+    }
+    .banner-wrapper.institution-page{
+        height: 200px;
+    }
+    .error404 .background-on-banner{
+        position: static;
+        transform: none;
+        background: #333333;
+    }
+    .error404 .banner-image.gray-part{
+        height: 100%;
+        padding: 65px 0 50px;
+    }
+    .more-content-404{
+        position: static;
+        transform: none;
+    }
+    .text-on-banner.background-instead-banner h1{
+        margin: 0 0;
+        line-height: 36px;
+    }
+    .banner-wrapper.no-image {
+        height: 58px;
+    }
+    .breadcrumbs-campus{
+        display: none;
+    }
+    .banner-wrapper{
+        height: auto;
+    }
+
+    .img-opacity-on-banner {
+        height: 72px;
+        width: 145px;
+        margin: auto;
+    }
+    .institution-page.centering-on-banner{
+        text-align: right;
+    }
+    .institution-page .img-opacity-on-banner{
+        margin: 0;
+    }
+    .info-institu {
+        margin: auto;
+        margin-top: 13px;
+    }
+    /*header*/
+    .logo-header {
+        /*width: 142px;
+        padding-top: 13px;*/
+        max-width: 100%;
+        max-height: 100%;
+    }
+    .menu-header ul li {
+        padding: 0 5px;
+    }
+    .login_lang_wrap {
+        bottom: 10px;
+    }
+    .position-header-mobile {
+        /* padding-bottom: 7px; */
+        bottom: 0;
+    }
+    .centering-on-banner{
+        position: static;
+        left: 50%;
+        top: 50%;
+        text-align: center;
+        z-index: 1041;
+        padding: 15px;
+    }
+    /*cuorses*/
+    .contact-us-wrap {
+        padding-top: 16px;
+        padding-bottom: 20px;
+    }
+    .contact-us-text {
+        height: auto;
+        width: auto;
+    }
+    .excerpt-course {
+        position: relative;
+        font-size: 16px;
+        line-height: 1.5;
+        width: 100%;
+        margin: 0!important;
+        margin-bottom: 18px!important;
+    }
+    .start-date-title-bar,
+    .duration-bar.title-bar,
+    .price-course-bar.title-bar {
+        background-size: 17px 17px!important;
+    }
+    .start-date-title-bar.title-bar,
+    .duration-bar.title-bar,
+    .price-course-bar.title-bar {
+        padding-right: 23px!important;
+        font-size: 14px!important;
+        font-weight: bold!important;
+    }
+    .lecturer-role {
+        margin-bottom: 4px;
+    }
+    .lecturer-title {
+        margin-bottom: 0;
+    }
+    .price-bar-info {
+        /*padding-right: 0;*/
+        /*padding-left: 0*/
+    }
+    .more-courses-section {
+        padding: 51px 0 69px;
+    }
+    .more-courses-inner {
+        padding-right: 20px;
+        padding-left: 20px;
+    }
+    .info-single-course-container {
+        background-color: white;
+    }
+    .wrap-info-single-course {
+        background-color: white;
+    }
+    .sharing {
+        background-color: #F2F2F2;
+    }
+    .more_details-text {
+        font-size: 16px;
+    }
+    .more-courses-interest {
+        font-size: 20px;
+    }
+    .course-details-more-courses {
+        background-color: white;
+    }
+    .for-all-courses-link {
+        padding: 9px 57px;
+    }
+    .for-all-courses-link {
+        font-size: 20px;
+        display: block;
+        width: max-content;
+        margin: 0 auto;
+    }
+    .signup-course-button-wrap {
+        display: block;
+        text-align: center;
+    }
+    .excerpt-course {
+        font-size: 17px;
+    }
+    body .top-bar-search, body .filter-dynamic {
+        padding: 7px 15px;
+    }
+    .about-course .title-course {
+        font-size: 23px;
+    }
+    .img-testimonials-lobby img {
+        width: 225px;
+        height: 225px;
+    }
+    /*404*/
+   
+    .background-on-banner.gray-part {
+        max-width: 100%;
+        top: 0;
+        right: 0;
+        padding: 24px;
+        transform: inherit;
+        position: relative;
+        background: #333333;
+    }
+    .general.banner-image,
+    .search-tags.banner-image{
+        /*padding-top: 80%;*/
+        height: 227px;
+    }
+    .banner-image.gray-part {
+        width: 100%!important;
+        height: 158px;
+    }
+    .popup-about-course-video{
+        position: absolute;
+        right: calc(50% - 45px)!important;
+        top: 33px;
+    }
+    .excerpt-course {
+        text-align: right;
+        padding-right: 48px;
+        padding-left: 50px;
+    }
+    .single-lecturer {
+        height: 100%;
+        text-align: right;
+        padding-right: 75px;
+        width: 82%;
+        margin-right: 46px;
+    }
+    /*cuorses*/
+    .content-lecturer {
+        padding-top: 0
+    }
+    .testimonials-course-page-items-inner {
+        padding-right: 36px;
+        padding-bottom: 24px;
+    }
+    /*popup*/
+    .rounded-rectangle-16 {
+        font-size: 20px;
+        font-weight: bold;
+        line-height: 1;
+        display: -webkit-box;
+        text-align: center;
+        display: block;
+        position: static;
+        width: 185px;
+        margin: 0 auto;
+        bottom: 0;
+        border-radius: 28px;
+        background-color: #91C653;
+        padding: 17px 40px 20px 40px;
+    }
+    /*lobby*/
+    .img-lecturer{
+        width: 103px;
+        height: 103px;
+        top: 50%;
+        right: -7%;
+        transform: translateY(-50%);
+    }
+    /*404*/
+    .main_label_404 {
+        max-width: 100%;
+    }
+    .background-on-banner.gray-part{
+        padding: 25px 0!important;
+    }
+    .text-on-banner{
+        width: 100%;
+        max-width: 100%;
+    }
+    .text-on-banner.search-tags{
+        max-width: 100%;
+        text-align: right;
+        padding: 0 15px;
+    }
+    .link-banner_404 {
+        display: block;
+        padding-right: 7px;
+        padding-top: 10px;
+    }
+    .text-on-banner.gray-part{
+        max-width: 100%!important;
+        padding: 0 20px!important;
+        text-align: center;
+    }
+
+    .link-banner.button_404_page{
+        margin-top: 21px;
+        padding: 9px 38px;
+        margin-bottom: 21px;
+    }
+    .read-more-text {
+        font-size: 16px;
+    }
+    .content-course-page{
+        font-size: 16px;
+        padding-top: 0;
+    }
+    /*about*/
+    .image-general img {
+        width: 60%;
+    }
+    .image-general{
+        flex: 0 0 100%;
+    }
+    .content-boxes-general {
+        flex: 0 0 100%;
+    }
+    .wpcf7-form{
+        width: 100%;
+        padding: 2% 0;
+    }
+    .p_contactUs {
+        font-size: 24px;
+        padding-top: 20px;
+    }
+    /*campus-section*/
+    .school-item h4 {
+        font-size: 26px;
+    }
+    .school-item p {
+        width: 100%;
+        font-size: 16px;
+    }
+    .school-item a {
+        padding: 8px 2px;
+        font-size: 15px;
+    }
+    .school-item {
+        padding: 20px;
+    }
+    /*how-it-work-section*/
+    .video_boxes_wrap:before{
+        background-position: center;
+        bottom: 0;
+        top: auto;
+        left: calc(50% - 40px);
+        transform: rotate(-90deg);
+        width: 80px;
+        height: 36px;
+        background-size: auto;
+        display: none;
+    }
+    .open_yt_lightbox {
+        padding: 0;
+        padding-bottom: 46px;
+        margin: 0;
+    }
+    .you-tube-video{
+        margin-top: 45px;
+    }
+    .video_boxes_wrap h4{
+        position: absolute;
+        bottom: 100%;
+        padding: 0;
+        font-size: 18px;
+        left: 50%;
+        transform: translateX(-50%);
+        margin-bottom: 16px;
+        width: 100%;
+        text-align: center;
+    }
+    .boxes-items {
+        padding: 0 15px;
+    }
+    .video_boxes_wrap {
+        padding: 20px 0px;
+    }
+    .video_boxes_wrap:last-child {
+        padding-bottom: 10px;
+    }
+    .how-it-work-section-inner {
+        padding-top: 103px;
+    }
+    /*FAQ*/
+    button.faq-question{
+        padding: 20px 54px;
+    }
+    .faq-answer {
+        padding: 30px 55px 30px 50px;
+    }
+    /*Footer*/
+    #footer_content_social_logo {
+        text-align: center;
+    }
+    .logo-footer,
+    footer .footer-content,
+    footer .footer-content p{
+        //text-align: center !important;
+        line-height: 21px;
+        max-width: 90%;
+        margin: 0 auto;
+    }
+    #footer_content_campus_logo img {
+        padding-bottom: 0;
+        width: 62px;
+    }
+    .social-equality-logo.logo-footer{
+        text-align: center;
+    }
+    footer h4{
+        padding: 0 0 4px 0;
+    }
+    .inners-footer-items {
+        padding-top: 15px;
+    }
+    footer ul li {
+        line-height: 2;
+    }
+    .footer-content img {
+        margin-top: 30px;
+    }
+    #footer_content_campus_logo .footer-content {
+        padding-left: 0px;
+    }
+    #footer_content_social_logo .footer-content {
+        padding-right: 0;
+    }
+    #footer_content_campus_logo {
+        padding-bottom: 20px;
+    }
+    /*about course*/
+    .single-lecturer{
+        margin-bottom: 20px;
+    }
+   /*academic_institution*/
+    .course-details-more-courses.course-details.link-more-courses {
+        height: 193px;
+    }
+    .course_test_type_readmore{
+        padding-bottom: 20px;
+    }
+    .found-lecturer-text, .found-course-text{
+        padding-right: 44px;
+    }
+    .text-description-of-course {
+        max-height: 118px;
+    }
+    .wpml-ls-menu-item a{
+        font-size: 12px;
+    }
+    /*.menu-header a, .login a, a.link-my-courses, .user-information {*/
+    /*    font-size: 12px;*/
+    /*}*/
+    .all_courses .all_courses_btn_project{
+        font-size: 20px;
+        padding: 5px 40px;
+    }
+    .content_single_project .activity_btn_project{
+        font-size: 18px;
+        padding: 8px 45px;
+        margin-top: 30px;
+    }
+    .video_boxes_wrap {
+        padding-bottom: 5px;
+        .open_yt_lightbox {
+            padding-bottom: 0;
+        }
+
+        .you-tube-video {
+            margin-top: 0;
+        }
+
+        .title-video-boxes {
+            padding-bottom: 0;
+            padding-top: 0;
+        }
+
+        &:last-child {
+            padding-bottom: 38px;
+        }
+    }
+}
+@media(max-width: 767px) {
+    .facebook:before, .instegram:before, .linkdin:before, .twitter:before, .google:before, .email:before, .phone:before, .fax:before, .website:before{
+        display: block;
+    }
+    .video_boxes_wrap:before{
+        display: none;
+    }
+    .header .social-equality-logo {
+        max-width: 41px !important;
+    }
+    .social-equality-logo {
+        width: 100%;
+        height: 61px;
+        /*max-width: 41px !important;*/
+    }
+    .social-equality-logo:first-child {
+        margin-left: 3px;
+    }
+    .search-form-header form{
+        max-width: 100%;
+    }
+    .login .seperator{
+        display: none;
+    }
+    .search-course-form {
+        padding: 0 15px;
+    }
+    .contact-us-page {
+        padding-top: 7%;
+    }
+    .text-on-banner.contact_us h1 {
+        font-size: 24px;
+        margin: 0;
+    }
+    .banner-image.contact_us {
+        padding-top: 13%;
+    }
+    /* search course page */
+    .breadcrumbs-campus{
+        display: none;
+    }
+    .banner-image.institution-page {
+        padding-top: 40%;
+    }
+    .content-course-page{
+        padding-top: 25%;
+    }
+    .modal-backdrop.show {
+        opacity: 0.7;
+    }
+    .no-result-form form{
+        width: 100%;
+    }
+    .no-result-form .wpcf7:after{
+        background: none;
+    }
+    .close-nav-search {
+        display: block;
+        position: absolute;
+        right: 100%;
+        top: 0;
+        background: none;
+        border: none;
+        width: 37px;
+        height: 27px;
+    }
+    .close-nav-search:after{
+        content: '';
+        background-image: url(../images/closefilter.png);
+        background-repeat: no-repeat;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        right: 0;
+        top: 16px;
+        padding: 0 15px;
+    }
+    .wrap-sum {
+        padding: 15px 0;
+    }
+    .clear-link:hover{
+        color: white;
+    }
+    .wrap-mobile-filter-title {
+        background-color: #3CA0AE;
+        padding: 9px 15px;
+    }
+    .search-course-form .search-form{
+        height: 40px;;
+    }
+    .search-field.form-control{
+        height: auto;
+    }
+    #course_load_more:after {
+        left: 57%;
+    }
+    .wrap-all-filter-names{
+        padding: 0;
+        box-shadow: none;    
+    }
+    .clear-link{
+        color: white;
+    }
+    .wrap-all-tags-filter{
+        display: none;
+        position: absolute;
+        top: 0;
+        background: white;
+        z-index: 2024;
+        right: 0;
+        width: 80%;
+    }
+    body .sidebar-search-course{
+        position: static;
+    }
+    .clear-filter-area{
+        padding: 7px 14px;
+        background-color: #3CA0AE;
+        display: inline-block;
+    }
+    .filter-course-title{
+        color: white;
+        font-size: 20px;
+        font-weight: 600;
+    }
+    body .org-logo{
+        position: absolute;
+        top: 116%;
+        margin: 0 auto;
+    }
+    body .org-logo a{
+        margin: 0 auto;
+    }
+    .academic-course-image {
+        height: 47px;
+        width: 88px;
+    }
+    /*Lobby*/
+    .excerpt-course {
+        padding: 0;
+    }
+    .quote-text-course-page {
+        padding: 22px 44px 22px 10px;
+    }
+    .img-lecturer {
+        right: -7%;
+        width: 86px;
+        height: 86px;
+    }
+    .testimonials-main-title-lobbby {
+        padding: 30px 0;
+    }
+    .title_lobby_info-inner {
+        font-size: 21px;
+    }
+    .short_text_lobby_info-inner {
+        font-size: 16px;
+    }
+    .short_text_lobby_info-inner {
+        max-width: 80%;
+    }
+    .img-testimonials-lobby img {
+        height: 94px;
+        width: 94px;
+    }
+    .img-testimonials-lobby {
+        bottom: -5%;
+        right: -4%;
+        border: 5px solid #f2f2f2;
+        background-color: #F2F2F2;
+    }
+    .testimonials-main-title-lobbby h3 {
+        font-size: 24px;
+        text-align: center;
+    }
+    .testimonials-lobby-item:before,
+    .testimonials-lobby-item:after {
+        display: none;
+    }
+    .wrap-item-tesimonials-lobby {
+        padding-right: 16px;
+        padding-left: 16px;
+    }
+    .testimonials-lobby-knowledge {
+        padding-right: 0px;
+    }
+    .testimonials_loby_content-inner {
+        height: 100%;
+    }
+    .content-testimonials-lobby {
+        padding: 7px 0px 0px 0px;
+        max-width: 100%;
+        font-size: 16px;
+    }
+    .testimonials_loby_title {
+        font-size: 18px;
+    }
+    .wrap-testimonial-names {
+        padding-right: 83px;
+    }
+    .role-lobby-testimonials,
+    .academic_institution-lobby-testimonials {
+        font-size: 16px;
+    }
+    .testimonial-course-page {
+        padding: 28px 0;
+    }
+    .course-item-inner.more {
+        padding: 0px 6px;
+        padding-bottom: 13px;
+    }
+    .text-bar-course {
+        font-size: 16px!important;
+    }
+    .syllabus-course-page {
+        margin: 27px 0;
+    }
+    .course-staff-title {
+        padding-right: 20px;
+        padding-left:  20px;
+        margin-bottom: 22px;
+        font-size: 18px;
+    }
+
+    .about-course .title-course {
+        font-size: 24px;
+        text-align: right;
+    }
+    .image_lobby_info-inner {
+        background-size: 56px;
+        width: 100px;
+        height: 100px;
+    }
+    .more-info-lobby-inner {
+        padding: 11% 0;
+    }
+    .link_url_lobby_info-inner {
+        padding: 10px 25px;
+        font-size: 17px;
+    }
+    /*404*/
+    .label_404 {
+        font-size: 16px;
+    }
+    .secondary_title_404 {
+        font-size: 24px;
+    }
+    .link-banner.button_404_page {
+        height: 49px;
+        width: 208px;
+        padding: 7px 5px;
+    }
+    .main_label_404 {
+        font-size: 20px;
+        max-width: 50%;
+    }
+    .link-banner_404 {
+        font-size: 16px;
+        text-align: center;
+        margin-top: 19px;
+    }
+    /*contact Mobile*/
+    .wrap-contact{
+        width: 100%;
+        padding: 0 15px;
+    }
+    .popup-course-link {
+        width: 100%;
+    }
+    .signup-course-button {
+        box-shadow: 0px 3px 22px rgba(0, 0, 0, 0.60);
+    }
+
+    .title-contact-us {
+        font-size: 22px;
+    }
+    .wpcf7-submit {
+        width: 166px;
+    }
+
+    .wpcf7-not-valid-tip {
+        padding-right: 11%;
+    }
+    .label_text_contact {
+        right: 12%;
+    }
+    .wpcf7-not-valid-tip {
+        font-size: 14px;
+    }
+    /*about*/
+    .sidebar-general li {
+        padding: 10px 0;
+    }
+    .title-opacity-on-banner{
+        padding: 10px 14px
+    }
+    .course-item-duration {
+        background-position: 99% 35%;
+    }
+    .popup_left_side {
+        padding-right: 0;
+    }
+    .p_border-bottom {
+        margin: 10px 0 23px;
+    }
+    .content-general {
+        padding-right: 0;
+        padding-left: 0;
+    }
+    .social-equality-logo.logo-header img {
+        width: 56pt;
+        height: 41pt;
+    }
+    .gray-part:after {
+        display: none;
+    }
+    .link-banner.button_404_page {
+        margin-top: 15px;
+    }
+    .gray-on-banner.gray-part {
+        width: 100%;
+        padding: 0;
+        min-height: 318px;
+        display: none;
+    }
+    .more-content-404 {
+        width: 100%;
+    }
+    .main_title_404 {
+        font-size: 60px;
+    }
+    .text-on-banner h1 {
+        font-size: 24px;
+        margin-bottom: 1.5%;
+    }
+    .sub-title-banner-term-tag{
+        padding: 8px 15px;
+    }
+    .signup-course-button_wrap {
+        display: block;
+        text-align: center;
+    }
+    .text-on-banner a {
+        font-weight: bold;
+        font-size: 18px!important;
+        padding: 12px 29px!important;
+        display: inline-block;
+        margin-top: 0;
+    }
+    /*academic institution slider*/
+    .slick-dots {
+        margin: 0;
+    }
+    .slick-dots li button:before {
+        color: #C4C4C4;
+    }
+    .link-banner_404 {
+        display: block;
+    }
+    .slick-dots .slick-active   {
+        border: 0;
+    }
+    .academic-inner {
+        padding: 14px 0 7px 0;;
+    }
+    .carousel-item.slick-slide {
+        float: inherit;
+    }
+    body .carousel-item.slick-slide img{
+        max-width: 52px;
+        max-height: 50px;
+    }
+    .slick-dots li {
+        width: 13px;
+        height: 13px;
+    }
+    .slick-dots li button:before {
+        width: 6px;
+        height: 6px;
+        font-size: 23px;
+    }
+    /*category-section*/
+    .category-inner div {
+        margin-bottom: 43px;
+    }
+    .category-inner img {
+        height: 130px;
+        width: auto;
+        margin-bottom: 12px;
+    }
+    .category-section h3 {
+        font-size: 21px;
+    }
+    .category-section p {
+        font-size: 16px;
+        max-width: 70%;
+    }
+    .category-section a {
+        padding-top: 13px;
+        display: block;
+    }
+    .category-inner {
+        padding: 32px 0 5px 0;
+    }
+    /*courses-section*/
+    .title-main-courses {
+        font-size: 24px;
+        padding: 0 10px;
+    }
+    .tags-filter-items .link-data-filter {
+        font-size: 18px;
+        font-weight: 600;
+        padding: 0 3px;
+    }
+    .tags-courses-filter {
+        padding: 18px 0;
+    }
+    .course-item-title {
+        font-size: 18px;
+        margin: 0;
+    }
+    .course-item-org {
+        font-size: 16px;
+    }
+    .course-item-marketing,
+    .course-item-duration {
+        font-size: 16px;
+    }
+    .course-image {
+        padding-top: 50%;
+    }
+    .course-details {
+        height: 152px;
+    }
+    .all-courses-link {
+        padding: 13px 58px;
+        padding-bottom: 44px;
+        font-size: 18px;
+    }
+    .course-item-inner {
+        padding: 27px;
+        padding-bottom: 12px;
+    }
+    .courses-section .slick-next {
+         margin-left: 21px;
+    }
+    .courses-section .slick-prev {
+         margin-right: 14px;
+    }
+
+    .wrap-courses {
+        padding: 30px 15px 0 15px;
+    }
+    .how-it-work-section .title {
+        font-size: 24px;
+        margin: 0;
+    }
+    .how-it-work-section-inner {
+        padding-top: 36px;
+    }
+    .video_boxes_wrap h4:before {
+        font-size: 21px;
+    }
+    .how-it-work-section:before {
+        content: none;
+    }
+    .video_boxes_wrap:before {
+        left: calc(50% - 20px);
+        width: 40px;
+        height: 36px;
+        background-size: 43px;
+    }
+    /*campus-section*/
+    .main-title-school {
+        font-size: 24px;
+    }
+    .school-item-text-wrap {
+        height: auto;
+        overflow: visible;
+        margin-bottom: 23px;
+        width: 75%;
+    }
+    .school-items {
+        margin-top: 20px;
+    }
+    .title-campus-section {
+        width: 90%;
+        margin: 0 auto;
+    }
+    .school-item {
+        margin-bottom: 16px;
+    }
+    .school-item h4 {
+        font-size: 21px;
+        font-weight: 700;
+        margin-top: 17px;
+    }
+    .campus-section {
+        background-image: none;
+        padding: 39px 0 60px 0;
+    }
+    .campus-section:before {
+        content: none;
+    }
+    .school-item a {
+        padding: 7px 5px;
+        font-size: 18px;
+        width: 80%;
+        box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.15),
+        0px 3px 10px 0 rgba(0, 0, 0, 0.09);
+    }
+    .campus-section .more-info h4 {
+        font-size: 24px;
+        color: #70C6D1;
+    }
+    .campus-section .more-info .item p {
+        font-size: 18px;
+    }
+    .campus-section .more-info {
+        margin-top: 0;
+    }
+    .campus-section .more-info .item {
+        padding: 37px 48px;
+    }
+    .school-item p {
+        max-height: 100%;
+    }
+    /*testimonials-slider-section*/
+    .testimonials-slider-section .title-section {
+        font-size: 24px;
+    }
+    .testimonials-slider-section {
+        padding: 36px 0 36px 0;
+    }
+    .testimonials-slider {
+        padding-top: 6px;
+    }
+    .item-testimonials-inner {
+        padding: 85px 10px 0 10px;
+    }
+    .img-testimonials-inner {
+        width: 80px;
+        height: 80px;
+    }
+    .name-testimonial {
+        font-size: 21px;
+    }
+    .roll-testimonial {
+        font-size: 16px;
+        font-weight: 300;
+    }
+    .content-item-testimonials {
+        padding-top: 69px;
+    }
+    .img-testimonials {
+        border: 7px solid white;
+        top: 33px;
+    }
+    #testimonials-slider-slick .slick-dots {
+        margin-top: 12px;
+    }
+    .excerpt-testimonial {
+        height: 121px;
+    }
+    .testimonials-slider-section .container {
+        padding: 0;
+    }
+    /*faq section*/
+    .faq-section .faq-title {
+        font-size: 24px;
+        margin: 0;
+    }
+    .faq-answer {
+        font-size: 16px;
+    }
+    .faq-question {
+        padding: 17px 13px 17px 50px;
+        font-size: 18px;
+        line-height: 1.4;
+    }
+    .faq-answer {
+        padding: 18px 13px;
+    }
+    .more-faq {
+        font-size: 15px;
+        margin-top: 23px;
+    }
+    .faq-section {
+        padding: 39px 0;
+    }
+    .faq-content {
+        padding-top: 38px;
+    }
+    .faq-item {
+        padding-bottom: 11px;
+    }
+    .information-bar-inner{
+        .start-date-title-bar,
+        .duration-bar.title-bar,
+        .price-course-bar.title-bar {
+            background-size: 14px 14px!important;
+            background-position: center right;
+            padding-right: 16px!important;
+            [lang="ar"] &{
+                padding-right: 19px!important;
+            }
+        }
+    }
+    /*Footer*/
+    .logo-footer,
+    footer .footer-content,
+    footer .footer-content p {
+        font-size: 15px;
+        max-width: 100%
+    }
+    .footer-section ul,
+    footer h4 {
+        font-size: 16px;
+    }
+    .social-equality-logo.logo-footer img {
+        height: 58px;
+    }
+    #footer_content_campus_logo {
+        padding-bottom: 0px;
+    }
+    .copyright {
+        font-size: 16px;
+        padding: 18px 8px;
+    }
+    .scroll-top {
+        right: 30px;
+    }
+    .testimonial-course-page-img{
+    right: 0%;
+    }
+}
+
+@media(max-width: 422px){
+    .text-description-of-course {
+        max-height: 118px;
+    }
+}
+/*copy to stayle*/
+.wpcf7-not-valid-tip{
+    padding-right: 0 !important;
+}
+@-moz-document url-prefix() {
+    .search-form-header form{
+        box-shadow: 0 2px 3px gray;
+    }
+}

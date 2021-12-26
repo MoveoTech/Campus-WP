@@ -1,0 +1,34 @@
+.acf_terms_list_each{
+    margin-bottom: 15px;
+}
+.acf_terms_list_wrap .acf_terms_list_select_wrap{
+    display: inline-block;
+    width: calc(100% - 200px);
+}
+.acf_terms_list_wrap button{
+    height: 30px;
+    min-width: 30px;
+    vertical-align: middle;
+}
+.campus_admin_loading:after{
+    content: '';
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    opacity: .7;
+    background: #fff;
+}
+.campus_order_filter_items [type = "text"]{
+    position: absolute;
+    opacity: 0;
+    height: 0;
+    width: 0;
+
+}
+.campus_order_filter_items select[multiple]{
+    height: 200px;
+}

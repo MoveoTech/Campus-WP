@@ -1,0 +1,454 @@
+/* קורס תאריך, שעה, מחיר*/
+
+.title-description {
+  margin-bottom: 0px;
+}
+
+.title-contact-us {
+  display: none;
+}
+
+.p_contactUs {
+  font-size: 41px;
+  padding-top: 48px;
+}
+
+.single-lecturer {
+  margin-left: 30px;
+  margin-top: 50px;
+}
+
+.more-info-box {
+  margin-bottom: 22px;
+}
+
+////new contact us page
+#contact_us_banner_image {
+  height: 302px;
+  @media (max-width: 767px) {
+    height: 269px;
+  }
+}
+
+#wrap_contact_us_container {
+  background-color: #F7F7F7;
+  padding: 67px 0 48px;
+  @media (max-width: 767px) {
+    padding: 20px 10px 48px;
+  }
+}
+
+.contact_us_floors {
+  background-color: white;
+  border-radius: 32px;
+  margin: 0 auto 50px;
+  padding: 50px 20px 35px;
+  width: 88%;
+  @media (max-width: 1199px) {
+    width: 95%;
+  }
+  @media (max-width: 991px) {
+    width: 100%;
+    padding-top: 30px;
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.contact_us_titles {
+  font-weight: bold;
+  margin-bottom: 35px;
+  font-size: 30px;
+  line-height: 1.33333;
+  @media (max-width: 767px) {
+    font-size: 22px;
+    margin-bottom: 25px;
+  }
+}
+
+.ways_contact_us_row {
+  justify-content: center;
+  margin-bottom: 9px;
+}
+
+.ways_contact_us_wrap {
+  display: inline-block;
+  margin-bottom: 20px;
+}
+
+.ways_contact_us_image {
+  height: 54px;
+  width: 54px;
+  border-radius: 50%;
+  background-color: #F7F7F7;
+  margin: auto auto 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  img {
+    width: 30px;
+    height: auto;
+  }
+}
+
+.ways_contact_us_text {
+  font-size: 14px;
+}
+
+.ways_contact_us_links {
+  display: block;
+  background-color: #304659;
+  border-radius: 5px;
+  height: 48px;
+  width: 48px;
+  margin: auto;
+  position: relative;
+  @media (max-width: 767px) {
+    height: 38px;
+    width: 38px;
+  }
+}
+
+.ways_contact_us_links:before {
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 35px;
+  height: 35px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  content: "";
+  @media (max-width: 767px) {
+    height: 25px !important;
+    width: 25px !important;
+  }
+}
+
+.ways_contact_us_links.link_facebook:before {
+  top: 100%;
+  width: 40px;
+  height: 40px;
+  transform: translate(-50%, -100%);
+  background-image: url("../images/facebook_white.svg");
+}
+
+.ways_contact_us_links.link_instegram:before {
+  background-image: url("../images/instegram_white.svg");
+}
+
+.ways_contact_us_links.link_linkdin:before {
+  background-image: url("../images/linkdin_white.svg");
+}
+
+.ways_contact_us_links.link_twitter:before {
+  background-image: url("../images/twitter_white.svg");
+}
+
+.ways_contact_us_links.link_telegram:before {
+  background-image: url("../images/telegram_white.svg");
+}
+
+#contact_us_activity_time p {
+  margin-bottom: 5px;
+}
+
+#contact_us_activity_time strong {
+  font-size: 18px;
+}
+
+#you_have_a_question_link {
+  color: black;
+  font-weight: bold;
+  background-color: #FFCD03;
+  padding: 16px 20px 19px;
+  border-radius: 32px;
+  font-size: 22px;
+  display: block;
+  width: max-content;
+  min-width: 492px;
+  max-width: 80%;
+  margin: auto;
+  line-height: 1.28;
+  @media (max-width: 767px) {
+    min-width: 80%;
+    font-size: 18px;
+    max-width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+}
+
+.contact_us_form_wrap_contact {
+  width: 65%;
+  margin: 0 auto;
+  @media (max-width: 1400px) {
+    width: 100%;
+  }
+}
+
+.contact_us_form_wrap_contact {
+  .labels_wrap_fields {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .fields_titles {
+    font-weight: 500;
+    width: 34%;
+    text-align: left;
+  }
+
+  label span:not(.fields_titles) {
+    width: 66%;
+  }
+
+  .fields_titles.required_red_asterisk:after {
+    display: inline-block;
+    content: "*";
+    color: #FF0000;
+    padding-right: 2px;
+  }
+
+  p {
+    margin-bottom: 30px;
+  }
+
+  label input, select {
+    border-radius: 5px;
+  }
+
+  label input {
+    padding: 9px 16px 9px;
+    height: auto;
+    line-height: 1.25;
+  }
+
+  input[type= 'submit'] {
+    background-color: #FFCD03;
+    color: #053664;
+    height: 40px;
+    border: 1px solid #E2E2E2;
+    border-radius: 50px;
+    //vertical-align: bottom - So that a load icon in the stage will be aligned to the submit button
+    vertical-align: bottom;
+  }
+
+  input[class*= '-not-valid'], select[class*='-not-valid'] + .select-styled, textarea[class*='-not-valid'] {
+    border-color: #FF564A !important;
+    background-color: #FCEBEB !important;
+  }
+
+  .select-hidden {
+    display: none;
+    visibility: hidden;
+    @media (max-width: 767px) {
+      display: block;
+      visibility: visible;
+    }
+  }
+
+  .select-styled {
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    border: 1px solid #E2E2E2;
+    border-radius: 5px;
+    padding: 7px 16px;
+    text-align: left;
+    cursor: pointer;
+    z-index: 11;
+    @media (max-width: 767px) {
+      display: none;
+    }
+  }
+
+  .select-options {
+    position: absolute;
+    top: 0%;
+    right: 0;
+    left: 0;
+    z-index: 3;
+    margin: 0;
+    list-style: none;
+    overflow: auto;
+    white-space: nowrap;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    box-shadow: 0px 3px 6px #00000029;
+    border: 1px solid #E2E2E2;
+    border-radius: 5px;
+    padding: 0 16px 0;
+    cursor: pointer;
+    display: none;
+    @media (max-width: 767px) {
+      display: none !important;
+    }
+  }
+
+  .select-options li {
+    text-align: left;
+    line-height: 1.5;
+    padding: 5px 0;
+    color: #707070;
+    white-space: normal;
+
+    &:not(:last-child) {
+      border-bottom: 1px solid black;
+    }
+  }
+
+  .select-options:after {
+    position: absolute;
+    content: "";
+    width: 10px;
+    height: 10px;
+    border: 2px solid #707070;
+    top: 12px;
+    right: 17px;
+    transform: rotate(
+                    -45deg);
+    border-top: 0;
+    border-right: 0;
+  }
+
+  span.wpcf7-not-valid-tip {
+    display: none !important;
+  }
+
+  form[class*="invalid"] div[class*='response-output'] {
+    border: none;
+    color: #FF564A;
+  }
+
+  .wpcf7-textarea {
+    border-radius: 5px;
+  }
+
+  .wpcf7-form {
+    padding: 20px 22% 0;
+    @media (max-width: 991px) {
+      padding: 20px 10% 0;
+    }
+    @media (max-width: 767px) {
+      padding: 20px 0 0;
+    }
+  }
+
+  .wrap_submit {
+    text-align: right;
+  }
+
+  form[class*="sent"] div[class*='response-output'], form[class*="invalid"] div[class*='response-output'] {
+    display: block;
+    border: none;
+    margin-top: 22px;
+    padding-top: 0;
+    text-align: right;
+    @media (max-width: 767px) {
+      text-align: center !important;
+    }
+  }
+
+  form[class*="sent"] div[class*='response-output'] {
+    color: #89C44C;
+  }
+
+  .ajax-loader {
+    margin-right: 0 !important;
+  }
+
+}
+
+.page-template-contact_us {
+  @media (min-width: 992px) {
+    .banner-wrapper.no-image {
+      height: 140px;
+    }
+    .banner-image.background-instead-banner {
+      height: 140px;
+    }
+    .breadcrumbs-campus {
+      padding-top: 40px;
+    }
+    .background-on-banner {
+      top: 60%;
+    }
+  }
+
+}
+
+label.select-subject .select {
+  position: relative;
+
+  @media (max-width: 767px) {
+    &:before {
+      content: "";
+      position: absolute;
+      top: 60%;
+      right: 5px;
+      transform: translateY(-50%);
+      content: "";
+      border: 4px solid transparent;
+      border-top: 6px solid #333333;
+    }
+  }
+}
+
+label.select-subject .select select {
+  @media (max-width: 767px) {
+    -webkit-appearance: none;
+    box-shadow: inset 0px -19px 20px -7px #dee2e6;
+    background-color: white;
+  }
+}
+
+body.rtl {
+  .fields_titles {
+    text-align: right;
+  }
+
+  .fields_titles.required_red_asterisk {
+    &:before {
+      display: inline-block;
+      content: "*";
+      color: #FF0000;
+      padding-right: 2px;
+    }
+
+    &:after {
+      display: none;
+    }
+  }
+
+  .wpcf7-textarea {
+    direction: rtl;
+  }
+
+  .wrap_submit {
+    text-align: left;
+  }
+
+  form[class*="sent"] div[class*='response-output'], form[class*="invalid"] div[class*='response-output'] {
+    text-align: left;
+  }
+
+  .select-styled {
+    text-align: right;
+  }
+
+  .select-options li {
+    text-align: right;
+  }
+
+  .select-options:after {
+    right: 0;
+    left: 17px;
+  }
+
+  label.select-subject .select:before {
+    right: calc(100% - 13px);
+  }
+}

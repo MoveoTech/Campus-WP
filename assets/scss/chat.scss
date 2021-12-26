@@ -1,0 +1,156 @@
+#layout-header{
+  background: #323333;
+  padding: 9px 0 9px 0;
+  border-top-right-radius: 8px;
+  border-top-left-radius: 8px;
+}
+#layout-header .profile-name{
+  color:  #fdcc0d;
+  font-size: 18px;
+}
+#layout-header .menu > .icon{
+  color: #72c6d1;
+  background: none;
+}
+#layout-header .menu > .icon:hover{
+  background: none;
+}
+#layout-body{
+  background-color: #fff;
+  bottom: 0;
+}
+
+#layout-body .bot > span{
+  box-shadow: none;
+  display: block;
+  max-width: 75%;
+  background: #f2f2f2;
+  border-radius: 8px 8px 8px 0;
+  margin: 0;
+  padding: 8px 8px 8px 8px;
+  font-size: 14px;
+  text-align: right;
+  margin-right: auto;
+}
+#layout-body .button:hover{
+  background-color: #72c6d1;
+}
+#layout-body .button {
+  background: none;
+  border: 1px solid rgb(111, 206, 205);
+  color: #000;
+  transition: all .2s;
+  box-shadow: none !important;
+  display: block;
+  border-radius: 8px 8px 0 8px;
+  margin: 0;
+  padding: 6px 8px 6px 8px;
+  font-size: 14px;
+  text-align: right;
+  max-width: 75%;
+  cursor: pointer;
+}
+#layout-body .bot:before {
+  display: none;
+}
+#layout-body .buttons {
+  margin-top: 0;
+}
+#layout-body .user span {
+  background: #72c6d1;
+  color: #000;
+  transition: all .2s;
+  box-shadow: none !important;
+  display: block;
+  border-radius: 8px 8px 0 8px;
+  margin: 0;
+  padding: 6px 8px 6px 8px;
+  font-size: 14px;
+  max-width: 75%;
+}
+#layout-body .user:before {
+  display: none;
+}
+#layout-header .menu > .items > .item {
+  color: #323333;
+  padding: 0 10px 0 25px;
+  font-size: 14px;
+  background: #edf7f7;
+  border-bottom: solid 1px white;
+  line-height: 24px;
+}
+#layout-header .menu > .items > .item:first-child {
+  border-bottom: solid 1px white;
+}
+#ChatBotFrame {
+  border-radius: 15px;
+  width: 325px;
+  height: 475px;
+}
+#layout-header .profile-image {
+  margin: 0 12px 0 18px;
+}
+#layout-body {
+  padding-top: 25px;
+  margin-bottom: 20px;
+}
+#layout-body .bot {
+  margin-bottom: 7px;
+}
+#layout-body .user {
+  margin-bottom: 7px;
+}
+#layout-footer {
+  display: none;
+}
+#layout-credit {
+  display: none;
+}
+
+#layout-header .menu > .icon:before {
+  content: "";
+  background-image: url(https://campus.gov.il/wp-content/uploads/2021/04/CHATBOTicons-01.png);
+  background-repeat: no-repeat;
+  display: block;
+  background-size: contain;
+  width: 26px;
+  height: 41px;
+  top: 18px;
+  position: absolute;
+  right: 15px;
+}
+#layout:after {
+  content: "";
+  background-image: url(https://campus.gov.il/wp-content/uploads/2021/04/CHATBOTicons-07.png);
+  background-repeat: no-repeat;
+  display: block;
+  background-size: contain;
+  width: 45px;
+  height: 24px;
+  bottom: -2px;
+  position: absolute;
+  left: -5px;
+}
+#layout {
+  background-color: white;
+  border: 1px solid #bfc2ce;
+  border-radius: 8px;
+}
+#layout-body .items{
+  margin-bottom: 7px;
+  padding: 0;
+}
+#layout-body .items .slides {
+  max-width: 75%;
+  background: #f2f2f2;
+  border-radius: 8px 8px 8px 0;
+  margin: 0;
+  padding: 8px 8px 8px 8px;
+  box-sizing: border-box;
+}
+#layout-body .items .slides .item .texts{
+  padding: 0;
+}
+#layout-body .items .slides .item .texts .title{
+  color: #72c6d1;
+}
