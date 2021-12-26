@@ -4,6 +4,8 @@ function campus_enqueue_admin()
 {
     wp_enqueue_style( 'admin_css_campus', get_bloginfo('stylesheet_directory') . '/admin_files/admin_css.css' );
     wp_enqueue_script('admin_js_campus', get_bloginfo('stylesheet_directory') . '/admin_files/admin.js',array(), '1.1');
+    wp_enqueue_script('new_admin_js_campus', get_bloginfo('stylesheet_directory') . '/admin_files/newAdmin.js',array(), '1.0');
+
     wp_localize_script('admin_js_campus', 'admin_vars', array(
             'admin_ajax' => admin_url('admin-ajax.php')
         )
@@ -93,55 +95,55 @@ function acf_campus_order_academic_institutions_list_func( $field )
     $sitepress->switch_lang($default_lang);
 
     echo "<div class='acf_terms_list_wrap'>";
-        $items = get_posts(array(
-            'post_type' => 'academic_institution',
-            'posts_per_page' => -1,
-            'orderby' => 'title',
-            'order' => 'ASC',
-            'suppress_filters' => false
-        ));
-        $default_options = '';
-            // In manual order - the items are in different selects
-            foreach ($items as $item) {
-                $id = $item->ID;
-                $name = $item->post_title;
-                $default_options .= "<option value='$id'>$name</option>";
-            }
+    $items = get_posts(array(
+        'post_type' => 'academic_institution',
+        'posts_per_page' => -1,
+        'orderby' => 'title',
+        'order' => 'ASC',
+        'suppress_filters' => false
+    ));
+    $default_options = '';
+    // In manual order - the items are in different selects
+    foreach ($items as $item) {
+        $id = $item->ID;
+        $name = $item->post_title;
+        $default_options .= "<option value='$id'>$name</option>";
+    }
 
-            $val = $field['value'];
-            if($val) {
-                $obj = json_decode($val);
-                $index = 1;
-                $count = count($obj->items);
-                $remove_disabled = $count == 1 ? 'disabled' : '';
+    $val = $field['value'];
+    if($val) {
+        $obj = json_decode($val);
+        $index = 1;
+        $count = count($obj->items);
+        $remove_disabled = $count == 1 ? 'disabled' : '';
 
-                foreach ($obj->items as $item) {
-                    $output = str_replace("value='$item'", "value='$item' selected", $default_options);
-                    $select = "<select id='admin_acf_manual_order_select' data-post_type='academic_institution'>
+        foreach ($obj->items as $item) {
+            $output = str_replace("value='$item'", "value='$item' selected", $default_options);
+            $select = "<select id='admin_acf_manual_order_select' data-post_type='academic_institution'>
                 <option>- Select -</option>
                 $output
             </select>";
-                    $disableds = array(
-                        'remove' => $remove_disabled,
-                        'before' => $index == 1 ? 'disabled' : '',
-                        'after' => $index == $count ? 'disabled' : '',
-                    );
-                    echo admin_acf_manual_order_html_func($select, $disableds);
-                    $index++;
-                }
-            }else {
+            $disableds = array(
+                'remove' => $remove_disabled,
+                'before' => $index == 1 ? 'disabled' : '',
+                'after' => $index == $count ? 'disabled' : '',
+            );
+            echo admin_acf_manual_order_html_func($select, $disableds);
+            $index++;
+        }
+    }else {
 
-                $select = "<select id='admin_acf_manual_order_select' data-post_type='academic_institution'>
+        $select = "<select id='admin_acf_manual_order_select' data-post_type='academic_institution'>
                 <option>- Select -</option>
                 $default_options
             </select>";
-                $disableds = array(
-                    'remove' => 'disabled',
-                    'before' => 'disabled',
-                    'after' => 'disabled',
-                );
-                echo admin_acf_manual_order_html_func($select, $disableds);
-            }
+        $disableds = array(
+            'remove' => 'disabled',
+            'before' => 'disabled',
+            'after' => 'disabled',
+        );
+        echo admin_acf_manual_order_html_func($select, $disableds);
+    }
     echo "</div>";
     $sitepress->switch_lang($current_lang);
 }
@@ -393,3 +395,25 @@ function cache_purge_action_js() { ?>
         });
     </script> <?php
 }
+
+
+function pods_RELPODNAME_pick_data($data, $name, $value, $options, $pod, $id){
+    if ($name == "pods_field_tags") {
+        foreach ($data as $dataid => &$value) {
+            if($dataid){
+                $p = pods('tags', $dataid);
+                $name = $p->display('name');
+                $relfield = $p->display('group');
+                $single = $p->display('single_multiple');
+
+                if($single == 'Single')
+                    $value = $name . ' - ' . $relfield;
+                else
+                    $value = $name;
+
+            }
+        }
+    }
+    return $data;
+}
+add_filter('pods_field_pick_data', 'pods_RELPODNAME_pick_data', 1, 6);

@@ -4,6 +4,11 @@
 
 global $site_settings, $fields;
 
+$hero_image = $fields['hero_image'];
+$hero_image_mobile = $fields['hero_image_mobile'];
+$hero_title = ($fields['hero_title']);
+$hero_subtitle =  $fields['hero_subtitle'];
+
 $banner = $fields['banner'];
 $banner_for_mobile = $fields['banner_fore_mobile'];
 $academic_institutions = $fields['academic_institution'];
@@ -32,15 +37,27 @@ $choose_event = $fields['choose_event'];
 ?>
 
 <!--Banner area-->
-<?php if ($banner) : ?>
+<?php if ($hero_image) : ?>
     <?php
     $class = 'home';
-    $title = str_replace('%' , '<span class="span-brake"></span>' ,$text_on_banner );
+    $title = str_replace('%' , '<span class="span-brake"></span>' ,$hero_title );
     $text_on_banner_content = '';
     $text_on_banner_content .= '<h1>'. $title .'</h1>';
-    $text_on_banner_content .= '<a href="'.$link_url.'" class="link-banner">'.$link_name .'</a>';
     ?>
-    <?=  get_banner_area( $banner_for_mobile, $banner , $text_on_banner_content, $class); ?>
+<!--    --><?//=  get_banner_area( $banner_for_mobile, $banner , $text_on_banner_content, $class); ?>
+    <div class="hero-banner" >
+        <div class="banner-image" >
+            <img class="desktop-banner" src="<?= $hero_image['url'] ?>" >
+            <img class="mobile-banner" src="<?= $hero_image_mobile['url'] ?>" >
+            <div class="container" >
+                <div class="text-on-banner">
+                    <h1><?=$hero_title?></h1>
+                    <h5><?=$hero_subtitle?></h5>
+                </div>
+                <?= get_template_part('templates/hero', 'search') ?>
+            </div>
+        </div>
+    </div>
     <!--End Banner area-->
 <?php endif; ?>
 <!--academic institution slider-->

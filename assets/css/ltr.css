@@ -1,9 +1,66 @@
-/*new header 14/02/2021*/
+/* Popup 15/12/2021 */
+.mobile-menu-popup {
+  right: unset;
+  left: 0;
+  transform: translateX(-100%); }
+  .mobile-menu-popup .nav-mobile .mobile-list-item {
+    padding-right: unset;
+    padding-left: 13px; }
+    .mobile-menu-popup .nav-mobile .mobile-list-item .list-item-content {
+      text-align: left; }
+    .mobile-menu-popup .nav-mobile .mobile-list-item img {
+      margin-left: unset;
+      margin-right: 7px; }
+    .mobile-menu-popup .nav-mobile .mobile-list-item a img.mobile-menu-vector {
+      left: unset;
+      right: 0; }
+
+/* Header */
 .user_is_logged_in .header_wrap .has_profile_icon:before {
   margin: -4px 4px 0 0; }
   @media (max-width: 991px) {
     .user_is_logged_in .header_wrap .has_profile_icon:before {
       margin: 0px 2px 0px 0px; } }
+
+@media (max-width: 767px) {
+  .header_wrap .nav-mobile-btn-wrap .navbar-toggle.navbar-light.navbar-mobile-button {
+    padding: 16px 15px 10px; } }
+
+.header_wrap .user-login-container {
+  margin-left: 0;
+  margin-right: 29px; }
+  .header_wrap .user-login-container .menu-user-menu-container {
+    left: unset;
+    right: 29px; }
+    .header_wrap .user-login-container .menu-user-menu-container .nav-user .user-list-item {
+      padding-right: unset;
+      padding-left: 10px; }
+      .header_wrap .user-login-container .menu-user-menu-container .nav-user .user-list-item a img.mobile-menu-vector {
+        transform: rotate(270deg);
+        left: unset;
+        right: 0; }
+      .header_wrap .user-login-container .menu-user-menu-container .nav-user .user-list-item .list-item-content {
+        text-align: left; }
+      .header_wrap .user-login-container .menu-user-menu-container .nav-user .user-list-item img {
+        margin-right: 7px;
+        margin-left: unset; }
+    .header_wrap .user-login-container .menu-user-menu-container .secondary-lang-menu {
+      left: unset;
+      right: 154px; }
+  .header_wrap .user-login-container .dropdown_langs_btn {
+    padding-left: 20px;
+    padding-right: unset; }
+
+@media (max-width: 991px) {
+  .header_wrap .control-container {
+    margin-right: 15px; } }
+
+.header_wrap .logo-container {
+  margin-right: unset;
+  margin-left: 30px; }
+  @media (max-width: 991px) {
+    .header_wrap .logo-container {
+      margin-left: unset; } }
 
 .header_wrap .header_container {
   padding: 22px 84px 8px 45px; }
@@ -40,7 +97,7 @@
       width: 216px; } }
 
 .header_wrap .login_search_lang_wrap .search-submit {
-  right: 8px;
+  right: 3.64px;
   left: auto; }
 
 .header_wrap .login-item:after {
@@ -59,25 +116,21 @@
 .header_wrap .user-connect:before {
   margin: 0px 6px -1px 0px; }
 
-.header_wrap .user-connect .user-information {
-  margin-right: 24px;
-  margin-left: 0; }
-
 .header_wrap .languages_menu_wrap .dropdown_langs_btn:after {
   left: auto;
   right: 9px; }
 
 .header_wrap .menu-language-menu-container {
-  padding: 25px 75px 0 45px; }
-  @media (max-width: 1440px) {
-    .header_wrap .menu-language-menu-container {
-      padding: 25px 40px 0 10px; } }
-  .header_wrap .menu-language-menu-container:before {
-    right: 0; }
+  margin: unset;
+  margin-right: 40px;
+  left: unset;
+  transform: unset; }
 
-.header_wrap .lang:before {
-  left: 0;
-  right: auto; }
+.header_wrap .lang {
+  margin: 0 0 0 20px; }
+  .header_wrap .lang:before {
+    left: 3px;
+    right: unset; }
 
 .header_wrap #header_flex .header_login_area {
   left: auto;
@@ -90,6 +143,54 @@
       right: 34px; } }
 
 /*home page*/
+.hero-banner .banner-image img.desktop-banner {
+  left: unset;
+  right: 0; }
+
+.hero-banner .banner-image .container {
+  right: unset;
+  top: 115px;
+  left: 185px;
+  width: 550px;
+  align-items: flex-start; }
+  .hero-banner .banner-image .container .text-on-banner {
+    text-align: left; }
+  .hero-banner .banner-image .container .hero-search-form .search-field.form-control {
+    text-align: left;
+    padding-left: 30px;
+    padding-right: 5px; }
+  .hero-banner .banner-image .container .hero-search-form .search-submit {
+    left: unset;
+    right: 5px; }
+
+@media (max-width: 991px) {
+  .hero-banner .banner-image {
+    background: rgba(51, 52, 51, 0.7); }
+    .hero-banner .banner-image .container {
+      align-items: center;
+      right: 0;
+      left: 0;
+      margin: auto; }
+      .hero-banner .banner-image .container .text-on-banner {
+        text-align: center; }
+        .hero-banner .banner-image .container .text-on-banner h5 {
+          width: 370px; } }
+
+@media (max-width: 768px) {
+  .hero-banner .banner-image img.mobile-banner {
+    left: unset;
+    right: 0; }
+  .hero-banner .banner-image .container {
+    width: 90%;
+    top: 30%; }
+    .hero-banner .banner-image .container .text-on-banner {
+      margin-bottom: 15px; }
+      .hero-banner .banner-image .container .text-on-banner h1 {
+        font-size: 28px;
+        line-height: 35px; }
+      .hero-banner .banner-image .container .text-on-banner h5 {
+        width: 275px; } }
+
 .all_courses:before {
   transform: scaleX(-1);
   left: 0;
@@ -588,8 +689,6 @@ footer .footer-section .inners-footer-items {
   .header_wrap .social-logo.digital-isreal-logo {
     margin-right: 0;
     margin-left: 20px; }
-  .header_wrap .lang {
-    margin: 0 21px 0 20px; }
   .header_wrap .user-connect .user-information {
     margin-left: 0;
     margin-right: 14px; } }
@@ -600,14 +699,8 @@ footer .footer-section .inners-footer-items {
     margin-right: 0; }
   .header_wrap .social-logo.digital-isreal-logo {
     margin-left: 0px; }
-  .header_wrap .lang {
-    margin-left: 53px;
-    margin-right: 10px; }
   .header_wrap .login.login-desktop .login-item:before {
-    margin: 0 12px 0 0; }
-  .header_wrap .nav-lang {
-    margin-left: 32px;
-    margin-right: 0; } }
+    margin: 0 12px 0 0; } }
 
 @media (max-width: 1070px) {
   .courses-section .slick-prev {
@@ -652,8 +745,6 @@ footer .footer-section .inners-footer-items {
       margin: 0; }
       .header_wrap .nav-campus-inner-wrap .nav-mobile-campus-inner ul li:first-child {
         margin: 0; }
-  .header_wrap nav.header-nav .nav, .header_wrap nav.header-nav .nav-lang {
-    padding: 0 9px; }
   .header_wrap .menu-language-menu-container {
     right: 0;
     left: auto;
