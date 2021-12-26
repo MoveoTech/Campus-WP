@@ -65,8 +65,7 @@ function style_of_campus_enqueue() {
 		wp_enqueue_style( 'css_ltr_css', get_bloginfo( 'stylesheet_directory' ) . '/assets/css/ltr.css', null, '1.9' );
 	}
 //    wp_enqueue_style('slick_css', '//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css');
-
-
+    
 	wp_enqueue_script( 'popper_js', 'https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js' );
 	wp_enqueue_script( 'slick_js', '//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js', array( 'jquery' ) );
 	wp_enqueue_script( 'cookie_js', '//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js', array( 'jquery' ) );
