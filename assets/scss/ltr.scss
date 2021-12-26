@@ -1,12 +1,97 @@
+/* Popup 15/12/2021 */
 
-/*new header 14/02/2021*/
+.mobile-menu-popup {
+    right: unset;
+    left: 0;
+    transform: translateX(-100%);
+
+    .nav-mobile {
+        .mobile-list-item {
+            padding-right: unset;
+            padding-left: 13px;
+
+            .list-item-content {
+                text-align: left;
+            }
+            img {
+                margin-left: unset;
+                margin-right: 7px;
+            }
+            a {
+                img.mobile-menu-vector {
+                    left: unset;
+                    right: 0;
+                }
+            }
+        }
+    }
+}
+
+/* Header */
 .user_is_logged_in .header_wrap .has_profile_icon:before{
     margin: -4px 4px 0 0;
     @media(max-width: 991px){
-       margin: 0px 2px 0px 0px;
+        margin: 0px 2px 0px 0px;
     }
 }
 .header_wrap {
+    .nav-mobile-btn-wrap {
+        .navbar-toggle.navbar-light.navbar-mobile-button {
+            @media(max-width: 767px){
+                padding: 16px 15px 10px;
+            }
+        }
+    }
+    .user-login-container {
+        margin-left: 0;
+        margin-right: 29px;
+        .menu-user-menu-container {
+            left: unset;
+            right: 29px;
+            .nav-user {
+                .user-list-item {
+                    padding-right: unset;
+                    padding-left: 10px;
+                    a {
+                        img.mobile-menu-vector {
+                            transform: rotate(270deg);
+                            left: unset;
+                            right: 0;
+                        }
+                    }
+                    .list-item-content {
+                        text-align: left;
+                    }
+                    img {
+                        margin-right: 7px;
+                        margin-left: unset;
+                    }
+                }
+            }
+
+            .secondary-lang-menu {
+                left: unset;
+                right: 154px;
+            }
+        }
+        .dropdown_langs_btn {
+
+            padding-left: 20px;
+            padding-right: unset;
+        }
+    }
+    .control-container {
+        @media(max-width: 991px){
+            margin-right: 15px;
+        }
+    }
+    .logo-container {
+        margin-right: unset;
+        margin-left: 30px;
+        @media(max-width: 991px){
+            margin-left: unset;
+        }
+    }
     .header_container {
         padding: 22px 84px 8px 45px;
         @media (max-width: 1439px){
@@ -51,25 +136,18 @@
             }
         }
         .search-submit {
-            right: 8px;
+            right: 3.64px;
             left: auto;
         }
     }
-    //.login.login-desktop {
-    //    margin-left: 0;
-    //    margin-right: 80px;
-    //    @media screen and (max-width: 1640px) {
-    //        margin-right: 0;
-    //    }
-        .login-item {
-            &:after {
-                margin: 0 1px 0 7px;
-            }
-            &:before {
-                margin: 0 19px 0 0px;
-            }
+    .login-item {
+        &:after {
+            margin: 0 1px 0 7px;
         }
-    //}
+        &:before {
+            margin: 0 19px 0 0px;
+        }
+    }
     .has_profile_icon:before{
         margin-left: 0;
         margin-right: 17px;
@@ -81,32 +159,27 @@
         &:before {
             margin: 0px 6px -1px 0px;
         }
-        .user-information {
-            margin-right: 24px;
-            margin-left: 0;
-        }
     }
     .languages_menu_wrap {
         .dropdown_langs_btn {
             &:after {
                 left: auto;
                 right: 9px;
+
             }
         }
     }
     .menu-language-menu-container {
-        padding: 25px 75px 0 45px;
-        @media (max-width: 1440px){
-            padding: 25px 40px 0 10px;
-        }
-        &:before {
-            right: 0;
-        }
+        margin: unset;
+        margin-right: 40px;
+        left: unset;
+        transform: unset;
     }
     .lang {
+        margin: 0 0 0 20px;
         &:before {
-            left: 0;
-            right: auto;
+            left: 3px;
+            right: unset;
         }
     }
     #header_flex .header_login_area{
@@ -120,7 +193,88 @@
         }
     }
 }
+
 /*home page*/
+.hero-banner {
+    .banner-image {
+        //background: linear-gradient(90deg, #333433 38.02%, rgba(51, 52, 51, 0) 100%);
+        img.desktop-banner {
+            left: unset;
+            right: 0;
+
+        }
+        .container {
+            right: unset;
+            top: 115px;
+            left: 185px;
+            width: 550px;
+            align-items: flex-start;
+            .text-on-banner {
+                text-align: left;
+            }
+            .hero-search-form {
+                .search-field.form-control {
+                    text-align: left;
+                    padding-left: 30px;
+                    padding-right: 5px;
+                }
+                .search-submit {
+                    left: unset;
+                    right: 5px;
+                }
+            }
+        }
+    }
+}
+@media (max-width: 991px) {
+    .hero-banner {
+        .banner-image {
+            background: rgba(51, 52, 51, 0.7);
+            .container {
+                align-items: center;
+                right: 0;
+                left: 0;
+                margin: auto;
+                .text-on-banner {
+                    text-align: center;
+                    h5 {
+                        width: 370px;
+                    }
+                }
+            }
+        }
+
+    }
+}
+@media (max-width: 768px) {
+    .hero-banner {
+        .banner-image {
+
+            img.mobile-banner {
+                left: unset;
+                right: 0;
+            }
+            .container {
+                width: 90%;
+                top: 30%;
+
+                .text-on-banner {
+                    margin-bottom: 15px;
+                    h1 {
+                        font-size: 28px;
+                        line-height: 35px;
+                    }
+                    h5 {
+                        width: 275px;
+                    }
+                }
+
+            }
+        }
+
+    }
+}
+
 .all_courses:before{
     transform: scaleX(-1);
     left: 0;
@@ -289,7 +443,7 @@ html[lang="en-US"] .single-h_course, html[lang="en-US"] .single-hybrid_instituti
 }
 html[lang="en-US"] #hybrid_course_team {
     @media (max-width: 991px) {
-    .content-lecturer{
+        .content-lecturer{
             margin-left: 8px;
             margin-right: 0;
             text-align: left;
@@ -463,9 +617,9 @@ footer .footer-section{
                 border-left: 1px solid #ffffff80;
                 border-right: 0;
             }
-           &.sahring_wrap{
-               padding: 0;
-           }
+            &.sahring_wrap{
+                padding: 0;
+            }
         }
         #footer_content_social_logo{
             .logo-footer{
@@ -611,7 +765,7 @@ footer .footer-section{
     left: 100%;
     right: auto;
     @-moz-document url-prefix() {
-       margin-left: 5px;
+        margin-left: 5px;
     }
 }
 .institution-page.breadcrumbs-campus a:after,
@@ -641,7 +795,7 @@ footer .footer-section{
     transform: scaleX(-1);
 }
 .single-lecturer-popup.active .lecturer-content{
-direction: rtl;
+    direction: rtl;
 }
 .slick-next {
     right: 2px;
@@ -726,9 +880,6 @@ direction: rtl;
                 margin-left: 20px;
             }
         }
-        .lang{
-            margin: 0 21px 0 20px;
-        }
         .user-connect .user-information{
             margin-left: 0;
             margin-right: 14px;
@@ -746,16 +897,8 @@ direction: rtl;
                 margin-left: 0px;
             }
         }
-        .lang{
-            margin-left: 53px;
-            margin-right: 10px;
-        }
         .login.login-desktop .login-item:before{
             margin: 0 12px 0 0;
-        }
-        .nav-lang{
-            margin-left: 32px;
-            margin-right: 0;
         }
     }
 }
@@ -832,11 +975,7 @@ direction: rtl;
                 }
             }
         }
-        nav.header-nav {
-            .nav, .nav-lang{
-                padding: 0 9px;
-            }
-        }
+
         .menu-language-menu-container{
             right: 0;
             left: auto;

@@ -1,7 +1,7 @@
 //carusel slick to institution logos - home page
-
+import('./scrolling.js')
+import('./user_menu.js')
 var current_lang = jQuery('#current_lang').val();
-console.log(current_lang);
 var is_rtl = !(jQuery('html[lang = "en-US"]').length > 0);
 var prevSlick = '<button type="button" class="slick-prev" tabindex="-1" aria-label="' + global_vars.prev_btn_text + '">' + global_vars.prev_btn_text + '</button>';
 var nexSlick = '<button type="button" class="slick-next" tabindex="-1" aria-label="' + global_vars.next_btn_text + '">' + global_vars.next_btn_text + '</button>';
@@ -95,10 +95,23 @@ jQuery(document).ready(function () {
     if (jQuery('.wrap-search-page-course.no_ajax_filter').length > 0)
         course_filter_url();
 
-    var title = jQuery('.nav-lang .wpml-ls-current-language a').first().text();
-    //var title = jQuery(this).attr('title');
-    var lang = title == 'En' ? 'en' : (title == 'עב' ? 'he' : 'ar');
-    setCookie('openedx-language-preference', lang, 30);
+    var title = jQuery('.nav-lang .wpml-ls-current-language a span')[1].lang
+    var lang = title === 'en' ? 'en' : (title === 'he' ? 'he' : (title === 'ar' ? 'ar' : null))
+    if(lang) {
+        setCookie('openedx-language-preference', lang, 30);
+    }
+
+    jQuery('.wpml-ls-menu-item').click(function(event) {
+
+        const id = event.currentTarget.id;
+        if(id === 'menu-item-wpml-ls-83-en' || id === 'wpml-ls-item-en') {
+            setCookie('openedx-language-preference', 'en', 30);
+        } else if(id === 'menu-item-wpml-ls-83-ar' || id === 'wpml-ls-item-ar') {
+            setCookie('openedx-language-preference', 'ar', 30);
+        } else if(id === 'menu-item-wpml-ls-83-he' || id === 'wpml-ls-item-he') {
+            setCookie('openedx-language-preference', 'he', 30);
+        }
+    })
 
     if (jQuery(window).width() > 1024) {
         jQuery(document).on('click', function (e) {
@@ -489,7 +502,8 @@ jQuery(document).ready(function () {
         jQuery(".nav-mobile-campus").toggleClass('open').animate({
             width: "toggle"
         });
-        jQuery(".background-popup").toggleClass('modal-backdrop fade show header-nav');
+        jQuery(".mobile-menu-popup").toggleClass('active');
+        jQuery(".bg-overlay").toggleClass('active');
         jQuery('html').toggleClass('menu_open');
 
     });
@@ -1185,7 +1199,7 @@ function setCookie(cname, cvalue, exdays) {
     var d = new Date();
     d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
     var expires = "expires=" + d.toUTCString();
-    document.cookie = cname + "=" + cvalue + ";" + expires + ";domain=.campus.gov.il;path=/";
+    document.cookie = cname + "=" + cvalue + ";" + expires+"; path=/";
 }
 
 function show_username() {
@@ -1301,10 +1315,9 @@ function initCourseSlider(is_rtl, prevSlick, nexSlick) {
                         rows: 1,
                         centerMode: false,
                         centerPadding: '60px',
-                        slidesPerRow: 1,
                         arrows: true,
                         swipe: true,
-                        lidesToShow: 1
+                        slidesToShow: 1
                         // rows: 1,
                     }
                 }
