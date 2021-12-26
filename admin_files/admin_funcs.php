@@ -396,7 +396,6 @@ function cache_purge_action_js() { ?>
     </script> <?php
 }
 
-}
 
 
 function pods_RELPODNAME_pick_data($data, $name, $value, $options, $pod, $id){
