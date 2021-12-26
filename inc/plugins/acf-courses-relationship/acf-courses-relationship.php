@@ -1,7 +1,7 @@
 <?php
 
 /*
-Plugin Name: Advanced Custom Fields: relationship Courses
+Plugin Name: Advanced Custom Fields: ACF Relationship Courses
 Plugin URI: PLUGIN_URL
 Description: Connect Courses from separated table to ACF plugin
 Version: 1.0.0
