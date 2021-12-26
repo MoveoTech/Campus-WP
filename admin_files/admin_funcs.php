@@ -5,7 +5,6 @@ function campus_enqueue_admin()
     wp_enqueue_style( 'admin_css_campus', get_bloginfo('stylesheet_directory') . '/admin_files/admin_css.css' );
     wp_enqueue_script('admin_js_campus', get_bloginfo('stylesheet_directory') . '/admin_files/admin.js',array(), '1.1');
     wp_enqueue_script('new_admin_js_campus', get_bloginfo('stylesheet_directory') . '/admin_files/newAdmin.js',array(), '1.0');
-
     wp_localize_script('admin_js_campus', 'admin_vars', array(
             'admin_ajax' => admin_url('admin-ajax.php')
         )
@@ -396,7 +395,6 @@ function cache_purge_action_js() { ?>
     </script> <?php
 }
 
-
 function pods_RELPODNAME_pick_data($data, $name, $value, $options, $pod, $id){
     if ($name == "pods_field_tags") {
         foreach ($data as $dataid => &$value) {
@@ -416,4 +414,5 @@ function pods_RELPODNAME_pick_data($data, $name, $value, $options, $pod, $id){
     }
     return $data;
 }
+
 add_filter('pods_field_pick_data', 'pods_RELPODNAME_pick_data', 1, 6);

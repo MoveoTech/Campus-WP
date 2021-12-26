@@ -32,3 +32,28 @@
 .campus_order_filter_items select[multiple]{
     height: 200px;
 }
+
+.acf-notice {
+    position: relative;
+    display: block;
+    color: #fff;
+    margin: 5px 0 15px;
+    padding: 3px 12px;
+    background: #2a9bd9;
+    border-left: #1f7db1 solid 3px;
+}
+.acf-notice.-error {
+    background: #d94f4f;
+    border-color: #c92c2c;
+}
+.acf-field .acf-notice {
+    margin: 0 0 15px;
+    background: #edf2ff;
+    color: #0c6ca0;
+    border-color: #2183b9;
+}
+.acf-field .acf-notice.-error {
+    background: #ffe6e6;
+    color: #cc2727;
+    border-color: #d12626;
+}

@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Based on includes/fields/class-acf-courses.php from
+ * Based on includes/fields/class-acf-courses-relationship.php from
  * https://github.com/AdvancedCustomFields/acf by elliotcondon, licensed
  * under GPLv2 or later
  */
