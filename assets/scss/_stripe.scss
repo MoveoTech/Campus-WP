@@ -1,0 +1,47 @@
+/* Courses Stripe */
+
+.courses-stripe {
+  display: flex;
+  flex-direction: row;
+  width: 80%;
+  align-items: baseline;
+  justify-content: center;
+  margin: 20px auto;
+  .course-stripe-item {
+    width: 253px;
+    height: 277px;
+    margin: 0 15px;
+    .course-img {
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      width: 100%;
+      height: 124px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(40, 40, 40, 0.2);
+    }
+    .item-content {
+      height: 87px;
+      margin-top: 10px;
+      h3 {
+        overflow: hidden;
+        text-wrap: none;
+        height: 58px;
+        font-size: 22px;
+        font-weight: 600;
+        line-height: 29px;
+        text-align: right;
+        a {
+          color: #000000;
+        }
+      }
+      p {
+        font-size: 16px;
+        font-weight: 300;
+        line-height: 21px;
+        text-align: right;
+        opacity: 50%
+      }
+    }
+  }
+}

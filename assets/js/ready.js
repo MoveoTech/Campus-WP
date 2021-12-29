@@ -3,24 +3,11 @@ import('./scrolling.js')
 import('./user_menu.js')
 var current_lang = jQuery('#current_lang').val();
 var is_rtl = !(jQuery('html[lang = "en-US"]').length > 0);
-var prevSlick = '<button type="button" class="slick-prev" tabindex="-1" aria-label="' + global_vars.prev_btn_text + '">' + global_vars.prev_btn_text + '</button>';
-var nexSlick = '<button type="button" class="slick-next" tabindex="-1" aria-label="' + global_vars.next_btn_text + '">' + global_vars.next_btn_text + '</button>';
+var prevSlick = '<button type="button" class="slick-prev slick-button" tabindex="-1" aria-label="' + global_vars.prev_btn_text + '"></button>';
+var nexSlick = '<button type="button" id="slick-next" class="slick-next slick-button" tabindex="-1" aria-label="' + global_vars.next_btn_text + '"></button>';
 var focusables = 'input, button, a, textarea, select, [tabindex]';
 var class_to_add;
 jQuery(document).ready(function () {
-
-    // jQuery('#popup_new_event').find(focusables).last().on('keydown', function(e){
-    //     if(e.keyCode == 9 && !(e.shiftKey)){
-    //         e.preventDefault();
-    //         jQuery(this).closest('#popup_new_event').find(focusables).first().focus();
-    //     }
-    // });
-    // jQuery('#popup_new_event').find(focusables).first().on('keydown', function(e){
-    //     if(e.keyCode == 9 && e.shiftKey){
-    //         e.preventDefault();
-    //         jQuery(this).closest('#popup_new_event').find(focusables).last().focus();
-    //     }
-    // });
 
     jQuery('form[role = "search"]').on('submit', function (e) {
         e.preventDefault();
@@ -74,7 +61,6 @@ jQuery(document).ready(function () {
     });
 
     /*  */
-
 
     jQuery('.dropdown_langs_btn').on('click', function () {
         jQuery(this).toggleClass('open');
@@ -232,43 +218,6 @@ jQuery(document).ready(function () {
     // //onload show the contact
     // jQuery('.lokking-for-form').css('display', 'block');
 
-    jQuery('#academic-institution-slider').slick({
-        slidesToShow: 7,
-        accessibility: false,
-        slidesToScroll: 7,
-        rtl: is_rtl,
-        nextArrow: nexSlick,
-        prevArrow: prevSlick,
-        responsive: [
-            {
-                breakpoint: 991,
-                settings: {
-                    slidesToShow: 5,
-                    slidesToScroll: 5,
-                }
-            },
-            {
-                breakpoint: 768,
-                settings: {
-                    slidesToShow: 4,
-                    arrows: false,
-                    dots: true,
-                    centerMode: true,
-                    focusOnSelect: false,
-                }
-            },
-            {
-                breakpoint: 480,
-                settings: {
-                    slidesToShow: 4,
-                    arrows: false,
-                    dots: true,
-                    centerMode: true,
-                    focusOnSelect: false,
-                }
-            }
-        ]
-    });
 
     // Courses-slick
 
@@ -401,50 +350,7 @@ jQuery(document).ready(function () {
 
     });
 
-    jQuery('#testimonials-slider-slick').slick({
-        slidesToShow: 3,
-        slidesToScroll: 1,
-        rtl: is_rtl,
-        nextArrow: nexSlick,
-        prevArrow: prevSlick,
-        infinite: true,
-        dots: true,
-        height: '250px',
-        responsive: [
-            {
-                breakpoint: 992,
-                settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 2,
-                    infinite: true,
-                    dots: true
-                }
-            },
-            {
-                breakpoint: 768,
-                settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1,
-                    arrows: false,
-                    centerMode: true,
 
-                }
-            },
-            {
-                breakpoint: 480,
-                settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1,
-                    arrows: false,
-                    centerMode: true,
-                }
-            }
-            // You can unslick at a given breakpoint now by adding:
-            // settings: "unslick"
-            // instead of a settings object
-        ]
-
-    })
     //toggle faq
     jQuery('.faq-title-inner').on('keydown', function (e) {
         if (e.which == 13) {
