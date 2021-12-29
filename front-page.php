@@ -1,8 +1,13 @@
 <?php
-
+require_once 'inc/classes/Course_stripe.php';
 //$fields = get_fields();
 
 global $site_settings, $fields;
+
+$hero_image = $fields['hero_image'];
+$hero_image_mobile = $fields['hero_image_mobile'];
+$hero_title = ($fields['hero_title']);
+$hero_subtitle =  $fields['hero_subtitle'];
 
 $banner = $fields['banner'];
 $banner_for_mobile = $fields['banner_fore_mobile'];
@@ -29,20 +34,70 @@ $how_it_works_title = $fields['how_it_works_title'];
 
 $choose_event = $fields['choose_event'];
 
+/* Carousel */
+$stripe = $fields['new_stripe'];
+//$carousel = $fields['carusela'];
 ?>
 
 <!--Banner area-->
-<?php if ($banner) : ?>
+<?php if ($hero_image) : ?>
     <?php
     $class = 'home';
-    $title = str_replace('%' , '<span class="span-brake"></span>' ,$text_on_banner );
+    $title = str_replace('%', '<span class="span-brake"></span>', $hero_title);
     $text_on_banner_content = '';
     $text_on_banner_content .= '<h1>'. $title .'</h1>';
-    $text_on_banner_content .= '<a href="'.$link_url.'" class="link-banner">'.$link_name .'</a>';
     ?>
-    <?=  get_banner_area( $banner_for_mobile, $banner , $text_on_banner_content, $class); ?>
-    <!--End Banner area-->
+<!--    --><?//=  get_banner_area( $banner_for_mobile, $banner , $text_on_banner_content, $class); ?>
+    <div class="hero-banner" >
+        <div class="banner-image" >
+            <img class="desktop-banner" src="<?= $hero_image['url'] ?>" >
+            <img class="mobile-banner" src="<?= $hero_image_mobile['url'] ?>" >
+            <div class="container" >
+                <div class="text-on-banner">
+                    <h1><?=$hero_title?></h1>
+                    <h5><?=$hero_subtitle?></h5>
+                </div>
+                <?= get_template_part('templates/hero', 'search') ?>
+            </div>
+        </div>
+    </div>
 <?php endif; ?>
+<!--End Banner area-->
+
+<!--Test Stripe-->
+<?php if ($stripe) : ?>
+    <?php foreach ($stripe as $carousel) :?>
+        <div id="stripe-slider-slick">
+
+         <?php foreach ($carousel as $courses) :?>
+
+            <div hidden id="courses-ids" value="<?php  print_r(json_encode($courses)); ?>" ></div>
+            <div id="courses-stripe" class="courses-stripe">
+            <?php
+                for($i = 0; $i <= 10; $i++) {
+                    $course_item = new Course_stripe($courses[$i]); // New Class
+                    $title = $course_item->get_title();
+                    $type = $course_item->get_post_type(); // 'academic_institution' OR 'course'
+                    $url = $course_item->get_url();
+                    $institution_name = $course_item->get_institution_name();
+                    $thumb = $course_item->get_img_url();
+                    ?>
+                    <div class="course-stripe-item">
+                        <div class="course-img" style="background-image: url(<?= $thumb ?>);">
+                        </div>
+                        <div class="item-content"">
+                            <h3 ><a href="<?= $url ?>"><?= $title ?></a></h3>
+                            <p ><?= $institution_name?></p>
+                        </div>
+                    </div>
+
+                <?php };?>
+            </div>
+        <?php endforeach; ?>
+        </div>
+    <?php endforeach; ?>
+<?php endif; ?>
+
 <!--academic institution slider-->
 <?php if ($academic_institutions) : ?>
     <?= get_academic_institution_slider($academic_institutions); ?>
@@ -52,7 +107,8 @@ $choose_event = $fields['choose_event'];
     <div class="category-section">
         <div class="container">
             <div class="row category-inner">
-                <?php foreach ($categories as $category){ ;?>
+                <?php foreach ($categories as $category) {
+                    ;?>
                     <a href="<?php echo $category['link']; ?>" class="item-category col-sm-12 col-md-4">
                         <img src="<?php echo $category['icon']; ?>">
                         <h3 aria-level="2"><?php echo $category['title']; ?></h3>
@@ -116,13 +172,13 @@ echo '</div>';
 global $sitepress;
 $current_lang = $sitepress->get_current_language();
 
-if($json){
+if ($json) {
     $all_items = json_decode($json, true);
     $date_now = strtotime(date('Y-m-d'));
     $courses_output = '';
 
-    foreach($all_items as $ID => $item){
-        if($item['enrollment_end'] == '' || $item['enrollment_end'] >= $date_now){
+    foreach ($all_items as $ID => $item) {
+        if ($item['enrollment_end'] == '' || $item['enrollment_end'] >= $date_now) {
             $post = get_post($ID);
             setup_postdata($post);
             $attrs = array(
@@ -136,10 +192,10 @@ if($json){
     wp_reset_query();
 }
 
-echo str_replace('REPLACEME', $courses_output, get_filtered_courses_masc($courses_filter_term,$title_course_section));
- ?>
+echo str_replace('REPLACEME', $courses_output, get_filtered_courses_masc($courses_filter_term, $title_course_section));
+?>
 <!--academic institution slider-->
-<?php if( $fields['display_campus_school'] ): ?>
+<?php if ($fields['display_campus_school']) : ?>
     <?php if ($title_campus_school) {
         echo '<div style="display: none; ">';
         $bg_img = $fields['school_1st_floor_bg_img'];
@@ -154,25 +210,22 @@ echo str_replace('REPLACEME', $courses_output, get_filtered_courses_masc($course
                     <div class="campus-title-scholl-img" style="background-image: url(<?= get_bloginfo('stylesheet_directory') . '/assets/images/sprite.png'; ?>)"></div>
                 </div>
                 <div class="school-items row justify-content-center">
-                    <?php foreach ($coffs_schools as $coffs_school){
+                    <?php foreach ($coffs_schools as $coffs_school) {
                         $tax_obj = get_term_by('id', $coffs_school->term_id, 'tags_course');
                         $field_tax = get_fields($tax_obj);
 
-                        if(ICL_LANGUAGE_CODE =='en') {
+                        if (ICL_LANGUAGE_CODE =='en') {
                             $name = $coffs_school->name;
                             $description = $coffs_school->description;
                             $text_on_button_coffs = $field_tax['text_on_button_home_page_en'];
-
-                        }else if(ICL_LANGUAGE_CODE =='he') {
+                        } else if (ICL_LANGUAGE_CODE =='he') {
                             $name = $field_tax['translate_title_hebrew'];
                             $description = $field_tax['translate_description_hebrew'];
                             $text_on_button_coffs =  $field_tax['text_on_button_home_page_he'];
-
-                        }else{
+                        } else {
                             $name = $field_tax['translate_title_arab'];
                             $description = $field_tax['translate_description_arab'];
                             $text_on_button_coffs = $field_tax['text_on_button_home_page_arab'];
-
                         }
                         ?>
                         <div class="col-sm-12 col-md-4">
@@ -182,13 +235,13 @@ echo str_replace('REPLACEME', $courses_output, get_filtered_courses_masc($course
                                     <p><?php echo $description;  ?></p>
                                 </div>
                                 <?php
-                                if(isset($_GET['lang'])) {
+                                if (isset($_GET['lang'])) {
                                     $term_id = '&termid=';
-                                }else{
+                                } else {
                                     $term_id = '?termid=';
                                 }
                                 ?>
-                                <a href="<?= get_post_type_archive_link( 'course') . $term_id .$coffs_school->term_id ; ?>" aria-label="<?= $text_on_button_coffs ?>- <?= $name ?>"><?= $text_on_button_coffs; ?></a>
+                                <a href="<?= get_post_type_archive_link('course') . $term_id .$coffs_school->term_id ; ?>" aria-label="<?= $text_on_button_coffs ?>- <?= $name ?>"><?= $text_on_button_coffs; ?></a>
                             </div>
                         </div>
                     <?php } ?>
@@ -197,7 +250,7 @@ echo str_replace('REPLACEME', $courses_output, get_filtered_courses_masc($course
         </div>
     <?php } ?>
 <?php endif; ?>
-<?php if( isset($fields['display_2nd_campus_school'] ) && $fields['display_2nd_campus_school']):
+<?php if (isset($fields['display_2nd_campus_school']) && $fields['display_2nd_campus_school']) :
     echo '<div style="display: none; ">';
     $first_line = $fields['additional_target_audiences_title'];
     $second_line = $fields['additional_target_audiences_content'];
@@ -227,22 +280,22 @@ echo str_replace('REPLACEME', $courses_output, get_filtered_courses_masc($course
 <?php endif; ?>
 <!--academic institution slider-->
 <?php if ($how_it_works_title) : ?>
-    <?= get_how_it_works($how_it_works_title , $video_boxes);?>
+    <?= get_how_it_works($how_it_works_title, $video_boxes);?>
 <?php endif; ?>
-<?php if( $faq ): ?>
+<?php if ($faq) : ?>
     <!--faq section-->
-    <?= get_faq($faq_title, $faq ,$more_faq_link); ?>
+    <?= get_faq($faq_title, $faq, $more_faq_link); ?>
     <!--faq section-->
 <?php endif; ?>
-<?php if( $choose_testimonials ): ?>
+<?php if ($choose_testimonials) : ?>
     <div class="testimonials-slider-section">
         <div class="container">
             <h3 aria-level="2" class="title-section"><?php echo $testimonials_title; ?></h3>
-            <label for="right-button-slider-testimonials" class="sr-only"><?php _e('next recommendation' ,'single_corse')?></label>
-            <label for="left-button-slider-testimonials" class="sr-only"><?php _e('previous recommendation' ,'single_corse')?></label>
+            <label for="right-button-slider-testimonials" class="sr-only"><?php _e('next recommendation', 'single_corse')?></label>
+            <label for="left-button-slider-testimonials" class="sr-only"><?php _e('previous recommendation', 'single_corse')?></label>
             <div class="testimonials-slider" id="testimonials-slider-slick">
                 <?php
-                foreach ($choose_testimonials as $choose_testimonial){
+                foreach ($choose_testimonials as $choose_testimonial) {
                     $testimonial_id = $choose_testimonial->ID;
                     $role = get_field('role', $testimonial_id);
                     $academic_institution =  get_field('academic_institution', $testimonial_id)
@@ -250,7 +303,7 @@ echo str_replace('REPLACEME', $courses_output, get_filtered_courses_masc($course
                     <div class="item-testimonials">
                         <div class="item-testimonials-inner">
                             <div class="img-testimonials">
-                                <?php  $img_exsist = get_the_post_thumbnail_url( $testimonial_id) ? get_the_post_thumbnail_url( $testimonial_id,'medium') : get_bloginfo('stylesheet_directory') .'/assets/images/campus_avatar.png' ;?>
+                                <?php  $img_exsist = get_the_post_thumbnail_url($testimonial_id) ? get_the_post_thumbnail_url($testimonial_id, 'medium') : get_bloginfo('stylesheet_directory') .'/assets/images/campus_avatar.png' ;?>
                                 <div class="img-testimonials-inner" style="background-image: url(<?= $img_exsist ?>)"></div>
                             </div>
                             <div class="content-item-testimonials">
@@ -270,6 +323,6 @@ echo str_replace('REPLACEME', $courses_output, get_filtered_courses_masc($course
 <?php endif; ?>
 
 
-<?php add_action('wp_footer', function(){
+<?php add_action('wp_footer', function () {
     get_template_part('templates/event_popup');
 });

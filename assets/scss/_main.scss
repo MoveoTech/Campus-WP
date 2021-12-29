@@ -185,12 +185,6 @@ main {
 
 /*front page*/
 
-.banner-image {
-  position: relative;
-  width: 100%;
-  text-align: center;
-}
-
 .banner-image:after {
   content: '';
   display: inline-block;
@@ -226,6 +220,176 @@ main {
   font-size: 48px;
 }
 
+.hero-banner {
+  height: 464px;
+  .banner-image {
+    //background: linear-gradient(270deg, #333433 38.02%, rgba(51, 52, 51, 0) 100%);
+    position: relative;
+    width: 100%;
+    display: inline-block;
+    text-align: center;
+    img.desktop-banner {
+      //width: 989px;
+      width: 100%;
+      height: inherit;
+      position: absolute;
+      left: 0;
+      z-index: -1;
+    }
+    img.mobile-banner {
+      display: none;
+    }
+    .container {
+      position: absolute;
+      top: 30%;
+      right: 185px;
+      padding: 0;
+      width: 471px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      .text-on-banner {
+        color: #ffffff;
+        width: 100%;
+        text-align: right;
+        margin-bottom: 20px;
+        h1 {
+          font-size: 42px;
+          font-weight: 600;
+          line-height: 55px;
+          margin-top: 0;
+          margin-bottom: 7px;
+        }
+        h5 {
+          font-size: 18px;
+          font-weight: 300;
+          line-height: 24px;
+          margin: 0;
+        }
+      }
+      .hero-search-form {
+        display: inline-block;
+
+        .search-field.form-control {
+          height: 55px;
+          width: 375px;
+          font-size: 18px;
+          &::placeholder {
+            color: #69696991;
+            font-size: 18px;
+          }
+          &:focus {
+            outline: none;
+            box-shadow: none;
+          }
+        }
+        .search-submit {
+          width: 45px;
+          height: 45px;
+          background: #F1595A;
+          border-radius: 33px;
+          font-size: 0;
+          border: 0;
+          position: absolute;
+          left: 5px;
+          top: 50%;
+          transform: translateY(-50%);
+          background-image: url("../../assets/images/search-red.png");
+          background-repeat: no-repeat;
+          background-position: center center;
+          z-index: 3;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 991px) {
+  .hero-banner {
+    height: 464px;
+    .banner-image {
+      background: rgba(51, 52, 51, 0.7);
+      position: relative;
+      width: 100%;
+      display: block;
+      text-align: center;
+      img.desktop-banner {
+        //width: 100%;
+        top: 63px;
+      }
+      .container {
+        right: 0;
+        left: 0;
+        margin: auto;
+        width: 80%;
+        align-items: center;
+        .text-on-banner {
+          text-align: center;
+          h1 {
+            margin-bottom: 10px;
+          }
+          h5 {
+            width: 300px;
+            margin: auto;
+          }
+        }
+        .hero-search-form {
+          .search-field.form-control {
+            height: 56px;
+            width: 331px;
+            font-size: 16px;
+            &::placeholder {
+              font-size: 16px;
+            }
+          }
+          .search-submit {
+            width: 46px;
+            height: 46px;
+          }
+        }
+      }
+    }
+
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-banner {
+    height: 441px;
+    .banner-image {
+      img.desktop-banner {
+        display: none;
+      }
+      img.mobile-banner {
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 63px;
+        width: 100%;
+        min-width: 391px;
+        height: 378px;
+        z-index: -1;
+      }
+      .container {
+        width: 90%;
+        .text-on-banner {
+          margin-bottom: 15px;
+          h1 {
+            font-size: 28px;
+          }
+          h5 {
+            width: 255px;
+          }
+        }
+
+      }
+    }
+
+  }
+}
+
+
+
 .link-banner {
   border-radius: 29px;
   background-color: #ffffff;
@@ -254,9 +418,9 @@ main {
   color: inherit;
 }
 
-.academic-institution {
-  background-color: #f5f5f5;
-}
+//.academic-institution {
+//  background-color: #f5f5f5;
+//}
 
 /*.carousel-item img{
     -webkit-filter: grayscale(100%);
@@ -272,6 +436,10 @@ body .carousel-item.slick-slide a:hover img.icon-color {
 }
 
 body .carousel-item.slick-slide {
+  width: 100%;
+  max-width: 135px;
+  height: 100%;
+  max-height: 60px;
   display: inline-block;
   vertical-align: middle;
   float: none;
@@ -288,14 +456,20 @@ body .carousel-item.slick-slide img {
   max-width: 115px;
 }
 
+.slick-button {
+  background: rgba(109, 109, 110, 0.7);
+  opacity: 0.25;
+  transform: matrix(1, 0, 0, -1, 0, 0);
+}
+
 .slick-prev {
-  right: -19px;
+  right: -60px;
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
 }
 
 .slick-next {
-  left: -28px;
-  -webkit-transform: scaleX(-1);
-  transform: scaleX(-1);
+  left: -60px;
 }
 
 .slick-prev,
@@ -303,7 +477,7 @@ body .carousel-item.slick-slide img {
   font-size: 0;
   line-height: 0;
   position: absolute;
-  top: calc(50% - 11px);
+  top: calc(30% - 11px);
   height: 22px;
   width: 14px;
   padding: 0;
@@ -312,9 +486,10 @@ body .carousel-item.slick-slide img {
   border: none;
   outline: none;
   background: transparent;
-  background-image: url(../images/sprite.png);
+  background-image: url(../images/stripe-vector-rtl.png);
+  //background-image: url(../images/sprite.png);
   background-repeat: no-repeat;
-  background-position: -82px -5px;
+  //background-position: -82px -5px;
   z-index: 1;
 }
 
@@ -1654,7 +1829,6 @@ body.lecturer_popup_open{
   }
 }
 .modal-backdrop.show {
-  opacity: .5;
   transition: all .5s ease-out;
 }
 
@@ -2245,7 +2419,7 @@ footer .footer-section {
     }
     @media(min-width: 1635px) {
       .logo-footer {
-         margin-top: -2px;
+        margin-top: -2px;
       }
     }
     @media(max-width: 1634px) {
@@ -3532,9 +3706,9 @@ body.rtl .lokking-for-form .wpcf7 {
 
 .wrap-search-page-course {
   padding-top: 80px;
-    @media(max-width: 991px){
-      padding-top: 20px;
-    }
+  @media(max-width: 991px){
+    padding-top: 20px;
+  }
 }
 
 .wrap-top-bar-search {

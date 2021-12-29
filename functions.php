@@ -11,6 +11,7 @@ include locate_template( 'lib/languages_functions.php' );
 include locate_template( 'lib/acf_fields.php' );
 include locate_template( 'lib/course-index-functions.php' );
 include locate_template( 'admin_files/admin_funcs.php' );
+include locate_template( 'assets/ajax/get_courses.php' );
 /**
  * Daat Ester
  * Adding option page to header and footer
@@ -46,10 +47,10 @@ function register_my_menu() {
 
 add_action( 'init', 'register_my_menu' );
 
-
 add_filter( 'user_can_richedit', function ( $param ) {
 	return true;
 }, 1 );
+
 
 function redirect($url){
     wp_redirect($url);
@@ -102,26 +103,21 @@ function set_user_default_language() {
 //            }
 //        }
 //    }
+  
 }
-
 add_action( 'wp_loaded', 'set_user_default_language' );
 
 
 
+
 function style_of_campus_enqueue() {
-//    wp_enqueue_style( 'bootstrap_css', get_bloginfo('stylesheet_directory') . '/assets/css/bootstrap.min.css' );
-//    wp_enqueue_style( 'style-fontawesome','https://use.fontawesome.com/releases/v5.4.1/css/all.css');
 	wp_enqueue_style( 'assistant', 'https://fonts.googleapis.com/css?family=Assistant:500,400,600,700,800&amp;subset=hebrew' );
-	wp_enqueue_style( 'header', get_bloginfo( 'stylesheet_directory' ) . '/assets/css/header.css', array(), '1.0.2' );
 	wp_enqueue_style( 'style', get_bloginfo( 'stylesheet_directory' ) . '/assets/css/style.css', array(), '1.9.7' );
-//    wp_enqueue_style('css_contact_css', get_bloginfo('stylesheet_directory') . '/assets/css/contact.css', null, '1.6');
-//    wp_enqueue_style('css_responsive_css', get_bloginfo('stylesheet_directory') . '/assets/css/responsive.css', null, '1.9.2');
-	if ( ICL_LANGUAGE_CODE == 'en' ) {
-		//echo ICL_LANGUAGE_CODE;
-		wp_enqueue_style( 'css_ltr_css', get_bloginfo( 'stylesheet_directory' ) . '/assets/css/ltr.css', null, '1.9' );
-	}
-//    wp_enqueue_style('slick_css', '//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css');
-    
+    global  $sitepress;
+    if ( $sitepress->get_current_language() == 'en' ) {
+        wp_enqueue_style( 'css_ltr_css', get_bloginfo( 'stylesheet_directory' ) . '/assets/css/ltr.css', null, '1.9' );
+    }
+
 	wp_enqueue_script( 'popper_js', 'https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js' );
 	wp_enqueue_script( 'slick_js', '//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js', array( 'jquery' ) );
 	wp_enqueue_script( 'cookie_js', '//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js', array( 'jquery' ) );
@@ -131,7 +127,8 @@ function style_of_campus_enqueue() {
 		'cookie_js'
 	), '1.2.15' );
 	wp_enqueue_script( 'bootstrap_js', get_bloginfo( 'stylesheet_directory' ) . '/assets/js/bootstrap.min.js' );
-
+    wp_enqueue_script('home_page_js', get_bloginfo( 'stylesheet_directory' ) . '/assets/js/home_page.js', array('jquery'));
+    wp_localize_script('home_page_js', 'get_courses_ajax', array('ajaxurl' => admin_url('admin-ajax.php')));
 
 	wp_localize_script( 'ready_js', 'global_vars', array(
 			'link_to_enrollment_api'        => get_field( 'link_to_enrollment_api', 'option' ),
@@ -148,7 +145,6 @@ function style_of_campus_enqueue() {
 			'menu_en_title'                 => cin_get_str( 'menu_en_title' ),
 		)
 	);
-//    var_dump(get_field('cookie_name','option'));
 }
 
 add_action( 'wp_enqueue_scripts', 'style_of_campus_enqueue' );
@@ -170,38 +166,27 @@ function get_lang_menu() {
 			wp_nav_menu( [ 'theme_location' => 'lang_menu', 'menu_class' => 'nav-lang' ] );
 		endif;
 	}
-
 	return $output_lang_menu;
 }
 
 //get active lang with giving lang
 function current_active_lang( $given_lang ) {
-	$lang_class = '';
-	if ( ICL_LANGUAGE_CODE == $given_lang ) {
-		$lang_class .= 'wpml-ls-current-language';
-	}
+    global $sitepress;
+    $language = $sitepress->get_current_language();
+    $lang_class = '';
+    if ( $language == $given_lang ) {
+        $lang_class .= 'wpml-ls-current-language';
+    }
 
-	return $lang_class;
+    return $lang_class;
 }
 
 //get wpml lang with givin url
 function get_lang_url( $lang ) {
-
-	global $wp;
-//    echo $wp;
-//    $aaa=get_permalink() ;
-//    $current_url = apply_filters( 'wpml_permalink', home_url( $wp->request) , 'en');
-	$base_url = ( isset( $_SERVER['HTTPS'] ) && $_SERVER['HTTPS'] == 'on' ? 'https' : 'http' ) . '://' . $_SERVER['HTTP_HOST'];
-	$url      = $base_url . $_SERVER["REQUEST_URI"];
-//    echo '</br>EEEEEEEE';
-//    echo $url;
-//    echo '</br>EEEEEEEEEEE';
-	$wpml_permalink = apply_filters( 'wpml_permalink', $url, $lang );
-
-//    $wpml_permalink = apply_filters( 'wpml_permalink',  $current_url , $lang);
-	return $wpml_permalink;
-
-	//echo '</br>EEEEEEEE';
+    $base_url = ( isset( $_SERVER['HTTPS'] ) && $_SERVER['HTTPS'] == 'on' ? 'https' : 'http' ) . '://' . $_SERVER['HTTP_HOST'];
+    $url      = $base_url . $_SERVER["REQUEST_URI"];
+    $wpml_permalink = apply_filters( 'wpml_permalink', $url, $lang );
+    return $wpml_permalink;
 }
 
 // pre get post
@@ -1144,3 +1129,30 @@ add_action('wp_head', function(){
 ";
         }
 }, 1);
+
+function new_search_placeholder() {
+    global $sitepress;
+    $current = $sitepress->get_current_language();
+    $placeholder = 'חיפוש קורס';
+    if ($current === 'en') {
+        $placeholder = 'Search Course';
+    }
+    if ($current === 'ar') {
+        $placeholder = 'البحث عن الدورة';
+    }
+
+    return $placeholder;
+}
+
+function hero_search_placeholder() {
+    global $sitepress;
+    $current = $sitepress->get_current_language();
+    $placeholder = 'מה נרצה ללמוד היום?';
+    if ($current === 'en') {
+        $placeholder = 'What we want to learn today?';
+    }
+    if ($current === 'ar') {
+        $placeholder = 'ما نريد أن نتعلمه اليوم?';
+    }
+    return $placeholder;
+}

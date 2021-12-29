@@ -1,6 +1,7 @@
-<?php 
+<?php
 global $sitepress;
 $current_language = $sitepress->get_current_language();
+$mobile_menu = get_mobile_menu();
 ?>
     <footer class="clearfix" id = "page_footer" role = "contentinfo" >
         <div class="footer-section">
@@ -12,9 +13,9 @@ $current_language = $sitepress->get_current_language();
                         $url_campus_footer = $campus_logo_footer['url'];
                         $alt_campus_logo = $campus_logo_footer['alt'];
                         ?>
-                       <div class='logo-footer'>
-                           <img src='<?= $url_campus_footer ?>' alt='<?= cin_get_str('footer_first_logo_alt'); ?>' title='' />
-                       </div>
+                        <div class='logo-footer'>
+                            <img src='<?= $url_campus_footer ?>' alt='<?= cin_get_str('footer_first_logo_alt'); ?>' title='' />
+                        </div>
                         <div class="footer-content"><?php the_field('footer_text_after_logo', 'options'); ?></div>
                     </div>
                     <div class="" id="footer_content_social_logo" >
@@ -36,20 +37,20 @@ $current_language = $sitepress->get_current_language();
                             <?php
                             if($social_networks){
                                 $go_to_label = cin_get_str('go_to_social_network');
-                              foreach ($social_networks as $social_network){
-                                  $label = str_replace('%', $social_network['name_of_class'], $go_to_label);
-                                  ?>
-                                  <li>
-                                      <a aria-label="<?= $label; ?>" target="_blank" class="socials-icon <?php echo $social_network['name_of_class'];?>" href="<?php echo $social_network['url'];?>"></a>
-                                  </li>
-                            <?php  }
+                                foreach ($social_networks as $social_network){
+                                    $label = str_replace('%', $social_network['name_of_class'], $go_to_label);
+                                    ?>
+                                    <li>
+                                        <a aria-label="<?= $label; ?>" target="_blank" class="socials-icon <?php echo $social_network['name_of_class'];?>" href="<?php echo $social_network['url'];?>"></a>
+                                    </li>
+                                <?php  }
                             }?>
                         </ul>
                     </div>
                     <div class="inners-footer-items links_wrap">
                         <?php $column_1_title = get_field('column_1_title', 'options'); ?>
                         <nav id="footer_nav" role="navigation">
-<!--                            <h4 aria-level="2">--><?php //echo $column_1_title  ?><!--</h4>-->
+                            <!--                            <h4 aria-level="2">--><?php //echo $column_1_title  ?><!--</h4>-->
                             <?php
                             if (has_nav_menu('footer_menu')) :
                                 wp_nav_menu(['theme_location' => 'footer_menu', 'menu_class' => 'nav']);
@@ -61,14 +62,14 @@ $current_language = $sitepress->get_current_language();
             </div>
         </div>
         <a href="#" class="scroll-top  d-none" role="button" tabindex="0" aria-label="<?=  __('scroll to the top of page','single_corse') ?>">
-                <i class="fa fa-chevron-up"></i>
+            <i class="fa fa-chevron-up"></i>
         </a>
         <div class="copyright">
             <?php $copyright = get_field('copyright', 'options'); ?>
             <p><?php echo date('Y');  ?> &copy; <?php echo $copyright ?></p>
         </div>
         <input type="hidden" id="current_lang" name="current_lang" value="<?= $current_language; ?>">
-<!--        empty html to popup course-->
+        <!--        empty html to popup course-->
         <div id="popup-course-hp">
             <div class="popup-loader" style="background-image:url(<?= get_bloginfo('stylesheet_directory') . '/assets/images/loader-popup.gif'; ?>)"></div>
             <div class="close-popup-course">
@@ -103,7 +104,7 @@ $current_language = $sitepress->get_current_language();
                 </div>
             </div>
         </div>
-<!--        End empty html to popup course-->
+        <!--        End empty html to popup course-->
         <div id="popup_overlay">
             <div aria-hidden="true" id="popup" class="dialog" role="dialog" aria-model="true">
                 <button aria-label="<?= cin_get_str('close_btn_popup'); ?>" class="last-popup-element first-popup-element close-popup-button close-popup-iframe" role="button" tabindex="0"></button>
@@ -112,13 +113,66 @@ $current_language = $sitepress->get_current_language();
                 </div>
             </div>
         </div>
-<!--        03/06/2020 new version popups     -->
+        <!--        03/06/2020 new version popups     -->
         <div id="popup_overlay_2020" tabindex="0"><?php do_action('site_popups')?></div>
-<!--      End 03/06/2020 new version popups     -->
+        <!--      End 03/06/2020 new version popups     -->
     </footer>
-    <div class="background-popup"></div>
-<script>
-    function ajax_dir(){
-        return '<?php echo get_bloginfo('stylesheet_directory');  ?>/assets/ajax/';
-    }
-</script>
+    <div class="bg-overlay"></div>
+    <div class="mobile-menu-popup">
+        <?= $mobile_menu; ?>
+    </div>
+    <script>
+        function ajax_dir(){
+            return '<?php echo get_bloginfo('stylesheet_directory');  ?>/assets/ajax/';
+        }
+    </script>
+
+<?php
+function get_mobile_menu() {
+    $current = cin_get_str('header_current_languages');
+    if ($current === 'עברית') :
+        {
+            $courses = 'הקורסים שלי';
+            $language = 'שינוי שפה';
+            $profile = 'פרופיל';
+            $controlpanel = 'לוח בקרה';
+            $logout = 'התנתקות';
+        }
+    elseif ($current === 'English') :
+        {
+            $courses = 'My Courses';
+            $language = 'Change Language';
+            $profile = 'Profile';
+            $controlpanel = 'Control Panel';
+            $logout = 'Log out';
+
+
+        }
+    elseif ($current === 'العربية') :
+        {
+            $courses = 'دوراتي';
+            $language = 'تغيير اللغة';
+            $profile = 'الملف الشخصي';
+            $controlpanel = 'لوحة المراقبة';
+            $logout = 'تسجيل خروج';
+        }
+    endif;
+
+    return '
+    <ul id="menu-mobile-menu-1" class="nav-mobile">
+       <li class="mobile-list-item"><img src="' . get_bloginfo('stylesheet_directory') . '/assets/images/courses-icon.png' .'"><a target="_blank" href="'. get_field('link_to_dashboard_for_campus', 'option') .'"><span class="list-item-content">'.$courses.'</span></a></li>
+       <li class="mobile-list-item change-mobile-lang"><img src="' . get_bloginfo('stylesheet_directory') . '/assets/images/lang-logo.png' .'"><a class="a-link"><span class="list-item-content">'.$language.'</span><img class="mobile-menu-vector" width="9.93px" height="5.68px" src="' . get_bloginfo('stylesheet_directory') . '/assets/images/vector-black.png' .'"/></a> </li>
+       <div class="secondary-mobile-lang-menu">
+           <ul id="menu-language-menu-1" class="nav-lang">
+                <li id="wpml-ls-item-he" class="wpml-ls-menu-item mobile-list-item ' . current_active_lang( 'he' ) . '"><a href="' . get_lang_url( 'he' ) . '"><span class="wpml-ls-native">עב</span></a></li>
+                <li id="wpml-ls-item-en" class="wpml-ls-menu-item mobile-list-item ' . current_active_lang( 'en' ) . '"><a href="' . get_lang_url( 'en' ) . '"><span class="wpml-ls-native">En</span></a></li>
+                <li id="wpml-ls-item-ar" class="wpml-ls-menu-item mobile-list-item ' . current_active_lang( 'ar' ) . '"><a href="' . get_lang_url( 'ar' ) . '"><span class="wpml-ls-native">العر</span></a></li>
+            </ul>
+        </div>
+        <li class="mobile-list-item"><img src="' . get_bloginfo('stylesheet_directory') . '/assets/images/profile.png' .'"><a target="_blank" href="'. get_field('link_to_dashboard_for_campus', 'option') .'"><span class="list-item-content">'.$profile.'</span></a></li>
+        <li class="mobile-list-item"><img src="' . get_bloginfo('stylesheet_directory') . '/assets/images/equalizer.png' .'"><a target="_blank" href="'. get_field('link_to_dashboard_for_campus', 'option') .'"><span class="list-item-content">'.$controlpanel.'</span></a></li>
+        <li class="mobile-list-item mobile-logged-out"><img src="' . get_bloginfo('stylesheet_directory') . '/assets/images/logout.png' .'"><a target="_blank" href="'. get_field('link_to_dashboard_for_campus', 'option') .'"><span class="list-item-content">'.$logout.'</span></a></li>         
+    </ul>
+
+    ';
+}
