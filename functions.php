@@ -51,22 +51,63 @@ add_filter( 'user_can_richedit', function ( $param ) {
 	return true;
 }, 1 );
 
-function set_user_default_language() {
-    global $sitepress;
-    $get_language = $_COOKIE['openedx-language-preference'];
 
-    if($get_language == 'en' || $get_language == 'ar') {
-        if($sitepress->get_current_language() != $get_language) {
-            $sitepress->switch_lang($get_language);
-            do_action( 'wpml_switch_language',  $get_language);
-            $url = home_url('/') . $get_language;
-            wp_redirect($url);
-            exit;
-        }
-    }
+function redirect($url){
+    wp_redirect($url);
+    exit;
 }
 
+function set_user_default_language() {
+
+    $get_language = $_COOKIE['openedx-language-preference'];
+    $url = home_url('/');
+
+    if (is_admin())
+        return;
+
+    if($get_language == 'ar') {
+        if(str_contains($url, "en"))
+            redirect(str_replace("en", "ar", $url));
+
+        if(!str_contains($url, "ar"))
+            redirect(home_url('/'). $get_language);
+    }
+
+    if($get_language == 'en') {
+        if(str_contains($url, "ar"))
+            redirect(str_replace("ar", "en", $url));
+
+        if(!str_contains($url, "en"))
+            redirect(home_url('/'). $get_language);
+    }
+
+    if($get_language == 'he') {
+        if(str_contains($url, "ar"))
+            redirect(str_replace("ar", "", $url));
+
+        if(str_contains($url, "en"))
+            redirect(str_replace("en", "", $url));
+    }
+
+//    global $sitepress;
+//
+//    if (!is_admin()) {
+//
+//        if($get_language == 'en' || $get_language == 'ar') {
+//            if($sitepress->get_current_language() != $get_language) {
+//                $sitepress->switch_lang($get_language);
+//                do_action( 'wpml_switch_language',  $get_language);
+//                $url = home_url('/') . $get_language;
+//                wp_redirect($url);
+//                exit;
+//            }
+//        }
+//    }
+  
+}
 add_action( 'wp_loaded', 'set_user_default_language' );
+
+
 
 
 function style_of_campus_enqueue() {
