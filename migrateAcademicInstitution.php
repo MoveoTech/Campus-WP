@@ -6,45 +6,40 @@
 <div style="height: 100px"></div>
 <?php
 
-global $wpdb;
-$results = $wpdb->get_results( "SELECT * FROM $wpdb->posts WHERE `post_type`='academic_institution'" ); // AND `post_title`='Sapir College'
+$wp_query = new WP_Query(array(
+    'post_type' => 'academic_institution',
+    'posts_per_page' => -1,
+    'post_status' => 'publish',
+));
+echo nl2br("number of courses =  $wp_query->found_posts \n"); //admin: 406,  WP_Query: 325
+$posts = $wp_query->posts;
 
 $hebrew_ids = array();
 $english_ids = array();
 $arabic_ids = array();
 
-foreach ( $results as $result )
-{
-    $translated = apply_filters( 'wpml_object_id', $result->ID, 'academic_institution', FALSE, 'he' );
-    if ($translated){
-        array_push($hebrew_ids, $translated);
+foreach($posts as $result) {
+
+    $translated1 = apply_filters( 'wpml_object_id', $result->ID, 'academic_institution', FALSE, 'he' );
+    if ($translated1){
+        array_push($hebrew_ids, $translated1);
     }
-    $translated = apply_filters( 'wpml_object_id', $result->ID, 'academic_institution', FALSE, 'en' );
-    if ($translated){
-        array_push($english_ids, $translated);
+
+    $translated2 = apply_filters( 'wpml_object_id', $result->ID, 'academic_institution', FALSE, 'en' );
+    if ($translated2){
+        array_push($english_ids, $translated2);
     }
-    $translated = apply_filters( 'wpml_object_id', $result->ID, 'academic_institution', FALSE, 'ar' );
-    if ($translated){
-        array_push($arabic_ids, $translated);
+    $translated3 = apply_filters( 'wpml_object_id', $result->ID, 'academic_institution', FALSE, 'ar' );
+    if ($translated3){
+        array_push($arabic_ids, $translated3);
     }
 }
-$unique_hebrew_ids = array_unique($hebrew_ids);
-$unique_english_ids = array_unique($english_ids);
-$unique_arabic_ids = array_unique($arabic_ids);
 
-$index=1;
-
-//foreach ( $unique_hebrew_ids as $id )
-for($i=0 ; $i <  count($unique_hebrew_ids) ; $i++)
-
+for($i=0 ; $i <  count($hebrew_ids) ; $i++)
 {
-    var_dump($unique_hebrew_ids[i]);
-
-//    $result = get_post($id);
-    $result = get_post($unique_hebrew_ids[$i]);
-
-    $resultEnglish = get_post($unique_english_ids[$i]);
-    $resultArabic = get_post($unique_arabic_ids[$i]);
+    $result = get_post($hebrew_ids[$i]);
+    $resultEnglish = get_post($english_ids[$i]);
+    $resultArabic = get_post($arabic_ids[$i]);
 
     ?>
     <div class="restaurant-card" style="border: 1px solid red; min-height: 150px; padding: 10px">
@@ -52,14 +47,17 @@ for($i=0 ; $i <  count($unique_hebrew_ids) ; $i++)
         <h4>ID :</h4><p class="name"> <?php echo $result->ID; ?></p>
         <h4>Author ID :</h4><p class="name"> <?php echo $result->post_author; ?></p>
         <h4>Name : </h4><p class="name"><?php echo $result->post_title; ?></p>
-<!--        <h4>created : </h4><p class="name">--><?php //echo $result->post_date; ?><!--</p>-->
-<!--        <h4>modified : </h4><p class="name">--><?php //echo $result->post_modified; ?><!--</p>-->
-<!--        <h4>Description : </h4><p class="name">--><?php //echo $result->post_content; ?><!--</p>-->
-<!--        <h4>image : </h4><p class="name">--><?php //echo wp_get_attachment_url( get_post_thumbnail_id($result->ID), 'thumbnail' ); ?><!--</p>-->
-<!--        <h4>edx_id :</h4><p class="name"> --><?php //echo get_post_meta($result->ID, 'edx_id', true); ?><!--</p>-->
-<!--        <h4>institution_site_link : </h4><p class="name">--><?php //echo get_post_meta($result->ID, 'institution_site_link', true); ?><!--</p>-->
-<!--        <h4>banner_image_institute :</h4><p class="name"> --><?php //echo get_post_meta($result->ID, 'banner_image_institute', true); ?><!--</p>-->
-<!--        <h4>banner_mobile_institute :</h4><p class="name"> --><?php //echo get_post_meta($result->ID, 'banner_mobile_institute', true); ?><!--</p>-->
+        <h4>Name : </h4><p class="name"><?php echo $resultEnglish->post_title; ?></p>
+        <h4>Name : </h4><p class="name"><?php echo $resultArabic->post_title; ?></p>
+
+                <h4>created : </h4><p class="name"><?php echo $result->post_date; ?></p>
+        <h4>modified : </h4><p class="name"><?php echo $result->post_modified; ?></p>
+        <h4>Description : </h4><p class="name"><?php echo $result->post_content; ?></p>
+        <h4>image : </h4><p class="name"><?php echo wp_get_attachment_url( get_post_thumbnail_id($result->ID), 'thumbnail' ); ?></p>
+        <h4>edx_id :</h4><p class="name"> <?php echo get_post_meta($result->ID, 'edx_id', true); ?></p>
+        <h4>institution_site_link : </h4><p class="name"><?php echo get_post_meta($result->ID, 'institution_site_link', true); ?></p>
+        <h4>banner_image_institute :</h4><p class="name"> <?php echo get_post_meta($result->ID, 'banner_image_institute', true); ?></p>
+        <h4>banner_mobile_institute :</h4><p class="name"> <?php echo get_post_meta($result->ID, 'banner_mobile_institute', true); ?></p>
 
     </div>
 
@@ -95,7 +93,50 @@ for($i=0 ; $i <  count($unique_hebrew_ids) ; $i++)
 // Add the new item now and get the new ID
 //    $academic_institution = $pod->add( $data);
 
+
 }
+
+
+
+
+
+
+
+
+
+//global $wpdb;
+//$results = $wpdb->get_results( "SELECT * FROM $wpdb->posts WHERE `post_type`='academic_institution'" ); // AND `post_title`='Sapir College'
+//
+//$hebrew_ids = array();
+//$english_ids = array();
+//$arabic_ids = array();
+//$language_ids = array();
+//
+//
+//$unique_hebrew_ids = array_unique($hebrew_ids);
+//$unique_english_ids = array_unique($english_ids);
+//$unique_arabic_ids = array_unique($arabic_ids);
+//
+//var_dump($unique_hebrew_ids);
+//print_r("----------------------");
+//print_r($unique_english_ids);
+//
+//print_r("----------------------\r\n ");
+//print_r($unique_arabic_ids);
+//
+//
+//
+//$index=1;
+//
+////for($i=0 ; $i <  count($unique_hebrew_ids) ; $i++)
+//for($i=0 ; $i <  0 ; $i++)
+//{
+//
+//    $result = get_post($unique_hebrew_ids[$i]);
+//    $resultEnglish = get_post($unique_english_ids[$i]);
+//    $resultArabic = get_post($unique_arabic_ids[$i]);
+//
+//}
 
 
 
