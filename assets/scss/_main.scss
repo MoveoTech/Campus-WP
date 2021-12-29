@@ -456,14 +456,20 @@ body .carousel-item.slick-slide img {
   max-width: 115px;
 }
 
+.slick-button {
+  background: rgba(109, 109, 110, 0.7);
+  opacity: 0.25;
+  transform: matrix(1, 0, 0, -1, 0, 0);
+}
+
 .slick-prev {
-  right: -19px;
+  right: -60px;
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
 }
 
 .slick-next {
-  left: -28px;
-  -webkit-transform: scaleX(-1);
-  transform: scaleX(-1);
+  left: -60px;
 }
 
 .slick-prev,
@@ -471,7 +477,7 @@ body .carousel-item.slick-slide img {
   font-size: 0;
   line-height: 0;
   position: absolute;
-  top: calc(50% - 11px);
+  top: calc(30% - 11px);
   height: 22px;
   width: 14px;
   padding: 0;
@@ -480,9 +486,10 @@ body .carousel-item.slick-slide img {
   border: none;
   outline: none;
   background: transparent;
-  background-image: url(../images/sprite.png);
+  background-image: url(../images/stripe-vector-rtl.png);
+  //background-image: url(../images/sprite.png);
   background-repeat: no-repeat;
-  background-position: -82px -5px;
+  //background-position: -82px -5px;
   z-index: 1;
 }
 
