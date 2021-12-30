@@ -31,6 +31,13 @@ body.rtl {
   }
 }
 
+.wrap {
+  @media (max-width: 768px) {
+    position: relative;
+    top: 63px;
+  }
+}
+
 /* Breadcrumbs */
 .breadcrumbs-campus {
   position: absolute;
@@ -315,7 +322,7 @@ main {
       text-align: center;
       img.desktop-banner {
         //width: 100%;
-        top: 63px;
+        //top: 63px;
       }
       .container {
         right: 0;
@@ -355,7 +362,7 @@ main {
 
 @media (max-width: 768px) {
   .hero-banner {
-    height: 441px;
+    height: 378px;
     .banner-image {
       img.desktop-banner {
         display: none;
@@ -364,7 +371,7 @@ main {
         display: block;
         position: absolute;
         left: 0;
-        top: 63px;
+        //top: 63px;
         width: 100%;
         min-width: 391px;
         height: 378px;
@@ -372,6 +379,7 @@ main {
       }
       .container {
         width: 90%;
+        top: 60px;
         .text-on-banner {
           margin-bottom: 15px;
           h1 {

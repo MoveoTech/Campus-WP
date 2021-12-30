@@ -1179,6 +1179,7 @@ function initCourseSlider(is_rtl, prevSlick, nexSlick) {
             // rows:2,
             prevArrow: prevSlick,
             nextArrow: nexSlick,
+            arrows: false,
             // infinite: false,
             // slidesToShow:1
         });
@@ -1192,6 +1193,7 @@ function initCourseSlider(is_rtl, prevSlick, nexSlick) {
             rows: 2,
             prevArrow: prevSlick,
             nextArrow: nexSlick,
+            arrows: false,
             infinite: false,
             // infinite: false,
             responsive: [
@@ -1221,7 +1223,7 @@ function initCourseSlider(is_rtl, prevSlick, nexSlick) {
                         rows: 1,
                         centerMode: false,
                         centerPadding: '60px',
-                        arrows: true,
+                        // arrows: true,
                         swipe: true,
                         slidesToShow: 1
                         // rows: 1,
