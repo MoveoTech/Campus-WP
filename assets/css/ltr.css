@@ -191,6 +191,33 @@
       .hero-banner .banner-image .container .text-on-banner h5 {
         width: 275px; } }
 
+/* Slick Stripe */
+.courses-stripe .course-stripe-item .item-content {
+  height: 87px;
+  width: 233px;
+  margin: 10px; }
+  .courses-stripe .course-stripe-item .item-content h3 {
+    text-align: left; }
+  .courses-stripe .course-stripe-item .item-content p {
+    text-align: left; }
+
+.courses-stripe .course-stripe-item .tags-div {
+  justify-content: left; }
+  .courses-stripe .course-stripe-item .tags-div span {
+    margin-left: unset;
+    margin-right: 10px; }
+
+.slick-prev {
+  right: unset;
+  left: -60px;
+  -webkit-transform: unset;
+  transform: rotate(0); }
+
+.slick-next {
+  left: unset;
+  right: -60px;
+  transform: rotate(180deg); }
+
 .all_courses:before {
   transform: scaleX(-1);
   left: 0;
@@ -614,20 +641,8 @@ footer .footer-section .inners-footer-items {
   transform-origin: right top;
   left: auto; }
 
-.slick-prev {
-  left: 2px;
-  right: auto;
-  -webkit-transform: scaleX(-1);
-  transform: scaleX(-1); }
-
 .single-lecturer-popup.active .lecturer-content {
   direction: rtl; }
-
-.slick-next {
-  right: 2px;
-  left: auto;
-  -webkit-transform: scaleX(1);
-  transform: scaleX(1); }
 
 .testimonials-lobby-knowledge .slick-next {
   right: 41px; }

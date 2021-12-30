@@ -275,6 +275,45 @@
     }
 }
 
+/* Slick Stripe */
+.courses-stripe {
+    .course-stripe-item {
+        .item-content {
+            height: 87px;
+            width: 233px;
+            //margin-top: 10px;
+            margin: 10px;
+            h3 {
+                text-align: left;
+            }
+            p {
+                text-align: left;
+            }
+        }
+        .tags-div {
+            //flex-direction: row-reverse;
+            justify-content: left;
+            span {
+                margin-left: unset;
+                margin-right: 10px;
+            }
+        }
+    }
+}
+    //Slick Arrows
+.slick-prev {
+    right: unset;
+    left: -60px;
+    -webkit-transform: unset;
+    transform: rotate(0);
+}
+
+.slick-next {
+    left: unset;
+    right: -60px;
+    transform: rotate(180deg);
+}
+
 .all_courses:before{
     transform: scaleX(-1);
     left: 0;
@@ -788,21 +827,11 @@ footer .footer-section{
     transform-origin: right top;
     left: auto;
 }
-.slick-prev {
-    left: 2px;
-    right: auto;
-    -webkit-transform: scaleX(-1);
-    transform: scaleX(-1);
-}
+
 .single-lecturer-popup.active .lecturer-content{
     direction: rtl;
 }
-.slick-next {
-    right: 2px;
-    left: auto;
-    -webkit-transform: scaleX(1);
-    transform: scaleX(1);
-}
+
 .testimonials-lobby-knowledge .slick-next{
     right: 41px;
 }
