@@ -14,9 +14,9 @@ class Course_stripe {
     function __construct($id) {
         $mypod = pods( 'courses', $id );
         $this->title = $mypod->display( 'name' );
-        $this->img_url = $mypod->display( 'image' );
+        $this->img_url = $mypod->display( 'featured_image' );
         $this->tags = $mypod->display( 'tags' );
-        $this->institution = $mypod->display( 'academic_institution' );
+        $this->institution = $mypod->display( 'institutions' );
 //        $this->post = get_post($id);
 //        $this->title = get_the_title($id);
 //        $this->institution = get_field('org',$id);
