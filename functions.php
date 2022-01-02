@@ -11,7 +11,7 @@ include locate_template( 'lib/languages_functions.php' );
 include locate_template( 'lib/acf_fields.php' );
 include locate_template( 'lib/course-index-functions.php' );
 include locate_template( 'admin_files/admin_funcs.php' );
-include locate_template( 'assets/ajax/get_courses.php' );
+include locate_template( 'assets/ajax/stripe_data.php' );
 /**
  * Daat Ester
  * Adding option page to header and footer
@@ -128,7 +128,7 @@ function style_of_campus_enqueue() {
 	), '1.2.15' );
 	wp_enqueue_script( 'bootstrap_js', get_bloginfo( 'stylesheet_directory' ) . '/assets/js/bootstrap.min.js' );
     wp_enqueue_script('home_page_js', get_bloginfo( 'stylesheet_directory' ) . '/assets/js/home_page.js', array('jquery'));
-    wp_localize_script('home_page_js', 'get_courses_ajax', array('ajaxurl' => admin_url('admin-ajax.php')));
+    wp_localize_script('home_page_js', 'stripe_data_ajax', array('ajaxurl' => admin_url('admin-ajax.php')));
 
 	wp_localize_script( 'ready_js', 'global_vars', array(
 			'link_to_enrollment_api'        => get_field( 'link_to_enrollment_api', 'option' ),
