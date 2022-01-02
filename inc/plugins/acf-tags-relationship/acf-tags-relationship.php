@@ -1,9 +1,9 @@
 <?php
 
 /*
-Plugin Name: Advanced Custom Fields: relationship Courses
+Plugin Name: Advanced Custom Fields: ACF Relationship Tags
 Plugin URI: PLUGIN_URL
-Description: Connect Courses from separated table to ACF plugin
+Description: Connect Tags from separated table to ACF plugin
 Version: 1.0.0
 Author: Ali Khutaba
 Author URI: AUTHOR_URL
@@ -16,9 +16,9 @@ if( ! defined( 'ABSPATH' ) ) exit;
 
 
 // check if class already exists
-if( !class_exists('_acf_courses') ) :
+if( !class_exists('_acf_tags') ) :
 
-    class _acf_courses {
+    class _acf_tags {
 
         // vars
         var $settings;
@@ -78,14 +78,14 @@ if( !class_exists('_acf_courses') ) :
 
 
             // include
-            include_once('fields/class-courses.php');
+            include_once('fields/class-tags.php');
         }
 
     }
 
 
 // initialize
-    new _acf_courses();
+    new _acf_tags();
 
 
 // class_exists check
