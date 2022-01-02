@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Based on includes/fields/class-acf-courses-relationship.php from
+ * Based on includes/fields/class-acf-tags-relationship.php from
  * https://github.com/AdvancedCustomFields/acf by elliotcondon, licensed
  * under GPLv2 or later
  */
@@ -14,7 +14,7 @@ if (!defined('ABSPATH')) {
 
 
 
-class acf_field_courses extends acf_field {
+class acf_field_tags extends acf_field {
 
 
     /*
@@ -33,8 +33,8 @@ class acf_field_courses extends acf_field {
     function initialize() {
 
         // vars
-        $this->name = 'relationship-courses';
-        $this->label = __("Relationship courses",'acf');
+        $this->name = 'relationship-tags';
+        $this->label = __("Relationship tags",'acf');
         $this->category = 'relational';
         $this->defaults = array(
             'post_type'			=> array(),
@@ -45,8 +45,8 @@ class acf_field_courses extends acf_field {
         );
 
         // extra
-        add_action('wp_ajax_acf/fields/relationship-courses/query',			array($this, 'ajax_query'));
-        add_action('wp_ajax_nopriv_acf/fields/relationship-courses/query',	array($this, 'ajax_query'));
+        add_action('wp_ajax_acf/fields/relationship-tags/query',			array($this, 'ajax_query'));
+        add_action('wp_ajax_nopriv_acf/fields/relationship-tags/query',	array($this, 'ajax_query'));
 
     }
 
@@ -69,8 +69,8 @@ class acf_field_courses extends acf_field {
 
     function input_admin_enqueue_scripts() {
 
-        wp_register_script( 'acf-courses', plugins_url(). '/acf-courses-relationship/assets/src/input.js' , array( 'jquery' ), 1.2 );
-        wp_enqueue_script('acf-courses');
+        wp_register_script( 'acf-tags', plugins_url(). '/acf-tags-relationship/assets/src/input.js' , array( 'jquery' ), 1.2 );
+        wp_enqueue_script('acf-tags');
 
         // localize
         acf_localize_text(array(
@@ -159,12 +159,12 @@ class acf_field_courses extends acf_field {
 
         $results = array();
 
-        $CoursesPods = pods( 'courses' );
-        $CoursesPods->find($params);
+        $tagsPods = pods( 'tags' );
+        $tagsPods->find($params);
 
-        while ($CoursesPods->fetch()) { // Courses Loop
+        while ($tagsPods->fetch()) { // tags Loop
 
-            $results[] = $this->get_post_result( $CoursesPods->field('id'), $CoursesPods->field('name'));
+            $results[] = $this->get_post_result( $tagsPods->field('id'), $tagsPods->field('name'));
 
         }
 
@@ -292,11 +292,11 @@ class acf_field_courses extends acf_field {
                                 'where'=>$where,
                                 'orderby'=> $order
                             );
-                            $posts = pods( 'courses');
+                            $posts = pods( 'tags');
                             $posts->find($params);
 
 
-                            while ($posts->fetch()) { // Courses Loop ?>
+                            while ($posts->fetch()) { // tags Loop ?>
 
                                 <li>
                                     <?php acf_hidden_input( array('name' => $field['name'].'[]', 'value' => $posts->field('id')) ); ?>
@@ -495,5 +495,5 @@ class acf_field_courses extends acf_field {
 
 
 // initialize
-new acf_field_courses($this->settings);
+new acf_field_tags($this->settings);
 ?>
