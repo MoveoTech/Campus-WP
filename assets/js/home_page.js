@@ -1,47 +1,31 @@
 jQuery(document).ready(function () {
 
     //reload new courses
-    jQuery('.courses-stripe').on('afterChange', function() {
+    jQuery('.courses-stripe').on('afterChange', function () {
         const slickTrack = document.querySelector('.slick-track');
         const trackLength = parseInt(slickTrack.lastChild.getAttribute('data-slick-index'))
         const coursesIDs = JSON.parse(jQuery('#courses-ids').attr('value'))
         let currentIndex = jQuery('.slick-active').attr("data-slick-index");
 
-        // let newCoursesArray = coursesIDs.slice(trackLength + 1 )
-        let newCoursesArray = coursesIDs.slice(trackLength + 1, (trackLength + 11))
+        // let newCoursesArray = coursesIDs.slice(trackLength + 1)
 
-        let url =  get_courses_ajax.ajaxurl;
-        let data = {
-                'action': 'get_courses',
-                'coursesIDs': newCoursesArray,
-            }
-        if (trackLength - currentIndex <= 8) {
-            jQuery.post(url, data, function(response){
-                const podsArray = JSON.parse(response);
-                console.log(podsArray)
-            })
-        }
-
-        // if (trackLength - currentIndex <= 4) {
-        //     jQuery.post(url, data, function(response){
-        //         // console.log(JSON.parse(response))
-        //         const podsArray = JSON.parse(response);
-        //         for (let i = 0; i < podsArray.length; i++ ) {
-        //             const data = podsArray[i].data.row
+        // if (trackLength - currentIndex <= 8) {
+        //     let newCoursesArray = coursesIDs.slice(trackLength + 1, (trackLength + 11))
+        //
+        //     let data = {
+        //         'action': 'stripe_data',
+        //         'type' : 'courses',
+        //         'lang' : getCookie('openedx-language-preference'),
+        //         'idsArray': newCoursesArray,
+        //     }
+        //     jQuery.post(stripe_data_ajax.ajaxurl, data, function(response){
+        //         if(response.success){
+        //             const data = JSON.parse(response.data);
         //             console.log(data)
-        //             let div = document.createElement('div')
-        //             div.className = 'course-stripe-item slick-slide';
-        //             div.setAttribute('data-slick-index', trackLength + i + 1)
-        //             let div2 = document.createElement('div')
-        //             div2.className = 'course-img';
-        //             div.setAttribute('style', 'background-image: url(<?= $thumb ?>);')
-        //
-        //
-        //             slickTrack.append(div);
-        //             console.log(slickTrack)
+        //             apppendCourses(data);
         //         }
         //     })
-    // }
+        // }
 
     });
 
@@ -55,7 +39,7 @@ jQuery(document).ready(function () {
         prevArrow: prevSlick,
         height: '253px',
         speed: 1000,
-        infinite:false,
+        infinite: false,
         responsive: [
             {
                 breakpoint: 1440,
@@ -65,7 +49,7 @@ jQuery(document).ready(function () {
                     // infinite: false,
                 }
             }
-            ,{
+            , {
                 breakpoint: 1100,
                 settings: {
                     slidesToShow: 3,
@@ -169,9 +153,10 @@ jQuery(document).ready(function () {
         rtl: is_rtl,
         nextArrow: nexSlick,
         prevArrow: prevSlick,
-        arrows:false,
+        arrows: false,
         infinite: true,
         dots: true,
+
         height: '250px',
         responsive: [
             {
@@ -208,4 +193,106 @@ jQuery(document).ready(function () {
         ]
 
     })
+
+    jQuery('#institutions-slider').slick({
+        slidesToShow: 7,
+        slidesToScroll: 7,
+        rtl: is_rtl,
+        nextArrow: nexSlick,
+        prevArrow: prevSlick,
+        arrows: false,
+        infinite: true,
+        // autoplay: true,
+        // autoplaySpeed: 3000,
+        dots: true,
+        speed: 2000,
+        responsive: [
+            {
+                breakpoint: 1390,
+                settings: {
+                    slidesToShow: 6,
+                    slidesToScroll: 6,
+
+                }
+            },
+            {
+                breakpoint: 1100,
+                settings: {
+                    slidesToShow: 5,
+                    slidesToScroll: 5,
+                }
+            },
+            {
+                breakpoint: 992,
+                settings: {
+                    slidesToShow: 4,
+                    slidesToScroll: 4,
+                }
+            },
+            {
+                breakpoint: 768,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 3,
+                }
+            },
+            {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll:2,
+                    // centerMode: true,
+                }
+            }
+        ]
+
+    })
+
 })
+
+function getCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
+
+
+function apppendCourses(coursesData) {
+
+    coursesData.forEach(item =>{
+
+        let tags = '';
+        for (let i = 0; i < item.tags.length; ++i) {
+            if (i > 1){
+                tags = tags + '<span className="extra-tags">+</span>';
+                break;
+            }
+            tags = tags + '<span>'+item.tags[i]+'</span>';
+        }
+
+        let temp = document.createElement("div");
+        temp.className = 'course-stripe-item';
+        temp.innerHTML =
+            '<div class="course-img" style="background-image: url('+item.image+');"></div>'+
+            '<div class="item-content"">'+
+            '<h3 ><a href="">'+item.name+'</a></h3>'+
+            '<p >'+item.academic_institution+'</p>'+
+            ' </div>'+
+            '<div class=" tags-div">'+tags+ '</div>';
+
+        jQuery('.courses-stripe').slick('slickAdd',temp);
+
+    });
+
+
+}
+

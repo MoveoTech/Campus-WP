@@ -7680,20 +7680,17 @@ img.quotesmall {
   padding: 0;
   list-style: none;
   text-align: center;
-  margin: 0; }
+  margin: 15px 0; }
 
 #testimonials-slider-slick .slick-dots {
   margin-top: 72px; }
 
 .slick-dots .slick-active {
-  background: transparent;
-  color: black;
-  border: 1px solid black;
-  border-radius: 50%; }
+  background: transparent; }
 
 .slick-dots li button:before {
   font-family: 'slick';
-  font-size: 34px;
+  font-size: 26px;
   line-height: 18px;
   position: absolute;
   top: 50%;
@@ -7703,8 +7700,8 @@ img.quotesmall {
   height: 18px;
   content: '•';
   text-align: center;
-  opacity: 0.8;
-  color: #2F2F2F;
+  opacity: 0.4;
+  color: #FDCC07;
   /* -webkit-font-smoothing: antialiased; */
   -moz-osx-font-smoothing: grayscale; }
 
@@ -7715,7 +7712,9 @@ img.quotesmall {
     top: -1px; } }
 
 .slick-dots li.slick-active button:before {
-  color: #333;
+  color: #FDCC07;
+  opacity: 1;
+  font-size: 36px;
   border: transparent; }
 
 /*Course Page*/
@@ -18041,6 +18040,106 @@ html:not(.user_is_not_logged_in) .header_login {
   text-align: right; }
 
 /* Courses Stripe */
+.home-page-courses-stripe .stripe-header {
+  height: 78px;
+  width: 70%;
+  margin: 27px auto; }
+  .home-page-courses-stripe .stripe-header h1 {
+    margin: 0;
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 42px; }
+  .home-page-courses-stripe .stripe-header p {
+    margin-top: 15px;
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 21px; }
+
+.home-page-info-stripe {
+  background: #333433;
+  display: flex;
+  flex-direction: column; }
+  .home-page-info-stripe .info-stripe-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 42px;
+    margin: 37px auto; }
+    .home-page-info-stripe .info-stripe-header span {
+      height: 35px;
+      width: 4px;
+      background: #70C6D1;
+      border-radius: 10px;
+      margin-left: 10px; }
+    .home-page-info-stripe .info-stripe-header h1 {
+      color: #FFFFFF;
+      font-size: 32px;
+      font-weight: 600;
+      line-height: 42px; }
+  .home-page-info-stripe .info-content {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    flex-wrap: wrap;
+    max-width: 933px;
+    margin: 0 auto 28px; }
+    .home-page-info-stripe .info-content .info-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 233px;
+      margin: 0 39px 50px; }
+      .home-page-info-stripe .info-content .info-item img {
+        height: 107px;
+        width: 98px; }
+      .home-page-info-stripe .info-content .info-item h1 {
+        font-size: 22px;
+        text-align: center;
+        margin-bottom: 5px;
+        line-height: 29px;
+        font-weight: 600;
+        color: #FFFFFF; }
+      .home-page-info-stripe .info-content .info-item p {
+        font-size: 16px;
+        margin: 0;
+        line-height: 21px;
+        font-weight: 300;
+        color: #FFFFFF; }
+
+.home-page-institutions_stripe .institution-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 42px;
+  margin: 37px auto; }
+  .home-page-institutions_stripe .institution-header span {
+    height: 35px;
+    width: 4px;
+    background: #FDCC07;
+    border-radius: 10px;
+    margin-left: 10px; }
+  .home-page-institutions_stripe .institution-header h1 {
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 42px; }
+
+.home-page-institutions_stripe #institutions-slider {
+  width: 80%;
+  margin: auto; }
+
+.home-page-institutions_stripe .course-stripe-item .course-img {
+  width: 135px;
+  height: 60px;
+  background-size: contain;
+  background-position: center center;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  opacity: 0.5;
+  -webkit-filter: grayscale(100%); }
+  .home-page-institutions_stripe .course-stripe-item .course-img:hover {
+    opacity: 1;
+    -webkit-filter: grayscale(0%); }
+
 .courses-stripe {
   display: flex;
   flex-direction: row;
