@@ -36,7 +36,11 @@ $choose_event = $fields['choose_event'];
 
 /* Carousel */
 $stripe = $fields['new_stripe'];
-//$carousel = $fields['carusela'];
+$info_stripe = $fields['info_stripe'];
+$academic_institutions_stripe = $fields['academic_institutions'];
+
+//$carousel = $fields['carousel'];
+
 ?>
 
 <!--Banner area-->
@@ -65,63 +69,46 @@ $stripe = $fields['new_stripe'];
 <!--End Banner area-->
 
 <!--Test Stripe-->
-<?php if ($stripe) : ?>
-    <?php foreach ($stripe as $carousel) :?>
-        <div id="stripe-slider-slick">
+<?php if ($info_stripe) :
+    foreach ($info_stripe as $carousel):
+    get_template_part('template', 'parts/Stripes/info-stripe',
+    array(
+    'info' => $carousel,
+    ));
+    endforeach;
+endif; ?>
 
-         <?php foreach ($carousel as $courses) :?>
-
-            <div hidden id="courses-ids" value="<?php  print_r(json_encode($courses)); ?>" ></div>
-            <div id="courses-stripe" class="courses-stripe">
-            <?php
-//                $size =  sizeof($courses) < 5 ? sizeof($courses) : 5;
-                $size =  sizeof($courses) < 10 ? sizeof($courses) : 10;
-                for($i = 0; $i < $size; $i++) {
-                    $course_item = new Course_stripe($courses[$i]); // New Class
-                    $title = $course_item->get_title();
-                    $institution_name = $course_item->get_institution_name();
-                    $tags = $course_item->get_tags();
-                    $tags_arr = explode(', ', $tags);
-                    $thumb = $course_item->get_img_url();
-//                    $type = $course_item->get_post_type(); // 'academic_institution' OR 'course'
-//                    $url = $course_item->get_url();
-//                    $institution_name = $course_item->get_institution_name();
-
-
-                    ?>
-                    <div class="course-stripe-item" >
-                        <div class="course-img" style="background-image: url(<?= $thumb ?>);">
-                        </div>
-                        <div class="item-content"">
-                            <h3 ><a href="<?= $url ?>"><?= $title ?></a></h3>
-                            <p ><?= $institution_name?></p>
-                        </div>
-                        <div class="tags-div">
-                            <?php
-                            $index = 0;
-                            while ($index < 2) : ?>
-                                <span><?= $tags_arr[$index] ?></span>
-                                <?php
-                                $index++;
-                            endwhile;
-                            if(sizeof($tags_arr) > 2){ ?>
-                                <span class="extra-tags">+</span>
-                            <?php } ?>
-
-                        </div>
-                    </div>
-
-                <?php };?>
-            </div>
-        <?php endforeach; ?>
-        </div>
-    <?php endforeach; ?>
-<?php endif; ?>
+<!-- Courses Stripe -->
+<?php if ($stripe) :
+    foreach ($stripe as $carousel):
+    get_template_part('template', 'parts/Stripes/courses-stripe',
+        array(
+            'carousel' => $carousel,
+        ));
+    endforeach;
+endif; ?>
 
 <!--academic institution slider-->
-<?php if ($academic_institutions) : ?>
-    <?= get_academic_institution_slider($academic_institutions); ?>
-<?php endif; ?>
+<?php if($academic_institutions_stripe) :
+    get_template_part('template', 'parts/Stripes/academic-institution-stripe',
+    array(
+    'academic_institutions_stripe' => $academic_institutions_stripe,
+    ));
+endif;
+?>
+<?php //if ($academic_institutions) : ?>
+<!--    --><?//= get_academic_institution_slider($academic_institutions); ?>
+<?php //endif; ?>
+<?php
+//
+//$academic_institutions_stripe = $fields['academic_institution_test'];
+//if ($academic_institutions_stripe) :
+//get_template_part('template', 'parts/Stripes/academic-institution-stripe',
+//    array(
+//        'academic_institutions_stripe' => $academic_institutions_stripe,
+//    ));
+//    endif;
+//?>
 <!--end academic institution slider-->
 <?php if ($categories) : ?>
     <div class="category-section">

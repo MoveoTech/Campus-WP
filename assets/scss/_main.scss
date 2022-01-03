@@ -1323,7 +1323,7 @@ img.quotesmall {
   padding: 0;
   list-style: none;
   text-align: center;
-  margin: 0;
+  margin: 15px 0;
 }
 
 #testimonials-slider-slick .slick-dots {
@@ -1332,14 +1332,11 @@ img.quotesmall {
 
 .slick-dots .slick-active {
   background: transparent;
-  color: black;
-  border: 1px solid black;
-  border-radius: 50%;
 }
 
 .slick-dots li button:before {
   font-family: 'slick';
-  font-size: 34px;
+  font-size: 26px;
   line-height: 18px;
   position: absolute;
   //top: 0;
@@ -1350,8 +1347,8 @@ img.quotesmall {
   height: 18px;
   content: '•';
   text-align: center;
-  opacity: 0.8;
-  color: #2F2F2F;
+  opacity: 0.4;
+  color: #FDCC07;
   /* -webkit-font-smoothing: antialiased; */
   -moz-osx-font-smoothing: grayscale;
 
@@ -1367,7 +1364,9 @@ img.quotesmall {
 }
 
 .slick-dots li.slick-active button:before {
-  color: #333;
+  color: #FDCC07;
+  opacity: 1;
+  font-size: 36px;
   border: transparent;
 }
 
