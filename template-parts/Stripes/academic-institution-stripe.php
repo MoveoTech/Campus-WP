@@ -1,34 +1,38 @@
 <?php
-$academic_institutions_stripe = wp_parse_args(
-    $args["academic_institutions_stripe"]
+$stripe = wp_parse_args(
+    $args["args"]
 );
-//var_dump($academic_institutions_stripe[0]['title']);
 
-if(empty($academic_institutions_stripe) )
+if(empty($stripe) || empty($stripe['id']) || empty($stripe['carousel']) || count($stripe['carousel']) < 1)
     return;
 
 $academic_institutions = pods( 'academic_institution');
-$academic_institutions->find(academicInstitutionsParams($academic_institutions_stripe[0]['carousel']));
+$academic_institutions->find(academicInstitutionsParams($stripe['carousel']));
 
 ?>
 
-<div class="home-page-institutions_stripe"  >
-    <div class="institution-header">
-        <span></span>
-        <h1><?php echo $academic_institutions_stripe[0]['title'] ?></h1>
-    </div>
-    <div id="institutions-slider" >
+    <div class="home-page-institutions_stripe"  >
+        <div hidden id="<?php echo $stripe['id']; ?>" class="academic-institutions-ids" value="<?php  print_r(json_encode($stripe['carousel'])); ?>" ></div>
         <?php
-        while ($academic_institutions->fetch()) { // academic_institution Loop
-            $thumb = $academic_institutions->display('image');
-            if($thumb){
-                ?>
-                <div class="course-stripe-item" style="margin: auto">
-                    <div class="course-img" style="background-image: url(<?php echo $thumb ?>);  "></div>
-                </div>
-        <?php } } ?>
+        if(!empty($stripe['title']) && $stripe['title'] != ""){
+            ?>
+            <div class="institution-header">
+                <span></span>
+                <h1><?php echo $stripe['title'] ?></h1>
+            </div>
+        <?php } ?>
+        <div id="institutions-slider" >
+            <?php
+            while ($academic_institutions->fetch()) { // academic_institution Loop
+                $thumb = $academic_institutions->display('image');
+                if($thumb){
+                    ?>
+                    <div class="course-stripe-item" style="margin: auto">
+                        <div class="course-img" style="background-image: url(<?php echo $thumb ?>);  "></div>
+                    </div>
+                <?php } } ?>
+        </div>
     </div>
-</div>
 
 <?php
 function academicInstitutionsParams($academic_institutions_stripe){
