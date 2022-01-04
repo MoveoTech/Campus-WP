@@ -102,6 +102,7 @@ jQuery(document).ready(function () {
                 breakpoint: 390,
                 settings: {
                     arrows: false,
+                    speed: 500,
                     slidesToShow: 2.15,
                     slidesToScroll: 2,
                     // infinite: true,
@@ -247,6 +248,7 @@ jQuery(document).ready(function () {
             {
                 breakpoint: 480,
                 settings: {
+                    speed: 500,
                     slidesToShow: 2,
                     slidesToScroll:2,
                     // centerMode: true,
