@@ -6,11 +6,14 @@
   display: none;
   z-index: 1030;
   &.active{
-    display: block;
+    @media (max-width: 991px) {
+      display: block;
+    }
   }
 }
 
   .mobile-menu-popup {
+    display: none;
     z-index: 1040;
     background-color: #ffffff;
     width: 75%;
@@ -120,6 +123,9 @@
   }
 }
 @media (max-width: 991px) {
+  .mobile-menu-popup {
+    display: block;
+  }
   .mobile-menu-popup .nav-lang li.wpml-ls-current-language {
     display: none; } }
 .mobile-menu-popup .nav-lang li[id$="en"] span:before {

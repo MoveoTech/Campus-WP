@@ -16969,7 +16969,7 @@ html[lang="en-US"] #single_project_video_wrap {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 5px;
+    padding: 0;
     margin: 0 auto; }
     .menu-user-menu-container .nav-user .user-list-item {
       height: 42px;
@@ -17012,7 +17012,7 @@ html[lang="en-US"] #single_project_video_wrap {
     display: none;
     position: absolute;
     top: 0;
-    left: 154px;
+    left: 157px;
     box-shadow: 0 5px 15px rgba(40, 40, 40, 0.2);
     background-color: #ffffff;
     z-index: 2;
@@ -17925,10 +17925,12 @@ html:not(.user_is_not_logged_in) .header_login {
   inset: 0;
   display: none;
   z-index: 1030; }
-  .bg-overlay.active {
-    display: block; }
+  @media (max-width: 991px) {
+    .bg-overlay.active {
+      display: block; } }
 
 .mobile-menu-popup {
+  display: none;
   z-index: 1040;
   background-color: #ffffff;
   width: 75%;
@@ -18014,6 +18016,8 @@ html:not(.user_is_not_logged_in) .header_login {
       margin-bottom: 1px; }
 
 @media (max-width: 991px) {
+  .mobile-menu-popup {
+    display: block; }
   .mobile-menu-popup .nav-lang li.wpml-ls-current-language {
     display: none; } }
 
