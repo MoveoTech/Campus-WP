@@ -7,25 +7,32 @@ if(empty($stripe) || empty($stripe['title']) || $stripe['title'] == '' || empty(
 ?>
 
 <div class="home-page-info-stripe" >
+    <div class="back-img-1" ></div>
+    <div class="back-img-2" ></div>
     <div class="info-stripe-header">
         <span></span>
         <h1 ><?php echo $stripe['title'] ?></h1>
     </div>
     <div class="info-content">
         <?php
+        global $sitepress;
+
         if($stripe['carousel'] && count($stripe['carousel']) > 0):
-        foreach ($stripe['carousel'] as $info_item) :
-//            var_dump($info_item['info_media']['url']);
-        ?>
-        <div class="info-item" >
-            <img src="<?php echo $info_item['info_media']['url'] ?>">
-            <h1><?php echo $info_item['title'] ?></h1>
-            <?php if($info_item['subtitle'] && $info_item['subtitle'] !== '') :?>
-                <p ><?php echo $info_item['subtitle'] ?></p>
-            <?php endif; ?>
-        </div>
-        <?php endforeach;
-            endif;
+            foreach ($stripe['carousel'] as $info_item) :
+
+                $title = getFieldByLanguage($info_item['title']['hebrew_title'], $info_item['title']['english_title'], $info_item['title']['arabic_title'], $sitepress->get_current_language());
+
+                $subTitle = getFieldByLanguage($info_item['sub_title']['hebrew_sub_title'], $info_item['sub_title']['english_sub_title'], $info_item['sub_title']['arabic_sub_title'], $sitepress->get_current_language());
+                ?>
+                <div class="info-item" >
+                    <img src="<?php echo $info_item['info_media']['url'] ?>">
+                    <h1><?php echo $title ?></h1>
+                    <?php if($subTitle && $subTitle !== '') :?>
+                        <p ><?php echo $subTitle ?></p>
+                    <?php endif; ?>
+                </div>
+            <?php endforeach;
+        endif;
         ?>
     </div>
 </div>

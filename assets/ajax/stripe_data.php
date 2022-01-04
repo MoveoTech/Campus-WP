@@ -34,12 +34,7 @@ add_action('wp_ajax_nopriv_stripe_data', 'stripe_data');
 function academicInstitutionsData($data, $lang){
 
     return array(
-        'name' => getFieldByLanguage(array(
-            'name'=>$data->display('name'),
-            'english_name'=>$data->display('english_name'),
-            'arabic_name'=>$data->display('arabic_name')
-
-        ), $lang, 'name', 'english_name', 'arabic_name'),
+        'name' => getFieldByLanguage($data->display('name'), $data->display('english_name'), $data->display('arabic_name'), $lang),
         'image' => $data->display('image'),
         'permalink' => $data->display('permalink')
     );
@@ -50,12 +45,7 @@ function academicInstitutionsData($data, $lang){
 function tagsData($data, $lang){
 
     return array(
-        'name' => getFieldByLanguage(array(
-            'name'=>$data->display('name'),
-            'english_name'=>$data->display('english_name'),
-            'arabic_name'=>$data->display('arabic_name')
-
-        ), $lang, 'name', 'english_name', 'arabic_name'),
+        'name' => getFieldByLanguage($data->display('name'), $data->display('english_name'), $data->display('arabic_name'), $lang),
         'permalink' => $data->display('name')
         );
 }
@@ -63,17 +53,12 @@ function tagsData($data, $lang){
 
 function coursesData($data, $lang){
 
-
+    $academic_institution = $data->field('academic_institution');
     return array(
-        'name' => getFieldByLanguage(array(
-            'name'=>$data->display('name'),
-            'english_name'=>$data->display('english_name'),
-            'arabic_name'=>$data->display('arabic_name')
-
-        ), $lang, 'name', 'english_name', 'arabic_name'),
+        'name' => getFieldByLanguage($data->display('name'), $data->display('english_name'), $data->display('arabic_name'), $lang),
         'image' => $data->display('featured_image'),
         'description' => $data->display('description'),
-        'academic_institution' => getFieldByLanguage($data->field('academic_institution'), $lang, 'name', 'english_name', 'arabic_name'),
+        'academic_institution' => getFieldByLanguage($academic_institution['name'], $academic_institution['english_name'], $academic_institution['arabic_name'], $lang),
         'tags' => getCourseTags($data->field('tags'), $lang),
         'permalink' => $data->display('permalink')
 
@@ -83,15 +68,12 @@ function coursesData($data, $lang){
 
 
 
-
-
-
 function getCourseTags($data, $lang)
 {
     $tags = [];
 
     foreach ($data as $tag) {
-        array_push($tags, getFieldByLanguage($tag, $lang, 'name', 'english_name', 'arabic_name'));
+        array_push($tags, getFieldByLanguage($tag['name'], $tag['english_name'], $tag['arabic_name'], $lang));
     }
     return $tags;
 }

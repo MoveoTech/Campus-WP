@@ -32,13 +32,14 @@ function getStripeType($stripeId){
 
     $stripeType = get_field('stripe_type', $stripeId);
 
+    echo $stripeType;
     switch ($stripeType) {
 
         case 'Academic Institution Stripe':{
             AcademicInstitutionStripe($stripeId);
             break;
         }
-        case 'Nerative Stripe':{
+        case 'Narrative Stripe':{
             nerativeCoursesStripe($stripeId);
             break;
         }
@@ -48,13 +49,18 @@ function getStripeType($stripeId){
             break;
 
         case 'Info Stripe':
-            echo "Info Stripe";
+            infoStripe($stripeId);
+            break;
+
+        case 'Courses Stripe':
+            coursesStripe($stripeId);
             break;
 
     }
-
-
 }
+
+
+
 
 
 
@@ -67,11 +73,7 @@ function academicInstitutionStripe($stripeId){
         array(
             'args' => array(
                 'id'=>  $stripeId,
-                'title' => getFieldByLanguage(array(
-                    'hebrew'=>get_field('hebrew_title', $stripeId),
-                    'english'=>get_field('english_title', $stripeId),
-                    'arabic'=>get_field('arabic_title', $stripeId)
-                ), $sitepress->get_current_language(), 'hebrew', 'english', 'arabic'),
+                'title' => getFieldByLanguage(get_field('hebrew_title', $stripeId), get_field('english_title', $stripeId), get_field('arabic_title', $stripeId), $sitepress->get_current_language()),
                 'carousel' => get_field('academic_institution', $stripeId),
             )
         ));
@@ -83,30 +85,68 @@ function nerativeCoursesStripe($stripeId){
 
     global $sitepress;
 
-    $title = getFieldByLanguage(array(
-        'hebrew'=>get_field('hebrew_title', $stripeId),
-        'english'=>get_field('english_title', $stripeId),
-        'arabic'=>get_field('arabic_title', $stripeId)
-    ), $sitepress->get_current_language(), 'hebrew', 'english', 'arabic');
+    $title = getFieldByLanguage(get_field('hebrew_title', $stripeId), get_field('english_title', $stripeId), get_field('arabic_title', $stripeId), $sitepress->get_current_language());
 
-    $subTitle = getFieldByLanguage(array(
-        'hebrew'=>get_field('hebrew_sub_title', $stripeId),
-        'english'=>get_field('english_sub_title', $stripeId),
-        'arabic'=>get_field('arabic_sub_title', $stripeId)
-    ), $sitepress->get_current_language(), 'hebrew', 'english', 'arabic');
+    $subTitle = getFieldByLanguage(get_field('hebrew_sub_title', $stripeId), get_field('english_sub_title', $stripeId), get_field('arabic_sub_title', $stripeId), $sitepress->get_current_language());
 
-    get_template_part('template', 'parts/Stripes/academic-institution-stripe',
+
+    echo "<br>";
+    echo $title;
+    echo $subTitle;
+    echo $stripeId;
+
+    get_template_part('template', 'parts/Stripes/nerative-stripe',
         array(
             'args' => array(
-                'id'=>  $stripeId,
-                'title' =>$title,
-                'carousel' => get_field('academic_institution', $stripeId),
+                'id' => $stripeId,
+                'image' => get_field('logo', $stripeId),
+                'title' => $title,
+                'subtitle' => $subTitle,
+                'carousel' => get_field('courses', $stripeId),
             )
         ));
 
 }
 
 
+
+function coursesStripe($stripeId){
+
+    global $sitepress;
+
+    $title = getFieldByLanguage(get_field('hebrew_title', $stripeId), get_field('english_title', $stripeId), get_field('arabic_title', $stripeId), $sitepress->get_current_language());
+
+    $subTitle = getFieldByLanguage(get_field('hebrew_sub_title', $stripeId), get_field('english_sub_title', $stripeId), get_field('arabic_sub_title', $stripeId), $sitepress->get_current_language());
+
+
+    get_template_part('template', 'parts/Stripes/courses-stripe',
+        array(
+            'args' => array(
+                'id' => $stripeId,
+                'title' => $title,
+                'subtitle' => $subTitle,
+                'carousel' => get_field('courses', $stripeId),
+            )
+        ));
+}
+
+
+function infoStripe($stripeId){
+
+    global $sitepress;
+
+    $title = getFieldByLanguage(get_field('hebrew_title', $stripeId), get_field('english_title', $stripeId), get_field('arabic_title', $stripeId), $sitepress->get_current_language());
+
+
+    get_template_part('template', 'parts/Stripes/info-stripe',
+        array(
+            'args' => array(
+                'id' => $stripeId,
+                'title' => $title,
+                'carousel' => get_field('info', $stripeId)["info_item"],
+            )
+        ));
+}
 
 ?>
 
