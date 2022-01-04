@@ -18059,7 +18059,28 @@ html:not(.user_is_not_logged_in) .header_login {
 .home-page-info-stripe {
   background: #333433;
   display: flex;
-  flex-direction: column; }
+  flex-direction: column;
+  position: relative; }
+  .home-page-info-stripe .back-img-1 {
+    background: url("../../assets/images/info-stripe-img2.png");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 113px;
+    height: 182px;
+    position: absolute;
+    left: 0;
+    top: 0; }
+  .home-page-info-stripe .back-img-2 {
+    background: url("../../assets/images/info-stripe-img1.png");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 179px;
+    height: 140px;
+    position: absolute;
+    right: 0;
+    bottom: 0; }
   .home-page-info-stripe .info-stripe-header {
     display: flex;
     justify-content: center;
@@ -18141,6 +18162,90 @@ html:not(.user_is_not_logged_in) .header_login {
     opacity: 1;
     -webkit-filter: grayscale(0%); }
 
+.home-page-tags-stripe {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative; }
+  .home-page-tags-stripe .back-img-1 {
+    background: url("../../assets/images/tags-stripe-img1.png");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 156px;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0; }
+    @media (max-width: 767px) {
+      .home-page-tags-stripe .back-img-1 {
+        display: none; } }
+  .home-page-tags-stripe .back-img-2 {
+    background: url("../../assets/images/tags-stripe-img2.png");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 156px;
+    height: 240px;
+    position: absolute;
+    right: 0;
+    top: 0; }
+    @media (max-width: 425px) {
+      .home-page-tags-stripe .back-img-2 {
+        width: 90px;
+        height: 120px; } }
+  .home-page-tags-stripe .tags-stripe-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 40px auto 44px; }
+    .home-page-tags-stripe .tags-stripe-header span {
+      background: #F1595A;
+      margin-left: 10px;
+      border-radius: 10px;
+      width: 4px;
+      height: 41px; }
+    .home-page-tags-stripe .tags-stripe-header h1 {
+      margin: 0; }
+  .home-page-tags-stripe .tags-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    max-width: 1037px;
+    margin: 0 auto 70px; }
+    @media (max-width: 1250px) {
+      .home-page-tags-stripe .tags-div {
+        max-width: 850px; } }
+    @media (max-width: 992px) {
+      .home-page-tags-stripe .tags-div {
+        max-width: 550px; } }
+    .home-page-tags-stripe .tags-div .tag-item {
+      margin: 0 7.5px 15px;
+      background: #F2F2F2;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      box-sizing: border-box;
+      border-radius: 20px;
+      height: 36px;
+      cursor: pointer; }
+      .home-page-tags-stripe .tags-div .tag-item:hover {
+        background: #FDCC07; }
+      .home-page-tags-stripe .tags-div .tag-item a {
+        display: block;
+        position: relative;
+        width: 100%;
+        height: 100%;
+        padding: 6px 15px; }
+        .home-page-tags-stripe .tags-div .tag-item a p {
+          font-weight: bold;
+          font-size: 18px;
+          line-height: 24px;
+          margin: 0;
+          color: #333433; }
+          .home-page-tags-stripe .tags-div .tag-item a p:after {
+            content: ">>";
+            margin-right: 8px; }
+
 .home-page-nerative-stripe {
   background: #333433; }
   .home-page-nerative-stripe .stripe-header {
@@ -18175,6 +18280,26 @@ html:not(.user_is_not_logged_in) .header_login {
       margin: 0; }
 
 @media (max-width: 768px) {
+  .home-page-tags-stripe .tags-stripe-header {
+    margin: 40px auto 20px; }
+    .home-page-tags-stripe .tags-stripe-header span {
+      height: 35px; }
+    .home-page-tags-stripe .tags-stripe-header h1 {
+      font-weight: 600;
+      font-size: 26px;
+      line-height: 34px; }
+  .home-page-tags-stripe .tags-div {
+    max-width: 355px; }
+    .home-page-tags-stripe .tags-div .tag-item {
+      margin: 0 2.5px 10px; }
+      .home-page-tags-stripe .tags-div .tag-item a {
+        padding: 6px 10px; }
+        .home-page-tags-stripe .tags-div .tag-item a p {
+          font-size: 14px;
+          line-height: 18px;
+          font-weight: normal; }
+          .home-page-tags-stripe .tags-div .tag-item a p:after {
+            margin-right: 7px; }
   .home-page-nerative-stripe .stripe-header {
     margin: auto 27px 30px; }
     .home-page-nerative-stripe .stripe-header .stripe-title {
@@ -18273,6 +18398,10 @@ html:not(.user_is_not_logged_in) .header_login {
         font-weight: 600;
         font-size: 14px;
         line-height: 18px; }
+
+@media (max-width: 992px) {
+  .nerative-class button {
+    display: none; } }
 
 .nerative-class .slick-list {
   margin-bottom: 44px; }

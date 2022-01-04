@@ -26,6 +26,29 @@
   background: #333433;
   display: flex;
   flex-direction: column;
+  position: relative;
+  .back-img-1 {
+    background: url("../../assets/images/info-stripe-img2.png");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 113px;
+    height: 182px;
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+  .back-img-2 {
+    background: url("../../assets/images/info-stripe-img1.png");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 179px;
+    height: 140px;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+  }
   .info-stripe-header {
     display: flex;
     justify-content: center;
@@ -124,6 +147,103 @@
   }
 }
 
+.home-page-tags-stripe {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  .back-img-1 {
+    background: url("../../assets/images/tags-stripe-img1.png");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 156px;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    @media (max-width: 767px) {
+      display: none;
+    }
+  }
+  .back-img-2 {
+    background: url("../../assets/images/tags-stripe-img2.png");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 156px;
+    height: 240px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    @media (max-width: 425px) {
+      width: 90px;
+      height: 120px;
+    }
+  }
+  .tags-stripe-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 40px auto 44px;
+    span {
+      background: #F1595A;
+      margin-left: 10px;
+      border-radius: 10px;
+      width: 4px;
+      height: 41px
+    }
+    h1 {
+      margin: 0
+    }
+  }
+  .tags-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    max-width: 1037px;
+    margin: 0 auto 70px;
+    @media (max-width: 1250px) {
+      max-width: 850px;
+    }
+    @media (max-width: 992px) {
+      max-width: 550px;
+    }
+    .tag-item {
+      margin: 0 7.5px 15px;
+      background: #F2F2F2;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      box-sizing: border-box;
+      border-radius: 20px;
+      height: 36px;
+      cursor: pointer;
+      &:hover {
+        background: #FDCC07;
+      }
+      a {
+        display: block;
+        position: relative;
+        width: 100%;
+        height: 100%;
+        padding: 6px 15px;
+        p {
+          font-weight: bold;
+          font-size: 18px;
+          line-height: 24px;
+          margin: 0;
+          color: #333433;
+          &:after {
+            content: ">>";
+            margin-right: 8px;
+          }
+        }
+      }
+    }
+  }
+}
+
+
 .home-page-nerative-stripe {
   background: #333433;
   .stripe-header {
@@ -165,6 +285,37 @@
 }
 
 @media (max-width: 768px) {
+  .home-page-tags-stripe {
+    .tags-stripe-header {
+      margin: 40px auto 20px;
+      span {
+        height: 35px;
+      }
+      h1 {
+        font-weight: 600;
+        font-size: 26px;
+        line-height: 34px;
+      }
+    }
+    .tags-div {
+      max-width: 355px;
+      .tag-item {
+        margin: 0 2.5px 10px;
+        a {
+          padding: 6px 10px;
+          p {
+            font-size: 14px;
+            line-height: 18px;
+            font-weight: normal;
+            &:after {
+              margin-right: 7px;
+            }
+          }
+        }
+      }
+    }
+  }
+
   .home-page-nerative-stripe {
     .stripe-header {
       margin: auto 27px 30px;
@@ -285,6 +436,11 @@
 }
 
 .nerative-class {
+  @media (max-width: 992px) {
+    button {
+      display: none;
+    }
+  }
   .slick-list {
     margin-bottom: 44px;
     .slick-track {

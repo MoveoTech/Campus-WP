@@ -38,7 +38,7 @@ $choose_event = $fields['choose_event'];
 $stripe = $fields['new_stripe'];
 $info_stripe = $fields['info_stripe'];
 $academic_institutions_stripe = $fields['academic_institutions'];
-
+$tags_stripe = $fields['tags_stripe'];
 //$carousel = $fields['carousel'];
 
 ?>
@@ -69,6 +69,19 @@ $academic_institutions_stripe = $fields['academic_institutions'];
 <!--End Banner area-->
 
 <!--Test Stripe-->
+<!-- Tags Stripe -->
+<?php if($tags_stripe):
+    get_template_part('template', 'parts/Stripes/tags-stripe',
+    array(
+            'args' => array(
+                'title' => $tags_stripe[0]['title'],
+                'tags' => $tags_stripe[0]['tags'],
+            )
+    ));
+ endif; ?>
+<!-- end tags stripe -->
+
+
 <!--Nerative Stripe -->
 <?php if ($stripe) :
 //    foreach ($stripe as $carousel):
@@ -86,15 +99,16 @@ $academic_institutions_stripe = $fields['academic_institutions'];
             ));
 //    endforeach;
 endif; ?>
+<!-- end nerative stripe -->
 
-    <!--academic institution slider-->
+<!--academic institution slider-->
 <?php if($academic_institutions_stripe) :
     get_template_part('template', 'parts/Stripes/academic-institution-stripe',
         array(
             'academic_institutions_stripe' => $academic_institutions_stripe,
         ));
 endif; ?>
-    <!--end academic institution slider-->
+<!--end academic institution slider-->
 
 <!-- Courses Stripe -->
 <?php if ($stripe) :
