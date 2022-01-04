@@ -1156,3 +1156,15 @@ function hero_search_placeholder() {
     }
     return $placeholder;
 }
+
+function getFieldByLanguage($data, $lang, $heField, $enField, $arField)
+{
+
+    if($lang == "en" && $data[$enField] && $data[$enField] != "")
+        return $data[$enField];
+    elseif ($lang == "ar" && $data[$arField] && $data[$arField] != "" )
+        return $data[$arField];
+    else
+        return $data[$heField];
+
+}

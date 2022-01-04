@@ -169,3 +169,51 @@ function get_tax_labeles_for_registration($label, $labels){
     );
     return $labels;
 }
+
+
+
+
+function stripes_custom_post_type() {
+    $labels = array(
+        'name'               => __( 'Stripes' ),
+        'singular_name'      => __( 'Stripe' ),
+        'menu_name'          => __( 'Stripes' ),
+        'all_items'          => __( 'All Stripes' ),
+        'view_item'          => __( 'View Stripe' ),
+        'add_new_item'       => __( 'Add New Stripe' ),
+        'add_new'            => __( 'Add New' ),
+        'edit_item'          => __( 'Edit Stripe' ),
+        'update_item'        => __( 'Update Stripe' ),
+        'search_items'       => __( 'Search Stripe' ),
+        'not_found'          => __( 'Not Found' ),
+        'not_found_in_trash' => __( 'Not found in Trash' )
+    );
+
+    $args = array(
+        'label'               => __( 'stripes' ),
+        'description'         => __( 'Available stripes' ),
+        'labels'              => $labels,
+        'supports'            => array(
+            'title',
+            'excerpt',
+            'author',
+            'revisions',
+            'custom-fields'
+        ),
+        'public'              => false,
+        'hierarchical'        => false,
+        'show_ui'             => true,
+        'show_in_menu'        => true,
+        'show_in_nav_menus'   => true,
+        'show_in_admin_bar'   => true,
+        'menu_icon'           => 'dashicons-list-view',
+        'has_archive'         => false,
+        'can_export'          => false,
+        'exclude_from_search' => false,
+        'yarpp_support'       => true,
+        'taxonomies'          => array( 'stripes_types' ),
+        'publicly_queryable'  => true,
+    );
+    register_post_type( 'stripes', $args );
+}
+add_action( 'init', 'stripes_custom_post_type', 0 );
