@@ -61,12 +61,6 @@ function tagsData($data, $lang){
 }
 
 
-
-
-
-
-
-
 function coursesData($data, $lang){
 
 
@@ -77,7 +71,7 @@ function coursesData($data, $lang){
             'arabic_name'=>$data->display('arabic_name')
 
         ), $lang, 'name', 'english_name', 'arabic_name'),
-        'image' => $data->display('image'),
+        'image' => $data->display('featured_image'),
         'description' => $data->display('description'),
         'academic_institution' => getFieldByLanguage($data->field('academic_institution'), $lang, 'name', 'english_name', 'arabic_name'),
         'tags' => getCourseTags($data->field('tags'), $lang),
@@ -98,7 +92,6 @@ function getFieldByLanguage($data, $lang, $heField, $enField, $arField)
         return $data[$heField];
 
 }
-
 
 
 

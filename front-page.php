@@ -69,64 +69,82 @@ $academic_institutions_stripe = $fields['academic_institutions'];
 <!--End Banner area-->
 
 <!--Test Stripe-->
-<?php if ($info_stripe) :
-    foreach ($info_stripe as $carousel):
-    get_template_part('template', 'parts/Stripes/info-stripe',
-    array(
-    'info' => $carousel,
-    ));
-    endforeach;
+<!--Nerative Stripe -->
+<?php if ($stripe) :
+//    foreach ($stripe as $carousel):
+    $carousel = $stripe[0];
+    $id = uniqid();
+        get_template_part('template', 'parts/Stripes/nerative-stripe',
+            array(
+                'args' => array(
+                    'id' => $id,
+                    'image' => $carousel['logo']['url'],
+                    'title' => $carousel['carousel_title'],
+                    'subtitle' => $carousel['carousel_subtitle'],
+                    'carousel' => $carousel['carousel'],
+                )
+            ));
+//    endforeach;
 endif; ?>
+
+    <!--academic institution slider-->
+<?php if($academic_institutions_stripe) :
+    get_template_part('template', 'parts/Stripes/academic-institution-stripe',
+        array(
+            'academic_institutions_stripe' => $academic_institutions_stripe,
+        ));
+endif; ?>
+    <!--end academic institution slider-->
 
 <!-- Courses Stripe -->
 <?php if ($stripe) :
-    foreach ($stripe as $carousel):
+//    foreach ($stripe as $carousel):
+    $carousel = $stripe[1];
+    $id = uniqid();
     get_template_part('template', 'parts/Stripes/courses-stripe',
         array(
-            'carousel' => $carousel,
+            'args' => array(
+                'id' => $id,
+                'title' => $carousel['carousel_title'],
+                'subtitle' => $carousel['carousel_subtitle'],
+                'carousel' => $carousel['carousel'],
+            )
         ));
+//    endforeach;
+endif; ?>
+<!-- end courses stripe -->
+
+<!-- Info Stripe -->
+<?php if ($info_stripe) :
+    foreach ($info_stripe as $carousel):
+        get_template_part('template', 'parts/Stripes/info-stripe',
+            array(
+                'args' => array(
+                    'title' => $carousel['info_title'],
+                    'carousel' => $carousel['carousel']
+                )
+            ));
     endforeach;
 endif; ?>
+<!-- end info stripe -->
 
-<!--academic institution slider-->
-<?php if($academic_institutions_stripe) :
-    get_template_part('template', 'parts/Stripes/academic-institution-stripe',
-    array(
-    'academic_institutions_stripe' => $academic_institutions_stripe,
-    ));
-endif;
-?>
-<?php //if ($academic_institutions) : ?>
-<!--    --><?//= get_academic_institution_slider($academic_institutions); ?>
+<?php //if ($categories) : ?>
+<!--    <div class="category-section">-->
+<!--        <div class="container">-->
+<!--            <div class="row category-inner">-->
+<!--                --><?php //foreach ($categories as $category) {
+//                    ;?>
+<!--                    <a href="--><?php //echo $category['link']; ?><!--" class="item-category col-sm-12 col-md-4">-->
+<!--                        <img src="--><?php //echo $category['icon']; ?><!--">-->
+<!--                        <h3 aria-level="2">--><?php //echo $category['title']; ?><!--</h3>-->
+<!--                        <p>--><?php //echo $category['sub_title']; ?><!--</p>-->
+<!--                        <div>--><?//= $category['add_name_of_link_category']; ?><!--</div>-->
+<!--                    </a>-->
+<!--                --><?php // } ?>
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
 <?php //endif; ?>
-<?php
-//
-//$academic_institutions_stripe = $fields['academic_institution_test'];
-//if ($academic_institutions_stripe) :
-//get_template_part('template', 'parts/Stripes/academic-institution-stripe',
-//    array(
-//        'academic_institutions_stripe' => $academic_institutions_stripe,
-//    ));
-//    endif;
-//?>
-<!--end academic institution slider-->
-<?php if ($categories) : ?>
-    <div class="category-section">
-        <div class="container">
-            <div class="row category-inner">
-                <?php foreach ($categories as $category) {
-                    ;?>
-                    <a href="<?php echo $category['link']; ?>" class="item-category col-sm-12 col-md-4">
-                        <img src="<?php echo $category['icon']; ?>">
-                        <h3 aria-level="2"><?php echo $category['title']; ?></h3>
-                        <p><?php echo $category['sub_title']; ?></p>
-                        <div><?= $category['add_name_of_link_category']; ?></div>
-                    </a>
-                <?php  } ?>
-            </div>
-        </div>
-    </div>
-<?php endif; ?>
 <?php
 /*
 $date_now = date('Y-m-d');

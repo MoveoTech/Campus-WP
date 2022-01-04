@@ -1,26 +1,31 @@
 <?php
-$info = wp_parse_args(
-    $args["info"]
+$stripe = wp_parse_args(
+    $args["args"]
 );
-if(empty($info) )
+if(empty($stripe) || empty($stripe['title']) || $stripe['title'] == '' || empty($stripe['carousel']) || count($stripe['carousel']) < 1 )
     return;
 ?>
 
 <div class="home-page-info-stripe" >
     <div class="info-stripe-header">
         <span></span>
-        <h1 ><?php echo $info['info_title'] ?></h1>
+        <h1 ><?php echo $stripe['title'] ?></h1>
     </div>
     <div class="info-content">
         <?php
-        foreach ($info['carousel'] as $info_item) :
+        if($stripe['carousel'] && count($stripe['carousel']) > 0):
+        foreach ($stripe['carousel'] as $info_item) :
 //            var_dump($info_item['info_media']['url']);
         ?>
         <div class="info-item" >
             <img src="<?php echo $info_item['info_media']['url'] ?>">
             <h1><?php echo $info_item['title'] ?></h1>
-            <p ><?php echo $info_item['subtitle'] ?></p>
+            <?php if($info_item['subtitle'] && $info_item['subtitle'] !== '') :?>
+                <p ><?php echo $info_item['subtitle'] ?></p>
+            <?php endif; ?>
         </div>
-        <?php endforeach; ?>
+        <?php endforeach;
+            endif;
+        ?>
     </div>
 </div>

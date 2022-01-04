@@ -1,20 +1,19 @@
 <?php
-$courses = wp_parse_args(
-    $args["courses_stripe"]
+$stripe = wp_parse_args(
+    $args["args"]
 );
 
+if(empty($stripe) || empty($stripe['id']) || empty($stripe['courses']) || count($stripe['courses']) < 1 )
+    return;
 ?>
-    <div id="stripe-slider-slick">
 
-<!--    --><?php //foreach ($courses_stripe as $courses) :?>
-
-        <div hidden id="courses-ids" value="<?php  print_r(json_encode($courses)); ?>" ></div>
-        <div id="courses-stripe" class="courses-stripe">
+<div class="stripe-slider-slick">
+        <div hidden id="<?php echo $stripe['id'] . "courses" ?>" value="<?php  print_r(json_encode($stripe['courses'])); ?>" ></div>
+        <div id="<?php echo $stripe['id'] ?>" class="courses-stripe <?php echo ($stripe['type'] && $stripe['type'] == 'nerative' ) ? 'nerative-class' : '' ?>">
         <?php
-        $size =  sizeof($courses) < 5 ? sizeof($courses) : 5;
-//                $size =  sizeof($courses) < 10 ? sizeof($courses) : 10;
+        $size =  count($stripe['courses']) < 10 ? count($stripe['courses']) : 10;
         for($i = 0; $i < $size; $i++) {
-            $course_item = new Course_stripe($courses[$i]); // New Class
+            $course_item = new Course_stripe($stripe['courses'][$i]); // New Class
             $title = $course_item->get_title();
             $institution_name = $course_item->get_institution_name();
             $tags = $course_item->get_tags();
@@ -22,29 +21,29 @@ $courses = wp_parse_args(
             $thumb = $course_item->get_img_url();
 //                    $url = $course_item->get_url();
             ?>
-            <div class="course-stripe-item" >
+            <div class="course-stripe-item " >
                 <div class="course-img" style="background-image: url(<?= $thumb ?>);">
                 </div>
-                <div class="item-content"">
-                <h3 ><a href="<?= $url ?>"><?= $title ?></a></h3>
-                <p ><?= $institution_name?></p>
-            </div>
-            <div class="tags-div">
-                <?php
-                $index = 0;
-                while ($index < 2) : ?>
-                    <span><?= $tags_arr[$index] ?></span>
+                <div class="item-content">
+                    <h3 ><a href="<?= $url ?>"><?= $title ?></a></h3>
+                    <p><?= $institution_name?></p>
+                </div>
+                <div class="tags-div">
                     <?php
-                    $index++;
-                endwhile;
-                if(sizeof($tags_arr) > 2){ ?>
-                    <span class="extra-tags">+</span>
-                <?php } ?>
-
-            </div>
+                    if(count($tags_arr) > 0 && $tags_arr[0] !== '') {
+                        $index = 0;
+                        while ($index < 2 && $index < count($tags_arr)) : ?>
+                            <span><?= $tags_arr[$index] ?></span>
+                            <?php
+                            $index++;
+                        endwhile;
+                        if(count($tags_arr) > 2){ ?>
+                            <span class="extra-tags">+</span>
+                    <?php } }?>
+                </div>
             </div>
 
         <?php };?>
         </div>
-<!--    --><?php //endforeach; ?>
     </div>
+
