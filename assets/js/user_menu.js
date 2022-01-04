@@ -7,7 +7,6 @@ jQuery(document).ready(function () {
         if(lang_menu.classList.contains('active')) {
             lang_menu.classList.toggle('active')
             jQuery('.change-lang-menu').toggleClass('active')
-
         }
     })
 
@@ -17,16 +16,12 @@ jQuery(document).ready(function () {
     })
 
     jQuery(window).click(function(event) {
+        console.log(event.target)
         if(event.target.parentElement.classList.contains('user-information')) return // click on user button
         if(event.target.parentElement.classList.contains('nav-user')) return // click on user-menu
         if(event.target.parentElement.classList.contains('a-link')) return // click on user-menu
         if(event.target.classList.contains('list-item-content')) return // click on list-item
-        if(menu.classList.contains("active") && lang_menu.classList.contains('active')) {
-            menu.classList.toggle('active');
-            lang_menu.classList.toggle('active')
-            jQuery('.change-lang-menu').toggleClass('active')
-
-        } else if(menu.classList.contains("active")) {
+        if(menu.classList.contains("active") && !event.target.classList.contains('user-information')) {
             menu.classList.toggle('active');
         }
 
