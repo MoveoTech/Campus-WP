@@ -2,10 +2,9 @@
 class Course_stripe {
 
     //Properties
-    private $post;
     private $title;
-    private $post_type;
-    private $url;
+//    private $post_type;
+//    private $url;
     private $institution;
     private $img_url;
     private $tags;
@@ -17,22 +16,16 @@ class Course_stripe {
         $this->img_url = $mypod->display( 'featured_image' );
         $this->tags = $mypod->display( 'tags' );
         $this->institution = $mypod->display( 'institutions' );
-//        $this->post = get_post($id);
-//        $this->title = get_the_title($id);
-//        $this->institution = get_field('org',$id);
-//        $this->institution = $this->institution->post_title;
-//        $this->img_url = get_the_post_thumbnail_url($id);
-//        $this->url = $this->post->guid;
-//        $this->post_type = $this->post->post_type;
+
     }
 
-    function get_url() {
-        return $this->url;
-    }
-
-    function get_post_type() {
-         return $this->post_type;
-    }
+//    function get_url() {
+//        return $this->url;
+//    }
+//
+//    function get_post_type() {
+//         return $this->post_type;
+//    }
 
     function get_title() {
         return $this->title;

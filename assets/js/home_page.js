@@ -1,31 +1,35 @@
 jQuery(document).ready(function () {
-
+    let is_rtl = !(jQuery('html[lang = "en-US"]').length > 0);
+    let is_auto = false;
+    let prevSlick = '<button type="button" class="slick-prev slick-button" tabindex="-1" aria-label="' + global_vars.prev_btn_text + '"></button>';
+    let nexSlick = '<button type="button" id="slick-next" class="slick-next slick-button" tabindex="-1" aria-label="' + global_vars.next_btn_text + '"></button>';
     //reload new courses
-    jQuery('.courses-stripe').on('afterChange', function () {
-        const slickTrack = document.querySelector('.slick-track');
+    jQuery('.courses-stripe').on('afterChange', function (event) {
+        const id = event.target.id
+        const slickTrack = jQuery(`#${id} .slick-track`)[0]
         const trackLength = parseInt(slickTrack.lastChild.getAttribute('data-slick-index'))
-        const coursesIDs = JSON.parse(jQuery('#courses-ids').attr('value'))
-        let currentIndex = jQuery('.slick-active').attr("data-slick-index");
+        const coursesIDs = JSON.parse(jQuery(`#${id}courses`).attr('value'))
+        let currentIndex = jQuery(`#${id} .slick-track .slick-active`).attr("data-slick-index");
 
-        // let newCoursesArray = coursesIDs.slice(trackLength + 1)
+        // Checking if have courses in admin side more then what displaying
+        // Checking if the current course is close to the end of the carousel
+        if (coursesIDs.length > 10  && coursesIDs.length > trackLength + 1 && trackLength - currentIndex <= 8) {
+            let newCoursesArray = coursesIDs.slice(trackLength + 1, (trackLength + 11))
 
-        // if (trackLength - currentIndex <= 8) {
-        //     let newCoursesArray = coursesIDs.slice(trackLength + 1, (trackLength + 11))
-        //
-        //     let data = {
-        //         'action': 'stripe_data',
-        //         'type' : 'courses',
-        //         'lang' : getCookie('openedx-language-preference'),
-        //         'idsArray': newCoursesArray,
-        //     }
-        //     jQuery.post(stripe_data_ajax.ajaxurl, data, function(response){
-        //         if(response.success){
-        //             const data = JSON.parse(response.data);
-        //             console.log(data)
-        //             apppendCourses(data);
-        //         }
-        //     })
-        // }
+            let data = {
+                'action': 'stripe_data',
+                'type' : 'courses',
+                'lang' : getCookie('openedx-language-preference'),
+                'idsArray': newCoursesArray,
+            }
+            jQuery.post(stripe_data_ajax.ajaxurl, data, function(response){
+                if(response.success){
+                    const data = JSON.parse(response.data);
+                    console.log(data)
+                    apppendCourses(data, id);
+                }
+            })
+        }
 
     });
 
@@ -88,6 +92,7 @@ jQuery(document).ready(function () {
                 breakpoint: 480,
                 settings: {
                     arrows: false,
+                    speed: 500,
                     slidesToShow: 2.15,
                     slidesToScroll: 2,
                     // infinite: true,
@@ -109,6 +114,7 @@ jQuery(document).ready(function () {
 
     })
 
+    //academic-institution slick (OLD)
     jQuery('#academic-institution-slider').slick({
         slidesToShow: 7,
         accessibility: false,
@@ -147,6 +153,7 @@ jQuery(document).ready(function () {
         ]
     });
 
+    //testimonials slick
     jQuery('#testimonials-slider-slick').slick({
         slidesToShow: 3,
         slidesToScroll: 1,
@@ -194,7 +201,8 @@ jQuery(document).ready(function () {
 
     })
 
-    jQuery('#institutions-slider').slick({
+    //institutions slick
+    jQuery('.institutions-slider').slick({
         slidesToShow: 7,
         slidesToScroll: 7,
         rtl: is_rtl,
@@ -202,8 +210,8 @@ jQuery(document).ready(function () {
         prevArrow: prevSlick,
         arrows: false,
         infinite: true,
-        // autoplay: true,
-        // autoplaySpeed: 3000,
+        autoplay: is_auto,
+        autoplaySpeed: 3000,
         dots: true,
         speed: 2000,
         responsive: [
@@ -266,7 +274,7 @@ function getCookie(cname) {
 }
 
 
-function apppendCourses(coursesData) {
+function apppendCourses(coursesData, id) {
 
     coursesData.forEach(item =>{
 
@@ -278,7 +286,6 @@ function apppendCourses(coursesData) {
             }
             tags = tags + '<span>'+item.tags[i]+'</span>';
         }
-
         let temp = document.createElement("div");
         temp.className = 'course-stripe-item';
         temp.innerHTML =
@@ -289,7 +296,7 @@ function apppendCourses(coursesData) {
             ' </div>'+
             '<div class=" tags-div">'+tags+ '</div>';
 
-        jQuery('.courses-stripe').slick('slickAdd',temp);
+        jQuery(`#${id}`).slick('slickAdd',temp);
 
     });
 
