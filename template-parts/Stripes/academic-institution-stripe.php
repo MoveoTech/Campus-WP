@@ -21,7 +21,7 @@ $academic_institutions->find(academicInstitutionsParams($stripe['carousel']));
                 <h1><?php echo $stripe['title'] ?></h1>
             </div>
         <?php } ?>
-        <div id="institutions-slider" >
+        <div class="institutions-slider" >
             <?php
             while ($academic_institutions->fetch()) { // academic_institution Loop
                 $thumb = $academic_institutions->display('image');
