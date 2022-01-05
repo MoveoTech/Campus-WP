@@ -68,7 +68,7 @@ for($i=0 ; $i <  count($ids) ; $i++)
     $academic_institution_id = get_post_meta($resultHebrew->ID, 'academic_institution', true);
     $academic_institution = get_post($academic_institution_id);
     $name = $academic_institution->post_title;
-    if(str_contains($name, '"'))
+    if(strpos($name, '"') != false)
         $name = str_replace('"','""', $name);
     $mypod = pods( 'academic_institution', array('where' => 't.name LIKE "%' . $name . '%"') );
     $PodAcademic_institution_id = $mypod->display( 'id' );
