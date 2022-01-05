@@ -215,6 +215,10 @@ header.scrolling-header {
 .logo-container {
   width: 33%;
   margin-right: 30px;
+  @media (max-width: 1200px) {
+    width: unset;
+    margin-right: 20px;
+  }
 }
 
 .header_login {
@@ -455,7 +459,9 @@ nav.header-nav ul li a {
 
 .header_wrap .campus_logo {
   display: inline-block;
-  /*margin-left: 42px;*/
+  @media (max-width: 1200px) {
+    margin-left: 42px;
+  }
 }
 .header_wrap .campus_logo img {
   width: 100%;

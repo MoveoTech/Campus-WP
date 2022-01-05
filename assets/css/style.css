@@ -17061,6 +17061,10 @@ header.scrolling-header {
 .logo-container {
   width: 33%;
   margin-right: 30px; }
+  @media (max-width: 1200px) {
+    .logo-container {
+      width: unset;
+      margin-right: 20px; } }
 
 .header_login {
   display: flex;
@@ -17264,8 +17268,10 @@ nav.header-nav ul li a {
   margin: -2px 0 0 4px; }
 
 .header_wrap .campus_logo {
-  display: inline-block;
-  /*margin-left: 42px;*/ }
+  display: inline-block; }
+  @media (max-width: 1200px) {
+    .header_wrap .campus_logo {
+      margin-left: 42px; } }
 
 .header_wrap .campus_logo img {
   width: 100%;
@@ -18351,7 +18357,7 @@ html:not(.user_is_not_logged_in) .header_login {
     @media (max-width: 768px) {
       .courses-stripe .course-stripe-item {
         max-width: 166px;
-        max-height: 147px; } }
+        max-height: 250px; } }
     .courses-stripe .course-stripe-item .course-img {
       background-position: center center;
       background-repeat: no-repeat;
@@ -18368,6 +18374,9 @@ html:not(.user_is_not_logged_in) .header_login {
       height: 87px;
       width: 233px;
       margin: 10px; }
+      @media (max-width: 768px) {
+        .courses-stripe .course-stripe-item .item-content {
+          width: 100%; } }
       .courses-stripe .course-stripe-item .item-content h3 {
         overflow: hidden;
         text-wrap: none;
@@ -18376,6 +18385,10 @@ html:not(.user_is_not_logged_in) .header_login {
         font-weight: 600;
         line-height: 29px;
         text-align: right; }
+        @media (max-width: 768px) {
+          .courses-stripe .course-stripe-item .item-content h3 {
+            height: unset;
+            font-size: 18px; } }
         .courses-stripe .course-stripe-item .item-content h3 a {
           color: #000000; }
       .courses-stripe .course-stripe-item .item-content p {
@@ -18390,6 +18403,9 @@ html:not(.user_is_not_logged_in) .header_login {
       justify-content: right;
       height: 22px;
       margin: 0 10px; }
+      @media (max-width: 768px) {
+        .courses-stripe .course-stripe-item .tags-div {
+          margin: unset; } }
       .courses-stripe .course-stripe-item .tags-div span {
         height: 100%;
         margin-left: 10px;
@@ -18402,6 +18418,10 @@ html:not(.user_is_not_logged_in) .header_login {
         font-weight: 600;
         font-size: 14px;
         line-height: 18px; }
+        @media (max-width: 768px) {
+          .courses-stripe .course-stripe-item .tags-div span {
+            padding: 2px 5px;
+            margin-left: 5px; } }
 
 @media (max-width: 992px) {
   .nerative-class button {

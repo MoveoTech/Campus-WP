@@ -243,7 +243,6 @@
   }
 }
 
-
 .home-page-nerative-stripe {
   background: #333433;
   .stripe-header {
@@ -372,7 +371,7 @@
     }
     @media (max-width: 768px){
       max-width: 166px;
-      max-height: 147px;
+      max-height: 250px;
     }
     .course-img {
       background-position: center center;
@@ -390,8 +389,10 @@
     .item-content {
       height: 87px;
       width: 233px;
-      //margin-top: 10px;
       margin: 10px;
+      @media (max-width: 768px){
+        width: 100%;
+      }
       h3 {
         overflow: hidden;
         text-wrap: none;
@@ -400,6 +401,10 @@
         font-weight: 600;
         line-height: 29px;
         text-align: right;
+        @media (max-width: 768px){
+          height: unset;
+          font-size: 18px;
+        }
         a {
           color: #000000;
         }
@@ -418,6 +423,9 @@
       justify-content: right;
       height: 22px;
       margin: 0 10px;
+      @media (max-width: 768px){
+        margin: unset;
+      }
       span {
         height: 100%;
         margin-left: 10px;
@@ -430,6 +438,10 @@
         font-weight: 600;
         font-size: 14px;
         line-height: 18px;
+        @media (max-width: 768px){
+          padding: 2px 5px;
+          margin-left: 5px;
+        }
       }
     }
   }
