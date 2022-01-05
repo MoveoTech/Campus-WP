@@ -999,6 +999,12 @@ jQuery(document).ready(function () {
 
     });
 
+    const userInfo = get_user_info();
+    if(userInfo) {
+        jQuery('.profile-button').attr('href', userInfo['header_urls']['learner_profile'])
+        jQuery('.logout-button').attr('href', userInfo['header_urls']['logout'])
+    }
+
 });
 
 jQuery(document).on('scroll', function () {
@@ -1119,6 +1125,15 @@ function show_username() {
         jQuery('html').addClass('user_is_not_logged_in');
     }
 
+}
+
+function get_user_info() {
+    let edx_user_info = getCookie(global_vars.cookie_name);
+    if (edx_user_info) {
+        edx_user_info = edx_user_info.replace(/\\054/g, ',');
+        return JSON.parse(JSON.parse(edx_user_info))
+    }
+    return null;
 }
 
 function close_sidebar() {
