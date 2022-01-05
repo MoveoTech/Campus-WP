@@ -13,7 +13,7 @@ class Course_stripe {
     function __construct($id) {
         $mypod = pods( 'courses', $id );
         $this->title = $mypod->display( 'name' );
-        $this->img_url = $mypod->display( 'featured_image' );
+        $this->img_url = $mypod->display( 'image' );
         $this->tags = $mypod->display( 'tags' );
         $this->institution = $mypod->display( 'institutions' );
 

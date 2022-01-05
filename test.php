@@ -14,7 +14,7 @@ require_once 'template-parts/Stripes/stripeTypes.php';
 
 //---------- STRIPES SECTION ----------
 $cookieValue = $_COOKIE['prod-olivex-user-info'];
-if($cookieValue && str_contains($cookieValue,"username"))
+if($cookieValue && strpos($cookieValue,"username") != false)
     $stripes = $fields['loggedin_users_stripes'];
 else
     $stripes = $fields['anonymous_users_stripes'];

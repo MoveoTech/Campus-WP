@@ -11,7 +11,7 @@ $hero_subtitle =  $fields['hero_subtitle'];
 
 ?>
 
-<!--Banner area-->
+    <!--Banner area-->
 <?php if ($hero_image) : ?>
     <?php
     $class = 'home';
@@ -33,16 +33,17 @@ $hero_subtitle =  $fields['hero_subtitle'];
         </div>
     </div>
 <?php endif; ?>
-<!--End Banner area-->
+    <!--End Banner area-->
 
 
 
+    <!--STRIPES SECTION-->
 
 <?php
 //---------- STRIPES SECTION ----------
 
 $cookieValue = $_COOKIE['prod-olivex-user-info'];
-if($cookieValue && str_contains($cookieValue,"username"))
+if($cookieValue && strpos($cookieValue,"username") != false)
     $stripes = $fields['loggedin_users_stripes'];
 
 else
@@ -55,6 +56,7 @@ foreach($stripes as $stripeId ) {
 //---------- STRIPES SECTION ----------
 ?>
 
+    <!--STRIPES SECTION-->
 
 
 
