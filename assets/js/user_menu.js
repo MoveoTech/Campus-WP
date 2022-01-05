@@ -16,7 +16,6 @@ jQuery(document).ready(function () {
     })
 
     jQuery(window).click(function(event) {
-        console.log(event.target)
         if(event.target.parentElement.classList.contains('user-information')) return // click on user button
         if(event.target.parentElement.classList.contains('nav-user')) return // click on user-menu
         if(event.target.parentElement.classList.contains('a-link')) return // click on user-menu

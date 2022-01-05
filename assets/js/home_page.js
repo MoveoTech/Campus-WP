@@ -199,7 +199,6 @@ jQuery(document).ready(function () {
             // settings: "unslick"
             // instead of a settings object
         ]
-
     })
 
     //institutions slick

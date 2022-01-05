@@ -71,7 +71,6 @@ $user_menu = get_user_menu();
                             <span class="d-inline-block d-lg-none header_connected_label"><?= cin_get_str('header_connected'); ?></span>
 
                         </div>
-                        <!--                    <span class="d-none d-lg-inline">--><?//= $user_courses; ?><!--</span> -->
                     </div>
                 </div>
                 <div class="header_login lang languages_menu_wrap">
@@ -194,9 +193,9 @@ function get_user_menu() {
                 </ul>
             </div>
        </li>
-        <li class="user-list-item"><a class="a-link" target="_blank" href="'. get_field('link_to_dashboard_for_campus', 'option') .'"><img src="' . get_bloginfo('stylesheet_directory') . '/assets/images/profile.png' .'"><span class="list-item-content">'.$profile.'</span></a></li>
+        <li class="user-list-item "><a class="a-link profile-button" target="_blank"><img src="' . get_bloginfo('stylesheet_directory') . '/assets/images/profile.png' .'"><span class="list-item-content">'.$profile.'</span></a></li>
         <li class="user-list-item"><a class="a-link" target="_blank" href="'. get_field('link_to_dashboard_for_campus', 'option') .'"><img src="' . get_bloginfo('stylesheet_directory') . '/assets/images/equalizer.png' .'"><span class="list-item-content">'.$controlpanel.'</span></a></li>
-        <li class="user-list-item user-logged-out"><a class="a-link" target="_blank" href="'. get_field('link_to_dashboard_for_campus', 'option') .'"><img src="' . get_bloginfo('stylesheet_directory') . '/assets/images/logout.png' .'"><span class="list-item-content">'.$logout.'</span></a></li>         
+        <li class="user-list-item user-logged-out"><a class="a-link logout-button" target="_blank"><img src="' . get_bloginfo('stylesheet_directory') . '/assets/images/logout.png' .'"><span class="list-item-content">'.$logout.'</span></a></li>         
     </ul>
     
     

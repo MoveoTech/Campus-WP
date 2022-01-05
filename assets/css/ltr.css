@@ -34,13 +34,14 @@
     right: 29px; }
     .header_wrap .user-login-container .menu-user-menu-container .nav-user .user-list-item {
       padding-right: unset;
-      padding-left: 10px; }
+      padding-left: 5px; }
       .header_wrap .user-login-container .menu-user-menu-container .nav-user .user-list-item a img.mobile-menu-vector {
         transform: rotate(270deg);
         left: unset;
         right: 0; }
       .header_wrap .user-login-container .menu-user-menu-container .nav-user .user-list-item .list-item-content {
-        text-align: left; }
+        text-align: left;
+        font-size: 13px; }
       .header_wrap .user-login-container .menu-user-menu-container .nav-user .user-list-item img {
         margin-right: 7px;
         margin-left: unset; }

@@ -169,9 +169,9 @@ function get_mobile_menu() {
                 <li id="wpml-ls-item-ar" class="wpml-ls-menu-item mobile-list-item ' . current_active_lang( 'ar' ) . '"><a href="' . get_lang_url( 'ar' ) . '"><span class="wpml-ls-native">العر</span></a></li>
             </ul>
         </div>
-        <li class="mobile-list-item"><img src="' . get_bloginfo('stylesheet_directory') . '/assets/images/profile.png' .'"><a target="_blank" href="'. get_field('link_to_dashboard_for_campus', 'option') .'"><span class="list-item-content">'.$profile.'</span></a></li>
+        <li class="mobile-list-item"><img src="' . get_bloginfo('stylesheet_directory') . '/assets/images/profile.png' .'"><a class="profile-button" target="_blank"><span class="list-item-content">'.$profile.'</span></a></li>
         <li class="mobile-list-item"><img src="' . get_bloginfo('stylesheet_directory') . '/assets/images/equalizer.png' .'"><a target="_blank" href="'. get_field('link_to_dashboard_for_campus', 'option') .'"><span class="list-item-content">'.$controlpanel.'</span></a></li>
-        <li class="mobile-list-item mobile-logged-out"><img src="' . get_bloginfo('stylesheet_directory') . '/assets/images/logout.png' .'"><a target="_blank" href="'. get_field('link_to_dashboard_for_campus', 'option') .'"><span class="list-item-content">'.$logout.'</span></a></li>         
+        <li class="mobile-list-item mobile-logged-out"><img src="' . get_bloginfo('stylesheet_directory') . '/assets/images/logout.png' .'"><a class="logout-button" target="_blank" ><span class="list-item-content">'.$logout.'</span></a></li>         
     </ul>
 
     ';
