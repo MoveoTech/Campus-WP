@@ -5,8 +5,7 @@ $stripe = wp_parse_args(
 if(empty($stripe) || empty($stripe['title']) || $stripe['title'] == '' || empty($stripe['tags']) || count($stripe['tags']) < 1 )
     return;
 
-$tags = pods( 'tags');
-$tags->find(tagsParams($stripe['tags']));
+$tags = pods( 'tags', podsParams($stripe['tags']));
 
 ?>
 
@@ -30,27 +29,3 @@ $tags->find(tagsParams($stripe['tags']));
             <?php } ?>
     </div>
 </div>
-
-<?php
-function tagsParams($tags_stripe){
-
-    $where = "t.id IN (";
-    $order = "FIELD(t.id,";
-
-    foreach($tags_stripe as $tag ) {
-        $where = $where . $tag . ",";
-        $order = $order . $tag . ",";
-
-    }
-    $where = substr_replace($where, ")", -1);
-    $order = substr_replace($order, ")", -1);
-
-    $params = array(
-        'limit' => -1,
-        'where'=>$where,
-        'orderby'=> $order
-    );
-    return $params;
-
-}
-?>
