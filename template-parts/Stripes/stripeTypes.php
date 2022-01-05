@@ -118,7 +118,6 @@ function tagsStripe($stripeId){
     global $sitepress;
     $title = getFieldByLanguage(get_field('hebrew_title', $stripeId), get_field('english_title', $stripeId), get_field('arabic_title', $stripeId), $sitepress->get_current_language());
 
-    var_dump(get_field('tags', $stripeId));
     get_template_part('template', 'parts/Stripes/tags-stripe',
         array(
             'args' => array(

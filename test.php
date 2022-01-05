@@ -26,7 +26,6 @@ foreach($stripes as $stripeId ) {
 
 //---------- STRIPES SECTION ----------
 
-
 ?>
 
 
