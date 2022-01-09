@@ -20,6 +20,10 @@ function getStripeType($stripeId){
             tagsStripe($stripeId);
             break;
 
+        case 'Goals Stripe':
+            goalsStripe($stripeId);
+        break;
+
         case 'Info Stripe':
             infoStripe($stripeId);
             break;
@@ -48,7 +52,6 @@ function academicInstitutionStripe($stripeId){
 
 }
 
-
 function nerativeCoursesStripe($stripeId){
 
     global $sitepress;
@@ -71,8 +74,6 @@ function nerativeCoursesStripe($stripeId){
 
 }
 
-
-
 function coursesStripe($stripeId){
 
     global $sitepress;
@@ -93,7 +94,6 @@ function coursesStripe($stripeId){
         ));
 }
 
-
 function infoStripe($stripeId){
 
     global $sitepress;
@@ -111,7 +111,21 @@ function infoStripe($stripeId){
         ));
 }
 
+function goalsStripe($stripeId){
 
+    global $sitepress;
+
+    $title = getFieldByLanguage(get_field('hebrew_title', $stripeId), get_field('english_title', $stripeId), get_field('arabic_title', $stripeId), $sitepress->get_current_language());
+
+    get_template_part('template', 'parts/Stripes/goals-stripe',
+        array(
+            'args' => array(
+                'id' => $stripeId,
+                'title' => $title,
+                'carousel' => get_field('goals', $stripeId)["goal_item"],
+            )
+        ));
+}
 
 function tagsStripe($stripeId){
 

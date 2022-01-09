@@ -245,6 +245,76 @@ jQuery(document).ready(function () {
 
     })
 
+    jQuery('.goals-slider').slick({
+        lazyLoad: 'ondemand',
+        slidesToShow: 4,
+        slidesToScroll: 4,
+        rtl: is_rtl,
+        nextArrow: nexSlick,
+        prevArrow: prevSlick,
+        speed: 1000,
+        infinite: false,
+        responsive: [
+            {
+                breakpoint: 1440,
+                settings: {
+                    slidesToShow: 4,
+                    slidesToScroll: 4,
+                }
+            },
+            {
+                breakpoint: 1250,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 3,
+                }
+            },
+            {
+                breakpoint: 768,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 2,
+                    speed: 500,
+                    arrows: false,
+                }
+            },
+            {
+                breakpoint: 710,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 3,
+                    arrows: false,
+                }
+            },
+            {
+                breakpoint: 650,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 3,
+                    arrows: false,
+                }
+            },
+            {
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 2.5,
+                    slidesToScroll: 2,
+                    arrows: false,
+                }
+            },
+            {
+                breakpoint: 480,
+                settings: {
+                    speed: 500,
+                    slidesToShow: 2.15,
+                    slidesToScroll: 2,
+                    arrows: false,
+                }
+            },
+        ]
+
+    })
+
 })
 
 function getCookie(cname) {
