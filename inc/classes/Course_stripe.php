@@ -15,7 +15,7 @@ class Course_stripe {
         $this->title = $mypod->display( 'name' );
         $this->img_url = $mypod->display( 'image' );
         $this->tags = $mypod->display( 'tags' );
-        $this->institution = $mypod->display( 'institutions' );
+        $this->institution = $mypod->display( 'academic_institution' );
 
     }
 

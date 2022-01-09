@@ -193,6 +193,30 @@
         width: 275px; } }
 
 /* Slick Stripe */
+.home-page-nerative-stripe .stripe-header .stripe-title span {
+  margin-left: unset;
+  margin-right: 10px; }
+
+.home-page-nerative-stripe .stripe-header .stripe-title img {
+  margin-left: unset;
+  margin-right: 10px; }
+
+.home-page-tags-stripe .tags-stripe-header span {
+  margin-left: unset;
+  margin-right: 10px; }
+
+.home-page-tags-stripe .tags-div .tag-item a p:after {
+  margin-right: unset;
+  margin-left: 8px; }
+
+.home-page-info-stripe .info-stripe-header span {
+  margin-left: unset;
+  margin-right: 10px; }
+
+.home-page-institutions_stripe .institution-header span {
+  margin-right: 10px;
+  margin-left: unset; }
+
 .courses-stripe .course-stripe-item .item-content {
   height: 87px;
   width: 233px;

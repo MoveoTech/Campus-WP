@@ -64,7 +64,7 @@
   align-items: center;
   background: rgba(255, 255, 255, 0.1);
   border-radius: 22px;
-  padding: 3px 10px;
+  padding: 3px 9px;
   height: 38px;
   width: 127px;
 }
@@ -229,19 +229,19 @@ header.scrolling-header {
 
 .signin_he {
   border-right: 1px solid #ffffff;
-  padding-right: 3px;
-  margin-right: 3px;
+  padding-right: 7px;
+  margin-right: 7px;
 }
 .signin_en {
   border-left: 1px solid #ffffff;
-  padding-left: 3px;
-  margin-left: 3px;
+  padding-left: 7px;
+  margin-left: 7px;
 
 }
 .signin_ar {
   border-right: 1px solid #ffffff;
-  padding-right: 3px;
-  margin-right: 3px;
+  padding-right: 7px;
+  margin-right: 7px;
 }
 
 .header-nav .nav > li {
@@ -678,7 +678,6 @@ div.user-information {
   right: 3px;
   top: 50%;
   transform: translateY(-50%);
-  margin-top: 2px;
   z-index: -1; }
 
 @media (max-width: 1200px) {
