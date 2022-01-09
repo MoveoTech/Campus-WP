@@ -1,6 +1,5 @@
 jQuery(document).ready(function () {
     let is_rtl = !(jQuery('html[lang = "en-US"]').length > 0);
-    let is_auto = false;
     let prevSlick = '<button type="button" class="slick-prev slick-button" tabindex="-1" aria-label="' + global_vars.prev_btn_text + '"></button>';
     let nexSlick = '<button type="button" id="slick-next" class="slick-next slick-button" tabindex="-1" aria-label="' + global_vars.next_btn_text + '"></button>';
     //reload new courses
@@ -50,7 +49,6 @@ jQuery(document).ready(function () {
                 settings: {
                     slidesToShow: 4,
                     slidesToScroll: 3,
-                    // infinite: false,
                 }
             },
             {
@@ -58,26 +56,8 @@ jQuery(document).ready(function () {
                 settings: {
                     slidesToShow: 3,
                     slidesToScroll: 3,
-                    // infinite: false,
                 }
             },
-            // {
-            //     breakpoint: 1050,
-            //     settings: {
-            //         slidesToShow: 3,
-            //         slidesToScroll: 3,
-            //         // infinite: false,
-            //     }
-            // },
-            // {
-            //     breakpoint: 992,
-            //     settings: {
-            //         arrows: false,
-            //         slidesToShow: 3,
-            //         slidesToScroll: 3,
-            //         // infinite: false,
-            //     }
-            // },
             {
                 breakpoint: 768,
                 settings: {
@@ -114,21 +94,12 @@ jQuery(document).ready(function () {
             {
                 breakpoint: 480,
                 settings: {
+                    speed: 500,
                     slidesToShow: 2.15,
                     slidesToScroll: 2,
                     arrows: false,
                 }
             },
-            // {
-            //     breakpoint: 390,
-            //     settings: {
-            //         arrows: false,
-                    // speed: 500,
-            //         slidesToShow: 2.15,
-            //         slidesToScroll: 2,
-            //         // infinite: true,
-            //     }
-            // }
             //     // You can unslick at a given breakpoint now by adding:
             //     // settings: "unslick"
             //     // instead of a settings object
@@ -231,17 +202,14 @@ jQuery(document).ready(function () {
         prevArrow: prevSlick,
         arrows: false,
         infinite: true,
-        autoplay: is_auto,
-        autoplaySpeed: 3000,
         dots: true,
-        speed: 2000,
+        speed: 1000,
         responsive: [
             {
                 breakpoint: 1390,
                 settings: {
                     slidesToShow: 6,
                     slidesToScroll: 6,
-
                 }
             },
             {
@@ -271,7 +239,6 @@ jQuery(document).ready(function () {
                     speed: 500,
                     slidesToShow: 2,
                     slidesToScroll:2,
-                    // centerMode: true,
                 }
             }
         ]

@@ -95,7 +95,7 @@ function get_user_hello()
 {
     return '
     <div class="user-information show_for_connected_user">
-        <img src="' . get_bloginfo('stylesheet_directory') . '/assets/images/user-boy.png' .'" alt="user icon">
+        <img width="30px" src="' . get_bloginfo('stylesheet_directory') . '/assets/images/user-boy.png' .'" alt="user icon">
                   <span class="name-user"></span>            
          <img src="' . get_bloginfo('stylesheet_directory') . '/assets/images/vector.png' .'" />
     </div>';

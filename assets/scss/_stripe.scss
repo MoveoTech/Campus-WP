@@ -17,7 +17,7 @@
         line-height: 42px;
       }
       p {
-        margin-top: 15px;
+        margin: 15px 0 0;
         height: 36px;
         font-size: 16px;
         font-weight: 300;
@@ -305,7 +305,7 @@
   width: 72%;
   align-items: baseline;
   justify-content: center;
-  margin: 20px auto;
+  margin: 20px auto 0;
   @media (max-width: 1440px){
     width: 78.5%;
   }
@@ -325,7 +325,7 @@
       box-shadow: 0 5px 15px rgba(40, 40, 40, 0.2);
     }
     .item-content {
-      min-width: 233px;
+      min-width: 209px;
       margin: 10px;
       h3 {
         overflow: hidden;
@@ -386,7 +386,7 @@
     }
   }
   .slick-list {
-    margin-bottom: 44px;
+    margin-bottom: 55px;
     .slick-track {
       .course-stripe-item {
         .item-content {
@@ -403,6 +403,9 @@
             color: #FFFFFF;
           }
         }
+        .tags-div {
+          margin: 0 0 0 10px;
+        }
       }
     }
   }
@@ -413,6 +416,11 @@
   .courses-stripe {
     .course-stripe-item {
       min-width: unset;
+      .tags-div {
+        height: fit-content;
+        max-height: 42px;
+        overflow: hidden;
+      }
     }
   }
 }
@@ -450,6 +458,9 @@
 @media (max-width: 768px) {
   .courses-stripe {
     width: 80.5%;
+    button.slick-button {
+      display: none !important;
+    }
     .course-stripe-item {
       min-width: 166px;
       max-height: 250px;
@@ -466,7 +477,7 @@
 
   .home-page-courses-stripe {
     .stripe-header {
-      width: 72%;
+      width: 78%;
     }
   }
 
@@ -532,6 +543,12 @@
   .courses-stripe {
     width: 91.5%;
   }
+
+  .home-page-courses-stripe {
+    .stripe-header {
+      width: 86%;
+    }
+  }
 }
 @media (max-width: 650px) {
   .home-page-courses-stripe {
@@ -549,18 +566,29 @@
 }
 @media (max-width: 600px) {
   .courses-stripe {
-    margin: 20px 30px 20px 0 ;
+    margin: 20px 30px 0 0 ;
   }
 }
 
 @media (max-width: 480px) {
   .courses-stripe {
-    margin: 20px 2.5px 20px 0;
+    margin: 20px 2.5px 0 0;
     .course-stripe-item {
       height: unset;
+      .item-content {
+        p {
+          max-width: 156px;
+        }
+      }
       .tags-div {
         display: none;
       }
+    }
+  }
+
+  .home-page-courses-stripe {
+    .stripe-header {
+      width: 94%;
     }
   }
 }
@@ -569,7 +597,20 @@
 
   .home-page-courses-stripe {
     .stripe-header {
-      margin: 27px 15px;
+      margin: 27px 15px 15px;
+      .header-title {
+        p {
+          margin: 5px 0 0;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 389px) {
+  .courses-stripe {
+    .course-stripe-item {
+      min-width: unset;
     }
   }
 }

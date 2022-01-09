@@ -302,6 +302,7 @@ main {
           top: 50%;
           transform: translateY(-50%);
           background-image: url("../../assets/images/search-red.png");
+          background-size: cover;
           background-repeat: no-repeat;
           background-position: center center;
           z-index: 3;
@@ -1299,7 +1300,7 @@ img.quotesmall {
   cursor: pointer;
   color: black;
   border: 0;
-  /* outline: none; */
+  outline: none;
   background: transparent;
   position: absolute;
   left: 50%;

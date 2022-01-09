@@ -331,6 +331,18 @@
     }
 }
 
+.nerative-class {
+    .slick-list {
+        .slick-track {
+            .course-stripe-item {
+                .tags-div {
+                    margin: 0 10px 0 0;
+                }
+            }
+        }
+    }
+}
+
 .courses-stripe {
     .course-stripe-item {
         .item-content {
@@ -353,6 +365,16 @@
                 margin-right: 10px;
             }
         }
+    }
+}
+@media (max-width: 600px) {
+    .courses-stripe {
+        margin: 20px 0 20px 30px ;
+    }
+}
+@media (max-width: 480px) {
+    .courses-stripe {
+        margin: 20px 0 20px 2.5px;
     }
 }
     //Slick Arrows

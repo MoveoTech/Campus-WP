@@ -6859,6 +6859,7 @@ main {
           top: 50%;
           transform: translateY(-50%);
           background-image: url("../../assets/images/search-red.png");
+          background-size: cover;
           background-repeat: no-repeat;
           background-position: center center;
           z-index: 3; }
@@ -7658,7 +7659,7 @@ img.quotesmall {
   cursor: pointer;
   color: black;
   border: 0;
-  /* outline: none; */
+  outline: none;
   background: transparent;
   position: absolute;
   left: 50%;
@@ -12019,14 +12020,8 @@ body.rtl label.select-subject .select:before {
     display: inline-block;
     margin-top: 0; }
   /*academic institution slider*/
-  .slick-dots {
-    margin: 0; }
-  .slick-dots li button:before {
-    color: #C4C4C4; }
   .link-banner_404 {
     display: block; }
-  .slick-dots .slick-active {
-    border: 0; }
   .academic-inner {
     padding: 14px 0 7px 0; }
   .carousel-item.slick-slide {
@@ -12034,13 +12029,6 @@ body.rtl label.select-subject .select:before {
   body .carousel-item.slick-slide img {
     max-width: 52px;
     max-height: 50px; }
-  .slick-dots li {
-    width: 13px;
-    height: 13px; }
-  .slick-dots li button:before {
-    width: 6px;
-    height: 6px;
-    font-size: 23px; }
   /*category-section*/
   .category-inner div {
     margin-bottom: 43px; }
@@ -17489,6 +17477,7 @@ div.user-information {
   content: "";
   display: inline-block;
   background-image: url("../../assets/images/lang-logo.png");
+  background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   height: 30px;
@@ -18070,7 +18059,7 @@ html:not(.user_is_not_logged_in) .header_login {
     font-weight: 600;
     line-height: 42px; }
   .home-page-courses-stripe .stripe-header .header-title p {
-    margin-top: 15px;
+    margin: 15px 0 0;
     height: 36px;
     font-size: 16px;
     font-weight: 300;
@@ -18312,7 +18301,7 @@ html:not(.user_is_not_logged_in) .header_login {
   width: 72%;
   align-items: baseline;
   justify-content: center;
-  margin: 20px auto; }
+  margin: 20px auto 0; }
   @media (max-width: 1440px) {
     .courses-stripe {
       width: 78.5%; } }
@@ -18331,7 +18320,7 @@ html:not(.user_is_not_logged_in) .header_login {
       border-radius: 10px;
       box-shadow: 0 5px 15px rgba(40, 40, 40, 0.2); }
     .courses-stripe .course-stripe-item .item-content {
-      min-width: 233px;
+      min-width: 209px;
       margin: 10px; }
       .courses-stripe .course-stripe-item .item-content h3 {
         overflow: hidden;
@@ -18382,7 +18371,7 @@ html:not(.user_is_not_logged_in) .header_login {
     display: none; } }
 
 .nerative-class .slick-list {
-  margin-bottom: 44px; }
+  margin-bottom: 55px; }
   .nerative-class .slick-list .slick-track .course-stripe-item .item-content {
     margin: 3.5px 3px; }
     .nerative-class .slick-list .slick-track .course-stripe-item .item-content h3 a {
@@ -18392,10 +18381,16 @@ html:not(.user_is_not_logged_in) .header_login {
       color: #FCFCFC; }
     .nerative-class .slick-list .slick-track .course-stripe-item .item-content p {
       color: #FFFFFF; }
+  .nerative-class .slick-list .slick-track .course-stripe-item .tags-div {
+    margin: 0 0 0 10px; }
 
 @media (max-width: 1439px) {
   .courses-stripe .course-stripe-item {
-    min-width: unset; } }
+    min-width: unset; }
+    .courses-stripe .course-stripe-item .tags-div {
+      height: fit-content;
+      max-height: 42px;
+      overflow: hidden; } }
 
 @media (max-width: 992px) {
   .courses-stripe .course-stripe-item {
@@ -18410,6 +18405,8 @@ html:not(.user_is_not_logged_in) .header_login {
 @media (max-width: 768px) {
   .courses-stripe {
     width: 80.5%; }
+    .courses-stripe button.slick-button {
+      display: none !important; }
     .courses-stripe .course-stripe-item {
       min-width: 166px;
       max-height: 250px;
@@ -18420,7 +18417,7 @@ html:not(.user_is_not_logged_in) .header_login {
         width: 100%;
         margin: 3.5px 3px; }
   .home-page-courses-stripe .stripe-header {
-    width: 72%; }
+    width: 78%; }
   .home-page-tags-stripe .tags-stripe-header {
     margin: 40px auto 20px; }
     .home-page-tags-stripe .tags-stripe-header span {
@@ -18462,7 +18459,9 @@ html:not(.user_is_not_logged_in) .header_login {
 
 @media (max-width: 710px) {
   .courses-stripe {
-    width: 91.5%; } }
+    width: 91.5%; }
+  .home-page-courses-stripe .stripe-header {
+    width: 86%; } }
 
 @media (max-width: 650px) {
   .home-page-courses-stripe .stripe-header .show-all-courses {
@@ -18473,16 +18472,26 @@ html:not(.user_is_not_logged_in) .header_login {
 
 @media (max-width: 600px) {
   .courses-stripe {
-    margin: 20px 30px 20px 0; } }
+    margin: 20px 30px 0 0; } }
 
 @media (max-width: 480px) {
   .courses-stripe {
-    margin: 20px 2.5px 20px 0; }
+    margin: 20px 2.5px 0 0; }
     .courses-stripe .course-stripe-item {
       height: unset; }
+      .courses-stripe .course-stripe-item .item-content p {
+        max-width: 156px; }
       .courses-stripe .course-stripe-item .tags-div {
-        display: none; } }
+        display: none; }
+  .home-page-courses-stripe .stripe-header {
+    width: 94%; } }
 
 @media (max-width: 425px) {
   .home-page-courses-stripe .stripe-header {
-    margin: 27px 15px; } }
+    margin: 27px 15px 15px; }
+    .home-page-courses-stripe .stripe-header .header-title p {
+      margin: 5px 0 0; } }
+
+@media (max-width: 389px) {
+  .courses-stripe .course-stripe-item {
+    min-width: unset; } }
