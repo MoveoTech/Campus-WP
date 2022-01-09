@@ -18295,6 +18295,110 @@ html:not(.user_is_not_logged_in) .header_login {
       color: #FCFCFC;
       margin: 0; }
 
+.home-page-goals-stripe {
+  background: #333433;
+  position: relative; }
+  .home-page-goals-stripe .back-img-1 {
+    background: url("../../assets/images/goal-strip1.png");
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 100%;
+    max-width: 1440px;
+    height: 145px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0.7; }
+  .home-page-goals-stripe .back-img-2 {
+    background: url("../../assets/images/goal-strip2.png");
+    background-position: bottom;
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 100%;
+    max-width: 1440px;
+    height: 145px;
+    position: absolute;
+    left: 0;
+    bottom: 0; }
+  .home-page-goals-stripe .goals-stripe-header {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 33px; }
+    .home-page-goals-stripe .goals-stripe-header .stripe-title {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 15px;
+      margin-top: 87px; }
+      .home-page-goals-stripe .goals-stripe-header .stripe-title span {
+        width: 4px;
+        height: 41px;
+        margin-left: 10px;
+        border-radius: 10px; }
+      .home-page-goals-stripe .goals-stripe-header .stripe-title h1 {
+        font-size: 32px;
+        line-height: 42px;
+        font-weight: 600;
+        color: #FCFCFC; }
+  .home-page-goals-stripe .goals-slider {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: baseline;
+    width: 76%;
+    margin: 25px auto 0; }
+    .home-page-goals-stripe .goals-slider .goal-item {
+      margin: 0 10px 127px;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center center;
+      height: 320px;
+      max-width: 253px;
+      box-shadow: 0 5px 15px rgba(40, 40, 40, 0.2);
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      position: relative; }
+      .home-page-goals-stripe .goals-slider .goal-item .bg-gradient {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        background: linear-gradient(0deg, #000000 0%, rgba(0, 0, 0, 0.1) 55.31%); }
+      .home-page-goals-stripe .goals-slider .goal-item .goal-item-content {
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center; }
+        .home-page-goals-stripe .goals-slider .goal-item .goal-item-content h1 {
+          margin: 0 10px 19px;
+          font-weight: bold;
+          font-size: 18px;
+          line-height: 24px;
+          color: #FFFFFF;
+          text-shadow: 1px 1px 5px #000000; }
+        .home-page-goals-stripe .goals-slider .goal-item .goal-item-content span {
+          width: 92%;
+          margin: 0 10px 12px;
+          padding: 7px 0;
+          background: #91C653;
+          border-radius: 30px;
+          color: #FFFFFF;
+          font-weight: bold;
+          font-size: 18px;
+          line-height: 24px;
+          text-align: center; }
+          .home-page-goals-stripe .goals-slider .goal-item .goal-item-content span:after {
+            content: '>>';
+            padding-right: 5px; }
+
 .courses-stripe {
   display: flex;
   flex-direction: row;
