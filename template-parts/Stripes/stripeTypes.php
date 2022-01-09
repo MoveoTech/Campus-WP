@@ -150,3 +150,13 @@ function podsParams($tags_stripe)
 
 }
 
+function randomColor() {
+    return array(
+        '#70C6D1',
+        '#F1595A',
+        '#FDCC07',
+        '#46b01b',
+        '#ee8e2b'
+    )[rand(0,4)];
+
+}
