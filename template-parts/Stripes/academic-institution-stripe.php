@@ -8,6 +8,14 @@ if(empty($stripe) || empty($stripe['id']) || empty($stripe['carousel']) || count
 
 $academic_institutions = pods( 'academic_institution', podsParams($stripe['carousel']));
 
+$colors = array(
+    '#70C6D1',
+    '#F1595A',
+    '#FDCC07',
+    '#46b01b',
+    '#ee8e2b'
+);
+$rand_color = $colors[rand(0,4)];
 ?>
 
 <div class="home-page-institutions_stripe"  >
@@ -16,7 +24,7 @@ $academic_institutions = pods( 'academic_institution', podsParams($stripe['carou
     if(!empty($stripe['title']) && $stripe['title'] != ""){
         ?>
         <div class="institution-header">
-            <span></span>
+            <span style="background: <?php echo $rand_color?>"></span>
             <h1><?php echo $stripe['title'] ?></h1>
         </div>
     <?php } ?>

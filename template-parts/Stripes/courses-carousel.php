@@ -20,6 +20,8 @@ if(empty($stripe) || empty($stripe['id']) || empty($stripe['courses']) || count(
             $tags_arr = explode(', ', $tags);
             $thumb = $course_item->get_img_url();
 //                    $url = $course_item->get_url();
+            $title_length = mb_strlen($title, 'utf8');
+            if($title_length >= 40) $title = substr($title, 0,37) . '...';
             ?>
             <div class="course-stripe-item " >
                 <div class="course-img" style="background-image: url(<?= $thumb ?>);">

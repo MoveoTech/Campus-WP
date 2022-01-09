@@ -52,62 +52,83 @@ jQuery(document).ready(function () {
                     slidesToScroll: 3,
                     // infinite: false,
                 }
-            }
-            , {
-                breakpoint: 1100,
-                settings: {
-                    slidesToShow: 3,
-                    slidesToScroll: 3,
-                    // infinite: false,
-                }
             },
             {
-                breakpoint: 992,
+                breakpoint: 1250,
                 settings: {
-                    arrows: false,
                     slidesToShow: 3,
                     slidesToScroll: 3,
                     // infinite: false,
                 }
             },
+            // {
+            //     breakpoint: 1050,
+            //     settings: {
+            //         slidesToShow: 3,
+            //         slidesToScroll: 3,
+            //         // infinite: false,
+            //     }
+            // },
+            // {
+            //     breakpoint: 992,
+            //     settings: {
+            //         arrows: false,
+            //         slidesToShow: 3,
+            //         slidesToScroll: 3,
+            //         // infinite: false,
+            //     }
+            // },
             {
                 breakpoint: 768,
                 settings: {
                     slidesToShow: 3,
                     slidesToScroll: 2,
+                    speed: 500,
                     arrows: false,
-                    // infinite: false,
+                }
+            },
+            {
+                breakpoint: 710,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 3,
+                    arrows: false,
                 }
             },
             {
                 breakpoint: 650,
                 settings: {
                     slidesToShow: 3,
+                    slidesToScroll: 3,
+                    arrows: false,
+                }
+            },
+            {
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 2.5,
                     slidesToScroll: 2,
                     arrows: false,
-                    // infinite: false,
                 }
             },
             {
                 breakpoint: 480,
                 settings: {
-                    arrows: false,
-                    speed: 500,
                     slidesToShow: 2.15,
                     slidesToScroll: 2,
-                    // infinite: true,
+                    arrows: false,
                 }
             },
-            {
-                breakpoint: 390,
-                settings: {
-                    arrows: false,
-                    speed: 500,
-                    slidesToShow: 2.15,
-                    slidesToScroll: 2,
-                    // infinite: true,
-                }
-            }
+            // {
+            //     breakpoint: 390,
+            //     settings: {
+            //         arrows: false,
+                    // speed: 500,
+            //         slidesToShow: 2.15,
+            //         slidesToScroll: 2,
+            //         // infinite: true,
+            //     }
+            // }
             //     // You can unslick at a given breakpoint now by adding:
             //     // settings: "unslick"
             //     // instead of a settings object
