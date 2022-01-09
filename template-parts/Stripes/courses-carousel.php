@@ -19,7 +19,15 @@ if(empty($stripe) || empty($stripe['id']) || empty($stripe['courses']) || count(
             $tags = $course_item->get_tags();
             $tags_arr = explode(', ', $tags);
             $thumb = $course_item->get_img_url();
-//                    $url = $course_item->get_url();
+//            $url = $course_item->get_url();
+//            var_dump(strlen($title));
+//            $institution_name_length = mb_strlen($institution_name, 'utf8');
+//            $title_length = mb_strlen($title, 'utf8');
+            $institution_name_length = strlen($institution_name);
+            $title_length = strlen($title);
+            if($title_length >= 50) $title = mb_substr($title, 0,37) . '...';
+            if($institution_name_length >= 50) $institution_name = mb_substr($institution_name, 0,29) . '...';
+
             ?>
             <div class="course-stripe-item " >
                 <div class="course-img" style="background-image: url(<?= $thumb ?>);">

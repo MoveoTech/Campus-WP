@@ -2,16 +2,19 @@
 $stripe = wp_parse_args(
     $args["args"]
 );
-if(empty($stripe) || empty($stripe['title']) || $stripe['title'] == '' || empty($stripe['carousel']) || count($stripe['carousel']) < 1 )
+if(empty($stripe) || empty($stripe['carousel']) || count($stripe['carousel']) < 1 )
     return;
+
 ?>
 
 <div class="home-page-info-stripe" >
     <div class="back-img-1" ></div>
     <div class="back-img-2" ></div>
     <div class="info-stripe-header">
-        <span></span>
-        <h1 ><?php echo $stripe['title'] ?></h1>
+        <span style="background: <?php echo randomColor();?>"></span>
+        <?php if($stripe['title'] != '' && !empty($stripe['title'])) : ?>
+            <h1 ><?php echo $stripe['title'] ?></h1>
+        <?php endif; ?>
     </div>
     <div class="info-content">
         <?php

@@ -277,6 +277,72 @@
 }
 
 /* Slick Stripe */
+.home-page-nerative-stripe {
+    .stripe-header {
+        .stripe-title {
+            span {
+                margin-left: unset;
+                margin-right: 10px;
+            }
+            img {
+                margin-left: unset;
+                margin-right: 10px;
+            }
+        }
+    }
+}
+
+.home-page-tags-stripe {
+    .tags-stripe-header {
+        span {
+            margin-left: unset;
+            margin-right: 10px;
+        }
+    }
+    .tags-div {
+        .tag-item {
+            a {
+                p {
+                    &:after {
+                        margin-right: unset;
+                        margin-left: 8px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.home-page-info-stripe {
+    .info-stripe-header {
+        span {
+            margin-left: unset;
+            margin-right: 10px;
+        }
+    }
+}
+
+.home-page-institutions_stripe {
+    .institution-header {
+        span {
+            margin-right: 10px;
+            margin-left: unset;
+        }
+    }
+}
+
+.nerative-class {
+    .slick-list {
+        .slick-track {
+            .course-stripe-item {
+                .tags-div {
+                    margin: 0 10px 0 0;
+                }
+            }
+        }
+    }
+}
+
 .courses-stripe {
     .course-stripe-item {
         .item-content {
@@ -299,6 +365,16 @@
                 margin-right: 10px;
             }
         }
+    }
+}
+@media (max-width: 600px) {
+    .courses-stripe {
+        margin: 20px 0 20px 30px ;
+    }
+}
+@media (max-width: 480px) {
+    .courses-stripe {
+        margin: 20px 0 20px 2.5px;
     }
 }
     //Slick Arrows

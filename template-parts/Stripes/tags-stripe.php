@@ -13,8 +13,10 @@ $tags = pods( 'tags', podsParams($stripe['tags']));
     <div class="back-img-1" ></div>
     <div class="back-img-2" ></div>
     <div class="tags-stripe-header">
-        <span></span>
-        <h1><?php echo $stripe['title'] ?></h1>
+        <span style="background: <?php echo randomColor();?>"></span>
+        <?php if($stripe['title'] != '' && !empty($stripe['title'])) : ?>
+            <h1><?php echo $stripe['title'] ?></h1>
+        <?php endif; ?>
     </div>
     <div class="tags-div">
         <?php

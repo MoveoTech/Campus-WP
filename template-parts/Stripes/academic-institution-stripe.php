@@ -16,7 +16,7 @@ $academic_institutions = pods( 'academic_institution', podsParams($stripe['carou
     if(!empty($stripe['title']) && $stripe['title'] != ""){
         ?>
         <div class="institution-header">
-            <span></span>
+            <span style="background: <?php echo randomColor();?>"></span>
             <h1><?php echo $stripe['title'] ?></h1>
         </div>
     <?php } ?>
