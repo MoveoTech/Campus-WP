@@ -18589,13 +18589,17 @@ html:not(.user_is_not_logged_in) .header_login {
       .courses-stripe .course-stripe-item .tags-div {
         display: none; }
   .home-page-courses-stripe .stripe-header {
-    width: 94%; } }
+    width: 94%; }
+  .home-page-institutions_stripe .course-stripe-item .course-img {
+    width: 90px; } }
 
 @media (max-width: 425px) {
   .home-page-courses-stripe .stripe-header {
     margin: 27px 15px 15px; }
     .home-page-courses-stripe .stripe-header .header-title p {
-      margin: 5px 0 0; } }
+      margin: 5px 0 0; }
+  .home-page-institutions_stripe .course-stripe-item .course-img {
+    width: 80px; } }
 
 @media (max-width: 389px) {
   .courses-stripe .course-stripe-item {

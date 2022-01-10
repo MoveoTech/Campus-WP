@@ -237,14 +237,15 @@ jQuery(document).ready(function () {
                 breakpoint: 480,
                 settings: {
                     speed: 500,
-                    slidesToShow: 2,
-                    slidesToScroll:2,
+                    slidesToShow: 3,
+                    slidesToScroll: 3,
                 }
             }
         ]
 
     })
 
+    //goals slick
     jQuery('.goals-slider').slick({
         lazyLoad: 'ondemand',
         slidesToShow: 4,

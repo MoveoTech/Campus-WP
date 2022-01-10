@@ -712,10 +712,18 @@
       width: 94%;
     }
   }
+
+  .home-page-institutions_stripe {
+    .course-stripe-item {
+      .course-img {
+        width: 90px;
+      }
+    }
+  }
+
 }
 
 @media (max-width: 425px) {
-
   .home-page-courses-stripe {
     .stripe-header {
       margin: 27px 15px 15px;
@@ -726,6 +734,15 @@
       }
     }
   }
+
+  .home-page-institutions_stripe {
+    .course-stripe-item {
+      .course-img {
+        width: 80px;
+      }
+    }
+  }
+
 }
 
 @media (max-width: 389px) {
