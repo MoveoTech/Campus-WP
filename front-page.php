@@ -43,11 +43,23 @@ $hero_subtitle =  $fields['hero_subtitle'];
 //---------- STRIPES SECTION ----------
 
 $cookieValue = $_COOKIE['prod-olivex-user-info'];
-if($cookieValue && strpos($cookieValue,"username") != false)
-    $stripes = $fields['loggedin_users_stripes'];
+global  $sitepress;
 
-else
-    $stripes = $fields['anonymous_users_stripes'];
+if ( $sitepress->get_current_language() == 'en' ) {
+    $frontPageHe = apply_filters( 'wpml_object_id', get_option('page_on_front'), 'page', FALSE, 'he'  );
+
+    if($cookieValue && strpos($cookieValue,"username") != false)
+        $stripes = get_field( "loggedin_users_stripes", $frontPageHe );
+    else
+        $stripes = get_field( "anonymous_users_stripes", $frontPageHe );
+}else{
+
+    if($cookieValue && strpos($cookieValue,"username") != false)
+        $stripes = $fields['loggedin_users_stripes'];
+
+    else
+        $stripes = $fields['anonymous_users_stripes'];
+}
 
 foreach($stripes as $stripeId ) {
     getStripeType($stripeId);
