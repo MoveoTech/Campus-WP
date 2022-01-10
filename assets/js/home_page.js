@@ -306,8 +306,8 @@ jQuery(document).ready(function () {
                 breakpoint: 480,
                 settings: {
                     speed: 500,
-                    slidesToShow: 2.15,
-                    slidesToScroll: 2,
+                    slidesToShow: 1.5,
+                    slidesToScroll: 1,
                     arrows: false,
                 }
             },

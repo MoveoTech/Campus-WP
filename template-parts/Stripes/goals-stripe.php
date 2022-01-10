@@ -13,12 +13,12 @@ if(empty($stripe) || empty($stripe['carousel']) || count($stripe['carousel']) < 
     <div class="back-img-1" ></div>
     <div class="back-img-2" ></div>
     <div class="goals-stripe-header">
-        <div class="stripe-title">
-            <span style="background: <?php echo randomColor();?>"></span>
-            <?php if($stripe['title'] != '' && !empty($stripe['title'])) : ?>
+        <?php if($stripe['title'] != '' && !empty($stripe['title'])) : ?>
+            <div class="stripe-title">
+                <span style="background: <?php echo randomColor();?>"></span>
                 <h1 ><?php echo $stripe['title'] ?></h1>
-            <?php endif; ?>
-        </div>
+            </div>
+        <?php endif; ?>
     </div>
     <div class="goals-slider">
         <?php
