@@ -57,3 +57,8 @@
     color: #cc2727;
     border-color: #d12626;
 }
+
+
+.settings-error{
+    background: #ffe6e6;
+}
