@@ -18105,6 +18105,7 @@ html:not(.user_is_not_logged_in) .header_login {
       border-radius: 10px;
       margin-left: 10px; }
     .home-page-info-stripe .info-stripe-header h1 {
+      margin: 0;
       color: #FFFFFF;
       font-size: 32px;
       font-weight: 600;
@@ -18154,6 +18155,7 @@ html:not(.user_is_not_logged_in) .header_login {
       border-radius: 10px;
       margin-left: 10px; }
     .home-page-institutions_stripe .institution-header h1 {
+      margin: 0;
       font-size: 32px;
       font-weight: 600;
       line-height: 42px; }
@@ -18284,6 +18286,7 @@ html:not(.user_is_not_logged_in) .header_login {
         width: 98px;
         height: 45px; }
       .home-page-nerative-stripe .stripe-header .stripe-title h1 {
+        margin: 0;
         font-size: 32px;
         line-height: 42px;
         font-weight: 600;
