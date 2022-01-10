@@ -45,9 +45,23 @@ jQuery(document).ready(function () {
         infinite: false,
         responsive: [
             {
-                breakpoint: 1440,
+                breakpoint: 1439,
                 settings: {
                     slidesToShow: 4,
+                    slidesToScroll: 3,
+                }
+            },
+            {
+                breakpoint: 1400,
+                settings: {
+                    slidesToShow: 3.5,
+                    slidesToScroll: 3,
+                }
+            },
+            {
+                breakpoint: 1300,
+                settings: {
+                    slidesToShow: 3,
                     slidesToScroll: 3,
                 }
             },
@@ -56,6 +70,14 @@ jQuery(document).ready(function () {
                 settings: {
                     slidesToShow: 3,
                     slidesToScroll: 3,
+                }
+            },
+            {
+                breakpoint: 992,
+                settings: {
+                    speed: 500,
+                    slidesToShow: 2.5,
+                    slidesToScroll: 2,
                 }
             },
             {

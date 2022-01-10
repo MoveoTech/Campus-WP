@@ -39,10 +39,14 @@ global $sitepress;
                 <div class="tags-div">
                     <?php
                     if(count($tags) > 0 && $tags[0] != '' ) {
-
                         $index = 0;
-                        while ($index < 2 && $index < count($tags) && $tags[$index] != '') : ?>
-                            <span><?= getFieldByLanguage($tags[$index]['name'], $tags[$index]['english_name'], $tags[$index]['arabic_name'], $sitepress->get_current_language()); ?></span>
+                        while ($index < 2 && $index < count($tags) && $tags[$index] != '') :
+                        $tag = getFieldByLanguage($tags[$index]['name'], $tags[$index]['english_name'], $tags[$index]['arabic_name'], $sitepress->get_current_language());
+                        $tag_length = mb_strlen($tag, 'utf8');
+                        $class = '';
+                        if($tag_length >= 11) $class = 'ellipsis-text';
+                        ?>
+                            <span class="<?php echo $class ?>"><?php echo $tag ?></span>
                             <?php
                             $index++;
                         endwhile;

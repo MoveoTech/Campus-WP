@@ -444,7 +444,7 @@
   }
   .course-stripe-item {
     min-width: 253px;
-    width: 253px;
+    //width: 253px;
     height: 277px;
     margin: 0 15px;
     .course-img {
@@ -488,6 +488,7 @@
       justify-content: right;
       height: 22px;
       margin: 0 10px;
+      overflow: hidden;
       @media (max-width: 768px){
         margin: unset;
       }
@@ -503,10 +504,20 @@
         font-weight: 600;
         font-size: 14px;
         line-height: 18px;
+        white-space: nowrap;
+        overflow: hidden;
+
         @media (max-width: 768px){
           padding: 2px 5px;
           margin-left: 5px;
         }
+      }
+      .ellipsis-text {
+        text-overflow: ellipsis;
+      }
+      .extra-tags {
+        text-overflow: unset;
+        margin: 0;
       }
     }
   }
@@ -546,14 +557,7 @@
 
 @media (max-width: 1439px) {
   .courses-stripe {
-    .course-stripe-item {
-      min-width: unset;
-      .tags-div {
-        height: fit-content;
-        max-height: 42px;
-        overflow: hidden;
-      }
-    }
+    width: 80%;
   }
 
   .home-page-goals-stripe {
@@ -566,6 +570,27 @@
   }
 }
 
+@media (max-width: 1400px) {
+  .courses-stripe {
+    width: 75.5%;
+  }
+}
+
+@media (max-width: 1250px) {
+  .courses-stripe {
+    width: 76.5%;
+  }
+}
+
+@media (max-width: 1100px) {
+  .courses-stripe {
+    width: 80.5%;
+    .course-stripe-item {
+      min-width: 240px;
+    }
+  }
+}
+
 @media (max-width: 992px) {
   .courses-stripe {
     .course-stripe-item {
@@ -574,6 +599,11 @@
         min-width: unset;
         h3 {
           font-size: 18px;
+        }
+      }
+      .tags-div {
+        span {
+          padding: 2px 8px;
         }
       }
     }
@@ -629,6 +659,9 @@
       .item-content {
         width: 100%;
         margin: 3.5px 3px;
+      }
+      .tags-div {
+        display: none;
       }
     }
   }
@@ -801,9 +834,6 @@
         p {
           max-width: 156px;
         }
-      }
-      .tags-div {
-        display: none;
       }
     }
   }
