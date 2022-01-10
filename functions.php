@@ -1154,3 +1154,40 @@ function getFieldByLanguage($heField, $enField, $arField, $lang)
         return $heField;
 
 }
+
+
+function disallow_posts_with_same_title($messages) {
+
+    global $post;
+
+    global $wpdb ;
+
+    $title = $post->post_title;
+
+    $post_id = $post->ID ;
+
+    $wtitlequery = "SELECT post_title FROM $wpdb->posts WHERE post_status = 'publish' AND post_type = 'stripes' AND post_title = '{$title}' AND ID != {$post_id} " ;
+
+    $wresults = $wpdb->get_results( $wtitlequery) ;
+
+    if ( $wresults ) {
+
+        $error_message = 'This Stripe title is already used. Please choose another';
+
+        add_settings_error('post_has_links', ”, $error_message, 'error');
+
+        settings_errors( 'post_has_links' );
+
+        $post->post_status = 'draft';
+
+        wp_update_post($post);
+
+        return;
+
+    }
+
+    return $messages;
+
+}
+
+add_action('post_updated_messages', 'disallow_posts_with_same_title');
