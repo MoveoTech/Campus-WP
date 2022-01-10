@@ -7,6 +7,7 @@ if(empty($stripe) || empty($stripe['title']) || $stripe['title'] == '' || empty(
 
 $tags = pods( 'tags', podsParams($stripe['tags']));
 
+global $sitepress;
 ?>
 
 <div class="home-page-tags-stripe" >
@@ -21,7 +22,7 @@ $tags = pods( 'tags', podsParams($stripe['tags']));
     <div class="tags-div">
         <?php
         while ($tags->fetch()) { // tags Loop
-            $tag_name = $tags->display('name');
+            $tag_name = getFieldByLanguage($tags->display('name'), $tags->display('english_name'), $tags->display('arabic_name'), $sitepress->get_current_language());
                 ?>
             <div class="tag-item" >
                 <a href="https://www.google.com/">

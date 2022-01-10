@@ -277,6 +277,19 @@
 }
 
 /* Slick Stripe */
+.home-page-courses-stripe {
+    .stripe-header {
+        .show-all-courses {
+            p {
+                &:after {
+                    margin-right: unset;
+                    margin-left: 4px;
+                }
+            }
+        }
+    }
+}
+
 .home-page-nerative-stripe {
     .stripe-header {
         .stripe-title {
@@ -331,6 +344,29 @@
     }
 }
 
+.home-page-goals-stripe {
+    .goals-stripe-header {
+        .stripe-title {
+            span {
+                margin-left: unset;
+                margin-right: 10px;
+            }
+        }
+    }
+    .goals-slider {
+        .goal-item {
+            .goal-item-content {
+                span {
+                    &:after {
+                        padding-right: unset;
+                        padding-left: 5px;
+                    }
+                }
+            }
+        }
+    }
+}
+
 .nerative-class {
     .slick-list {
         .slick-track {
@@ -367,6 +403,7 @@
         }
     }
 }
+
 @media (max-width: 600px) {
     .courses-stripe {
         margin: 20px 0 20px 30px ;

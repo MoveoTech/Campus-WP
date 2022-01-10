@@ -1143,6 +1143,29 @@ function hero_search_placeholder() {
     return $placeholder;
 }
 
+function more_courses_text($carousel) {
+    global $sitepress;
+    $current = $sitepress->get_current_language();
+    $text = '';
+    if ($current === 'he') {
+            $text .= 'הצג  את ';
+            $text .= count($carousel);
+            $text .= ' הקורסים';
+        }
+    if ($current === 'en') {
+            $text .= 'View the ';
+            $text .= count($carousel);
+            $text .= ' courses';
+        }
+    if ($current === 'ar') {
+            $text .= 'استعرض ';
+            $text .= count($carousel);
+            $text .= ' دورات';
+        }
+
+    return $text;
+}
+
 function getFieldByLanguage($heField, $enField, $arField, $lang)
 {
 

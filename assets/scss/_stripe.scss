@@ -28,6 +28,10 @@
       p {
         font-weight: 700;
         color: #333433;
+        &:after {
+          content: '>>';
+          margin-right: 4px;
+        }
       }
     }
   }
@@ -362,6 +366,9 @@
     align-items: baseline;
     width: 76%;
     margin: 25px auto 0;
+    button.slick-button {
+      outline: none;
+    }
     .goal-item {
       margin: 0 10px 127px;
       background-size: cover;
@@ -378,6 +385,7 @@
       justify-content: flex-end;
       position: relative;
       .bg-gradient {
+        border-radius: 10px;
         position: absolute;
         top: 0;
         left: 0;
@@ -428,6 +436,9 @@
   align-items: baseline;
   justify-content: center;
   margin: 20px auto 0;
+  button.slick-button {
+    outline: none;
+  }
   @media (max-width: 1440px){
     width: 78.5%;
   }
@@ -544,6 +555,15 @@
       }
     }
   }
+
+  .home-page-goals-stripe {
+    .goals-slider {
+      width: 66%;
+      .goal-item {
+        min-width: unset;
+      }
+    }
+  }
 }
 
 @media (max-width: 992px) {
@@ -573,6 +593,23 @@
       }
     }
 
+  }
+
+  .home-page-goals-stripe {
+    .goals-slider {
+      width: 78%;
+      .goal-item {
+        min-width: 200px;
+      }
+    }
+  }
+}
+
+@media (max-width: 850px) {
+  .home-page-goals-stripe {
+    .goals-slider {
+      width: 65%;
+    }
   }
 }
 
@@ -659,6 +696,56 @@
       }
     }
   }
+
+  .home-page-goals-stripe {
+    .back-img-1 {
+      background-size: cover;
+      height: 52px;
+    }
+    .back-img-2 {
+      background-size: cover;
+      height: 90px;
+    }
+    .goals-stripe-header {
+      .stripe-title {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 15px;
+        margin-top: 87px;
+        span {
+          height: 35px;
+        }
+        h1 {
+          font-weight: 600;
+          font-size: 26px;
+          line-height: 34px;
+          color: #FFFFFF;
+        }
+      }
+    }
+    .goals-slider {
+      .goal-item {
+        .goal-item-content {
+          h1 {
+            font-weight: 600;
+            font-size: 18px;
+            line-height: 24px;
+          }
+        }
+      }
+    }
+  }
+
+  .home-page-institutions_stripe {
+    .institution-header {
+      h1 {
+        font-size: 26px;
+        line-height: 34px;
+      }
+    }
+  }
 }
 
 @media (max-width: 710px) {
@@ -669,6 +756,17 @@
   .home-page-courses-stripe {
     .stripe-header {
       width: 86%;
+    }
+  }
+
+  .home-page-goals-stripe {
+    .goals-slider {
+      width: 98%;
+      margin-left: 0;
+      margin-right: 0;
+      .goal-item {
+        min-width: 253px;
+      }
     }
   }
 }

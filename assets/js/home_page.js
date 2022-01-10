@@ -229,18 +229,11 @@ jQuery(document).ready(function () {
             {
                 breakpoint: 768,
                 settings: {
-                    slidesToShow: 3,
-                    slidesToScroll: 3,
-                }
-            },
-            {
-                breakpoint: 480,
-                settings: {
                     speed: 500,
                     slidesToShow: 3,
                     slidesToScroll: 3,
                 }
-            }
+            },
         ]
 
     })
@@ -271,9 +264,17 @@ jQuery(document).ready(function () {
                 }
             },
             {
+                breakpoint: 850,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 2,
+
+                }
+            },
+            {
                 breakpoint: 768,
                 settings: {
-                    slidesToShow: 3,
+                    slidesToShow: 2,
                     slidesToScroll: 2,
                     speed: 500,
                     arrows: false,
@@ -282,24 +283,36 @@ jQuery(document).ready(function () {
             {
                 breakpoint: 710,
                 settings: {
-                    slidesToShow: 3,
-                    slidesToScroll: 3,
+                    speed: 500,
+                    slidesToShow: 2.5,
+                    slidesToScroll: 2,
                     arrows: false,
                 }
             },
             {
                 breakpoint: 650,
                 settings: {
-                    slidesToShow: 3,
-                    slidesToScroll: 3,
+                    speed: 500,
+                    slidesToShow: 2.25,
+                    slidesToScroll: 2,
                     arrows: false,
                 }
             },
             {
                 breakpoint: 600,
                 settings: {
-                    slidesToShow: 2.5,
+                    speed: 500,
+                    slidesToShow: 2.1,
                     slidesToScroll: 2,
+                    arrows: false,
+                }
+            },
+            {
+                breakpoint: 550,
+                settings: {
+                    speed: 500,
+                    slidesToShow: 1.75,
+                    slidesToScroll: 1.5,
                     arrows: false,
                 }
             },
@@ -308,6 +321,15 @@ jQuery(document).ready(function () {
                 settings: {
                     speed: 500,
                     slidesToShow: 1.5,
+                    slidesToScroll: 1,
+                    arrows: false,
+                }
+            },
+            {
+                breakpoint: 400,
+                settings: {
+                    speed: 500,
+                    slidesToShow: 1.40,
                     slidesToScroll: 1,
                     arrows: false,
                 }
