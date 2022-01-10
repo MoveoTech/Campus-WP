@@ -21,7 +21,7 @@ $courses_url = home_url('/') . 'course/' ;
                 <p><?php echo $stripe['subtitle'] ?></p>
             <?php endif; ?>
         </div>
-        <div class="show-all-courses"><a href="<?php echo $courses_url ?>"><p>הצג את <span><?php echo count($stripe['carousel']) ?></span> הקורסים >> </p></a></div>
+        <div class="show-all-courses"><a href="<?php echo $courses_url ?>"><p> <?php echo more_courses_text($stripe['carousel']) ?></p></a></div>
     </div>
 
     <?php

@@ -193,6 +193,10 @@
         width: 275px; } }
 
 /* Slick Stripe */
+.home-page-courses-stripe .stripe-header .show-all-courses p:after {
+  margin-right: unset;
+  margin-left: 4px; }
+
 .home-page-nerative-stripe .stripe-header .stripe-title span {
   margin-left: unset;
   margin-right: 10px; }
@@ -216,6 +220,14 @@
 .home-page-institutions_stripe .institution-header span {
   margin-right: 10px;
   margin-left: unset; }
+
+.home-page-goals-stripe .goals-stripe-header .stripe-title span {
+  margin-left: unset;
+  margin-right: 10px; }
+
+.home-page-goals-stripe .goals-slider .goal-item .goal-item-content span:after {
+  padding-right: unset;
+  padding-left: 5px; }
 
 .nerative-class .slick-list .slick-track .course-stripe-item .tags-div {
   margin: 0 10px 0 0; }

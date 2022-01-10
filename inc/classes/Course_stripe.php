@@ -3,7 +3,6 @@ class Course_stripe {
 
     //Properties
     private $title;
-//    private $post_type;
 //    private $url;
     private $institution;
     private $img_url;
@@ -11,22 +10,18 @@ class Course_stripe {
 
     // Methods
     function __construct($id) {
+        global $sitepress;
         $mypod = pods( 'courses', $id );
-        $this->title = $mypod->display( 'name' );
+        $this->title = getFieldByLanguage($mypod->display( 'name' ), $mypod->display( 'english_name' ), $mypod->display( 'arabic_name' ),$sitepress->get_current_language());
         $this->img_url = $mypod->display( 'image' );
-        $this->tags = $mypod->display( 'tags' );
-        $this->institution = $mypod->display( 'academic_institution' );
-
+        $this->tags = $mypod->field('tags');
+        $this->institution = getFieldByLanguage($mypod->field( 'academic_institution.name' ), $mypod->field( 'academic_institution.english_name' ), $mypod->field( 'academic_institution.arabic_name' ), $sitepress->get_current_language());
     }
 
 //    function get_url() {
 //        return $this->url;
 //    }
 //
-//    function get_post_type() {
-//         return $this->post_type;
-//    }
-
     function get_title() {
         return $this->title;
     }
@@ -36,7 +31,6 @@ class Course_stripe {
     }
 
     function get_img_url() {
-
         return $this->img_url;
     }
 
