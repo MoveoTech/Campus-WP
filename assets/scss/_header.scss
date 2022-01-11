@@ -34,6 +34,9 @@
     justify-content: space-evenly;
     width: 70%;
   }
+  .scroll-logo_items {
+    display: none !important;
+  }
 }
 .img_logo_wrap a {
   width: 33%;
@@ -393,7 +396,9 @@ input.search-field.form-control::placeholder {
 a.link-my-courses {
   color: #ffffff;
   font-size: 14px;
-  font-weight: 700; }
+  font-weight: 700;
+  line-height: 18px;
+}
 
 .link-dasboard {
   display: none; }
@@ -529,12 +534,13 @@ max-width: 165px}
   font-size: 12px;
   font-weight: 400;
   height: 40.03999710083008px;
-
 }
 
 .header_wrap .login_search_lang_wrap .search-field::placeholder {
   color: #69696991;
-  font-size: 18px; }
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 16px; }
 
 .header_wrap .login_search_lang_wrap .search-submit {
   width: 36px;
@@ -548,6 +554,7 @@ max-width: 165px}
   top: 50%;
   transform: translateY(-50%);
   background-image: url("../../assets/images/search-red.png");
+  background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
   z-index: 99998; }
@@ -589,7 +596,7 @@ div.user-information {
 
 .header_wrap .languages_menu_wrap .dropdown_langs_btn:after {
   position: absolute;
-  top: 4px;
+  top: 9px;
   left: 9px;
   z-index: -1;
   width: 8px;
@@ -613,7 +620,8 @@ div.user-information {
   font: normal normal 500 22px/28px Assistant;
   color: #ffffff;
   font-size: 14px;
-  font-weight: 700;
+  font-weight: bold;
+  line-height: 18px;
   width: 84px;
   outline: transparent;
   padding-right: 20px;

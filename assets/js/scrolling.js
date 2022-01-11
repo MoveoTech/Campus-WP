@@ -2,11 +2,13 @@ function changeMenuOnScrolling(scroll) {
     const headerScroll = document.querySelector('.header_section');
     const searchScroll = document.querySelector('.search-form');
     const menuScroll = document.querySelector('.header_menu');
+    const logoItems = document.querySelector('.logo_items');
 
     if(scroll > 55 ) {
         headerScroll.classList.add('scrolling-header');
         searchScroll.classList.add('scroll-search')
         menuScroll.classList.add('scroll-header_menu')
+        logoItems.classList.add('scroll-logo_items')
 
         const height = (-50 + ((scroll-50) / 5.5));
         if(height < 0) {
@@ -18,6 +20,7 @@ function changeMenuOnScrolling(scroll) {
         headerScroll.classList.remove('scrolling-header');
         searchScroll.classList.remove('scroll-search')
         menuScroll.classList.remove('scroll-header_menu')
+        logoItems.classList.remove('scroll-logo_items')
 
     }
     if(scroll <= 55) {

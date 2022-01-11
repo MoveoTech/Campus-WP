@@ -35,7 +35,7 @@ if(empty($stripe) || empty($stripe['carousel']) || count($stripe['carousel']) < 
                     <div class="bg-gradient"></div>
                     <div class="goal-item-content">
                         <h1><?php echo $title ?></h1>
-                        <span><?php echo $buttonText ?></span>
+                        <a href="#"><span><?php echo $buttonText ?></span></a>
                     </div>
                 </div>
             <?php endforeach;

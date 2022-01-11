@@ -11,6 +11,12 @@ html body {
 [lang="ar"] body {
   font-family: Assistant, arial;
 }
+
+body {
+  max-width: 1440px;
+  margin: auto;
+}
+
 .span-brake {
   display: block;
 }
@@ -230,14 +236,20 @@ main {
 .hero-banner {
   height: 464px;
   .banner-image {
-    //background: linear-gradient(270deg, #333433 38.02%, rgba(51, 52, 51, 0) 100%);
     position: relative;
     width: 100%;
     display: inline-block;
     text-align: center;
-    img.desktop-banner {
-      //width: 989px;
+    .hero-gradient {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
       width: 100%;
+      background: linear-gradient(270deg, #333433 34.02%, rgba(51, 52, 51, 0) 100%);
+    }
+    img.desktop-banner {
+      width: fit-content;
       height: inherit;
       position: absolute;
       left: 0;
@@ -248,7 +260,7 @@ main {
     }
     .container {
       position: absolute;
-      top: 30%;
+      top: 144px;
       right: 185px;
       padding: 0;
       width: 471px;
@@ -321,9 +333,8 @@ main {
       width: 100%;
       display: block;
       text-align: center;
-      img.desktop-banner {
-        //width: 100%;
-        //top: 63px;
+      .hero-gradient {
+        display: none;
       }
       .container {
         right: 0;
@@ -372,7 +383,6 @@ main {
         display: block;
         position: absolute;
         left: 0;
-        //top: 63px;
         width: 100%;
         min-width: 391px;
         height: 378px;
@@ -384,7 +394,7 @@ main {
         .text-on-banner {
           margin-bottom: 15px;
           h1 {
-            font-size: 28px;
+            font-size: 42px;
           }
           h5 {
             width: 255px;
@@ -4546,7 +4556,7 @@ body.rtl .all_courses:after {
 /* 03/06/2020 new version popups */
 
 #popup_overlay_2020 {
-  position: fixed;
+  //position: fixed;
   top: 0px;
   bottom: 0px;
   right: 0px;
