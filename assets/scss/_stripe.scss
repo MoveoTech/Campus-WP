@@ -7,7 +7,7 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    width: 72%;
+    width: 76%;
     margin: 27px auto;
     .header-title {
       margin-right: 10px;
@@ -20,7 +20,7 @@
       }
       p {
         margin: 15px 0 0;
-        height: 36px;
+        height: fit-content;
         font-size: 16px;
         font-weight: 300;
         line-height: 21px;
@@ -77,7 +77,7 @@
     justify-content: center;
     align-items: center;
     height: 42px;
-    margin: 37px auto;
+    margin: 37px auto 0;
     span {
       height: 35px;
       width: 4px;
@@ -99,7 +99,7 @@
     align-items: baseline;
     flex-wrap: wrap;
     max-width: 933px;
-    margin: 0 auto 28px;
+    margin: 37px auto 28px;
     .info-item {
       text-align: center;
       display: flex;
@@ -133,12 +133,13 @@
 
 .home-page-institutions_stripe {
   margin-bottom: 40px;
+  margin-top: 35px;
   .institution-header {
       display: flex;
       justify-content: center;
       align-items: center;
       height: 42px;
-      margin: 35px auto;
+      margin: 0 auto 35px;
       span {
         height: 35px;
         width: 4px;
@@ -249,14 +250,15 @@
     }
     .tag-item {
       margin: 0 7.5px 15px;
-      background: #F2F2F2;
+      background-color: #F2F2F2;
       border: 1px solid rgba(0, 0, 0, 0.1);
       box-sizing: border-box;
       border-radius: 20px;
       height: 36px;
       cursor: pointer;
       &:hover {
-        background: #FDCC07;
+        transition: background-color 500ms linear;
+        background-color: #FDCC07;
       }
       a {
         display: block;
@@ -350,16 +352,16 @@
     bottom: 0;
   }
   .goals-stripe-header {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 33px;
+    display: flex;
+    flex-direction: column;
+    padding-top: 87px;
   .stripe-title {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    margin-bottom: 15px;
-    margin-top: 87px;
+    margin-bottom: 0;
+    margin-top: 0;
     span {
       width: 4px;
       height: 41px;
@@ -450,7 +452,7 @@
 .courses-stripe {
   display: flex;
   flex-direction: row;
-  width: 72%;
+  width: 76%;
   align-items: baseline;
   justify-content: center;
   margin: 20px auto 0;
@@ -473,22 +475,27 @@
       box-shadow: 0 5px 15px rgba(40, 40, 40, 0.2);
     }
     .item-content {
-      min-width: 209px;
       margin: 10px 3px 7px;
       h3 {
+        text-overflow: ellipsis;
         overflow: hidden;
-        text-wrap: none;
         height: 58px;
         font-size: 22px;
         font-weight: 600;
         line-height: 29px;
         text-align: right;
+        -webkit-line-clamp: 2;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
         a {
           color: #000000;
         }
       }
       p {
+        -webkit-font-smoothing: antialiased;
         height: 21px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
         overflow: hidden;
         font-size: 16px;
         font-weight: 300;
@@ -509,29 +516,43 @@
         margin: unset;
       }
       span {
+        display: flex;
+        align-items: center;
+        justify-content: center;
         height: 100%;
         margin-left: 10px;
         background: #F2F2F2;
         border: 1px solid rgba(0, 0, 0, 0.1);
         box-sizing: border-box;
         border-radius: 15px;
-        padding: 2px 10px;
+
         text-align: center;
         font-weight: 600;
         font-size: 14px;
         line-height: 18px;
-        white-space: nowrap;
         overflow: hidden;
-
+        p {
+          padding: 2px 10px;
+          white-space: nowrap;
+          overflow: hidden;
+          margin: 0;
+          width: 100%;
+        }
         @media (max-width: 768px){
           padding: 2px 5px;
           margin-left: 5px;
         }
       }
+      .regular-tag {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
       .ellipsis-text {
         text-overflow: ellipsis;
       }
       .extra-tags {
+        padding: 2px 10px;
         text-overflow: unset;
         margin: 0;
       }
@@ -688,7 +709,6 @@
         height: 97px;
       }
       .item-content {
-        width: 100%;
         margin: 3px;
         h3 {
           margin-bottom: 3px;
@@ -786,7 +806,6 @@
         justify-content: center;
         align-items: center;
         margin-bottom: 15px;
-        margin-top: 87px;
         span {
           height: 35px;
         }

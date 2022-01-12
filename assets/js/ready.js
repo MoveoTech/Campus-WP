@@ -830,6 +830,7 @@ jQuery(document).ready(function () {
     //breadcrumbs
     jQuery('#breadcrumbs span span:first').attr('role', 'navigation');
     // Accessability
+    // Tooltip
     jQuery(".wpml-ls-item-he a").attr("title", global_vars.menu_he_title);
     jQuery(".wpml-ls-item-ar a").attr("title", global_vars.menu_ar_title); //"تغيير لغة الموقع إلى اللغة العربية");
     jQuery(".wpml-ls-item-en a").attr("title", global_vars.menu_en_title); //"change the site language to english");

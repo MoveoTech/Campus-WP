@@ -280,6 +280,7 @@ main {
           margin-bottom: 7px;
         }
         h5 {
+          -webkit-font-smoothing: antialiased;
           font-size: 18px;
           font-weight: 300;
           line-height: 24px;
@@ -288,11 +289,11 @@ main {
       }
       .hero-search-form {
         display: inline-block;
-
         .search-field.form-control {
           height: 55px;
           width: 375px;
           font-size: 18px;
+          padding-right: 25px;
           &::placeholder {
             color: #69696991;
             font-size: 18px;
@@ -497,7 +498,7 @@ body .carousel-item.slick-slide img {
   font-size: 0;
   line-height: 0;
   position: absolute;
-  top: calc(30% - 11px);
+  top: 25%;
   height: 26px;
   width: 14px;
   padding: 0;
