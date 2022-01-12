@@ -40,51 +40,22 @@ jQuery(document).ready(function () {
         rtl: is_rtl,
         nextArrow: nexSlick,
         prevArrow: prevSlick,
-        height: '253px',
         speed: 1000,
         infinite: false,
         responsive: [
             {
-                breakpoint: 1439,
-                settings: {
-                    slidesToShow: 4,
-                    slidesToScroll: 3,
-                }
-            },
-            {
-                breakpoint: 1400,
-                settings: {
-                    slidesToShow: 3.5,
-                    slidesToScroll: 3,
-                }
-            },
-            {
-                breakpoint: 1300,
-                settings: {
-                    slidesToShow: 3,
-                    slidesToScroll: 3,
-                }
-            },
-            {
-                breakpoint: 1250,
-                settings: {
-                    slidesToShow: 3,
-                    slidesToScroll: 3,
-                }
-            },
-            {
                 breakpoint: 992,
                 settings: {
                     speed: 500,
-                    slidesToShow: 2.5,
-                    slidesToScroll: 2,
+                    slidesToShow: 3,
+                    slidesToScroll: 3,
                 }
             },
             {
                 breakpoint: 768,
                 settings: {
                     slidesToShow: 3,
-                    slidesToScroll: 2,
+                    slidesToScroll: 3,
                     speed: 500,
                     arrows: false,
                 }
@@ -122,9 +93,6 @@ jQuery(document).ready(function () {
                     arrows: false,
                 }
             },
-            //     // You can unslick at a given breakpoint now by adding:
-            //     // settings: "unslick"
-            //     // instead of a settings object
         ]
 
     })
@@ -272,25 +240,17 @@ jQuery(document).ready(function () {
         infinite: false,
         responsive: [
             {
-                breakpoint: 1440,
-                settings: {
-                    slidesToShow: 4,
-                    slidesToScroll: 4,
-                }
-            },
-            {
-                breakpoint: 1250,
+                breakpoint: 1251,
                 settings: {
                     slidesToShow: 3,
                     slidesToScroll: 3,
                 }
             },
             {
-                breakpoint: 850,
+                breakpoint: 851,
                 settings: {
                     slidesToShow: 2,
                     slidesToScroll: 2,
-
                 }
             },
             {

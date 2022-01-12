@@ -148,9 +148,13 @@
   left: unset;
   right: 0; }
 
+.hero-banner .banner-image .hero-gradient {
+  right: unset;
+  left: 0;
+  transform: rotate(180deg); }
+
 .hero-banner .banner-image .container {
   right: unset;
-  top: 115px;
   left: 185px;
   width: 550px;
   align-items: flex-start; }

@@ -46,7 +46,7 @@ global $sitepress;
                         $class = '';
                         if($tag_length >= 11) $class = 'ellipsis-text';
                         ?>
-                            <span class="<?php echo $class ?>"><?php echo $tag ?></span>
+                            <span title="<?php echo $tag ?>" class="<?php echo $class ?>"><?php echo $tag ?></span>
                             <?php
                             $index++;
                         endwhile;
