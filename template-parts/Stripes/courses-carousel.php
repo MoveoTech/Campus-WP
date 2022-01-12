@@ -20,14 +20,6 @@ global $sitepress;
             $tags = $course_item->get_tags();
             $thumb = $course_item->get_img_url();
 //            $url = $course_item->get_url();
-//            var_dump(strlen($title));
-//            $institution_name_length = mb_strlen($institution_name, 'utf8');
-//            $title_length = mb_strlen($title, 'utf8');
-            $institution_name_length = strlen($institution_name);
-            $title_length = strlen($title);
-            if($title_length >= 50) $title = mb_substr($title, 0,37) . '...';
-            if($institution_name_length >= 50) $institution_name = mb_substr($institution_name, 0,29) . '...';
-
             ?>
             <div class="course-stripe-item " >
                 <div class="course-img" style="background-image: url(<?= $thumb ?>);">
@@ -43,10 +35,10 @@ global $sitepress;
                         while ($index < 2 && $index < count($tags) && $tags[$index] != '') :
                         $tag = getFieldByLanguage($tags[$index]['name'], $tags[$index]['english_name'], $tags[$index]['arabic_name'], $sitepress->get_current_language());
                         $tag_length = mb_strlen($tag, 'utf8');
-                        $class = '';
+                        $class = 'regular-tag';
                         if($tag_length >= 11) $class = 'ellipsis-text';
                         ?>
-                            <span title="<?php echo $tag ?>" class="<?php echo $class ?>"><?php echo $tag ?></span>
+                            <span title="<?php echo $tag ?>" ><p class="<?php echo $class ?>"><?php echo $tag ?></p></span>
                             <?php
                             $index++;
                         endwhile;

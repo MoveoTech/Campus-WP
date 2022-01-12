@@ -13,7 +13,9 @@ if(empty($stripe) || empty($stripe['id']) || empty($stripe['carousel']) || count
     <div class="stripe-header">
 
         <div class="stripe-title">
-            <span style="background: <?php echo randomColor();?>"></span>
+            <?php if($stripe['title'] != '' && !empty($stripe['title'])) : ?>
+                <span style="background: <?php echo randomColor();?>"></span>
+            <?php endif; ?>
             <?php if($stripe['image']):?>
                 <img src="<?php echo $stripe['image'] ?>">
             <?php endif; ?>
