@@ -36,9 +36,9 @@ global $sitepress;
                         $tag = getFieldByLanguage($tags[$index]['name'], $tags[$index]['english_name'], $tags[$index]['arabic_name'], $sitepress->get_current_language());
                         $tag_length = mb_strlen($tag, 'utf8');
                         $class = 'regular-tag';
-                        if($tag_length >= 11) $class = 'ellipsis-text';
+                        if($tag_length >= 8) $class = 'ellipsis-text';
                         ?>
-                            <span title="<?php echo $tag ?>" ><p class="<?php echo $class ?>"><?php echo $tag ?></p></span>
+                            <span class="<?php echo $class ?>" title="<?php echo $tag ?>" ><p class="<?php echo $class ?>"><?php echo $tag ?></p></span>
                             <?php
                             $index++;
                         endwhile;

@@ -18540,11 +18540,13 @@ html:not(.user_is_not_logged_in) .header_login {
           .courses-stripe .course-stripe-item .tags-div span {
             padding: 2px 5px;
             margin-left: 5px; } }
-      .courses-stripe .course-stripe-item .tags-div .regular-tag {
-        display: flex;
-        align-items: center;
-        justify-content: center; }
-      .courses-stripe .course-stripe-item .tags-div .ellipsis-text {
+      .courses-stripe .course-stripe-item .tags-div span.regular-tag {
+        min-width: fit-content; }
+        .courses-stripe .course-stripe-item .tags-div span.regular-tag p.regular-tag {
+          display: flex;
+          align-items: center;
+          justify-content: center; }
+      .courses-stripe .course-stripe-item .tags-div p.ellipsis-text {
         text-overflow: ellipsis; }
       .courses-stripe .course-stripe-item .tags-div .extra-tags {
         padding: 2px 10px;
@@ -18567,12 +18569,45 @@ html:not(.user_is_not_logged_in) .header_login {
 .nerative-class .slick-list .slick-track .course-stripe-item .tags-div {
   margin: 0 0 0 10px; }
 
+.home-page-myCourses-stripe .stripe-header {
+  display: flex;
+  align-items: center;
+  width: 76%;
+  margin: 27px auto 37px; }
+  .home-page-myCourses-stripe .stripe-header span {
+    margin-left: 10px;
+    border-radius: 10px;
+    width: 4px;
+    height: 35px; }
+  .home-page-myCourses-stripe .stripe-header h1 {
+    font-size: 32px;
+    line-height: 42px;
+    font-weight: 500;
+    margin: 0; }
+
+.home-page-myCourses-stripe .myCourses-slider {
+  display: flex;
+  flex-direction: row;
+  width: 76%;
+  align-items: baseline;
+  justify-content: center;
+  margin: 0 auto; }
+  .home-page-myCourses-stripe .myCourses-slider .slick-track button.slick-button {
+    outline: none; }
+  .home-page-myCourses-stripe .myCourses-slider .slick-track img {
+    max-width: 253px;
+    max-height: 275px; }
+
 @media (max-width: 1439px) {
   .home-page-goals-stripe .goals-slider .goal-item {
     min-width: unset; } }
 
 @media (max-width: 1250px) {
   .courses-stripe {
+    width: 78%; }
+  .home-page-myCourses-stripe .stripe-header {
+    width: 78%; }
+  .home-page-myCourses-stripe .myCourses-slider {
     width: 78%; }
   .home-page-courses-stripe .stripe-header {
     width: 78%; }
@@ -18581,6 +18616,10 @@ html:not(.user_is_not_logged_in) .header_login {
 
 @media (max-width: 1100px) {
   .courses-stripe {
+    width: 85%; }
+  .home-page-myCourses-stripe .stripe-header {
+    width: 85%; }
+  .home-page-myCourses-stripe .myCourses-slider {
     width: 85%; }
   .home-page-courses-stripe .stripe-header {
     width: 85%; }
@@ -18597,9 +18636,15 @@ html:not(.user_is_not_logged_in) .header_login {
         .courses-stripe .course-stripe-item .item-content h3 {
           font-size: 18px; }
       .courses-stripe .course-stripe-item .tags-div span {
-        padding: 2px 8px; }
+        padding: 2px; }
+        .courses-stripe .course-stripe-item .tags-div span p {
+          padding: 6px; }
   .nerative-class .slick-list .slick-track .course-stripe-item .item-content h3 a {
     font-size: 18px; }
+  .home-page-myCourses-stripe .stripe-header {
+    width: 76%; }
+  .home-page-myCourses-stripe .myCourses-slider {
+    width: 76%; }
   .home-page-courses-stripe .stripe-header {
     width: 76%; }
   .home-page-goals-stripe .goals-slider {
@@ -18697,10 +18742,20 @@ html:not(.user_is_not_logged_in) .header_login {
     line-height: 24px; }
   .home-page-institutions_stripe .institution-header h1 {
     font-size: 26px;
-    line-height: 34px; } }
+    line-height: 34px; }
+  .home-page-myCourses-stripe .stripe-header {
+    width: 80%; }
+  .home-page-myCourses-stripe .myCourses-slider {
+    width: 80%; }
+    .home-page-myCourses-stripe .myCourses-slider button.slick-button {
+      display: none !important; } }
 
 @media (max-width: 710px) {
   .courses-stripe {
+    width: 91.5%; }
+  .home-page-myCourses-stripe .stripe-header {
+    width: 91.5%; }
+  .home-page-myCourses-stripe .myCourses-slider {
     width: 91.5%; }
   .home-page-courses-stripe .stripe-header {
     width: 91.5%; }
@@ -18715,10 +18770,18 @@ html:not(.user_is_not_logged_in) .header_login {
     display: none; }
   .courses-stripe {
     width: unset;
+    margin: 20px 30px; }
+  .home-page-myCourses-stripe .stripe-header {
+    width: unset;
+    margin: 20px 40px; }
+  .home-page-myCourses-stripe .myCourses-slider {
+    width: unset;
     margin: 20px 30px; } }
 
 @media (max-width: 600px) {
   .courses-stripe {
+    margin: 20px 30px 0 0; }
+  .home-page-myCourses-stripe .myCourses-slider {
     margin: 20px 30px 0 0; } }
 
 @media (max-width: 480px) {
@@ -18727,6 +18790,10 @@ html:not(.user_is_not_logged_in) .header_login {
     .courses-stripe .course-stripe-item {
       max-height: 195px;
       height: 100%; }
+  .home-page-myCourses-stripe .stripe-header {
+    margin: 15px 20px 0 0; }
+  .home-page-myCourses-stripe .myCourses-slider {
+    margin: 15px 10px 0 0; }
   .home-page-courses-stripe .stripe-header {
     width: unset;
     margin-right: 5px; }
