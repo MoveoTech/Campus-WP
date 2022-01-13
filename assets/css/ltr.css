@@ -238,7 +238,6 @@
 
 .courses-stripe .course-stripe-item .item-content {
   height: 87px;
-  width: 233px;
   margin: 10px; }
   .courses-stripe .course-stripe-item .item-content h3 {
     text-align: left; }
@@ -257,7 +256,10 @@
 
 @media (max-width: 480px) {
   .courses-stripe {
-    margin: 20px 0 20px 2.5px; } }
+    margin: 20px 0 20px 10px; }
+  .home-page-courses-stripe .stripe-header {
+    margin-right: unset;
+    margin-left: 15px; } }
 
 .slick-prev {
   right: unset;

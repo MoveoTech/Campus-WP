@@ -408,6 +408,15 @@ main {
   }
 }
 
+@media (max-width: 375px) {
+  .hero-banner {
+    .banner-image {
+      .container {
+        top: 10px;
+      }
+    }
+  }
+}
 
 
 .link-banner {

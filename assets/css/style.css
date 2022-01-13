@@ -6934,6 +6934,10 @@ main {
         .hero-banner .banner-image .container .text-on-banner h5 {
           width: 255px; } }
 
+@media (max-width: 375px) {
+  .hero-banner .banner-image .container {
+    top: 10px; } }
+
 .link-banner {
   border-radius: 29px;
   background-color: #ffffff;
@@ -18702,7 +18706,7 @@ html:not(.user_is_not_logged_in) .header_login {
     width: 91.5%; }
   .home-page-goals-stripe .goals-slider {
     width: 98%;
-    margin: 0 1px 0 0; }
+    margin: 0 5px 0 0; }
     .home-page-goals-stripe .goals-slider .goal-item {
       min-width: 253px; } }
 
