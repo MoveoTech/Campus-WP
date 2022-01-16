@@ -17283,9 +17283,6 @@ nav.header-nav ul li a {
 
 .header_wrap .campus_logo {
   display: inline-block; }
-  @media (max-width: 1200px) {
-    .header_wrap .campus_logo {
-      margin-left: 42px; } }
 
 .header_wrap .campus_logo img {
   width: 100%;
@@ -18417,6 +18414,8 @@ html:not(.user_is_not_logged_in) .header_login {
       align-items: center;
       justify-content: flex-end;
       position: relative; }
+      .home-page-goals-stripe .goals-slider .goal-item:hover .bg-gradient {
+        background: linear-gradient(0deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), linear-gradient(0deg, #000000 0%, rgba(0, 0, 0, 0.1) 55.31%); }
       .home-page-goals-stripe .goals-slider .goal-item .bg-gradient {
         border-radius: 10px;
         position: absolute;
