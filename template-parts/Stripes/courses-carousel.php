@@ -6,19 +6,22 @@ $stripe = wp_parse_args(
 if(empty($stripe) || empty($stripe['id']) || empty($stripe['courses']) || count($stripe['courses']) < 1 )
     return;
 global $sitepress;
+
+$courses_slice = array_slice($stripe['courses'], 0, 10);
+$courses = pods( 'courses', podsParams($courses_slice));
+
 ?>
 
 <div class="stripe-slider-slick">
         <div hidden id="<?php echo $stripe['id'] . "courses" ?>" value="<?php  print_r(json_encode($stripe['courses'])); ?>" ></div>
         <div id="<?php echo $stripe['id'] ?>" class="courses-stripe <?php echo ($stripe['type'] && $stripe['type'] == 'nerative' ) ? 'nerative-class' : '' ?>">
         <?php
-        $size =  count($stripe['courses']) < 10 ? count($stripe['courses']) : 10;
-        for($i = 0; $i < $size; $i++) {
-            $course_item = new Course_stripe($stripe['courses'][$i]); // New Class
-            $title = $course_item->get_title();
-            $institution_name = $course_item->get_institution_name();
-            $tags = $course_item->get_tags();
-            $thumb = $course_item->get_img_url();
+        while ($courses->fetch()) {
+            $title = getFieldByLanguage($courses->display( 'name' ), $courses->display( 'english_name' ), $courses->display( 'arabic_name' ),$sitepress->get_current_language());
+            $institution_name = getFieldByLanguage($courses->field( 'academic_institution.name' ), $courses->field( 'academic_institution.english_name' ), $courses->field( 'academic_institution.arabic_name' ), $sitepress->get_current_language());
+            $tags = $courses->field('tags');
+            $thumb = $courses->display( 'image' );
+
 //            $url = $course_item->get_url();
             ?>
             <div class="course-stripe-item " >
