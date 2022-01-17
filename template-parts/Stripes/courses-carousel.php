@@ -39,14 +39,20 @@ $courses = pods( 'courses', podsParams($courses_slice));
                         $tag = getFieldByLanguage($tags[$index]['name'], $tags[$index]['english_name'], $tags[$index]['arabic_name'], $sitepress->get_current_language());
                         $tag_length = mb_strlen($tag, 'utf8');
                         $class = 'regular-tag';
-                        if($tag_length >= 8) $class = 'ellipsis-text';
-                        ?>
-                            <span class="<?php echo $class ?>" title="<?php echo $tag ?>" ><p class="<?php echo $class ?>"><?php echo $tag ?></p></span>
-                            <?php
-                            $index++;
+
+                        if($tag_length >= 8) $class = 'ellipsis-text'; ?>
+                            <?php if($index == 1) { ?>
+                                <span class="<?php echo $class ?> tag-2"><p class="<?php echo $class ?>"><?php echo $tag ?></p></span>
+                            <?php } else { ?>
+                                <span class="<?php echo $class ?>"><p class="<?php echo $class ?>"><?php echo $tag ?></p></span>
+                            <?php } $index++;
                         endwhile;
                         if(count($tags) > 2){ ?>
                             <span class="extra-tags">+</span>
+                    <?php }
+                    if(count($tags) >= 2) { ?>
+                        <span class="extra-tags-mobile">+</span>
+
                     <?php } }?>
                 </div>
             </div>

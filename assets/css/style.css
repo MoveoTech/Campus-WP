@@ -18551,6 +18551,8 @@ html:not(.user_is_not_logged_in) .header_login {
         padding: 2px 10px;
         text-overflow: unset;
         margin: 0; }
+      .courses-stripe .course-stripe-item .tags-div .extra-tags-mobile {
+        display: none; }
 
 @media (max-width: 992px) {
   .nerative-class button {
@@ -18668,7 +18670,19 @@ html:not(.user_is_not_logged_in) .header_login {
         margin: 3px; }
         .courses-stripe .course-stripe-item .item-content h3 {
           margin-bottom: 3px; }
-      .courses-stripe .course-stripe-item .tags-div {
+      .courses-stripe .course-stripe-item .tags-div span {
+        font-weight: normal;
+        font-size: 12px;
+        line-height: 16px;
+        margin-left: 2px; }
+      .courses-stripe .course-stripe-item .tags-div .extra-tags {
+        display: none; }
+      .courses-stripe .course-stripe-item .tags-div .extra-tags-mobile {
+        display: block;
+        padding: 2px 10px;
+        text-overflow: unset;
+        margin: 0; }
+      .courses-stripe .course-stripe-item .tags-div .tag-2 {
         display: none; }
   .home-page-courses-stripe {
     margin-bottom: 25px; }
@@ -18787,7 +18801,6 @@ html:not(.user_is_not_logged_in) .header_login {
   .courses-stripe {
     margin: 15px 10px 0 0; }
     .courses-stripe .course-stripe-item {
-      max-height: 195px;
       height: 100%; }
   .home-page-myCourses-stripe .stripe-header {
     margin: 15px 20px 0 0; }
