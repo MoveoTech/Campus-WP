@@ -1128,6 +1128,13 @@
     }
     .testimonials-slider {
       width: 76%;
+      .testimonial-item {
+        margin: 0 30px;
+      }
+      .slick-list {
+        width: 95%;
+        margin: auto;
+      }
     }
   }
 }
@@ -1282,7 +1289,10 @@
 
   .home-page-testimonials_stripe {
     .testimonials-slider {
-      width: 81%;
+      width: 90%;
+      .slick-list {
+        width: 85%;
+      }
     }
   }
 }

@@ -233,6 +233,10 @@
   padding-right: unset;
   padding-left: 5px; }
 
+.home-page-testimonials_stripe .testimonials-stripe-header span {
+  margin-left: unset;
+  margin-right: 10px; }
+
 .nerative-class .slick-list .slick-track .course-stripe-item .tags-div {
   margin: 0 10px 0 0; }
 

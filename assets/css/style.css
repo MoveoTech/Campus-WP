@@ -18888,7 +18888,12 @@ html:not(.user_is_not_logged_in) .header_login {
     font-size: 26px;
     line-height: 35px; }
   .home-page-testimonials_stripe .testimonials-slider {
-    width: 76%; } }
+    width: 76%; }
+    .home-page-testimonials_stripe .testimonials-slider .testimonial-item {
+      margin: 0 30px; }
+    .home-page-testimonials_stripe .testimonials-slider .slick-list {
+      width: 95%;
+      margin: auto; } }
 
 @media (max-width: 710px) {
   .courses-stripe {
@@ -18959,7 +18964,9 @@ html:not(.user_is_not_logged_in) .header_login {
   .home-page-institutions_stripe .course-stripe-item .course-img {
     width: 80px; }
   .home-page-testimonials_stripe .testimonials-slider {
-    width: 81%; } }
+    width: 90%; }
+    .home-page-testimonials_stripe .testimonials-slider .slick-list {
+      width: 85%; } }
 
 @media (max-width: 389px) {
   .courses-stripe .course-stripe-item {
