@@ -455,6 +455,7 @@
 }
 
 .home-page-testimonials_stripe {
+  background: #F9F9F9;
   position: relative;
   .back-img-1 {
     background: url("../../assets/images/testimonials-bckg-1.png");
@@ -506,69 +507,58 @@
   .testimonials-slider {
     display: flex;
     flex-direction: row;
-    justify-content: center;
-    align-items: baseline;
     width: 76%;
+    align-items: baseline;
+    justify-content: center;
     margin: 0 auto;
     padding: 0 0 55px 0;
     button.slick-button {
       outline: none;
+    }
+    .slick-list {
+      max-width: 933px;
     }
     .testimonial-item {
       display: flex;
       flex-direction: column;
       align-items: center;
       max-width: 233px;
-      margin: 0 78px;
+      margin: 0 39px;
       .testimonial-img-container {
-        position: relative;
         .background-img {
+          width: 103px;
+          height: 100px;
           position: relative;
-          .bckg-1 {
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          align-items: center;
+          background-position: center center;
+          background-repeat: no-repeat;
+          background-size: cover;
+          .testimonial-item-img {
+            border: 2px solid #90c653;
             position: absolute;
-            background-image: url("../../assets/images/testimonial-item-bckg-1.png");
+            top: 23px;
+            height: 68px;
+            width: 68px;
+            border-radius: 50px;
             background-position: center center;
             background-repeat: no-repeat;
             background-size: cover;
-            width: 11px;
-            height: 11px;
-            left: -36px;
-            top: 30px;
-          }
-          .bckg-2 {
-            position: absolute;
-            background-image: url("../../assets/images/testimonial-item-bckg-2.png");
-            background-position: center center;
-            background-repeat: no-repeat;
-            background-size: cover;
-            width: 84px;
-            height: 115px;
-            top: 15px;
-            left: -35px
-          }
-          .bckg-3 {
-            position: absolute;
-            background-image: url("../../assets/images/testimonial-item-bckg-3.png");
-            background-position: center center;
-            background-repeat: no-repeat;
-            background-size: cover;
-            width: 53px;
-            height: 72px;
-            top: 8px;
-            left: 22px;
           }
         }
-        .testimonial-item-img {
-          //position: absolute;
-          border: 2px solid #90c653;
-          //top: 37px;
-          //left: -22px;
-          height: 68px;
-          width: 68px;
-          border-radius: 50px;
-          background-position: center center;
-          background-size: cover;
-          background-repeat: no-repeat;
+        .yellow {
+          background-image: url("../../assets/images/testimonials-item-bckg-yellow.png");
+
+        }
+        .green {
+          background-image: url("../../assets/images/testimonials-item-bckg-yellow.png");
+
+        }
+        .blue {
+          background-image: url("../../assets/images/testimonials-item-bckg-yellow.png");
+
         }
       }
       .testimonial-item-content {
@@ -820,6 +810,9 @@
 
   .home-page-testimonials_stripe {
     .testimonials-slider {
+      .slick-list {
+        width: 90%;
+      }
       .testimonial-item {
         max-width: 233px;
         margin: 0 40px;
@@ -851,6 +844,14 @@
   .home-page-goals-stripe {
     .goals-slider {
       width: 74%;
+    }
+  }
+
+  .home-page-testimonials_stripe {
+    .testimonials-slider {
+      .slick-list {
+        width: 100%;
+      }
     }
   }
 }
@@ -1108,6 +1109,14 @@
   }
 
   .home-page-testimonials_stripe {
+    .back-img-1 {
+      width: 84px;
+      height: 182px;
+    }
+    .back-img-2 {
+      width: 108px;
+      height: 106px;
+    }
     .testimonials-stripe-header {
       span {
         height: 35px;
@@ -1180,6 +1189,7 @@
 
   .home-page-testimonials_stripe {
     .testimonials-slider {
+      display: block;
       width: 75%;
       .testimonial-item {
         margin: 0 25px;
@@ -1267,6 +1277,12 @@
       .course-img {
         width: 80px;
       }
+    }
+  }
+
+  .home-page-testimonials_stripe {
+    .testimonials-slider {
+      width: 81%;
     }
   }
 }

@@ -28,15 +28,17 @@ global $sitepress;
             $title = getFieldByLanguage($testimonials->display('name'), $testimonials->display('english_name'), $testimonials->display('arabic_name'), $sitepress->get_current_language());
             $description = getFieldByLanguage($testimonials->display('hebrew_description'), $testimonials->display('english_description'), $testimonials->display('arabic_description'), $sitepress->get_current_language());
             $thumb = $testimonials->display('image');
+            $color = randomBckgColor();
+            if($color == 'yellow') $border_color = '#FDCC07';
+            if($color == 'green') $border_color = '#91C653';
+            if($color == 'blue') $border_color = '#70C6D1';
+
             if($thumb){ ?>
                 <div class="testimonial-item">
                     <div class="testimonial-img-container" >
-<!--                        <div class="background-img">-->
-<!--                            <span class="bckg-1"></span>-->
-<!--                            <span class="bckg-2"></span>-->
-<!--                            <span class="bckg-3"></span>-->
-<!--                        </div>-->
-                        <div class="testimonial-item-img" style="background-image: url(<?php echo $thumb?>)"></div>
+                        <div class="background-img <?php echo $color ?>">
+                            <div class="testimonial-item-img" style="border-color: <?php echo $border_color ?>;background-image: url(<?php echo $thumb?>)"></div>
+                        </div>
                     </div>
                     <div class="testimonial-item-content">
                         <h1><?php echo $title ?></h1>

@@ -396,13 +396,6 @@ jQuery(document).ready(function () {
         dots: false,
         responsive: [
             {
-                breakpoint: 1250,
-                settings: {
-                    slidesToShow: 3,
-                    slidesToScroll: 1,
-                }
-            },
-            {
                 breakpoint: 992,
                 settings: {
                     slidesToShow: 2,
@@ -414,8 +407,8 @@ jQuery(document).ready(function () {
                 settings: {
                     slidesToShow: 2,
                     slidesToScroll: 1,
+                    dots: true,
                     arrows: false,
-                    infinite: true,
                 }
             },
             {
@@ -423,8 +416,17 @@ jQuery(document).ready(function () {
                 settings: {
                     slidesToShow: 1,
                     slidesToScroll: 1,
+                    dots: true,
                     arrows: false,
-                    infinite: true,
+                }
+            },
+            {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    dots: true,
+                    arrows: false,
                 }
             },
         ]

@@ -211,5 +211,12 @@ function randomColor() {
         '#F1595A',
         '#91C653'
     )[rand(0,3)];
+}
 
+function randomBckgColor() {
+    return array(
+        'yellow',
+        'green',
+        'blue',
+    )[rand(0,2)];
 }
