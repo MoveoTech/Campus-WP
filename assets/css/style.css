@@ -12905,6 +12905,7 @@ html[lang="en-US"] #single_project_video_wrap {
 
 .slick-list {
   position: relative;
+  height: 100%;
   display: block;
   overflow: hidden;
   margin: 0;
@@ -12929,6 +12930,7 @@ html[lang="en-US"] #single_project_video_wrap {
   position: relative;
   top: 0;
   left: 0;
+  height: 100%;
   display: flex;
   margin-left: auto;
   margin-right: auto; }
@@ -18464,6 +18466,7 @@ html:not(.user_is_not_logged_in) .header_login {
   .courses-stripe button.slick-button {
     outline: none; }
   .courses-stripe .course-stripe-item {
+    position: relative;
     max-width: 253px;
     max-height: 277px;
     height: 100%;
@@ -18553,6 +18556,70 @@ html:not(.user_is_not_logged_in) .header_login {
         margin: 0; }
       .courses-stripe .course-stripe-item .tags-div .extra-tags-mobile {
         display: none; }
+    .courses-stripe .course-stripe-item .course-item-hover {
+      display: none;
+      z-index: 1;
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 295px;
+      height: fit-content;
+      background: #FFFFFF;
+      box-shadow: 0 10px 15px rgba(57, 104, 109, 0.25);
+      border-radius: 10px; }
+      .courses-stripe .course-stripe-item .course-item-hover .course-img {
+        width: 275px;
+        max-width: unset;
+        height: 135px;
+        margin: 10px 10px 0; }
+      .courses-stripe .course-stripe-item .course-item-hover .item-content {
+        margin: 10px 20px 7px 14px; }
+        .courses-stripe .course-stripe-item .course-item-hover .item-content h3 {
+          text-overflow: unset;
+          overflow: unset;
+          height: 100%;
+          -webkit-line-clamp: unset;
+          display: unset;
+          -webkit-box-orient: unset;
+          font-size: 22px;
+          font-weight: 600;
+          line-height: 29px;
+          text-align: right; }
+          .courses-stripe .course-stripe-item .course-item-hover .item-content h3 a {
+            color: #000000; }
+        .courses-stripe .course-stripe-item .course-item-hover .item-content p {
+          height: 21px;
+          font-size: 16px;
+          font-weight: 300;
+          line-height: 21px;
+          text-align: right;
+          opacity: 50%;
+          margin: 8px 0 0; }
+      .courses-stripe .course-stripe-item .course-item-hover .tags-div {
+        flex-wrap: wrap;
+        margin-right: 20px;
+        max-width: 233px;
+        height: unset;
+        overflow: unset; }
+        .courses-stripe .course-stripe-item .course-item-hover .tags-div span {
+          margin-bottom: 7px; }
+        .courses-stripe .course-stripe-item .course-item-hover .tags-div span.regular-tag {
+          min-width: fit-content; }
+          .courses-stripe .course-stripe-item .course-item-hover .tags-div span.regular-tag p.regular-tag {
+            display: flex;
+            align-items: center;
+            justify-content: center; }
+        .courses-stripe .course-stripe-item .course-item-hover .tags-div p.ellipsis-text {
+          text-overflow: ellipsis; }
+      .courses-stripe .course-stripe-item .course-item-hover .course-details {
+        margin: 0 20px 15px 14px; }
+        .courses-stripe .course-stripe-item .course-item-hover .course-details span {
+          font-weight: 300;
+          font-size: 14px;
+          line-height: 18px;
+          color: #808080; }
+    .courses-stripe .course-stripe-item:hover .course-item-hover {
+      display: block; }
 
 @media (max-width: 992px) {
   .nerative-class button {
@@ -18569,6 +18636,17 @@ html:not(.user_is_not_logged_in) .header_login {
 
 .nerative-class .slick-list .slick-track .course-stripe-item .tags-div {
   margin: 0 0 0 10px; }
+
+.nerative-class .slick-list .slick-track .course-stripe-item .course-item-hover .item-content h3 a {
+  color: #333433; }
+
+.nerative-class .slick-list .slick-track .course-stripe-item .course-item-hover .item-content p {
+  color: #333433; }
+
+.nerative-class .slick-list .slick-track .course-stripe-item .course-item-hover .tags-div {
+  margin-right: 20px; }
+  .nerative-class .slick-list .slick-track .course-stripe-item .course-item-hover .tags-div span {
+    margin-bottom: 7px; }
 
 .home-page-myCourses-stripe .stripe-header {
   display: flex;

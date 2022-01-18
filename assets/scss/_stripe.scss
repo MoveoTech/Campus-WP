@@ -465,6 +465,7 @@
     outline: none;
   }
   .course-stripe-item {
+    position: relative;
     max-width: 253px;
     max-height: 277px;
     height: 100%;
@@ -567,7 +568,88 @@
         display: none;
       }
     }
+    .course-item-hover {
+      display: none;
+      z-index: 1;
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 295px;
+      height: fit-content;
+      background: #FFFFFF;
+      box-shadow: 0 10px 15px rgba(57, 104, 109, 0.25);
+      border-radius: 10px;
+      .course-img {
+        width: 275px;
+        max-width: unset;
+        height: 135px;
+        margin: 10px 10px 0;
+      }
+      .item-content {
+        margin: 10px 20px 7px 14px;
+        h3 {
+          text-overflow: unset;
+          overflow: unset;
+          height: 100%;
+          -webkit-line-clamp: unset;
+          display: unset;
+          -webkit-box-orient: unset;
+          font-size: 22px;
+          font-weight: 600;
+          line-height: 29px;
+          text-align: right;
+          a {
+            color: #000000;
+          }
+        }
+        p {
+          height: 21px;
+          font-size: 16px;
+          font-weight: 300;
+          line-height: 21px;
+          text-align: right;
+          opacity: 50%;
+          margin: 8px 0 0;
+        }
+      }
+      .tags-div {
+        flex-wrap: wrap;
+        margin-right: 20px;
+        max-width: 233px;
+        height: unset;
+        overflow: unset;
+        span {
+          margin-bottom: 7px;
+        }
+        span.regular-tag {
+          min-width: fit-content;
+          p.regular-tag {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+        }
+        p.ellipsis-text {
+          text-overflow: ellipsis;
+        }
+      }
+      .course-details {
+        margin: 0 20px 15px 14px;
+        span {
+          font-weight: 300;
+          font-size: 14px;
+          line-height: 18px;
+          color: #808080;
+        }
+      }
+    }
+    &:hover {
+      .course-item-hover {
+        display: block;
+      }
+    }
   }
+
 }
 
 .nerative-class {
@@ -594,6 +676,24 @@
         }
         .tags-div {
           margin: 0 0 0 10px;
+        }
+        .course-item-hover {
+          .item-content {
+            h3 {
+              a {
+                color: #333433;
+              }
+            }
+            p {
+              color: #333433;
+            }
+          }
+          .tags-div {
+            margin-right: 20px;
+            span {
+              margin-bottom: 7px;
+            }
+          }
         }
       }
     }
