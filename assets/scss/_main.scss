@@ -240,6 +240,30 @@ main {
     width: 100%;
     display: inline-block;
     text-align: center;
+    .bckg-1 {
+      background-image: url("../../assets/images/hero-bckg-1.png");
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center center;
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 222px;
+      height: 377px;
+      z-index: 1;
+    }
+    .bckg-2 {
+      background-image: url("../../assets/images/hero-bckg-2.png");
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center center;
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      width: 590px;
+      height: 459px;
+      z-index: 1;
+    }
     .hero-gradient {
       position: absolute;
       top: 0;
@@ -334,6 +358,14 @@ main {
       width: 100%;
       display: block;
       text-align: center;
+      .bckg-1 {
+        width: 170px;
+        height: 250px;
+      }
+      .bckg-2 {
+        width: 500px;
+        height: 380px;
+      }
       .hero-gradient {
         display: none;
       }
@@ -377,6 +409,12 @@ main {
   .hero-banner {
     height: 378px;
     .banner-image {
+      .bckg-1 {
+        display: none;
+      }
+      .bckg-2 {
+        display: none;
+      }
       img.desktop-banner {
         display: none;
       }
