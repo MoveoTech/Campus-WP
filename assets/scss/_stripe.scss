@@ -454,6 +454,139 @@
   }
 }
 
+.home-page-testimonials_stripe {
+  background: #F9F9F9;
+  position: relative;
+  .back-img-1 {
+    background: url("../../assets/images/testimonials-bckg-1.png");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 113px;
+    height: 45%;
+    position: absolute;
+    left: 0;
+    top: 0;
+
+  }
+  .back-img-2 {
+    background: url("../../assets/images/testimonials-bckg-2.png");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 179px;
+    height: 35%;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    //@media (max-width: 480px) {
+    //  width: 90px;
+    //  height: 120px;
+    //}
+  }
+  .testimonials-stripe-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding-top: 37px;
+    margin: 0 0 37px 0;
+    span {
+      width: 4px;
+      height: 41px;
+      margin-left: 10px;
+      border-radius: 10px;
+    }
+    h1 {
+      margin: 0;
+      font-size: 32px;
+      line-height: 42px;
+      font-weight: 500;
+    }
+  }
+  .testimonials-slider {
+    display: flex;
+    flex-direction: row;
+    width: 76%;
+    align-items: baseline;
+    justify-content: center;
+    margin: 0 auto;
+    padding: 0 0 55px 0;
+    button.slick-button {
+      outline: none;
+    }
+    .slick-list {
+      max-width: 933px;
+    }
+    .testimonial-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      max-width: 233px;
+      margin: 0 39px;
+      .testimonial-img-container {
+        .background-img {
+          width: 103px;
+          height: 100px;
+          position: relative;
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          align-items: center;
+          background-position: center center;
+          background-repeat: no-repeat;
+          background-size: cover;
+          .testimonial-item-img {
+            border: 2px solid #90c653;
+            position: absolute;
+            top: 23px;
+            height: 68px;
+            width: 68px;
+            border-radius: 50px;
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-size: cover;
+          }
+        }
+        .yellow {
+          background-image: url("../../assets/images/testimonials-item-bckg-yellow.png");
+
+        }
+        .green {
+          background-image: url("../../assets/images/testimonials-item-bckg-yellow.png");
+
+        }
+        .blue {
+          background-image: url("../../assets/images/testimonials-item-bckg-yellow.png");
+
+        }
+      }
+      .testimonial-item-content {
+        margin: 5px auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        h1 {
+          font-weight: 600;
+          font-size: 22px;
+          line-height: 29px;
+          color: #141414;
+          margin-bottom: 5px;
+        }
+        p {
+          text-align: center;
+          -webkit-font-smoothing: antialiased;
+          font-weight: 300;
+          font-size: 16px;
+          line-height: 21px;
+          color: #141414;
+        }
+      }
+    }
+  }
+}
+
 .courses-stripe {
   display: flex;
   flex-direction: row;
@@ -674,6 +807,18 @@
       width: 66%;
     }
   }
+
+  .home-page-testimonials_stripe {
+    .testimonials-slider {
+      .slick-list {
+        width: 90%;
+      }
+      .testimonial-item {
+        max-width: 233px;
+        margin: 0 40px;
+      }
+    }
+  }
 }
 
 @media (max-width: 1100px) {
@@ -699,6 +844,14 @@
   .home-page-goals-stripe {
     .goals-slider {
       width: 74%;
+    }
+  }
+
+  .home-page-testimonials_stripe {
+    .testimonials-slider {
+      .slick-list {
+        width: 100%;
+      }
     }
   }
 }
@@ -763,6 +916,12 @@
       .goal-item {
         min-width: 200px;
       }
+    }
+  }
+
+  .home-page-testimonials_stripe {
+    .testimonials-slider {
+      width: 65%;
     }
   }
 }
@@ -948,6 +1107,29 @@
       }
     }
   }
+
+  .home-page-testimonials_stripe {
+    .back-img-1 {
+      width: 84px;
+      height: 182px;
+    }
+    .back-img-2 {
+      width: 108px;
+      height: 106px;
+    }
+    .testimonials-stripe-header {
+      span {
+        height: 35px;
+      }
+      h1 {
+        font-size: 26px;
+        line-height: 35px;
+      }
+    }
+    .testimonials-slider {
+      width: 76%;
+    }
+  }
 }
 
 @media (max-width: 710px) {
@@ -1004,6 +1186,16 @@
       width: unset;
       margin: 20px 30px ;    }
   }
+
+  .home-page-testimonials_stripe {
+    .testimonials-slider {
+      display: block;
+      width: 75%;
+      .testimonial-item {
+        margin: 0 25px;
+      }
+    }
+  }
 }
 
 @media (max-width: 600px) {
@@ -1014,6 +1206,15 @@
   .home-page-myCourses-stripe {
     .myCourses-slider {
         margin: 20px 30px 0 0 ;
+    }
+  }
+
+  .home-page-testimonials_stripe {
+    .testimonials-slider {
+      width: 50%;
+      .testimonial-item {
+        margin: 0 40px;
+      }
     }
   }
 }
@@ -1035,6 +1236,11 @@
     }
   }
 
+  .home-page-testimonials_stripe {
+    .testimonials-slider {
+      width: 65%;
+    }
+  }
 
   .home-page-courses-stripe {
     .stripe-header {
@@ -1071,6 +1277,12 @@
       .course-img {
         width: 80px;
       }
+    }
+  }
+
+  .home-page-testimonials_stripe {
+    .testimonials-slider {
+      width: 81%;
     }
   }
 }

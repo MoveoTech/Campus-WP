@@ -36,6 +36,10 @@ function getStripeType($stripeId){
             myCoursesStripe($stripeId);
             break;
 
+        case 'Testimonials Stripe':
+            testimonialsStripe($stripeId);
+            break;
+
     }
 }
 
@@ -111,6 +115,21 @@ function myCoursesStripe($stripeId){
                 'id' => $stripeId,
                 'title' => $title,
                 'courses' => $courses,
+            )
+        ));
+}
+
+function testimonialsStripe($stripeId){
+    global $sitepress;
+
+    $title = getFieldByLanguage(get_field('hebrew_title', $stripeId), get_field('english_title', $stripeId), get_field('arabic_title', $stripeId), $sitepress->get_current_language());
+
+    get_template_part('template', 'parts/Stripes/testimonials-stripe',
+        array(
+            'args' => array(
+                'id' => $stripeId,
+                'title' => $title,
+                'carousel' => get_field('testimonials', $stripeId),
             )
         ));
 }
@@ -192,5 +211,12 @@ function randomColor() {
         '#F1595A',
         '#91C653'
     )[rand(0,3)];
+}
 
+function randomBckgColor() {
+    return array(
+        'yellow',
+        'green',
+        'blue',
+    )[rand(0,2)];
 }

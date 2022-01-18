@@ -384,6 +384,53 @@ jQuery(document).ready(function () {
         ]
     })
 
+    //testimonials slick
+    jQuery('.testimonials-slider').slick({
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        rtl: is_rtl,
+        nextArrow: nexSlick,
+        prevArrow: prevSlick,
+        arrows: true,
+        infinite: false,
+        dots: false,
+        responsive: [
+            {
+                breakpoint: 992,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 1,
+                }
+            },
+            {
+                breakpoint: 650,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 1,
+                    dots: true,
+                    arrows: false,
+                }
+            },
+            {
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    dots: true,
+                    arrows: false,
+                }
+            },
+            {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    dots: true,
+                    arrows: false,
+                }
+            },
+        ]
+    })
 })
 
 function getCookie(cname) {
