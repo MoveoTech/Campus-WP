@@ -18936,7 +18936,7 @@ html:not(.user_is_not_logged_in) .header_login {
   .home-page-testimonials_stripe .testimonials-slider {
     width: 50%; }
     .home-page-testimonials_stripe .testimonials-slider .testimonial-item {
-      margin: 0 40px; } }
+      margin: 0 33px; } }
 
 @media (max-width: 480px) {
   .courses-stripe {
