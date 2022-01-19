@@ -26,6 +26,7 @@ $courses = pods( 'courses', podsParams($courses_slice));
             ?>
             <div class="course-stripe-item " >
                 <div class="course-img" style="background-image: url(<?= $thumb ?>);">
+                    <span class="info-button"></span>
                 </div>
                 <div class="item-content">
                     <h3 ><a href="<?= $url ?>"><?= $title ?></a></h3>
