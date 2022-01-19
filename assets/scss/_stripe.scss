@@ -481,6 +481,7 @@
       border-radius: 10px;
       box-shadow: 0 5px 15px rgba(40, 40, 40, 0.2);
       .info-button {
+        display: none;
         position: absolute;
         right: -2px;
         top: 5px;
@@ -902,6 +903,9 @@
       }
       .course-img {
         height: 97px;
+        .info-button {
+          display: block;
+        }
       }
       .item-content {
         margin: 3px;

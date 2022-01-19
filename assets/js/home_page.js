@@ -224,6 +224,14 @@ jQuery(document).ready(function () {
                     slidesToScroll: 3,
                 }
             },
+            {
+                breakpoint: 480,
+                settings: {
+                    speed: 500,
+                    slidesToShow: 2,
+                    slidesToScroll: 2,
+                }
+            },
         ]
 
     })

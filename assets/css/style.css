@@ -18514,6 +18514,7 @@ html:not(.user_is_not_logged_in) .header_login {
       border-radius: 10px;
       box-shadow: 0 5px 15px rgba(40, 40, 40, 0.2); }
       .courses-stripe .course-stripe-item .course-img .info-button {
+        display: none;
         position: absolute;
         right: -2px;
         top: 5px;
@@ -18788,6 +18789,8 @@ html:not(.user_is_not_logged_in) .header_login {
       margin: 0 5px; }
       .courses-stripe .course-stripe-item .course-img {
         height: 97px; }
+        .courses-stripe .course-stripe-item .course-img .info-button {
+          display: block; }
       .courses-stripe .course-stripe-item .item-content {
         margin: 3px; }
         .courses-stripe .course-stripe-item .item-content h3 {
