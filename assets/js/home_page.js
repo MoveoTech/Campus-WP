@@ -441,8 +441,10 @@ jQuery(document).ready(function () {
     })
 
     //Course Card
-    let openCourseId;
-    jQuery('.course-stripe-item').mouseenter(function (event) {
+
+    if(jQuery(window).width() > 768) {
+        let openCourseId;
+        jQuery('.course-stripe-item').mouseenter(function (event) {
         let id = event.target.id;
         if(id == '') { id = event.target.parentElement.id;}
         if(id == '') { id = event.target.parentElement.parentElement.id;}
@@ -463,6 +465,20 @@ jQuery(document).ready(function () {
             jQuery('body').remove(jQuery(`.${id}`));
         })
     })
+    }
+
+    jQuery('.info-button').click(function(event) {
+        let id = event.target.parentElement.parentElement.id
+        let element = jQuery(`.mobile-course-popup${id}`)
+        element.appendTo(jQuery('body'));
+        element.toggle()
+
+        jQuery(`.course-popup-close${id}`).click(function() {
+            element.hide()
+        })
+    })
+
+
 
 })
 

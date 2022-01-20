@@ -84,6 +84,17 @@ $courses = pods( 'courses', podsParams($courses_slice));
                 </div>
             </div>
         </div>
+        <?php get_template_part('templates/mobileCourse', 'popup',
+            array(
+                    'args' => array(
+                            'image' => $thumb,
+                            'title' => $title,
+                            'institution' => $institution_name,
+                            'tags' => $tags,
+                            'id' => $id . $stripe['id']
+                    )
+            )
+        ) ?>
 
     <?php };?>
     </div>
