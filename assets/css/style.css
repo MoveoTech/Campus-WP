@@ -18138,6 +18138,7 @@ html:not(.user_is_not_logged_in) .header_login {
         margin-right: 4px; }
 
 .home-page-info-stripe {
+  z-index: 0;
   background: #333433;
   display: flex;
   flex-direction: column;
@@ -18377,6 +18378,7 @@ html:not(.user_is_not_logged_in) .header_login {
       margin: 0; }
 
 .home-page-goals-stripe {
+  z-index: 0;
   background: #333433;
   position: relative; }
   .home-page-goals-stripe .back-img-1 {
@@ -18570,9 +18572,9 @@ html:not(.user_is_not_logged_in) .header_login {
       .home-page-testimonials_stripe .testimonials-slider .testimonial-item .testimonial-img-container .yellow {
         background-image: url("../../assets/images/testimonials-item-bckg-yellow.png"); }
       .home-page-testimonials_stripe .testimonials-slider .testimonial-item .testimonial-img-container .green {
-        background-image: url("../../assets/images/testimonials-item-bckg-yellow.png"); }
+        background-image: url("../../assets/images/testimonials-item-bckg-green.png"); }
       .home-page-testimonials_stripe .testimonials-slider .testimonial-item .testimonial-img-container .blue {
-        background-image: url("../../assets/images/testimonials-item-bckg-yellow.png"); }
+        background-image: url("../../assets/images/testimonials-item-bckg-blue.png"); }
       .home-page-testimonials_stripe .testimonials-slider .testimonial-item .testimonial-item-content {
         margin: 5px auto;
         display: flex;
@@ -18600,6 +18602,10 @@ html:not(.user_is_not_logged_in) .header_login {
   align-items: baseline;
   justify-content: center;
   margin: 20px auto 0; }
+  .courses-stripe .slick-list {
+    width: 100%;
+    overflow-x: clip;
+    overflow-y: visible; }
   .courses-stripe button.slick-button {
     outline: none; }
   .courses-stripe .course-stripe-item {
@@ -18621,14 +18627,15 @@ html:not(.user_is_not_logged_in) .header_login {
       .courses-stripe .course-stripe-item .course-img .info-button {
         display: none;
         position: absolute;
-        right: -2px;
-        top: 5px;
+        right: 10px;
+        top: 10px;
         background-image: url("../../assets/images/info-button.png");
         background-position: center center;
         background-repeat: no-repeat;
         background-size: cover;
-        width: 50px;
-        height: 40px; }
+        width: 20px;
+        height: 20px;
+        filter: drop-shadow(0px 5px 10px black); }
     .courses-stripe .course-stripe-item .item-content {
       margin: 10px 3px 7px; }
       .courses-stripe .course-stripe-item .item-content h3 {
@@ -18705,71 +18712,6 @@ html:not(.user_is_not_logged_in) .header_login {
         margin: 0; }
       .courses-stripe .course-stripe-item .tags-div .extra-tags-mobile {
         display: none; }
-    .courses-stripe .course-stripe-item .course-item-hover {
-      display: none;
-      z-index: 1;
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 295px;
-      height: fit-content;
-      background: #FFFFFF;
-      box-shadow: 0 10px 15px rgba(57, 104, 109, 0.25);
-      border-radius: 10px; }
-      .courses-stripe .course-stripe-item .course-item-hover .course-img {
-        width: 275px;
-        max-width: unset;
-        height: 135px;
-        margin: 10px 10px 0; }
-      .courses-stripe .course-stripe-item .course-item-hover .item-content {
-        margin: 10px 20px 7px 14px; }
-        .courses-stripe .course-stripe-item .course-item-hover .item-content h3 {
-          text-overflow: unset;
-          overflow: unset;
-          height: 100%;
-          -webkit-line-clamp: unset;
-          display: unset;
-          -webkit-box-orient: unset;
-          font-size: 22px;
-          font-weight: 600;
-          line-height: 29px;
-          text-align: right; }
-          .courses-stripe .course-stripe-item .course-item-hover .item-content h3 a {
-            color: #000000; }
-        .courses-stripe .course-stripe-item .course-item-hover .item-content p {
-          height: 21px;
-          font-size: 16px;
-          font-weight: 300;
-          line-height: 21px;
-          text-align: right;
-          opacity: 50%;
-          margin: 8px 0 0; }
-      .courses-stripe .course-stripe-item .course-item-hover .tags-div {
-        flex-wrap: wrap;
-        margin-right: 20px;
-        max-width: 233px;
-        height: unset;
-        overflow: unset; }
-        .courses-stripe .course-stripe-item .course-item-hover .tags-div span {
-          margin-bottom: 7px; }
-        .courses-stripe .course-stripe-item .course-item-hover .tags-div span.regular-tag {
-          min-width: fit-content; }
-          .courses-stripe .course-stripe-item .course-item-hover .tags-div span.regular-tag p.regular-tag {
-            display: flex;
-            align-items: center;
-            justify-content: center; }
-        .courses-stripe .course-stripe-item .course-item-hover .tags-div p.ellipsis-text {
-          text-overflow: ellipsis; }
-      .courses-stripe .course-stripe-item .course-item-hover .course-details {
-        margin: 0 20px 15px 14px; }
-        .courses-stripe .course-stripe-item .course-item-hover .course-details span {
-          font-weight: 300;
-          font-size: 14px;
-          line-height: 18px;
-          color: #808080; }
-    @media (min-width: 769px) {
-      .courses-stripe .course-stripe-item:hover .course-item-hover {
-        display: block; } }
 
 @media (max-width: 992px) {
   .nerative-class button {
@@ -18826,6 +18768,97 @@ html:not(.user_is_not_logged_in) .header_login {
   .home-page-myCourses-stripe .myCourses-slider .slick-track img {
     max-width: 253px;
     max-height: 275px; }
+
+body .course-item-hover {
+  display: none;
+  z-index: 1;
+  position: absolute;
+  left: -5px;
+  top: -15px;
+  width: 295px;
+  height: fit-content;
+  background: #FFFFFF;
+  box-shadow: 0 10px 15px rgba(57, 104, 109, 0.25);
+  border-radius: 10px; }
+  body .course-item-hover .course-img {
+    width: 275px;
+    max-width: unset;
+    height: 135px;
+    margin: 10px 10px 0; }
+  body .course-item-hover .item-content {
+    margin: 10px 20px 7px 14px; }
+    body .course-item-hover .item-content h3 {
+      text-overflow: unset;
+      overflow: unset;
+      height: 100%;
+      -webkit-line-clamp: unset;
+      display: unset;
+      -webkit-box-orient: unset;
+      font-size: 22px;
+      font-weight: 600;
+      line-height: 29px;
+      text-align: right; }
+      body .course-item-hover .item-content h3 a {
+        color: #000000; }
+    body .course-item-hover .item-content p {
+      -webkit-font-smoothing: antialiased;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+      height: 21px;
+      font-size: 16px;
+      font-weight: 300;
+      line-height: 21px;
+      text-align: right;
+      opacity: 50%;
+      margin: 8px 0 0; }
+  body .course-item-hover .tags-div {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: right;
+    margin-right: 20px; }
+    body .course-item-hover .tags-div span {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      margin-left: 10px;
+      margin-bottom: 7px;
+      background: #F2F2F2;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      box-sizing: border-box;
+      border-radius: 15px;
+      text-align: center;
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 18px;
+      overflow: hidden; }
+      body .course-item-hover .tags-div span p {
+        padding: 2px 10px;
+        white-space: nowrap;
+        overflow: hidden;
+        margin: 0;
+        width: 100%; }
+      @media (max-width: 768px) {
+        body .course-item-hover .tags-div span {
+          padding: 2px 5px;
+          margin-left: 5px; } }
+    body .course-item-hover .tags-div span.regular-tag {
+      min-width: fit-content; }
+      body .course-item-hover .tags-div span.regular-tag p.regular-tag {
+        display: flex;
+        align-items: center;
+        justify-content: center; }
+    body .course-item-hover .tags-div p.ellipsis-text {
+      text-overflow: ellipsis; }
+  body .course-item-hover .course-details {
+    margin: 0 20px 15px 14px; }
+    body .course-item-hover .course-details span {
+      font-weight: 300;
+      font-size: 14px;
+      line-height: 18px;
+      color: #808080; }
 
 @media (max-width: 1439px) {
   .home-page-goals-stripe .goals-slider .goal-item {

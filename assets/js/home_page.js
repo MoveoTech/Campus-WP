@@ -439,6 +439,31 @@ jQuery(document).ready(function () {
             },
         ]
     })
+
+    //Course Card
+    let openCourseId;
+    jQuery('.course-stripe-item').mouseenter(function (event) {
+        let id = event.target.id;
+        if(id == '') { id = event.target.parentElement.id;}
+        if(id == '') { id = event.target.parentElement.parentElement.id;}
+        if(id == '') { id = event.target.parentElement.parentElement.parentElement.id;}
+        openCourseId = id;
+        var element = jQuery(`.${id}`);
+        var parentElem = jQuery(`#${id}`);
+        var pos = parentElem.offset();
+        element.appendTo(jQuery('body')); // optional
+        element.css({
+            display : 'block',
+            position : 'absolute'
+        }).offset(pos)
+
+        jQuery(`.${id}`).mouseleave(function () {
+            jQuery(`.${id}`).appendTo( jQuery(`#${id}`));
+            jQuery(`.${id}`).css('display', 'none');
+            jQuery('body').remove(jQuery(`.${id}`));
+        })
+    })
+
 })
 
 function getCookie(cname) {

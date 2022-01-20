@@ -21,9 +21,10 @@ $courses = pods( 'courses', podsParams($courses_slice));
         $institution_name = getFieldByLanguage($courses->field( 'academic_institution.name' ), $courses->field( 'academic_institution.english_name' ), $courses->field( 'academic_institution.arabic_name' ), $sitepress->get_current_language());
         $tags = $courses->field('tags');
         $thumb = $courses->display( 'image' );
+        $id = $courses->display( 'ID' );
 //            $url = $course_item->get_url();
         ?>
-        <div class="course-stripe-item " >
+        <div id="<?php echo $id . $stripe['id'] ?>" class="course-stripe-item " >
             <div class="course-img" style="background-image: url(<?= $thumb ?>);">
                 <span class="info-button"></span>
             </div>
@@ -55,7 +56,7 @@ $courses = pods( 'courses', podsParams($courses_slice));
 
                 <?php } }?>
             </div>
-            <div class="course-item-hover">
+            <div class="course-item-hover <?php echo $id . $stripe['id'] ?>">
                 <div class="course-img" style="background-image: url(<?= $thumb ?>);">
                 </div>
                 <div class="item-content">
@@ -74,9 +75,9 @@ $courses = pods( 'courses', podsParams($courses_slice));
 
                             if($tag_length >= 26) $class = 'ellipsis-text'; ?>
                             <span class="<?php echo $class ?>" title="<?php echo $tag ?>"><p class="<?php echo $class ?>"><?php echo $tag ?></p></span>
-                        <?php
+                            <?php
                             $index++;
-                            endwhile; }?>
+                        endwhile; }?>
                 </div>
                 <div class="course-details">
                     <span>כ-70 שעות | 4 שעות בשבוע</span>
