@@ -409,7 +409,11 @@ jQuery(document).ready(function () {
             width: "toggle"
         });
         jQuery(".mobile-menu-popup").toggleClass('active');
-        jQuery(".bg-overlay").toggleClass('active');
+        if(!jQuery(".bg-overlay")[0].classList.contains('active') && jQuery(".mobile-menu-popup")[0].classList.contains('active')) {
+            jQuery(".bg-overlay").addClass('active');
+        } else if(!jQuery(".mobile-menu-popup")[0].classList.contains('active')) {
+            jQuery(".bg-overlay").removeClass('active');
+        }
         jQuery('html').toggleClass('menu_open');
 
     });

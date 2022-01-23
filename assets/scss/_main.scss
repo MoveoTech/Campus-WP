@@ -47,7 +47,7 @@ body.rtl {
 /* Breadcrumbs */
 .breadcrumbs-campus {
   position: absolute;
-  top: 0;
+  top: 63px;
   right: 0;
   z-index: 1052;
   width: 100%;
@@ -2993,7 +2993,7 @@ footer {
   right: 80px;
   display: block;
   overflow: hidden;
-  z-index: 1000;
+  z-index: 3;
   webkit-border-radius: 35px;
   webkit-background-clip: padding-box;
   box-shadow: -3px 0 8px 1px rgba(57, 57, 57, 0.33);

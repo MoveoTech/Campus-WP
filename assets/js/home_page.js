@@ -474,16 +474,20 @@ jQuery(document).ready(function () {
         element.appendTo(jQuery('body'));
         if(element.css('display') == 'none') {
             element.show();
+            jQuery(".bg-overlay").addClass('active');
+
         }
         else if (element.css('display') == 'block') {
             element.appendTo( jQuery(`#${id}`));
             element.hide()
+            jQuery(".bg-overlay").removeClass('active');
             jQuery('body').remove(element);
         }
 
         jQuery(`.course-popup-close${id}`).click(function() {
             element.appendTo( jQuery(`#${id}`));
             element.hide()
+            jQuery(".bg-overlay").removeClass('active');
             jQuery('body').remove(jQuery(`.${id}`));
         })
     })
