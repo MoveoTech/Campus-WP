@@ -441,29 +441,52 @@ jQuery(document).ready(function () {
     })
 
     //Course Card
-    let openCourseId;
     jQuery('.course-stripe-item').mouseenter(function (event) {
-        let id = event.target.id;
-        if(id == '') { id = event.target.parentElement.id;}
-        if(id == '') { id = event.target.parentElement.parentElement.id;}
-        if(id == '') { id = event.target.parentElement.parentElement.parentElement.id;}
-        openCourseId = id;
-        var element = jQuery(`.${id}`);
-        var parentElem = jQuery(`#${id}`);
-        var pos = parentElem.offset();
-        element.appendTo(jQuery('body')); // optional
-        element.css({
-            display : 'block',
-            position : 'absolute'
-        }).offset(pos)
+        let width = document.documentElement.clientWidth;
+        if(width > 768) {
+            let id = event.target.id;
+            if(id == '') { id = event.target.parentElement.id;}
+            if(id == '') { id = event.target.parentElement.parentElement.id;}
+            if(id == '') { id = event.target.parentElement.parentElement.parentElement.id;}
+            var element = jQuery(`.${id}`);
+            var parentElem = jQuery(`#${id}`);
+            var pos = parentElem.offset();
+            element.appendTo(jQuery('body')); // optional
+            element.css({
+                display : 'block',
+                position : 'absolute'
+            }).offset(pos)
 
-        jQuery(`.${id}`).mouseleave(function () {
-            jQuery(`.${id}`).appendTo( jQuery(`#${id}`));
-            jQuery(`.${id}`).css('display', 'none');
+            jQuery(`.${id}`).mouseleave(function () {
+                jQuery(`.${id}`).appendTo( jQuery(`#${id}`));
+                jQuery(`.${id}`).css('display', 'none');
+                jQuery('body').remove(jQuery(`.${id}`));
+            })
+        }
+    })
+
+    jQuery('.info-button').click(function(event) {
+        let id = event.target.parentElement.parentElement.id
+
+        closePopupIfOpen(id)
+
+        let element = jQuery(`.mobile-course-popup${id}`)
+        element.appendTo(jQuery('body'));
+        if(element.css('display') == 'none') {
+            element.show();
+        }
+        else if (element.css('display') == 'block') {
+            element.appendTo( jQuery(`#${id}`));
+            element.hide()
+            jQuery('body').remove(element);
+        }
+
+        jQuery(`.course-popup-close${id}`).click(function() {
+            element.appendTo( jQuery(`#${id}`));
+            element.hide()
             jQuery('body').remove(jQuery(`.${id}`));
         })
     })
-
 })
 
 function getCookie(cname) {
@@ -480,7 +503,6 @@ function getCookie(cname) {
     }
     return "";
 }
-
 
 function apppendCourses(coursesData, id) {
 
@@ -509,5 +531,19 @@ function apppendCourses(coursesData, id) {
     });
 
 
+}
+
+function closePopupIfOpen(id) {
+    let array = document.querySelectorAll('body .course-popup-modal')
+    let arrayLength = array.length
+    let openCourse = array[arrayLength - 1]
+    if(openCourse.getAttribute('style')) {
+        let courseClassName = openCourse.classList[openCourse.classList.length - 1]
+        let courseId = courseClassName.slice(19)
+        if(courseId == id) return;
+        let element = jQuery(`.mobile-course-popup${courseId}`)
+        element.hide()
+        element.appendTo( jQuery(`#${courseId}`));
+    }
 }
 
