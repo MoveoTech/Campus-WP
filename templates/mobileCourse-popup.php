@@ -14,7 +14,6 @@
 ?>
 
 <div class="course-popup-modal mobile-course-popup<?php echo $id ?>">
-
     <div class="popup-header">
         <span class="course-popup-close<?php echo $id ?> close">&times;</span>
     </div>

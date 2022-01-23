@@ -4,7 +4,7 @@
   position: fixed;
   inset: 0;
   display: none;
-  z-index: 1030;
+  z-index: 4;
   &.active{
     @media (max-width: 991px) {
       display: block;
@@ -148,7 +148,6 @@
 }
 
 //Mobile Course popup
-
 .course-popup-modal {
   display: none;
   position: fixed; /* Stay in place */
