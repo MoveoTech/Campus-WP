@@ -196,6 +196,9 @@
       height: 108.15px;
       margin: 0 15px 0 25px;
       border-radius: 20px;
+      @media (max-width: 389px){
+        margin-left: 15px;
+      }
     }
     .course-details {
       display: flex;
@@ -310,6 +313,36 @@
         color: #333433;;
         font-size: 16px;
         line-height: 21px;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .course-popup-modal {
+    .course-content {
+      .course-details {
+        max-width: 420px;
+      }
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .course-popup-modal {
+    .course-content {
+      .course-details {
+        max-width: 300px;
+      }
+    }
+  }
+}
+
+@media (max-width: 450px) {
+  .course-popup-modal {
+    .course-content {
+      .course-details {
+        max-width: 244px;
       }
     }
   }

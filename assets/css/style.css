@@ -18150,6 +18150,9 @@ html:not(.user_is_not_logged_in) .header_login {
       height: 108.15px;
       margin: 0 15px 0 25px;
       border-radius: 20px; }
+      @media (max-width: 389px) {
+        .course-popup-modal .course-content .course-img {
+          margin-left: 15px; } }
     .course-popup-modal .course-content .course-details {
       display: flex;
       flex-direction: column;
@@ -18248,6 +18251,18 @@ html:not(.user_is_not_logged_in) .header_login {
         color: #333433;
         font-size: 16px;
         line-height: 21px; }
+
+@media (max-width: 768px) {
+  .course-popup-modal .course-content .course-details {
+    max-width: 420px; } }
+
+@media (max-width: 600px) {
+  .course-popup-modal .course-content .course-details {
+    max-width: 300px; } }
+
+@media (max-width: 450px) {
+  .course-popup-modal .course-content .course-details {
+    max-width: 244px; } }
 
 @keyframes slideIn {
   from {
@@ -18927,17 +18942,19 @@ html:not(.user_is_not_logged_in) .header_login {
     max-height: 275px; }
 
 body .course-item-hover {
+  animation: courseFadeIn;
+  animation-duration: 0.5s;
   display: none;
   z-index: 1;
   position: absolute;
-  left: -5px;
-  top: -15px;
   width: 295px;
   height: fit-content;
   background: #FFFFFF;
   box-shadow: 0 10px 15px rgba(57, 104, 109, 0.25);
   border-radius: 10px; }
   body .course-item-hover .course-img {
+    animation: courseImgFadeIn;
+    animation-duration: 0.5s;
     width: 275px;
     max-width: unset;
     height: 135px;
@@ -19039,6 +19056,10 @@ body .course-item-hover {
     margin: 0 40px; } }
 
 @media (max-width: 1100px) {
+  body .course-item-hover {
+    max-width: 270px; }
+    body .course-item-hover .course-img {
+      max-width: 250px; }
   .courses-stripe {
     width: 85%; }
   .home-page-myCourses-stripe .stripe-header {
@@ -19053,6 +19074,10 @@ body .course-item-hover {
     width: 100%; } }
 
 @media (max-width: 992px) {
+  body .course-item-hover {
+    max-width: unset; }
+    body .course-item-hover .course-img {
+      max-width: unset; }
   .courses-stripe {
     width: 76%; }
     .courses-stripe .course-stripe-item {
@@ -19081,6 +19106,10 @@ body .course-item-hover {
     width: 65%; } }
 
 @media (max-width: 850px) {
+  body .course-item-hover {
+    max-width: 270px; }
+    body .course-item-hover .course-img {
+      max-width: 250px; }
   .home-page-goals-stripe .goals-slider {
     width: 64%; } }
 
@@ -19286,3 +19315,19 @@ body .course-item-hover {
 @media (max-width: 389px) {
   .courses-stripe .course-stripe-item {
     min-width: unset; } }
+
+@keyframes courseFadeIn {
+  from {
+    opacity: 0;
+    width: 270px; }
+  to {
+    opacity: 1;
+    width: 295px; } }
+
+@keyframes courseImgFadeIn {
+  from {
+    opacity: 0;
+    width: 255px; }
+  to {
+    opacity: 1;
+    width: 275px; } }

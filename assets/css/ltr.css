@@ -254,6 +254,55 @@
     margin-left: unset;
     margin-right: 10px; }
 
+body .course-item-hover .item-content {
+  margin: 10px 14px 7px 20px; }
+  body .course-item-hover .item-content h3 {
+    text-align: left; }
+  body .course-item-hover .item-content p {
+    text-align: left; }
+
+body .course-item-hover .tags-div {
+  justify-content: left;
+  margin-right: unset;
+  margin-left: 20px; }
+  body .course-item-hover .tags-div span {
+    margin-left: unset;
+    margin-right: 10px; }
+    @media (max-width: 768px) {
+      body .course-item-hover .tags-div span {
+        margin-left: unset;
+        margin-right: 5px; } }
+
+body .course-item-hover .course-details {
+  margin: 0 14px 15px 20px; }
+
+.course-popup-modal .popup-header {
+  padding: 22px 17px 10px 0; }
+  .course-popup-modal .popup-header .close {
+    float: left; }
+
+.course-popup-modal .course-content .course-img {
+  margin: 0 25px 0 15px; }
+  @media (max-width: 389px) {
+    .course-popup-modal .course-content .course-img {
+      margin-right: 15px; } }
+
+.course-popup-modal .course-content .course-details {
+  justify-content: left; }
+  .course-popup-modal .course-content .course-details .course-header h3 {
+    text-align: left; }
+  .course-popup-modal .course-content .course-details .course-header p {
+    text-align: left; }
+  .course-popup-modal .course-content .course-details .tags-div {
+    justify-content: left; }
+    .course-popup-modal .course-content .course-details .tags-div span {
+      margin-left: unset;
+      margin-right: 10px; }
+      @media (max-width: 768px) {
+        .course-popup-modal .course-content .course-details .tags-div span {
+          margin-left: unset;
+          margin-right: 5px; } }
+
 @media (max-width: 600px) {
   .courses-stripe {
     margin: 20px 0 20px 30px; } }

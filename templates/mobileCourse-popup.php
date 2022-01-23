@@ -8,6 +8,7 @@
     $title = $course['title'];
     $institution_name = $course['institution'];
     $tags = $course['tags'];
+    $duration = $course['duration'];
 
     global $sitepress;
 ?>
@@ -42,7 +43,7 @@
                     endwhile; }?>
             </div>
             <div class="details">
-                <span>כ-70 שעות | 4 שעות בשבוע</span>
+                <span><?php echo $duration ?></span>
             </div>
         </div>
     </div>

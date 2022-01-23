@@ -21,6 +21,7 @@ $courses = pods( 'courses', podsParams($courses_slice));
         $institution_name = getFieldByLanguage($courses->field( 'academic_institution.name' ), $courses->field( 'academic_institution.english_name' ), $courses->field( 'academic_institution.arabic_name' ), $sitepress->get_current_language());
         $tags = $courses->field('tags');
         $thumb = $courses->display( 'image' );
+        $duration = $courses->display( 'duration' );
         $id = $courses->display( 'ID' );
 //            $url = $course_item->get_url();
         ?>
@@ -80,21 +81,22 @@ $courses = pods( 'courses', podsParams($courses_slice));
                         endwhile; }?>
                 </div>
                 <div class="course-details">
-                    <span>כ-70 שעות | 4 שעות בשבוע</span>
+                    <span><?php echo $duration ?></span>
                 </div>
             </div>
-        </div>
-        <?php get_template_part('templates/mobileCourse', 'popup',
-            array(
+            <?php get_template_part('templates/mobileCourse', 'popup',
+                array(
                     'args' => array(
-                            'image' => $thumb,
-                            'title' => $title,
-                            'institution' => $institution_name,
-                            'tags' => $tags,
-                            'id' => $id . $stripe['id']
+                        'image' => $thumb,
+                        'title' => $title,
+                        'institution' => $institution_name,
+                        'tags' => $tags,
+                        'duration' => $duration,
+                        'id' => $id . $stripe['id']
                     )
-            )
-        ) ?>
+                )
+            ) ?>
+        </div>
 
     <?php };?>
     </div>
