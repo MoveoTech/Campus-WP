@@ -340,7 +340,7 @@ jQuery(document).ready(function () {
         infinite: false,
         responsive: [
             {
-                breakpoint: 992,
+                breakpoint: 993,
                 settings: {
                     speed: 500,
                     slidesToShow: 3,
