@@ -6897,7 +6897,7 @@ main {
           background-size: cover;
           background-repeat: no-repeat;
           background-position: center center;
-          z-index: 2; }
+          z-index: 3; }
 
 @media (max-width: 991px) {
   .hero-banner {
