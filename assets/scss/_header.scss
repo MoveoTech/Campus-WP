@@ -16,6 +16,9 @@
   left: 0;
   z-index: 10000;
   width: 100%;
+  @media (max-width: 768px) {
+    z-index: 4!important;
+  }
 }
 
 .header_wrap .nav-mobile-btn-wrap {

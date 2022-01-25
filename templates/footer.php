@@ -116,6 +116,15 @@ $mobile_menu = get_mobile_menu();
         <!--        03/06/2020 new version popups     -->
         <div id="popup_overlay_2020" tabindex="0"><?php do_action('site_popups')?></div>
         <!--      End 03/06/2020 new version popups     -->
+
+        <div id="youtube-popup" >
+            <div id="popup" style="width: 516px; height: 315px;" aria-hidden="true">
+                <button class="close-popup-iframe close-popup-button"></button>
+                <div class="iframe">
+
+                </div>
+            </div>
+        </div>
     </footer>
     <div class="bg-overlay"></div>
     <div class="mobile-menu-popup">

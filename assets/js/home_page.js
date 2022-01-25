@@ -475,12 +475,14 @@ jQuery(document).ready(function () {
         if(element.css('display') == 'none') {
             element.show();
             jQuery(".bg-overlay").addClass('active');
+            jQuery('body').css('overflow-y', 'hidden');
 
         }
         else if (element.css('display') == 'block') {
             element.appendTo( jQuery(`#${id}`));
             element.hide()
             jQuery(".bg-overlay").removeClass('active');
+            jQuery('body').css('overflow-y', 'unset');
             jQuery('body').remove(element);
         }
 
@@ -488,9 +490,29 @@ jQuery(document).ready(function () {
             element.appendTo( jQuery(`#${id}`));
             element.hide()
             jQuery(".bg-overlay").removeClass('active');
+            jQuery('body').css('overflow-y', 'unset');
             jQuery('body').remove(jQuery(`.${id}`));
         })
     })
+
+    //Youtube popup
+    jQuery('body').on('click', '.open-iframe', function (e) {
+        e.preventDefault();
+        var url = jQuery(this).data('url');
+        jQuery('#youtube-popup #popup').attr('aria-hidden', 'false');
+        jQuery('#popup div.iframe').html('<iframe width="560" height="315" src="' + url + '" frameborder="0" allowfullscreen></iframe>');
+        jQuery("#youtube-popup").addClass('active');
+    })
+    jQuery(".close-popup-button").on("click", function (e) {
+        e.preventDefault();
+        jQuery("#popup_overlay").click();
+    });
+    jQuery('.close-popup-iframe').on("click", function () {
+        setTimeout(function () {
+            jQuery('#popup_overlay #popup').attr('aria-hidden', 'true');
+            jQuery("#youtube-popup").removeClass('active');
+        }, 100);
+    });
 })
 
 function getCookie(cname) {
