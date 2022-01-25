@@ -28,10 +28,21 @@ if(empty($stripe) || empty($stripe['carousel']) || count($stripe['carousel']) < 
                 $subTitle = getFieldByLanguage($info_item['sub_title']['hebrew_sub_title'], $info_item['sub_title']['english_sub_title'], $info_item['sub_title']['arabic_sub_title'], $sitepress->get_current_language());
 
                 $url = $info_item['link'];
+
+                $media = getMediaType($info_item);
                 ?>
                 <div class="info-item" >
                     <a href="<?php echo $url ?>">
-                        <img src="<?php echo $info_item['info_media']['url'] ?>">
+                        <?php if($media['image']) : ?>
+                            <img src="<?php echo $media['image'] ?>" />
+                        <?php endif; ?>
+
+                        <?php if($media['embeded_media']) :
+                            $videoId = substr($media['embeded_media'], 30);
+                            ?>
+                            <div class="open-iframe you-tube-video" data-url="<?php echo $media['embeded_media'] ?>" style="background-image: url('https://img.youtube.com/vi/<?= $videoId ?>/mqdefault.jpg')"></div>
+                        <?php endif; ?>
+
                         <h1><?php echo $title ?></h1>
                         <?php if($subTitle && $subTitle !== '') :?>
                             <p ><?php echo $subTitle ?></p>
@@ -43,3 +54,7 @@ if(empty($stripe) || empty($stripe['carousel']) || count($stripe['carousel']) < 
         ?>
     </div>
 </div>
+
+
+
+

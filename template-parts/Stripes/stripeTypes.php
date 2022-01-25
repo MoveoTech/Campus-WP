@@ -140,7 +140,6 @@ function infoStripe($stripeId){
 
     $title = getFieldByLanguage(get_field('hebrew_title', $stripeId), get_field('english_title', $stripeId), get_field('arabic_title', $stripeId), $sitepress->get_current_language());
 
-
     get_template_part('template', 'parts/Stripes/info-stripe',
         array(
             'args' => array(
@@ -219,4 +218,32 @@ function randomBckgColor() {
         'green',
         'blue',
     )[rand(0,2)];
+}
+
+function getMediaType($item) {
+    $mediaType = $item['info_media'];
+    $media = array();
+
+    if($mediaType == 'Image') $media = array("image" => $item['image']['url']);
+    if($mediaType == 'Video') $media = array("video" => $item['video']);
+    if($mediaType == 'Embeded Media') $media = array("embeded_media" => $item['embeded_media']);
+
+    return $media;
+}
+
+function getMediaHtml($media) {
+    $exportHtml = '';
+
+    if($media['embed_media']) {
+        $videoId = substr($media['embed_media'], 30);
+        $exportHtml .= '<div class="open-iframe you-tube-video" data-url=" ' . $media['embed_media'] .'style="background-image: url(' + 'https://img.youtube.com/vi/' . $videoId . '/mqdefault.jpg"' + ')"' + '></div>';
+    }
+
+
+    if($media['image']) {
+        $exportHtml .= '<img src="';
+        $exportHtml .= $media['image'];
+        $exportHtml .= '">';
+    }
+    return $exportHtml;
 }

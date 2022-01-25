@@ -97,7 +97,7 @@
   .info-content {
     display: flex;
     justify-content: center;
-    align-items: baseline;
+    //align-items: baseline;
     flex-wrap: wrap;
     max-width: 933px;
     margin: 37px auto 28px;
@@ -108,6 +108,16 @@
       align-items: center;
       width: 233px;
       margin: 0 39px 50px;
+      .open-iframe {
+        cursor: pointer;
+        border-radius: 20px;
+        width: 200px;
+        height: 107px;
+        margin: 0 auto 10px;
+        background-size: cover;
+        background-position: center center;
+        background-size: cover;
+      }
       img {
         height: 107px;
         width: 98px;
