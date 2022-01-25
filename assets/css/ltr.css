@@ -237,6 +237,15 @@
   margin-left: unset;
   margin-right: 10px; }
 
+.home-page-myCourses-stripe .myCourses-slider .course-stripe-item .item-content h3 {
+  text-align: left; }
+
+.home-page-myCourses-stripe .myCourses-slider .course-stripe-item .item-content p.institution-name {
+  text-align: left; }
+
+.home-page-myCourses-stripe .myCourses-slider .course-stripe-item .item-content p.course-progress {
+  text-align: left; }
+
 .nerative-class .slick-list .slick-track .course-stripe-item .tags-div {
   margin: 0 10px 0 0; }
 
@@ -305,10 +314,14 @@ body .course-item-hover .course-details {
 
 @media (max-width: 600px) {
   .courses-stripe {
+    margin: 20px 0 20px 30px; }
+  .myCourses-slider {
     margin: 20px 0 20px 30px; } }
 
 @media (max-width: 480px) {
   .courses-stripe {
+    margin: 20px 0 20px 10px; }
+  .myCourses-slider {
     margin: 20px 0 20px 10px; }
   .home-page-courses-stripe .stripe-header {
     margin-right: unset;

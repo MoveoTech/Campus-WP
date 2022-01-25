@@ -18972,6 +18972,7 @@ html:not(.user_is_not_logged_in) .header_login {
   margin: 27px auto 37px; }
   .home-page-myCourses-stripe .stripe-header span {
     margin-left: 10px;
+    margin-right: 10px;
     border-radius: 10px;
     width: 4px;
     height: 35px; }
@@ -18987,12 +18988,65 @@ html:not(.user_is_not_logged_in) .header_login {
   width: 76%;
   align-items: baseline;
   justify-content: center;
-  margin: 0 auto; }
-  .home-page-myCourses-stripe .myCourses-slider .slick-track button.slick-button {
+  margin: 20px auto 0;
+  padding-bottom: 30px; }
+  .home-page-myCourses-stripe .myCourses-slider .slick-list {
+    width: 100%;
+    overflow-x: clip;
+    overflow-y: visible; }
+  .home-page-myCourses-stripe .myCourses-slider button.slick-button {
     outline: none; }
-  .home-page-myCourses-stripe .myCourses-slider .slick-track img {
+  .home-page-myCourses-stripe .myCourses-slider .course-stripe-item {
+    position: relative;
     max-width: 253px;
-    max-height: 275px; }
+    max-height: 277px;
+    height: 100%;
+    margin: 0 10px; }
+    .home-page-myCourses-stripe .myCourses-slider .course-stripe-item .course-img {
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      width: 100%;
+      max-width: 253px;
+      height: 124px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(40, 40, 40, 0.2); }
+    .home-page-myCourses-stripe .myCourses-slider .course-stripe-item .item-content {
+      margin: 10px 3px 7px; }
+      .home-page-myCourses-stripe .myCourses-slider .course-stripe-item .item-content h3 {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        height: 58px;
+        font-size: 22px;
+        font-weight: 600;
+        line-height: 29px;
+        text-align: right;
+        -webkit-line-clamp: 2;
+        display: -webkit-box;
+        -webkit-box-orient: vertical; }
+        .home-page-myCourses-stripe .myCourses-slider .course-stripe-item .item-content h3 a {
+          color: #000000; }
+      .home-page-myCourses-stripe .myCourses-slider .course-stripe-item .item-content p.institution-name {
+        -webkit-font-smoothing: antialiased;
+        height: 21px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        font-size: 16px;
+        font-weight: 300;
+        line-height: 21px;
+        text-align: right;
+        opacity: 50%;
+        margin: 0; }
+      .home-page-myCourses-stripe .myCourses-slider .course-stripe-item .item-content p.course-progress {
+        margin-top: 7px;
+        margin-bottom: 9px;
+        font-weight: bold;
+        font-size: 18px;
+        line-height: 24px;
+        text-align: right; }
+        .home-page-myCourses-stripe .myCourses-slider .course-stripe-item .item-content p.course-progress a {
+          color: #91C653; }
 
 body .course-item-hover {
   animation: courseFadeIn;
@@ -19149,6 +19203,14 @@ body .course-item-hover {
     width: 76%; }
   .home-page-myCourses-stripe .myCourses-slider {
     width: 76%; }
+    .home-page-myCourses-stripe .myCourses-slider .course-stripe-item {
+      min-width: 166px; }
+      .home-page-myCourses-stripe .myCourses-slider .course-stripe-item .item-content {
+        min-width: unset; }
+        .home-page-myCourses-stripe .myCourses-slider .course-stripe-item .item-content h3 {
+          font-size: 18px; }
+        .home-page-myCourses-stripe .myCourses-slider .course-stripe-item .item-content p.course-progress {
+          font-size: 16px; }
   .home-page-courses-stripe .stripe-header {
     width: 76%; }
   .home-page-goals-stripe .goals-slider {
@@ -19269,10 +19331,21 @@ body .course-item-hover {
     line-height: 34px; }
   .home-page-myCourses-stripe .stripe-header {
     width: 80%; }
+    .home-page-myCourses-stripe .stripe-header h1 {
+      font-size: 26px;
+      line-height: 34px; }
   .home-page-myCourses-stripe .myCourses-slider {
     width: 80%; }
     .home-page-myCourses-stripe .myCourses-slider button.slick-button {
       display: none !important; }
+    .home-page-myCourses-stripe .myCourses-slider .course-stripe-item {
+      margin: 0 5px; }
+      .home-page-myCourses-stripe .myCourses-slider .course-stripe-item .course-img {
+        height: 97px; }
+      .home-page-myCourses-stripe .myCourses-slider .course-stripe-item .item-content {
+        margin: 3px; }
+        .home-page-myCourses-stripe .myCourses-slider .course-stripe-item .item-content h3 {
+          margin-bottom: 3px; }
   .home-page-testimonials_stripe .back-img-1 {
     width: 84px;
     height: 182px; }
@@ -19316,6 +19389,8 @@ body .course-item-hover {
   .home-page-myCourses-stripe .stripe-header {
     width: unset;
     margin: 20px 40px; }
+    .home-page-myCourses-stripe .stripe-header span {
+      margin-right: 0; }
   .home-page-myCourses-stripe .myCourses-slider {
     width: unset;
     margin: 20px 30px; }
@@ -19341,9 +19416,14 @@ body .course-item-hover {
     .courses-stripe .course-stripe-item {
       height: 100%; }
   .home-page-myCourses-stripe .stripe-header {
-    margin: 15px 20px 0 0; }
+    width: unset;
+    margin-right: 5px; }
+    .home-page-myCourses-stripe .stripe-header span {
+      margin-right: 10px; }
   .home-page-myCourses-stripe .myCourses-slider {
     margin: 15px 10px 0 0; }
+    .home-page-myCourses-stripe .myCourses-slider .course-stripe-item {
+      height: 100%; }
   .home-page-testimonials_stripe .testimonials-slider {
     width: 65%; }
   .home-page-courses-stripe .stripe-header {
@@ -19358,6 +19438,9 @@ body .course-item-hover {
     margin-bottom: 0; }
     .home-page-courses-stripe .stripe-header .header-title p {
       margin: 5px 0 0; }
+  .home-page-myCourses-stripe .stripe-header {
+    margin-top: 27px;
+    margin-bottom: 0; }
   .home-page-institutions_stripe .course-stripe-item .course-img {
     width: 80px; }
   .home-page-testimonials_stripe .testimonials-slider {
@@ -19367,6 +19450,8 @@ body .course-item-hover {
 
 @media (max-width: 389px) {
   .courses-stripe .course-stripe-item {
+    min-width: unset; }
+  .myCourses-slider .course-stripe-item {
     min-width: unset; } }
 
 @keyframes courseFadeIn {
