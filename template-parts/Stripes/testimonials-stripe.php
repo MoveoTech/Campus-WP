@@ -13,7 +13,7 @@ global $sitepress;
 <div class="home-page-testimonials_stripe"  >
     <div class="back-img-1" ></div>
     <div class="back-img-2" ></div>
-    <div hidden id="<?php echo $stripe['id']; ?>" class="testimonials-ids" value="<?php  print_r(json_encode($stripe['carousel'])); ?>" ></div>
+    <div hidden class="testimonials-ids" value="<?php  print_r(json_encode($stripe['carousel'])); ?>" ></div>
     <?php
     if(!empty($stripe['title']) && $stripe['title'] != ""){
         ?>
@@ -22,7 +22,7 @@ global $sitepress;
             <h1><?php echo $stripe['title'] ?></h1>
         </div>
     <?php } ?>
-    <div class="testimonials-slider" >
+    <div id="<?php echo $stripe['id']; ?>" class="testimonials-slider" >
         <?php
         while ($testimonials->fetch()) { // Testimonials Loop
             $title = getFieldByLanguage($testimonials->display('name'), $testimonials->display('english_name'), $testimonials->display('arabic_name'), $sitepress->get_current_language());

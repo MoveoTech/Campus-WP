@@ -49,12 +49,11 @@ $courses = pods( 'courses', podsParams($courses_slice));
                             <span class="<?php echo $class ?>"><p class="<?php echo $class ?>"><?php echo $tag ?></p></span>
                         <?php } $index++;
                     endwhile;
-                    if(count($tags) > 2){ ?>
-                        <span class="extra-tags">+</span>
+                if(count($tags) > 2){ ?>
+                    <span class="extra-tags">+</span>
                 <?php }
                 if(count($tags) >= 2) { ?>
                     <span class="extra-tags-mobile">+</span>
-
                 <?php } }?>
             </div>
             <div class="course-item-hover <?php echo $id . $stripe['id'] ?>">
