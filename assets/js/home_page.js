@@ -729,7 +729,9 @@ function getMyCourses() {
 
 function appendMyCourses(coursesData, id) {
     coursesData.forEach(item =>{
-
+        let courseStripe = document.getElementById(id);
+        if(!courseStripe) return;
+        
         let temp = document.createElement("div");
         temp.className = 'course-stripe-item';
         temp.innerHTML =
@@ -740,7 +742,7 @@ function appendMyCourses(coursesData, id) {
             '<p class="institution-name">'+item.course_details.academic_institution+'</p>'+
             ' </div>';
 
-        let courseStripe = document.getElementById(id);
+
         courseStripe.append(temp)
     });
 
