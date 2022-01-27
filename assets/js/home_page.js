@@ -1,40 +1,47 @@
 jQuery(document).ready(function () {
     let is_rtl = !(jQuery('html[lang = "en-US"]').length > 0);
     let prevSlick = '<button type="button" class="slick-prev slick-button" tabindex="-1" aria-label="' + global_vars.prev_btn_text + '"></button>';
-    let nexSlick = '<button type="button" id="slick-next" class="slick-next slick-button" tabindex="-1" aria-label="' + global_vars.next_btn_text + '"></button>';
+    let nexSlick = '<button type="button" id="slick-next" class="slick-next slick-button " tabindex="-1" aria-label="' + global_vars.next_btn_text + '"></button>';
+    let prevSlickNerrativ = '<button type="button" class="slick-prev slick-button slick-prev-nerrative" tabindex="-1" aria-label="' + global_vars.prev_btn_text + '"></button>';
+    let nexSlickNerrativ = '<button type="button" id="slick-next" class="slick-next slick-button slick-next-nerrative " tabindex="-1" aria-label="' + global_vars.next_btn_text + '"></button>';
 
     //Get My Courses
     getMyCourses()
 
+    //Course Card
+    mouseHoverOnCourse()
+
+    clickOnCourseInfoButton()
+
     //reload new courses
     jQuery('.courses-stripe').on('afterChange', function (event) {
         const id = event.target.id
-        const slickTrack = jQuery(`#${id} .slick-track`)[0]
-        const trackLength = parseInt(slickTrack.lastChild.getAttribute('data-slick-index'))
-        const coursesIDs = JSON.parse(jQuery(`#${id}courses`).attr('value'))
-        let currentIndex = jQuery(`#${id} .slick-track .slick-active`).attr("data-slick-index");
-
-        // Checking if have courses in admin side more then what displaying
-        // Checking if the current course is close to the end of the carousel
-        if (coursesIDs.length > 10  && coursesIDs.length > trackLength + 1 && trackLength - currentIndex <= 8) {
-            let newCoursesArray = coursesIDs.slice(trackLength + 1, (trackLength + 11))
-
-            let data = {
-                'action': 'stripe_data',
-                'type' : 'courses',
-                'lang' : getCookie('openedx-language-preference'),
-                'idsArray': newCoursesArray,
-            }
-            jQuery.post(stripe_data_ajax.ajaxurl, data, function(response){
-                if(response.success){
-                    const data = JSON.parse(response.data);
-                    console.log(data)
-                    apppendCourses(data, id);
-                }
-            })
-        }
-
+        getCoursesAjax(id)
+        let width = jQuery(document).width();
+        if(width <= 768) return;
+        changeArrowClass(id)
     });
+
+    jQuery('.goals-slider').on('afterChange', function (event) {
+        let width = jQuery(document).width();
+        if(width <= 768) return;
+        const id = event.target.id
+        changeArrowClass(id)
+    })
+
+    jQuery('#myCoursesStripeId').on('afterChange', function (event) {
+        let width = jQuery(document).width();
+        if(width <= 768) return;
+        const id = event.target.id
+        changeArrowClass(id)
+    })
+
+    jQuery('.testimonials-slider').on('afterChange', function (event) {
+        let width = jQuery(document).width();
+        if(width < 650) return;
+        const id = event.target.id
+        changeArrowClass(id, 'testimonials');
+    })
 
     //courses slick
     jQuery('.courses-stripe').slick({
@@ -99,92 +106,6 @@ jQuery(document).ready(function () {
             },
         ]
 
-    })
-
-    //academic-institution slick (OLD)
-    jQuery('#academic-institution-slider').slick({
-        slidesToShow: 7,
-        accessibility: false,
-        slidesToScroll: 7,
-        rtl: is_rtl,
-        nextArrow: nexSlick,
-        prevArrow: prevSlick,
-        responsive: [
-            {
-                breakpoint: 991,
-                settings: {
-                    slidesToShow: 5,
-                    slidesToScroll: 5,
-                }
-            },
-            {
-                breakpoint: 768,
-                settings: {
-                    slidesToShow: 4,
-                    arrows: false,
-                    dots: true,
-                    centerMode: true,
-                    focusOnSelect: false,
-                }
-            },
-            {
-                breakpoint: 480,
-                settings: {
-                    slidesToShow: 4,
-                    arrows: false,
-                    dots: true,
-                    centerMode: true,
-                    focusOnSelect: false,
-                }
-            }
-        ]
-    });
-
-    //testimonials slick
-    jQuery('#testimonials-slider-slick').slick({
-        slidesToShow: 3,
-        slidesToScroll: 1,
-        rtl: is_rtl,
-        nextArrow: nexSlick,
-        prevArrow: prevSlick,
-        arrows: false,
-        infinite: true,
-        dots: true,
-
-        height: '250px',
-        responsive: [
-            {
-                breakpoint: 992,
-                settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 2,
-                    infinite: true,
-                    dots: true
-                }
-            },
-            {
-                breakpoint: 768,
-                settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1,
-                    arrows: false,
-                    centerMode: true,
-
-                }
-            },
-            {
-                breakpoint: 480,
-                settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1,
-                    arrows: false,
-                    centerMode: true,
-                }
-            }
-            // You can unslick at a given breakpoint now by adding:
-            // settings: "unslick"
-            // instead of a settings object
-        ]
     })
 
     //institutions slick
@@ -444,61 +365,6 @@ jQuery(document).ready(function () {
         ]
     })
 
-    //Course Card
-    jQuery('.course-stripe-item').mouseenter(function (event) {
-        let width = document.documentElement.clientWidth;
-        if(width > 768) {
-            let id = event.target.id;
-            if(id == '') { id = event.target.parentElement.id;}
-            if(id == '') { id = event.target.parentElement.parentElement.id;}
-            if(id == '') { id = event.target.parentElement.parentElement.parentElement.id;}
-            var element = jQuery(`.${id}`);
-            var parentElem = jQuery(`#${id}`);
-            var pos = parentElem.offset();
-            element.appendTo(jQuery('body')); // optional
-            element.css({
-                display : 'block',
-                position : 'absolute'
-            }).offset(pos)
-
-            jQuery(`.${id}`).mouseleave(function () {
-                jQuery(`.${id}`).appendTo( jQuery(`#${id}`));
-                jQuery(`.${id}`).css('display', 'none');
-                jQuery('body').remove(jQuery(`.${id}`));
-            })
-        }
-    })
-
-    jQuery('.info-button').click(function(event) {
-        let id = event.target.parentElement.parentElement.id
-
-        closePopupIfOpen(id)
-
-        let element = jQuery(`.mobile-course-popup${id}`)
-        element.appendTo(jQuery('body'));
-        if(element.css('display') == 'none') {
-            element.show();
-            jQuery(".bg-overlay").addClass('active');
-            jQuery('body').css('overflow-y', 'hidden');
-
-        }
-        else if (element.css('display') == 'block') {
-            element.appendTo( jQuery(`#${id}`));
-            element.hide()
-            jQuery(".bg-overlay").removeClass('active');
-            jQuery('body').css('overflow-y', 'unset');
-            jQuery('body').remove(element);
-        }
-
-        jQuery(`.course-popup-close${id}`).click(function() {
-            element.appendTo( jQuery(`#${id}`));
-            element.hide()
-            jQuery(".bg-overlay").removeClass('active');
-            jQuery('body').css('overflow-y', 'unset');
-            jQuery('body').remove(jQuery(`.${id}`));
-        })
-    })
-
     //Youtube popup
     jQuery('body').on('click', '.open-iframe', function (e) {
         e.preventDefault();
@@ -534,33 +400,108 @@ function getCookie(cname) {
     return "";
 }
 
+function getCoursesAjax(id) {
+    const slickTrack = jQuery(`#${id} .slick-track`)[0]
+    const trackLength = parseInt(slickTrack.lastChild.getAttribute('data-slick-index'))
+    const coursesIDs = JSON.parse(jQuery(`#${id}courses`).attr('value'))
+    let currentIndex = jQuery(`#${id} .slick-track .slick-active`).attr("data-slick-index");
+
+    if (coursesIDs.length > 10  && coursesIDs.length > trackLength + 1 && trackLength - currentIndex <= 8) {
+        let newCoursesArray = coursesIDs.slice(trackLength + 1, (trackLength + 11))
+
+        let data = {
+            'action': 'stripe_data',
+            'type' : 'courses',
+            'lang' : getCookie('openedx-language-preference'),
+            'idsArray': newCoursesArray,
+        }
+        jQuery.post(stripe_data_ajax.ajaxurl, data, function(response){
+            if(response.success){
+                const data = JSON.parse(response.data);
+                apppendCourses(data, id);
+            }
+        })
+    }
+}
+
 function apppendCourses(coursesData, id) {
 
     coursesData.forEach(item =>{
 
         let tags = '';
+        let hoverTags = '';
         for (let i = 0; i < item.tags.length; ++i) {
             if (i > 1){
-                tags = tags + '<span className="extra-tags">+</span>';
+                tags = tags + '<span class="extra-tags">+</span>';
                 break;
             }
-            tags = tags + '<span>'+item.tags[i]+'</span>';
+            if (i >= 1){
+                tags = tags + '<span class="extra-tags-mobile">+</span>';
+            }
+
+            let tagLength = item.tags[i].length;
+
+            let tagClass = 'regular-tag';
+            if(tagLength >= 8) tagClass = 'ellipsis-text';
+
+            let hoverTagClass = 'regular-tag';
+            if(tagLength >= 26) hoverTagClass = 'ellipsis-text';
+
+            let tag2 = '';
+            if(i == 1) tag2 = 'tag-2';
+            tags = tags + '<span class="'+ tagClass +' '+ tag2 +'" ><p class="'+ tagClass +'">'+item.tags[i]+'</p></span>';
+            hoverTags = hoverTags + '<span class="'+ hoverTagClass +'" title="'+ item.tags[i] +'"><p class="'+ hoverTagClass +'">'+item.tags[i]+'</p></span>';
         }
+
         let temp = document.createElement("div");
-        temp.className = 'course-stripe-item';
+        temp.id = item.id + id;
+        temp.classList.add('course-stripe-item');
         temp.innerHTML =
-            '<div class="course-img" style="background-image: url('+item.image+');"></div>'+
+            '<div class="course-img" style="background-image: url('+item.image+');">'+
+            '<span class="info-button"></span></div>'+
             '<div class="item-content"">'+
             '<h3 ><a href="">'+item.name+'</a></h3>'+
             '<p >'+item.academic_institution+'</p>'+
             ' </div>'+
-            '<div class=" tags-div">'+tags+ '</div>';
+            '<div class=" tags-div">'+tags+ '</div>'+
+            '<div class="course-item-hover '+ item.id + id +'">'+
+                '<div class="course-img" style="background-image: url('+item.image+');"></div>'+
+                '<div class="item-content"">'+
+                    '<h3 ><a href="">'+item.name+'</a></h3>'+
+                    '<p >'+item.academic_institution+'</p>'+
+                '</div>'+
+                '<div class=" tags-div">'+ hoverTags +'</div>'+
+                '<div class="course-details">'+
+                    '<span>'+ item.duration +'</span>'+
+                '</div>'+
+            '</div>'+
+            '<div class="course-popup-modal mobile-course-popup'+ item.id + id +'">'+
+                '<div class="popup-header">'+
+                    '<span class="course-popup-close'+ item.id + id +' close">&times;</span>'+
+                '</div>'+
+                '<div class="course-content">'+
+                    '<div class="course-img" style="background-image: url('+item.image+');"></div>'+
+                    '<div class="course-details">'+
+                        '<div class="course-header"">'+
+                            '<h3 ><a href="">'+item.name+'</a></h3>'+
+                            '<p >'+item.academic_institution+'</p>'+
+                        '</div>'+
+                        '<div class="tags-div">'+ hoverTags +'</div>'+
+                        '<div class="details">'+
+                            '<span>'+ item.duration +'</span>'+
+                        '</div>'+
+                    '</div>'+
+                '</div>'+
+                '<div class="popup-footer">'+
+                    '<a href=""><span>מעבר לקורס</span></a>'+
+                '</div>'+
+            '</div>';
 
         jQuery(`#${id}`).slick('slickAdd',temp);
-
+        mouseHoverOnCourse()
     });
-
-
+    changeArrowClass(id)
+    clickOnCourseInfoButton()
 }
 
 function closePopupIfOpen(id) {
@@ -805,3 +746,92 @@ function appendMyCourses(coursesData, id) {
 
 }
 
+function changeArrowClass(id, type=null) {
+    if(!jQuery(`#${id}`).children('.slick-button')[0]) return;
+    const slickTrack = jQuery(`#${id} .slick-track`)[0]
+    const trackLength = parseInt(slickTrack.lastChild.getAttribute('data-slick-index'))
+    let currentIndex = jQuery(`#${id} .slick-track .slick-active`).attr("data-slick-index");
+
+        // Change the opacity of the arrows depend if it possible to click on them
+    if(currentIndex > 0) {
+        jQuery(`#${id}`).children('.slick-prev')[0].classList.add('activate');
+    } else {
+        jQuery(`#${id}`).children('.slick-prev')[0].classList.remove('activate');
+    }
+
+    let width = jQuery(document).width();
+    let index = 3;
+    if(width < 992) index = 2;
+    if (type == 'testimonials') {
+        index = 2;
+        if(width < 992) index = 1;
+    }
+    if(trackLength - currentIndex <= index) {
+        jQuery(`#${id}`).children('.slick-next')[0].classList.add('off');
+    } else {
+        jQuery(`#${id}`).children('.slick-next')[0].classList.remove('off');
+    }
+
+}
+
+function mouseHoverOnCourse() {
+    jQuery(`.course-stripe-item`).unbind('mouseenter');
+
+    jQuery('.course-stripe-item').mouseenter(function (event) {
+        let width = document.documentElement.clientWidth;
+        if(width > 768) {
+            let id = event.target.id;
+            if(id == '') { id = event.target.parentElement.id;}
+            if(id == '') { id = event.target.parentElement.parentElement.id;}
+            if(id == '') { id = event.target.parentElement.parentElement.parentElement.id;}
+            var element = jQuery(`.${id}`);
+            var parentElem = jQuery(`#${id}`);
+            var pos = parentElem.offset();
+            element.appendTo(jQuery('body')); // optional
+            element.css({
+                display : 'block',
+                position : 'absolute'
+            }).offset(pos)
+
+            jQuery(`.${id}`).mouseleave(function () {
+                jQuery(`.${id}`).appendTo( jQuery(`#${id}`));
+                jQuery(`.${id}`).css('display', 'none');
+                jQuery('body').remove(jQuery(`.${id}`));
+            })
+        }
+    })
+}
+
+function clickOnCourseInfoButton() {
+    jQuery(`.info-button`).unbind('click');
+
+    jQuery(`.info-button`).click(function(event) {
+        let id = event.target.parentElement.parentElement.id
+
+        closePopupIfOpen(id)
+
+        let element = jQuery(`.mobile-course-popup${id}`)
+        element.appendTo(jQuery('body'));
+        if(element.css('display') == 'none') {
+            element.show();
+            jQuery(".bg-overlay").addClass('active');
+            jQuery('body').css('overflow-y', 'hidden');
+
+        }
+        else if (element.css('display') == 'block') {
+            element.appendTo( jQuery(`#${id}`));
+            element.hide()
+            jQuery(".bg-overlay").removeClass('active');
+            jQuery('body').css('overflow-y', 'unset');
+            jQuery('body').remove(element);
+        }
+
+        jQuery(`.course-popup-close${id}`).click(function() {
+            element.appendTo( jQuery(`#${id}`));
+            element.hide()
+            jQuery(".bg-overlay").removeClass('active');
+            jQuery('body').css('overflow-y', 'unset');
+            jQuery('body').remove(jQuery(`.${id}`));
+        })
+    })
+}

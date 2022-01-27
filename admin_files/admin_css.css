@@ -58,6 +58,18 @@
     border-color: #d12626;
 }
 
+ul.pods-dfv-list li.pods-dfv-list-remove a:before,
+ul.pods-dfv-list li.pods-dfv-list-edit a:before {
+    margin: 0 !important;
+    right: 0;
+    contain: size;
+    position: absolute
+}
+
+ul.pods-dfv-list li.pods-dfv-list-remove a,
+ul.pods-dfv-list li.pods-dfv-list-edit a {
+    position: relative;
+}
 
 .settings-error{
     background: #ffe6e6;

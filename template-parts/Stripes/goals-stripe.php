@@ -20,7 +20,7 @@ if(empty($stripe) || empty($stripe['carousel']) || count($stripe['carousel']) < 
             </div>
         <?php endif; ?>
     </div>
-    <div class="goals-slider">
+    <div id="<?php echo $stripe['id'] ?>" class="goals-slider">
         <?php
         global $sitepress;
 

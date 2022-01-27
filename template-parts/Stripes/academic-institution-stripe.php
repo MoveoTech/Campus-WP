@@ -24,10 +24,13 @@ $academic_institutions = pods( 'academic_institution', podsParams($stripe['carou
         <?php
         while ($academic_institutions->fetch()) { // academic_institution Loop
             $thumb = $academic_institutions->display('image');
+            $institution_permalink = $academic_institutions->display('permalink');
             if($thumb){
                 ?>
                 <div class="course-stripe-item" style="margin: auto">
-                    <div class="course-img" style="background-image: url(<?php echo $thumb ?>);  "></div>
+                    <div class="course-img" style="background-image: url(<?php echo $thumb ?>);  ">
+                        <a href="https://dev.campus.gov.il/academic_institution/<?php echo $institution_permalink ?>"></a>
+                    </div>
                 </div>
             <?php } } ?>
     </div>

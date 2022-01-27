@@ -172,6 +172,7 @@
     .course-img {
       width: 135px;
       height: 60px;
+      position: relative;
       background-size: contain;
       background-position: center center;
       background-repeat: no-repeat;
@@ -182,6 +183,11 @@
         opacity: 1;
         transition: opacity 500ms ease-in-out;
         -webkit-filter: grayscale(0);
+      }
+      a {
+        position: absolute;
+        width: 100%;
+        height: 100%;
       }
     }
   }
@@ -896,6 +902,8 @@ body {
       max-width: unset;
       height: 135px;
       margin: 10px 10px 0;
+      background-size: cover;
+      background-repeat: no-repeat;
     }
     .item-content {
       margin: 10px 20px 7px 14px;

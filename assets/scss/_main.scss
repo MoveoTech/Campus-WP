@@ -535,9 +535,17 @@ body .carousel-item.slick-slide img {
   opacity: 0.25;
 }
 
+.slick-prev.activate {
+  opacity: 1;
+}
+
 .slick-next {
   left: -60px;
   opacity: 1;
+}
+
+.slick-next.off {
+  opacity: 0.25;
 }
 
 .slick-prev,
@@ -555,11 +563,30 @@ body .carousel-item.slick-slide img {
   outline: none;
   background: transparent;
   background-size: cover;
-  background-image: url(../images/stripe-vector-rtl.png);
-  //background-image: url(../images/sprite.png);
   background-repeat: no-repeat;
-  //background-position: -82px -5px;
   z-index: 1;
+}
+
+.slick-prev:before {
+  content: url(../images/stripe-vector-rtl.png);
+  font-size: 30px;
+}
+
+.slick-next:before {
+  content: url(../images/stripe-vector-rtl.png);
+  font-size: 30px;
+}
+
+.slick-prev-nerrative:before {
+  content: '>';
+  color: lightgrey;
+  font-size: 30px;
+}
+
+.slick-next-nerrative:before {
+  content: '>';
+  color: white;
+  font-size: 30px;
 }
 
 .academic-inner {
