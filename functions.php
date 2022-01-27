@@ -1214,3 +1214,25 @@ function disallow_posts_with_same_title($messages) {
 }
 
 add_action('post_updated_messages', 'disallow_posts_with_same_title');
+
+
+// Remove Stripes row actions
+function remove_row_actions_post( $actions ){
+    if( get_post_type() === 'stripes' )
+        return array();
+
+}
+add_filter( 'post_row_actions', 'remove_row_actions_post', 10, 1 );
+
+
+// Remove ability to trash Stripes
+function my_custom_admin_styles() {
+    ?>
+    <style type="text/css">
+        .post-type-stripes form #delete-action{
+            display:none;
+        }
+    </style>
+    <?php
+}
+add_action('admin_head', 'my_custom_admin_styles');

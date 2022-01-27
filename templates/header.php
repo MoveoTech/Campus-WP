@@ -3,6 +3,8 @@ $user_courses = get_user_courses_link();
 $user_name = get_user_hello();
 $user_login = get_user_login();
 $user_menu = get_user_menu();
+wp_head();
+
 ?>
     <header class="above-banner header_section header_wrap" role="above_banner">
         <div class="flex-div">

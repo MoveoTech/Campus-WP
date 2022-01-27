@@ -10,6 +10,9 @@ function get_langs_json_object(){
 
 function cin_get_str($id, $lang = null){
     global $lang_strings;
+    if($lang_strings == NULL){
+        $lang_strings = get_langs_json_object();
+    }
     if(!$lang) {
         if ($lang = get_current_lang()) {
 

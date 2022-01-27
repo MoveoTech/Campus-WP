@@ -126,6 +126,7 @@ $mobile_menu = get_mobile_menu();
             </div>
         </div>
     </footer>
+<?php wp_footer(); ?>
     <div class="bg-overlay"></div>
     <div class="mobile-menu-popup">
         <?= $mobile_menu; ?>
