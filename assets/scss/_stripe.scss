@@ -179,9 +179,10 @@
       cursor: pointer;
       opacity: 0.5;
       -webkit-filter: grayscale(100);
+      transition: opacity 300ms linear;
       &:hover {
         opacity: 1;
-        transition: opacity 500ms ease-in-out;
+        transition: opacity 300ms linear;
         -webkit-filter: grayscale(0);
       }
       a {
@@ -266,6 +267,9 @@
       max-width: 550px;
     }
     .tag-item {
+      display: flex;
+      justify-content: center;
+      align-items: center;
       margin: 0 7.5px 15px;
       background-color: #F2F2F2;
       border: 1px solid rgba(0, 0, 0, 0.1);
@@ -273,8 +277,9 @@
       border-radius: 20px;
       height: 36px;
       cursor: pointer;
+      transition: background-color 300ms linear;
       &:hover {
-        transition: background-color 500ms linear;
+        transition: background-color 300ms linear;
         background-color: #FDCC07;
       }
       a {
@@ -422,7 +427,8 @@
       position: relative;
       &:hover {
         .bg-gradient {
-          background: linear-gradient(0deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), linear-gradient(0deg, #000000 0%, rgba(0, 0, 0, 0.1) 55.31%)
+          background: linear-gradient(0deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),linear-gradient(0deg, #282923 0%, rgba(0, 0, 0, 0.1) 55.31%);
+          transition: opacity 300ms linear ;
         }
       }
       .bg-gradient {
@@ -582,6 +588,7 @@
         align-items: center;
         justify-content: center;
         h1 {
+          text-align: center;
           font-weight: 600;
           font-size: 22px;
           line-height: 29px;
@@ -765,9 +772,7 @@
         .course-item-hover {
           .item-content {
             h3 {
-              a {
                 color: #333433;
-              }
             }
             p {
               color: #333433;
@@ -895,101 +900,105 @@ body {
     background: #FFFFFF;
     box-shadow: 0 10px 15px rgba(57, 104, 109, 0.25);
     border-radius: 10px;
-    .course-img {
-      animation: courseImgFadeIn;
-      animation-duration: 0.5s;
-      width: 275px;
-      max-width: unset;
-      height: 135px;
-      margin: 10px 10px 0;
-      background-size: cover;
-      background-repeat: no-repeat;
-    }
-    .item-content {
-      margin: 10px 20px 7px 14px;
-      h3 {
-        text-overflow: unset;
-        overflow: unset;
-        height: 100%;
-        -webkit-line-clamp: unset;
-        display: unset;
-        -webkit-box-orient: unset;
-        font-size: 22px;
-        font-weight: 600;
-        line-height: 29px;
-        text-align: right;
-        a {
+    a {
+      width: 100%;
+      height: 100%;
+      color: #333433;
+      .course-img {
+        animation: courseImgFadeIn;
+        animation-duration: 0.5s;
+        width: 275px;
+        max-width: unset;
+        height: 135px;
+        margin: 10px 10px 0;
+        background-size: cover;
+        background-repeat: no-repeat;
+      }
+      .item-content {
+        margin: 10px 20px 7px 14px;
+        h3 {
+          text-overflow: unset;
+          overflow: unset;
+          height: 100%;
+          -webkit-line-clamp: unset;
+          display: unset;
+          -webkit-box-orient: unset;
+          font-size: 22px;
+          font-weight: 600;
+          line-height: 29px;
+          text-align: right;
           color: #000000;
         }
-      }
-      p {
-        -webkit-font-smoothing: antialiased;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        overflow: hidden;
-        height: 21px;
-        font-size: 16px;
-        font-weight: 300;
-        line-height: 21px;
-        text-align: right;
-        opacity: 50%;
-        margin: 8px 0 0;
-      }
-    }
-    .tags-div {
-      display: flex;
-      flex-wrap: wrap;
-      flex-direction: row;
-      justify-content: right;
-      margin-right: 20px;
-      span {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 100%;
-        margin-left: 10px;
-        margin-bottom: 7px;
-        background: #F2F2F2;
-        border: 1px solid rgba(0, 0, 0, 0.1);
-        box-sizing: border-box;
-        border-radius: 15px;
-        text-align: center;
-        font-weight: 600;
-        font-size: 14px;
-        line-height: 18px;
-        overflow: hidden;
         p {
-          padding: 2px 10px;
+          -webkit-font-smoothing: antialiased;
+          text-overflow: ellipsis;
           white-space: nowrap;
           overflow: hidden;
-          margin: 0;
-          width: 100%;
-        }
-        @media (max-width: 768px){
-          padding: 2px 5px;
-          margin-left: 5px;
+          height: 21px;
+          font-size: 16px;
+          font-weight: 300;
+          line-height: 21px;
+          text-align: right;
+          opacity: 50%;
+          margin: 8px 0 0;
         }
       }
-      span.regular-tag {
-        min-width: fit-content;
-        p.regular-tag {
+      .tags-div {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        justify-content: right;
+        margin-right: 20px;
+        span {
           display: flex;
           align-items: center;
           justify-content: center;
+          height: 100%;
+          margin-left: 10px;
+          margin-bottom: 7px;
+          background: #F2F2F2;
+          border: 1px solid rgba(0, 0, 0, 0.1);
+          box-sizing: border-box;
+          border-radius: 15px;
+          text-align: center;
+          font-weight: 600;
+          font-size: 14px;
+          line-height: 18px;
+          overflow: hidden;
+          p {
+            padding: 2px 10px;
+            white-space: nowrap;
+            overflow: hidden;
+            margin: 0;
+            width: 100%;
+          }
+          @media (max-width: 768px){
+            padding: 2px 5px;
+            margin-left: 5px;
+          }
+        }
+        span.regular-tag {
+          min-width: fit-content;
+          p.regular-tag {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+        }
+        p.ellipsis-text {
+          text-overflow: ellipsis;
         }
       }
-      p.ellipsis-text {
-        text-overflow: ellipsis;
-      }
-    }
-    .course-details {
-      margin: 0 20px 15px 14px;
+      .course-details {
+      margin: 0 20px 0 14px;
+        padding-bottom: 15px;
       span {
         font-weight: 300;
         font-size: 14px;
         line-height: 18px;
         color: #808080;
       }
+    }
     }
   }
 }
@@ -1266,6 +1275,7 @@ body {
       max-width: 355px;
       .tag-item {
         margin: 0 2.5px 10px;
+        height: 30px;
         a {
           padding: 6px 10px;
           p {
@@ -1604,6 +1614,14 @@ body {
   .myCourses-slider {
     .course-stripe-item {
       min-width: unset;
+    }
+  }
+
+  .home-page-goals-stripe {
+    .goals-slider {
+      .goal-item {
+        min-width: unset;
+      }
     }
   }
 }

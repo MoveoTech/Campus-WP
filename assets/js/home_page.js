@@ -98,7 +98,7 @@ jQuery(document).ready(function () {
             {
                 breakpoint: 480,
                 settings: {
-                    speed: 500,
+                    speed: 100,
                     slidesToShow: 2.15,
                     slidesToScroll: 2,
                     arrows: false,
@@ -243,12 +243,21 @@ jQuery(document).ready(function () {
             {
                 breakpoint: 400,
                 settings: {
-                    speed: 500,
+                    speed: 300,
                     slidesToShow: 1.40,
                     slidesToScroll: 1,
                     arrows: false,
                 }
             },
+            {
+                breakpoint: 389,
+                settings: {
+                    speed: 300,
+                    slidesToShow: 1.36,
+                    slidesToScroll: 1,
+                    arrows: false,
+                }
+            }
         ]
 
     })
@@ -383,6 +392,22 @@ jQuery(document).ready(function () {
             jQuery("#youtube-popup").removeClass('active');
         }, 100);
     });
+
+    jQuery('.bg-overlay').on('click', function() {
+        let array = document.querySelectorAll('body .course-popup-modal')
+        let arrayLength = array.length
+        let openCourse = array[arrayLength - 1]
+        if(openCourse.getAttribute('style')) {
+            let courseClassName = openCourse.classList[openCourse.classList.length - 1]
+            let courseId = courseClassName.slice(19)
+            let element = jQuery(`.mobile-course-popup${courseId}`)
+            element.hide()
+            element.appendTo(jQuery(`#${courseId}`));
+            jQuery(".bg-overlay").removeClass('active');
+            jQuery('body').css('overflow-y', 'unset');
+            jQuery('body').remove(element);
+        }
+    })
 })
 
 function getCookie(cname) {
@@ -731,7 +756,7 @@ function appendMyCourses(coursesData, id) {
     coursesData.forEach(item =>{
         let courseStripe = document.getElementById(id);
         if(!courseStripe) return;
-        
+
         let temp = document.createElement("div");
         temp.className = 'course-stripe-item';
         temp.innerHTML =

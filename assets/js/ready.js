@@ -411,8 +411,12 @@ jQuery(document).ready(function () {
         jQuery(".mobile-menu-popup").toggleClass('active');
         if(!jQuery(".bg-overlay")[0].classList.contains('active') && jQuery(".mobile-menu-popup")[0].classList.contains('active')) {
             jQuery(".bg-overlay").addClass('active');
+            jQuery(".header_section").addClass('menu-open');
+
         } else if(!jQuery(".mobile-menu-popup")[0].classList.contains('active')) {
             jQuery(".bg-overlay").removeClass('active');
+            jQuery(".header_section").removeClass('menu-open');
+
         }
         jQuery('html').toggleClass('menu_open');
 
@@ -435,16 +439,6 @@ jQuery(document).ready(function () {
 
         })
     }
-
-    // //copy to Clipboard
-    // jQuery('.copy-to-clipboard').click(function (e) {
-    //     e.preventDefault();
-    //     var $temp = jQuery("<input>");
-    //     jQuery("body").append($temp);
-    //     $temp.val(jQuery(this).attr('href')).select();
-    //     document.execCommand("copy");
-    //     $temp.remove();
-    // });
 
     //Scroll top
     if (jQuery(document).height() > jQuery(window).height() + 800) {

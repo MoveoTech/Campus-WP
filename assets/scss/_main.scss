@@ -568,25 +568,31 @@ body .carousel-item.slick-slide img {
 }
 
 .slick-prev:before {
-  content: url(../images/stripe-vector-rtl.png);
-  font-size: 30px;
+  background-image: url(../images/stripe-vector-rtl.png);
+  background-size: 10px 20px;
+  display: inline-block;
+  width: 10px;
+  height: 21px;
+  content:"";
 }
 
 .slick-next:before {
-  content: url(../images/stripe-vector-rtl.png);
-  font-size: 30px;
+  background-image: url(../images/stripe-vector-rtl.png);
+  background-size: 10px 20px;
+  display: inline-block;
+  width: 10px;
+  height: 21px;
+  content:"";
 }
 
-.slick-prev-nerrative:before {
-  content: '>';
-  color: lightgrey;
-  font-size: 30px;
+.nerative-class .slick-prev:before,
+.goals-slider .slick-prev:before {
+  background-image: url(../images/stripe-vector-white.png);
 }
 
-.slick-next-nerrative:before {
-  content: '>';
-  color: white;
-  font-size: 30px;
+.nerative-class .slick-next:before,
+.goals-slider .slick-next:before {
+  background-image: url(../images/stripe-vector-white.png);
 }
 
 .academic-inner {

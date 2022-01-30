@@ -430,7 +430,8 @@ html:not(.user_is_not_logged_in) .header_login {
     padding-bottom: 0;
     position: relative;
     background-color: #fff;
-    z-index: 9999; }
+    z-index: 9999;
+  }
   .menu-item-object-wpml_ls_menu_item.menu-item-wpml-ls-83-ar {
     padding-right: 20px;
     padding-left: 20px; }
