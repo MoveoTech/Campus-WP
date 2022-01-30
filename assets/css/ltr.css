@@ -35,7 +35,7 @@
     .header_wrap .user-login-container .menu-user-menu-container .nav-user .user-list-item {
       padding-right: unset;
       padding-left: 5px; }
-      .header_wrap .user-login-container .menu-user-menu-container .nav-user .user-list-item a img.mobile-menu-vector {
+      .header_wrap .user-login-container .menu-user-menu-container .nav-user .user-list-item img.mobile-menu-vector {
         transform: rotate(270deg);
         left: unset;
         right: 0; }

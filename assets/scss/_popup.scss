@@ -13,7 +13,7 @@
 }
 .mobile-menu-popup {
     display: none;
-    z-index: 1040;
+    z-index: 5;
     background-color: #ffffff;
     width: 75%;
     height: 100%;
@@ -341,7 +341,7 @@
   .course-popup-modal {
     .course-content {
       .course-details {
-        max-width: 244px;
+        max-width: 235px;
       }
     }
   }

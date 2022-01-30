@@ -186,7 +186,7 @@ function get_user_menu() {
 
     return '
     <ul id="menu-user-menu-1" class="nav-user">
-       <li class="user-list-item change-lang-menu"><a class="a-link"><img src="' . get_bloginfo('stylesheet_directory') . '/assets/images/lang-logo.png' .'"><span class="list-item-content">'.$language.'</span><img class="mobile-menu-vector" src="' . get_bloginfo('stylesheet_directory') . '/assets/images/vector-black.png' .'"/></a> 
+       <li class="user-list-item change-lang-menu"><a class="a-link"></a><img src="' . get_bloginfo('stylesheet_directory') . '/assets/images/lang-logo.png' .'"><span class="list-item-content">'.$language.'</span><img class="mobile-menu-vector" src="' . get_bloginfo('stylesheet_directory') . '/assets/images/vector-black.png' .'"/> 
            <div class="secondary-lang-menu">
                <ul id="menu-language-menu-1" class="nav-lang">
                     <li id="wpml-ls-item-he" class="wpml-ls-menu-item wpml-ls-item-he ' . current_active_lang( 'he' ) . '"><a href="' . get_lang_url( 'he' ) . '"><span class="wpml-ls-native">עב</span></a></li>
@@ -195,9 +195,9 @@ function get_user_menu() {
                 </ul>
             </div>
        </li>
-        <li class="user-list-item "><a class="a-link profile-button" target="_blank"><img src="' . get_bloginfo('stylesheet_directory') . '/assets/images/profile.png' .'"><span class="list-item-content">'.$profile.'</span></a></li>
-        <li class="user-list-item"><a class="a-link" target="_blank" href="'. get_field('link_to_dashboard_for_campus', 'option') .'"><img src="' . get_bloginfo('stylesheet_directory') . '/assets/images/equalizer.png' .'"><span class="list-item-content">'.$controlpanel.'</span></a></li>
-        <li class="user-list-item user-logged-out"><a class="a-link logout-button" target="_blank"><img src="' . get_bloginfo('stylesheet_directory') . '/assets/images/logout.png' .'"><span class="list-item-content">'.$logout.'</span></a></li>         
+        <li class="user-list-item "><a class="a-link profile-button" target="_blank"></a><img src="' . get_bloginfo('stylesheet_directory') . '/assets/images/profile.png' .'"><span class="list-item-content">'.$profile.'</span></li>
+        <li class="user-list-item"><a class="a-link" target="_blank" href="'. get_field('link_to_dashboard_for_campus', 'option') .'"></a><img src="' . get_bloginfo('stylesheet_directory') . '/assets/images/equalizer.png' .'"><span class="list-item-content">'.$controlpanel.'</span></li>
+        <li class="user-list-item user-logged-out"><a class="a-link logout-button" target="_blank"></a><img src="' . get_bloginfo('stylesheet_directory') . '/assets/images/logout.png' .'"><span class="list-item-content">'.$logout.'</span></li>         
     </ul>
     
     

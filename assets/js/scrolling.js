@@ -10,7 +10,7 @@ function changeMenuOnScrolling(scroll) {
         menuScroll.classList.add('scroll-header_menu')
         logoItems.classList.add('scroll-logo_items')
 
-        const height = (-50 + ((scroll-50) / 7.5));
+        const height = (-50 + ((scroll-50) / 8));
         if(height < 0) {
             jQuery('.scrolling-header').css("top", height)
         } else {
