@@ -312,6 +312,7 @@ main {
         }
       }
       .hero-search-form {
+        z-index: 2;
         display: inline-block;
         .search-field.form-control {
           height: 55px;
@@ -328,6 +329,7 @@ main {
           }
         }
         .search-submit {
+          cursor: pointer;
           width: 45px;
           height: 45px;
           background: #F1595A;

@@ -6870,6 +6870,7 @@ main {
           line-height: 24px;
           margin: 0; }
       .hero-banner .banner-image .container .hero-search-form {
+        z-index: 2;
         display: inline-block; }
         .hero-banner .banner-image .container .hero-search-form .search-field.form-control {
           height: 55px;
@@ -6883,6 +6884,7 @@ main {
             outline: none;
             box-shadow: none; }
         .hero-banner .banner-image .container .hero-search-form .search-submit {
+          cursor: pointer;
           width: 45px;
           height: 45px;
           background: #F1595A;
