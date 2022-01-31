@@ -2425,11 +2425,10 @@ body.rtl .faq-section {
 
 //new footer 02.2021
 footer .footer-section {
-  @media(min-width: 1634px) {
-    .container {
-      max-width: 1626px;
+  //@media(min-width: 1634px) {
+  .container {
+      max-width: 1440px;
     }
-  }
 
   .logo-footer {
     display: inline-block;
@@ -2473,68 +2472,42 @@ footer .footer-section {
   #footer_content_campus_logo {
     padding-right: 0;
     width: 21%;
-    display: inline-block;
-    vertical-align: top;
     margin-left: 58px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: nowrap;
 
     .logo-footer {
       margin-left: 2px;
-      @media(max-width: 1634px) {
-        margin-bottom: 2px;
-      }
-    }
-
-    @media(max-width: 1634px) {
-      width: 27%;
-      margin-left: 10px;
-    }
-
-    .footer-content {
-      @media(min-width: 1440px) and (max-width: 1634px) {
-        width: 68%;
-      }
     }
   }
 
   #footer_content_social_logo {
     padding-left: 0;
     width: 32%;
-    display: inline-block;
-    vertical-align: top;
     margin-left: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: nowrap;
+    align-items: flex-start;
 
     .logo-footer {
+      margin-top: 4px;
       margin-left: 8px;
     }
 
     .footer-content {
       width: 289px;
+      margin-right: 0;
     }
 
-    @media(max-width: 1634px) {
-      .footer-content {
-        width: 72%;
-        margin-right: 0;
-      }
-      .logo-footer {
-        margin-top: 4px;
-      }
+    img {
+      width: 86px;
     }
-    @media(min-width: 1635px) {
-      .logo-footer {
-        margin-top: -2px;
-      }
-    }
-    @media(max-width: 1634px) {
-      img {
-        width: 109px;
-      }
-    }
-    @media(max-width: 1440px) {
-      img {
-        width: 86px;
-      }
-    }
+
   }
 
   .inners-footer-items {
@@ -2543,9 +2516,9 @@ footer .footer-section {
     padding-right: 42px;
 
     &.sahring_wrap {
-      padding: 0 42px;
-      border-left: 1px solid #ffffff80;
+      padding: 0 15px;
       width: 23.4%;
+      border-left: 1px solid #ffffff80;
       border-right: 1px solid #ffffff80;
       @media all and (-ms-high-contrast: none) {
         border-left: 1px solid #fff;
@@ -2636,8 +2609,6 @@ footer .footer-section {
         margin-bottom: 0;
       }
       &.sahring_wrap {
-        padding: 0 15px;
-        width: 23.4%;
 
         ul {
           -webkit-box-pack: justify;
@@ -2674,6 +2645,8 @@ footer .footer-section {
       width: 49%;
       margin: 0;
       margin-bottom: 95px;
+      display: inline-block;
+      vertical-align: top;
     }
     #footer_content_campus_logo {
       width: 42%;
@@ -3055,15 +3028,15 @@ footer .footer-section {
   background-color: #333333;
   color: #ffffff;
   font-weight: 400;
-  padding: 146px 0 109px;
-  @media(max-width: 1634px) {
+  //padding: 146px 0 109px;
+  //@media(max-width: 1634px) {
     padding: 126px 0 107px;
     .footer-section_wrap {
       display: -webkit-box;
       display: -ms-flexbox;
       display: flex;
     }
-  }
+  //}
   @media(max-width: 1199px) {
     .footer-section_wrap {
       display: block;

@@ -428,7 +428,7 @@
       &:hover {
         .bg-gradient {
           background: linear-gradient(0deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),linear-gradient(0deg, #282923 0%, rgba(0, 0, 0, 0.1) 55.31%);
-          transition: opacity 300ms linear ;
+          transition: background 300ms linear ;
         }
       }
       .bg-gradient {
@@ -990,15 +990,15 @@ body {
         }
       }
       .course-details {
-      margin: 0 20px 0 14px;
+        margin: 0 20px 0 14px;
         padding-bottom: 15px;
-      span {
-        font-weight: 300;
-        font-size: 14px;
-        line-height: 18px;
-        color: #808080;
+        span {
+          font-weight: 300;
+          font-size: 14px;
+          line-height: 18px;
+          color: #808080;
+        }
       }
-    }
     }
   }
 }

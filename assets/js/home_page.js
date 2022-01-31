@@ -490,15 +490,17 @@ function apppendCourses(coursesData, id) {
             ' </div>'+
             '<div class=" tags-div">'+tags+ '</div>'+
             '<div class="course-item-hover '+ item.id + id +'">'+
-                '<div class="course-img" style="background-image: url('+item.image+');"></div>'+
-                '<div class="item-content"">'+
-                    '<h3 ><a href="">'+item.name+'</a></h3>'+
-                    '<p >'+item.academic_institution+'</p>'+
-                '</div>'+
-                '<div class=" tags-div">'+ hoverTags +'</div>'+
-                '<div class="course-details">'+
-                    '<span>'+ item.duration +'</span>'+
-                '</div>'+
+                '<a href="">'+
+                    '<div class="course-img" style="background-image: url('+item.image+');"></div>'+
+                    '<div class="item-content"">'+
+                        '<h3 >'+item.name+'</h3>'+
+                        '<p >'+item.academic_institution+'</p>'+
+                    '</div>'+
+                    '<div class=" tags-div">'+ hoverTags +'</div>'+
+                    '<div class="course-details">'+
+                        '<span>'+ item.duration +'</span>'+
+                    '</div>'+
+                '</a>'+
             '</div>'+
             '<div class="course-popup-modal mobile-course-popup'+ item.id + id +'">'+
                 '<div class="popup-header">'+
