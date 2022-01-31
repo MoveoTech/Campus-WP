@@ -891,7 +891,7 @@
 body {
   .course-item-hover {
     animation: courseFadeIn;
-    animation-duration: 0.5s;
+    animation-duration: 0.4s;
     display: none;
     z-index: 1;
     position: absolute;
@@ -905,8 +905,6 @@ body {
       height: 100%;
       color: #333433;
       .course-img {
-        animation: courseImgFadeIn;
-        animation-duration: 0.5s;
         width: 275px;
         max-width: unset;
         height: 135px;
@@ -1627,11 +1625,6 @@ body {
 }
 
 @keyframes courseFadeIn {
-  from {opacity: 0; width: 270px;}
-  to {opacity: 1; width: 295px; }
-}
-
-@keyframes courseImgFadeIn {
-  from {opacity: 0; width: 255px;}
-  to {opacity: 1; width: 275px; }
+  from {opacity: 0; clip-path: inset(0 20% 15% 0); }
+  to {opacity: 1; clip-path: inset(0 0 0 0);}
 }

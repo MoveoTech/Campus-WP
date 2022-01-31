@@ -2,8 +2,6 @@ jQuery(document).ready(function () {
     let is_rtl = !(jQuery('html[lang = "en-US"]').length > 0);
     let prevSlick = '<button type="button" class="slick-prev slick-button" tabindex="-1" aria-label="' + global_vars.prev_btn_text + '"></button>';
     let nexSlick = '<button type="button" id="slick-next" class="slick-next slick-button " tabindex="-1" aria-label="' + global_vars.next_btn_text + '"></button>';
-    let prevSlickNerrativ = '<button type="button" class="slick-prev slick-button slick-prev-nerrative" tabindex="-1" aria-label="' + global_vars.prev_btn_text + '"></button>';
-    let nexSlickNerrativ = '<button type="button" id="slick-next" class="slick-next slick-button slick-next-nerrative " tabindex="-1" aria-label="' + global_vars.next_btn_text + '"></button>';
 
     //Get My Courses
     getMyCourses()
@@ -392,7 +390,6 @@ jQuery(document).ready(function () {
             jQuery("#youtube-popup").removeClass('active');
         }, 100);
     });
-
     jQuery('.bg-overlay').on('click', function() {
         let array = document.querySelectorAll('body .course-popup-modal')
         let arrayLength = array.length
