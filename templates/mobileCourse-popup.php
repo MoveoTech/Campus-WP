@@ -48,7 +48,7 @@
     </div>
     <div class="popup-footer">
         <a href="<?php echo $url ?>">
-            <span>מעבר לקורס</span>
+            <span><?php echo course_popup_button_text(); ?></span>
         </a>
     </div>
 </div>

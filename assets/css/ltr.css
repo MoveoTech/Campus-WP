@@ -312,17 +312,27 @@ body .course-item-hover .course-details {
           margin-left: unset;
           margin-right: 5px; } }
 
+@media (max-width: 650px) {
+  .home-page-myCourses-stripe .stripe-header span {
+    margin-right: 10px;
+    margin-left: 0; } }
+
 @media (max-width: 600px) {
   .courses-stripe {
     margin: 20px 0 20px 30px; }
-  .myCourses-slider {
-    margin: 20px 0 20px 30px; } }
+  .home-page-myCourses-stripe .myCourses-slider {
+    margin: 20px 0 0 30px; } }
 
 @media (max-width: 480px) {
   .courses-stripe {
     margin: 20px 0 20px 10px; }
-  .myCourses-slider {
-    margin: 20px 0 20px 10px; }
+  .home-page-myCourses-stripe .stripe-header {
+    margin-right: unset;
+    margin-left: 5px; }
+    .home-page-myCourses-stripe .stripe-header span {
+      margin-left: 10px; }
+  .home-page-myCourses-stripe .myCourses-slider {
+    margin: 15px 0 0 10px; }
   .home-page-courses-stripe .stripe-header {
     margin-right: unset;
     margin-left: 15px; } }

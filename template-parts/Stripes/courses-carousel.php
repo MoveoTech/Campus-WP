@@ -23,7 +23,9 @@ $courses = pods( 'courses', podsParams($courses_slice));
         $thumb = $courses->display( 'image' );
         $duration = $courses->display( 'duration' );
         $id = $courses->display( 'ID' );
-//            $url = $course_item->get_url();
+        $institution_permalink = $courses->display('permalink');
+        $site_url = get_site_url();
+        $url = $site_url . '/course/' . $institution_permalink;
         ?>
         <div id="<?php echo $id . $stripe['id'] ?>" class="course-stripe-item " >
             <div class="course-img" style="background-image: url(<?= $thumb ?>);">
@@ -81,8 +83,8 @@ $courses = pods( 'courses', podsParams($courses_slice));
                             endwhile; }?>
                     </div>
                     <div class="course-details">
-                    <span><?php echo $duration ?></span>
-                </div>
+                        <span><?php echo $duration ?></span>
+                    </div>
                 </a>
             </div>
             <?php get_template_part('templates/mobileCourse', 'popup',
