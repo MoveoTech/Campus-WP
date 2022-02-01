@@ -49,8 +49,9 @@ for($i=0 ; $i <  count($hebrew_ids) ; $i++)
         <h4>Name : </h4><p class="name"><?php echo $result->post_title; ?></p>
         <h4>Name : </h4><p class="name"><?php echo $resultEnglish->post_title; ?></p>
         <h4>Name : </h4><p class="name"><?php echo $resultArabic->post_title; ?></p>
+        <h4>PermaLink : </h4><p class="name"><?php echo get_permalink($result->ID); ?></p>
 
-                <h4>created : </h4><p class="name"><?php echo $result->post_date; ?></p>
+        <h4>created : </h4><p class="name"><?php echo $result->post_date; ?></p>
         <h4>modified : </h4><p class="name"><?php echo $result->post_modified; ?></p>
         <h4>Description : </h4><p class="name"><?php echo $result->post_content; ?></p>
         <h4>image : </h4><p class="name"><?php echo wp_get_attachment_url( get_post_thumbnail_id($result->ID), 'thumbnail' ); ?></p>
@@ -67,6 +68,8 @@ for($i=0 ; $i <  count($hebrew_ids) ; $i++)
 
     $pod = pods( 'academic_institution' );
 
+    $link = explode( '/', get_permalink($result->ID) );
+
     $data = array(
         'name' => $result->post_title,
         'english_name' => $resultEnglish->post_title,
@@ -74,6 +77,7 @@ for($i=0 ; $i <  count($hebrew_ids) ; $i++)
         'author' => $result->post_author,
         'created' => $result->post_date,
         'modified' => $result->post_modified,
+        'permalink' => $link[count($link)-2],
         'hebrew_description' => $result->post_content,
         'english_description' => $resultEnglish->post_content,
         'arabic_description' => $resultArabic->post_content,
@@ -87,6 +91,7 @@ for($i=0 ; $i <  count($hebrew_ids) ; $i++)
         'banner_mobile_institute' => intval(get_post_meta($result->ID, 'banner_mobile_institute', true)),
 
     );
+
 
     var_dump($data);
 
