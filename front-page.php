@@ -26,12 +26,14 @@ $hero_subtitle =  $fields['hero_subtitle'];
             <img class="desktop-banner" src="<?= $hero_image['url'] ?>" >
             <img class="mobile-banner" src="<?= $hero_image_mobile['url'] ?>" >
             <div class="hero-gradient"></div>
-            <div class="container" >
+            <div class="hero-container">
+                <div class="container" >
                 <div class="text-on-banner">
                     <h1><?=$hero_title?></h1>
                     <h5><?=$hero_subtitle?></h5>
                 </div>
                 <?= get_template_part('templates/hero', 'search') ?>
+            </div>
             </div>
         </div>
     </div>

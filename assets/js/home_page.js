@@ -12,8 +12,12 @@ jQuery(document).ready(function () {
     clickOnCourseInfoButton()
 
     //reload new courses
+    jQuery('.courses-stripe').on('beforeChange', function (event) {
+        jQuery(`.course-stripe-item`).unbind('mouseenter');
+    })
     jQuery('.courses-stripe').on('afterChange', function (event) {
         const id = event.target.id
+        mouseHoverOnCourse()
         getCoursesAjax(id)
         let width = jQuery(document).width();
         if(width <= 768) return;
@@ -197,7 +201,7 @@ jQuery(document).ready(function () {
                 breakpoint: 710,
                 settings: {
                     speed: 500,
-                    slidesToShow: 2.5,
+                    slidesToShow: 2.6,
                     slidesToScroll: 2,
                     arrows: false,
                 }
@@ -206,7 +210,7 @@ jQuery(document).ready(function () {
                 breakpoint: 650,
                 settings: {
                     speed: 500,
-                    slidesToShow: 2.25,
+                    slidesToShow: 2.4,
                     slidesToScroll: 2,
                     arrows: false,
                 }
@@ -215,7 +219,7 @@ jQuery(document).ready(function () {
                 breakpoint: 600,
                 settings: {
                     speed: 500,
-                    slidesToShow: 2.1,
+                    slidesToShow: 2.2,
                     slidesToScroll: 2,
                     arrows: false,
                 }
@@ -224,8 +228,8 @@ jQuery(document).ready(function () {
                 breakpoint: 550,
                 settings: {
                     speed: 500,
-                    slidesToShow: 1.75,
-                    slidesToScroll: 1.5,
+                    slidesToShow: 2,
+                    slidesToScroll: 1,
                     arrows: false,
                 }
             },
@@ -233,7 +237,7 @@ jQuery(document).ready(function () {
                 breakpoint: 480,
                 settings: {
                     speed: 500,
-                    slidesToShow: 1.5,
+                    slidesToShow: 1.75,
                     slidesToScroll: 1,
                     arrows: false,
                 }
@@ -242,7 +246,7 @@ jQuery(document).ready(function () {
                 breakpoint: 400,
                 settings: {
                     speed: 300,
-                    slidesToShow: 1.40,
+                    slidesToShow: 1.50,
                     slidesToScroll: 1,
                     arrows: false,
                 }
@@ -390,6 +394,8 @@ jQuery(document).ready(function () {
             jQuery("#youtube-popup").removeClass('active');
         }, 100);
     });
+
+    //Course popup overlay
     jQuery('.bg-overlay').on('click', function() {
         let array = document.querySelectorAll('body .course-popup-modal')
         let arrayLength = array.length
@@ -450,30 +456,8 @@ function apppendCourses(coursesData, id) {
 
     coursesData.forEach(item =>{
 
-        let tags = '';
-        let hoverTags = '';
-        for (let i = 0; i < item.tags.length; ++i) {
-            if (i > 1){
-                tags = tags + '<span class="extra-tags">+</span>';
-                break;
-            }
-            if (i >= 1){
-                tags = tags + '<span class="extra-tags-mobile">+</span>';
-            }
-
-            let tagLength = item.tags[i].length;
-
-            let tagClass = 'regular-tag';
-            if(tagLength >= 8) tagClass = 'ellipsis-text';
-
-            let hoverTagClass = 'regular-tag';
-            if(tagLength >= 26) hoverTagClass = 'ellipsis-text';
-
-            let tag2 = '';
-            if(i == 1) tag2 = 'tag-2';
-            tags = tags + '<span class="'+ tagClass +' '+ tag2 +'" ><p class="'+ tagClass +'">'+item.tags[i]+'</p></span>';
-            hoverTags = hoverTags + '<span class="'+ hoverTagClass +'" title="'+ item.tags[i] +'"><p class="'+ hoverTagClass +'">'+item.tags[i]+'</p></span>';
-        }
+        let tags = getDesktopTags(item.tags);
+        let hoverTags = getHoverTags(item.tags);
 
         let temp = document.createElement("div");
         temp.id = item.id + id;
@@ -755,15 +739,20 @@ function appendMyCourses(coursesData, id) {
     coursesData.forEach(item =>{
         let courseStripe = document.getElementById(id);
         if(!courseStripe) return;
-
+        let itemData = {
+            thumb: item.course_details.image,
+            progress: item.course_details.progress,
+            name: item.course_details.course_name,
+            academic_institution: item.course_details.academic_institution
+        }
         let temp = document.createElement("div");
         temp.className = 'course-stripe-item';
         temp.innerHTML =
-            '<div class="course-img" style="background-image: url('+item.course_details.image+');"></div>'+
+            '<div class="course-img" style="background-image: url('+itemData.thumb+');"></div>'+
             '<div class="item-content"">'+
-            '<p class="course-progress" ><a href="">' + item.course_details.progress +'</a></p>'+
-            '<h3><a href="">'+item.course_details.course_name+'</a></h3>'+
-            '<p class="institution-name">'+item.course_details.academic_institution+'</p>'+
+            '<p class="course-progress" ><a href="">' + itemData.progress +'</a></p>'+
+            '<h3><a href="">'+itemData.name+'</a></h3>'+
+            '<p class="institution-name">'+itemData.academic_institution+'</p>'+
             ' </div>';
 
 
@@ -802,6 +791,7 @@ function changeArrowClass(id, type=null) {
 
 function mouseHoverOnCourse() {
     jQuery(`.course-stripe-item`).unbind('mouseenter');
+    // jQuery(`.course-item-hover`).unbind('mouseleave');
 
     jQuery('.course-stripe-item').mouseenter(function (event) {
         let width = document.documentElement.clientWidth;
@@ -810,22 +800,51 @@ function mouseHoverOnCourse() {
             if(id == '') { id = event.target.parentElement.id;}
             if(id == '') { id = event.target.parentElement.parentElement.id;}
             if(id == '') { id = event.target.parentElement.parentElement.parentElement.id;}
+            courseItem = jQuery(`.${id}`);
+
             var element = jQuery(`.${id}`);
             var parentElem = jQuery(`#${id}`);
             var pos = parentElem.offset();
-            element.appendTo(jQuery('body')); // optional
+
+            element.appendTo(jQuery('body'));
             element.css({
                 display : 'block',
-                position : 'absolute'
-            }).offset(pos)
+                position : 'absolute',
+            }).offset(pos);
 
-            jQuery(`.${id}`).mouseleave(function () {
-                jQuery(`.${id}`).appendTo( jQuery(`#${id}`));
-                jQuery(`.${id}`).css('display', 'none');
-                jQuery('body').remove(jQuery(`.${id}`));
+            element.mouseleave(function (event) {
+                // console.log(event.currentTarget)
+                element.appendTo( jQuery(`#${id}`));
+                element.css('display', 'none');
+                element.css('inset', 'unset');
+                element.unbind('mouseleave');
             })
         }
     })
+
+    // jQuery(`.course-item-hover`).mouseleave(function (event) {
+    //     // console.log(event.currentTarget.classList[1])
+    //     let id = event.currentTarget.classList[1];
+    //     let width = document.documentElement.clientWidth;
+    //     if(width > 768) {
+    //         // let id = event.target.id;
+    //         // if(id == '') { id = event.target.parentElement.id;}
+    //         // if(id == '') { id = event.target.parentElement.parentElement.id;}
+    //         // if(id == '') { id = event.target.parentElement.parentElement.parentElement.id;}
+    //         //
+    //         var element = jQuery(`.${id}`);
+    //         // var parentElem = jQuery(`#${id}`);
+    //         // var pos = parentElem.offset();
+    //
+    //         element.appendTo( jQuery(`#${id}`));
+    //         element.css({
+    //             display : 'none',
+    //             position : 'unset',
+    //             inset : 'unset'
+    //         })
+    //     }
+    // })
+
 }
 
 function clickOnCourseInfoButton() {
@@ -860,4 +879,51 @@ function clickOnCourseInfoButton() {
             jQuery('body').remove(jQuery(`.${id}`));
         })
     })
+}
+
+function getHoverTags(tags) {
+    let hoverTagsHtml = '';
+    for (let i = 0; i < tags.length; i++) {
+
+        let tagLength = tags[i].length;
+        let hoverTagClass = 'regular-tag';
+
+        if(tagLength >= 26) hoverTagClass = 'ellipsis-text';
+
+        hoverTagsHtml = hoverTagsHtml + '<span class="'+ hoverTagClass +'" title="'+ tags[i] +'"><p class="'+ hoverTagClass +'">'+tags[i]+'</p></span>';
+    }
+
+    return hoverTagsHtml;
+}
+
+function getDesktopTags(tags) {
+    let tagsHtml = '';
+    for (let i = 0; i < tags.length; i++) {
+        if (i > 1){
+            tagsHtml = tagsHtml + '<span class="extra-tags">+</span>';
+            break;
+        }
+
+        if (i >= 1){
+            tagsHtml = tagsHtml + '<span class="extra-tags-mobile">+</span>';
+        }
+
+        let tagLength = tags[i].length;
+        let tagClass = 'regular-tag';
+        if(tagLength >= 8) tagClass = 'ellipsis-text';
+        let tag2 = '';
+        if(i == 1) tag2 = 'tag-2';
+
+        tagsHtml = tagsHtml + '<span class="'+ tagClass +' '+ tag2 +'" ><p class="'+ tagClass +'">'+tags[i]+'</p></span>';
+    }
+
+    return tagsHtml;
+}
+
+function goalGradient() {
+    let width = jQuery(window).width();
+    if(width > 710) return;
+    let goalDiv = document.createElement('div');
+    goalDiv.className = 'goal-stripe-gradient';
+    jQuery('.goals-slider').children('div.slick-list')[0].append(goalDiv);
 }

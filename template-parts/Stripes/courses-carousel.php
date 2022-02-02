@@ -19,7 +19,7 @@ $courses = pods( 'courses', podsParams($courses_slice));
     while ($courses->fetch()) {
         $title = getFieldByLanguage($courses->display( 'name' ), $courses->display( 'english_name' ), $courses->display( 'arabic_name' ),$sitepress->get_current_language());
         $institution_name = getFieldByLanguage($courses->field( 'academic_institution.name' ), $courses->field( 'academic_institution.english_name' ), $courses->field( 'academic_institution.arabic_name' ), $sitepress->get_current_language());
-        $tags = $courses->field('tags');
+        $tags = $courses->field('marketing_tags');
         $thumb = $courses->display( 'image' );
         $duration = $courses->display( 'duration' );
         $id = $courses->display( 'ID' );
@@ -59,7 +59,7 @@ $courses = pods( 'courses', podsParams($courses_slice));
                 <?php } }?>
             </div>
             <div class="course-item-hover <?php echo $id . $stripe['id'] ?>">
-                <a href="<?= $url ?>">
+               <a href="<?= $url ?>">
                     <div class="course-img" style="background-image: url(<?= $thumb ?>);">
                     </div>
                     <div class="item-content">

@@ -2,7 +2,6 @@
 $stripe = wp_parse_args(
     $args["args"]
 );
-//var_dump($stripe);
 
 if(empty($stripe) || empty($stripe['carousel']) || count($stripe['carousel']) < 1 )
     return;
@@ -10,17 +9,18 @@ if(empty($stripe) || empty($stripe['carousel']) || count($stripe['carousel']) < 
 ?>
 
 <div class="home-page-goals-stripe" >
-    <div class="back-img-1" ></div>
-    <div class="back-img-2" ></div>
-    <div class="goals-stripe-header">
-        <?php if($stripe['title'] != '' && !empty($stripe['title'])) : ?>
-            <div class="stripe-title">
-                <span style="background: <?php echo randomColor();?>"></span>
-                <h1 ><?php echo $stripe['title'] ?></h1>
-            </div>
-        <?php endif; ?>
-    </div>
-    <div id="<?php echo $stripe['id'] ?>" class="goals-slider">
+    <div class="stripe-container">
+        <div class="back-img-1" ></div>
+        <div class="back-img-2" ></div>
+        <div class="goals-stripe-header">
+            <?php if($stripe['title'] != '' && !empty($stripe['title'])) : ?>
+                <div class="stripe-title">
+                    <span style="background: <?php echo randomColor();?>"></span>
+                    <h1 ><?php echo $stripe['title'] ?></h1>
+                </div>
+            <?php endif; ?>
+        </div>
+        <div id="<?php echo $stripe['id'] ?>" class="goals-slider">
         <?php
         global $sitepress;
 
@@ -41,5 +41,6 @@ if(empty($stripe) || empty($stripe['carousel']) || count($stripe['carousel']) < 
             <?php endforeach;
         endif;
         ?>
+    </div>
     </div>
 </div>

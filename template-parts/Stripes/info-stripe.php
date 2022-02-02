@@ -10,13 +10,14 @@ if(empty($stripe) || empty($stripe['carousel']) || count($stripe['carousel']) < 
 <div class="home-page-info-stripe" >
     <div class="back-img-1" ></div>
     <div class="back-img-2" ></div>
-    <?php if($stripe['title'] != '' && !empty($stripe['title'])) : ?>
-        <div class="info-stripe-header">
-            <span style="background: <?php echo randomColor();?>"></span>
-                <h1 ><?php echo $stripe['title'] ?></h1>
-        </div>
-    <?php endif; ?>
-    <div class="info-content">
+    <div class="stripe-container">
+        <?php if($stripe['title'] != '' && !empty($stripe['title'])) : ?>
+            <div class="info-stripe-header">
+                <span style="background: <?php echo randomColor();?>"></span>
+                    <h1 ><?php echo $stripe['title'] ?></h1>
+            </div>
+        <?php endif; ?>
+        <div class="info-content">
         <?php
         global $sitepress;
 
@@ -52,6 +53,7 @@ if(empty($stripe) || empty($stripe['carousel']) || count($stripe['carousel']) < 
             <?php endforeach;
         endif;
         ?>
+    </div>
     </div>
 </div>
 
