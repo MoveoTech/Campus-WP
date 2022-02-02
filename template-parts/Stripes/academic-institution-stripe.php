@@ -12,15 +12,16 @@ $academic_institutions = pods( 'academic_institution', podsParams($stripe['carou
 
 <div class="home-page-institutions_stripe"  >
     <div hidden id="<?php echo $stripe['id']; ?>" class="academic-institutions-ids" value="<?php  print_r(json_encode($stripe['carousel'])); ?>" ></div>
-    <?php
-    if(!empty($stripe['title']) && $stripe['title'] != ""){
-        ?>
-        <div class="institution-header">
-            <span style="background: <?php echo randomColor();?>"></span>
-            <h1><?php echo $stripe['title'] ?></h1>
-        </div>
-    <?php } ?>
-    <div class="institutions-slider" >
+    <div class="stripe-container">
+        <?php
+        if(!empty($stripe['title']) && $stripe['title'] != ""){
+            ?>
+            <div class="institution-header">
+                <span style="background: <?php echo randomColor();?>"></span>
+                <h1><?php echo $stripe['title'] ?></h1>
+            </div>
+        <?php } ?>
+        <div class="institutions-slider" >
         <?php
         while ($academic_institutions->fetch()) { // academic_institution Loop
             $thumb = $academic_institutions->display('image');
@@ -34,5 +35,6 @@ $academic_institutions = pods( 'academic_institution', podsParams($stripe['carou
                     </div>
                 </div>
             <?php } } ?>
+    </div>
     </div>
 </div>

@@ -13,13 +13,14 @@ global $sitepress;
 <div class="home-page-tags-stripe" >
     <div class="back-img-1" ></div>
     <div class="back-img-2" ></div>
+    <div class="stripe-container">
         <div class="tags-stripe-header">
-    <?php if($stripe['title'] != '' && !empty($stripe['title'])) : ?>
-            <span style="background: <?php echo randomColor();?>"></span>
-            <h1><?php echo $stripe['title'] ?></h1>
-    <?php endif; ?>
-        </div>
-    <div class="tags-div">
+        <?php if($stripe['title'] != '' && !empty($stripe['title'])) : ?>
+                <span style="background: <?php echo randomColor();?>"></span>
+                <h1><?php echo $stripe['title'] ?></h1>
+        <?php endif; ?>
+            </div>
+        <div class="tags-div">
         <?php
         while ($tags->fetch()) { // tags Loop
             $tag_name = getFieldByLanguage($tags->display('name'), $tags->display('english_name'), $tags->display('arabic_name'), $sitepress->get_current_language());
@@ -30,5 +31,6 @@ global $sitepress;
                 </a>
             </div>
             <?php } ?>
+    </div>
     </div>
 </div>

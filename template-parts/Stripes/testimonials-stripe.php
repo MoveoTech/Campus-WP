@@ -14,15 +14,16 @@ global $sitepress;
     <div class="back-img-1" ></div>
     <div class="back-img-2" ></div>
     <div hidden class="testimonials-ids" value="<?php  print_r(json_encode($stripe['carousel'])); ?>" ></div>
-    <?php
-    if(!empty($stripe['title']) && $stripe['title'] != ""){
-        ?>
-        <div class="testimonials-stripe-header">
-            <span style="background: <?php echo randomColor();?>"></span>
-            <h1><?php echo $stripe['title'] ?></h1>
-        </div>
-    <?php } ?>
-    <div id="<?php echo $stripe['id']; ?>" class="testimonials-slider" >
+    <div class="stripe-container">
+        <?php
+        if(!empty($stripe['title']) && $stripe['title'] != ""){
+            ?>
+            <div class="testimonials-stripe-header">
+                <span style="background: <?php echo randomColor();?>"></span>
+                <h1><?php echo $stripe['title'] ?></h1>
+            </div>
+        <?php } ?>
+        <div id="<?php echo $stripe['id']; ?>" class="testimonials-slider" >
         <?php
         while ($testimonials->fetch()) { // Testimonials Loop
             $title = getFieldByLanguage($testimonials->display('name'), $testimonials->display('english_name'), $testimonials->display('arabic_name'), $sitepress->get_current_language());
@@ -48,6 +49,7 @@ global $sitepress;
 
 
             <?php } } ?>
+    </div>
     </div>
 </div>
 

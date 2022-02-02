@@ -13,7 +13,7 @@ html body {
 }
 
 body {
-  max-width: 1440px;
+  //max-width: 1440px;
   margin: auto;
 }
 
@@ -40,7 +40,7 @@ body.rtl {
 .wrap {
   @media (max-width: 768px) {
     position: relative;
-    top: 63px;
+    padding-top: 63px;
   }
 }
 
@@ -271,6 +271,9 @@ main {
       height: 100%;
       width: 100%;
       background: linear-gradient(270deg, #333433 34.02%, rgba(51, 52, 51, 0) 100%);
+      @media (min-width: 1441px) {
+        background: linear-gradient(270deg, #333433 52%, rgba(51, 52, 51, 0) 100%);
+      }
     }
     img.desktop-banner {
       width: fit-content;
@@ -282,7 +285,12 @@ main {
     img.mobile-banner {
       display: none;
     }
-    .container {
+    .hero-container {
+      position: relative;
+      max-width: 1440px;
+      height: 100%;
+      margin: 0 auto;
+      .container {
       position: absolute;
       top: 144px;
       right: 185px;
@@ -348,6 +356,7 @@ main {
         }
       }
     }
+    }
   }
 }
 
@@ -371,39 +380,48 @@ main {
       .hero-gradient {
         display: none;
       }
-      .container {
+      .hero-container {
         right: 0;
         left: 0;
         margin: auto;
         width: 80%;
-        align-items: center;
-        .text-on-banner {
-          text-align: center;
-          h1 {
-            margin-bottom: 10px;
-          }
-          h5 {
-            width: 300px;
-            margin: auto;
-          }
-        }
-        .hero-search-form {
-          .search-field.form-control {
-            height: 56px;
-            width: 331px;
-            font-size: 16px;
-            &::placeholder {
-              font-size: 16px;
+        .container {
+          right: 0;
+          left: 0;
+          margin: auto;
+          align-items: center;
+          .text-on-banner {
+            text-align: center;
+
+            h1 {
+              margin-bottom: 10px;
+            }
+
+            h5 {
+              width: 300px;
+              margin: auto;
             }
           }
-          .search-submit {
-            width: 46px;
-            height: 46px;
+
+          .hero-search-form {
+            .search-field.form-control {
+              height: 56px;
+              width: 331px;
+              font-size: 16px;
+
+              &::placeholder {
+                font-size: 16px;
+              }
+            }
+
+            .search-submit {
+              width: 46px;
+              height: 46px;
+            }
           }
         }
       }
     }
-
   }
 }
 
@@ -429,30 +447,48 @@ main {
         height: 378px;
         z-index: -1;
       }
-      .container {
-        width: 90%;
-        top: 60px;
-        .text-on-banner {
-          margin-bottom: 15px;
-          h1 {
-            font-size: 42px;
-          }
-          h5 {
-            width: 255px;
-          }
-        }
+      .hero-container {
+        .container {
+          top: 60px;
+          width: 100%;
+          .text-on-banner {
+            margin-bottom: 15px;
 
+            h1 {
+              font-size: 42px;
+            }
+
+            h5 {
+              width: 255px;
+            }
+          }
+
+        }
       }
     }
 
   }
 }
 
+@media (max-width: 480px) {
+  .hero-banner {
+    .banner-image {
+      .hero-container {
+        .container {
+          top: 15px;
+        }
+      }
+    }
+  }
+}
+
 @media (max-width: 375px) {
   .hero-banner {
     .banner-image {
-      .container {
-        top: 10px;
+      .hero-container {
+        .container {
+          top: 10px;
+        }
       }
     }
   }
@@ -3022,23 +3058,16 @@ footer {
   transition: background 0.3s ease-in-out, opacity .3s, visibility 0s .3s
 }
 
-footer {
-  margin-top: 100px;
-}
-
 footer .footer-section {
   background-color: #333333;
   color: #ffffff;
   font-weight: 400;
-  //padding: 146px 0 109px;
-  //@media(max-width: 1634px) {
-    padding: 126px 0 107px;
-    .footer-section_wrap {
-      display: -webkit-box;
-      display: -ms-flexbox;
-      display: flex;
-    }
-  //}
+  padding: 126px 0 107px;
+  .footer-section_wrap {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
   @media(max-width: 1199px) {
     .footer-section_wrap {
       display: block;
