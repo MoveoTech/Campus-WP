@@ -56,26 +56,26 @@
   flex-direction: column;
   position: relative;
   .back-img-1 {
-    background: url("../../assets/images/info-stripe-img2.png");
+    background: url("../../assets/images/info-stripe-img2.svg");
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
     width: 113px;
-    height: 182px;
+    height: 239px;
     position: absolute;
     left: 0;
-    top: 0;
+    top: 43px;
   }
   .back-img-2 {
-    background: url("../../assets/images/info-stripe-img1.png");
+    background: url("../../assets/images/info-stripe-img1.svg");
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
-    width: 179px;
-    height: 140px;
+    width: 129px;
+    height: 317px;
     position: absolute;
     right: 0;
-    bottom: 0;
+    top: 17px;
   }
   .stripe-container {
     max-width: 1440px;
@@ -218,7 +218,7 @@
   align-items: center;
   position: relative;
   .back-img-1 {
-    background: url("../../assets/images/tags-stripe-img1.png");
+    background: url("../../assets/images/tags-stripe-img1.svg");
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -235,12 +235,12 @@
     }
   }
   .back-img-2 {
-    background: url("../../assets/images/tags-stripe-img2.png");
+    background: url("../../assets/images/tags-stripe-img2.svg");
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
     width: 156px;
-    height: 240px;
+    height: 100%;
     position: absolute;
     right: 0;
     top: 0;
@@ -468,7 +468,6 @@
           height: 100%;
           background: linear-gradient(90deg, #333433 13.7%, rgba(51, 52, 51, 0) 100%);
         }
-
       }
 
       .goal-item {
@@ -486,14 +485,24 @@
         align-items: center;
         justify-content: flex-end;
         position: relative;
-
         &:hover {
-          .bg-gradient {
+          .bg-gradient-hover {
+            opacity: 1;
             background: linear-gradient(0deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), linear-gradient(0deg, #282923 0%, rgba(0, 0, 0, 0.1) 55.31%);
-            transition: background 300ms linear;
+            transition: opacity 300ms linear;
           }
         }
-
+        .bg-gradient-hover {
+          border-radius: 10px;
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          z-index: 0;
+          opacity: 0;
+          transition: opacity 300ms linear;
+        }
         .bg-gradient {
           border-radius: 10px;
           position: absolute;
@@ -551,27 +560,27 @@
   background: #F9F9F9;
   position: relative;
   .back-img-1 {
-    background: url("../../assets/images/testimonials-bckg-1.png");
+    background: url("../../assets/images/info-stripe-img2.svg");
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
     width: 113px;
-    height: 182px;
+    height: 230px;
     position: absolute;
     left: 0;
-    top: 0;
+    top: 20%;
 
   }
   .back-img-2 {
-    background: url("../../assets/images/testimonials-bckg-2.png");
+    background: url("../../assets/images/info-stripe-img1.svg");
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
-    width: 179px;
-    height: 158px;
+    width: 115px;
+    height: 317px;
     position: absolute;
     right: 0;
-    bottom: 0;
+    top: 10%;
   }
   .stripe-container {
     max-width: 1440px;
