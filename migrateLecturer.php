@@ -124,8 +124,8 @@ for($i=0 ; $i <  count($ids) ; $i++)
     var_dump($data);
 
 // Add the new item now and get the new ID
-//    $pod = pods( 'lecturer' );
-//    $new_book_id = $pod->add( $data );
+    $pod = pods( 'lecturer' );
+    $new_book_id = $pod->add( $data );
 //    }
 
 }

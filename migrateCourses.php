@@ -96,14 +96,15 @@ foreach ( $results as $result )
             $subTitleLanguage_id  =get_post_meta($result->ID, 'subtitle_lang', true);
             $subTitleLanguages = array();
             $subTitleLanguagesPod = array();
-            foreach ($subTitleLanguage_id as $lang):
-                $subTitleLanguage = get_term( $lang );
-                array_push($subTitleLanguages, $subTitleLanguage->name);
-                array_push($subTitleLanguagesPod, getLanguage($subTitleLanguage->name));
+            if($subTitleLanguage_id):
+                foreach ($subTitleLanguage_id as $lang):
+                    $subTitleLanguage = get_term( $lang );
+                    array_push($subTitleLanguages, $subTitleLanguage->name);
+                    array_push($subTitleLanguagesPod, getLanguage($subTitleLanguage));
 
-                echo $subTitleLanguage->name;
-            endforeach;
-
+                    echo $subTitleLanguage->name;
+                endforeach;
+            endif;
             ?>
             <h4>Sub Title Language</h4><p class="name"> <?php var_dump($subTitleLanguages); ?></p>
             <h4>Sub Title Language Pod : </h4><p class="name"> <?php var_dump($subTitleLanguagesPod); ?></p>
@@ -173,10 +174,10 @@ foreach ( $results as $result )
         'corporation_institution' => $PodCorporation_institution_id,
 
         'pacing' => getPacing(get_post_meta($result->ID, 'pacing', true)),
-        'language' => getLanguage($language->name),
+        'language' => getLanguage($language),
         'subtitle_language' => $subTitleLanguagesPod,
 
-        'certificate' => getCertificate($certificate->name),
+        'certificate' => getCertificate($certificate),
 
         'syllabus_link' => get_post_meta($result->ID, 'syllabus', true),
         'mobile_available' => get_post_meta($result->ID, 'mobile_available', true),
@@ -191,9 +192,9 @@ foreach ( $results as $result )
 
     );
 
-//        var_dump($data);
+//    var_dump($data);
 
-    if($result->ID == "43727"){
+//    if($result->ID == "43727"){
 
 
         $pod = pods( 'courses' );
@@ -207,14 +208,8 @@ foreach ( $results as $result )
             'post_name' => $newPermalink
         ));
 
-    echo "<br>";
-    echo "<br>";
-    echo $newPermalink = $data->display('oder');
-//    echo gettype(get_post_field( 'menu_order', $result->ID, true ));
-    echo "<br>";
-    echo "<br>";
 
-    }
+//    }
 
 
 
@@ -238,16 +233,17 @@ function getPacing($pacing)
 
 function getLanguage($lang)
 {
+    if($lang && $lang->name){
 
-    if($lang == "אנגלית")
-        return 'אנגלית , English  , الانجليزيه';
+        if($lang->name == "אנגלית")
+            return 'אנגלית , English  , الانجليزيه';
 
-    if($lang == "ערבית")
-        return 'ערבית , Arabic  , العربيه';
+        if($lang->name == "ערבית")
+            return 'ערבית , Arabic  , العربيه';
 
-    if($lang == "עברית")
-        return 'עברית , Hebrew  , العبرية';
-
+        if($lang->name == "עברית")
+            return 'עברית , Hebrew  , العبرية';
+    }
     return null;
 }
 
@@ -256,21 +252,21 @@ function getPodslecturerArray($postId)
 
     $lecturerArray = get_post_meta($postId, 'lecturer', true);
     $PodslecturerArray = array();
+    if($lecturerArray) :
+        foreach ($lecturerArray as $id):
 
-    foreach ($lecturerArray as $id):
+            $lecturer = get_post($id);
+            $name = $lecturer->post_title;
 
-        $lecturer = get_post($id);
-        $name = $lecturer->post_title;
+            if(strpos($name, '"') != false)
+                $name = str_replace('"','""', $name);
 
-        if(strpos($name, '"') != false)
-            $name = str_replace('"','""', $name);
+            $mypod = pods( 'lecturer', array('where' => 't.name LIKE "%' . $name . '%" or t.english_name LIKE "%' . $name . '%" or t.arabic_name LIKE "%' . $name . '%"') );
+            $Pod_lecturer_id = $mypod->display( 'id' );
+            array_push($PodslecturerArray, $Pod_lecturer_id);
 
-        $mypod = pods( 'lecturer', array('where' => 't.name LIKE "%' . $name . '%" or t.english_name LIKE "%' . $name . '%" or t.arabic_name LIKE "%' . $name . '%"') );
-        $Pod_lecturer_id = $mypod->display( 'id' );
-        array_push($PodslecturerArray, $Pod_lecturer_id);
-
-    endforeach;
-
+        endforeach;
+    endif;
     return $PodslecturerArray;
 }
 
@@ -279,22 +275,22 @@ function getPodsTestimonialArray($postId)
 
     $testimonialArray = get_post_meta($postId, 'testimonial', true);
     $PodstestimonialArray = array();
+    if($testimonialArray):
+        foreach ($testimonialArray as $id):
 
-    foreach ($testimonialArray as $id):
+            $testimonial = get_post($id);
+            $name = $testimonial->post_title;
+    //        var_dump($name);
 
-        $testimonial = get_post($id);
-        $name = $testimonial->post_title;
-//        var_dump($name);
+            if(strpos($name, '"') != false)
+                $name = str_replace('"','""', $name);
 
-        if(strpos($name, '"') != false)
-            $name = str_replace('"','""', $name);
+            $mypod = pods( 'testimonial', array('where' => 't.name LIKE "%' . $name . '%" or t.english_name LIKE "%' . $name . '%" or t.arabic_name LIKE "%' . $name . '%"') );
+            $Pod_testimonial_id = $mypod->display( 'id' );
+            array_push($PodstestimonialArray, $Pod_testimonial_id);
 
-        $mypod = pods( 'testimonial', array('where' => 't.name LIKE "%' . $name . '%" or t.english_name LIKE "%' . $name . '%" or t.arabic_name LIKE "%' . $name . '%"') );
-        $Pod_testimonial_id = $mypod->display( 'id' );
-        array_push($PodstestimonialArray, $Pod_testimonial_id);
-
-    endforeach;
-
+        endforeach;
+    endif;
     return $PodstestimonialArray;
 }
 
@@ -319,21 +315,21 @@ function getPodsCorporationInstitutionArray($postId)
 
     $academicInstitutionArray = get_post_meta($postId, 'corporation_institution', true);
     $podAcademicInstitutionArray = array();
+    if($academicInstitutionArray) :
+        foreach ($academicInstitutionArray as $id):
 
-    foreach ($academicInstitutionArray as $id):
+            $academic_institution = get_post($id);
+            $name = $academic_institution->post_title;
 
-        $academic_institution = get_post($id);
-        $name = $academic_institution->post_title;
+            if(strpos($name, '"') != false)
+                $name = str_replace('"','""', $name);
 
-        if(strpos($name, '"') != false)
-            $name = str_replace('"','""', $name);
+            $mypod = pods( 'academic_institution', array('where' => 't.name LIKE "%' . $name . '%" or t.english_name LIKE "%' . $name . '%" or t.arabic_name LIKE "%' . $name . '%"') );
+            $PodAcademic_institution_id = $mypod->display( 'id' );
+            array_push($podAcademicInstitutionArray, $PodAcademic_institution_id);
 
-        $mypod = pods( 'academic_institution', array('where' => 't.name LIKE "%' . $name . '%" or t.english_name LIKE "%' . $name . '%" or t.arabic_name LIKE "%' . $name . '%"') );
-        $PodAcademic_institution_id = $mypod->display( 'id' );
-        array_push($podAcademicInstitutionArray, $PodAcademic_institution_id);
-
-    endforeach;
-
+        endforeach;
+    endif;
     return $podAcademicInstitutionArray;
 }
 
@@ -342,18 +338,20 @@ function getPodsCorporationInstitutionArray($postId)
 function getCertificate($certificate)
 {
 
-    if($certificate == "אין תעודה")
-        return 'אין תעודה , No certificate  , لا يحتوي على شهادة';
+    if($certificate && $certificate->name){
+        if($certificate->name == "אין תעודה")
+            return 'אין תעודה , No certificate  , لا يحتوي على شهادة';
 
-    if($certificate == "כולל תעודה בקמפוסIL")
-        return 'כולל תעודה בקמפוסIL , Contains a certificate on Campus IL  , يحتوي على شهادة في كامبوس';
+        if($certificate->name == "כולל תעודה בקמפוסIL")
+            return 'כולל תעודה בקמפוסIL , Contains a certificate on Campus IL  , يحتوي على شهادة في كامبوس';
 
-    if($certificate == "קרדיט בכפוף לבחינה במוסד")
-        return 'קרדיט בכפוף לבחינה במוסד , Credit subject to university exam , يوجد شهادة , لكن يتوجّب اجتياز امتحان في المعهد التعليمي';
+        if($certificate->name == "קרדיט בכפוף לבחינה במוסד")
+            return 'קרדיט בכפוף לבחינה במוסד , Credit subject to university exam , يوجد شهادة , لكن يتوجّب اجتياز امتحان في المعهد التعليمي';
 
-    if($certificate == "תעודה בתוספת תשלום")
-        return 'תעודה בתוספת תשלום , Verified payed for Certificate of an external education system  , برسوم-اضافيّة';
+        if($certificate->name == "תעודה בתוספת תשלום")
+            return 'תעודה בתוספת תשלום , Verified payed for Certificate of an external education system  , برسوم-اضافيّة';
 
+    }
     return null;
 }
 
