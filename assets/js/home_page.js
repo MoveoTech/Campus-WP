@@ -736,9 +736,10 @@ function getMyCourses() {
 }
 
 function appendMyCourses(coursesData, id) {
+    let courseStripe = document.getElementById(id);
+    if(!courseStripe) return;
+
     coursesData.forEach(item =>{
-        let courseStripe = document.getElementById(id);
-        if(!courseStripe) return;
         let itemData = {
             thumb: item.course_details.image,
             progress: item.course_details.progress,
@@ -758,7 +759,6 @@ function appendMyCourses(coursesData, id) {
 
         courseStripe.append(temp)
     });
-
 }
 
 function changeArrowClass(id, type=null) {

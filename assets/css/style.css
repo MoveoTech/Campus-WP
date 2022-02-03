@@ -18387,25 +18387,25 @@ html:not(.user_is_not_logged_in) .header_login {
   flex-direction: column;
   position: relative; }
   .home-page-info-stripe .back-img-1 {
-    background: url("../../assets/images/info-stripe-img2.png");
+    background: url("../../assets/images/info-stripe-img2.svg");
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
     width: 113px;
-    height: 182px;
+    height: 239px;
     position: absolute;
     left: 0;
-    top: 0; }
+    top: 43px; }
   .home-page-info-stripe .back-img-2 {
-    background: url("../../assets/images/info-stripe-img1.png");
+    background: url("../../assets/images/info-stripe-img1.svg");
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
-    width: 179px;
-    height: 140px;
+    width: 129px;
+    height: 317px;
     position: absolute;
     right: 0;
-    bottom: 0; }
+    top: 17px; }
   .home-page-info-stripe .stripe-container {
     max-width: 1440px;
     margin: 0 auto; }
@@ -18518,7 +18518,7 @@ html:not(.user_is_not_logged_in) .header_login {
   align-items: center;
   position: relative; }
   .home-page-tags-stripe .back-img-1 {
-    background: url("../../assets/images/tags-stripe-img1.png");
+    background: url("../../assets/images/tags-stripe-img1.svg");
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -18534,12 +18534,12 @@ html:not(.user_is_not_logged_in) .header_login {
       .home-page-tags-stripe .back-img-1 {
         display: none; } }
   .home-page-tags-stripe .back-img-2 {
-    background: url("../../assets/images/tags-stripe-img2.png");
+    background: url("../../assets/images/tags-stripe-img2.svg");
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
     width: 156px;
-    height: 240px;
+    height: 100%;
     position: absolute;
     right: 0;
     top: 0; }
@@ -18735,9 +18735,20 @@ html:not(.user_is_not_logged_in) .header_login {
         align-items: center;
         justify-content: flex-end;
         position: relative; }
-        .home-page-goals-stripe .stripe-container .goals-slider .goal-item:hover .bg-gradient {
+        .home-page-goals-stripe .stripe-container .goals-slider .goal-item:hover .bg-gradient-hover {
+          opacity: 1;
           background: linear-gradient(0deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), linear-gradient(0deg, #282923 0%, rgba(0, 0, 0, 0.1) 55.31%);
-          transition: background 300ms linear; }
+          transition: opacity 300ms linear; }
+        .home-page-goals-stripe .stripe-container .goals-slider .goal-item .bg-gradient-hover {
+          border-radius: 10px;
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          z-index: 0;
+          opacity: 0;
+          transition: opacity 300ms linear; }
         .home-page-goals-stripe .stripe-container .goals-slider .goal-item .bg-gradient {
           border-radius: 10px;
           position: absolute;
@@ -18780,25 +18791,25 @@ html:not(.user_is_not_logged_in) .header_login {
   background: #F9F9F9;
   position: relative; }
   .home-page-testimonials_stripe .back-img-1 {
-    background: url("../../assets/images/testimonials-bckg-1.png");
+    background: url("../../assets/images/info-stripe-img2.svg");
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
     width: 113px;
-    height: 182px;
+    height: 230px;
     position: absolute;
     left: 0;
-    top: 0; }
+    top: 20%; }
   .home-page-testimonials_stripe .back-img-2 {
-    background: url("../../assets/images/testimonials-bckg-2.png");
+    background: url("../../assets/images/info-stripe-img1.svg");
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
-    width: 179px;
-    height: 158px;
+    width: 115px;
+    height: 317px;
     position: absolute;
     right: 0;
-    bottom: 0; }
+    top: 10%; }
   .home-page-testimonials_stripe .stripe-container {
     max-width: 1440px;
     margin: 0 auto; }

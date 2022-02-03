@@ -9,7 +9,7 @@
     $institution_name = $course['institution'];
     $tags = $course['tags'];
     $duration = $course['duration'];
-
+    $url = $course['url'];
     global $sitepress;
 ?>
 
