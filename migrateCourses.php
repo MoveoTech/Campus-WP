@@ -21,106 +21,105 @@ $index=1;
 foreach ( $results as $result )
 {
 //    if($result->ID == "43727"):
-        if(false):
-
-    ?>
-
-
-    <div class="restaurant-card" style="border: 1px solid red; min-height: 150px; padding: 10px">
-        <h4>lecturer Number :</h4><p> <?php echo $index++; ?></p>
-        <h4>ID :</h4><p class="name"> <?php echo $result->ID; ?></p>
-        <h4>Name : </h4><p class="name"><?php echo $result->post_title; ?></p>
-        <h4>PermaLink : </h4><p class="name"><?php echo get_permalink($result->ID); ?></p>
-        <h4>created : </h4><p class="name"><?php echo $result->post_date; ?></p>
-        <h4>modified : </h4><p class="name"><?php echo $result->post_modified; ?></p>
-        <h4>Author ID :</h4><p class="name"> <?php echo $result->post_author; ?></p>
-        <h4>Description : </h4><p class="name"><?php echo $result->post_content; ?></p>
-        <h4>Excerpt : </h4><p class="name"><?php echo $result->post_excerpt; ?></p>
-        <h4>Meta Keywords : </h4><p class="name"><?php echo get_post_meta($result->ID, 'meta_keywords', true); ?></p>
-
-        <br>
-        <h1 style="color: red">--------------------------</h1>
-        <br>
-
-
-        <h4>image : </h4><p class="name"><?php echo wp_get_attachment_url( get_post_thumbnail_id($result->ID), 'thumbnail' ); ?></p>
-        <h4>Meta Keywords : </h4><p class="name"><?php echo get_post_meta($result->ID, 'course_banner', true); ?></p>
-        <h4>Meta Keywords : </h4><p class="name"><?php echo get_post_meta($result->ID, 'banner_for_mobile_course', true); ?></p>
-
-
-        <br>
-        <h1 style="color: red">--------------------------</h1>
-        <br>
-
-
-        <h4>Course ID edX :</h4><p class="name"> <?php echo get_post_meta($result->ID, 'course_id_edx', true); ?></p>
-        <h4>Trailer :</h4><p class="name"> <?php echo get_post_meta($result->ID, 'course_video', true); ?></p>
-        <h4>Title on banner :</h4><p class="name"> <?php echo get_post_meta($result->ID, 'title_on_banner_course', true); ?></p>
-        <h4>Start Date :</h4><p class="name"> <?php echo get_post_meta($result->ID, 'start', true); ?></p>
-        <h4>End Date :</h4><p class="name"> <?php echo get_post_meta($result->ID, 'end', true); ?></p>
-        <h4>Duration :</h4><p class="name"> <?php echo get_post_meta($result->ID, 'duration', true); ?></p>
-        <h4>Price :</h4><p class="name"> <?php echo get_post_meta($result->ID, 'price', true); ?></p>
-        <h4>External link :</h4><p class="name"> <?php echo get_post_meta($result->ID, 'external_link', true); ?></p>
-        <h4>Course Products :</h4><p class="name"> <?php echo get_post_meta($result->ID, 'description', true); ?></p>
-
-
-        <h4>lecturer :</h4><p class="name"> <?php var_dump(get_post_meta($result->ID, 'lecturer', true)); ?></p>
-        <h4>Testimonials :</h4><p class="name"> <?php var_dump(get_post_meta($result->ID, 'testimonial', true)); ?></p>
-        <h4>Institution :</h4><p class="name"> <?php var_dump(get_post_meta($result->ID, 'org', true)); ?></p>
-        <h4>Corporation institution :</h4><p class="name"> <?php var_dump(get_post_meta($result->ID, 'corporation_institution', true)); ?></p>
-
-        <!-- certificate -->
-        <?php
-        $certificate_id  =get_post_meta($result->ID, 'certificate', true);
-        $certificate = get_term( $certificate_id );
-        ?>
-        <h4>certificate</h4><p class="name"> <?php echo $certificate->name; ?></p>
-        <h4>certificate Pod : </h4><p class="name"> <?php echo getCertificate($certificate->name); ?></p>
-
-        <!-- Pacing -->
-        <h4>Pacing : </h4><p class="name"> <?php echo get_post_meta($result->ID, 'pacing', true); ?></p>
-        <h4>Pacing Pod : </h4><p class="name"> <?php echo getPacing(get_post_meta($result->ID, 'pacing', true)); ?></p>
-
-        <!-- Language -->
-        <?php
-        $language_id  =get_post_meta($result->ID, 'language_course', true);
-        $language = get_term( $language_id );
-        echo $language->taxonomy;
-        ?>
-        <h4>Language</h4><p class="name"> <?php echo $language->name; ?></p>
-        <h4>Language Pod : </h4><p class="name"> <?php echo getLanguage($language->name); ?></p>
-
-        <!-- Subtitle Language -->
-        <br style="color: gold">
-        <?php
-        $subTitleLanguage_id  =get_post_meta($result->ID, 'subtitle_lang', true);
-        $subTitleLanguages = array();
-        $subTitleLanguagesPod = array();
-        foreach ($subTitleLanguage_id as $lang):
-            $subTitleLanguage = get_term( $lang );
-            array_push($subTitleLanguages, $subTitleLanguage->name);
-            array_push($subTitleLanguagesPod, getLanguage($subTitleLanguage->name));
-
-            echo $subTitleLanguage->name;
-        endforeach;
+    if(false):
 
         ?>
-        <h4>Sub Title Language</h4><p class="name"> <?php var_dump($subTitleLanguages); ?></p>
-        <h4>Sub Title Language Pod : </h4><p class="name"> <?php var_dump($subTitleLanguagesPod); ?></p>
 
-        <h4>Syllabus Link :</h4><p class="name"> <?php echo get_post_meta($result->ID, 'syllabus', true); ?></p>
-        <h4>Mobile Available :</h4><p class="name"> <?php echo get_post_meta($result->ID, 'mobile_available', true); ?></p>
-        <h4>Enrollment start :</h4><p class="name"> <?php echo get_post_meta($result->ID, 'enrollment_start', true); ?></p>
-        <h4>Enrollment end :</h4><p class="name"> <?php echo get_post_meta($result->ID, 'enrollment_end', true); ?></p>
-        <h4>Hide in site :</h4><p class="name"> <?php echo get_post_meta($result->ID, 'campus_hide_in_site', true); ?></p>
-        <h4>קוד javaScript :</h4><p class="name"> <?php echo get_post_meta($result->ID, 'js_code', true); ?></p>
 
-        <h4>Order :</h4><p class="name"> <?php echo get_post_meta($result->ID, 'order', true); ?></p>
-        <h4>Order :</h4><p class="name"> <?php echo $result->post_attributes; ?></p>
+        <div class="restaurant-card" style="border: 1px solid red; min-height: 150px; padding: 10px">
+            <h4>lecturer Number :</h4><p> <?php echo $index++; ?></p>
+            <h4>ID :</h4><p class="name"> <?php echo $result->ID; ?></p>
+            <h4>Name : </h4><p class="name"><?php echo $result->post_title; ?></p>
+            <h4>PermaLink : </h4><p class="name"><?php echo get_permalink($result->ID); ?></p>
+            <h4>created : </h4><p class="name"><?php echo $result->post_date; ?></p>
+            <h4>modified : </h4><p class="name"><?php echo $result->post_modified; ?></p>
+            <h4>Author ID :</h4><p class="name"> <?php echo $result->post_author; ?></p>
+            <h4>Description : </h4><p class="name"><?php echo $result->post_content; ?></p>
+            <h4>Excerpt : </h4><p class="name"><?php echo $result->post_excerpt; ?></p>
+            <h4>Meta Keywords : </h4><p class="name"><?php echo get_post_meta($result->ID, 'meta_keywords', true); ?></p>
 
-        <!-- Order -->
+            <br>
+            <h1 style="color: red">--------------------------</h1>
+            <br>
 
-    </div>
+
+            <h4>image : </h4><p class="name"><?php echo wp_get_attachment_url( get_post_thumbnail_id($result->ID), 'thumbnail' ); ?></p>
+            <h4>Meta Keywords : </h4><p class="name"><?php echo get_post_meta($result->ID, 'course_banner', true); ?></p>
+            <h4>Meta Keywords : </h4><p class="name"><?php echo get_post_meta($result->ID, 'banner_for_mobile_course', true); ?></p>
+
+
+            <br>
+            <h1 style="color: red">--------------------------</h1>
+            <br>
+
+
+            <h4>Course ID edX :</h4><p class="name"> <?php echo get_post_meta($result->ID, 'course_id_edx', true); ?></p>
+            <h4>Trailer :</h4><p class="name"> <?php echo get_post_meta($result->ID, 'course_video', true); ?></p>
+            <h4>Title on banner :</h4><p class="name"> <?php echo get_post_meta($result->ID, 'title_on_banner_course', true); ?></p>
+            <h4>Start Date :</h4><p class="name"> <?php echo get_post_meta($result->ID, 'start', true); ?></p>
+            <h4>End Date :</h4><p class="name"> <?php echo get_post_meta($result->ID, 'end', true); ?></p>
+            <h4>Duration :</h4><p class="name"> <?php echo get_post_meta($result->ID, 'duration', true); ?></p>
+            <h4>Price :</h4><p class="name"> <?php echo get_post_meta($result->ID, 'price', true); ?></p>
+            <h4>External link :</h4><p class="name"> <?php echo get_post_meta($result->ID, 'external_link', true); ?></p>
+            <h4>Course Products :</h4><p class="name"> <?php echo get_post_meta($result->ID, 'description', true); ?></p>
+
+
+            <h4>lecturer :</h4><p class="name"> <?php var_dump(get_post_meta($result->ID, 'lecturer', true)); ?></p>
+            <h4>Testimonials :</h4><p class="name"> <?php var_dump(get_post_meta($result->ID, 'testimonial', true)); ?></p>
+            <h4>Institution :</h4><p class="name"> <?php var_dump(get_post_meta($result->ID, 'org', true)); ?></p>
+            <h4>Corporation institution :</h4><p class="name"> <?php var_dump(get_post_meta($result->ID, 'corporation_institution', true)); ?></p>
+
+            <!-- certificate -->
+            <?php
+            $certificate_id  =get_post_meta($result->ID, 'certificate', true);
+            $certificate = get_term( $certificate_id );
+            ?>
+            <h4>certificate</h4><p class="name"> <?php echo $certificate->name; ?></p>
+            <h4>certificate Pod : </h4><p class="name"> <?php echo getCertificate($certificate->name); ?></p>
+
+            <!-- Pacing -->
+            <h4>Pacing : </h4><p class="name"> <?php echo get_post_meta($result->ID, 'pacing', true); ?></p>
+            <h4>Pacing Pod : </h4><p class="name"> <?php echo getPacing(get_post_meta($result->ID, 'pacing', true)); ?></p>
+
+            <!-- Language -->
+            <?php
+            $language_id  =get_post_meta($result->ID, 'language_course', true);
+            $language = get_term( $language_id );
+            echo $language->taxonomy;
+            ?>
+            <h4>Language</h4><p class="name"> <?php echo $language->name; ?></p>
+            <h4>Language Pod : </h4><p class="name"> <?php echo getLanguage($language->name); ?></p>
+
+            <!-- Subtitle Language -->
+            <br style="color: gold">
+            <?php
+            $subTitleLanguage_id  =get_post_meta($result->ID, 'subtitle_lang', true);
+            $subTitleLanguages = array();
+            $subTitleLanguagesPod = array();
+            foreach ($subTitleLanguage_id as $lang):
+                $subTitleLanguage = get_term( $lang );
+                array_push($subTitleLanguages, $subTitleLanguage->name);
+                array_push($subTitleLanguagesPod, getLanguage($subTitleLanguage->name));
+
+                echo $subTitleLanguage->name;
+            endforeach;
+
+            ?>
+            <h4>Sub Title Language</h4><p class="name"> <?php var_dump($subTitleLanguages); ?></p>
+            <h4>Sub Title Language Pod : </h4><p class="name"> <?php var_dump($subTitleLanguagesPod); ?></p>
+
+            <h4>Syllabus Link :</h4><p class="name"> <?php echo get_post_meta($result->ID, 'syllabus', true); ?></p>
+            <h4>Mobile Available :</h4><p class="name"> <?php echo get_post_meta($result->ID, 'mobile_available', true); ?></p>
+            <h4>Enrollment start :</h4><p class="name"> <?php echo get_post_meta($result->ID, 'enrollment_start', true); ?></p>
+            <h4>Enrollment end :</h4><p class="name"> <?php echo get_post_meta($result->ID, 'enrollment_end', true); ?></p>
+            <h4>Hide in site :</h4><p class="name"> <?php echo get_post_meta($result->ID, 'campus_hide_in_site', true); ?></p>
+            <h4>קוד javaScript :</h4><p class="name"> <?php echo get_post_meta($result->ID, 'js_code', true); ?></p>
+
+            <h4>Order :</h4><p class="name"> <?php echo get_post_field( 'menu_order', $result->ID, true ); ?></p>
+
+            <!-- Order -->
+
+        </div>
 
 
     <?php
@@ -135,14 +134,14 @@ foreach ( $results as $result )
 
 
     $link = explode( '/', get_permalink($result->ID) );
-    echo "<br>";
-    echo "<br>";
-    echo "<br>";
-
-    echo $result->post_title;
-    echo "<br>";
-    echo $link[count($link)-2];
-    echo "<br>";
+//    echo "<br>";
+//    echo "<br>";
+//    echo "<br>";
+//
+//    echo $result->post_title;
+//    echo "<br>";
+//    echo $link[count($link)-2];
+//    echo "<br>";
 
     $data = array(
         'name' => $result->post_title,
@@ -186,26 +185,40 @@ foreach ( $results as $result )
         'hide_in_site' => get_post_meta($result->ID, 'campus_hide_in_site', true),
         'javascript_code' => get_post_meta($result->ID, 'js_code', true),
 
-//        <!-- Order -->
-//        'order' => get_post_meta($result->ID, 'order', true),
+        'order' => get_post_field( 'menu_order', $result->ID, true )
 
 
 
     );
 
-//    var_dump(count($data));
-
-    $pod = pods( 'courses' );
-
-    if($result->ID == "22409"){
 //        var_dump($data);
+
+    if($result->ID == "43727"){
+
+
+        $pod = pods( 'courses' );
+
         $CourseID = $pod->add( $data );
+
+        $data = pods("courses", $CourseID);
+        $newPermalink = $data->display('permalink');
+        wp_update_post( array(
+            'ID' => $result->ID,
+            'post_name' => $newPermalink
+        ));
+
+    echo "<br>";
+    echo "<br>";
+    echo $newPermalink = $data->display('oder');
+//    echo gettype(get_post_field( 'menu_order', $result->ID, true ));
+    echo "<br>";
+    echo "<br>";
+
     }
 
 
-//    var_dump($data);
-    // Add the new item now and get the new ID
-//    $new_book_id = $pod->add( $data );
+
+
 
 }
 

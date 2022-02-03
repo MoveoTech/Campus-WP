@@ -96,8 +96,15 @@ for($i=0 ; $i <  count($hebrew_ids) ; $i++)
     var_dump($data);
 
 // Add the new item now and get the new ID
-//    $academic_institution = $pod->add( $data);
+    $academic_institution = $pod->add( $data);
 
+    $data = pods("courses", $academic_institution);
+    $newPermalink = $data->display('permalink');
+
+    wp_update_post( array(
+        'ID' => $result->ID,
+        'post_name' => $newPermalink
+    ));
 
 }
 
