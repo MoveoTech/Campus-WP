@@ -791,59 +791,48 @@ function changeArrowClass(id, type=null) {
 
 function mouseHoverOnCourse() {
     jQuery(`.course-stripe-item`).unbind('mouseenter');
-    // jQuery(`.course-item-hover`).unbind('mouseleave');
+    let enterTimer;
 
     jQuery('.course-stripe-item').mouseenter(function (event) {
-        let width = document.documentElement.clientWidth;
-        if(width > 768) {
-            let id = event.target.id;
-            if(id == '') { id = event.target.parentElement.id;}
-            if(id == '') { id = event.target.parentElement.parentElement.id;}
-            if(id == '') { id = event.target.parentElement.parentElement.parentElement.id;}
-            courseItem = jQuery(`.${id}`);
-
-            var element = jQuery(`.${id}`);
-            var parentElem = jQuery(`#${id}`);
-            var pos = parentElem.offset();
-
-            element.appendTo(jQuery('body'));
-            element.css({
-                display : 'block',
-                position : 'absolute',
-            }).offset(pos);
-
-            element.mouseleave(function (event) {
-                // console.log(event.currentTarget)
-                element.appendTo( jQuery(`#${id}`));
-                element.css('display', 'none');
-                element.css('inset', 'unset');
-                element.unbind('mouseleave');
-            })
+        if(jQuery('body').children('div.course-item-hover').length > 0) {
+            let id = jQuery('body').children('div.course-item-hover')[0].classList[1];
+            let oldHoverElement = jQuery(`.${id}`);
+            oldHoverElement.appendTo(`#${id}`);
+            oldHoverElement.css('display', 'none');
+            oldHoverElement.css('inset', 'unset');
         }
-    })
+        enterTimer = setTimeout(function() {
+            let width = document.documentElement.clientWidth;
+            if(width > 768) {
+                let id = event.target.id;
+                if(id == '') { id = event.target.parentElement.id;}
+                if(id == '') { id = event.target.parentElement.parentElement.id;}
+                if(id == '') { id = event.target.parentElement.parentElement.parentElement.id;}
 
-    // jQuery(`.course-item-hover`).mouseleave(function (event) {
-    //     // console.log(event.currentTarget.classList[1])
-    //     let id = event.currentTarget.classList[1];
-    //     let width = document.documentElement.clientWidth;
-    //     if(width > 768) {
-    //         // let id = event.target.id;
-    //         // if(id == '') { id = event.target.parentElement.id;}
-    //         // if(id == '') { id = event.target.parentElement.parentElement.id;}
-    //         // if(id == '') { id = event.target.parentElement.parentElement.parentElement.id;}
-    //         //
-    //         var element = jQuery(`.${id}`);
-    //         // var parentElem = jQuery(`#${id}`);
-    //         // var pos = parentElem.offset();
-    //
-    //         element.appendTo( jQuery(`#${id}`));
-    //         element.css({
-    //             display : 'none',
-    //             position : 'unset',
-    //             inset : 'unset'
-    //         })
-    //     }
-    // })
+                let element = jQuery(`.${id}`);
+                let parentElem = jQuery(`#${id}`);
+                let top = parentElem.offset().top - 5 ;
+                let left = parentElem.offset().left - 10;
+                let pos = {top , left};
+                element.appendTo(jQuery('body'));
+                element.css({
+                    display : 'block',
+                    position : 'absolute',
+                }).offset(pos)
+            }
+        }, 700);
+    })
+    jQuery('.course-stripe-item').mouseleave(function(){
+        clearTimeout(enterTimer);
+    })
+    jQuery('.course-item-hover').mouseleave(function (event) {
+        clearTimeout(enterTimer);
+        let id = event.currentTarget.classList[1]
+        let element = jQuery(`.${id}`);
+        element.appendTo(`#${id}`);
+        element.css('display', 'none');
+        element.css('inset', 'unset');
+    })
 
 }
 
