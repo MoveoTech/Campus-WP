@@ -2,6 +2,7 @@
 window.addEventListener('DOMContentLoaded', (event) => {
     check();
     validateDuplicatedTagsGroup();
+
 });
 
 
@@ -56,97 +57,107 @@ function removeGroups(group){
 
 
 
-async function validateDuplicatedTagsGroup(){
+async function validateDuplicatedTagsGroup() {
 
     var tagsContainer = document.getElementById("pods-meta-box-tags");
-    if(!tagsContainer)
+    console.log(name);
+    if (!tagsContainer)
         return;
 
     var ulContainer = tagsContainer.querySelectorAll(".pods-pick-values");
 
-    if(!ulContainer)
+    if (!ulContainer)
         return;
 
-    ulContainer[0].addEventListener('DOMSubtreeModified', async function(e) {
 
-        var tags = ulContainer[0].querySelectorAll("ul.pods-relationship li.pods-relationship");
+    ulContainer.forEach(container => {
+        container.addEventListener('DOMSubtreeModified', async function (e) {
+            var tags = container.querySelectorAll("ul.pods-relationship li.pods-relationship");
 
-        var uniqueDulicatedMode = await getUniqueDulicatedModes(tags);
-        showDuplicatesTags(tags, uniqueDulicatedMode);
-        var errorContainer = tagsContainer.getElementsByClassName("pods-submittable-fields");
+            var uniqueDulicatedMode = await getUniqueDulicatedModes(tags);
+            showDuplicatesTags(tags, uniqueDulicatedMode);
+            // var errorContainer = tagsContainer.getElementsByClassName("pods-submittable-fields");
+            var errorContainer = container.closest('div .pods-submittable-fields');
 
-        if(uniqueDulicatedMode.length > 0)
-            showErorMessage(errorContainer[0], uniqueDulicatedMode);
-        else
-            removeErrorMessage(errorContainer[0]);
+            if (uniqueDulicatedMode.length > 0)
+                showErorMessage(errorContainer, uniqueDulicatedMode);
+            else
+                removeErrorMessage(errorContainer);
 
-    });
-}
-function removeErrorMessage(errorContainer){
-
-    var message = errorContainer.querySelector('.tags-modes-error');
-    if(message){
-        errorContainer.removeChild(message);
-        document.getElementById("publishing-action").getElementsByTagName("input")[0].disabled = false;
-    }
-
-}
-
-function showErorMessage(errorContainer,modes){
-    removeErrorMessage(errorContainer)
-    var message = "Duplicated Tags Group : " + modes.join();
-    var error = `<div class="tags-modes-error" style='position: relative; display: block; color: #cc2727;  border-color: #d12626; margin: 5px 0 15px; padding: 12px; border-left: #ee0000 solid 3px; background: #ffe6e6; max-width: 776px;'><p>${message}</p></div>`;
-    document.getElementById("publishing-action").getElementsByTagName("input")[0].disabled = true;
-
-    errorContainer.insertAdjacentHTML("afterbegin",error);
-}
-
-
-function showDuplicatesTags(tags, modes){
-    tags.forEach(e =>{
-        if(checkInvalidMode(e, modes))
-            e.style.backgroundColor = '#ffe6e6';
-        else
-            e.style.backgroundColor = '#fff';
-
+        });
     })
 }
 
-function checkInvalidMode(e, modes){
-    var tagName = e.getElementsByClassName("pods-dfv-list-name");
-    if(tagName[0].textContent.includes(" - ")){
-        const [name, mode] = tagName[0].textContent.split(' - ');
-        if(modes.includes(mode))
-            return true;
-    }
-    return false;
-}
 
-function getUniqueDulicatedModes(tags){
-    var tagsNameArray = [];
-    tags.forEach(e =>{
+    function removeErrorMessage(errorContainer){
+
+        var message = errorContainer.querySelector('.tags-modes-error');
+
+        if(message){
+            errorContainer.removeChild(message);
+        }
+        let errors = document.querySelectorAll(".tags-modes-error");
+        if(errors.length == 0){
+            document.getElementById("publishing-action").getElementsByTagName("input")[0].disabled = false;
+        }
+
+    }
+
+    function showErorMessage(errorContainer,modes){
+        removeErrorMessage(errorContainer);
+        var message = "Duplicated Tags Group : " + modes.join();
+        var error = `<div class="tags-modes-error" style='position: relative; display: block; color: #cc2727;  border-color: #d12626; margin: 5px 0 15px; padding: 12px; border-left: #ee0000 solid 3px; background: #ffe6e6; max-width: 776px;'><p>${message}</p></div>`;
+        document.getElementById("publishing-action").getElementsByTagName("input")[0].disabled = true;
+
+        errorContainer.insertAdjacentHTML("afterbegin",error);
+    }
+
+
+    function showDuplicatesTags(tags, modes){
+        tags.forEach(e =>{
+            if(checkInvalidMode(e, modes))
+                e.style.backgroundColor = '#ffe6e6';
+            else
+                e.style.backgroundColor = '#fff';
+
+        })
+    }
+
+    function checkInvalidMode(e, modes){
         var tagName = e.getElementsByClassName("pods-dfv-list-name");
         if(tagName[0].textContent.includes(" - ")){
             const [name, mode] = tagName[0].textContent.split(' - ');
-            tagsNameArray.push(mode)
+            if(modes.includes(mode))
+                return true;
         }
-    })
-    return [...new Set(findDuplicates(tagsNameArray))];
-}
+        return false;
+    }
 
-function toFindDuplicates(arry) {
-    const uniqueElements = new Set(arry);
-    const filteredElements = arry.filter(item => {
-        if (uniqueElements.has(item)) {
-            uniqueElements.delete(item);
-        } else {
-            return item;
-        }
-    });
+    function getUniqueDulicatedModes(tags){
+        var tagsNameArray = [];
+        tags.forEach(e =>{
+            var tagName = e.getElementsByClassName("pods-dfv-list-name");
+            if(tagName[0].textContent.includes(" - ")){
+                const [name, mode] = tagName[0].textContent.split(' - ');
+                tagsNameArray.push(mode)
+            }
+        })
+        return [...new Set(findDuplicates(tagsNameArray))];
+    }
 
-    return [...new Set(uniqueElements)]
-}
+    function toFindDuplicates(arry) {
+        const uniqueElements = new Set(arry);
+        const filteredElements = arry.filter(item => {
+            if (uniqueElements.has(item)) {
+                uniqueElements.delete(item);
+            } else {
+                return item;
+            }
+        });
 
-function findDuplicates(arr){
-    return arr.filter((item, index) => arr.indexOf(item) != index)
-}
+        return [...new Set(uniqueElements)]
+    }
+
+    function findDuplicates(arr){
+        return arr.filter((item, index) => arr.indexOf(item) != index)
+    }
