@@ -243,7 +243,7 @@ function getLanguage($lang)
         return 'אנגלית , English  , الانجليزيه';
 
     if($lang == "ערבית")
-        return 'עברית , Hebrew  , العبرية';
+        return 'ערבית , Arabic  , العربيه';
 
     if($lang == "עברית")
         return 'עברית , Hebrew  , العبرية';
