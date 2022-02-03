@@ -396,7 +396,7 @@ function cache_purge_action_js() { ?>
 }
 
 function pods_RELPODNAME_pick_data($data, $name, $value, $options, $pod, $id){
-    if ($name == "pods_field_tags" || "pods_field_marketing_tags") {
+    if ($name == "pods_field_tags" || $name == "pods_field_marketing_tags") {
         foreach ($data as $dataid => &$value) {
             if($dataid){
                 $p = pods('tags', $dataid);
