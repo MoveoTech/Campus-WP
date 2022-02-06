@@ -386,7 +386,6 @@
 .home-page-goals-stripe {
   z-index: 0;
   background: #333433;
-
   .stripe-container {
     position: relative;
     max-width: 1440px;
@@ -488,7 +487,6 @@
         &:hover {
           .bg-gradient-hover {
             opacity: 1;
-            background: linear-gradient(0deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), linear-gradient(0deg, #282923 0%, rgba(0, 0, 0, 0.1) 55.31%);
             transition: opacity 300ms linear;
           }
         }
@@ -500,6 +498,7 @@
           width: 100%;
           height: 100%;
           z-index: 0;
+          background: linear-gradient(0deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), linear-gradient(0deg, #282923 0%, rgba(0, 0, 0, 0.1) 55.31%);
           opacity: 0;
           transition: opacity 300ms linear;
         }
