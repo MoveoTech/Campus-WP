@@ -51,7 +51,7 @@ wp_head();
                     </nav>
                 </div>
                 <div class="search-form login_search_lang_wrap ">
-                    <span class="search-button"><img src="<?= get_bloginfo('stylesheet_directory') . '/assets/images/search-mobile.png' ?>" /></span>
+                    <span class="search-button"><img src="<?= get_bloginfo('stylesheet_directory') . '/assets/images/search-mobile.svg' ?>" /></span>
                     <div class="header-courses">
                         <?php get_search_form(); ?>
                     </div>
@@ -97,9 +97,9 @@ function get_user_hello()
 {
     return '
     <div class="user-information show_for_connected_user">
-        <img width="30px" src="' . get_bloginfo('stylesheet_directory') . '/assets/images/cactus.png' .'" alt="user icon">
+        <img width="30px" src="' . get_bloginfo('stylesheet_directory') . '/assets/images/cactus.svg' .'" alt="user icon">
                   <span class="name-user"></span>            
-         <img src="' . get_bloginfo('stylesheet_directory') . '/assets/images/vector.png' .'" />
+         <img src="' . get_bloginfo('stylesheet_directory') . '/assets/images/vector.svg' .'" />
     </div>';
 }
 function get_user_login()
@@ -186,7 +186,7 @@ function get_user_menu() {
 
     return '
     <ul id="menu-user-menu-1" class="nav-user">
-       <li class="user-list-item change-lang-menu"><a class="a-link"></a><img src="' . get_bloginfo('stylesheet_directory') . '/assets/images/lang-logo.png' .'"><span class="list-item-content">'.$language.'</span><img class="mobile-menu-vector" src="' . get_bloginfo('stylesheet_directory') . '/assets/images/vector-black.png' .'"/> 
+       <li class="user-list-item change-lang-menu"><a class="a-link"></a><img src="' . get_bloginfo('stylesheet_directory') . '/assets/images/lang-logo.svg' .'"><span class="list-item-content">'.$language.'</span><img class="mobile-menu-vector" src="' . get_bloginfo('stylesheet_directory') . '/assets/images/vector-black.svg' .'"/> 
            <div class="secondary-lang-menu">
                <ul id="menu-language-menu-1" class="nav-lang">
                     <li id="wpml-ls-item-he" class="wpml-ls-menu-item wpml-ls-item-he ' . current_active_lang( 'he' ) . '"><a href="' . get_lang_url( 'he' ) . '"><span class="wpml-ls-native">עב</span></a></li>
@@ -195,9 +195,9 @@ function get_user_menu() {
                 </ul>
             </div>
        </li>
-        <li class="user-list-item "><a class="a-link profile-button" target="_blank"></a><img src="' . get_bloginfo('stylesheet_directory') . '/assets/images/profile.png' .'"><span class="list-item-content">'.$profile.'</span></li>
-        <li class="user-list-item"><a class="a-link" target="_blank" href="'. get_field('link_to_dashboard_for_campus', 'option') .'"></a><img src="' . get_bloginfo('stylesheet_directory') . '/assets/images/equalizer.png' .'"><span class="list-item-content">'.$controlpanel.'</span></li>
-        <li class="user-list-item user-logged-out"><a class="a-link logout-button" target="_blank"></a><img src="' . get_bloginfo('stylesheet_directory') . '/assets/images/logout.png' .'"><span class="list-item-content">'.$logout.'</span></li>         
+        <li class="user-list-item "><a class="a-link profile-button" target="_blank"></a><img src="' . get_bloginfo('stylesheet_directory') . '/assets/images/profile.svg' .'"><span class="list-item-content">'.$profile.'</span></li>
+        <li class="user-list-item"><a class="a-link" target="_blank" href="'. get_field('link_to_dashboard_for_campus', 'option') .'"></a><img src="' . get_bloginfo('stylesheet_directory') . '/assets/images/equalizer.svg' .'"><span class="list-item-content">'.$controlpanel.'</span></li>
+        <li class="user-list-item user-logged-out"><a class="a-link logout-button" target="_blank"></a><img src="' . get_bloginfo('stylesheet_directory') . '/assets/images/logout.svg' .'"><span class="list-item-content">'.$logout.'</span></li>         
     </ul>
     
     

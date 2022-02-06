@@ -161,7 +161,7 @@ main {
   position: absolute;
   background: #333333;
   left: -100px;
-  z-index: 999999;
+  z-index: 1;
   height: 200px;
   top: 0;
   transform: rotate(30deg);
@@ -348,7 +348,7 @@ main {
           left: 5px;
           top: 50%;
           transform: translateY(-50%);
-          background-image: url("../../assets/images/search-red.png");
+          background-image: url("../../assets/images/search-red.svg");
           background-size: cover;
           background-repeat: no-repeat;
           background-position: center center;
@@ -1601,7 +1601,7 @@ img.quotesmall {
   background-repeat: no-repeat;
   background-position: center;
   position: relative;
-  z-index: 9;
+  z-index: 2;
 }
 
 .banner-image.about-course:before {
@@ -3517,7 +3517,7 @@ body.rtl .close-popup-course {
 
 /*Academic institution page*/
 .content-institution-page {
-  padding: 3% 0;
+  padding: 90px 0 3%;
 }
 
 .img-opacity-on-banner {
@@ -3815,12 +3815,12 @@ body.rtl .lokking-for-form .wpcf7 {
   height: 100%;
 }
 
-.wrap-search-page-course {
-  padding-top: 80px;
-  @media(max-width: 991px){
-    padding-top: 20px;
-  }
-}
+//.wrap-search-page-course {
+//  padding-top: 80px;
+//  @media(max-width: 991px){
+//    padding-top: 20px;
+//  }
+//}
 
 .wrap-top-bar-search {
   border-top: 1px solid #F2F2F2;
