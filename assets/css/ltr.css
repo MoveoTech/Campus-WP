@@ -186,13 +186,12 @@
     left: unset;
     right: 0; }
   .hero-banner .banner-image .hero-container .container {
-    width: 90%;
-    top: 30%; }
+    width: 90%; }
     .hero-banner .banner-image .hero-container .container .text-on-banner {
       margin-bottom: 15px; }
       .hero-banner .banner-image .hero-container .container .text-on-banner h1 {
-        font-size: 28px;
-        line-height: 35px; }
+        font-size: 36px;
+        line-height: 40px; }
       .hero-banner .banner-image .hero-container .container .text-on-banner h5 {
         width: 275px; } }
 
