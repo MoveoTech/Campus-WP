@@ -394,6 +394,12 @@ jQuery(document).ready(function () {
             jQuery("#youtube-popup").removeClass('active');
         }, 100);
     });
+    jQuery('#youtube-popup').on('click', function () {
+        setTimeout(function () {
+            jQuery('#popup_overlay #popup').attr('aria-hidden', 'true');
+            jQuery("#youtube-popup").removeClass('active');
+        }, 100);
+    })
 
     //Course popup overlay
     jQuery('.bg-overlay').on('click', function() {
@@ -455,27 +461,32 @@ function getCoursesAjax(id) {
 function apppendCourses(coursesData, id) {
 
     coursesData.forEach(item =>{
-
+        let permalink = item.permalink ? item.permalink : '';
+        let url = 'course/' + permalink;
+        console.log(url)
         let tags = getDesktopTags(item.tags);
         let hoverTags = getHoverTags(item.tags);
+
+        let academicInstitution = item.academic_institution ? item.academic_institution : '';
 
         let temp = document.createElement("div");
         temp.id = item.id + id;
         temp.classList.add('course-stripe-item');
         temp.innerHTML =
             '<div class="course-img" style="background-image: url('+item.image+');">'+
+            '<a href="'+ url +'"></a>'+
             '<span class="info-button"></span></div>'+
             '<div class="item-content"">'+
-            '<h3 ><a href="">'+item.name+'</a></h3>'+
-            '<p >'+item.academic_institution+'</p>'+
+            '<h3 ><a href="'+ url +'">'+item.name+'</a></h3>'+
+            '<p >'+academicInstitution+'</p>'+
             ' </div>'+
             '<div class=" tags-div">'+tags+ '</div>'+
             '<div class="course-item-hover '+ item.id + id +'">'+
-                '<a href="">'+
+                '<a href="'+ url +'">'+
                     '<div class="course-img" style="background-image: url('+item.image+');"></div>'+
                     '<div class="item-content"">'+
                         '<h3 >'+item.name+'</h3>'+
-                        '<p >'+item.academic_institution+'</p>'+
+                        '<p >'+academicInstitution+'</p>'+
                     '</div>'+
                     '<div class=" tags-div">'+ hoverTags +'</div>'+
                     '<div class="course-details">'+
@@ -491,8 +502,8 @@ function apppendCourses(coursesData, id) {
                     '<div class="course-img" style="background-image: url('+item.image+');"></div>'+
                     '<div class="course-details">'+
                         '<div class="course-header"">'+
-                            '<h3 ><a href="">'+item.name+'</a></h3>'+
-                            '<p >'+item.academic_institution+'</p>'+
+                            '<h3 ><a href="'+ url +'">'+item.name+'</a></h3>'+
+                            '<p >'+academicInstitution+'</p>'+
                         '</div>'+
                         '<div class="tags-div">'+ hoverTags +'</div>'+
                         '<div class="details">'+
@@ -501,7 +512,7 @@ function apppendCourses(coursesData, id) {
                     '</div>'+
                 '</div>'+
                 '<div class="popup-footer">'+
-                    '<a href=""><span>מעבר לקורס</span></a>'+
+                    '<a href="'+ url +'"><span>'+ item.button_text +'</span></a>'+
                 '</div>'+
             '</div>';
 
@@ -811,9 +822,16 @@ function mouseHoverOnCourse() {
 
                 let element = jQuery(`.${id}`);
                 let parentElem = jQuery(`#${id}`);
-                let top = parentElem.offset().top - 5 ;
-                let left = parentElem.offset().left - 10;
-                let pos = {top , left};
+                let top = parentElem.offset().top - 5;
+                let left;
+                if(width > 1200) {
+                     left = parentElem.offset().left - 12;
+                } else if(width > 768 && width <= 1200) {
+                    left = parentElem.offset().left - 30;
+                } else {
+                    left = parentElem.offset().left - 20;
+                }
+                let pos = {top, left};
                 element.appendTo(jQuery('body'));
                 element.css({
                     display : 'block',

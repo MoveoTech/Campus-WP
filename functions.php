@@ -1146,12 +1146,12 @@ function hero_search_placeholder() {
 function course_popup_button_text() {
     global $sitepress;
     $current = $sitepress->get_current_language();
-    $text = 'מעבר לקורס';
+    $text = 'מעבר לעמוד הקורס';
     if ($current === 'en') {
-        $text = 'Go to the course';
+        $text = 'Go to the course page';
     }
     if ($current === 'ar') {
-        $text = 'اذهب إلى الدورة';
+        $text = 'اذهب إلى صفحة الدورة';
     }
     return $text;
 }
