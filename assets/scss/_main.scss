@@ -13,8 +13,10 @@ html body {
 }
 
 body {
-  //max-width: 1440px;
   margin: auto;
+}
+button:focus {
+  outline: none;
 }
 
 .span-brake {
@@ -49,7 +51,6 @@ body.rtl {
   position: absolute;
   top: 63px;
   right: 0;
-  z-index: 1052;
   width: 100%;
   padding-top: 24px;
 }
@@ -100,6 +101,8 @@ body.rtl {
 }
 
 .banner-image {
+  text-align: center;
+  position: relative;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -213,6 +216,7 @@ main {
 }
 
 .background-on-banner {
+  margin-top: 10px;
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -3815,12 +3819,13 @@ body.rtl .lokking-for-form .wpcf7 {
   height: 100%;
 }
 
-//.wrap-search-page-course {
-//  padding-top: 80px;
-//  @media(max-width: 991px){
-//    padding-top: 20px;
-//  }
-//}
+.wrap-search-page-course {
+  margin-top: 23px;
+}
+
+.wrap-events-page {
+  margin-top: 23px;
+}
 
 .wrap-top-bar-search {
   border-top: 1px solid #F2F2F2;
@@ -4643,11 +4648,11 @@ body.rtl .all_courses:after {
 /* 03/06/2020 new version popups */
 
 #popup_overlay_2020 {
-  //position: fixed;
-  top: 0px;
-  bottom: 0px;
-  right: 0px;
-  left: 0px;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
   background: rgba(255, 255, 255, .6);
   z-index: -1;
   opacity: 0;
@@ -4692,6 +4697,7 @@ body.rtl .all_courses:after {
 }
 
 .close-popup-button-2020, .close-popup-new-event {
+  outline: none;
   position: absolute;
   bottom: 100%;
   margin-bottom: 12px;

@@ -24,16 +24,20 @@ $courses = pods( 'courses', podsParams($courses_slice));
         $duration = $courses->display( 'duration' );
         $id = $courses->display( 'ID' );
         $course_permalink = $courses->display('permalink');
-        $site_url = get_site_url();
-        $url = $site_url . '/course/' . $course_permalink;
+        $site_url = get_current_url();
+        $url = $site_url . 'course/' . $course_permalink;
         ?>
         <div id="<?php echo $id . $stripe['id'] ?>" class="course-stripe-item " >
+
             <div class="course-img" style="background-image: url(<?= $thumb ?>);">
+                  <a href="<?= $url ?>"></a>
                 <span class="info-button"></span>
             </div>
             <div class="item-content">
                 <h3 ><a href="<?= $url ?>"><?= $title ?></a></h3>
-                <p><?= $institution_name?></p>
+                <?php if($institution_name) : ?>
+                    <p><?= $institution_name?></p>
+                <?php endif; ?>
             </div>
             <div class="tags-div">
                 <?php
@@ -64,7 +68,9 @@ $courses = pods( 'courses', podsParams($courses_slice));
                     </div>
                     <div class="item-content">
                         <h3 ><?= $title ?></h3>
-                        <p><?= $institution_name?></p>
+                        <?php if($institution_name) : ?>
+                            <p><?= $institution_name?></p>
+                        <?php endif; ?>
                     </div>
                     <div class="tags-div">
                         <?php
@@ -100,6 +106,7 @@ $courses = pods( 'courses', podsParams($courses_slice));
                     )
                 )
             ) ?>
+
         </div>
 
     <?php };?>

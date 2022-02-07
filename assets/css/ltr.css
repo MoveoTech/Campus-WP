@@ -195,6 +195,17 @@
       .hero-banner .banner-image .hero-container .container .text-on-banner h5 {
         width: 275px; } }
 
+.slick-prev {
+  right: unset;
+  left: -60px;
+  -webkit-transform: unset;
+  transform: rotate(0); }
+
+.slick-next {
+  left: unset;
+  right: -60px;
+  transform: rotate(180deg); }
+
 /* Slick Stripe */
 .home-page-courses-stripe .stripe-container .stripe-header .show-all-courses p:after {
   margin-right: unset;
@@ -236,6 +247,14 @@
   margin-left: unset;
   margin-right: 10px; }
 
+.home-page-testimonials_stripe .stripe-container .testimonials-slider button.slick-prev {
+  right: unset;
+  left: -20px; }
+
+.home-page-testimonials_stripe .stripe-container .testimonials-slider button.slick-next {
+  left: unset;
+  right: -20px; }
+
 .home-page-myCourses-stripe .stripe-container .myCourses-slider .course-stripe-item .item-content h3 {
   text-align: left; }
 
@@ -247,6 +266,10 @@
 
 .nerative-class .slick-list .slick-track .course-stripe-item .tags-div {
   margin: 0 10px 0 0; }
+
+.courses-stripe .course-stripe-item .course-img .info-button {
+  right: unset;
+  left: 10px; }
 
 .courses-stripe .course-stripe-item .item-content {
   height: 87px;
@@ -262,26 +285,26 @@
     margin-left: unset;
     margin-right: 10px; }
 
-body .course-item-hover .item-content {
+body .course-item-hover a .item-content {
   margin: 10px 14px 7px 20px; }
-  body .course-item-hover .item-content h3 {
+  body .course-item-hover a .item-content h3 {
     text-align: left; }
-  body .course-item-hover .item-content p {
+  body .course-item-hover a .item-content p {
     text-align: left; }
 
-body .course-item-hover .tags-div {
+body .course-item-hover a .tags-div {
   justify-content: left;
   margin-right: unset;
   margin-left: 20px; }
-  body .course-item-hover .tags-div span {
+  body .course-item-hover a .tags-div span {
     margin-left: unset;
     margin-right: 10px; }
     @media (max-width: 768px) {
-      body .course-item-hover .tags-div span {
+      body .course-item-hover a .tags-div span {
         margin-left: unset;
         margin-right: 5px; } }
 
-body .course-item-hover .course-details {
+body .course-item-hover a .course-details {
   margin: 0 14px 15px 20px; }
 
 .course-popup-modal .popup-header {
@@ -335,17 +358,6 @@ body .course-item-hover .course-details {
   .home-page-courses-stripe .stripe-container .stripe-header {
     margin-right: unset;
     margin-left: 15px; } }
-
-.slick-prev {
-  right: unset;
-  left: -60px;
-  -webkit-transform: unset;
-  transform: rotate(0); }
-
-.slick-next {
-  left: unset;
-  right: -60px;
-  transform: rotate(180deg); }
 
 .all_courses:before {
   transform: scaleX(-1);

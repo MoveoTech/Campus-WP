@@ -104,7 +104,6 @@
     .info-content {
       display: flex;
       justify-content: center;
-      //align-items: baseline;
       flex-wrap: wrap;
       max-width: 933px;
       margin: 37px auto 28px;
@@ -458,7 +457,6 @@
 
       .slick-list {
         position: relative;
-
         .goal-stripe-gradient {
           position: absolute;
           left: 0;
@@ -475,8 +473,6 @@
         background-repeat: no-repeat;
         background-position: center center;
         height: 320px;
-        max-width: 253px;
-        min-width: 253px;
         box-shadow: 0 5px 15px rgba(40, 40, 40, 0.2);
         border-radius: 10px;
         display: flex;
@@ -618,7 +614,12 @@
       button.slick-button {
         outline: none;
       }
-
+      button.slick-prev {
+        right: -20px;
+      }
+      button.slick-next {
+        left: -20px;
+      }
       .slick-list {
         max-width: 933px;
       }
@@ -732,9 +733,16 @@
       height: 124px;
       border-radius: 10px;
       box-shadow: 0 5px 10px rgba(40, 40, 40, 0.2);
+      a {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+      }
       .info-button {
         display: none;
         position: absolute;
+        cursor: pointer;
         right: 10px;
         top: 10px;
         background-image: url("../../assets/images/info-button.png");
@@ -848,10 +856,18 @@
       .course-stripe-item {
         .item-content {
           h3 {
+            text-overflow: ellipsis;
+            overflow: hidden;
+            height: 58px;
+            font-size: 22px;
+            font-weight: 600;
+            text-align: right;
+            line-height: 24px;
             a {
-              font-size: 22px;
-              line-height: 24px;
-              font-weight: 600;
+              overflow: hidden;
+              -webkit-line-clamp: 2;
+              display: -webkit-box;
+              -webkit-box-orient: vertical;
               color: #FCFCFC;
             }
           }
@@ -1021,6 +1037,7 @@ body {
           margin: 10px 10px 0;
           background-size: cover;
           background-repeat: no-repeat;
+          border-radius: 10px;
         }
         .item-content {
           margin: 10px 20px 7px 14px;
@@ -1113,9 +1130,9 @@ body {
 
 @media (max-width: 1439px) {
   .home-page-goals-stripe {
-    .goals-slider {
-      .goal-item {
-        min-width: unset;
+    .stripe-container {
+      .goals-slider {
+        width: 80%;
       }
     }
   }
@@ -1142,8 +1159,10 @@ body {
   }
 
   .home-page-goals-stripe {
-    .goals-slider {
-      width: 66%;
+    .stripe-container {
+      .goals-slider {
+        width: 70%;
+      }
     }
   }
 
@@ -1163,7 +1182,6 @@ body {
 @media (max-width: 1100px) {
   body {
     .course-item-hover {
-      max-width: 270px;
       .course-img {
         max-width: 250px;
       }
@@ -1190,15 +1208,35 @@ body {
   }
 
   .home-page-goals-stripe {
-    .goals-slider {
-      width: 74%;
+    .stripe-container {
+      .goals-slider {
+        width: 78%;
+      }
     }
   }
 
   .home-page-testimonials_stripe {
+    .back-img-1 {
+      width: 100px;
+      height: 200px;
+    }
+    .back-img-2 {
+      width: 100px;
+      height: 250px;
+    }
     .testimonials-slider {
       .slick-list {
         width: 100%;
+      }
+    }
+  }
+
+  .home-page-info-stripe {
+    .stripe-container {
+      .info-content {
+        .info-item {
+          margin: 0 20px 50px;
+        }
       }
     }
   }
@@ -1300,9 +1338,25 @@ body {
   }
 
   .home-page-testimonials_stripe {
+    .back-img-1 {
+      width: 90px;
+      height: 200px;
+    }
+    .back-img-2 {
+      width: 90px;
+      height: 250px;
+    }
     .stripe-container {
       .testimonials-slider {
         width: 65%;
+      }
+    }
+  }
+
+  .home-page-info-stripe {
+    .stripe-container {
+      .info-content {
+        max-width: 800px;
       }
     }
   }
@@ -1311,7 +1365,6 @@ body {
 @media (max-width: 850px) {
   body {
     .course-item-hover {
-      max-width: 270px;
       .course-img {
         max-width: 250px;
       }
@@ -1556,12 +1609,10 @@ body {
 
   .home-page-testimonials_stripe {
     .back-img-1 {
-      width: 84px;
-      height: 182px;
+      top: 15%;
     }
     .back-img-2 {
-      width: 108px;
-      height: 106px;
+      top: 5%;
     }
     .stripe-container {
       .testimonials-stripe-header {
@@ -1623,6 +1674,14 @@ body {
         .goal-item {
           min-width: unset;
         }
+      }
+    }
+  }
+
+  .home-page-info-stripe {
+    .stripe-container {
+      .info-content {
+        flex-direction: column;
       }
     }
   }
@@ -1756,6 +1815,17 @@ body {
     }
   }
 
+  .home-page-info-stripe {
+    .back-img-1 {
+      width: 100px;
+      height: 200px;
+    }
+    .back-img-2 {
+      width: 100px;
+      height: 250px;
+    }
+  }
+
 }
 
 @media (max-width: 425px) {
@@ -1830,6 +1900,31 @@ body {
           min-width: unset;
         }
       }
+    }
+  }
+
+  .home-page-info-stripe {
+    .back-img-1 {
+      width: 80px;
+      height: 170px;
+      top: 45%;
+    }
+    .back-img-2 {
+      width: 80px;
+      height: 200px;
+      top: 0;
+    }
+  }
+
+  .home-page-testimonials_stripe {
+    .back-img-1 {
+      width: 35px;
+      height: 125px;
+    }
+    .back-img-2 {
+      width: 45px;
+      height: 150px;
+      top: 30%;
     }
   }
 }

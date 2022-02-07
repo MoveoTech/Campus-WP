@@ -109,7 +109,7 @@ foreach($taxonomies as $tax => $details){
 $events_sidebar_title = cin_get_str('events_sidebar_title');
 ?>
 
-<div class="container">
+<div class="container wrap-events-page">
     <div class="row">
         <aside class="col-xs-12 col-md-12 col-lg-3 col-xl-3 col-sm-12 sidebar-search-course">
             <div class="wrap-all-filter-names">
