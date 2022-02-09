@@ -17514,6 +17514,8 @@ div.user-information {
   font-weight: bold;
   line-height: 18px;
   width: 84px;
+  height: 100%;
+  border-radius: 22px;
   outline: transparent;
   padding-right: 20px; }
 
