@@ -566,7 +566,6 @@ function getMyCourses() {
                 "course_end":null,
                 "invite_only":false,
                 "academic_institution": 'אוניברסית אריאל בשומרון',
-                "progress": 'בואו נתחיל את הקורס >>',
                 'image': "http://127.0.0.1/app/uploads/2021/05/תמונת_קורס.jpg",
                 "course_modes":[
                     {
@@ -753,7 +752,7 @@ function appendMyCourses(coursesData, id) {
     coursesData.forEach(item =>{
         let itemData = {
             thumb: item.course_details.image,
-            progress: item.course_details.progress,
+            progress: item.course_details.progress ? item.course_details.progress : '',
             name: item.course_details.course_name,
             academic_institution: item.course_details.academic_institution
         }
