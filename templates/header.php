@@ -76,9 +76,14 @@ wp_head();
                     </div>
                 </div>
                 <div class="header_login lang languages_menu_wrap">
-                    <?=
-                    lang_button();
-                    get_lang_menu(); ?>
+                    <?= lang_button(); ?>
+                    <div class="menu-language-menu-container">
+                        <ul id="menu-language-menu-1" class="nav-lang">
+                            <li id="wpml-ls-item-he" class="wpml-ls-menu-item wpml-ls-item-he <?= current_active_lang( 'he' ) ?>"><a href="<?= get_lang_url( 'he' ) ?>"><span class="wpml-ls-native">עב</span></a></li>
+                            <li id="wpml-ls-item-ar" class="wpml-ls-menu-item wpml-ls-item-ar <?= current_active_lang( 'ar' ) ?>"><a href="<?= get_lang_url( 'ar' ) ?>"><span class="wpml-ls-native">العر</span></a></li>
+                            <li id="wpml-ls-item-en" class="wpml-ls-menu-item wpml-ls-item-en <?= current_active_lang( 'en' ) ?>"><a href="<?= get_lang_url( 'en' ) ?>"><span class="wpml-ls-native">En</span></a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>

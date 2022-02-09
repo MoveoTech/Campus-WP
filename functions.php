@@ -136,24 +136,24 @@ function style_of_campus_enqueue() {
 add_action( 'wp_enqueue_scripts', 'style_of_campus_enqueue' );
 
 // get lang menu
-function get_lang_menu() {
-	$output_lang_menu = '';
-	if ( is_archive( 'course' ) or is_search() or is_singular( 'course' ) or is_singular( 'h_course' ) ) {
-		$lang_class = '';
-
-		$output_lang_menu .= '<div class="menu-language-menu-container">
-        <ul id="menu-language-menu-1" class="nav-lang">
-        <li id="wpml-ls-item-he" class="wpml-ls-menu-item wpml-ls-item-he ' . current_active_lang( 'he' ) . '"><a href="' . get_lang_url( 'he' ) . '"><span class="wpml-ls-native">עב</span></a></li>
-        <li id="wpml-ls-item-ar" class="wpml-ls-menu-item wpml-ls-item-ar ' . current_active_lang( 'ar' ) . '"><a href="' . get_lang_url( 'ar' ) . '"><span class="wpml-ls-native">العر</span></a></li>
-        <li id="wpml-ls-item-en" class="wpml-ls-menu-item wpml-ls-item-en ' . current_active_lang( 'en' ) . '"><a href="' . get_lang_url( 'en' ) . '"><span class="wpml-ls-native">En</span></a></li>
-        </ul></div>';
-	} else {
-		if ( has_nav_menu( 'lang_menu' ) ) :
-			wp_nav_menu( [ 'theme_location' => 'lang_menu', 'menu_class' => 'nav-lang' ] );
-		endif;
-	}
-	return $output_lang_menu;
-}
+//function get_lang_menu() {
+//	$output_lang_menu = '';
+//	if ( is_archive( 'course' ) or is_search() or is_singular( 'course' ) or is_singular( 'h_course' ) ) {
+//		$lang_class = '';
+//
+//		$output_lang_menu .= '<div class="menu-language-menu-container">
+//        <ul id="menu-language-menu-1" class="nav-lang">
+//        <li id="wpml-ls-item-he" class="wpml-ls-menu-item wpml-ls-item-he ' . current_active_lang( 'he' ) . '"><a href="' . get_lang_url( 'he' ) . '"><span class="wpml-ls-native">עב</span></a></li>
+//        <li id="wpml-ls-item-ar" class="wpml-ls-menu-item wpml-ls-item-ar ' . current_active_lang( 'ar' ) . '"><a href="' . get_lang_url( 'ar' ) . '"><span class="wpml-ls-native">العر</span></a></li>
+//        <li id="wpml-ls-item-en" class="wpml-ls-menu-item wpml-ls-item-en ' . current_active_lang( 'en' ) . '"><a href="' . get_lang_url( 'en' ) . '"><span class="wpml-ls-native">En</span></a></li>
+//        </ul></div>';
+//	} else {
+//		if ( has_nav_menu( 'lang_menu' ) ) :
+//			wp_nav_menu( [ 'theme_location' => 'lang_menu', 'menu_class' => 'nav-lang' ] );
+//		endif;
+//	}
+//	return $output_lang_menu;
+//}
 
 //get active lang with giving lang
 function current_active_lang( $given_lang ) {
