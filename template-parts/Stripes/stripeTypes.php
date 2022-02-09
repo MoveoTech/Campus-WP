@@ -107,14 +107,11 @@ function myCoursesStripe($stripeId){
 
     $title = getFieldByLanguage(get_field('hebrew_title', $stripeId), get_field('english_title', $stripeId), get_field('arabic_title', $stripeId), $sitepress->get_current_language());
 
-    $courses = get_field('my_courses', $stripeId);
-
     get_template_part('template', 'parts/Stripes/myCourses-stripe',
         array(
             'args' => array(
                 'id' => $stripeId,
                 'title' => $title,
-                'courses' => $courses,
             )
         ));
 }
