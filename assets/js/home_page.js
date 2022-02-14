@@ -392,6 +392,7 @@ jQuery(document).ready(function () {
         setTimeout(function () {
             jQuery('#popup_overlay #popup').attr('aria-hidden', 'true');
             jQuery("#youtube-popup").removeClass('active');
+            jQuery("#login-register-popup").removeClass('active');
         }, 100);
     });
     jQuery('#youtube-popup').on('click', function () {
@@ -417,6 +418,21 @@ jQuery(document).ready(function () {
             jQuery('body').remove(element);
         }
     })
+
+    // Login / Register Iframe
+    jQuery('.login-item').on('click', function(e) {
+        e.preventDefault();
+        jQuery('#login-register-popup .popup').attr('aria-hidden', 'false');
+        jQuery("#login-register-popup").addClass('active');
+    })
+    jQuery(".login-register-iframe").append("<iframe id='login-register-iframe' src='https://courses.stage.campus.gov.il/login?next=/dashboard' height='300px' width='300px' title='Login page'></iframe>")
+    jQuery('#login-register-popup').on('click', function () {
+        setTimeout(function () {
+            jQuery('#login-register-popup .popup').attr('aria-hidden', 'true');
+            jQuery("#login-register-popup").removeClass('active');
+        }, 100);
+    })
+
 })
 
 function getCookie(cname) {
