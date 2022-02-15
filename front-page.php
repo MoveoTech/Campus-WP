@@ -49,7 +49,7 @@ $hero_subtitle =  $fields['hero_subtitle'];
 
 $cookieValue = $_COOKIE['prod-olivex-user-info'];
 $edxUserValue =  $_COOKIE['edx-user-info'];
-var_dump(!isset($_COOKIE[$edxUserValue]));
+
 global  $sitepress;
 
 if ( $sitepress->get_current_language() == 'en' ) {
