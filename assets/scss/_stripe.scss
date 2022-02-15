@@ -456,6 +456,7 @@
       }
 
       .slick-list {
+        width: 100%;
         position: relative;
         .goal-stripe-gradient {
           position: absolute;
@@ -510,6 +511,7 @@
         }
 
         .goal-item-content {
+          width: 100%;
           z-index: 1;
           display: flex;
           flex-direction: column;

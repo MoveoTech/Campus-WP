@@ -45,6 +45,8 @@ jQuery(document).ready(function () {
         changeArrowClass(id, 'testimonials');
     })
 
+    /** SLICK SETTINGS **/
+
     //courses slick
     jQuery('.courses-stripe').slick({
         lazyLoad: 'ondemand',
@@ -449,10 +451,17 @@ function getCoursesAjax(id) {
             'lang' : getCookie('openedx-language-preference'),
             'idsArray': newCoursesArray,
         }
+        // disable button
+        let nextButton = slickTrack.parentElement.parentElement.lastChild;
+        if(nextButton.classList.contains('slick-next')) {
+            jQuery(`#${nextButton.id}`).prop('disabled', true);
+        }
         jQuery.post(stripe_data_ajax.ajaxurl, data, function(response){
             if(response.success){
                 const data = JSON.parse(response.data);
                 apppendCourses(data, id);
+                // button unable
+                jQuery(`#${nextButton.id}`).prop('disabled', false);
             }
         })
     }
@@ -463,7 +472,6 @@ function apppendCourses(coursesData, id) {
     coursesData.forEach(item =>{
         let permalink = item.permalink ? item.permalink : '';
         let url = 'course/' + permalink;
-        console.log(url)
         let tags = getDesktopTags(item.tags);
         let hoverTags = getHoverTags(item.tags);
 
@@ -517,7 +525,7 @@ function apppendCourses(coursesData, id) {
             '</div>';
 
         jQuery(`#${id}`).slick('slickAdd',temp);
-        mouseHoverOnCourse()
+        mouseHoverOnCourse();
     });
     changeArrowClass(id)
     clickOnCourseInfoButton()
@@ -538,6 +546,25 @@ function closePopupIfOpen(id) {
 }
 
 function getMyCourses() {
+    // let coursesData;
+    // jQuery.ajax({
+    //     method: "GET",
+    //     // url: 'https://courses.stage.campus.gov.il/api/enrollment/v1/enrollment',
+    //     url: 'https://courses.stage.campus.gov.il/api/courses/v1/courses/',
+    //     headers: {
+    //         "Accept": "application/json",
+    //         "Content-Type": "application/json"
+    //     },
+    //     xhrFields: {withCredentials: true},
+    //     success: function (data) {
+    //         console.log('succeeded: authenticated');
+    //         coursesData = data.results;
+    //         console.log(coursesData);
+    //     },
+    //     error: function (error) {
+    //         console.error(error)
+    //     }
+    // });
     // let data = {
     //     'action': 'stripe_data',
     //     'type' : 'courses',
@@ -749,26 +776,26 @@ function appendMyCourses(coursesData, id) {
     let courseStripe = document.getElementById(id);
     if(!courseStripe) return;
 
-    coursesData.forEach(item =>{
-        let itemData = {
-            thumb: item.course_details.image,
-            progress: item.course_details.progress ? item.course_details.progress : '',
-            name: item.course_details.course_name,
-            academic_institution: item.course_details.academic_institution
-        }
-        let temp = document.createElement("div");
-        temp.className = 'course-stripe-item';
-        temp.innerHTML =
-            '<div class="course-img" style="background-image: url('+itemData.thumb+');"></div>'+
-            '<div class="item-content"">'+
-            '<p class="course-progress" ><a href="">' + itemData.progress +'</a></p>'+
-            '<h3><a href="">'+itemData.name+'</a></h3>'+
-            '<p class="institution-name">'+itemData.academic_institution+'</p>'+
-            ' </div>';
-
-
-        courseStripe.append(temp)
-    });
+    // coursesData.forEach(item =>{
+    //     let itemData = {
+    //         thumb: item.media.course_image,
+    //         progress: item.course_details.progress ? item.course_details.progress : '',
+    //         name: item.name,
+    //         academic_institution: item.course_details.academic_institution
+    //     }
+    //     let temp = document.createElement("div");
+    //     temp.className = 'course-stripe-item';
+    //     temp.innerHTML =
+    //         '<div class="course-img" style="background-image: url('+itemData.thumb+');"></div>'+
+    //         '<div class="item-content"">'+
+    //         '<p class="course-progress" ><a href="">' + itemData.progress +'</a></p>'+
+    //         '<h3><a href="">'+itemData.name+'</a></h3>'+
+    //         '<p class="institution-name">'+itemData.academic_institution+'</p>'+
+    //         ' </div>';
+    //
+    //
+    //     courseStripe.append(temp)
+    // });
 }
 
 function changeArrowClass(id, type=null) {

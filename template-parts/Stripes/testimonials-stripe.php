@@ -34,7 +34,7 @@ global $sitepress;
             if($color == 'green') $border_color = '#91C653';
             if($color == 'blue') $border_color = '#70C6D1';
 
-            if($thumb){ ?>
+            if($thumb){?>
                 <div class="testimonial-item">
                     <div class="testimonial-img-container" >
                         <div class="background-img <?php echo $color ?>">
