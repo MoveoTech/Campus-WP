@@ -18720,6 +18720,7 @@ html:not(.user_is_not_logged_in) .header_login {
       .home-page-goals-stripe .stripe-container .goals-slider button.slick-button {
         outline: none; }
       .home-page-goals-stripe .stripe-container .goals-slider .slick-list {
+        width: 100%;
         position: relative; }
         .home-page-goals-stripe .stripe-container .goals-slider .slick-list .goal-stripe-gradient {
           position: absolute;
@@ -18765,6 +18766,7 @@ html:not(.user_is_not_logged_in) .header_login {
           z-index: 0;
           background: linear-gradient(0deg, #000000 0%, rgba(0, 0, 0, 0.1) 55.31%); }
         .home-page-goals-stripe .stripe-container .goals-slider .goal-item .goal-item-content {
+          width: 100%;
           z-index: 1;
           display: flex;
           flex-direction: column;

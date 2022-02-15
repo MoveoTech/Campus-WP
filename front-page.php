@@ -48,6 +48,8 @@ $hero_subtitle =  $fields['hero_subtitle'];
 //---------- STRIPES SECTION ----------
 
 $cookieValue = $_COOKIE['prod-olivex-user-info'];
+$edxUserValue =  $_COOKIE['edx-user-info'];
+
 global  $sitepress;
 
 if ( $sitepress->get_current_language() == 'en' ) {
@@ -55,13 +57,18 @@ if ( $sitepress->get_current_language() == 'en' ) {
 
     if($cookieValue && strpos($cookieValue,"username") != false)
         $stripes = get_field( "loggedin_users_stripes", $frontPageHe );
+    else if ($edxUserValue && strpos($edxUserValue,"username") != false) {
+        $stripes = get_field( "loggedin_users_stripes", $frontPageHe );
+    }
     else
         $stripes = get_field( "anonymous_users_stripes", $frontPageHe );
 }else{
 
     if($cookieValue && strpos($cookieValue,"username") != false)
         $stripes = $fields['loggedin_users_stripes'];
-
+    else if ($edxUserValue && strpos($edxUserValue,"username") != false) {
+        $stripes = $fields['loggedin_users_stripes'];
+    }
     else
         $stripes = $fields['anonymous_users_stripes'];
 }
