@@ -4,7 +4,11 @@ jQuery(document).ready(function () {
     let nexSlick = '<button type="button" id="slick-next" class="slick-next slick-button " tabindex="-1" aria-label="' + global_vars.next_btn_text + '"></button>';
 
     //Get My Courses
-    getMyCourses()
+    // check if user loggedIn
+    let edx_user_info = getCookie(global_vars.cookie_name);
+    if (edx_user_info) {
+        getMyCourses()
+    }
 
     //Course Card
     mouseHoverOnCourse()
@@ -51,7 +55,7 @@ jQuery(document).ready(function () {
     jQuery('.courses-stripe').slick({
         lazyLoad: 'ondemand',
         slidesToShow: 4,
-        slidesToScroll: 3,
+        slidesToScroll: 4,
         rtl: is_rtl,
         nextArrow: nexSlick,
         prevArrow: prevSlick,
@@ -547,11 +551,10 @@ function closePopupIfOpen(id) {
 
 function getMyCourses() {
     let coursesData;
+
     jQuery.ajax({
         method: "GET",
-        // url: 'https://courses.stage.campus.gov.il/api/enrollment/v1/enrollment',
-        url: 'https://courses.stage.campus.gov.il/api/courses/v1/courses/',
-        // url: 'https://courses.stage.campus.gov.il/api/organizations/v0/organizations/',
+        url: 'https://courses.stage.campus.gov.il/api/enrollment/v1/enrollment',
         headers: {
             "Accept": "application/json",
             "Content-Type": "application/json",
@@ -559,237 +562,57 @@ function getMyCourses() {
         xhrFields: {withCredentials: true},
         success: function (data) {
             console.log('succeeded: authenticated');
-            coursesData = data.results;
+            coursesData = data;
             console.log(coursesData);
-            const id = 'myCoursesStripeId';
-            appendMyCourses(coursesData, id);
+            getCoursesDetails(coursesData);
         },
         error: function (error) {
             console.error(error)
         }
     });
-    // let data = {
-    //     'action': 'stripe_data',
-    //     'type' : 'courses',
-    //     'lang' : getCookie('openedx-language-preference'),
-    //     'idsArray': newCoursesArray,
-    // }
-    // jQuery.post(stripe_data_ajax.ajaxurl, data, function(response){
-    //     if(response.success){
-    //         const data = JSON.parse(response.data);
-    //         console.log(data)
-    //         apppendCourses(data, id);
-    //     }
-    // })
+}
 
-    // const mockData = [
-    //     {
-    //         "created":"2018-05-25T06:08:27.508362Z",
-    //         "mode":"audit",
-    //         "is_active":true,
-    //         "course_details":{
-    //             "course_id":"course-v1:edX+DemoX+Demo_Course",
-    //             "course_name":"edX DemoX",
-    //             "enrollment_start":null,
-    //             "enrollment_end":null,
-    //             "course_start":"2017-01-01T00:00:00Z",
-    //             "course_end":null,
-    //             "invite_only":false,
-    //             "academic_institution": 'אוניברסית אריאל בשומרון',
-    //             'image': "http://127.0.0.1/app/uploads/2021/05/תמונת_קורס.jpg",
-    //             "course_modes":[
-    //                 {
-    //                     "slug":"audit",
-    //                     "name":"audit",
-    //                     "min_price":0,
-    //                     "suggested_prices":"",
-    //                     "currency":"usd",
-    //                     "expiration_datetime":null,
-    //                     "description":null,
-    //                     "sku":null,
-    //                     "bulk_sku":null
-    //                 }
-    //             ]
-    //         },
-    //         "user":"honor"
-    //     },
-    //     {
-    //         "created":"2018-05-25T06:08:27.508362Z",
-    //         "mode":"audit",
-    //         "is_active":true,
-    //         "course_details":{
-    //             "course_id":"course-v1:edX+DemoX+Demo_Course",
-    //             "course_name":"edX DemoX",
-    //             "enrollment_start":null,
-    //             "enrollment_end":null,
-    //             "course_start":"2017-01-01T00:00:00Z",
-    //             "course_end":null,
-    //             "invite_only":false,
-    //             "academic_institution": 'אוניברסית אריאל בשומרון',
-    //             "progress": 'בואו נתחיל את הקורס >>',
-    //             'image': "http://127.0.0.1/app/uploads/2021/12/מבני-נתונים-תמונת-בקורס.jpg",
-    //             "course_modes":[
-    //                 {
-    //                     "slug":"audit",
-    //                     "name":"audit",
-    //                     "min_price":0,
-    //                     "suggested_prices":"",
-    //                     "currency":"usd",
-    //                     "expiration_datetime":null,
-    //                     "description":null,
-    //                     "sku":null,
-    //                     "bulk_sku":null
-    //                 }
-    //             ]
-    //         },
-    //         "user":"honor"
-    //     },
-    //     {
-    //         "created":"2018-05-25T06:08:27.508362Z",
-    //         "mode":"audit",
-    //         "is_active":true,
-    //         "course_details":{
-    //             "course_id":"course-v1:edX+DemoX+Demo_Course",
-    //             "course_name":"edX DemoX",
-    //             "enrollment_start":null,
-    //             "enrollment_end":null,
-    //             "course_start":"2017-01-01T00:00:00Z",
-    //             "course_end":null,
-    //             "invite_only":false,
-    //             "academic_institution": 'אוניברסית אריאל בשומרון',
-    //             "progress": 'בואו נתחיל את הקורס >>',
-    //             'image': "http://127.0.0.1/app/uploads/2021/10/course_image_500X225_v3.jpg",
-    //             "course_modes":[
-    //                 {
-    //                     "slug":"audit",
-    //                     "name":"audit",
-    //                     "min_price":0,
-    //                     "suggested_prices":"",
-    //                     "currency":"usd",
-    //                     "expiration_datetime":null,
-    //                     "description":null,
-    //                     "sku":null,
-    //                     "bulk_sku":null
-    //                 }
-    //             ]
-    //         },
-    //         "user":"honor"
-    //     },
-    //     {
-    //         "created":"2018-05-25T06:08:27.508362Z",
-    //         "mode":"audit",
-    //         "is_active":true,
-    //         "course_details":{
-    //             "course_id":"course-v1:edX+DemoX+Demo_Course",
-    //             "course_name":"edX DemoX",
-    //             "enrollment_start":null,
-    //             "enrollment_end":null,
-    //             "course_start":"2017-01-01T00:00:00Z",
-    //             "course_end":null,
-    //             "invite_only":false,
-    //             "academic_institution": 'אוניברסית אריאל בשומרון',
-    //             "progress": 'בואו נתחיל את הקורס >>',
-    //             'image': "http://127.0.0.1/app/uploads/2021/11/course-image_500x225.jpg",
-    //             "course_modes":[
-    //                 {
-    //                     "slug":"audit",
-    //                     "name":"audit",
-    //                     "min_price":0,
-    //                     "suggested_prices":"",
-    //                     "currency":"usd",
-    //                     "expiration_datetime":null,
-    //                     "description":null,
-    //                     "sku":null,
-    //                     "bulk_sku":null
-    //                 }
-    //             ]
-    //         },
-    //         "user":"honor"
-    //     },
-    //     {
-    //         "created":"2018-05-25T06:08:27.508362Z",
-    //         "mode":"audit",
-    //         "is_active":true,
-    //         "course_details":{
-    //             "course_id":"course-v1:edX+DemoX+Demo_Course",
-    //             "course_name":"edX DemoX",
-    //             "enrollment_start":null,
-    //             "enrollment_end":null,
-    //             "course_start":"2017-01-01T00:00:00Z",
-    //             "course_end":null,
-    //             "invite_only":false,
-    //             "academic_institution": 'אוניברסית אריאל בשומרון',
-    //             "progress": 'בואו נתחיל את הקורס >>',
-    //             'image': "http://127.0.0.1/app/uploads/2021/05/תמונת_קורס.jpg",
-    //             "course_modes":[
-    //                 {
-    //                     "slug":"audit",
-    //                     "name":"audit",
-    //                     "min_price":0,
-    //                     "suggested_prices":"",
-    //                     "currency":"usd",
-    //                     "expiration_datetime":null,
-    //                     "description":null,
-    //                     "sku":null,
-    //                     "bulk_sku":null
-    //                 }
-    //             ]
-    //         },
-    //         "user":"honor"
-    //     },
-    //     {
-    //         "created":"2018-05-25T06:08:27.508362Z",
-    //         "mode":"audit",
-    //         "is_active":true,
-    //         "course_details":{
-    //             "course_id":"course-v1:edX+DemoX+Demo_Course",
-    //             "course_name":"edX DemoX",
-    //             "enrollment_start":null,
-    //             "enrollment_end":null,
-    //             "course_start":"2017-01-01T00:00:00Z",
-    //             "course_end":null,
-    //             "invite_only":false,
-    //             "academic_institution": 'אוניברסית אריאל בשומרון',
-    //             "progress": 'בואו נתחיל את הקורס >>',
-    //             'image': "http://127.0.0.1/app/uploads/2021/05/תמונת_קורס.jpg",
-    //             "course_modes":[
-    //                 {
-    //                     "slug":"audit",
-    //                     "name":"audit",
-    //                     "min_price":0,
-    //                     "suggested_prices":"",
-    //                     "currency":"usd",
-    //                     "expiration_datetime":null,
-    //                     "description":null,
-    //                     "sku":null,
-    //                     "bulk_sku":null
-    //                 }
-    //             ]
-    //         },
-    //         "user":"honor"
-    //     }
-    // ];
-    // const id = 'myCoursesStripeId';
-    //
-    // appendMyCourses(coursesData, id);
+function getCoursesDetails(coursesArray) {
+    let edXIdCoursesArray = [];
 
+    coursesArray.forEach((item) => {
+        let courseId = item.course_details.course_id;
+        if(courseId) edXIdCoursesArray.push(courseId);
+    })
+    getMyCoursesDataFromWordpress(edXIdCoursesArray);
+}
+
+function getMyCoursesDataFromWordpress(edXIdCoursesArray) {
+
+    let data = {
+        'action': 'my_courses',
+        'lang' : getCookie('openedx-language-preference'),
+        'idsArray': edXIdCoursesArray,
+    }
+
+    jQuery.post(stripe_data_ajax.ajaxurl, data, function(response){
+        if(response.success){
+            const data = JSON.parse(response.data);
+            const id = 'myCoursesStripeId';
+            appendMyCourses(data, id)
+        }
+    })
 }
 
 function appendMyCourses(coursesData, id) {
     let courseStripe = document.getElementById(id);
-    console.log(courseStripe)
     if(!courseStripe) return;
     coursesData.forEach(item =>{
         let itemData = {
-            thumb: item.media.image.small,
-            course_id: item.course_id,
-            // progress: item.course_details.progress ? item.course_details.progress : '',
+            thumb: item.image,
+            course_id: item.id,
             name: item.name,
-            academic_institution: item.org
+            academic_institution: item.academic_institution,
+            permalink: item.permalink,
+            // progress: item.course_details.progress ? item.course_details.progress : '',
         }
 
-        let url = 'course/' + itemData.course_id;
-        console.log(itemData)
+        let url = 'course/' + itemData.permalink;
         let temp = document.createElement("div");
         temp.className = 'course-stripe-item';
         temp.innerHTML =
@@ -806,7 +629,7 @@ function appendMyCourses(coursesData, id) {
     jQuery('#myCoursesStripeId').slick({
         lazyLoad: 'ondemand',
         slidesToShow: 4,
-        slidesToScroll: 3,
+        slidesToScroll: 4,
         rtl: is_rtl,
         nextArrow: nexSlick,
         prevArrow: prevSlick,
