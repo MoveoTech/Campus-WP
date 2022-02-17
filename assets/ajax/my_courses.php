@@ -27,16 +27,20 @@ add_action('wp_ajax_nopriv_my_courses', 'my_courses');
 function getMyCoursesParams($idsArray){
 
     $where = "t.course_id_edx IN (";
+    $order = "FIELD(t.course_id_edx,";
 
     foreach($idsArray as $id ) {
         $where = $where . "'".$id . "',";
+        $order = $order . "'".$id . "',";
 
     }
     $where = substr_replace($where, ")", -1);
+    $order = substr_replace($order, ")", -1);
 
     $params = array(
         'limit' => -1,
         'where'=>$where,
+        'orderby'=> $order
     );
     return $params;
 

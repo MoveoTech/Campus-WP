@@ -563,6 +563,11 @@ function getMyCourses() {
         success: function (data) {
             console.log('succeeded: authenticated');
             coursesData = data;
+            // TODO check if data length < 0 : don't show my courses stripe
+
+            coursesData.sort(function(a,b){
+                return new Date(b.created) - new Date(a.created);
+            });
             console.log(coursesData);
             getCoursesDetails(coursesData);
         },
