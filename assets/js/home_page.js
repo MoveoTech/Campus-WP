@@ -603,8 +603,14 @@ function getMyCoursesDataFromWordpress(edXIdCoursesArray) {
     jQuery.post(stripe_data_ajax.ajaxurl, data, function(response){
         if(response.success){
             const data = JSON.parse(response.data);
-            const id = 'myCoursesStripeId';
-            appendMyCourses(data, id)
+            try {
+                if(data.length < 1) {
+                    document.getElementById('myCoursesWrapper').style.display = 'none';
+                } else {
+                    const id = 'myCoursesStripeId';
+                    appendMyCourses(data, id)
+                }
+            }catch {(e)=>{console.log(e)}}
         }
     })
 }
