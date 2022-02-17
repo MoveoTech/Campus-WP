@@ -329,7 +329,7 @@
                 margin-right: 10px;
             }
         }
-    }
+        }
     }
 }
 
@@ -452,6 +452,11 @@
     .slick-list {
         .slick-track {
             .course-stripe-item {
+                .item-content {
+                    h3 {
+                        text-align: left;
+                    }
+                }
                 .tags-div {
                     margin: 0 10px 0 0;
                 }

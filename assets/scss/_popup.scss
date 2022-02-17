@@ -8,6 +8,7 @@
   &.active{
     @media (max-width: 991px) {
       display: block;
+      overflow-y: hidden;
     }
   }
 }

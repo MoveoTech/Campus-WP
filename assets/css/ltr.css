@@ -264,6 +264,9 @@
 .home-page-myCourses-stripe .stripe-container .myCourses-slider .course-stripe-item .item-content p.course-progress {
   text-align: left; }
 
+.nerative-class .slick-list .slick-track .course-stripe-item .item-content h3 {
+  text-align: left; }
+
 .nerative-class .slick-list .slick-track .course-stripe-item .tags-div {
   margin: 0 10px 0 0; }
 

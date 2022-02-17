@@ -7,7 +7,7 @@ if(empty($stripe) || empty($stripe['id']))
 
 ?>
 
-<div class="home-page-myCourses-stripe" style="margin: 20px 0" >
+<div id="myCoursesWrapper" class="home-page-myCourses-stripe" style="margin: 20px 0" >
     <div class="stripe-container">
         <div class="stripe-header">
             <?php if($stripe['title'] != '' && !empty($stripe['title'])) : ?>
