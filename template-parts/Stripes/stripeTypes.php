@@ -244,3 +244,14 @@ function getMediaHtml($media) {
     }
     return $exportHtml;
 }
+
+
+function sortTagsByOrder($tags){
+
+    usort($tags, "CompareTagsByOrder");
+    return $tags;
+}
+
+function CompareTagsByOrder($tag1, $tag2) {
+    return $tag1['order'] > $tag2['order'];
+}
