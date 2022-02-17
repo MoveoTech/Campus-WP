@@ -565,6 +565,11 @@ function getMyCourses() {
             coursesData = data;
             // TODO check if data length < 0 : don't show my courses stripe
 
+            try {
+                if(data.length < 1)
+                    document.getElementById('myCoursesWrapper').style.display = 'none';
+
+            }catch {(e)=>{console.log(e)}}
             coursesData.sort(function(a,b){
                 return new Date(b.created) - new Date(a.created);
             });
