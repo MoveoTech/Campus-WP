@@ -18022,7 +18022,8 @@ html:not(.user_is_not_logged_in) .header_login {
   @media (max-width: 991px) {
     .bg-overlay.active {
       display: block;
-      overflow-y: hidden; } }
+      overflow-y: hidden;
+      touch-action: none; } }
 
 .mobile-menu-popup {
   display: none;
