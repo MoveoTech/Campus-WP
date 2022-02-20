@@ -364,6 +364,17 @@ main {
   }
 }
 
+@media (min-width: 2000px) {
+  .hero-banner {
+    .banner-image {
+      img.desktop-banner {
+        width: 50%;
+      }
+    }
+
+  }
+}
+
 @media (max-width: 991px) {
   .hero-banner {
     height: 464px;
@@ -497,7 +508,6 @@ main {
     }
   }
 }
-
 
 .link-banner {
   border-radius: 29px;

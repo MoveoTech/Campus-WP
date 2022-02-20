@@ -6913,6 +6913,10 @@ main {
             background-position: center center;
             z-index: 3; }
 
+@media (min-width: 2000px) {
+  .hero-banner .banner-image img.desktop-banner {
+    width: 50%; } }
+
 @media (max-width: 991px) {
   .hero-banner {
     height: 464px; }
@@ -18896,14 +18900,14 @@ html:not(.user_is_not_logged_in) .header_login {
           align-items: center;
           justify-content: center; }
           .home-page-testimonials_stripe .stripe-container .testimonials-slider .testimonial-item .testimonial-item-content h1 {
-            text-align: center;
+            text-align: center !important;
             font-weight: 600;
             font-size: 22px;
             line-height: 29px;
             color: #141414;
             margin-bottom: 5px; }
           .home-page-testimonials_stripe .stripe-container .testimonials-slider .testimonial-item .testimonial-item-content p {
-            text-align: center;
+            text-align: center !important;
             -webkit-font-smoothing: antialiased;
             font-weight: 300;
             font-size: 16px;
@@ -19575,7 +19579,7 @@ body .course-item-hover {
   .home-page-institutions_stripe .stripe-container .course-stripe-item .course-img {
     width: 80px; }
   .home-page-testimonials_stripe .stripe-container .testimonials-slider {
-    width: 90%; }
+    width: 70%; }
     .home-page-testimonials_stripe .stripe-container .testimonials-slider .slick-list {
       width: 85%; } }
 

@@ -683,7 +683,7 @@
           justify-content: center;
 
           h1 {
-            text-align: center;
+            text-align: center !important;
             font-weight: 600;
             font-size: 22px;
             line-height: 29px;
@@ -692,7 +692,7 @@
           }
 
           p {
-            text-align: center;
+            text-align: center !important;
             -webkit-font-smoothing: antialiased;
             font-weight: 300;
             font-size: 16px;
@@ -1868,7 +1868,7 @@ body {
   .home-page-testimonials_stripe {
     .stripe-container {
       .testimonials-slider {
-        width: 90%;
+        width: 70%;
 
         .slick-list {
           width: 85%;

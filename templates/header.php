@@ -114,8 +114,8 @@ function get_user_login()
     $current_lang = $sitepress->get_current_language();
     if ($current_lang === 'en') :
         {
-            $login = 'log in';
-            $register = 'register';
+            $login = 'Log in';
+            $register = 'Register';
         }
     elseif ($current_lang === 'he') :
         {
