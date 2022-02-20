@@ -628,7 +628,7 @@ function appendMyCourses(coursesData, id) {
             // progress: item.course_details.progress ? item.course_details.progress : '',
         }
 
-        let url = 'course/' + itemData.permalink;
+        let url = 'https://courses.campus.gov.il/courses/' + itemData.permalink + '/info';
         let temp = document.createElement("div");
         temp.className = 'course-stripe-item';
         temp.innerHTML =
