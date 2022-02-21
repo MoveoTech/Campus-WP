@@ -1641,6 +1641,15 @@ body {
       }
     }
   }
+
+  .home-page-info-stripe {
+    .back-img-1 {
+      top: 20%;
+    }
+    .back-img-2 {
+      top: 10%;
+    }
+  }
 }
 
 @media (max-width: 710px) {
@@ -1819,12 +1828,12 @@ body {
 
   .home-page-info-stripe {
     .back-img-1 {
-      width: 100px;
-      height: 200px;
+      width: 80px;
+      height: 170px;
     }
     .back-img-2 {
-      width: 100px;
-      height: 250px;
+      width: 70px;
+      height: 220px;
     }
   }
 
@@ -1907,14 +1916,12 @@ body {
 
   .home-page-info-stripe {
     .back-img-1 {
-      width: 80px;
-      height: 170px;
-      top: 45%;
+      width: 70px;
+      height: 150px;
     }
     .back-img-2 {
-      width: 80px;
-      height: 200px;
-      top: 0;
+      width: 60px;
+      height: 190px;
     }
   }
 

@@ -19490,7 +19490,11 @@ body .course-item-hover {
       margin: 0 30px; }
     .home-page-testimonials_stripe .stripe-container .testimonials-slider .slick-list {
       width: 95%;
-      margin: auto; } }
+      margin: auto; }
+  .home-page-info-stripe .back-img-1 {
+    top: 20%; }
+  .home-page-info-stripe .back-img-2 {
+    top: 10%; } }
 
 @media (max-width: 710px) {
   .courses-stripe {
@@ -19561,11 +19565,11 @@ body .course-item-hover {
   .home-page-institutions_stripe .stripe-container .course-stripe-item .course-img {
     width: 90px; }
   .home-page-info-stripe .back-img-1 {
-    width: 100px;
-    height: 200px; }
+    width: 80px;
+    height: 170px; }
   .home-page-info-stripe .back-img-2 {
-    width: 100px;
-    height: 250px; } }
+    width: 70px;
+    height: 220px; } }
 
 @media (max-width: 425px) {
   .home-page-courses-stripe .stripe-container .stripe-header {
@@ -19591,13 +19595,11 @@ body .course-item-hover {
   .home-page-goals-stripe .stripe-container .goals-slider .goal-item {
     min-width: unset; }
   .home-page-info-stripe .back-img-1 {
-    width: 80px;
-    height: 170px;
-    top: 45%; }
+    width: 70px;
+    height: 150px; }
   .home-page-info-stripe .back-img-2 {
-    width: 80px;
-    height: 200px;
-    top: 0; }
+    width: 60px;
+    height: 190px; }
   .home-page-testimonials_stripe .back-img-1 {
     width: 35px;
     height: 125px; }
