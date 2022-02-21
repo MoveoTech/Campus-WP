@@ -396,7 +396,8 @@
 }
 
 // login register popup
-#login-register-popup {
+#login-register-popup,
+#register-popup {
   visibility: hidden;
   position: fixed;
   background: #141414;
@@ -436,7 +437,8 @@
   }
 }
 
-#login-register-popup.active {
+#login-register-popup.active,
+#register-popup.active {
   opacity: 1;
   visibility: visible;
   background-color: rgba(0, 0, 0, 0.3);
