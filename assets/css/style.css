@@ -18852,6 +18852,8 @@ html:not(.user_is_not_logged_in) .header_login {
       justify-content: center;
       margin: 0 auto;
       padding: 0 0 55px 0; }
+      .home-page-testimonials_stripe .stripe-container .testimonials-slider.no-header {
+        padding-top: 55px; }
       .home-page-testimonials_stripe .stripe-container .testimonials-slider button.slick-button {
         outline: none; }
       .home-page-testimonials_stripe .stripe-container .testimonials-slider button.slick-prev {
