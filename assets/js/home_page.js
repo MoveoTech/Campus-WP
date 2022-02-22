@@ -429,7 +429,6 @@ jQuery(document).ready(function () {
     })
     //removing the iframe
     jQuery('#login-register-popup').on('click', function () {
-        console.log("testt")
         setTimeout(function () {
             jQuery("#login-iframe").empty();
             jQuery('#login-register-popup .popup').attr('aria-hidden', 'true');
