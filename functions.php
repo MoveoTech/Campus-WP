@@ -1164,19 +1164,22 @@ function more_courses_text($carousel) {
     $current = $sitepress->get_current_language();
     $text = '';
     if ($current === 'he') {
-            $text .= 'הצג  את ';
-            $text .= count($carousel);
-            $text .= ' הקורסים';
+        $text .= 'לקטלוג הקורסים';
+//            $text .= 'הצג  את ';
+//            $text .= count($carousel);
+//            $text .= ' הקורסים';
         }
     if ($current === 'en') {
-            $text .= 'View the ';
-            $text .= count($carousel);
-            $text .= ' courses';
+        $text .= 'Course Catalog';
+//            $text .= 'View the ';
+//            $text .= count($carousel);
+//            $text .= ' courses';
         }
     if ($current === 'ar') {
-            $text .= 'استعرض ';
-            $text .= count($carousel);
-            $text .= ' دورات';
+        $text .= 'كتالوج الدورة';
+//            $text .= 'استعرض ';
+//            $text .= count($carousel);
+//            $text .= ' دورات';
         }
 
     return $text;
