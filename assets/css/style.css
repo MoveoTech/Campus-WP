@@ -19183,6 +19183,7 @@ body .course-item-hover {
       margin: 10px 10px 0;
       background-size: cover;
       background-repeat: no-repeat;
+      background-position: center center;
       border-radius: 10px; }
     body .course-item-hover a .item-content {
       margin: 10px 20px 7px 14px; }
