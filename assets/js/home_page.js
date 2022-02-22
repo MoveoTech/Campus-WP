@@ -554,7 +554,7 @@ function getMyCourses() {
 
     jQuery.ajax({
         method: "GET",
-        url: 'https://courses.stage.campus.gov.il/api/enrollment/v1/enrollment',
+        url: 'https://courses.campus.gov.il/api/enrollment/v1/enrollment',
         headers: {
             "Accept": "application/json",
             "Content-Type": "application/json",
