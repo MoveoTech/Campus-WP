@@ -206,7 +206,7 @@
             right: unset;
             left: 0;
         }
-        img.desktop-banner {
+        div.desktop-banner {
             left: unset;
             right: 0;
         }
@@ -267,7 +267,7 @@
 @media (max-width: 768px) {
     .hero-banner {
         .banner-image {
-            img.mobile-banner {
+            div.mobile-banner {
                 left: unset;
                 right: 0;
             }

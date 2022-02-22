@@ -154,7 +154,7 @@
   right: unset;
   left: 0; }
 
-.hero-banner .banner-image img.desktop-banner {
+.hero-banner .banner-image div.desktop-banner {
   left: unset;
   right: 0; }
 
@@ -192,7 +192,7 @@
           width: 370px; } }
 
 @media (max-width: 768px) {
-  .hero-banner .banner-image img.mobile-banner {
+  .hero-banner .banner-image div.mobile-banner {
     left: unset;
     right: 0; }
   .hero-banner .banner-image .hero-container .container {

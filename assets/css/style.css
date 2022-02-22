@@ -6842,13 +6842,19 @@ main {
       @media (min-width: 1441px) {
         .hero-banner .banner-image .hero-gradient {
           background: linear-gradient(270deg, #333433 52%, rgba(51, 52, 51, 0) 100%); } }
-    .hero-banner .banner-image img.desktop-banner {
-      width: fit-content;
+    .hero-banner .banner-image div.desktop-banner {
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center center;
+      width: 70%;
       height: inherit;
       position: absolute;
       left: 0;
       z-index: -1; }
-    .hero-banner .banner-image img.mobile-banner {
+    .hero-banner .banner-image div.mobile-banner {
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center center;
       display: none; }
     .hero-banner .banner-image .hero-container {
       position: relative;
@@ -6914,7 +6920,7 @@ main {
             z-index: 3; }
 
 @media (min-width: 2000px) {
-  .hero-banner .banner-image img.desktop-banner {
+  .hero-banner .banner-image div.desktop-banner {
     width: 50%; } }
 
 @media (max-width: 991px) {
@@ -6934,6 +6940,8 @@ main {
         height: 380px; }
       .hero-banner .banner-image .hero-gradient {
         display: none; }
+      .hero-banner .banner-image div.desktop-banner {
+        width: 100%; }
       .hero-banner .banner-image .hero-container {
         right: 0;
         left: 0;
@@ -6968,9 +6976,9 @@ main {
       display: none; }
     .hero-banner .banner-image .bckg-2 {
       display: none; }
-    .hero-banner .banner-image img.desktop-banner {
+    .hero-banner .banner-image div.desktop-banner {
       display: none; }
-    .hero-banner .banner-image img.mobile-banner {
+    .hero-banner .banner-image div.mobile-banner {
       display: block;
       position: absolute;
       left: 0;
