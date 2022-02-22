@@ -612,6 +612,9 @@
       justify-content: center;
       margin: 0 auto;
       padding: 0 0 55px 0;
+      &.no-header {
+        padding-top: 55px;
+      }
 
       button.slick-button {
         outline: none;
