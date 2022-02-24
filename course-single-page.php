@@ -74,20 +74,17 @@ $certificate = $course->display('certificate');
 $course_video = $course->display('trailer');
 $js_code = $course->display('javascript_code');
 $org = $course->display('institution');
+$lecturers = $course->field(array('name'=>'lecturer', 'output'=>'pods'));
+
+
+//END fields on Course page
 
 
 
 
-//$corporation_institution = $fields['corporation_institution']; // TODO OLD Field
-$corporation_institution = $course->display('corporation_institution'); // TODO NEW Field
 
-$related = $course->field( 'corporation_institution' );
-
-//var_dump($related);
 
 //$subject_of_daat = $fields['subject_of_daat']; // TODO Change to Tags...
-
-
 
 //$prior = $fields['prior_knowledge'];  // TODO Change to Tags... or check with Oren
 //$ele_prior = "";
@@ -107,44 +104,28 @@ $related = $course->field( 'corporation_institution' );
 //    }
 //}
 
-$all_rows = $course->data();
-
-var_dump($all_rows);
 
 
-//$lecturer = $fields['lecturer']; // TODO OLD Field
-//$lecturer = $course->display('lecturer'); // TODO NEW Field
-$args = [
-    'name'   => 'lecturer',
-    'single' => true,
-    'output' => 'pods',
-];
-$lecturers = $course->field($args); // TODO NEW Field
-//var_dump($lecturers);
 
-foreach ($lecturers as $luc){
-//    var_dump("ali");
-//    $luc->fetch();
-//    var_dump($luc);
-    $all_rows = $luc->data();
-//    var_dump($all_rows);
-//
-//    var_dump($luc->dispay('name'));
 
-}
-while ($lecturers->fetch()) {
-    var_dump("ali");
-//    var_dump($lecturers->dispay('name'));
 
-}
+// TODO $corporation_institution and $testimonials need refactoring
 
-//var_dump($lecturers[0]->dispay('image'));
+
+//$corporation_institution = $fields['corporation_institution']; // TODO OLD Field
+$corporation_institution = $course->display('corporation_institution'); // TODO NEW Field
+
+
 //$testimonials = $fields['testimonial']; // TODO OLD Field
 $testimonials = $course->display('testimonial'); // TODO NEW Field
 
 //$knowledge = $fields['knowledge']; // TODO not used
 
 //$more_details = $fields['more_details']; // TODO removed from new entity
+
+
+
+
 
 
 
@@ -555,7 +536,8 @@ $video_id = ($link) ? $query_string["v"] : '';
         </div>
     </div>
 </div>
-<?php if ($lecturers) : ?>
+
+<?php if ( ! empty( $lecturers ) ) : ?>
     <div class="lecturer-about-course">
         <div class="container">
             <div class="row">
@@ -563,22 +545,14 @@ $video_id = ($link) ? $query_string["v"] : '';
             </div>
             <div class="row">
                 <?php foreach ( $lecturers as $lecturer ){
-                    $lecturers->fetch();
-                    var_dump($lecturers);
-                    $name = getFieldByLanguage($lecturer['name'], $lecturer['english_name'], $lecturer['arabic_name'] ,$sitepress->get_current_language());
-                    $content = getFieldByLanguage($lecturer['hebrew_description'], $lecturer['english_description'], $lecturer['arabic_description'] ,$sitepress->get_current_language());
-
-                    $thumb = $lecturer['image'] ? $lecturer['image'] : get_bloginfo('stylesheet_directory') . '/assets/images/campus_avatar.png';
-                    $thumb = $lecturer['image'];
-                    var_dump($thumb);
-//                    $rol_single_course = get_field('role', $lecturer_single_id);
-                    $rol_single_course = getFieldByLanguage($lecturer['hebrew_role'], $lecturer['english_role'], $lecturer['arabic_role'] ,$sitepress->get_current_language());
-
-//                    $email_lecturer = get_field('email', $lecturer_single_id);
-                    $email_lecturer = $lecturer['email'];
-
-                    $org_lecturer = null;
-//                    $org_lecturer = get_field('academic_institution', $lecturer_single_id);
+                    $name = getFieldByLanguage($lecturer->display('name'), $lecturer->display('english_name'), $lecturer->display('arabic_name') ,$sitepress->get_current_language());
+                    $content = getFieldByLanguage($lecturer->display('hebrew_description'), $lecturer->display('english_description'), $lecturer->display('arabic_description') ,$sitepress->get_current_language());
+                    $thumb = $lecturer->display('image');
+                    $thumb = $thumb ? $thumb : get_bloginfo('stylesheet_directory') . '/assets/images/campus_avatar.png';
+                    $rol_single_course = getFieldByLanguage($lecturer->display('hebrew_role'), $lecturer->display('english_role'), $lecturer->display('arabic_role') ,$sitepress->get_current_language());
+                    $email_lecturer = $lecturer->display('email');
+                    $org_lecturer = $lecturer->field('academic_institution');
+                    $org_lecturer = getFieldByLanguage($org_lecturer['name'], $org_lecturer['english_name'], $org_lecturer['arabic_name'] ,$sitepress->get_current_language());
                     ?>
 
                     <div class="single-lecturer">
@@ -602,7 +576,7 @@ $video_id = ($link) ? $query_string["v"] : '';
                                         <span class="lecturer-role-popup"><?= $rol_single_course; ?></span>
                                     <?php } ?>
                                     <?php if ($org_lecturer): ?>
-                                        <span class="lecturer-role-popup"> | <?= $org_lecturer->post_title; ?></span>
+                                        <span class="lecturer-role-popup"> | <?= $org_lecturer; ?></span>
                                     <?php endif; ?>
                                 </div>
                                 <div class="lecturer-content"><?= $content; ?></div>
@@ -641,13 +615,16 @@ $video_id = ($link) ? $query_string["v"] : '';
         </div>
     </div>
 <?php endif; ?>
-<?php if ($more_details) : ?>
-    <div class="more_details">
-        <div class="container">
-            <div class="more_details-text"><?= $more_details; ?></div>
-        </div>
-    </div>
-<?php endif; ?>
+
+
+<!--TODO removed from new entity -->
+<?php //if ($more_details) : ?>
+<!--    <div class="more_details">-->
+<!--        <div class="container">-->
+<!--            <div class="more_details-text">--><?//= $more_details; ?><!--</div>-->
+<!--        </div>-->
+<!--    </div>-->
+<?php //endif; ?>
 
 <!--more courses area 4 posts-->
 
