@@ -10774,7 +10774,7 @@ body .filter-dynamic {
   width: 159px !important;
   height: 96px !important;
   background-size: contain !important;
-  z-index: 9999 !important;
+  z-index: 4 !important;
   left: 32px;
   right: auto !important; }
   @media (max-width: 767px) {
