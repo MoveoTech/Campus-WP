@@ -442,12 +442,17 @@ function getCookie(cname) {
 
 function getCoursesAjax(id) {
     const slickTrack = jQuery(`#${id} .slick-track`)[0]
+    // disable button
+    let nextButton = slickTrack.parentElement.parentElement.lastChild;
     const trackLength = parseInt(slickTrack.lastChild.getAttribute('data-slick-index'))
     const coursesIDs = JSON.parse(jQuery(`#${id}courses`).attr('value'))
     let currentIndex = jQuery(`#${id} .slick-track .slick-active`).attr("data-slick-index");
 
     if (coursesIDs.length > 10  && coursesIDs.length > trackLength + 1 && trackLength - currentIndex <= 8) {
-        let newCoursesArray = coursesIDs.slice(trackLength + 1, (trackLength + 11))
+        if(nextButton.classList.contains('slick-next')) {
+            jQuery(`#${nextButton.id}`).prop('disabled', true);
+        }
+        let newCoursesArray = coursesIDs.slice(trackLength + 1, (trackLength + 21))
 
         let data = {
             'action': 'stripe_data',
@@ -455,17 +460,13 @@ function getCoursesAjax(id) {
             'lang' : getCookie('openedx-language-preference'),
             'idsArray': newCoursesArray,
         }
-        // disable button
-        let nextButton = slickTrack.parentElement.parentElement.lastChild;
-        if(nextButton.classList.contains('slick-next')) {
-            jQuery(`#${nextButton.id}`).prop('disabled', true);
-        }
+
         jQuery.post(stripe_data_ajax.ajaxurl, data, function(response){
             if(response.success){
                 const data = JSON.parse(response.data);
                 apppendCourses(data, id);
                 // button unable
-                jQuery(`#${nextButton.id}`).prop('disabled', false);
+                // jQuery(`#${nextButton.id}`).prop('disabled', false);
             }
         })
     }
@@ -533,6 +534,7 @@ function apppendCourses(coursesData, id) {
     });
     changeArrowClass(id)
     clickOnCourseInfoButton()
+    // jQuery(`#${nextButton.id}`).prop('disabled', false);
 }
 
 function closePopupIfOpen(id) {
@@ -573,7 +575,6 @@ function getMyCourses() {
             coursesData.sort(function(a,b){
                 return new Date(b.created) - new Date(a.created);
             });
-            console.log(coursesData);
             getCoursesDetails(coursesData);
         },
         error: function (error) {
@@ -625,10 +626,11 @@ function appendMyCourses(coursesData, id) {
             name: item.name,
             academic_institution: item.academic_institution,
             permalink: item.permalink,
+            course_edXId: item.course_id_edx,
             // progress: item.course_details.progress ? item.course_details.progress : '',
         }
-
-        let url = 'https://courses.campus.gov.il/courses/' + itemData.permalink + '/info';
+        let url = 'https://courses.campus.gov.il/courses/' + itemData.course_edXId + '/info';
+        // let url = 'https://campus.gov.il/course/' + itemData.permalink + '/';
         let temp = document.createElement("div");
         temp.className = 'course-stripe-item';
         temp.innerHTML =

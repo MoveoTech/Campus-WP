@@ -7,7 +7,7 @@ if(empty($stripe) || empty($stripe['id']) || empty($stripe['courses']) || count(
     return;
 global $sitepress;
 
-$courses_slice = array_slice($stripe['courses'], 0, 10);
+$courses_slice = array_slice($stripe['courses'], 0, 12);
 $courses = pods( 'courses', podsParams($courses_slice));
 
 ?>

@@ -62,6 +62,7 @@ function coursesData($data, $lang){
         'tags' => getCourseTags($data->field('tags'), $lang),
         'permalink' => $data->display('permalink'),
         'id' => $data->display('ID'),
+        'course_id_edx' => $data->display('course_id_edx'),
         'duration' => $data->display('duration'),
         'button_text' => course_popup_button_text()
     );
