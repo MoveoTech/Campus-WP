@@ -130,6 +130,7 @@ $mobile_menu = get_mobile_menu();
     <div class="bg-overlay"></div>
     <div class="mobile-menu-popup">
         <?= $mobile_menu; ?>
+        <div class="mobile-menu-asset"></div>
     </div>
     <script>
         function ajax_dir(){

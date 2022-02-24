@@ -1004,11 +1004,14 @@ jQuery(document).ready(function () {
         jQuery('.logout-button').attr('href', userInfo['header_urls']['logout'])
         if(jQuery('.mobile-login-register').hasClass('active')) {
             jQuery('.mobile-login-register').removeClass('active');
+            jQuery('.mobile-menu-asset').removeClass('active')
+
         }
     }
     if(!userInfo) {
         jQuery('.logged-in-item').hide();
         jQuery('.mobile-login-register').addClass('active')
+        jQuery('.mobile-menu-asset').addClass('active')
     }
 
 });
