@@ -6857,13 +6857,14 @@ main {
       background-position: center center;
       display: none; }
     .hero-banner .banner-image .hero-container {
+      display: flex;
+      align-items: center;
       position: relative;
       max-width: 1440px;
       height: 100%;
       margin: 0 auto; }
       .hero-banner .banner-image .hero-container .container {
         position: absolute;
-        top: 144px;
         right: 185px;
         padding: 0;
         width: 471px;
