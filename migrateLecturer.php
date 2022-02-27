@@ -1,8 +1,4 @@
-<?php
-/**
- * Template Name: Migrate Lecturer
- */
-?>
+
 <div style="height: 100px"></div>
 <?php
 

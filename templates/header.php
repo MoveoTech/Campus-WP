@@ -202,7 +202,7 @@ function get_user_menu() {
        </li>
         <li class="user-list-item "><a class="a-link profile-button" target="_blank"></a><img src="' . get_bloginfo('stylesheet_directory') . '/assets/images/profile.svg' .'"><span class="list-item-content">'.$profile.'</span></li>
         <li class="user-list-item"><a class="a-link" target="_blank" href="'. get_field('link_to_dashboard_for_campus', 'option') .'"></a><img src="' . get_bloginfo('stylesheet_directory') . '/assets/images/equalizer.svg' .'"><span class="list-item-content">'.$controlpanel.'</span></li>
-        <li class="user-list-item user-logged-out"><a class="a-link logout-button" target="_blank"></a><img src="' . get_bloginfo('stylesheet_directory') . '/assets/images/logout.svg' .'"><span class="list-item-content">'.$logout.'</span></li>         
+        <li class="user-list-item user-logged-out"><a class="a-link logout-button"></a><img src="' . get_bloginfo('stylesheet_directory') . '/assets/images/logout.svg' .'"><span class="list-item-content">'.$logout.'</span></li>         
     </ul>
     
     
