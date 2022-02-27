@@ -429,7 +429,7 @@ jQuery(document).ready(function () {
     //appending the iframe
     jQuery('.login-item').on('click', function(e) {
         e.preventDefault();
-        jQuery("#login-iframe").append("<iframe id='login-register-iframe' src='https://courses.campus.gov.il/login?next=/dashboard' height='300px' width='300px' title='Login page'></iframe>")
+        jQuery("#login-iframe").append("<iframe id='login-register-iframe' src='https://courses.stage.campus.gov.il/login?next=/dashboard' height='300px' width='300px' title='Login page'></iframe>")
         jQuery('#login-register-popup .popup').attr('aria-hidden', 'false');
         jQuery("#login-register-popup").addClass('active');
     })
@@ -446,7 +446,7 @@ jQuery(document).ready(function () {
     //appending the iframe
     jQuery('.register-item').on('click', function(e) {
         e.preventDefault();
-        jQuery("#register-iframe").append("<iframe id='register-iframe' src='https://courses.campus.gov.il/login?next=/dashboard' height='300px' width='300px' title='Register page'></iframe>")
+        jQuery("#register-iframe").append("<iframe id='register-iframe' src='https://courses.stage.campus.gov.il/login?next=/dashboard' height='300px' width='300px' title='Register page'></iframe>")
         jQuery('#register-popup .popup').attr('aria-hidden', 'false');
         jQuery("#register-popup").addClass('active');
     })
