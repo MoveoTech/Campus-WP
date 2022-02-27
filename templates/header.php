@@ -133,7 +133,7 @@ function get_user_login()
     <div class="header_login has_profile_icon">
         <a class="login-item"
            href="'. get_field('link_to_login_and_register', 'option') .'/login?next=/home' . $encoded_path .'">'. __($login, 'single_corse') .'</a>
-        <a class="signin_'.$current_lang.'"
+        <a class="register-item signin_'.$current_lang.'"
            href="'. get_field('link_to_login_and_register', 'option') .'/register?next=/home' . $encoded_path .'"> ' . __($register, 'single_corse') .'</a>
     </div>';
 }

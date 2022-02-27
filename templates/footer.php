@@ -125,6 +125,23 @@ $mobile_menu = get_mobile_menu();
                 </div>
             </div>
         </div>
+
+        <div id="login-register-popup" >
+            <div class="popup" style="" aria-hidden="true">
+                <button class="close-popup-iframe close-popup-button"></button>
+                <div class="login-register-iframe" id="login-iframe">
+
+                </div>
+            </div>
+        </div>
+        <div id="register-popup" >
+            <div class="popup" style="" aria-hidden="true">
+                <button class="close-popup-iframe close-popup-button"></button>
+                <div class="login-register-iframe" id="register-iframe">
+
+                </div>
+            </div>
+        </div>
     </footer>
 <?php wp_footer(); ?>
     <div class="bg-overlay"></div>

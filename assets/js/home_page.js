@@ -398,6 +398,7 @@ jQuery(document).ready(function () {
         setTimeout(function () {
             jQuery('#popup_overlay #popup').attr('aria-hidden', 'true');
             jQuery("#youtube-popup").removeClass('active');
+            jQuery("#login-register-popup").removeClass('active');
         }, 100);
     });
     jQuery('#youtube-popup').on('click', function () {
@@ -423,6 +424,41 @@ jQuery(document).ready(function () {
             jQuery('body').remove(element);
         }
     })
+
+    // Login Iframe
+    //appending the iframe
+    jQuery('.login-item').on('click', function(e) {
+        e.preventDefault();
+        jQuery("#login-iframe").append("<iframe id='login-register-iframe' src='https://courses.stage.campus.gov.il/login?next=/dashboard' height='300px' width='300px' title='Login page'></iframe>")
+        jQuery('#login-register-popup .popup').attr('aria-hidden', 'false');
+        jQuery("#login-register-popup").addClass('active');
+    })
+    //removing the iframe
+    jQuery('#login-register-popup').on('click', function () {
+        setTimeout(function () {
+            jQuery("#login-iframe").empty();
+            jQuery('#login-register-popup .popup').attr('aria-hidden', 'true');
+            jQuery("#login-register-popup").removeClass('active');
+        }, 100);
+    })
+
+    // Register Iframe
+    //appending the iframe
+    jQuery('.register-item').on('click', function(e) {
+        e.preventDefault();
+        jQuery("#register-iframe").append("<iframe id='register-iframe' src='https://courses.stage.campus.gov.il/login?next=/dashboard' height='300px' width='300px' title='Register page'></iframe>")
+        jQuery('#register-popup .popup').attr('aria-hidden', 'false');
+        jQuery("#register-popup").addClass('active');
+    })
+    //removing the iframe
+    jQuery('#register-popup').on('click', function () {
+        setTimeout(function () {
+            jQuery("#register-iframe").empty();
+            jQuery('#register-popup .popup').attr('aria-hidden', 'true');
+            jQuery("#register-popup").removeClass('active');
+        }, 0);
+    })
+
 })
 
 function getCookie(cname) {
