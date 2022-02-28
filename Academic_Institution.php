@@ -28,19 +28,6 @@ if ( false == $academicInstitution || ! $academicInstitution->exists()) {
     exit();
 }
 
-//echo "<br>";
-//echo "<br>";
-//echo "<br>";
-//echo "<br>";
-//var_dump($slug);
-//echo "<br>";
-//echo "<br>";
-//echo "<br>";
-//var_dump($academicInstitution);
-
-
-
-
 global $sitepress;
 
 $academicInstitution->display('institution_site_link');
@@ -52,7 +39,7 @@ $academicInstitutionTitle = getFieldByLanguage($academicInstitution->display('na
 $academicInstitutionTitle = $academicInstitutionTitle ? wrap_text_with_char($academicInstitutionTitle) : $academicInstitutionTitle;
 $thumb = $academicInstitution->display( 'image' );
 $content = getFieldByLanguage($academicInstitution->display('hebrew_description'), $academicInstitution->display('english_description'), $academicInstitution->display('arabic_description'), $sitepress->get_current_language());
-
+//$instituteId = $academicInstitution->display( 'id' );
 
 $params = [
     'limit'   => -1,
@@ -73,7 +60,7 @@ $found_lecturer = $lecturers->total_found();
     <?php
     $class = 'institution-page';
     $text_on_banner_content = '';
-    $text_on_banner_content .= '<h1 class="title-opacity-on-banner">'. $academicInstitutionTitle .'</h1>';
+    $text_on_banner_content = '<h1 class="title-opacity-on-banner">'. $academicInstitutionTitle .'</h1>';
     if($thumb){
         $text_on_banner_content .= '<img src="'.$thumb.'" class="img-academic"/>';
     }
@@ -81,7 +68,6 @@ $found_lecturer = $lecturers->total_found();
     <?=  get_banner_area(array('url' => $banner_mobile_institute) , array('url' => $banner_image_institute) , $text_on_banner_content,$class); ?>
 <?php endif;?>
 <!--End Banner area-->
-
 <div class="content-institution-page">
     <div class="container">
         <div class="row justify-content-between">
@@ -134,57 +120,74 @@ $found_lecturer = $lecturers->total_found();
 
                 while ($courses->fetch()) {
 
-
-
-
 //                    global $post;
-//                    $output = '';
+                    $output = '';
 //                    $org    = $attrs['org'] ? $attrs['org'] : get_field( 'org' );
-//
+
+//var_dump($org);
 //                    $marketing_feature = $attrs['marketing'] ? $attrs['marketing'] : get_field( 'marketing_feature' );
 //                    $marketing_feature = $marketing_feature ? $marketing_feature->name : ( $attrs['hybrid_course'] ? cin_get_str( 'hybrid_badge' ) : '' );
-//
-//                    $duration             = get_field( 'duration' );
-//                    $haveyoutube          = get_field( 'course_video' );
+
+                    $duration = $courses->display( 'duration' );
+                    $haveyoutube = $courses->display( 'trailer' );
+                    $url_course_img_slick = $courses->display( 'image' );
+                    $course_ID = $courses->display('id');
+                    $course_title = getFieldByLanguage($courses->display('name'), $courses->display('english_name'), $courses->display('arabic_name'), $sitepress->get_current_language());
+
+                    $org = $courses->field( array('name'=>'academic_institution', 'output'=>'pods' ));
+                    $orgName = getFieldByLanguage($org->display( 'name' ), $org->display( 'english_name' ), $org->display( 'arabic_name' ),$sitepress->get_current_language());
+
+
+                    ?>
+
+<!--                    <a class="course-item-image has_background_image --><?//= $haveyoutube; ?><!-- " data-id="--><?php //$course_ID; ?><!--">-->
+<!---->
+<!--                    </a>-->
+                    <?php
 //                    $url_course_img_slick = ( get_the_post_thumbnail_url( get_the_ID() ) ) ? get_the_post_thumbnail_url( get_the_ID(), 'medium' ) : site_url() . '/wp-content/uploads/2018/10/asset-v1JusticeJustice0012017_1type@assetblock@EDX3.png';
-//                    if ( $haveyoutube ) {
-//                        $haveyoutube = "haveyoutube";
-//                        $data_popup  = "data-popup";
-//                        $image_html  = '<a class="course-item-image has_background_image ' . $haveyoutube . '" data-id="' . $post->ID . '"' . $data_popup . ' aria-pressed="true" aria-haspopup="true" role="button" href="javascript:void(0)" aria-label="' . wrap_text_with_char( $post->post_title ) . '" data-classToAdd="course_info_popup" style="background-image: url(' . $url_course_img_slick . ');"></a>';
-//                    } else {
-//                        $haveyoutube = "donthaveyoutube";
-//                        $data_popup  = "";
-//                        $image_html  = '<div class="course-item-image has_background_image ' . $haveyoutube . '" data-id="' . $post->ID . '"' . $data_popup . '   data-classToAdd="course_info_popup" style="background-image: url(' . $url_course_img_slick . ');"></div>';
-//                    }
-//                    $attrs['class'] .= $attrs['hybrid_course'] ? ' hybrid_course' : '';
-//                    $output         .= '<div class="item_post_type_course course-item ' . $attrs['class'] . '" data-id="' . $post->ID . '" ' . $attrs['filters'] . '><div class="course-item-inner">';
-//                    $output         .= $image_html;
-//                    $output         .= '<a class="course-item-details" tabindex="0" href="' . get_permalink( $post->ID ) . '">
-//                <h3 class="course-item-title">' . wrap_text_with_char( $post->post_title ) . '</h3>';
-//                    if ( $org ) {
-//                        $output .= '<p class="course-item-org">' . $org->post_title . '</p>';
-//                    }
-//                    if ( $duration ) {
-//                        $output .= '<div class="course-item-duration">' . __( $duration, 'single_corse' ) . '</div>';
-//                    }
-//                    if ( $marketing_feature ) {
-//                        $output .= '<div class="course-item-marketing">';
-//                        $output .= '' . $marketing_feature . '</div>';
-//                    }
-//                    $output .= '<div class="course-item-link">
-//                    <span>' . cin_get_str( 'Course_Page' ) . '</span>
-//                </div>
-//            </a></div></div>';
-//
-//                    echo draw_course_item(array(
-//                        'class' => 'col-sm-12 col-md-6 col-lg-4 col-xl-3 course-item-with-border'
-//                    ));
+
+
+                    if ( $haveyoutube ) {
+                        $haveyoutube = "haveyoutube";
+                        $data_popup  = "data-popup";
+                        $image_html  = '<a class="course-item-image has_background_image ' . $haveyoutube . '" data-id="' . $course_ID . '"' . $data_popup . ' aria-pressed="true" aria-haspopup="true" role="button" href="javascript:void(0)" aria-label="' . wrap_text_with_char( $course_title ) . '" data-classToAdd="course_info_popup" style="background-image: url(' . $url_course_img_slick . ');"></a>';
+//                        var_dump($image_html);
+                    } else {
+                        $haveyoutube = "donthaveyoutube";
+                        $data_popup  = "";
+                        $image_html  = '<div class="course-item-image has_background_image ' . $haveyoutube . '" data-id="' . $course_ID . '"' . $data_popup . '   data-classToAdd="course_info_popup" style="background-image: url(' . $url_course_img_slick . ');"></div>';
+                        var_dump($image_html);
+                    }
+                    $attrs['class'] .= $attrs['hybrid_course'] ? ' hybrid_course' : '';
+                    $output         .= '<div class="item_post_type_course course-item ' . $attrs['class'] . '" data-id="' . $course_ID . '" ' . $attrs['filters'] . '><div class="course-item-inner">';
+                    $output         .= $image_html;
+                    $output         .= '<a class="course-item-details" tabindex="0" href="' . get_permalink( $post->ID ) . '">
+                <h3 class="course-item-title">' . wrap_text_with_char( $post->post_title ) . '</h3>';
+                    if ( $orgName ) {
+                        $output .= '<p class="course-item-org">' . $orgName . '</p>';
+                    }
+                    if ( $duration ) {
+                        $output .= '<div class="course-item-duration">' . __( $duration, 'single_corse' ) . '</div>';
+                    }
+                    if ( $marketing_feature ) {
+                        $output .= '<div class="course-item-marketing">';
+                        $output .= '' . $marketing_feature . '</div>';
+                    }
+                    $output .= '<div class="course-item-link">
+                    <span>' . cin_get_str( 'Course_Page' ) . '</span>
+                </div>
+            </a></div></div>';
+
+                    echo draw_course_item(array(
+                        'class' => 'col-sm-12 col-md-6 col-lg-4 col-xl-3 course-item-with-border'
+                    ));
 
 
 
 
                 }
             endif;
+
             ?>
         </div>
     </div>
