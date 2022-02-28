@@ -6,15 +6,24 @@
 /**
  * Template Name: new Academic Institutions
  */
+?>
 
+<!doctype html>
+<html class="no-js" <?php language_attributes(); ?>>
+<?php get_template_part('templates/head'); ?>
+<body <?php body_class(); ?>>
+<!--[if lt IE 9]>
+<div class="alert alert-warning">
+    <?php _e('You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.', 'sage'); ?>
+</div>
+<![endif]-->
+<?php
+do_action('get_header');
+get_template_part('templates/header');
 
-include locate_template( 'templates/header.php' );
-
-
+// fetching info from pods
 $slug = pods_v( 'last', 'url' );
-
 $slug = sanitize_text_field(rawurldecode($slug));
-
 $academicInstitution = pods( 'academic_institution', $slug, true);
 
 // Check if the pod is valid and exists.
@@ -27,11 +36,7 @@ if ( false == $academicInstitution || ! $academicInstitution->exists()) {
     include locate_template( 'templates/footer.php' );
     exit();
 }
-
 global $sitepress;
-
-$academicInstitution->display('institution_site_link');
-
 $banner_image_institute = $academicInstitution->display('banner_image_institute');
 $banner_mobile_institute = $academicInstitution->display('banner_mobile_institute');
 $institution_site_link = $academicInstitution->display('institution_site_link');
@@ -39,7 +44,7 @@ $academicInstitutionTitle = getFieldByLanguage($academicInstitution->display('na
 $academicInstitutionTitle = $academicInstitutionTitle ? wrap_text_with_char($academicInstitutionTitle) : $academicInstitutionTitle;
 $thumb = $academicInstitution->display( 'image' );
 $content = getFieldByLanguage($academicInstitution->display('hebrew_description'), $academicInstitution->display('english_description'), $academicInstitution->display('arabic_description'), $sitepress->get_current_language());
-//$instituteId = $academicInstitution->display( 'id' );
+
 
 $params = [
     'limit'   => -1,
@@ -56,6 +61,7 @@ $found_lecturer = $lecturers->total_found();
 
 
 <!--Banner area-->
+
 <?php if ($banner_image_institute) : ?>
     <?php
     $class = 'institution-page';
@@ -73,13 +79,13 @@ $found_lecturer = $lecturers->total_found();
         <div class="row justify-content-between">
             <div class="col-xs-12 col-sm-12 col-lg-8 col-xl-9">
                 <?php if($content) : ?>
-                    <p class="title-content-insitut"><?= __('About University:','single_corse'); ?></p>
+                    <p class="title-content-insitut"><?= __('About University:','single_course'); ?></p>
                     <div class="text-description-of-course content-inner-insti-page">
                         <span class="read-more-text"><?php echo wpautop($content); ?></span>
                     </div>
                     <button class="course_test_type_readmore course_test_readmore_collapse collapsed" aria-hidden="true">
-                        <span><?= __('Read More','single_corse'); ?></span>
-                        <span><?= __('Read Less','single_corse'); ?></span>
+                        <span><?= __('Read More','single_course'); ?></span>
+                        <span><?= __('Read Less','single_course'); ?></span>
                     </button>
                 <?php endif; ?>
             </div>
@@ -117,78 +123,56 @@ $found_lecturer = $lecturers->total_found();
         <div class="row more-courses-inner">
             <?php
             if( $found_courses > 0):
-
                 while ($courses->fetch()) {
 
-//                    global $post;
-                    $output = '';
-//                    $org    = $attrs['org'] ? $attrs['org'] : get_field( 'org' );
-
-//var_dump($org);
-//                    $marketing_feature = $attrs['marketing'] ? $attrs['marketing'] : get_field( 'marketing_feature' );
-//                    $marketing_feature = $marketing_feature ? $marketing_feature->name : ( $attrs['hybrid_course'] ? cin_get_str( 'hybrid_badge' ) : '' );
-
-                    $duration = $courses->display( 'duration' );
-                    $haveyoutube = $courses->display( 'trailer' );
-                    $url_course_img_slick = $courses->display( 'image' );
+                // courses info
+                    $marketing_tags = $courses->display( 'marketing_tags' );
                     $course_ID = $courses->display('id');
                     $course_title = getFieldByLanguage($courses->display('name'), $courses->display('english_name'), $courses->display('arabic_name'), $sitepress->get_current_language());
-
+                    $course_permalink = $courses->display('permalink');
+                    $attrs = 'col-sm-12 col-md-6 col-lg-4 col-xl-3 course-item-with-border';
+                    $duration = $courses->display( 'duration' );
+                    $haveyoutube = $courses->display( 'trailer' );
+                    $courseImageUrl = $courses->display( 'image' );
                     $org = $courses->field( array('name'=>'academic_institution', 'output'=>'pods' ));
                     $orgName = getFieldByLanguage($org->display( 'name' ), $org->display( 'english_name' ), $org->display( 'arabic_name' ),$sitepress->get_current_language());
-
-
                     ?>
-
-<!--                    <a class="course-item-image has_background_image --><?//= $haveyoutube; ?><!-- " data-id="--><?php //$course_ID; ?><!--">-->
-<!---->
-<!--                    </a>-->
-                    <?php
-//                    $url_course_img_slick = ( get_the_post_thumbnail_url( get_the_ID() ) ) ? get_the_post_thumbnail_url( get_the_ID(), 'medium' ) : site_url() . '/wp-content/uploads/2018/10/asset-v1JusticeJustice0012017_1type@assetblock@EDX3.png';
-
-
-                    if ( $haveyoutube ) {
-                        $haveyoutube = "haveyoutube";
-                        $data_popup  = "data-popup";
-                        $image_html  = '<a class="course-item-image has_background_image ' . $haveyoutube . '" data-id="' . $course_ID . '"' . $data_popup . ' aria-pressed="true" aria-haspopup="true" role="button" href="javascript:void(0)" aria-label="' . wrap_text_with_char( $course_title ) . '" data-classToAdd="course_info_popup" style="background-image: url(' . $url_course_img_slick . ');"></a>';
-//                        var_dump($image_html);
-                    } else {
-                        $haveyoutube = "donthaveyoutube";
-                        $data_popup  = "";
-                        $image_html  = '<div class="course-item-image has_background_image ' . $haveyoutube . '" data-id="' . $course_ID . '"' . $data_popup . '   data-classToAdd="course_info_popup" style="background-image: url(' . $url_course_img_slick . ');"></div>';
-                        var_dump($image_html);
-                    }
-                    $attrs['class'] .= $attrs['hybrid_course'] ? ' hybrid_course' : '';
-                    $output         .= '<div class="item_post_type_course course-item ' . $attrs['class'] . '" data-id="' . $course_ID . '" ' . $attrs['filters'] . '><div class="course-item-inner">';
-                    $output         .= $image_html;
-                    $output         .= '<a class="course-item-details" tabindex="0" href="' . get_permalink( $post->ID ) . '">
-                <h3 class="course-item-title">' . wrap_text_with_char( $post->post_title ) . '</h3>';
-                    if ( $orgName ) {
-                        $output .= '<p class="course-item-org">' . $orgName . '</p>';
-                    }
-                    if ( $duration ) {
-                        $output .= '<div class="course-item-duration">' . __( $duration, 'single_corse' ) . '</div>';
-                    }
-                    if ( $marketing_feature ) {
-                        $output .= '<div class="course-item-marketing">';
-                        $output .= '' . $marketing_feature . '</div>';
-                    }
-                    $output .= '<div class="course-item-link">
-                    <span>' . cin_get_str( 'Course_Page' ) . '</span>
-                </div>
-            </a></div></div>';
-
-                    echo draw_course_item(array(
-                        'class' => 'col-sm-12 col-md-6 col-lg-4 col-xl-3 course-item-with-border'
-                    ));
+<!--                    // displaying each course-->
+                        <div class="item_post_type_course course-item <?= $attrs; ?>" data-id="<?= $course_ID; ?>" >
+                            <div class="course-item-inner">
+                                <?php
+                                if($haveyoutube) {
+                                    $haveyoutube = "haveyoutube";
+                                    $data_popup = "data-popup";
+                                    ?>
+                                    <a class="course-item-image has_background_image <?= $haveyoutube; ?> " data-id="<?= $course_ID; ?>" <?= $data_popup; ?> aria-pressed="true" aria-haspopup="true" role="button" href="javascript:void(0)" aria-label="<?= wrap_text_with_char( $course_title ); ?>" data-classToAdd="course_info_popup" style="background-image: url(<?= $courseImageUrl; ?>)" ></a>
+                              <?php  } else {
+                                    $haveyoutube = "donthaveyoutube";
+                                    $data_popup = "";
+                                    ?>
+                                    <div class="course-item-image has_background_image <?= $haveyoutube; ?>" data-id="<?= $course_ID; ?>" <?= $data_popup; ?>   data-classToAdd="course_info_popup" style="background-image: url(<?= $courseImageUrl; ?>)" ></div>
+                              <?php } ?>
+                                <a class="course-item-details" tabindex="0" href="<?= get_home_url() . '/course/' . $course_permalink ?>">
+                                    <h3 class="course-item-title"> <?= wrap_text_with_char( $course_title ) ?></h3>
+                                   <?php
+                                   if($orgName):  ?>
+                                       <p class="course-item-org"> <?= $orgName; ?></p>
+                                    <?php endIf;
+                                    if($duration):  ?>
+                                        <div class="course-item-duration"> <?= __( $duration, 'single_corse' ); ?></div>
+                                    <?php endIf;
+                                    if($marketing_tags):  ?>
+                                        <div class="course-item-marketing"> <?= $marketing_tags; ?></div>
+                                    <?php endIf; ?>
+                                    <div class="course-item-link">
+                                        <span> <?= cin_get_str( 'Course_Page' ) ?></span>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
 
 
-
-
-                }
-            endif;
-
-            ?>
+<?php } endif; ?>
         </div>
     </div>
 </div>
@@ -241,11 +225,10 @@ $found_lecturer = $lecturers->total_found();
         </div>
     </div>
 <?php endif;
-
-
-
-
-
-
-include locate_template( 'templates/footer.php' );
+do_action('get_footer');
+get_template_part('templates/footer');
+wp_footer();
 ?>
+</body>
+</html>?>
+
