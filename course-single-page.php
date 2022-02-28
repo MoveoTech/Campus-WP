@@ -18,12 +18,12 @@ $course = pods( 'courses', $slug, true);
 // Check if the pod is valid and exists.
 if ( false == $course || ! $course->exists()) {
     // The pod item doesn't exists.
-//    global $wp_query;
-//    $wp_query->set_404();
-//    status_header( 404 );
-//    get_template_part( 404 );
-//    include locate_template( 'templates/footer.php' );
-//    exit();
+    global $wp_query;
+    $wp_query->set_404();
+    status_header( 404 );
+    get_template_part( 404 );
+    include locate_template( 'templates/footer.php' );
+    exit();
 
     echo "<br>";
     echo "<br>";
@@ -342,11 +342,6 @@ $video_id = ($link) ? $query_string["v"] : '';
 } ?>
 
 
-
-<?php
-
-
-?>
 <div class="information-bar" data-course_id_edx="<?= $course_id_edx ?>">
     <div class="container">
         <div class="row information-bar-inner">
