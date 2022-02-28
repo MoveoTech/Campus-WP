@@ -34,9 +34,9 @@ wp_head();
                     $url_logo_header_extra = $logo_header_extra['url'];
                     ?>
                     <div class="logo_items">
-                        <img class="social-logo" src="<?= $url_logo_header_extra ?>" alt="<?= cin_get_str('header_second_logo_alt') ?>" />
+                        <img class="social-logo" src="<?= $url_logo_header_extra ?>" alt="<?= cin_get_str('header_third_logo_alt') ?>" />
                         <img class="social-logo digital-isreal-logo" src="<?= $url_social_equality_logo_header ?>"
-                             alt="<?= cin_get_str('header_third_logo_alt') ?>"/>
+                             alt="<?= cin_get_str('header_second_logo_alt') ?>"/>
                     </div>
                 </div>
             </div>
