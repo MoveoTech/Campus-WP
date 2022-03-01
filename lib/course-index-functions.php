@@ -317,3 +317,181 @@ add_action('wp_ajax_nopriv_ajax_load_courses', 'ajax_load_courses_func');
 function courses_posts_per_page(){
     return  (ICL_LANGUAGE_CODE == 'he' && !isset($_GET['termid'])) ? 15 : -1;
 }
+
+// New create course function
+function create_course_and_filters_side($podsCourses, $filters_list, $academic_filter) {
+    $output_courses = '';
+    $course_attrs = array(
+        'class' => 'col-xs-12 col-md-6 col-xl-4 course-item-with-border',
+    );
+    while ($podsCourses->fetch()) {
+        $output_courses .= draw_new_course_item($course_attrs, $podsCourses);
+    }
+    global $sitepress;
+    $current_lang = $sitepress->get_current_language();
+
+    foreach($filters_list as $filter) {
+
+        $tax = $filter['taxonomy'];
+        $items = $filter['terms_list'];
+
+        $excluded_json = json_decode($items);
+
+        if($current_lang != 'he'){
+            $list = array();
+            foreach ($excluded_json->items as $he_item) {
+                $id = icl_object_id($he_item, $tax, false,ICL_LANGUAGE_CODE);
+                $list[] = $id;
+            }
+
+            $excluded_json->items = $list;
+        }
+
+        if ($filter['acf_fc_layout'] == 'automatic_order') {
+            if ($filter['order_type'] == 'amount') {
+                $orderby = 'count';
+                $order = 'DESC';
+            } else {
+                $orderby = 'name';
+                $order = 'ASC';
+            }
+
+            $args = array(
+                'taxonomy' => $tax,
+                'exclude' => $excluded_json->items,
+                'orderby' => $orderby,
+                'order' => $order,
+            );
+            $terms = get_terms($args);
+        } else {
+            $includes = $excluded_json->items;
+            $args = array(
+                'taxonomy' => $tax,
+                'include' => $includes
+            );
+            $terms = get_terms($args);
+            usort($terms, function ($a, $b) use ($includes) {
+                $pos_a = array_search($a->term_id, $includes);
+                $pos_b = array_search($b->term_id, $includes);
+                return $pos_a - $pos_b;
+            });
+        }
+        switch ($tax) {
+            case 'tags_knowledge':
+                $field_name = 'tags_knowledge';
+                $name = __('Field Of Knowledge', 'single_corse');
+                break;
+            case 'course_duration':
+                $field_name = 'course_duration_tag';
+                $name = cin_get_str('course_duration_filter_title');
+                break;
+            case 'age_strata':
+                $field_name = 'age_strata';
+                $name = __('Age Strata', 'single_corse');
+                break;
+            case 'skill':
+                $field_name = 'skill';
+                $name = __('Skill', 'single_corse');
+                break;
+            case 'areas_of_knowledge':
+                $field_name = 'knowledge';
+                $name = __('Learning Target', 'single_corse');
+                break;
+            case 'subject':
+                $field_name = 'subject_of_daat';
+                $name = __('Subject', 'single_corse');
+                break;
+            case 'language':
+                $field_name = 'language_course';
+                $name = __('Language', 'single_corse');
+                break;
+            case 'tags_course':
+                $field_name = 'tags';
+                $name = __('Courses Tags', 'single_corse');
+                break;
+        }
+
+        $tmp_select = '';
+        if (count($terms) > 0) {
+            $index = 1;
+
+            foreach ($terms as $term) {
+                $tmp_select .= draw_filter_item_from_term($tax, $term, $index);
+                $index++;
+            }
+            if($tmp_select){
+                $output_terms .= '
+                <div class="wrap-terms-group">
+                    <h2 class="search-page-tax-name">' . $name . '</h2>
+                    <div class="more-tags">
+                        '. $tmp_select .'
+                    </div>
+                </div>';
+            }
+        }
+        if (count($terms) > 7) {
+            $output_terms .= '<button class="show-more-tags collapsed" type="button" aria-hidden="true"><span>' . __('Show More Tags', 'single_corse') . '</span>
+        <span>' . __('Show Less Tags', 'single_corse') . '</span></button>';
+
+        }
+    }
+
+    return array(
+        'courses' => $output_courses,
+        'aside' => $output_terms
+    );
+}
+
+function draw_new_course_item( $attrs, $course ) {
+    global $sitepress;
+    $ID = $course->display('id');
+    $title = getFieldByLanguage($course->display( 'name' ), $course->display( 'english_name' ), $course->display( 'arabic_name' ),$sitepress->get_current_language());
+    $institution_name = getFieldByLanguage($course->field( 'academic_institution.name' ), $course->field( 'academic_institution.english_name' ), $course->field( 'academic_institution.arabic_name' ), $sitepress->get_current_language());
+    $marketing_feature = sortTagsByOrder($course->field('marketing_tags')) ;
+    $url_course_img_slick = $course->display( 'image' );
+    $duration = $course->display( 'duration' );
+    $course_permalink = $course->display('permalink');
+    $site_url = get_home_url();
+    $url = $site_url . '/course/' . $course_permalink;
+    $haveyoutube          = $course->display( 'trailer' );
+    $output = '';
+
+    if ( $haveyoutube ) {
+        $haveyoutube = "haveyoutube";
+        $data_popup  = "data-popup";
+        $image_html  = '<a class="course-item-image has_background_image ' . $haveyoutube . '" data-id="' . $ID . '"' . $data_popup . ' aria-pressed="true" aria-haspopup="true" role="button" href="javascript:void(0)" aria-label="' . wrap_text_with_char( $title ) . '" data-classToAdd="course_info_popup" style="background-image: url(' . $url_course_img_slick . ');"></a>';
+    } else {
+        $haveyoutube = "donthaveyoutube";
+        $data_popup  = "";
+        $image_html  = '<div class="course-item-image has_background_image ' . $haveyoutube . '" data-id="' . $ID . '"' . $data_popup . '   data-classToAdd="course_info_popup" style="background-image: url(' . $url_course_img_slick . ');"></div>';
+    }
+
+    $attrs['class'] .= $attrs['hybrid_course'] ? ' hybrid_course' : '';
+    $output         .= '<div class="item_post_type_course course-item ' . $attrs['class'] . '" data-id="' . $ID . '" ' . $attrs['filters'] . '><div class="course-item-inner">';
+    $output         .= $image_html;
+    $output         .= '<a class="course-item-details" tabindex="0" href="' . $url . '">
+                <h3 class="course-item-title">' . wrap_text_with_char( $title ) . '</h3>';
+    if ( $institution_name ) {
+        $output .= '<p class="course-item-org">' . $institution_name . '</p>';
+    }
+    if ( $duration ) {
+        $output .= '<div class="course-item-duration">' . __( $duration, 'single_corse' ) . '</div>';
+    }
+    if ( $marketing_feature ) {
+        $tags_array = [];
+        for($i = 0; $i < count($marketing_feature); $i++ ){
+            $tag = getFieldByLanguage($marketing_feature[$i]['name'], $marketing_feature[$i]['english_name'], $marketing_feature[$i]['arabic_name'], $sitepress->get_current_language());
+            array_push($tags_array, $tag);
+        }
+        $tags_string = implode(', ',$tags_array);
+
+        $output .= '<div class="course-item-marketing">';
+        $output .= '' . $tags_string . '</div>';
+    }
+    $output .= '<div class="course-item-link">
+                    <span>' . cin_get_str( 'Course_Page' ) . '</span>
+                </div>
+            </a></div></div>';
+
+    return $output;
+}

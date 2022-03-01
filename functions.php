@@ -1255,3 +1255,12 @@ function my_custom_admin_styles() {
     <?php
 }
 add_action('admin_head', 'my_custom_admin_styles');
+
+function sortTagsByOrder($tags){
+    usort($tags, "CompareTagsByOrder");
+    return $tags;
+}
+
+function CompareTagsByOrder($tag1, $tag2) {
+    return $tag1['order'] > $tag2['order'];
+}
