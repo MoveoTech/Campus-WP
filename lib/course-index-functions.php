@@ -324,9 +324,12 @@ function create_course_and_filters_side($podsCourses, $filters_list, $academic_f
     $course_attrs = array(
         'class' => 'col-xs-12 col-md-6 col-xl-4 course-item-with-border',
     );
+
+    /**  CREATE NEW COURSE CARD  **/
     while ($podsCourses->fetch()) {
         $output_courses .= draw_new_course_item($course_attrs, $podsCourses);
     }
+
     global $sitepress;
     $current_lang = $sitepress->get_current_language();
 
@@ -346,7 +349,6 @@ function create_course_and_filters_side($podsCourses, $filters_list, $academic_f
 
             $excluded_json->items = $list;
         }
-
         if ($filter['acf_fc_layout'] == 'automatic_order') {
             if ($filter['order_type'] == 'amount') {
                 $orderby = 'count';
@@ -416,7 +418,7 @@ function create_course_and_filters_side($podsCourses, $filters_list, $academic_f
             $index = 1;
 
             foreach ($terms as $term) {
-                $tmp_select .= draw_filter_item_from_term($tax, $term, $index);
+                $tmp_select .= draw_new_filter_item_from_term($tax, $term, $index);
                 $index++;
             }
             if($tmp_select){
@@ -494,4 +496,28 @@ function draw_new_course_item( $attrs, $course ) {
             </a></div></div>';
 
     return $output;
+}
+
+function draw_new_filter_item_from_term($tax, $term, $index)
+{
+    global $get_params, $filter_tags;
+    if(in_array($term->term_id, $get_params[$tax])){
+        // אם הצ'קבוקס הזה צריך להיות מסומן
+        $checked = 'checked';
+        $filter_tags .= "<a role='button' class='filter_dynamic_tag ajax_filter_tag' data-name='{$tax}[]' data-id='$term->slug' href='javascript: void(0);'>$term->name</a>";
+    }
+    $output_terms = '';
+    if ($index == 7) {
+        $access = 'data-accessibility-2020';
+    } else {
+        $access = '';
+    }
+    $output_terms .= '<div class="wrap-filter-search" ' . $access . ' >';
+    $output_terms .= '<label class="term-filter-search" for="' . $tax . "_" . $term->term_id . '">';
+    $output_terms .= '<input '. $checked .' class="checkbox-filter-search" type="checkbox" data-name="'. $tax .'" data-value="'. $term->term_id .'" name="' . $tax . '[]" value="' . $term->slug . '" id="' . $tax . "_" . $term->term_id . '">';
+    $output_terms .= '<div class="wrap-term-and-sum" ><span class="term-name">' . $term->name . '</span>
+        <span class="sum">(' . $term->count . ')</span>';
+    $output_terms .= '</div></label></div>';
+
+    return $output_terms;
 }
