@@ -95,7 +95,7 @@ $time_course = '';
 $time_course_n_con = "";
 $class_link = '';
 $link_btn = $site_settings['link_to_api_courses'] . "/courses/" . $course_id_edx . "/info";
-$link_dashboard = $site_settings['link_to_dashboard_for_campus'];
+$link_dashboard = getenv('LOGIN_REGISTER_KOA_URL') . "/dashboard"; // TODO change for koastage
 $register_api_n_con = false;
 $data_end_api = '';
 $two_btn = false;// שני כפתורים אחד - אם המשתמש רשום לקורס והשני אם משתמש לא רשום לקורס
@@ -104,7 +104,7 @@ $external_link = get_field('external_link');
 if (!$is_connect_to_site) {//משתמש שלא רשום לאתר בכל מקרה קודם צריך להרשם לאתר
     $enroll_time = cin_get_str('registration_to_campus');
     $encoded_path = urlencode($_SERVER['REQUEST_URI']);
-    $link_btn = $site_settings['link_to_login_and_register'] . "/login?next=/home" . $encoded_path;
+    $link_btn = getenv('LOGIN_REGISTER_KOA_URL') . "/login?next=/home" . $encoded_path; // TODO change for koastage
 
 } elseif (!empty($external_link)) {//קורס במערכת חיצונית
     $link_btn = $link_btn_n_con = $external_link;

@@ -429,7 +429,8 @@ jQuery(document).ready(function () {
     //appending the iframe
     jQuery('.login-item').on('click', function(e) {
         e.preventDefault();
-        jQuery("#login-iframe").append("<iframe id='login-register-iframe' src='https://courses.stage.campus.gov.il/login?next=/dashboard' height='300px' width='300px' title='Login page'></iframe>")
+        // TODO change for koastage
+        jQuery("#login-iframe").append("<iframe id='login-register-iframe' src='https://courses.koastage.campus.gov.il/login?next=/dashboard' height='300px' width='300px' title='Login page'></iframe>")
         jQuery('#login-register-popup .popup').attr('aria-hidden', 'false');
         jQuery("#login-register-popup").addClass('active');
         jQuery('body').css('overflow-y', 'hidden');
@@ -448,7 +449,8 @@ jQuery(document).ready(function () {
     //appending the iframe
     jQuery('.register-item').on('click', function(e) {
         e.preventDefault();
-        jQuery("#register-iframe").append("<iframe id='register-iframe' src='https://courses.stage.campus.gov.il/login?next=/dashboard' height='300px' width='300px' title='Register page'></iframe>")
+        // TODO change for koastage
+        jQuery("#register-iframe").append("<iframe id='register-iframe' src='https://courses.koastage.campus.gov.il/login?next=/dashboard' height='300px' width='300px' title='Register page'></iframe>")
         jQuery('#register-popup .popup').attr('aria-hidden', 'false');
         jQuery("#register-popup").addClass('active');
         jQuery('body').css('overflow-y', 'hidden');
@@ -596,7 +598,7 @@ function getMyCourses() {
 
     jQuery.ajax({
         method: "GET",
-        url: 'https://courses.campus.gov.il/api/enrollment/v1/enrollment',
+        url: 'https://courses.koastage.campus.gov.il/api/enrollment/v1/enrollment', // TODO change for koastage
         headers: {
             "Accept": "application/json",
             "Content-Type": "application/json",
