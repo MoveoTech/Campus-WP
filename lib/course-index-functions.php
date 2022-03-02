@@ -318,6 +318,12 @@ function courses_posts_per_page(){
     return  (ICL_LANGUAGE_CODE == 'he' && !isset($_GET['termid'])) ? 15 : -1;
 }
 
+
+
+
+
+
+
 // New create course function
 function create_course_and_filters_side($podsCourses, $filters_list, $academic_filter) {
     $output_courses = '';
@@ -330,8 +336,78 @@ function create_course_and_filters_side($podsCourses, $filters_list, $academic_f
         $output_courses .= draw_new_course_item($course_attrs, $podsCourses);
     }
 
+
     global $sitepress;
     $current_lang = $sitepress->get_current_language();
+
+
+    $output_terms = '';
+    $ajax_btn = '<a href="javascript: void(0);" class="ajax_filter_btn" role="button">' . __('Filter Courses', 'single_corse') . '</a>';
+    $output_terms .= '
+    <form class="wrap-all-tags-filter" id="ajax_filter">
+        <input type="hidden" name="action" value="ajax_load_courses" />
+        <input type="hidden" name="paged" value="1" />
+        <input type="hidden" name="orderby" value="menu_order" />
+        <input type="hidden" name="lang" value="he" />
+        <div class="wrap-mobile-filter-title">
+            <button id="close-nav-search" class="close-nav-search" type="button"></button>
+            <p class="filter-title-mobile">' . __('Filter Courses', 'single_corse') . '</p>';
+
+    $academic_name = cin_get_str('Institution_Name');
+
+    $excluded_json = json_decode($academic_filter);
+
+    if ($excluded_json->items) {
+        $tmp_select = $tmp_checkbox = '';
+
+        if($current_lang != 'he'){
+            $list = array();
+            foreach ($excluded_json->items as $he_item) {
+                $id = icl_object_id($he_item, 'page', false,ICL_LANGUAGE_CODE);
+                $list[] = $id;
+            }
+            $excluded_json->items = $list;
+        }
+        global $get_params, $filter_tags;
+
+        foreach ($excluded_json->items as $ac_id) {
+            $title = get_the_title($ac_id);
+            $checked = $selected = '';
+            if(in_array($ac_id, $get_params['institution'])){
+                // אם הצ'קבוקס הזה צריך להיות מסומן
+                $checked = 'checked';
+                $selected = 'selected';
+                $filter_tags .= "<a role='button' class='filter_dynamic_tag ajax_filter_tag' data-name='institution' data-id='$ac_id' href='javascript: void(0);'>$title</a>";
+            }
+            $tmp_select .= '<option '. $selected .' class="academic-option-item" value="' . $ac_id . '">' . $title . '</option>';
+            $tmp_checkbox .= '
+            <div class="wrap-filter-search">    
+                <label class="term-filter-search" for="institution_' . $ac_id . '">
+                    <input '. $checked .' class="checkbox-filter-search" type="checkbox" data-name="institution" data-value="' . $ac_id . '" value="' . $ac_id . '" id="institution_' . $ac_id . '">
+                    <div class="wrap-term-and-sum"><span class="term-name">' . $title . '</span></div>
+                </label>
+            </div>';
+        }
+        if($tmp_select) {
+            $choose_str = __('Choose Institution', 'single_corse');
+            $output_terms .= '<div class="wrap-terms-group wrap-terms-institution">
+                <h2 class="search-page-tax-name">' .$academic_name . '</h2>
+                <select multiple class="sr-only selected-academic" name="academic_select[]" aria-hidden="true" tabindex="-1">
+                    <option>' . $choose_str . '</option>
+                    '. $tmp_select .'
+                </select>
+            <button role="combobox" aria-expanded="false" data-original="' . $choose_str . '" type="button" class="filter_main_button dropdown_open">
+                    '. $choose_str .'
+                </button>
+                <div class="wrap-checkbox_institution wrap-terms-group">' . $tmp_checkbox . '</div>
+            </div>';
+        }
+    } //TODO change the old code
+
+    $output_terms .= '
+            <a href="javascript: void(0);" class="clear-link" role="button" id="clear_all_filters">' . __('Clear All', 'single_corse') . '</a>
+            '. $ajax_btn .'
+            </div>';
 
     foreach($filters_list as $filter) {
 
@@ -498,6 +574,7 @@ function draw_new_course_item( $attrs, $course ) {
     return $output;
 }
 
+
 function draw_new_filter_item_from_term($tax, $term, $index)
 {
     global $get_params, $filter_tags;
@@ -520,4 +597,4 @@ function draw_new_filter_item_from_term($tax, $term, $index)
     $output_terms .= '</div></label></div>';
 
     return $output_terms;
-}
+} //TODO change the old code
