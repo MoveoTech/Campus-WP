@@ -607,7 +607,10 @@ function getMyCourses() {
         success: function (data) {
             console.log('succeeded: authenticated');
             coursesData = data;
-            // TODO check if data length < 0 : don't show my courses stripe
+
+            /**
+             *  TODO check if data length < 0 : don't show my courses stripe
+             *  **/
 
             try {
                 if(data.length < 1)
