@@ -1,24 +1,67 @@
 <?php
-$docroot = dirname(dirname(dirname(dirname(dirname(dirname(__FILE__))))));
-require_once($docroot . '/wp-load.php');
+//$docroot = dirname(dirname(dirname(dirname(dirname(dirname(__FILE__))))));
+//require_once($docroot . '/wp-load.php');
+
+    function get_course_popup() {
+        global $sitepress;
+
+        $post_id = fixXSS($_POST['post_id']);
+        $current_lang = fixXSS($_POST['lang']);
+        $sitepress->switch_lang($current_lang);
+
+        $item = pods('courses', $post_id);
+        $item_type = 'course';
+
+        $item_video_popup_course = $item->display('trailer');
+        $lecturer_popup_course = $item->display('lecturer');
 
 
-$post_id = fixXSS($_POST['post_id']);
-$current_lang = fixXSS($_POST['lang']);
-global $sitepress;
-$sitepress->switch_lang($current_lang);
+
+
+
+        $idsArray = $_POST['idsArray'];
+        $type = $_POST['type'];
+        $lang = $_POST['lang'] ? $_POST['lang'] : 'he';
+
+        if(!$type || ($type != "courses" && $type != "tags"  && $type != "academic_institution" ) || !$idsArray || count($idsArray) < 1)
+            wp_send_json_error( 'Error: Invalid data!' );
+
+
+        $dataToReturn = [];
+
+        $data = pods($type);
+        $data->find(getParams($idsArray));
+
+        while ($data->fetch()) {
+            if($type == "courses")
+                array_push($dataToReturn, coursesData($data, $lang));
+            elseif ($type == "academic_institution")
+                array_push($dataToReturn, academicInstitutionsData($data, $lang));
+            elseif ($type == "tags")
+                array_push($dataToReturn, tagsData($data, $lang));
+        }
+
+        wp_send_json_success( json_encode($dataToReturn));
+
+    }
+add_action('wp_ajax_get_course_popup', 'get_course_popup');
+add_action('wp_ajax_nopriv_get_course_popup', 'get_course_popup');
+
+
+
+
 
 //$item = get_post($post_id); // TODO old
-$item = pods('courses', $post_id); // TODO new
+//$item = pods('courses', $post_id); // TODO new
 
 //$fields = get_fields($item);// TODO old
 //$item_type = $item->post_type;// TODO old
-$item_type = 'course'; // TODO new (temporary)
+//$item_type = 'course'; // TODO new (temporary)
 
 //$item_video_popup_course = $fields['course_video']; // TODO old
-$item_video_popup_course = $item->display('trailer'); // TODO new
+//$item_video_popup_course = $item->display('trailer'); // TODO new
 //$lecturer_popup_course = $fields['lecturer'];// TODO old
-$lecturer_popup_course = $item->display('lecturer'); // TODO new
+//$lecturer_popup_course = $item->display('lecturer'); // TODO new
 
 
 if ($item_type == 'course') {

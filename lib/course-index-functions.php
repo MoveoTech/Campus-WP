@@ -325,16 +325,7 @@ function courses_posts_per_page(){
 
 
 // New create course function
-function create_course_and_filters_side($podsCourses, $filters_list, $academic_filter) {
-    $output_courses = '';
-    $course_attrs = array(
-        'class' => 'col-xs-12 col-md-6 col-xl-4 course-item-with-border',
-    );
-
-    /**  CREATE NEW COURSE CARD  **/
-    while ($podsCourses->fetch()) {
-        $output_courses .= draw_new_course_item($course_attrs, $podsCourses);
-    }
+function create_course_and_filters_side( $filters_list, $academic_filter) {
 
 
     global $sitepress;
@@ -515,7 +506,6 @@ function create_course_and_filters_side($podsCourses, $filters_list, $academic_f
     }
 
     return array(
-        'courses' => $output_courses,
         'aside' => $output_terms
     );
 }
@@ -533,6 +523,43 @@ function draw_new_course_item( $attrs, $course ) {
     $url = $site_url . '/course/' . $course_permalink;
     $haveyoutube          = $course->display( 'trailer' );
     $output = '';
+    $attrs['class'] .= $attrs['hybrid_course'] ? ' hybrid_course' : '';
+
+//return
+//
+//    '<div class="item_post_type_course course-item ' . $attrs['class'] . '" data-id="' . $ID . '" ' . $attrs['filters'] . '><div class="course-item-inner">';
+//
+//    if($haveyoutube) {
+//       '<a class="course-item-image has_background_image haveyoutube " data-id="' . $ID . '"' . 'data-popup' . ' aria-pressed="true" aria-haspopup="true" role="button" href="javascript:void(0)" aria-label="' . wrap_text_with_char( $title ) . '" data-classToAdd="course_info_popup" style="background-image: url(' . $url_course_img_slick . ');"></a>';
+//    } else {
+//       '<div class="course-item-image has_background_image donthaveyoutube " data-id="' . $ID . '"data-classToAdd="course_info_popup" style="background-image: url(' . $url_course_img_slick . ');"></div>';
+//    }
+//
+//    '<a class="course-item-details" tabindex="0" href="' . $url . '">
+//        <h3 class="course-item-title">' . wrap_text_with_char( $title ) . '</h3>
+//    </a>';
+//
+//    if ($institution_name) {
+//        '<p class="course-item-org">' . $institution_name . '</p>';
+//    }
+//
+//    if ( $duration ) {
+//        '<div class="course-item-duration">' . __( $duration, 'single_corse' ) . '</div>';
+//    }
+//
+//    if ( $marketing_feature ) {
+//        $tags_array = [];
+//        for($i = 0; $i < count($marketing_feature); $i++ ){
+//            $tag = getFieldByLanguage($marketing_feature[$i]['name'], $marketing_feature[$i]['english_name'], $marketing_feature[$i]['arabic_name'], $sitepress->get_current_language());
+//            array_push($tags_array, $tag);
+//        }
+//        $tags_string = implode(', ',$tags_array);
+//
+//        '<div class="course-item-marketing">';
+//        '' . $tags_string . '</div>';
+//    }
+
+
 
     if ( $haveyoutube ) {
         $haveyoutube = "haveyoutube";
@@ -542,9 +569,8 @@ function draw_new_course_item( $attrs, $course ) {
         $haveyoutube = "donthaveyoutube";
         $data_popup  = "";
         $image_html  = '<div class="course-item-image has_background_image ' . $haveyoutube . '" data-id="' . $ID . '"' . $data_popup . '   data-classToAdd="course_info_popup" style="background-image: url(' . $url_course_img_slick . ');"></div>';
-    }
+    } // TODO old code
 
-    $attrs['class'] .= $attrs['hybrid_course'] ? ' hybrid_course' : '';
     $output         .= '<div class="item_post_type_course course-item ' . $attrs['class'] . '" data-id="' . $ID . '" ' . $attrs['filters'] . '><div class="course-item-inner">';
     $output         .= $image_html;
     $output         .= '<a class="course-item-details" tabindex="0" href="' . $url . '">
