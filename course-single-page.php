@@ -6,8 +6,21 @@
  * Time: 14:00
  */
 
+?>
+<!doctype html>
+<html class="no-js" <?php language_attributes(); ?>>
+<?php get_template_part('templates/head'); ?>
 
-include locate_template( 'templates/header.php' );
+<body <?php body_class(); ?>>
+<!--[if lt IE 9]>
+<div class="alert alert-warning">
+    <?php _e('You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.', 'sage'); ?>
+</div>
+<![endif]-->
+<?php
+do_action('get_header');
+get_template_part('templates/header');
+
 
 $slug = pods_v( 'last', 'url' );
 
@@ -24,29 +37,12 @@ if ( false == $course || ! $course->exists()) {
     get_template_part( 404 );
     include locate_template( 'templates/footer.php' );
     exit();
-
-    echo "<br>";
-    echo "<br>";
-    echo "the course is not exits";
-    echo "<br>";
-    echo "<br>";
 }
 
-echo "<div style='padding: 100px'>";
 
-//var_dump($course);
+global $sitepress, $site_settings, $fields;
 
-
-
-global $sitepress;
-
-
-
-//Course Page
-
-global $site_settings, $fields;
 $site_settings = get_fields('options');
-
 $what_is_explanation = $site_settings['what_is_explanation'];
 $time_now = strtotime(date('Y-m-d'));
 
@@ -75,8 +71,17 @@ $course_video = $course->display('trailer');
 $js_code = $course->display('javascript_code');
 $org = $course->display('institution');
 $lecturers = $course->field(array('name'=>'lecturer', 'output'=>'pods'));
+$testimonials = $course->field(array('name'=>'testimonial', 'output'=>'pods'));
+$corporation_institution = $course->field(array('name'=>'corporation_institution', 'output'=>'pods'));
+$external_link = $course->display('external_link');
 
 
+$course_attrs = array(
+    'class' => 'col-sm-12 col-md-6 col-lg-4 col-xl-3 course-item-with-border',
+);
+
+$relatedCourses = pods( 'courses', array('limit' => 4), true);
+var_dump($relatedCourses);
 //END fields on Course page
 
 
@@ -104,23 +109,7 @@ $lecturers = $course->field(array('name'=>'lecturer', 'output'=>'pods'));
 //    }
 //}
 
-
-
-
-
-
-// TODO $corporation_institution and $testimonials need refactoring
-
-
-//$corporation_institution = $fields['corporation_institution']; // TODO OLD Field
-$corporation_institution = $course->display('corporation_institution'); // TODO NEW Field
-
-
-//$testimonials = $fields['testimonial']; // TODO OLD Field
-$testimonials = $course->display('testimonial'); // TODO NEW Field
-
 //$knowledge = $fields['knowledge']; // TODO not used
-
 //$more_details = $fields['more_details']; // TODO removed from new entity
 
 
@@ -167,7 +156,6 @@ else
 
 
 
-echo '<div style="display: none;">';
 //user connect
 $is_connect_to_site = false;
 $cookie_name = get_field('cookie_name', 'options');
@@ -191,8 +179,6 @@ $data_end_api = '';
 $two_btn = false;// שני כפתורים אחד - אם המשתמש רשום לקורס והשני אם משתמש לא רשום לקורס
 $class_link_n_con = $enroll_time_n_con = $data_end_api_n_con = $link_btn_n_con = '';
 
-//$external_link = get_field('external_link'); // TODO OLD Field
-$external_link = $course->display('external_link'); // TODO NEW Field
 
 if (!$is_connect_to_site) {//משתמש שלא רשום לאתר בכל מקרה קודם צריך להרשם לאתר
     $enroll_time = cin_get_str('registration_to_campus');
@@ -306,13 +292,11 @@ $video_id = ($link) ? $query_string["v"] : '';
 
 <?php if ($course_image_banner) {
 
-//    $title = $fields['title_on_banner_course']; // TODO OLD Field
-    $title = $course->display('title_on_banner'); // TODO NEW Field
+    $title = $course->display('title_on_banner');
 
     $title = $title ? wrap_text_with_char($title) :  get_the_title();
 
-//    $banner_for_mobile = $fields['banner_for_mobile_course']; // TODO OLD Field
-    $banner_for_mobile = $course->display('banner_image_for_mobile'); // TODO NEW Field
+    $banner_for_mobile = $course->display('banner_image_for_mobile');
 
     $class = 'about-course gray-part';
     $text_on_banner_content = '';
@@ -425,16 +409,19 @@ $video_id = ($link) ? $query_string["v"] : '';
                                     <span><?= getFieldByLanguage($org->display( 'name' ), $org->display( 'english_name' ), $org->display( 'arabic_name' ),$sitepress->get_current_language()); ?></span>
                                 </div>
                             <?php endif; ?>
-                            <?php if ($corporation_institution) : // TODO add ?>
+                            <?php if ( ! empty( $corporation_institution ) ) : ?>
                                 <div class="corporation_institution info-course">
                                     <span class="info-course-list-bold"><?= __('In Collaboration With', 'single_corse'); ?>:</span>
                                     <?php
-                                    foreach ($corporation_institution as $item) {
+                                    foreach ($corporation_institution as $item){
+                                        $name = getFieldByLanguage($item->display('name'), $item->display('english_name'), $item->display('arabic_name') ,$sitepress->get_current_language());
+                                        $thumb = $item->display('image');
+                                        $url = get_site_url() . '/academic_institution/' . $item->display('permalink');
                                         ?>
-                                        <a href="<?= get_permalink($item->ID) ?>" class="item_corporation_institution"
-                                           target="_blank"> <?= $item->post_title; ?>
+                                        <a href="<?= $url ?>" class="item_corporation_institution"
+                                           target="_blank"> <?= $name; ?>
                                             <img class="corporation_img"
-                                                 src="<?= get_the_post_thumbnail_url($item->ID, 'medium'); ?>">
+                                                 src="<?= $thumb; ?>">
                                         </a>
                                     <?php } ?>
                                 </div>
@@ -497,12 +484,12 @@ $video_id = ($link) ? $query_string["v"] : '';
                                     <?php endforeach; ?>
                                 </div>
                             <?php endif; ?>
-                            <?php if ($prior) : ?>
-                                <div class="">
-                                    <span class="prior info-course-list-bold"><?= __('Prior knowledge', 'single_corse'); ?>:</span>
-                                    <span><?= $ele_prior; ?></span>
-                                </div>
-                            <?php endif; ?>
+<!--                            --><?php //if ($prior) : ?>
+<!--                                <div class="">-->
+<!--                                    <span class="prior info-course-list-bold">--><?//= __('Prior knowledge', 'single_corse'); ?><!--:</span>-->
+<!--                                    <span>--><?//= $ele_prior; ?><!--</span>-->
+<!--                                </div>-->
+<!--                            --><?php //endif; ?>
                             <?php if ($mobile_available) : ?>
                                 <div class="">
                                     <span class="mobile_available info-course-list-bold"><?= __('Mobile', 'single_corse'); ?>:</span>
@@ -593,37 +580,35 @@ $video_id = ($link) ? $query_string["v"] : '';
         </div>
     </div>
 <?php endif; ?>
-<?php if ($testimonials) : ?>
+
+
+<?php if ( ! empty( $testimonials ) ) : ?>
     <div class="testimonial-course-page">
         <div class="container">
             <div class="row testimonials-course-page-items">
                 <h4 class="col-12 title_of_testimonials"><?= cin_get_str('Learners_Testimonials'); ?>:</h4>
-                <?php foreach ($testimonials as $testimonial): ?>
+                <?php foreach ( $testimonials as $testimonial ){
+                    $content = getFieldByLanguage($testimonial->display('hebrew_description'), $testimonial->display('english_description'), $testimonial->display('arabic_description') ,$sitepress->get_current_language());
+                ?>
                     <div class="col-md-12 col-lg-6 testimonials-course-page-items-inner">
                         <?php $img_testimonial = get_bloginfo('stylesheet_directory') . '/assets/images/quotesmall.png'; ?>
                         <div class="img-quotesmall testimonial-course-page-img"
                              style="background-image: url(<?= $img_testimonial ?>)" class="quotesmall"></div>
-                        <div class="quote-text-course-page"><?= $testimonial->post_content; ?></div>
+                        <div class="quote-text-course-page"><?= $content; ?></div>
                     </div>
-                <?php endforeach; ?>
+                <?php } ?>
             </div>
         </div>
     </div>
 <?php endif; ?>
 
 
-<!--TODO removed from new entity -->
-<?php //if ($more_details) : ?>
-<!--    <div class="more_details">-->
-<!--        <div class="container">-->
-<!--            <div class="more_details-text">--><?//= $more_details; ?><!--</div>-->
-<!--        </div>-->
-<!--    </div>-->
-<?php //endif; ?>
 
 <!--more courses area 4 posts-->
 
 <!--the terms returns an id not an object-->
+<?php if ( ! empty( $relatedCourses ) ) : ?>
+
 <div class="more-courses-section">
     <div class="container">
         <div class="row">
@@ -631,22 +616,16 @@ $video_id = ($link) ? $query_string["v"] : '';
         </div>
         <div class="row more-courses-inner" id="single_course_related_container">
             <?php
-            for ($i = 0; $i < 4; $i++) {
-                echo '<div class="course-item-inner load_related_courses col-sm-12 col-md-6 col-lg-4 col-xl-3">
-                            <div class="course_wrap">
-                                <a class="course_top"></a>
-                                <a class="course-bottom">
-                                    <div class="course-content">
-                                        <div class="course-title"></div>
-                                        <div class="course-title second"></div>
-                                        <p class="course-text"></p>
-                                        <div class="course_duration"></div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>';
-            }
-            ?>
+            while ($relatedCourses->fetch()) {
+//                $output_courses .= get_template_part('template', 'parts/Courses/course-card',
+//                    array(
+//                        'args' => array(
+//                            'course' => $relatedCourses,
+//                            'attrs' => $course_attrs,
+//                        )
+//                    ));
+                ?>
+            <?php } ?>
         </div>
         <div class="row justify-content-center">
             <p class="course-page-bottom-info"><?= cin_get_str('text_before_archive_link_single_page'); ?>:</p>
@@ -657,18 +636,20 @@ $video_id = ($link) ? $query_string["v"] : '';
         </div>
     </div>
 </div>
+<?php endif; ?>
 
 
 <?php include locate_template( 'templates/footer.php' ); ?>
 
 
 
-<script>
-    jQuery.ajax({
-        url: '<?= get_bloginfo('stylesheet_directory'); ?>/assets/ajax/related_courses.php',
-        data: {post_id: <?= $post->ID; ?>, lang: '<?= $sitepress->get_current_language(); ?>'},
-        method: 'POST'
-    }).done(function (data) {
-        jQuery('#single_course_related_container').html(data);
-    });
-</script>
+
+
+
+<?php
+do_action('get_footer');
+get_template_part('templates/footer');
+wp_footer();
+?>
+</body>
+</html>
