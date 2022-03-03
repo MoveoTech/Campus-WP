@@ -64,7 +64,6 @@ function get_courses_search_filter_server_side($query, $filters_list, $academic_
     $academic_name = cin_get_str('Institution_Name');
 
     $excluded_json = json_decode($academic_filter);
-
     if ($excluded_json->items) {
         $tmp_select = $tmp_checkbox = '';
 
@@ -77,7 +76,7 @@ function get_courses_search_filter_server_side($query, $filters_list, $academic_
             $excluded_json->items = $list;
         }
 		global $get_params, $filter_tags;
-
+        var_dump($filter_tags);
         foreach ($excluded_json->items as $ac_id) {
             $title = get_the_title($ac_id);
 	        $checked = $selected = '';
@@ -203,7 +202,7 @@ function get_courses_search_filter_server_side($query, $filters_list, $academic_
             $index = 1;
 
             foreach ($terms as $term) {
-                $tmp_select .= draw_filter_item_from_term($tax, $term, $index);
+                $tmp_select .= draw_new_filter_item_from_term($tax, $term, $index);
                 $index++;
             }
             if($tmp_select){

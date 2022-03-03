@@ -31,16 +31,19 @@ $course_attrs = array(
 $params = [
     'limit'   => 27,
 ];
+$academic_institutions = pods( 'academic_institution', array('limit'   => -1 ));
 $courses = pods( 'courses', $params, true);
 $count = $courses->total_found(); // TODO new count
+$academic_name = cin_get_str('Institution_Name');
+$choose_str = __('Choose Institution', 'single_corse');
 
 
-//---- The old archive course code ----//
+/** The old archive course code **/
 
 
 //if ( $sitepress->get_current_language() == 'he' ) {
 //    $strings   = get_courses_search_filter_server_side( $wp_query, $filters_list, $academic_filter );
-    $strings   = create_course_and_filters_side( $filters_list, $academic_filter );
+//    $strings   = create_course_and_filters_side( $filters_list, $academic_filter );
     $title_str = cin_get_str( 'filter_courses_title_ajax' );
     $my_class = "ajax_filter";
 //} else {
@@ -48,7 +51,7 @@ $count = $courses->total_found(); // TODO new count
 //    $title_str = cin_get_str( 'filter_courses_title_no_ajax' );
 //    $my_class = "no_ajax_filter";
 //}
-$aside_str   = $strings['aside'];
+//$aside_str   = $strings['aside'];
 
 ?>
 
@@ -60,7 +63,15 @@ $aside_str   = $strings['aside'];
                     <div class="clear-filter-area">
                             <span class="filter-course-title" role="heading" aria-level="2"><?= $title_str ?></span>
                     </div>
-                    <?= $aside_str ?>
+                    <?php
+                         get_template_part('template', 'parts/Filters/filters-aside',
+                            array(
+                                'args' => array(
+                                    'filters_list' => $filters_list,
+                                    'academic_filter' => $academic_institutions->data(),
+                                )
+                            ));
+                    ?>
                 </div>
                 <div class="lokking-for-form"><?= $form_short_code_sidebar ?></div>
             </aside>
