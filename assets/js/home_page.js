@@ -430,7 +430,7 @@ jQuery(document).ready(function () {
     jQuery('.login-item').on('click', function(e) {
         e.preventDefault();
         // TODO change for koastage
-        jQuery("#login-iframe").append("<iframe id='login-register-iframe' src='https://courses.koastage.campus.gov.il/login?next=/dashboard' height='300px' width='300px' title='Login page'></iframe>")
+        jQuery("#login-iframe").append("<iframe id='login-register-iframe' src='https://courses.koastage.campus.gov.il/login?next=/home' height='300px' width='300px' title='Login page'></iframe>")
         jQuery('#login-register-popup .popup').attr('aria-hidden', 'false');
         jQuery("#login-register-popup").addClass('active');
         jQuery('body').css('overflow-y', 'hidden');
@@ -450,7 +450,7 @@ jQuery(document).ready(function () {
     jQuery('.register-item').on('click', function(e) {
         e.preventDefault();
         // TODO change for koastage
-        jQuery("#register-iframe").append("<iframe id='register-iframe' src='https://courses.koastage.campus.gov.il/login?next=/dashboard' height='300px' width='300px' title='Register page'></iframe>")
+        jQuery("#register-iframe").append("<iframe id='register-iframe' src='https://courses.koastage.campus.gov.il/register?next=/home' height='300px' width='300px' title='Register page'></iframe>")
         jQuery('#register-popup .popup').attr('aria-hidden', 'false');
         jQuery("#register-popup").addClass('active');
         jQuery('body').css('overflow-y', 'hidden');
@@ -609,7 +609,7 @@ function getMyCourses() {
             coursesData = data;
 
             /**
-             *  TODO check if data length < 0 : don't show my courses stripe
+             *  check if data length < 0 : don't show my courses stripe
              *  **/
 
             try {
@@ -674,7 +674,7 @@ function appendMyCourses(coursesData, id) {
             course_edXId: item.course_id_edx,
             // progress: item.course_details.progress ? item.course_details.progress : '',
         }
-        let url = 'https://courses.campus.gov.il/courses/' + itemData.course_edXId + '/info';
+        let url = 'https://courses.koastage.campus.gov.il/courses/' + itemData.course_edXId + '/course';// TODO change for koastage
         // let url = 'https://campus.gov.il/course/' + itemData.permalink + '/';
         let temp = document.createElement("div");
         temp.className = 'course-stripe-item';
