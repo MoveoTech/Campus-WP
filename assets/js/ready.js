@@ -232,7 +232,6 @@ jQuery(document).ready(function () {
         jQuery('#popup > div #popup-course-hp .popup-course-link').addClass(is_event);
         jQuery.ajax({
             type: 'POST',
-            // dataType: JSON,
             url: ajax_dir() + 'get_course_popup.php',
             data: {
                 'post_id': jQuery(this).data('id'),
