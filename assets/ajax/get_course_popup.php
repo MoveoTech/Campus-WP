@@ -39,30 +39,6 @@
 
         $json_output = wp_json_encode($ajax);
         print_r($json_output);
-//
-//        $idsArray = $_POST['idsArray'];
-//        $type = $_POST['type'];
-//        $lang = $_POST['lang'] ? $_POST['lang'] : 'he';
-//
-//        if(!$type || ($type != "courses" && $type != "tags"  && $type != "academic_institution" ) || !$idsArray || count($idsArray) < 1)
-//            wp_send_json_error( 'Error: Invalid data!' );
-//
-//
-//        $dataToReturn = [];
-//
-//        $data = pods($type);
-//        $data->find(getParams($idsArray));
-//
-//        while ($data->fetch()) {
-//            if($type == "courses")
-//                array_push($dataToReturn, coursesData($data, $lang));
-//            elseif ($type == "academic_institution")
-//                array_push($dataToReturn, academicInstitutionsData($data, $lang));
-//            elseif ($type == "tags")
-//                array_push($dataToReturn, tagsData($data, $lang));
-//        }
-//
-//        wp_send_json_success( json_encode($dataToReturn));
 
     }
 add_action('wp_ajax_get_course_popup', 'get_course_popup');
