@@ -1197,6 +1197,23 @@ function getFieldByLanguage($heField, $enField, $arField, $lang)
 
 }
 
+function getFieldByLanguageFromString($strField, $lang)
+{
+    try {
+        $fieldLanguageArray = explode(',', $strField);
+        if(count($fieldLanguageArray) != 3)
+            return null;
+        // TODO trim
+        $language_course = $fieldLanguageArray ? getFieldByLanguage($fieldLanguageArray[0], $fieldLanguageArray[1], $fieldLanguageArray[2], $lang) : null;
+        return $language_course;
+    }
+    catch (exception $e) {
+        //code to handle the exception
+        return null;
+    }
+
+}
+
 
 function disallow_posts_with_same_title($messages) {
 
@@ -1264,3 +1281,4 @@ function sortTagsByOrder($tags){
 function CompareTagsByOrder($tag1, $tag2) {
     return $tag1['order'] > $tag2['order'];
 }
+

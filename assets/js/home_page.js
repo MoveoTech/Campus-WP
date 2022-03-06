@@ -628,7 +628,9 @@ function getCoursesDetails(coursesArray) {
 
     coursesArray.forEach((item) => {
         let courseId = item.course_details.course_id;
-        if(courseId) edXIdCoursesArray.push(courseId);
+        let indexSplice = courseId.indexOf('+', 25);
+        let newCourseId = courseId.substring(0, indexSplice);
+        if(courseId) edXIdCoursesArray.push(newCourseId);
     })
     getMyCoursesDataFromWordpress(edXIdCoursesArray);
 }
@@ -669,7 +671,7 @@ function appendMyCourses(coursesData, id) {
             course_edXId: item.course_id_edx,
             // progress: item.course_details.progress ? item.course_details.progress : '',
         }
-        let url = 'https://courses.campus.gov.il/courses/' + itemData.course_edXId + '/info';
+        let url = 'https://courses.campus.gov.il/courses/' + itemData.course_edXId + '/info'; // TODO check the url for KOA -> for koa 'https://courses.koastage.campus.gov.il/courses/' + itemData.course_edXId + '/course/'
         // let url = 'https://campus.gov.il/course/' + itemData.permalink + '/';
         let temp = document.createElement("div");
         temp.className = 'course-stripe-item';
