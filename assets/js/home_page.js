@@ -628,7 +628,9 @@ function getCoursesDetails(coursesArray) {
 
     coursesArray.forEach((item) => {
         let courseId = item.course_details.course_id;
-        if(courseId) edXIdCoursesArray.push(courseId);
+        let indexSplice = courseId.indexOf('+', 25);
+        let newCourseId = courseId.substring(0, indexSplice);
+        if(courseId) edXIdCoursesArray.push(newCourseId);
     })
     getMyCoursesDataFromWordpress(edXIdCoursesArray);
 }
