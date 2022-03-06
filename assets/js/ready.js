@@ -232,16 +232,15 @@ jQuery(document).ready(function () {
         jQuery('#popup > div #popup-course-hp .popup-course-link').addClass(is_event);
         jQuery.ajax({
             type: 'POST',
-            url: global_vars.ajaxurl,
+            url: global_vars.ajax_url,
             data: {
                 'action': 'get_course_popup',
                 'post_id': jQuery(this).data('id'),
                 'lang': current_lang,
 
             },
-        }).done(function (data) {
-            var json = JSON.parse(data);
-            console.log(json.popup_course_link);
+        }).done(function (response) {
+            var json = response.data;
             jQuery('#popup > div #popup-course-hp .popup-video').attr('title', json.popup_title);
             jQuery('#popup > div #popup-course-hp .popup-video').attr('src', json.popup_video);
 

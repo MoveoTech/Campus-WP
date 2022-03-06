@@ -1,44 +1,47 @@
 <?php
-//$docroot = dirname(dirname(dirname(dirname(dirname(dirname(__FILE__))))));
-//require_once($docroot . '/wp-load.php');
-
-    function get_course_popup() {
+    function get_course_popup()
+    {
         global $sitepress;
 
         $post_id = fixXSS($_POST['post_id']);
         $current_lang = fixXSS($_POST['lang']);
         $sitepress->switch_lang($current_lang);
         $item = pods('courses', $post_id);
-//        $item_type = 'course';
         $item_video_popup_course = $item->display('trailer');
-        $lecturer_popup_course = $item->display('lecturer');
-        $duration_popup_course = $item->display('duration');// TODO new
-        $dates = __($duration_popup_course, 'single_corse');
-        $academic_institution_popup_course = $item->display('academic_institution');// TODO new
+        $lecturer_popup_course = $item->field('lecturer');
+        $duration_popup_course = $item->display('duration');
+        $post_excerpt_popup_course = $item->field('excerpt');
+        $academic_institution_popup_course = $item->field('academic_institution');
         if ($academic_institution_popup_course) {
             $academic_title = getFieldByLanguage($academic_institution_popup_course['name'],$academic_institution_popup_course['english_name'],$academic_institution_popup_course['arabic_name'], $sitepress->get_current_language());
+        }
+        if ($lecturer_popup_course) {
+            $popup_lecturer_title = getFieldByLanguage($lecturer_popup_course['name'],$lecturer_popup_course['english_name'],$lecturer_popup_course['arabic_name'], $sitepress->get_current_language());
         }
         $post_title_popup_course = $item->display('title_on_banner');// TODO new
         $post_title_popup_course = $post_title_popup_course ? wrap_text_with_char($post_title_popup_course) : getFieldByLanguage($item->display('name'),$item->display('english_name'),$item->display('arabic_name'), $sitepress->get_current_language());
         $course_permalink = $item->display('permalink'); //TODO new
-        $site_url = get_current_url();//TODO new
-        $url = $site_url . 'course/' . $course_permalink;//TODO new
-        $wpml_permalink = apply_filters('wpml_permalink', $url, $current_lang);
+        $site_url = get_home_url();//TODO new
+        $url = $site_url . '/course/' . $course_permalink;//TODO new
 
         $query_string = array();
         parse_str(parse_url($item_video_popup_course, PHP_URL_QUERY), $query_string);
         $video_id = $item_video_popup_course ? $query_string["v"] : '';
         $ajax = [];
+        $ajax['lecturer'] = $lecturer_popup_course['image'];
         $ajax['popup_title'] = $post_title_popup_course;
         $ajax['popup_video'] = 'https://www.youtube.com/embed/' . $video_id . '?autoplay=0&showinfo=0&autohide=1&rel=0&enablejsapi=1&wmode=transparent';
-        if ($lecturer_popup_course) {
-            $ajax['popup_academic_institution_title'] = $academic_title;
-        }
-        $ajax['popup_duration_popup_course'] = $dates;
-        $ajax['popup_course_link'] = $wpml_permalink;
+      if ($lecturer_popup_course) {
+          $ajax['popup_lecturer_title'] = $popup_lecturer_title;
+          //   $ajax['popup_lecturer_thumbnail'] = $lecturer_popup_course['image'];
+          $ajax['popup_academic_institution_title'] = $academic_title;
+      }
+        $ajax['popup_excerpt'] = $post_excerpt_popup_course;
+        $ajax['popup_duration_popup_course'] = $duration_popup_course;
+        $ajax['popup_course_link'] = $url;
 
-        $json_output = wp_json_encode($ajax);
-        print_r($json_output);
+        wp_send_json_success( $ajax);
+
 
     }
 add_action('wp_ajax_get_course_popup', 'get_course_popup');

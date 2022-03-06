@@ -13,6 +13,7 @@ include locate_template( 'lib/course-index-functions.php' );
 include locate_template( 'admin_files/admin_funcs.php' );
 include locate_template( 'assets/ajax/stripe_data.php' );
 include locate_template( 'assets/ajax/my_courses.php' );
+include locate_template( 'assets/ajax/get_course_popup.php' );
 
 /**
  * Daat Ester
