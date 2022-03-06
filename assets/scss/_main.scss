@@ -110,6 +110,7 @@ body.rtl {
 }
 
 .banner-image.institution-page {
+  width: 100%;
   height: 100%;
 }
 
@@ -276,7 +277,7 @@ main {
       width: 100%;
       background: linear-gradient(270deg, #333433 34.02%, rgba(51, 52, 51, 0) 100%);
       @media (min-width: 1441px) {
-        background: linear-gradient(270deg, #333433 52%, rgba(51, 52, 51, 0) 100%);
+        background: linear-gradient(270deg, #333433 45%, rgba(51, 52, 51, 0) 100%);
       }
     }
     div.desktop-banner {
@@ -375,7 +376,7 @@ main {
   .hero-banner {
     .banner-image {
       div.desktop-banner {
-        width: 50%;
+        width: 55%;
       }
     }
 
