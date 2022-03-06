@@ -13,6 +13,7 @@ include locate_template( 'lib/course-index-functions.php' );
 include locate_template( 'admin_files/admin_funcs.php' );
 include locate_template( 'assets/ajax/stripe_data.php' );
 include locate_template( 'assets/ajax/my_courses.php' );
+include locate_template("inc/importExportOption.php");
 
 /**
  * Daat Ester
@@ -1255,3 +1256,24 @@ function my_custom_admin_styles() {
     <?php
 }
 add_action('admin_head', 'my_custom_admin_styles');
+
+// Daniel Kisos's function - console log in PHP
+function console_log($output, $with_script_tags = true) {
+    $js_code = 'console.log(' . json_encode($output, JSON_HEX_TAG) .
+        ');';
+    if ($with_script_tags) {
+        $js_code = '<script>' . $js_code . '</script>';
+    }
+    echo $js_code;
+}
+
+/**
+ * Enqueue a script in the WordPress admin.
+ *
+ * @param int $hook Hook suffix for the current admin page.
+ */
+function enqueue_admin_script() {
+
+    wp_enqueue_script( 'my_custom_script', get_bloginfo( 'stylesheet_directory' ) . '/assets/js/priority-control.js', array(), '1.0' );
+}
+add_action( 'admin_enqueue_scripts', 'enqueue_admin_script' );
