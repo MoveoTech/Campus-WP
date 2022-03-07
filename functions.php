@@ -12,19 +12,6 @@ include locate_template( 'lib/acf_fields.php' );
 include locate_template( 'lib/course-index-functions.php' );
 include locate_template( 'admin_files/admin_funcs.php' );
 include locate_template( 'assets/ajax/stripe_data.php' );
-include locate_template( 'assets/ajax/my_courses.php' );
-
-
-//add_action('admin_init','load_home_meta');
-//function load_home_meta() {
-//    global $pagenow, $post;
-//    console_log($pagenow);
-////    if ($pagenow=='edit.php' && '104' == $post->ID) {
-////        include 'metaboxes/home-meta.php';
-////    }
-//}
-
-
 /**
  * Daat Ester
  * Adding option page to header and footer
@@ -128,7 +115,6 @@ function style_of_campus_enqueue() {
 	wp_enqueue_script( 'bootstrap_js', get_bloginfo( 'stylesheet_directory' ) . '/assets/js/bootstrap.min.js' );
     wp_enqueue_script('home_page_js', get_bloginfo( 'stylesheet_directory' ) . '/assets/js/home_page.js', array('jquery'));
     wp_localize_script('home_page_js', 'stripe_data_ajax', array('ajaxurl' => admin_url('admin-ajax.php')));
-    wp_localize_script('home_page_js', 'my_courses_ajax', array('ajaxurl' => admin_url('admin-ajax.php')));
 
 	wp_localize_script( 'ready_js', 'global_vars', array(
 			'link_to_enrollment_api'        => get_field( 'link_to_enrollment_api', 'option' ),
@@ -150,24 +136,24 @@ function style_of_campus_enqueue() {
 add_action( 'wp_enqueue_scripts', 'style_of_campus_enqueue' );
 
 // get lang menu
-//function get_lang_menu() {
-//	$output_lang_menu = '';
-//	if ( is_archive( 'course' ) or is_search() or is_singular( 'course' ) or is_singular( 'h_course' ) ) {
-//		$lang_class = '';
-//
-//		$output_lang_menu .= '<div class="menu-language-menu-container">
-//        <ul id="menu-language-menu-1" class="nav-lang">
-//        <li id="wpml-ls-item-he" class="wpml-ls-menu-item wpml-ls-item-he ' . current_active_lang( 'he' ) . '"><a href="' . get_lang_url( 'he' ) . '"><span class="wpml-ls-native">עב</span></a></li>
-//        <li id="wpml-ls-item-ar" class="wpml-ls-menu-item wpml-ls-item-ar ' . current_active_lang( 'ar' ) . '"><a href="' . get_lang_url( 'ar' ) . '"><span class="wpml-ls-native">العر</span></a></li>
-//        <li id="wpml-ls-item-en" class="wpml-ls-menu-item wpml-ls-item-en ' . current_active_lang( 'en' ) . '"><a href="' . get_lang_url( 'en' ) . '"><span class="wpml-ls-native">En</span></a></li>
-//        </ul></div>';
-//	} else {
-//		if ( has_nav_menu( 'lang_menu' ) ) :
-//			wp_nav_menu( [ 'theme_location' => 'lang_menu', 'menu_class' => 'nav-lang' ] );
-//		endif;
-//	}
-//	return $output_lang_menu;
-//}
+function get_lang_menu() {
+	$output_lang_menu = '';
+	if ( is_archive( 'course' ) or is_search() or is_singular( 'course' ) or is_singular( 'h_course' ) ) {
+		$lang_class = '';
+
+		$output_lang_menu .= '<div class="menu-language-menu-container">
+        <ul id="menu-language-menu-1" class="nav-lang">
+        <li id="wpml-ls-item-he" class="wpml-ls-menu-item wpml-ls-item-he ' . current_active_lang( 'he' ) . '"><a href="' . get_lang_url( 'he' ) . '"><span class="wpml-ls-native">עב</span></a></li>
+        <li id="wpml-ls-item-ar" class="wpml-ls-menu-item wpml-ls-item-ar ' . current_active_lang( 'ar' ) . '"><a href="' . get_lang_url( 'ar' ) . '"><span class="wpml-ls-native">العر</span></a></li>
+        <li id="wpml-ls-item-en" class="wpml-ls-menu-item wpml-ls-item-en ' . current_active_lang( 'en' ) . '"><a href="' . get_lang_url( 'en' ) . '"><span class="wpml-ls-native">En</span></a></li>
+        </ul></div>';
+	} else {
+		if ( has_nav_menu( 'lang_menu' ) ) :
+			wp_nav_menu( [ 'theme_location' => 'lang_menu', 'menu_class' => 'nav-lang' ] );
+		endif;
+	}
+	return $output_lang_menu;
+}
 
 //get active lang with giving lang
 function current_active_lang( $given_lang ) {
@@ -1160,12 +1146,12 @@ function hero_search_placeholder() {
 function course_popup_button_text() {
     global $sitepress;
     $current = $sitepress->get_current_language();
-    $text = 'מעבר לעמוד הקורס';
+    $text = 'מעבר לקורס';
     if ($current === 'en') {
-        $text = 'Go to the course page';
+        $text = 'Go to the course';
     }
     if ($current === 'ar') {
-        $text = 'اذهب إلى صفحة الدورة';
+        $text = 'اذهب إلى الدورة';
     }
     return $text;
 }
@@ -1175,22 +1161,19 @@ function more_courses_text($carousel) {
     $current = $sitepress->get_current_language();
     $text = '';
     if ($current === 'he') {
-        $text .= 'לקטלוג הקורסים';
-//            $text .= 'הצג  את ';
-//            $text .= count($carousel);
-//            $text .= ' הקורסים';
+            $text .= 'הצג  את ';
+            $text .= count($carousel);
+            $text .= ' הקורסים';
         }
     if ($current === 'en') {
-        $text .= 'Course Catalog';
-//            $text .= 'View the ';
-//            $text .= count($carousel);
-//            $text .= ' courses';
+            $text .= 'View the ';
+            $text .= count($carousel);
+            $text .= ' courses';
         }
     if ($current === 'ar') {
-        $text .= 'كتالوج الدورة';
-//            $text .= 'استعرض ';
-//            $text .= count($carousel);
-//            $text .= ' دورات';
+            $text .= 'استعرض ';
+            $text .= count($carousel);
+            $text .= ' دورات';
         }
 
     return $text;
@@ -1279,18 +1262,22 @@ function console_log($output, $with_script_tags = true) {
 
 //adding priority control submenu on admin menu (inside option page campus)
 function import_export_options(){
-    $submenu = add_submenu_page(
-        'option-page-campus',
+     add_menu_page(
         'Priority Control',
         'Priority Control',
         'administrator',
-        'campus-priority-control',
-        'campus-priority-control'
+        'priority-control',
+        'show_priority_control',
+         '',
+         80
     );
-    add_action( 'admin_print_scripts-' . $submenu, 'admin_custom_js' );
+//    add_action( 'admin_print_scripts-' . $submenu, 'admin_custom_js' );
 };
 add_action('admin_menu', 'import_export_options');
 
+function show_priority_control() {
+    include locate_template("templates/import-export-data.php");
+}
 /**
  * Enqueue a script in the WordPress admin.
  *
@@ -1298,7 +1285,9 @@ add_action('admin_menu', 'import_export_options');
  */
 function enqueue_admin_script() {
 
-    include locate_template("inc/importExportOption.php");
+//    include locate_template("inc/import-export-data.php");
+
+
     wp_enqueue_script( 'my_custom_script', get_bloginfo( 'stylesheet_directory' ) . '/assets/js/priority-control.js', array(), '1.0' );
 }
 add_action( 'admin_enqueue_scripts', 'enqueue_admin_script' );

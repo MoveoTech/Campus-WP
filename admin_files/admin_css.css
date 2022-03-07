@@ -74,15 +74,15 @@ ul.pods-dfv-list li.pods-dfv-list-edit a {
 .settings-error{
     background: #ffe6e6;
 }
-.priority-control-wrap {
-    width: 100%;
-    height: 100%;
-    border:2px solid blue;
-    display: flex;
-}
-.wraping-div{
-    border: 2px solid green;
-    margin: auto;
-    height: 100%;
+/*.priority-control-wrap {*/
+/*    width: 100%;*/
+/*    height: 100%;*/
+/*    border:2px solid blue;*/
+/*    display: flex;*/
+/*}*/
+/*.wraping-div{*/
+/*    border: 2px solid green;*/
+/*    margin: auto;*/
+/*    height: 100%;*/
 
-}
+/*}*/
