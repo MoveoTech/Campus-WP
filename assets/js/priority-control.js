@@ -8,7 +8,7 @@ $(document).ready(function($) {
     $('#btnExportpriority').on('click',function () {
         //write to the file
         const rows = [
-            ['Course id','Course name','Course Priority'],
+            ['Course ID','Course name','Course Priority'],
         ];
         $('#table_body tr').each(function () {
             let id = $(this).find('#id_selected').attr('data-selected');
@@ -128,12 +128,14 @@ $(document).ready(function($) {
     {
         let processRow = function (row) {
             let finalVal = '';
+            // console.log(row[1])
             for (let j = 0; j < row.length; j++) {
                 let innerValue = (row[j] === null || row[j] === undefined) ? '' : row[j].toString();
                 if (row[j] instanceof Date) {
                     innerValue = row[j].toLocaleString();
                 };
                 let result = innerValue.replace(/"/g, '""');
+
                 if (result.search(/("|,|\n)/g) >= 0) {
                     result = '"' + result + '"';
                 }

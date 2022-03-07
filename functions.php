@@ -23,7 +23,7 @@ include locate_template( 'assets/ajax/my_courses.php' );
 ////        include 'metaboxes/home-meta.php';
 ////    }
 //}
-include locate_template("inc/importExportOption.php");
+
 
 /**
  * Daat Ester
@@ -1277,6 +1277,20 @@ function console_log($output, $with_script_tags = true) {
     echo $js_code;
 }
 
+//adding priority control submenu on admin menu (inside option page campus)
+function import_export_options(){
+    $submenu = add_submenu_page(
+        'option-page-campus',
+        'Priority Control',
+        'Priority Control',
+        'administrator',
+        'campus-priority-control',
+        'campus-priority-control'
+    );
+    add_action( 'admin_print_scripts-' . $submenu, 'admin_custom_js' );
+};
+add_action('admin_menu', 'import_export_options');
+
 /**
  * Enqueue a script in the WordPress admin.
  *
@@ -1284,7 +1298,7 @@ function console_log($output, $with_script_tags = true) {
  */
 function enqueue_admin_script() {
 
-
+    include locate_template("inc/importExportOption.php");
     wp_enqueue_script( 'my_custom_script', get_bloginfo( 'stylesheet_directory' ) . '/assets/js/priority-control.js', array(), '1.0' );
 }
 add_action( 'admin_enqueue_scripts', 'enqueue_admin_script' );
