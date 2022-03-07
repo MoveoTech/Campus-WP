@@ -11,12 +11,14 @@ $(document).ready(function($) {
             ['Course id','Course name','Course Priority'],
         ];
         $('#table_body tr').each(function () {
-            let id = $(this).find('#course_id_selected').attr('data-selected');
-            let name = $(this).find('#course_name_selected').attr('data-selected');
-            let order = $(this).find('#course_priority_selected').attr('data-selected');
-            rows.push([id,name,order]);
+            let id = $(this).find('#id_selected').attr('data-selected');
+            let name = $(this).find('#name_selected').attr('data-selected');
+            let priority = $(this).find('#priority_selected').attr('data-selected');
+            // console.log("name : ", name)
+            rows.push([id,name,priority]);
         });
-        exportToCsv("organizations",rows)
+        console.log("before export : ", rows)
+        exportToCsv("Courses",rows)
     });
 
     $('#upload_template_organizations').on('click',function () {

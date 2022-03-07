@@ -13,6 +13,16 @@ include locate_template( 'lib/course-index-functions.php' );
 include locate_template( 'admin_files/admin_funcs.php' );
 include locate_template( 'assets/ajax/stripe_data.php' );
 include locate_template( 'assets/ajax/my_courses.php' );
+
+
+//add_action('admin_init','load_home_meta');
+//function load_home_meta() {
+//    global $pagenow, $post;
+//    console_log($pagenow);
+////    if ($pagenow=='edit.php' && '104' == $post->ID) {
+////        include 'metaboxes/home-meta.php';
+////    }
+//}
 include locate_template("inc/importExportOption.php");
 
 /**
@@ -1273,6 +1283,7 @@ function console_log($output, $with_script_tags = true) {
  * @param int $hook Hook suffix for the current admin page.
  */
 function enqueue_admin_script() {
+
 
     wp_enqueue_script( 'my_custom_script', get_bloginfo( 'stylesheet_directory' ) . '/assets/js/priority-control.js', array(), '1.0' );
 }

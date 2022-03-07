@@ -14,6 +14,23 @@ add_menu_page(
 
 }
 add_action('admin_menu', 'import_export_options');
+
+$params = [
+    'limit'   => 30,
+];
+$courses = pods( 'courses', $params, true);
+$found_courses = $courses->total_found();
+//$name = $courses->display( 'name' );
+//foreach ($courses as $course) {
+//    $id = $course->display( 'ID' );
+//    $name = $course->display( 'name' );
+//    $priority = $course->display( 'order' );
+//    console_log($name);
+//    console_log($id);
+//    console_log($priority);
+//
+//}
+
 ?>
 
 <div class="priority-control-wrap">
@@ -30,12 +47,20 @@ add_action('admin_menu', 'import_export_options');
                 <td>Course order</td>
             </tr>
             </thead>
-
+<?php foreach ($courses as $course) {
+    $id = $course->display( 'ID' );
+    $name = $course->display( 'name' );
+    $priority = $course->display( 'order' );
+    ?>
+        <tbody id="table_body">
             <tr>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td id="id_selected" data-selected="<?php echo $id ?>"><?php echo $id ?></td>
+                <td id="name_selected" data-selected="<?php echo $name ?>"><?php echo $name ?></td>
+                <td id="priority_selected" data-selected="<?php echo $priority ?>"><?php echo $priority ?></td>
             </tr>
+        </tbody>
+<?php } ?>
+
         </table>
 
 
