@@ -10,10 +10,10 @@ global $get_params;
 $academic_filters = $filtersList['academic_filter'];
 
 
-if(in_array($ID, $get_params['institution'])){
-    $checked = 'checked';
-    $selected = 'selected';
-}
+//if(in_array($ID, $get_params['institution'])){
+//    $checked = 'checked';
+//    $selected = 'selected';
+//}
 ?>
 <!-- <div class="wrap-filter-search">-->
 <!--    <label class="term-filter-search" for="institution_--><?//= $ID ?><!--">-->
@@ -56,6 +56,10 @@ $choose_str = __('Choose Institution', 'single_corse');
             $title = $single_academic_filter->name;
             $ID = $single_academic_filter->id;
             $checked = $selected = '';
+            if(in_array($ID, $get_params['institution'])){
+                $checked = 'checked';
+                $selected = 'selected';
+            }
 
             ?>
             <div class="wrap-filter-search">
