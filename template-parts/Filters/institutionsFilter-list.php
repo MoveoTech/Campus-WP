@@ -8,7 +8,7 @@ if(empty($filtersList) || empty($filtersList['academic_filter']))
 
 global $get_params;
 $academic_filters = $filtersList['academic_filter'];
-
+var_dump($academic_filters);
 
 //if(in_array($ID, $get_params['institution'])){
 //    $checked = 'checked';
