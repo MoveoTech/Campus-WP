@@ -22,43 +22,55 @@ $current_lang = $sitepress->get_current_language();
         <button id="close-nav-search" class="close-nav-search" type="button"></button>
         <p class="filter-title-mobile"><?= __('Filter Courses', 'single_corse') ?></p>
         <?php
-        if($academic_institutions) {
-            $choose_str = __('Choose Institution', 'single_corse');
-        ?>
-        <div class="wrap-terms-group wrap-terms-institution">
-            <h2 class="search-page-tax-name"><?= $academic_name ?></h2>
-            <select multiple class="sr-only selected-academic" name="academic_select[]" aria-hidden="true" tabindex="-1">
-                <option><?= $choose_str ?></option>
-                <?php
-                foreach ($academic_institutions as $academic_institution){
-                    $title = $academic_institution->name;
-                    $ID = $academic_institution->id;
-                    $checked = $selected = '';
-                    if(in_array($ID, $get_params['institution'])){
-                        $checked = 'checked';
-                        $selected = 'selected';
-                    }
-                    ?>
-                    <option <?= $selected ?> class="academic-option-item" value="<?= $ID ?>"><?= $title ?></option>
 
-                <?php } ?>
-            </select>
-            <button role="combobox" aria-expanded="false" data-original="<?= $choose_str ?>" type="button" class="filter_main_button dropdown_open">
-                <?= $choose_str ?>
-            </button>
-            <div class="wrap-checkbox_institution wrap-terms-group">
-            <?php
-                foreach ($academic_institutions as $academic_institution){
-                $output_courses .= get_template_part('template', 'parts/Filters/institutionsFilter-list',
-                    array(
-                        'args' => array(
-                            'academic_filter' => $academic_institution,
-                        )
-                    ));
-            } ?>
-            </div>
-        </div>
-        <?php }?>
+            get_template_part('template', 'parts/Filters/institutionsFilter-list',
+                            array(
+                                'args' => array(
+                                    'academic_filter' => $academic_institutions,
+                                )
+                            ));
+        ?>
+
+<!--        --><?php
+//        if($academic_institutions) {
+//            $choose_str = __('Choose Institution', 'single_corse');
+//        ?>
+<!--        <div class="wrap-terms-group wrap-terms-institution">-->
+<!--            <h2 class="search-page-tax-name">--><?//= $academic_name ?><!--</h2>-->
+<!--            <select multiple class="sr-only selected-academic" name="academic_select[]" aria-hidden="true" tabindex="-1">-->
+<!--                <option>--><?//= $choose_str ?><!--</option>-->
+<!--                --><?php
+//                foreach ($academic_institutions as $academic_institution){
+//                    $title = $academic_institution->name;
+//                    $ID = $academic_institution->id;
+//                    $checked = $selected = '';
+//                    if(in_array($ID, $get_params['institution'])){
+//                        $checked = 'checked';
+//                        $selected = 'selected';
+//                    }
+//                    ?>
+<!--                    <option --><?//= $selected ?><!-- class="academic-option-item" value="--><?//= $ID ?><!--">--><?//= $title ?><!--</option>-->
+<!---->
+<!--                --><?php //} ?>
+<!--            </select>-->
+<!--            <button role="combobox" aria-expanded="false" data-original="--><?//= $choose_str ?><!--" type="button" class="filter_main_button dropdown_open">-->
+<!--                --><?//= $choose_str ?>
+<!--            </button>-->
+<!--            <div class="wrap-checkbox_institution wrap-terms-group">-->
+<!--            --><?php
+//                foreach ($academic_institutions as $academic_institution){
+//                $output_courses .= get_template_part('template', 'parts/Filters/institutionsFilter-list',
+//                    array(
+//                        'args' => array(
+//                            'academic_filter' => $academic_institution,
+//                        )
+//                    ));
+//            } ?>
+<!--            </div>-->
+<!--        </div>-->
+<!--        --><?php //}?>
+
+
         <a href="javascript: void(0);" class="clear-link" role="button" id="clear_all_filters"><?= __('Clear All', 'single_corse') ?></a>
         <a href="javascript: void(0);" class="ajax_filter_btn" role="button"><?= __('Filter Courses', 'single_corse') ?></a>
     </div>
