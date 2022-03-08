@@ -18,11 +18,11 @@
         if ($lecturer_popup_course) {
             $popup_lecturer_title = getFieldByLanguage($lecturer_popup_course['name'],$lecturer_popup_course['english_name'],$lecturer_popup_course['arabic_name'], $sitepress->get_current_language());
         }
-        $post_title_popup_course = $item->display('title_on_banner');// TODO new
+        $post_title_popup_course = $item->display('title_on_banner');
         $post_title_popup_course = $post_title_popup_course ? wrap_text_with_char($post_title_popup_course) : getFieldByLanguage($item->display('name'),$item->display('english_name'),$item->display('arabic_name'), $sitepress->get_current_language());
-        $course_permalink = $item->display('permalink'); //TODO new
-        $site_url = get_home_url();//TODO new
-        $url = $site_url . '/course/' . $course_permalink;//TODO new
+        $course_permalink = $item->display('permalink');
+        $site_url = get_home_url();
+        $url = $site_url . '/course/' . $course_permalink;
 
         $query_string = array();
         parse_str(parse_url($item_video_popup_course, PHP_URL_QUERY), $query_string);
