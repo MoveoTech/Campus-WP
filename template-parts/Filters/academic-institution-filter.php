@@ -8,8 +8,9 @@ if(empty($filter) || empty($filter['title']) || $filter['title'] == '' || empty(
 
 global $get_params;
 
-$academic_institutions = $filter['academic_institutions'];
+$academic_institutions_array = $filter['academic_institutions'];
 $title = $filter['title'];
+$academic_institutions = pods('academic_institution', podsFilterParams($academic_institutions_array))->data();
 $choose_str = __('Choose Institution', 'single_corse');
 ?>
 

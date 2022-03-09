@@ -15,14 +15,14 @@ function getFilterType($filterId){
             tagsFilter($filterId);
             break;
         }
-//
-//        case 'Certificate':
-//            certificateFilter($filterId);
-//            break;
-//
-//        case 'Languages':
-//            languagesFilter($filterId);
-//            break;
+
+        case 'Languages':
+            languagesFilter($filterId);
+            break;
+
+        case 'Certificate':
+            certificateFilter($filterId);
+            break;
     }
 }
 
@@ -31,7 +31,7 @@ function academicInstitutionFilter($filterId){
 
     global $sitepress;
 
-    $academic_institutions = pods( 'academic_institution', array('limit'   => -1 ) );
+    $academic_institutions = get_field('academic_institutions_list', $filterId);
     $title = getFieldByLanguage(get_field('hebrew_title', $filterId), get_field('english_title', $filterId), get_field('arabic_title', $filterId), $sitepress->get_current_language());
 
     get_template_part('template', 'parts/Filters/academic-institution-filter',
@@ -39,11 +39,12 @@ function academicInstitutionFilter($filterId){
             'args' => array(
                 'id'=>  $filterId,
                 'title' => $title,
-                'academic_institutions' => $academic_institutions->data(),
+                'academic_institutions' => $academic_institutions,
             )
         ));
 
 }
+
 function tagsFilter($filterId){
 
     global $sitepress;
@@ -61,34 +62,37 @@ function tagsFilter($filterId){
         ));
 
 }
-function certificateFilter($filterId){
+
+function languagesFilter($filterId){
 
     global $sitepress;
 
-    $academic_institutions = pods( 'academic_institution' );
+    $languages = pods('courses')->fields('language', 'data');
+    $title = getFieldByLanguage(get_field('hebrew_title', $filterId), get_field('english_title', $filterId), get_field('arabic_title', $filterId), $sitepress->get_current_language());
+
+    get_template_part('template', 'parts/Filters/languages-filter',
+        array(
+            'args' => array(
+                'id' =>  $filterId,
+                'title' => $title,
+                'languages' => $languages,
+            )
+        ));
+
+}
+
+function certificateFilter($filterId){
+
+    global $sitepress;
+    $certificates = get_field('certificate_list', $filterId);
+    $title = getFieldByLanguage(get_field('hebrew_title', $filterId), get_field('english_title', $filterId), get_field('arabic_title', $filterId), $sitepress->get_current_language());
 
     get_template_part('template', 'parts/Filters/certificate-filter',
         array(
             'args' => array(
                 'id'=>  $filterId,
-                'title' => getFieldByLanguage(get_field('hebrew_title', $filterId), get_field('english_title', $filterId), get_field('arabic_title', $filterId), $sitepress->get_current_language()),
-                'academic_institutions' => $academic_institutions,
-            )
-        ));
-
-}
-function languagesFilter($filterId){
-
-    global $sitepress;
-
-    $academic_institutions = pods( 'academic_institution' );
-
-    get_template_part('template', 'parts/Filters/languages-filter',
-        array(
-            'args' => array(
-                'id'=>  $filterId,
-                'title' => getFieldByLanguage(get_field('hebrew_title', $filterId), get_field('english_title', $filterId), get_field('arabic_title', $filterId), $sitepress->get_current_language()),
-                'academic_institutions' => $academic_institutions,
+                'title' => $title,
+                'certificate' => $certificates,
             )
         ));
 

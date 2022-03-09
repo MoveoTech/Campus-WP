@@ -22,14 +22,24 @@ $current_lang = $sitepress->get_current_language();
     <input type="hidden" name="orderby" value="menu_order" />
     <input type="hidden" name="lang" value="he" />
 
+    <!-- START FILTERS SECTION .-->
+
     <?php
     foreach($filters as $filterId ) {
     getFilterType($filterId);
     }?>
+
+    <!-- END FILTERS SECTION .-->
+
+    <!-- FILTER BUTTON .-->
+
         <a href="javascript: void(0);" class="ajax_filter_btn" role="button"><?= __('Filter Courses', 'single_corse') ?></a>
         <div class="wrap-button-filter">
             <button type="button" class="search-close-button d-md-none d-xs-block"><?= __('Show Courses', 'single_corse') ?></button>
         </div>
+
+    <!-- END FILTER BUTTON .-->
+
     <?php
 
 //    foreach ($tags_filters as $filter){
