@@ -1280,6 +1280,6 @@ function sortTagsByOrder($tags){
 }
 
 function CompareTagsByOrder($tag1, $tag2) {
-    return $tag1['order'] > $tag2['order'];
+    return $tag2['order'] > $tag1['order'];
 }
 
