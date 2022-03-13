@@ -1,6 +1,5 @@
 <?php
 require_once 'filterTypes.php';
-require_once 'counting.php';
 $filtersList = wp_parse_args(
 $args["args"]
 );

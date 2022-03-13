@@ -1,7 +1,6 @@
 $= jQuery.noConflict();
 
 $(document).ready(function () {
-    // console.log("hola catalog");
 
     $('.filters_button').on('click', function (event) {
 
@@ -21,7 +20,6 @@ $(document).ready(function () {
             let value = element.value;
             //checking if value is checked
             if(element.checked) {
-                console.log(type, value)
 
                 switch (type) {
 
@@ -37,6 +35,8 @@ $(document).ready(function () {
 
             case 'certificate':
                 certificateArray.push(value);
+                
+
                 break;
 
             case 'language':
