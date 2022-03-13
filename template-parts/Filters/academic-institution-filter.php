@@ -56,7 +56,7 @@ $choose_str = __('Choose Institution', 'single_corse');
                 ?>
                 <div class="wrap-filter-search">
                     <label class="term-filter-search" for="institution_<?= $ID ?>">
-                        <input <?= $checked ?> class="checkbox-filter-search" type="checkbox" data-name="institution" data-value="<?= $ID ?>" value="<?= $ID ?>" id="institution_<?= $ID ?>">
+                        <input <?= $checked ?> class="checkbox-filter-search" type="checkbox" data-name="institution" data-value="<?= $ID ?>" value="<?= $title ?>" id="institution_<?= $ID ?>">
                         <div class="wrap-term-and-sum">
                             <span class="term-name"><?= $title ?></span>
                         </div>
@@ -67,6 +67,6 @@ $choose_str = __('Choose Institution', 'single_corse');
 
         </div>
     </div>
-    <a href="javascript: void(0);" class="clear-link" role="button" id="clear_all_filters"><?= __('Clear All', 'single_corse') ?></a>
-    <a href="javascript: void(0);" class="ajax_filter_btn" role="button"><?= __('Filter Courses', 'single_corse') ?></a>
+<!--    <a href="javascript: void(0);" class="clear-link" role="button" id="clear_all_filters">--><?//= __('Clear All', 'single_corse') ?><!--</a>-->
+<!--    <a href="javascript: void(0);" class="ajax_filter_btn" role="button">--><?//= __('Filter Courses', 'single_corse') ?><!--</a>-->
 </div>

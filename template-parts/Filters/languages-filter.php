@@ -24,14 +24,16 @@ $count = count($languages);
     <h2 class="search-page-tax-name"><?= $title ?></h2>
     <div class="more-tags">
 
-        <?php foreach ($languages as $language) {
+        <?php
+        $i=0;
+        foreach ($languages as $language) {
             $checked = '';
             //TODO get all courses that have this tag -> $count = result.
             ?>
 
             <div class="wrap-filter-search">
-                <label class="term-filter-search" for="<?= $language ?>">
-                    <input <?= $checked ?> class="checkbox-filter-search" type="checkbox" data-name=' $language ' data-value="<?= $language ?>" name=" $language '[]'" value="<?= $language ?>" id="<?= $language ?>"/>
+                <label class="term-filter-search" for="language_<?= $i ?>">
+                    <input <?= $checked ?> class="checkbox-filter-search" type="checkbox" data-name='language' data-value="<?= $language ?>" name=" language '[]'" value="<?= $language ?>" id="language_<?= $i ?>"/>
                     <div class="wrap-term-and-sum" >
                         <span class="term-name"><?= $language ?></span>
                         <span class="sum">(<?= $count ?>)</span>
@@ -46,6 +48,8 @@ $count = count($languages);
                 </button>
 
 
-            <?php } } ?>
+            <?php }
+        $i++;
+        } ?>
     </div>
 </div>

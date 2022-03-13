@@ -116,6 +116,7 @@ function style_of_campus_enqueue() {
 		'cookie_js'
 	), '1.2.15' );
 	wp_enqueue_script( 'bootstrap_js', get_bloginfo( 'stylesheet_directory' ) . '/assets/js/bootstrap.min.js' );
+    wp_enqueue_script('catalog_js', get_bloginfo( 'stylesheet_directory' ) . '/assets/js/catalog.js', array('jquery'));
     wp_enqueue_script('home_page_js', get_bloginfo( 'stylesheet_directory' ) . '/assets/js/home_page.js', array('jquery'));
     wp_localize_script('home_page_js', 'stripe_data_ajax', array('ajaxurl' => admin_url('admin-ajax.php')));
     wp_localize_script('home_page_js', 'my_courses_ajax', array('ajaxurl' => admin_url('admin-ajax.php')));
