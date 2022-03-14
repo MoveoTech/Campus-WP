@@ -1,13 +1,14 @@
 $= jQuery.noConflict();
 
 $(document).ready(function () {
-    let filterData = {};
-    let tagArray = [];
-    let institutionArray = [];
-    let certificateArray = [];
-    let languageArray = [];
+
 
     $('.filters_button').on('click', function (event) {
+        let filterData = {};
+        let tagArray = [];
+        let institutionArray = [];
+        let certificateArray = [];
+        let languageArray = [];
 
         //getting specific value - inside certificate-filter
         let certificates = $('.checkbox-filter-search');
@@ -76,7 +77,7 @@ $(document).ready(function () {
                 //pushing array to object
                 filterData['language'] = languageArray;
             }
-            console.log(filterData['tags']);
+            console.log(" array before Ajax : ", filterData);
             filterCoursesAjax(filterData);
         }
 
@@ -97,10 +98,10 @@ $(document).ready(function () {
             }
 
             jQuery.post(filter_by_tag_ajax.ajaxurl, data, function(response){
-                console.log(response.data)
+                // console.log("response.data : ", response.data)
                 if(response.success){
                     const data = JSON.parse(response.data);
-                    console.log("data in filterCoursesAjax : ", data)
+                    console.log("data in filterCoursesAjax : ", data.data.rows)
                     // apppendCourses(data, id);
                     // button unable
                     // jQuery(`#${nextButton.id}`).prop('disabled', false);

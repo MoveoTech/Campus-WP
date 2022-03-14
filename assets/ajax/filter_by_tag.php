@@ -3,12 +3,13 @@
 function filter_by_tag() {
     $dataObject = $_POST['dataObject'];
     $type = $_POST['type'];
-    $lang = $_POST['lang'] ? $_POST['lang'] : 'he';
+//    $lang = $_POST['lang'] ? $_POST['lang'] : 'he';
 //
-//    if(!$type || ($type != "courses" && $type != "tags"  && $type != "academic_institution" ) || !$dataObject || count($dataObject) < 0)
-//        wp_send_json_error( 'Error: Invalid data!' );
+    if(!$type || ($type != "courses" ) || !$dataObject || count($dataObject) < 0)
+        wp_send_json_error( 'Error: Invalid data!' );
 
     // filtering each data type
+    $dataToReturn = [];
 $courses = pods($type, getFilterParams($dataObject));
 //    $data = pods($type);
 //    $courses = $data->find(getFilterParams($dataObject));
@@ -31,42 +32,63 @@ add_action('wp_ajax_nopriv_filter_by_tag', 'filter_by_tag');
 
 
 function getFilterParams($dataObject){
-//    $tagfilter = $dataObject['tags'][0];
 
-//    $where = 't.tags ="testingtag"';
-////    $where = 't.tags LIKE "%'. $tagfilter. '%"';
-//    $order = "t.order DESC";
     $where= '';
+    $order = "t.order DESC";
     $sql = array();
-    if($dataObject['language']){
 
-        $tagsData = $dataObject['language'];
-//        $where = 't.name LIKE "%'.$tagsData[0].'%"';
-        $sql[] = 't.name LIKE "%'.$tagsData[0].'%"';
-        $sql[] = 't.description LIKE "%'.$tagsData[0].'%"';
-        $sql[] = 't.language LIKE "%'.$tagsData[0].'%"';
-        $sql[] = 't.lecturer LIKE "%'.$tagsData[0].'%"';
-//    foreach($tagsData as $tag) {
-//        $where = $where . $tag . ",";
+
+    // filter by language
+        if($dataObject['language']){
+            $tagsData = $dataObject['language'];
+
+            foreach($tagsData as $tag) {
+                $sql[] = ' t.language LIKE "'.$tag.'%" ';
+            }
+
+        };
+
+    // filter by certificate
+    if($dataObject['certificate']){
+        $tagsData = $dataObject['certificate'];
+
+        foreach($tagsData as $tag) {
+            $sql[] = ' t.certificate LIKE "'.$tag.'%" ';
+        }
+
+    };
+
+    // filter by language
+    if($dataObject['institution']){
+        $tagsData = $dataObject['institution'];
+
+        foreach($tagsData as $tag) {
+            $sql[] = ' t.institution LIKE "'.$tag.'%" ';
+        }
+
+    };
 //
-    }
-
+//    // filter by language
+//    if($dataObject['language']){
+//        $tagsData = $dataObject['language'];
+//
+//        foreach($tagsData as $tag) {
+//            $sql[] = ' t.language LIKE "'.$tag.'%" ';
+//        }
+//
 //    };
 
-//    foreach($dataObject as $dataType ) {
-//
-//
-////        $order = $order . $dataType . ",";
-//    }
 
-//    $where = substr_replace($where, "'%", -1);
 
-//    $order = substr_replace($order, ")", -1);
+
+
+
+       // declaring params for all filters
     $where = implode('OR', $sql);
     $params = array(
         'limit' => -1,
         'where'=>$where,
-//        'orderBy' => 't.order DESC'
+        'orderBy' => $order
     );
 
     return $params;
