@@ -13,8 +13,6 @@ $(document).ready(function () {
         //getting specific value - inside certificate-filter
         let certificates = $('.checkbox-filter-search');
 
-        // let certificates = $('.checkbox-filter-search').attr('data-name');
-// console.log(certificates)
 
         // looping all certificate inputs
         certificates.each((index, element) => {
@@ -46,38 +44,30 @@ $(document).ready(function () {
         }
             }
         });
-        // console.log("tagArray: ",tagArray);
-        // console.log("institutionArray: ",institutionArray);
-        // console.log("certificateArray: ",certificateArray);
-        // console.log("languageArray: ", languageArray);
 
 
         if(tagArray || institutionArray || certificateArray || languageArray) {
-
             // console.log("tagArray: ",tagArray);
             // console.log("institutionArray: ",institutionArray);
             // console.log("certificateArray: ",certificateArray);
             // console.log("languageArray: ", languageArray);
 
+            //pushing each array to object (key and values)
             if(tagArray.length > 0) {
-                //pushing array to object
                 filterData['tags'] = tagArray;
             }
             if(institutionArray.length > 0) {
-                //pushing array to object
                 filterData['institution'] = institutionArray;
 
             }
             if(certificateArray.length > 0) {
-                //pushing array to object
                 filterData['certificate'] = certificateArray;
 
             }
             if(languageArray.length > 0) {
-                //pushing array to object
                 filterData['language'] = languageArray;
             }
-            console.log(" array before Ajax : ", filterData);
+
             filterCoursesAjax(filterData);
         }
 
@@ -98,18 +88,87 @@ $(document).ready(function () {
             }
 
             jQuery.post(filter_by_tag_ajax.ajaxurl, data, function(response){
-                // console.log("response.data : ", response.data)
                 if(response.success){
-                    const data = JSON.parse(response.data);
-                    console.log("data in filterCoursesAjax : ", data.data.rows)
-                    // apppendCourses(data, id);
-                    // button unable
-                    // jQuery(`#${nextButton.id}`).prop('disabled', false);
+                    const responseData = JSON.parse(response.data);
+                    console.log("data in filterCoursesAjax : ", responseData)
+                    if(responseData.length > 0) {
+                        // appendFilteredCourses(data, id)
+
+                    } else {
+                        // showing "no courses found" message
+
+                    }
+
+
                 }
             })
-        // }
     }
-
 
 });
 // end of jquery
+
+// TO DO - change the function to fit the filtered courses data
+function appendFilteredCourses(coursesData, id) {
+
+    coursesData.forEach(item =>{
+        let permalink = item.permalink ? item.permalink : '';
+        let url = 'course/' + permalink;
+        let tags = getDesktopTags(item.tags);
+        let hoverTags = getHoverTags(item.tags);
+
+        let academicInstitution = item.academic_institution ? item.academic_institution : '';
+
+        let temp = document.createElement("div");
+        temp.id = item.id + id;
+        temp.classList.add('course-stripe-item');
+        temp.innerHTML =
+            '<div class="course-img" style="background-image: url('+item.image+');">'+
+            '<a href="'+ url +'"></a>'+
+            '<span class="info-button"></span></div>'+
+            '<div class="item-content"">'+
+            '<h3 ><a href="'+ url +'">'+item.name+'</a></h3>'+
+            '<p >'+academicInstitution+'</p>'+
+            ' </div>'+
+            '<div class=" tags-div">'+tags+ '</div>'+
+            '<div class="course-item-hover '+ item.id + id +'">'+
+            '<a href="'+ url +'">'+
+            '<div class="course-img" style="background-image: url('+item.image+');"></div>'+
+            '<div class="item-content"">'+
+            '<h3 >'+item.name+'</h3>'+
+            '<p >'+academicInstitution+'</p>'+
+            '</div>'+
+            '<div class=" tags-div">'+ hoverTags +'</div>'+
+            '<div class="course-details">'+
+            '<span>'+ item.duration +'</span>'+
+            '</div>'+
+            '</a>'+
+            '</div>'+
+            '<div class="course-popup-modal mobile-course-popup'+ item.id + id +'">'+
+            '<div class="popup-header">'+
+            '<span class="course-popup-close'+ item.id + id +' close">&times;</span>'+
+            '</div>'+
+            '<div class="course-content">'+
+            '<div class="course-img" style="background-image: url('+item.image+');"></div>'+
+            '<div class="course-details">'+
+            '<div class="course-header"">'+
+            '<h3 ><a href="'+ url +'">'+item.name+'</a></h3>'+
+            '<p >'+academicInstitution+'</p>'+
+            '</div>'+
+            '<div class="tags-div">'+ hoverTags +'</div>'+
+            '<div class="details">'+
+            '<span>'+ item.duration +'</span>'+
+            '</div>'+
+            '</div>'+
+            '</div>'+
+            '<div class="popup-footer">'+
+            '<a href="'+ url +'"><span>'+ item.button_text +'</span></a>'+
+            '</div>'+
+            '</div>';
+
+        jQuery(`#${id}`).slick('slickAdd',temp);
+        mouseHoverOnCourse();
+    });
+    changeArrowClass(id)
+    clickOnCourseInfoButton()
+    // jQuery(`#${nextButton.id}`).prop('disabled', false);
+}
