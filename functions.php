@@ -14,6 +14,7 @@ include locate_template( 'admin_files/admin_funcs.php' );
 include locate_template( 'assets/ajax/stripe_data.php' );
 include locate_template( 'assets/ajax/my_courses.php' );
 include locate_template( 'assets/ajax/get_course_popup.php' );
+include locate_template( 'assets/ajax/filter_by_tag.php' );
 
 /**
  * Daat Ester
@@ -120,6 +121,8 @@ function style_of_campus_enqueue() {
     wp_enqueue_script('home_page_js', get_bloginfo( 'stylesheet_directory' ) . '/assets/js/home_page.js', array('jquery'));
     wp_localize_script('home_page_js', 'stripe_data_ajax', array('ajaxurl' => admin_url('admin-ajax.php')));
     wp_localize_script('home_page_js', 'my_courses_ajax', array('ajaxurl' => admin_url('admin-ajax.php')));
+    //filtering tags ajax call
+    wp_localize_script('catalog_js', 'filter_by_tag_ajax', array('ajaxurl' => admin_url('admin-ajax.php')));
 
 	wp_localize_script( 'ready_js', 'global_vars', array(
 			'link_to_enrollment_api'        => get_field( 'link_to_enrollment_api', 'option' ),

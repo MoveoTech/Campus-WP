@@ -121,6 +121,7 @@ $choose_str = __('Choose Institution', 'single_corse');
                                     </div>
                                     <div class="row output-courses"><?php
                                         while ($courses->fetch()) {
+
                                             $output_courses .= get_template_part('template', 'parts/Courses/course-card',
                                                 array(
                                                     'args' => array(
