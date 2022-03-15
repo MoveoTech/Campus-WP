@@ -76,7 +76,7 @@ function get_courses_search_filter_server_side($query, $filters_list, $academic_
             $excluded_json->items = $list;
         }
 		global $get_params, $filter_tags;
-        var_dump($filter_tags);
+
         foreach ($excluded_json->items as $ac_id) {
             $title = get_the_title($ac_id);
 	        $checked = $selected = '';
