@@ -800,9 +800,9 @@ jQuery(document).ready(function () {
     jQuery('#ajax_filter').on('submit', function () {
         ajax_filter_courses(false);
     });
-    // jQuery('.ajax_filter_btn').on('click', function () {
-    //     ajax_filter_courses(false);
-    // });
+    jQuery('.ajax_filter_btn').on('click', function () {
+        ajax_filter_courses(false);
+    });
     jQuery('.wrap-all-tags-filter:not(#ajax_filter) .term-filter-search').change(function () {
         courses_js_filter();
     });

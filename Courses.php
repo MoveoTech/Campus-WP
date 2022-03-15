@@ -53,6 +53,8 @@ $choose_str = __('Choose Institution', 'single_corse');
 //}
 //$aside_str   = $strings['aside'];
 
+
+
 ?>
 
 <div class="wrap-search-page-course <?= $my_class ?>">
@@ -145,4 +147,8 @@ $choose_str = __('Choose Institution', 'single_corse');
         </div>
     </div>
 </div>
+
+
+
+
 

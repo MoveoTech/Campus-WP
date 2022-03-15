@@ -3,7 +3,7 @@ $= jQuery.noConflict();
 $(document).ready(function () {
 
 
-    $('.filters_button').on('click', function (event) {
+    $('.checkbox-filter-search').on('click', function (event) {
         let filterData = {};
         let tagArray = [];
         let institutionArray = [];
@@ -19,8 +19,10 @@ $(document).ready(function () {
             let id = element.id;
             let type = $(`#${id}`).data('name');
             let value = element.value;
+
             //checking if value is checked
             if(element.checked) {
+
 
                 switch (type) {
 
@@ -46,11 +48,8 @@ $(document).ready(function () {
         });
 
 
+
         if(tagArray || institutionArray || certificateArray || languageArray) {
-            // console.log("tagArray: ",tagArray);
-            // console.log("institutionArray: ",institutionArray);
-            // console.log("certificateArray: ",certificateArray);
-            // console.log("languageArray: ", languageArray);
 
             //pushing each array to object (key and values)
             if(tagArray.length > 0) {
@@ -67,9 +66,16 @@ $(document).ready(function () {
             if(languageArray.length > 0) {
                 filterData['language'] = languageArray;
             }
+            console.log("filterData : ",filterData)
+            filterCoursesAjax(filterData)
+            // TO DO - figure out where to put settimeout?
 
-            filterCoursesAjax(filterData);
-        }
+            // setTimeout(() =>{
+            //
+            //     console.log("in set time out")
+            // }, 2000);
+
+        };
 
 
 
@@ -90,14 +96,16 @@ $(document).ready(function () {
             jQuery.post(filter_by_tag_ajax.ajaxurl, data, function(response){
                 if(response.success){
                     const responseData = JSON.parse(response.data);
+                    console.log("data in filterCoursesAjax strictt : ", responseData['strictFilter'])
                     console.log("data in filterCoursesAjax : ", responseData)
-                    if(responseData.length > 0) {
-                        // appendFilteredCourses(responseData)
-
-                    } else {
-                        // showing "no courses found" message
-
-                    }
+                    appendFilteredCourses(responseData['strictFilter'])
+                    // if(responseData.length > 0) {
+                    //
+                    //
+                    // } else {
+                    //     // showing "no courses found" message
+                    //
+                    // }
 
 
                 }
@@ -110,15 +118,23 @@ $(document).ready(function () {
 // TO DO - change the function to fit the filtered courses data
 function appendFilteredCourses(coursesData) {
     let coursesBox = document.getElementById("coursesBox");
+    // coursesBox.innerHTML= "";
     console.log("coursesBox : ",coursesBox);
+    console.log("coursesdata : ",coursesData);
+    let path = window.location.pathname
 
-    let div = document.createElement("div")
-    let p = document.createElement("p")
+    window.location.pathname = window.location.pathname + "filter"
+    console.log("window.location.pathname : ",window.location.pathname);
+    // console.log("coursesBox : ",coursesData[0].getTemplatepart);
+
+
     // coursesBox.replaceChildren()
 
 
 
+
     // coursesBox.removeChild();
+
 
     coursesData.forEach(item =>{
         // console.log("each item : ",item);
@@ -128,6 +144,10 @@ function appendFilteredCourses(coursesData) {
         let hoverTags = getHoverTags(item.tags);
 
         let academicInstitution = item.academic_institution ? item.academic_institution : '';
+
+
+
+
 
         let temp = document.createElement("div");
         temp.id = item.id;
@@ -180,8 +200,7 @@ function appendFilteredCourses(coursesData) {
         // console.log(" temp: ", temp);
         // coursesBox.append(temp);
         // mouseHoverOnCourse();
-        coursesBox.append(temp)
-
+        // coursesBox.append(temp)
 
     });
 

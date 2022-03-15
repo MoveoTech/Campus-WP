@@ -213,3 +213,5 @@ function filteredCourseTags($data, $lang) {
     }
     return $tags;
 }
+
+
