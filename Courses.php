@@ -119,10 +119,11 @@ $choose_str = __('Choose Institution', 'single_corse');
                                     <div class="hidden no-result-inside-filter">
                                         <h4><?= __( 'No courses were found with the desired filter results', 'single_corse' ) ?>...</h4>
                                     </div>
-                                    <div class="row output-courses"><?php
+                                    <div class="row output-courses" id="coursesBox" > <?php
+
                                         while ($courses->fetch()) {
 
-                                            $output_courses .= get_template_part('template', 'parts/Courses/course-card',
+                                             get_template_part('template', 'parts/Courses/course-card',
                                                 array(
                                                     'args' => array(
                                                         'course' => $courses,

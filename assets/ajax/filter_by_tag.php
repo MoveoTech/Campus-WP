@@ -113,7 +113,7 @@ function filteredCoursesData($filteredCourse,$lang){
         'permalink' => $filteredCourse->display('permalink'),
         'id' => $filteredCourse->display('ID'),
         'duration' => $filteredCourse->display('duration'),
-        'button_text' => course_popup_button_text()
+        'buttonText' => course_popup_button_text()
     );
 }
 function filteredCourseTags($data, $lang) {

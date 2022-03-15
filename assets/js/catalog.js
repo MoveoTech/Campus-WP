@@ -92,7 +92,7 @@ $(document).ready(function () {
                     const responseData = JSON.parse(response.data);
                     console.log("data in filterCoursesAjax : ", responseData)
                     if(responseData.length > 0) {
-                        // appendFilteredCourses(data, id)
+                        appendFilteredCourses(responseData)
 
                     } else {
                         // showing "no courses found" message
@@ -108,9 +108,20 @@ $(document).ready(function () {
 // end of jquery
 
 // TO DO - change the function to fit the filtered courses data
-function appendFilteredCourses(coursesData, id) {
+function appendFilteredCourses(coursesData) {
+    let coursesBox = document.getElementById("coursesBox");
+    console.log("coursesBox : ",coursesBox);
+
+    let div = document.createElement("div")
+    let p = document.createElement("p")
+    // coursesBox.replaceChildren()
+
+
+
+    // coursesBox.removeChild();
 
     coursesData.forEach(item =>{
+        // console.log("each item : ",item);
         let permalink = item.permalink ? item.permalink : '';
         let url = 'course/' + permalink;
         let tags = getDesktopTags(item.tags);
@@ -119,7 +130,7 @@ function appendFilteredCourses(coursesData, id) {
         let academicInstitution = item.academic_institution ? item.academic_institution : '';
 
         let temp = document.createElement("div");
-        temp.id = item.id + id;
+        temp.id = item.id;
         temp.classList.add('course-stripe-item');
         temp.innerHTML =
             '<div class="course-img" style="background-image: url('+item.image+');">'+
@@ -130,7 +141,7 @@ function appendFilteredCourses(coursesData, id) {
             '<p >'+academicInstitution+'</p>'+
             ' </div>'+
             '<div class=" tags-div">'+tags+ '</div>'+
-            '<div class="course-item-hover '+ item.id + id +'">'+
+            '<div class="course-item-hover '+ item.id +'">'+
             '<a href="'+ url +'">'+
             '<div class="course-img" style="background-image: url('+item.image+');"></div>'+
             '<div class="item-content"">'+
@@ -143,9 +154,9 @@ function appendFilteredCourses(coursesData, id) {
             '</div>'+
             '</a>'+
             '</div>'+
-            '<div class="course-popup-modal mobile-course-popup'+ item.id + id +'">'+
+            '<div class="course-popup-modal mobile-course-popup'+ item.id +'">'+
             '<div class="popup-header">'+
-            '<span class="course-popup-close'+ item.id + id +' close">&times;</span>'+
+            '<span class="course-popup-close'+ item.id +' close">&times;</span>'+
             '</div>'+
             '<div class="course-content">'+
             '<div class="course-img" style="background-image: url('+item.image+');"></div>'+
@@ -161,14 +172,20 @@ function appendFilteredCourses(coursesData, id) {
             '</div>'+
             '</div>'+
             '<div class="popup-footer">'+
-            '<a href="'+ url +'"><span>'+ item.button_text +'</span></a>'+
+            '<a href="'+ url +'"><span>'+ item.buttonText +'</span></a>'+
             '</div>'+
             '</div>';
 
-        jQuery(`#${id}`).slick('slickAdd',temp);
-        mouseHoverOnCourse();
+        // jQuery(`#${id}`).slick('slickAdd',temp);
+        // console.log(" temp: ", temp);
+        // coursesBox.append(temp);
+        // mouseHoverOnCourse();
+        coursesBox.append(temp)
+
+
     });
-    changeArrowClass(id)
-    clickOnCourseInfoButton()
+
+    // changeArrowClass(id)
+    // clickOnCourseInfoButton()
     // jQuery(`#${nextButton.id}`).prop('disabled', false);
 }
