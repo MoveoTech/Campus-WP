@@ -92,7 +92,7 @@ $(document).ready(function () {
                     const responseData = JSON.parse(response.data);
                     console.log("data in filterCoursesAjax : ", responseData)
                     if(responseData.length > 0) {
-                        appendFilteredCourses(responseData)
+                        // appendFilteredCourses(responseData)
 
                     } else {
                         // showing "no courses found" message

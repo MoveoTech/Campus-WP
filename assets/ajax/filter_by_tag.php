@@ -9,17 +9,30 @@ function filter_by_tag() {
         wp_send_json_error( 'Error: Invalid data!' );
 
     // filtering each data type
-    $dataToReturn = [];
+    $dataToReturn = array();
+    $strictFilter = array();
+    $semiFilter = array();
+//    $strictFilterCourses = [];
+//    $semiFilterCourses = [];
 
-$filteredCourses = pods($type, getFilterParams($dataObject));
+
+    $strictfilteredCourses = pods($type, getFilterParams($dataObject));
+    $semifilteredCourses = pods($type, getSemiFilterParams($dataObject));
 
 
 
-    while ($filteredCourses->fetch()) {
-        array_push($dataToReturn, filteredCoursesData($filteredCourses,$lang));
+
+    while ($strictfilteredCourses->fetch()) {
+        $strictFilter[] = filteredCoursesData($strictfilteredCourses,$lang);
+
+//        array_push($dataToReturn, filteredCoursesData($strictfilteredCourses,$lang));
+    }
+    while ($semifilteredCourses->fetch()) {
+        $semiFilter[] = filteredCoursesData($semifilteredCourses,$lang);
+//        array_push($dataToReturn, filteredCoursesData($semifilteredCourses,$lang));
     }
 
-
+    $dataToReturn = ['strictFilter'=> $strictFilter,'semiFilter' => $semiFilter];
     wp_send_json_success( json_encode($dataToReturn));
 //    wp_send_json_success( json_encode($filteredCourses));
 
@@ -28,7 +41,7 @@ add_action('wp_ajax_filter_by_tag', 'filter_by_tag');
 add_action('wp_ajax_nopriv_filter_by_tag', 'filter_by_tag');
 
 
-function getFilterParams($dataObject){
+function getSemiFilterParams($dataObject){
 
     $where= '';
     $order = "t.order DESC";
@@ -86,6 +99,82 @@ function getFilterParams($dataObject){
 
        // declaring params for all filters
     $where = implode('OR', $sql);
+    $params = array(
+        'limit' => -1,
+        'where'=>$where,
+        'orderBy' => $order
+    );
+
+    return $params;
+
+}
+
+function getFilterParams($dataObject){
+
+    $where= '';
+    $order = "t.order DESC";
+    $sql = array();
+    $langQuery = '';
+    $certQuery = '';
+    $instQuery = '';
+    $tagsQuery = '';
+
+
+
+    // filter by language
+        if($dataObject['language']){
+            $tagsData = $dataObject['language'];
+            $sqlLang = array();
+            foreach($tagsData as $tag) {
+                $sqlLang[] = ' t.language LIKE "%'.$tag.'%" ';
+            };
+            $langQuery = "(" . implode('OR', $sqlLang) . ")";
+            $sql[] = $langQuery;
+        };
+
+    // filter by certificate
+    if($dataObject['certificate']){
+        $tagsData = $dataObject['certificate'];
+        $sqlCert = array();
+        foreach($tagsData as $tag) {
+            $sqlCert[] = ' t.certificate LIKE "%'.$tag.'%" ';
+        }
+        $certQuery = "(" . implode('OR', $sqlCert) . ")";
+        $sql[] = $certQuery;
+    };
+
+    // filter by language
+    if($dataObject['institution']){
+        $tagsData = $dataObject['institution'];
+        $sqlInst = array();
+        foreach($tagsData as $tag) {
+            $sqlInst[] = ' academic_institution.name LIKE "%'.$tag.'%" ';
+            $sqlInst[] = ' academic_institution.english_name LIKE "%'.$tag.'%" ';
+            $sqlInst[] = ' academic_institution.arabic_name LIKE "%'.$tag.'%" ';
+        }
+        $instQuery ="(" . implode('OR', $sqlInst) . ")";
+        $sql[] = $instQuery;
+    };
+
+    // filter by language
+    if($dataObject['tags']){
+        $tagsData = $dataObject['tags'];
+        $sqlTags = array();
+        foreach($tagsData as $tag) {
+            $sqlTags[] = ' tags.name LIKE "%'.$tag.'%" ';
+            $sqlTags[] = ' tags.english_name LIKE "%'.$tag.'%" ';
+            $sqlTags[] = ' tags.arabic_name LIKE "%'.$tag.'%" ';
+        }
+        $tagsQuery ="(" . implode('OR', $sqlTags) . ")";
+        $sql[] = $tagsQuery;
+    };
+
+
+
+
+
+       // declaring params for all filters
+    $where = implode('AND', $sql);
     $params = array(
         'limit' => -1,
         'where'=>$where,
