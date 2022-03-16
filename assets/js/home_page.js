@@ -1,7 +1,6 @@
 
 
 jQuery(document).ready(function () {
-    console.log("check : ", process.env.STAGE_LOGIN_IFRAME)
     let is_rtl = !(jQuery('html[lang = "en-US"]').length > 0);
     let prevSlick = '<button type="button" class="slick-prev slick-button" tabindex="-1" aria-label="' + global_vars.prev_btn_text + '"></button>';
     let nexSlick = '<button type="button" id="slick-next" class="slick-next slick-button " tabindex="-1" aria-label="' + global_vars.next_btn_text + '"></button>';
