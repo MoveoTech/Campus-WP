@@ -9,21 +9,23 @@ var focusables = 'input, button, a, textarea, select, [tabindex]';
 var class_to_add;
 jQuery(document).ready(function () {
 
-    jQuery('form[role = "search"]').on('submit', function (e) {
-        e.preventDefault();
-        if (jQuery(this).find('[name="s"]').val()) {
-            var $form = jQuery(this);
-            grecaptcha.ready(function () {
-                grecaptcha.execute('6LclyM8aAAAAAMttjBLWQ6mu9QQoW9GBACQTaeAE', {action: 'submit'}).then(function (token) {
-                    var url = $form.attr('action') + '?s=' + $form.find('[name = "s"]').val();
-                    window.location.href = url;
-                });
-            });
-        } else {
-            jQuery(this).find('[name="s"]').focus();
+    // jQuery('form[role = "search"]').on('submit', function (e) {
+    //     e.preventDefault();
+    //     console.log(jQuery(this).find('[name="s"]').val())
+    //     if (jQuery(this).find('[name="s"]').val()) {
+    //         var $form = jQuery(this);
+    //         grecaptcha.ready(function () {
+    //             grecaptcha.execute('6LclyM8aAAAAAMttjBLWQ6mu9QQoW9GBACQTaeAE', {action: 'submit'}).then(function (token) {
+    //                 var url = $form.attr('action') + '?s=' + $form.find('[name = "s"]').val();
+    //                 window.location.href = url;
+    //             });
+    //         });
+    //     } else {
+    //         jQuery(this).find('[name="s"]').focus();
+    //
+    //     }
+    // });
 
-        }
-    });
     jQuery('.single_project_quote_long_text').each(function () {
         var height = jQuery(this).height();
         var innerHeight = jQuery(this).children('span').height();

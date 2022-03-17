@@ -449,7 +449,7 @@ jQuery(document).ready(function () {
     //appending the iframe
     jQuery('.register-item').on('click', function(e) {
         e.preventDefault();
-        jQuery("#register-iframe").append("<iframe id='register-iframe' src='https://courses.stage.campus.gov.il/login?next=/dashboard' height='300px' width='300px' title='Register page'></iframe>")
+        jQuery("#register-iframe").append("<iframe id='register-iframe' src='https://courses.stage.campus.gov.il/register?next=/dashboard' height='300px' width='300px' title='Register page'></iframe>")
         jQuery('#register-popup .popup').attr('aria-hidden', 'false');
         jQuery("#register-popup").addClass('active');
         jQuery('body').css('overflow-y', 'hidden');
@@ -629,8 +629,9 @@ function getCoursesDetails(coursesArray) {
 
     coursesArray.forEach((item) => {
         let courseId = item.course_details.course_id;
-        let indexSplice = courseId.indexOf('+', 25);
-        let newCourseId = courseId.substring(0, indexSplice);
+        let startIndex = courseId.indexOf(':');
+        let endIndex = courseId.indexOf('+', 25);
+        let newCourseId = courseId.slice(startIndex + 1, endIndex);
         if(courseId) edXIdCoursesArray.push(newCourseId);
     })
     getMyCoursesDataFromWordpress(edXIdCoursesArray);
