@@ -2,15 +2,16 @@ $= jQuery.noConflict();
 
 $(document).ready(function () {
 
-
+    // click event - targeting filters inputs
     $('.checkbox-filter-search').on('click', function (event) {
+
         let filterData = {};
         let tagArray = [];
         let institutionArray = [];
         let certificateArray = [];
         let languageArray = [];
 
-        //getting specific value - inside certificate-filter
+        //getting array of inputs
         let certificates = $('.checkbox-filter-search');
 
 
@@ -22,7 +23,6 @@ $(document).ready(function () {
 
             //checking if value is checked
             if(element.checked) {
-
 
                 switch (type) {
 
@@ -48,10 +48,10 @@ $(document).ready(function () {
         });
 
 
-
+//checking if any filter checked
         if(tagArray || institutionArray || certificateArray || languageArray) {
 
-            //pushing each array to object (key and values)
+            //checking which filters checked and pushing each array to object (key and values)
             if(tagArray.length > 0) {
                 filterData['tags'] = tagArray;
             }
@@ -66,14 +66,9 @@ $(document).ready(function () {
             if(languageArray.length > 0) {
                 filterData['language'] = languageArray;
             }
-            console.log("filterData : ",filterData)
-            filterCoursesAjax(filterData)
-            // TO DO - figure out where to put settimeout?
 
-            // setTimeout(() =>{
-            //
-            //     console.log("in set time out")
-            // }, 2000);
+            filterCoursesAjax(filterData)
+
 
         };
 
@@ -83,29 +78,21 @@ $(document).ready(function () {
     // end of click event
 
 
-
+        // ajax call
     function filterCoursesAjax(filterData) {
 
             let data = {
                 'action': 'filter_by_tag',
                 'type' : 'courses',
-                // 'lang' : getCookie('openedx-language-preference'),
                 'dataObject': filterData,
             }
 
             jQuery.post(filter_by_tag_ajax.ajaxurl, data, function(response){
                 if(response.success){
                     const responseData = JSON.parse(response.data);
-                    console.log("data in filterCoursesAjax strictt : ", responseData['strictFilter'])
                     console.log("data in filterCoursesAjax : ", responseData)
-                    appendFilteredCourses(responseData['strictFilter'])
-                    // if(responseData.length > 0) {
-                    //
-                    //
-                    // } else {
-                    //     // showing "no courses found" message
-                    //
-                    // }
+                    appendFilteredCourses(responseData)
+                   // need to add if statement that checks if the response have courses
 
 
                 }
@@ -115,25 +102,14 @@ $(document).ready(function () {
 });
 // end of jquery
 
-// TO DO - change the function to fit the filtered courses data
+// TODO - change the function to fit the filtered courses data
 function appendFilteredCourses(coursesData) {
     let coursesBox = document.getElementById("coursesBox");
     // coursesBox.innerHTML= "";
     console.log("coursesBox : ",coursesBox);
     console.log("coursesdata : ",coursesData);
-    let path = window.location.pathname
+    // let path = window.location.pathname
 
-    window.location.pathname = window.location.pathname + "filter"
-    console.log("window.location.pathname : ",window.location.pathname);
-    // console.log("coursesBox : ",coursesData[0].getTemplatepart);
-
-
-    // coursesBox.replaceChildren()
-
-
-
-
-    // coursesBox.removeChild();
 
 
     coursesData.forEach(item =>{
@@ -196,15 +172,8 @@ function appendFilteredCourses(coursesData) {
             '</div>'+
             '</div>';
 
-        // jQuery(`#${id}`).slick('slickAdd',temp);
-        // console.log(" temp: ", temp);
-        // coursesBox.append(temp);
-        // mouseHoverOnCourse();
-        // coursesBox.append(temp)
 
     });
 
-    // changeArrowClass(id)
-    // clickOnCourseInfoButton()
-    // jQuery(`#${nextButton.id}`).prop('disabled', false);
+
 }

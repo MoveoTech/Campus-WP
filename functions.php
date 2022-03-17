@@ -1164,6 +1164,51 @@ function course_popup_button_text() {
     return $text;
 }
 
+function orderByNewestLanguage() {
+    global $sitepress;
+    $current = $sitepress->get_current_language();
+    $text = 'סידור לפי החדש ביותר';
+    if ($current === 'en') {
+        $text = 'Arranging by the newest';
+    }
+    if ($current === 'ar') {
+        $text = 'الترتيب حسب الأحدث';
+    }
+    return $text;
+}
+function orderByNameLanguage() {
+    global $sitepress;
+    $current = $sitepress->get_current_language();
+    $text = 'סידור לפי א׳ - ב׳';
+    if ($current === 'en') {
+        $text = 'Arrangement by name';
+    }
+    if ($current === 'ar') {
+        $text = 'الترتيب بالاسم';
+    }
+    return $text;
+}
+function orderByPopularityLanguage() {
+    global $sitepress;
+    $current = $sitepress->get_current_language();
+    $text = 'סידור לפי הפופלארי ביותר';
+    if ($current === 'en') {
+        $text = 'Arranging by the most popular';
+    }
+    if ($current === 'ar') {
+        $text = 'الترتيب حسب الأكثر شهرة';
+    }
+    return $text;
+}
+
+
+//function blackBox() {
+//    return [
+//        'limit'   => 27,
+//        'orderBy' => 't.order DESC',
+//    ];
+//}
+
 function more_courses_text($carousel) {
     global $sitepress;
     $current = $sitepress->get_current_language();

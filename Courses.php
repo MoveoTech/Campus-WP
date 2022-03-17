@@ -28,14 +28,17 @@ if ( empty( $_GET['termid'] ) ) {
 $course_attrs = array(
     'class' => 'col-xs-12 col-md-6 col-xl-4 course-item-with-border',
 );
+$orderBy = 't.order DESC';
 $params = [
     'limit'   => 27,
+    'orderBy' => $orderBy,
 ];
 $academic_institutions = pods( 'academic_institution', array('limit'   => -1 ));
 $courses = pods( 'courses', $params, true);
 $count = $courses->total_found(); // TODO new count
 $academic_name = cin_get_str('Institution_Name');
 $choose_str = __('Choose Institution', 'single_corse');
+
 
 
 /** The old archive course code **/
@@ -56,7 +59,7 @@ $choose_str = __('Choose Institution', 'single_corse');
 
 
 ?>
-
+f
 <div class="wrap-search-page-course <?= $my_class ?>">
     <div class="container">
         <div class="row justify-content-between">
@@ -64,6 +67,14 @@ $choose_str = __('Choose Institution', 'single_corse');
                 <div class="wrap-all-filter-names">
                     <div class="clear-filter-area">
                             <span class="filter-course-title" role="heading" aria-level="2"><?= $title_str ?></span>
+                    </div>
+                    <div>
+                        <select>
+                            <option name="orderByPopularity"><?php echo orderByPopularityLanguage() ?></option>
+                            <option name="orderByName"><?php echo orderByNameLanguage() ?></option>
+                            <option name="orderByNewest"><?php echo orderByNewestLanguage() ?></option>
+                        </select>
+
                     </div>
                     <?php
                          get_template_part('template', 'parts/Filters/filters-aside',
@@ -74,6 +85,7 @@ $choose_str = __('Choose Institution', 'single_corse');
                                 )
                             ));
                     ?>
+
                 </div>
                 <div class="lokking-for-form"><?= $form_short_code_sidebar ?></div>
             </aside>
