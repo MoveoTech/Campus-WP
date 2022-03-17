@@ -6,9 +6,9 @@
     "lib": "lib"
   },
   "dependencies": {
-    "node-sass": "^4.14.1"
+    "node-sass": "^7.0.1",
+    "nodemon": "^2.0.15"
   },
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "scss": "node-sass --watch assets/scss -o assets/css"

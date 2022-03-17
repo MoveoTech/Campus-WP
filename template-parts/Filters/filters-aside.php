@@ -23,15 +23,7 @@ $current_lang = $sitepress->get_current_language();
 
 
 
-    <!-- FILTER BUTTON .-->
 
-        <a href="javascript: void(0);" class="filters_button ajax_filter_btn" role="button"><?= __('Filter Courses', 'single_corse') ?></a>
-<!--        <a href="javascript: void(0);" class="ajax_filter_btn" role="button">--><?//= __('Filter Courses', 'single_corse') ?><!--</a>-->
-        <div class="wrap-button-filter">
-            <button type="button" class="search-close-button d-md-none d-xs-block"><?= __('Show Courses', 'single_corse') ?></button>
-        </div>
-
-    <!-- END FILTER BUTTON .-->
 
     <!-- START FILTERS SECTION .-->
 
@@ -41,6 +33,21 @@ $current_lang = $sitepress->get_current_language();
     }?>
 
     <!-- END FILTERS SECTION .-->
+
+    <!-- FILTER BUTTON .-->
+    <div>
+        <button></button>
+    </div>
+
+
+    <!--        <a href="javascript: void(0);" class="filters_button ajax_filter_btn" role="button">--><?//= __('Filter Courses', 'single_corse') ?><!--</a>-->
+    <!--        <a href="javascript: void(0);" class="ajax_filter_btn" role="button">--><?//= __('Filter Courses', 'single_corse') ?><!--</a>-->
+    <!--        <div class="wrap-button-filter">-->
+    <!--            <button type="button" class="search-close-button d-md-none d-xs-block">--><?//= __('Show Courses', 'single_corse') ?><!--</button>-->
+    <!--        </div>-->
+
+
+    <!-- END FILTER BUTTON .-->
 
     <?php
 

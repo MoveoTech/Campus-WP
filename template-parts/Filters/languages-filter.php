@@ -22,34 +22,20 @@ $count = count($languages);
 
 <div class="wrap-terms-group">
     <h2 class="search-page-tax-name"><?= $title ?></h2>
-    <div class="more-tags">
+    <select class="more-tags">
+        <option selected="selected" hidden class="checkbox-filter-search"  data-name='language' data-value="<?= $language ?>" name=" language '[]'" value="<?= $language ?>" id="language_<?= $i ?>">שפה</option>
 
         <?php
         $i=0;
         foreach ($languages as $language) {
             $checked = '';
-            //TODO get all courses that have this tag -> $count = result.
             ?>
 
-            <div class="wrap-filter-search">
-                <label class="term-filter-search" for="language_<?= $i ?>">
-                    <input <?= $checked ?> class="checkbox-filter-search" type="checkbox" data-name='language' data-value="<?= $language ?>" name=" language '[]'" value="<?= $language ?>" id="language_<?= $i ?>"/>
-                    <div class="wrap-term-and-sum" >
-                        <span class="term-name"><?= $language ?></span>
-                        <span class="sum">(<?= $count ?>)</span>
-                    </div>
-                </label>
-            </div>
+            <option <?= $checked ?> class="checkbox-filter-search" type="checkbox" data-name='language' data-value="<?= $language ?>" name=" language '[]'" value="<?= $language ?>" id="language_<?= $i ?>">
+                <?= $language ?>
+            </option>
 
-            <?php if (count($languages) > 7) {?>
-                <button class="show-more-tags collapsed" type="button" aria-hidden="true">
-                    <span><?= __('Show More Tags', 'single_corse') ?></span>
-                    <span><?= __('Show Less Tags', 'single_corse') ?></span>
-                </button>
-
-
-            <?php }
-        $i++;
+            <?php $i++;
         } ?>
-    </div>
+    </select>
 </div>

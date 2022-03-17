@@ -46,10 +46,23 @@ $catalog_title = getFieldByLanguage(get_field('catalog_title'), get_field('catal
     <div class="back-img-1" ></div>
     <div class="back-img-2" ></div>
     <div class="catalog-banner-content">
-        <h1 style="color: #ffffff"><?=$catalog_title?></h1>
-        <?php
-        get_template_part('templates/hero', 'search')
-        ?>
+        <h1 class="catalog-header" style="color: #ffffff"><?=$catalog_title?></h1>
+        <form role="search" method="get" class="hero-search-form" action="<?= esc_url(home_url('/')); ?>" novalidate>
+            <label class="sr-only"><?php _e('Search for:', 'single_corse'); ?></label>
+            <div class="input-group group-search-form">
+                <input type="text" value="<?= get_search_query(); ?>" name="s" class="search-field form-control" placeholder="<?php echo hero_search_placeholder(); ?>" aria-required="true">
+                <?php /* if(isset($_GET['termid'])){ ?>
+            <input type="hidden" name="termid" value="<?= fixXSS($_GET['termid']); ?>"  placeholder="<?php _e('Search Course', 'single_corse'); ?>">
+        <?php } */ ?>
+                <span class="input-group-btn">
+                  <button class="search-submit"><?php _e('Search', 'single_corse'); ?></button>
+                </span>
+            </div>
+        </form>
+<!---->
+<!--        --><?php
+//        get_template_part('templates/hero', 'search')
+//        ?>
     </div>
 </div>
 
