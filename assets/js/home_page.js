@@ -21,6 +21,7 @@ jQuery(document).ready(function () {
     })
     jQuery('.courses-stripe').on('afterChange', function (event) {
         const id = event.target.id
+        console.log("ttttt id : ", id)
         mouseHoverOnCourse()
         getCoursesAjax(id)
         let width = jQuery(document).width();

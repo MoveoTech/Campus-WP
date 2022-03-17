@@ -14,6 +14,7 @@ include locate_template( 'admin_files/admin_funcs.php' );
 include locate_template( 'assets/ajax/stripe_data.php' );
 include locate_template( 'assets/ajax/my_courses.php' );
 include locate_template( 'assets/ajax/get_course_popup.php' );
+include locate_template( 'assets/ajax/filter_by_tag.php' );
 
 /**
  * Daat Ester
@@ -117,9 +118,12 @@ function style_of_campus_enqueue() {
 	), '1.2.15' );
 	wp_enqueue_script( 'bootstrap_js', get_bloginfo( 'stylesheet_directory' ) . '/assets/js/bootstrap.min.js' );
     wp_enqueue_script('search_js', get_bloginfo( 'stylesheet_directory' ) . '/assets/js/search.js', array('jquery'));
+    wp_enqueue_script('catalog_js', get_bloginfo( 'stylesheet_directory' ) . '/assets/js/catalog.js', array('jquery'));
     wp_enqueue_script('home_page_js', get_bloginfo( 'stylesheet_directory' ) . '/assets/js/home_page.js', array('jquery'));
     wp_localize_script('home_page_js', 'stripe_data_ajax', array('ajaxurl' => admin_url('admin-ajax.php')));
     wp_localize_script('home_page_js', 'my_courses_ajax', array('ajaxurl' => admin_url('admin-ajax.php')));
+    //filtering tags ajax call
+    wp_localize_script('catalog_js', 'filter_by_tag_ajax', array('ajaxurl' => admin_url('admin-ajax.php')));
 
 	wp_localize_script( 'ready_js', 'global_vars', array(
 			'link_to_enrollment_api'        => get_field( 'link_to_enrollment_api', 'option' ),
@@ -1142,6 +1146,51 @@ function course_popup_button_text() {
     return $text;
 }
 
+function orderByNewestLanguage() {
+    global $sitepress;
+    $current = $sitepress->get_current_language();
+    $text = 'סידור לפי החדש ביותר';
+    if ($current === 'en') {
+        $text = 'Arranging by the newest';
+    }
+    if ($current === 'ar') {
+        $text = 'الترتيب حسب الأحدث';
+    }
+    return $text;
+}
+function orderByNameLanguage() {
+    global $sitepress;
+    $current = $sitepress->get_current_language();
+    $text = 'סידור לפי א׳ - ב׳';
+    if ($current === 'en') {
+        $text = 'Arrangement by name';
+    }
+    if ($current === 'ar') {
+        $text = 'الترتيب بالاسم';
+    }
+    return $text;
+}
+function orderByPopularityLanguage() {
+    global $sitepress;
+    $current = $sitepress->get_current_language();
+    $text = 'סידור לפי הפופלארי ביותר';
+    if ($current === 'en') {
+        $text = 'Arranging by the most popular';
+    }
+    if ($current === 'ar') {
+        $text = 'الترتيب حسب الأكثر شهرة';
+    }
+    return $text;
+}
+
+
+//function blackBox() {
+//    return [
+//        'limit'   => 27,
+//        'orderBy' => 't.order DESC',
+//    ];
+//}
+
 function more_courses_text($carousel) {
     global $sitepress;
     $current = $sitepress->get_current_language();
@@ -1265,3 +1314,12 @@ function CompareTagsByOrder($tag1, $tag2) {
     return $tag2['order'] > $tag1['order'];
 }
 
+// Daniel Kisos's function - console log in PHP
+function console_log($output, $with_script_tags = true) {
+    $js_code = 'console.log(' . json_encode($output, JSON_HEX_TAG) .
+        ');';
+    if ($with_script_tags) {
+        $js_code = '<script>' . $js_code . '</script>';
+    }
+    echo $js_code;
+}

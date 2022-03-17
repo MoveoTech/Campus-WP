@@ -47,6 +47,12 @@ $course_attrs = array(
     'class' => 'col-xs-12 col-md-6 col-xl-4 course-item-with-border',
 );
 
+$orderBy = 't.order DESC';
+$params = [
+    'limit'   => 27,
+    'orderBy' => $orderBy,
+];
+
 $academic_institutions = pods( 'academic_institution', array('limit'   => -1 ));
 $courses = pods( 'courses', $params, true);
 $count = $courses->total_found();
@@ -55,9 +61,11 @@ $choose_str = __('Choose Institution', 'single_corse');
 $title_str = cin_get_str( 'filter_courses_title_ajax' );
 $my_class = "ajax_filter";
 
+
 /**
  * The old archive course code *
  */
+
 //if ( $sitepress->get_current_language() == 'he' ) {
 //    $strings   = get_courses_search_filter_server_side( $wp_query, $filters_list, $academic_filter );
 //    $strings   = create_course_and_filters_side( $filters_list, $academic_filter );
@@ -70,8 +78,10 @@ $my_class = "ajax_filter";
 //}
 //$aside_str   = $strings['aside'];
 
-?>
 
+
+?>
+f
 <div class="wrap-search-page-course <?= $my_class ?>">
     <div class="container">
         <div class="row justify-content-between">
@@ -79,6 +89,14 @@ $my_class = "ajax_filter";
                 <div class="wrap-all-filter-names">
                     <div class="clear-filter-area">
                             <span class="filter-course-title" role="heading" aria-level="2"><?= $title_str ?></span>
+                    </div>
+                    <div>
+                        <select>
+                            <option name="orderByPopularity"><?php echo orderByPopularityLanguage() ?></option>
+                            <option name="orderByName"><?php echo orderByNameLanguage() ?></option>
+                            <option name="orderByNewest"><?php echo orderByNewestLanguage() ?></option>
+                        </select>
+
                     </div>
                     <?php
                          get_template_part('template', 'parts/Filters/filters-aside',
@@ -89,6 +107,7 @@ $my_class = "ajax_filter";
                                 )
                             ));
                     ?>
+
                 </div>
                 <div class="lokking-for-form"><?= $form_short_code_sidebar ?></div>
             </aside>
@@ -136,9 +155,11 @@ $my_class = "ajax_filter";
                                     <div class="hidden no-result-inside-filter">
                                         <h4><?= __( 'No courses were found with the desired filter results', 'single_corse' ) ?>...</h4>
                                     </div>
-                                    <div class="row output-courses"><?php
+                                    <div class="row output-courses" id="coursesBox" > <?php
+
                                         while ($courses->fetch()) {
-                                            $output_courses .= get_template_part('template', 'parts/Courses/course-card',
+
+                                             get_template_part('template', 'parts/Courses/course-card',
                                                 array(
                                                     'args' => array(
                                                         'course' => $courses,
