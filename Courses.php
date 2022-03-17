@@ -65,6 +65,14 @@ $choose_str = __('Choose Institution', 'single_corse');
                     <div class="clear-filter-area">
                             <span class="filter-course-title" role="heading" aria-level="2"><?= $title_str ?></span>
                     </div>
+                    <div>
+                        <select>
+                            <option name="orderByPopularity"><?php echo orderByPopularityLanguage() ?></option>
+                            <option name="orderByName"><?php echo orderByNameLanguage() ?></option>
+                            <option name="orderByNewest"><?php echo orderByNewestLanguage() ?></option>
+                        </select>
+
+                    </div>
                     <?php
                          get_template_part('template', 'parts/Filters/filters-aside',
                             array(
