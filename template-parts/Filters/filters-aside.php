@@ -36,7 +36,10 @@ $current_lang = $sitepress->get_current_language();
 
     <!-- FILTER BUTTON .-->
     <div>
-        <button></button>
+        <button><?= addingMoreFiltersLanguage(); ?></button>
+    </div>
+    <div>
+        <button><?= ResetFiltersLanguage(); ?></button>
     </div>
 
 

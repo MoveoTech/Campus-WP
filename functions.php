@@ -1164,6 +1164,31 @@ function course_popup_button_text() {
     return $text;
 }
 
+function addingMoreFiltersLanguage() {
+    global $sitepress;
+    $current = $sitepress->get_current_language();
+    $text = 'הוספת סינון';
+    if ($current === 'en') {
+        $text = 'Adding Filter';
+    }
+    if ($current === 'ar') {
+        $text = 'أضف التصفية';
+    }
+    return $text;
+}
+
+function ResetFiltersLanguage() {
+    global $sitepress;
+    $current = $sitepress->get_current_language();
+    $text = 'איפוס סינון';
+    if ($current === 'en') {
+        $text = 'Reset Filters';
+    }
+    if ($current === 'ar') {
+        $text = 'إعادة تعيين مرشح';
+    }
+    return $text;
+}
 function more_courses_text($carousel) {
     global $sitepress;
     $current = $sitepress->get_current_language();
