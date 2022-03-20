@@ -17,12 +17,17 @@ foreach ($languagesArray as $language) {
 }
 
 $title = $filter['title'];
-//$count = count($languages);
+
 ?>
 
-<div class="wrap-terms-group">
-    <button  class="filterGroupTitle" id="<?= $title ?>filterButton" ><?= $title ?></button>
-    <div class="inputsContainer" id="<?= $title ?>"> <?php
+<div class="wrapEachFiltergroup">
+    <div class="wrapEachFilterTag">
+        <div class="buttonWrap" >
+            <p  class="filterGroupTitle" ><?= $title ?></p>
+            <img class="filterVector" src="<?php echo get_bloginfo('stylesheet_directory'). '/assets/images/vector-black.svg'?>"/>
+        </div>
+    </div>
+    <div class="inputsContainer" > <?php
         $i=0;
         foreach ($languages as $language) {
             $checked = '';
@@ -30,7 +35,7 @@ $title = $filter['title'];
 
             <div class="filterInput">
                 <label class="term-filter-search" for="language_<?= $i ?>">
-                    <input  class="checkbox-filter-search" type="checkbox" data-name='language' data-value="<?= $language ?>" name=" language '[]'" value="<?= $language ?>" id="language_<?= $i ?>"/>
+                    <input <?= $checked ?> class="checkbox-filter-search" type="checkbox" data-name='language' data-value="<?= $language ?>" name=" language '[]'" value="<?= $language ?>" id="language_<?= $i ?>"/>
                     <div class="wrap-term-and-sum" >
                         <span class="term-name"><?= $language ?></span>
                     </div>
@@ -38,7 +43,9 @@ $title = $filter['title'];
             </div>
 
             <?php
-        $i++;
+            $i++;
         } ?>
     </div>
+
 </div>
+

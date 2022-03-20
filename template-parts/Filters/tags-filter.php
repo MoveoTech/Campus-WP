@@ -10,11 +10,16 @@ global $sitepress;
 $tagsArray = $filter['tags'];
 $title = $filter['title'];
 $tags = pods('tags',podsFilterParams($tagsArray))->data();
-$count = count($tags);
+
 ?>
-<div class="wrap-terms-group">
-    <button  class="filterGroupTitle" id="<?= $title ?>filterButton" ><?= $title ?></button>
-    <div class="inputsContainer" id="<?= $title ?>">
+<div class="wrapEachFiltergroup">
+    <div class="wrapEachFilterTag">
+        <div class="buttonWrap">
+            <p class="filterGroupTitle" ><?= $title ?></p>
+            <img class="filterVector" src="<?php echo get_bloginfo('stylesheet_directory'). '/assets/images/vector-black.svg'?>"/>
+        </div>
+    </div>
+        <div class="inputsContainer">
 
         <?php foreach ($tags as $tag) {
             $tagId =  $tag->id;

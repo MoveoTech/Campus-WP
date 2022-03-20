@@ -3,6 +3,7 @@ $= jQuery.noConflict();
 $(document).ready(function () {
 
     $('.addFilterButton').on('click', function (event) {
+        // console.log("event : ", event);
 
 
 
@@ -12,41 +13,30 @@ $(document).ready(function () {
     });
     //end of click event
 
-
+//reset filtering
     $('.resetFilterButton').on('click', function (event) {
 
         let filtersInputs = $('.checkbox-filter-search');
 
         filtersInputs.each((index, element) => {
-
            element.checked = false;
 
         });
-
-
-
-
     });
     //end of click event
 
 
-    $('.filterGroupTitle').on('click', function (event) {
-        console.log("event: ", event.target.id)
-        console.log("event.target.value: ", event.target.innerHTML)
-        let filtergroupValue = event.target.innerHTML.replace(/ /g,'');
-        console.log("filtergroupValue: " , filtergroupValue)
-        // let filtersInputs = $(`.filterGroupTitle`);
-        let filtersInputs = $(`#${filtergroupValue}`);
-        filtersInputs.toggle();
-console.log("filtersInputs :", filtersInputs)
+    //targeting each checkbox to open
+    $('.wrapEachFiltergroup').on('click', function (event) {
 
-        // filtersInputs.each((index, element) => {
-        //
-        //     element.checked = false;
-        //
-        // });
+    let popupMenuDiv = event.target.closest(".wrapEachFiltergroup").querySelector(".inputsContainer")
+    //     let id = event.target.id
+    //     if(!id) id = event.target.parentElement.id;
+    //     if(!id) id = event.target.parentElement.parentElement.id;
+    //     let popupMenuDiv = $(`.${id}`);
 
-
+        $(popupMenuDiv).toggle();
+        $(popupMenuDiv).toggleClass('showInputsContainer');
 
 
     });
@@ -57,8 +47,10 @@ console.log("filtersInputs :", filtersInputs)
 //end of Jquery
 
 // hiding filter inputs when clicking on screen
+
+//TODO changing function to close other open tabs
 $(document).click(function(event) {
-    let filtergroup = $('.filterGroupTitle');
+    let filtergroup = $('.wrapEachFiltergroup');
     let filtersInputs = $(`.inputsContainer`);
     if (!filtergroup.is(event.target) && !filtergroup.has(event.target).length && !filtersInputs.is(event.target) && !filtersInputs.has(event.target).length) {
         filtersInputs.hide();

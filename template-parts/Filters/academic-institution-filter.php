@@ -12,34 +12,17 @@ $academic_institutions_array = $filter['academic_institutions'];
 $title = $filter['title'];
 $academic_institutions = pods('academic_institution', podsFilterParams($academic_institutions_array))->data();
 $choose_str = __('Choose Institution', 'single_corse');
+
 ?>
 
-<div class="wrap-mobile-filter-title">
-
-<!--    <button id="close-nav-search" class="close-nav-search" type="button"></button>-->
-<!--    <p class="filter-title-mobile">--><?//= __('Filter Courses', 'single_corse') ?><!--</p>-->
-
-    <div class="wrap-terms-group wrap-terms-institution">
-
-<!--        <select multiple class="sr-only selected-academic" name="academic_select[]" aria-hidden="true" tabindex="-1">-->
-<!--            <option>--><?//= $choose_str ?><!--</option>-->
-<!--            --><?php
-//            foreach ($academic_institutions as $single_academic_institution){
-//                $title = $single_academic_institution->name;
-//                $ID = $single_academic_institution->id;
-//                $checked = $selected = '';
-//                if(in_array($ID, $get_params['institution'])){
-//                    $checked = 'checked';
-//                    $selected = 'selected';
-//                }
-//                ?>
-<!--                <option --><?//= $selected ?><!-- class="academic-option-item" value="--><?//= $ID ?><!--">--><?//= $title ?><!--</option>-->
-<!--            --><?php //} ?>
-<!--        </select>-->
-
-
-        <button  class="filterGroupTitle" id="<?= $title ?>filterButton" ><?= $title ?></button>
-        <div class="inputsContainer" id="<?= $title ?>">
+<div class="wrapEachFiltergroup">
+    <div class="wrapEachFilterTag">
+        <div class="buttonWrap">
+            <p class="filterGroupTitle" ><?= $title ?></p>
+            <img class="filterVector" src="<?php echo get_bloginfo('stylesheet_directory'). '/assets/images/vector-black.svg'?>"/>
+        </div>
+    </div>
+    <div class="inputsContainer">
 
             <?php
             foreach ($academic_institutions as $single_academic_institution){
@@ -64,7 +47,7 @@ $choose_str = __('Choose Institution', 'single_corse');
             ?>
 
         </div>
-    </div>
+
 <!--    <a href="javascript: void(0);" class="clear-link" role="button" id="clear_all_filters">--><?//= __('Clear All', 'single_corse') ?><!--</a>-->
 <!--    <a href="javascript: void(0);" class="ajax_filter_btn" role="button">--><?//= __('Filter Courses', 'single_corse') ?><!--</a>-->
 </div>

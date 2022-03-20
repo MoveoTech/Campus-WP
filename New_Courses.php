@@ -69,12 +69,8 @@ $catalog_title = getFieldByLanguage(get_field('catalog_title'), get_field('catal
 <div class="wrap-search-page-course <?= $my_class ?>">
     <div class="container">
         <div class="row justify-content-between">
-            <aside class="col-xs-12 col-md-12 col-lg-3 col-xl-3 col-sm-12 sidebar-search-course">
-                <div class="wrap-all-filter-names">
-                    <div class="clear-filter-area">
-                            <span class="filter-course-title" role="heading" aria-level="2"><?= $title_str ?></span>
-                    </div>
-
+            <div class="filtersSection">
+                <div class="allFiltersWrapDiv">
                     <?php
                          get_template_part('template', 'parts/Filters/filters-section',
                             array(
@@ -84,10 +80,8 @@ $catalog_title = getFieldByLanguage(get_field('catalog_title'), get_field('catal
                                 )
                             ));
                     ?>
-
                 </div>
-<!--                <div class="lokking-for-form">--><?//= $form_short_code_sidebar ?><!--</div>-->
-            </aside>
+                </div>
             <div class="col-sm-12 col-md-12 col-lg-9 col-xl-9 col-12">
                 <div class="row">
                     <div aria-label="<?= __( 'click here to remove filter button', 'single_corse' ) ?>" class="hidden" id="filter_dynamic_tags_demo">

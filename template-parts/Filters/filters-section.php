@@ -16,10 +16,10 @@ $current_lang = $sitepress->get_current_language();
 
 
 <!--<form class="wrap-all-tags-filter" id="ajax_filter">-->
-    <input type="hidden" name="action" value="ajax_load_courses" />
-    <input type="hidden" name="paged" value="1" />
-    <input type="hidden" name="orderby" value="menu_order" />
-    <input type="hidden" name="lang" value="he" />
+<!--    <input type="hidden" name="action" value="ajax_load_courses" />-->
+<!--    <input type="hidden" name="paged" value="1" />-->
+<!--    <input type="hidden" name="orderby" value="menu_order" />-->
+<!--    <input type="hidden" name="lang" value="he" />-->
 
 
 
@@ -27,21 +27,67 @@ $current_lang = $sitepress->get_current_language();
 
     <!-- START FILTERS SECTION .-->
 
-    <?php
-    foreach($filters as $filterId ) {
-        getFilterType($filterId);
-    }?>
 
+<div class="checkboxFiltersWrap">
+
+
+    <?php
+    $filtersInputs = array();
+    $i= 0;
+    foreach($filters as $filterId ) {
+
+        $i++;
+        if($i<=4){
+            getFilterType($filterId);
+        }
+        if($i>4){
+            array_push($filtersInputs,$filterId );
+
+        }
+    }
+//    console_log($filtersInputs);
+    if(count($filtersInputs)>0){
+        getMoreFilters($filtersInputs);
+    }
+    ?>
+
+    <?php
+//    $i= 0;
+//    foreach($filters as $filterId ) {
+//
+//        $i++;
+//        if($i>4){
+////            console_log($filterId);
+//            getMoreFilters($filters);
+//            break;
+//        }
+//    }
+
+
+   function getMoreFilters($filtersInputs){
+       get_template_part('template', 'parts/Filters/addMoreFilters',
+           array(
+               'args' => array(
+                   'filters'=>  $filtersInputs,
+               )
+           ));
+   }
+    ?>
+
+
+
+<!--    <div class="wrapEachFilterButton">-->
+<!--        <p class="addFilterButton filterGroupTitle">--><?//= addingMoreFiltersLanguage(); ?><!--<img src="--><?php //echo get_bloginfo('stylesheet_directory'). '/assets/images/plus-sign.svg'?><!--"/></p>-->
+<!--    </div>-->
+    <div class="wrapEachFilterButton">
+        <p class="resetFilterButton filterGroupTitle"><?= ResetFiltersLanguage(); ?></p>
+    </div>
+</div>
 
     <!-- END FILTERS SECTION .-->
 
     <!-- FILTER BUTTON .-->
-    <div>
-        <button class="addFilterButton"><?= addingMoreFiltersLanguage(); ?></button>
-    </div>
-    <div>
-        <button class="resetFilterButton"><?= ResetFiltersLanguage(); ?></button>
-    </div>
+
     <div>
         <select>
             <option name="orderByPopularity"><?php echo orderByPopularityLanguage() ?></option>

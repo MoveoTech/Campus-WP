@@ -66,7 +66,7 @@ $(document).ready(function () {
             if(languageArray.length > 0) {
                 filterData['language'] = languageArray;
             }
-            console.log("filterData : ",filterData)
+            // console.log("filterData : ",filterData)
             // filterCoursesAjax(filterData)
             // TO DO - figure out where to put settimeout?
 
@@ -96,8 +96,8 @@ $(document).ready(function () {
             jQuery.post(filter_by_tag_ajax.ajaxurl, data, function(response){
                 if(response.success){
                     const responseData = JSON.parse(response.data);
-                    console.log("data in filterCoursesAjax strictt : ", responseData['strictFilter'])
-                    console.log("data in filterCoursesAjax : ", responseData)
+                    // console.log("data in filterCoursesAjax strictt : ", responseData['strictFilter'])
+                    // console.log("data in filterCoursesAjax : ", responseData)
                     appendFilteredCourses(responseData['strictFilter'])
                     // if(responseData.length > 0) {
                     //

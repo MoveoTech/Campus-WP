@@ -20,16 +20,19 @@ foreach ($certificatesArray as $certificate) {
 
 
 $title = $filter['title'];
-//$count = count($certificates);
+
 ?>
 
-<div class="wrap-terms-group">
-    <button  class="filterGroupTitle" ><?= $title ?></button>
-    <div class="inputsContainer certificateBox" id="<?= $title ?>"> <?php
+<div class="wrapEachFiltergroup">
+    <div class="wrapEachFilterTag">
+        <div class="buttonWrap">
+            <p class="filterGroupTitle" ><?= $title ?></p>
+            <img class="filterVector" src="<?php echo get_bloginfo('stylesheet_directory'). '/assets/images/vector-black.svg'?>"/>
+        </div>
+    </div>
+        <div class="inputsContainer" >
 
-
-//        $keys = array_keys($certificates);
-        $i = 0;
+        <?php $i = 0;
         foreach ($certificates as $certificate) {
             $checked = '';
             ?>
