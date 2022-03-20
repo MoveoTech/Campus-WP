@@ -15,7 +15,7 @@ $current_lang = $sitepress->get_current_language();
 ?>
 
 
-<form class="wrap-all-tags-filter" id="ajax_filter">
+<!--<form class="wrap-all-tags-filter" id="ajax_filter">-->
     <input type="hidden" name="action" value="ajax_load_courses" />
     <input type="hidden" name="paged" value="1" />
     <input type="hidden" name="orderby" value="menu_order" />
@@ -32,16 +32,24 @@ $current_lang = $sitepress->get_current_language();
         getFilterType($filterId);
     }?>
 
+
     <!-- END FILTERS SECTION .-->
 
     <!-- FILTER BUTTON .-->
     <div>
-        <button><?= addingMoreFiltersLanguage(); ?></button>
+        <button class="addFilterButton"><?= addingMoreFiltersLanguage(); ?></button>
     </div>
     <div>
-        <button><?= ResetFiltersLanguage(); ?></button>
+        <button class="resetFilterButton"><?= ResetFiltersLanguage(); ?></button>
     </div>
+    <div>
+        <select>
+            <option name="orderByPopularity"><?php echo orderByPopularityLanguage() ?></option>
+            <option name="orderByName"><?php echo orderByNameLanguage() ?></option>
+            <option name="orderByNewest"><?php echo orderByNewestLanguage() ?></option>
+        </select>
 
+    </div>
 
     <!--        <a href="javascript: void(0);" class="filters_button ajax_filter_btn" role="button">--><?//= __('Filter Courses', 'single_corse') ?><!--</a>-->
     <!--        <a href="javascript: void(0);" class="ajax_filter_btn" role="button">--><?//= __('Filter Courses', 'single_corse') ?><!--</a>-->
@@ -166,7 +174,7 @@ $current_lang = $sitepress->get_current_language();
 
 
 
-</form>
+<!--</form>-->
 
 
 

@@ -19766,3 +19766,7 @@ body .course-item-hover {
       background-repeat: no-repeat;
       background-position: center center;
       z-index: 3; }
+
+.inputsContainer {
+  border: 1px solid red;
+  display: none; }

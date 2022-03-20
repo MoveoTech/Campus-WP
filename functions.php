@@ -118,6 +118,7 @@ function style_of_campus_enqueue() {
 	), '1.2.15' );
 	wp_enqueue_script( 'bootstrap_js', get_bloginfo( 'stylesheet_directory' ) . '/assets/js/bootstrap.min.js' );
     wp_enqueue_script('catalog_js', get_bloginfo( 'stylesheet_directory' ) . '/assets/js/catalog.js', array('jquery'));
+    wp_enqueue_script('catalogAddon_js', get_bloginfo( 'stylesheet_directory' ) . '/assets/js/catalogAddon.js', array('jquery'));
     wp_enqueue_script('home_page_js', get_bloginfo( 'stylesheet_directory' ) . '/assets/js/home_page.js', array('jquery'));
     wp_localize_script('home_page_js', 'stripe_data_ajax', array('ajaxurl' => admin_url('admin-ajax.php')));
     wp_localize_script('home_page_js', 'my_courses_ajax', array('ajaxurl' => admin_url('admin-ajax.php')));
@@ -1163,6 +1164,44 @@ function course_popup_button_text() {
     }
     return $text;
 }
+
+function orderByNewestLanguage() {
+    global $sitepress;
+    $current = $sitepress->get_current_language();
+    $text = 'סידור לפי החדש ביותר';
+    if ($current === 'en') {
+        $text = 'Arranging by the newest';
+    }
+    if ($current === 'ar') {
+        $text = 'الترتيب حسب الأحدث';
+    }
+    return $text;
+}
+function orderByNameLanguage() {
+    global $sitepress;
+    $current = $sitepress->get_current_language();
+    $text = 'סידור לפי א׳ - ב׳';
+    if ($current === 'en') {
+        $text = 'Arrangement by name';
+    }
+    if ($current === 'ar') {
+        $text = 'الترتيب بالاسم';
+    }
+    return $text;
+}
+function orderByPopularityLanguage() {
+    global $sitepress;
+    $current = $sitepress->get_current_language();
+    $text = 'סידור לפי הפופלארי ביותר';
+    if ($current === 'en') {
+        $text = 'Arranging by the most popular';
+    }
+    if ($current === 'ar') {
+        $text = 'الترتيب حسب الأكثر شهرة';
+    }
+    return $text;
+}
+
 
 function addingMoreFiltersLanguage() {
     global $sitepress;

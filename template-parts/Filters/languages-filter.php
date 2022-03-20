@@ -17,25 +17,28 @@ foreach ($languagesArray as $language) {
 }
 
 $title = $filter['title'];
-$count = count($languages);
+//$count = count($languages);
 ?>
 
 <div class="wrap-terms-group">
-    <h2 class="search-page-tax-name"><?= $title ?></h2>
-    <select class="more-tags">
-        <option selected="selected" hidden class="checkbox-filter-search"  data-name='language' data-value="<?= $language ?>" name=" language '[]'" value="<?= $language ?>" id="language_<?= $i ?>">שפה</option>
-
-        <?php
+    <button  class="filterGroupTitle" id="<?= $title ?>filterButton" ><?= $title ?></button>
+    <div class="inputsContainer" id="<?= $title ?>"> <?php
         $i=0;
         foreach ($languages as $language) {
             $checked = '';
             ?>
 
-            <option <?= $checked ?> class="checkbox-filter-search" type="checkbox" data-name='language' data-value="<?= $language ?>" name=" language '[]'" value="<?= $language ?>" id="language_<?= $i ?>">
-                <?= $language ?>
-            </option>
+            <div class="filterInput">
+                <label class="term-filter-search" for="language_<?= $i ?>">
+                    <input  class="checkbox-filter-search" type="checkbox" data-name='language' data-value="<?= $language ?>" name=" language '[]'" value="<?= $language ?>" id="language_<?= $i ?>"/>
+                    <div class="wrap-term-and-sum" >
+                        <span class="term-name"><?= $language ?></span>
+                    </div>
+                </label>
+            </div>
 
-            <?php $i++;
+            <?php
+        $i++;
         } ?>
-    </select>
+    </div>
 </div>

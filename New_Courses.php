@@ -74,8 +74,9 @@ $catalog_title = getFieldByLanguage(get_field('catalog_title'), get_field('catal
                     <div class="clear-filter-area">
                             <span class="filter-course-title" role="heading" aria-level="2"><?= $title_str ?></span>
                     </div>
+
                     <?php
-                         get_template_part('template', 'parts/Filters/filters-aside',
+                         get_template_part('template', 'parts/Filters/filters-section',
                             array(
                                 'args' => array(
                                     'filters_list' => $filters_list,
@@ -83,8 +84,9 @@ $catalog_title = getFieldByLanguage(get_field('catalog_title'), get_field('catal
                                 )
                             ));
                     ?>
+
                 </div>
-                <div class="lokking-for-form"><?= $form_short_code_sidebar ?></div>
+<!--                <div class="lokking-for-form">--><?//= $form_short_code_sidebar ?><!--</div>-->
             </aside>
             <div class="col-sm-12 col-md-12 col-lg-9 col-xl-9 col-12">
                 <div class="row">
@@ -98,13 +100,13 @@ $catalog_title = getFieldByLanguage(get_field('catalog_title'), get_field('catal
                                  <span class="">"<?= fixXSS( $_GET['s'] ) ?>"</span>
                             </h2>
                         </div>
-                    <?php if ( $form_short_code_no_result = get_field( 'form_short_code_no_result', 'options' ) ) { ?>
-                        <div class="col-12 lokking-for-form no-result-form"><?= $form_short_code_no_result ?></div>
-                    <?php } } else {?>
+<!--                    --><?php //if ( $form_short_code_no_result = get_field( 'form_short_code_no_result', 'options' ) ) { ?>
+<!--                        <div class="col-12 lokking-for-form no-result-form">--><?//= $form_short_code_no_result ?><!--</div>-->
+<!--                    --><?php //} } else {?>
                    <div class="sum-all-course col-lg-12" role="alert">
                         <h2 class="wrap-sum">
                             <span><?= __( 'Showing', 'single_corse' ) ?></span>
-                            <span id="add-sum-course" class="sum-of-courses-result"><?= $count ?></span>
+                            <span id="add-sum-course" class="sum-of-courses-result">ggg<?= $count ?></span>
                             <span><?= cin_get_str( 'matching_courses' ) ?></span>
                         </h2>
                     </div>

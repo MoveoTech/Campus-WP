@@ -67,7 +67,7 @@ $(document).ready(function () {
                 filterData['language'] = languageArray;
             }
             console.log("filterData : ",filterData)
-            filterCoursesAjax(filterData)
+            // filterCoursesAjax(filterData)
             // TO DO - figure out where to put settimeout?
 
             // setTimeout(() =>{
