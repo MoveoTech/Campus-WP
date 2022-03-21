@@ -89,7 +89,6 @@ $(document).ready(function () {
             let data = {
                 'action': 'filter_by_tag',
                 'type' : 'courses',
-                // 'lang' : getCookie('openedx-language-preference'),
                 'dataObject': filterData,
             }
 
@@ -119,12 +118,12 @@ $(document).ready(function () {
 function appendFilteredCourses(coursesData) {
     let coursesBox = document.getElementById("coursesBox");
     // coursesBox.innerHTML= "";
-    console.log("coursesBox : ",coursesBox);
-    console.log("coursesdata : ",coursesData);
+    // console.log("coursesBox : ",coursesBox);
+    // console.log("coursesdata : ",coursesData);
     let path = window.location.pathname
 
     window.location.pathname = window.location.pathname + "filter"
-    console.log("window.location.pathname : ",window.location.pathname);
+    // console.log("window.location.pathname : ",window.location.pathname);
     // console.log("coursesBox : ",coursesData[0].getTemplatepart);
 
 

@@ -72,7 +72,7 @@
 .inputsContainer {
   border: 1px solid blue;
   /* Auto layout */
-  display: flex;
+  //display: flex;
   flex-direction: column;
   align-items: flex-end;
   padding: 0px;
@@ -81,7 +81,7 @@
   margin: 10px 10px;
   left: 0px;
   right: 0px;
-    //display:none;
+    display:none;
 
   /* White */
 

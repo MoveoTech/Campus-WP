@@ -21,7 +21,7 @@ $moreFilters = $filter['filters'];
 
 <div class="moreFilters wrapEachFiltergroup">
     <div class="wrapEachFilterButton">
-        <p class="addFilterButton filterGroupTitle"><?= addingMoreFiltersLanguage(); ?><img src="<?php echo get_bloginfo('stylesheet_directory'). '/assets/images/plus-sign.svg'?>"/></p>
+        <p class="filterGroupTitle"><?= addingMoreFiltersLanguage(); ?><img src="<?php echo get_bloginfo('stylesheet_directory'). '/assets/images/plus-sign.svg'?>"/></p>
     </div>
 
     <div class="inputsContainer" >
