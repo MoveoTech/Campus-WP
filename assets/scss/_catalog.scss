@@ -78,7 +78,7 @@
   margin: 10px 10px;
   left: 0px;
   right: 0px;
-    //display:none;
+    display:none;
 
   /* White */
 
@@ -376,7 +376,10 @@ border: 1px solid red;
 }
 }
 
-
+#groupFiltersContainer{
+  display: flex;
+  flex-direction: row;
+}
 
 
 

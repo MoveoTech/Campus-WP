@@ -3,86 +3,7 @@ $= jQuery.noConflict();
 $(document).ready(function () {
 
 
-    $('.checkbox-filter-search').on('click', function (event) {
-        console.log("event.target : ", event.target)
-        let filterData = {};
-        let tagArray = [];
-        let institutionArray = [];
-        let certificateArray = [];
-        let languageArray = [];
-
-        //getting specific value - inside certificate-filter
-        let certificates = $('.checkbox-filter-search');
-
-
-        // looping all certificate inputs
-        certificates.each((index, element) => {
-            let id = element.id;
-            let type = $(`#${id}`).data('name');
-            let value = element.value;
-
-            //checking if value is checked
-            if(element.checked) {
-
-
-                switch (type) {
-
-            case 'tag':
-                tagArray.push(value);
-                break;
-
-
-            case 'institution':
-                institutionArray.push(value);
-                break;
-
-
-            case 'certificate':
-                certificateArray.push(value);
-                break;
-
-            case 'language':
-                languageArray.push(value);
-                break;
-        }
-            }
-        });
-
-
-
-        if(tagArray || institutionArray || certificateArray || languageArray) {
-
-            //pushing each array to object (key and values)
-            if(tagArray.length > 0) {
-                filterData['tags'] = tagArray;
-            }
-            if(institutionArray.length > 0) {
-                filterData['institution'] = institutionArray;
-
-            }
-            if(certificateArray.length > 0) {
-                filterData['certificate'] = certificateArray;
-
-            }
-            if(languageArray.length > 0) {
-                filterData['language'] = languageArray;
-            }
-            // console.log("filterData : ",filterData)
-            // filterCoursesAjax(filterData)
-            // TO DO - figure out where to put settimeout?
-
-            // setTimeout(() =>{
-            //
-            //     console.log("in set time out")
-            // }, 2000);
-
-        };
-
-
-
-    })
-    // end of click event
-
+    filterByTagEvent()
 
 
     function filterCoursesAjax(filterData) {
@@ -111,6 +32,82 @@ $(document).ready(function () {
 
                 }
             })
+    }
+
+    function filterByTagEvent(){
+        /** removing event from div */
+        $(`#groupFiltersContainer .checkbox-filter-search`).unbind('click');
+        /** click event - targeting each input for filtering */
+        $('.checkbox-filter-search').on('click', function (event) {
+            let filterData = {};
+            let tagArray = [];
+            let institutionArray = [];
+            let certificateArray = [];
+            let languageArray = [];
+
+            //getting specific value - inside certificate-filter
+            let certificates = $('.checkbox-filter-search');
+
+
+            // looping all certificate inputs
+            certificates.each((index, element) => {
+                let id = element.id;
+                let type = $(`#${id}`).data('name');
+                let value = element.value;
+
+                //checking if value is checked
+                if(element.checked) {
+
+
+                    switch (type) {
+
+                        case 'tag':
+                            tagArray.push(value);
+                            break;
+
+
+                        case 'institution':
+                            institutionArray.push(value);
+                            break;
+
+
+                        case 'certificate':
+                            certificateArray.push(value);
+                            break;
+
+                        case 'language':
+                            languageArray.push(value);
+                            break;
+                    }
+                }
+            });
+
+
+
+            if(tagArray || institutionArray || certificateArray || languageArray) {
+
+                //pushing each array to object (key and values)
+                if(tagArray.length > 0) {
+                    filterData['tags'] = tagArray;
+                }
+                if(institutionArray.length > 0) {
+                    filterData['institution'] = institutionArray;
+
+                }
+                if(certificateArray.length > 0) {
+                    filterData['certificate'] = certificateArray;
+
+                }
+                if(languageArray.length > 0) {
+                    filterData['language'] = languageArray;
+                }
+
+            };
+
+
+
+        })
+
     }
 
 });

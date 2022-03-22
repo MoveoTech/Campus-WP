@@ -2,98 +2,80 @@ $= jQuery.noConflict();
 
 $(document).ready(function () {
 
-    //click event - reset filtering
+/** Click event - reset filtering **/
     $('.resetFilterButton').on('click', function (event) {
 
         let filtersInputs = $('.checkbox-filter-search');
 
         filtersInputs.each((index, element) => {
             element.checked = false;
-
-        });
-    });
-    //end of click event -reset filtering
-
-
-    //click event - targeting each checkbox to open
-    $('.wrapEachFiltergroup').on('click', function (event) {
-        // console.log("event.targettttt", event.target);
-
-        let popupMenuDiv = event.target.closest(".wrapEachFiltergroup").querySelector(".inputsContainer")
-
-        $(popupMenuDiv).toggle();
-    });
-    //end of click event - targeting each checkbox to open
-
-
-    // click event - adding more filters
-    $('.moreFilters .checkbox-filter-search').on('click', function (event) {
-        let groupsArray = [];
-
-        //getting targeted inputs
-        let filtersGroup = $('.moreFilters .checkbox-filter-search');
-
-        // looping all group inputs
-        filtersGroup.each((index, element) => {
-            let id = element.id;
-            let filterId = $(`#${id}`).data('value');
-
-            //checking if value is checked
-            if(element.checked) {
-                console.log("filterId : ", filterId)
-                groupsArray.push(filterId);
-                console.log("groupsArray : ", groupsArray)
-
-                getFiltersGroups(groupsArray)
-            }
-
         });
 
-
+        /** removing extra filters **/
+        $('.extraFilter').remove();
 
     });
-    //end of click event
+        /**End of click event -reset filtering **/
 
-    //ajax call - getting filters group name and there tags
-    function getFiltersGroups(groupsArray) {
 
-        let data = {
-            'action': 'add_filters_to_menu',
-            'type' : 'moreFilters',
-            'dataArray': groupsArray,
+
+ /** Calling events - targeting each checkbox to open & filtering inputs **/
+    openCheckboxEvent()
+    filterByTagEvent()
+
+ /** Click event - adding more filters **/
+    $('.moreFilters .extraFilterCheckbox').on('click', function (event) {
+
+        /**Getting targeted input */
+        let filterId = $(event.target).data('value');
+
+        /** If element checked appending it to menu, else - remove it */
+        if(event.target.checked){
+            getFiltersGroups(filterId)
+        } else {
+            let filterToRemove = document.getElementsByClassName(filterId)[0];
+            filterToRemove.remove()
         }
+    });
+    /** End of click event **/
+});
+    /** End of Jquery */
 
-        jQuery.post(add_filters_to_menu_ajax.ajaxurl, data, function(response){
+/** Ajax call - getting filters group name and there tags **/
+function getFiltersGroups(filterId) {
 
-            if(response.success){
-                const responseData = JSON.parse(response.data);
-                // console.log("data Ajax : ", responseData)
-
-                if(responseData.length > 0) {
-                    appendMoreFilters(responseData)
-
-                } else {
-                    // no filters for this group?
-
-                }
-
-
-            }
-        })
+    let data = {
+        'action': 'add_filters_to_menu',
+        'type' : 'moreFilters',
+        'dataArray': filterId,
     }
 
-function appendMoreFilters(filtersData) {
-//looping each filter group and appending it to the filters menu
+    jQuery.post(add_filters_to_menu_ajax.ajaxurl, data, function(response){
+        if(response.success){
+            const responseData = JSON.parse(response.data);
+            appendMoreFilters(responseData)
+            /** Calling events - targeting each checkbox to open & filtering inputs **/
+            openCheckboxEvent();
+            filterByTagEvent()
+        }
+    })
+}
+/** End of function getFiltersGroups */
 
-    let container = document.getElementById('moreFiltersWrap');
-    // let existFilters = document.getElementsByClassName('term-name');
-
-    filtersData.forEach(filterData => {
 
 
-        let groupTitle = filterData.groupName;
-        let groupFilters = '';
-        let currentLanguage =filterData.language;
+/** Appending filter group **/
+function appendMoreFilters(filterData) {
+
+    /**looping each filter group and appending it to the filters menu */
+    let vector = $('.filterVector').attr('src');
+
+    let container = document.getElementById('groupFiltersContainer');
+
+    let groupTitle = filterData.groupName;
+    let groupFilters = '';
+    let currentLanguage =filterData.language;
+    let filterId = filterData.filterId
 
 
     if(filterData.tagsList) {
@@ -112,80 +94,176 @@ function appendMoreFilters(filtersData) {
 
         groupFilters = filterData.certificateList;
     }
-    else{
-        //remove after
-        console.log("else - something nt working")
-    }
+
+    let temp = document.createElement("div");
+    temp.classList.add('wrapEachFiltergroup');
+    temp.classList.add('extraFilter');
+    temp.classList.add(filterId);
 
 
-        let temp = document.createElement("div");
-        temp.classList.add('wrapEachFiltergroup');
+    let startTempPart =
+        '<div class="wrapEachFilterTag">'+
+        '<div class="buttonWrap">'+
+        '<p class="filterGroupTitle">'+ groupTitle +'</p>'+
+        '<img class="filterVector" src="'+vector+'"/>'+
+        '</div>'+
+        '</div>'+
+        '<div class="inputsContainer">';
+
+    let middleTempPart;
+
+    groupFilters.forEach(element => {
+
+        let id = element.id;
+        let name = element.name;
+        let checked = '';
+
+        if(element.english_name && currentLanguage == 'en' ) {
+            name = element.english_name;
+        }
+        if(element.arabic_name && currentLanguage == 'ar'){
+            name = element.arabic_name;
+        }
 
 
-            let startTempPart =
-                '<div class="wrapEachFilterTag">'+
-                    '<div class="buttonWrap">'+
-                        '<p class="filterGroupTitle">'+ groupTitle +'</p>'+
-                        // '<img class="filterVector" src="../images/vector-black.svg"/>'+
-                    '</div>'+
-                '</div>'+
-                '<div class="inputsContainer">';
+        middleTempPart =
+            '<div class="filterInput">'+
+            '<label class="term-filter-search" for="'+id+'">'+
+            '<input'+ checked +' class="checkbox-filter-search" type="checkbox" data-name="institution" data-value="'+id+'" value="'+name+'" id="'+id+'">'+
+            '<div class="wrap-term-and-sum">'+
+            '<span class="term-name">'+name+'</span>'+
+            '</div>'+
+            '</label>'+
+            '</div>';
+    })
+    let endTempPart = '</div>';
+    temp.innerHTML = startTempPart + middleTempPart + endTempPart;
 
-        let middleTempPart;
+    container.append(temp);
 
-            groupFilters.forEach(element => {
+}
+/** End of function appendMoreFilters */
 
-                let id = element.id;
-                let name = element.name;
-                let checked = '';
+function openCheckboxEvent() {
+    //removing event from div
+    $(`.wrapEachFiltergroup`).unbind('click');
 
-                if(element.english_name && currentLanguage == 'en' ) {
-                    name = element.english_name;
+    //click event - targeting each checkbox to open
+    $('.wrapEachFiltergroup').on('click', function (event) {
+
+
+        let popupMenuDiv = event.target.closest(".wrapEachFiltergroup").querySelector(".inputsContainer")
+
+        $(popupMenuDiv).toggle();
+    });
+}
+/** End of function openCheckboxEvent */
+
+
+// TODO removing when merging to catalog.js
+
+/** Filtering by tag function of catalog - need to remove  */
+function filterByTagEvent(){
+    /** removing event from div */
+   $(`#groupFiltersContainer .checkbox-filter-search`).unbind('click');
+
+   /** click event - targeting each input for filtering */
+    $('#groupFiltersContainer .checkbox-filter-search').on('click', function (event) {
+        let filterData = {};
+        let tagArray = [];
+        let institutionArray = [];
+        let certificateArray = [];
+        let languageArray = [];
+
+        /**getting specific value - inside certificate-filter */
+        let certificates = $('.checkbox-filter-search');
+
+
+        /** looping all certificate inputs */
+        certificates.each((index, element) => {
+            let id = element.id;
+            let type = $(`#${id}`).data('name');
+            let value = element.value;
+
+            //checking if value is checked
+            if(element.checked) {
+
+
+                switch (type) {
+
+                    case 'tag':
+                        tagArray.push(value);
+                        break;
+
+
+                    case 'institution':
+                        institutionArray.push(value);
+                        break;
+
+
+                    case 'certificate':
+                        certificateArray.push(value);
+                        break;
+
+                    case 'language':
+                        languageArray.push(value);
+                        break;
                 }
-                if(element.arabic_name && currentLanguage == 'ar'){
-                        name = element.arabic_name;
-                    }
+            }
+        });
 
 
-                middleTempPart =
-                    '<div class="filterInput">'+
-                    '<label class="term-filter-search" for="'+id+'">'+
-                    '<input'+ checked +' class="checkbox-filter-search" type="checkbox" data-name="institution" data-value="'+id+'" value="'+name+'" id="'+id+'">'+
-                    '<div class="wrap-term-and-sum">'+
-                    '<span class="term-name">'+name+'</span>'+
-                    '</div>'+
-                    '</label>'+
-                    '</div>';
-            })
-                let endTempPart = '</div>';
-        temp.innerHTML = startTempPart + middleTempPart + endTempPart;
 
+        if(tagArray || institutionArray || certificateArray || languageArray) {
 
-        container.append(temp);
+            //pushing each array to object (key and values)
+            if(tagArray.length > 0) {
+                filterData['tags'] = tagArray;
+            }
+            if(institutionArray.length > 0) {
+                filterData['institution'] = institutionArray;
 
+            }
+            if(certificateArray.length > 0) {
+                filterData['certificate'] = certificateArray;
 
+            }
+            if(languageArray.length > 0) {
+                filterData['language'] = languageArray;
+            }
+
+        };
 
 
 
     })
 
 }
-//end of function appendMoreFilters
+/** End of function filterByTagEvent */
 
 
-
-
-});
-//end of Jquery
-
-
-
-// hiding filter inputs when clicking on screen
-//TODO changing function to close other open tabs
+/** hiding filter inputs when clicking on screen or other filter group */
 $(document).click(function(event) {
+
     let filtergroup = $('.wrapEachFiltergroup');
     let filtersInputs = $(`.inputsContainer`);
+
+    /** hiding input container when clicking on screen */
     if (!filtergroup.is(event.target) && !filtergroup.has(event.target).length && !filtersInputs.is(event.target) && !filtersInputs.has(event.target).length) {
         filtersInputs.hide();
     }
+
+    /** hiding input container when clicking on other filter group */
+    if (filtergroup.is(event.target) || filtergroup.has(event.target).length || filtersInputs.is(event.target) || filtersInputs.has(event.target).length) {
+
+            let popupMenuDiv = event.target.closest(".wrapEachFiltergroup").querySelector(".inputsContainer");
+
+        filtersInputs.each((index, element) => {
+            if(element !== popupMenuDiv){
+                element.style.display = "none";
+            }
+        })
+
+    }
+
 });

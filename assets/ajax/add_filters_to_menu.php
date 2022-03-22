@@ -3,17 +3,13 @@
 function add_filters_to_menu() {
     $dataArray = $_POST['dataArray'];
     $type = $_POST['type'];
-//
+
     if(!$type || ($type != "moreFilters" ) || !$dataArray || count($dataArray) < 0)
         wp_send_json_error( 'Error: Invalid data!' );
 
 
-    $dataToReturn = array();
-
-    foreach ($dataArray as $filterId) {
-        $filterType = get_field('filter_type', $filterId);
-        $dataToReturn[] = get_filter_type($filterType, $filterId) ;
-    }
+        $filterType = get_field('filter_type', $dataArray);
+        $dataToReturn = get_filter_type($filterType, $dataArray) ;
 
     wp_send_json_success( json_encode($dataToReturn));
 
@@ -21,6 +17,7 @@ function add_filters_to_menu() {
 add_action('wp_ajax_add_filters_to_menu', 'add_filters_to_menu');
 add_action('wp_ajax_nopriv_add_filters_to_menu', 'add_filters_to_menu');
 
+/** Checking filter type and matching to the correct function */
 function get_filter_type($filterType, $filterId){
 
     switch ($filterType) {
@@ -39,6 +36,9 @@ function get_filter_type($filterType, $filterId){
 
     }
 }
+
+
+/** Getting the data of type - academic institution */
 function academicInstitution_moreFilter($filterId){
     global $sitepress;
     $academic_institutions_array = get_field('academic_institutions_list', $filterId);
@@ -46,9 +46,10 @@ function academicInstitution_moreFilter($filterId){
         'academicInstitutionsList' => pods('academic_institution', podsFilterParams($academic_institutions_array))->data(),
         'groupName' => getFieldByLanguage(get_field('hebrew_title', $filterId), get_field('english_title', $filterId), get_field('arabic_title', $filterId), $sitepress->get_current_language()),
         'language' => $sitepress->get_current_language(),
+        'filterId' => $filterId,
     );
 }
-
+/** Getting the data of type - tags */
 function tags_moreFilter($filterId){
     global $sitepress;
     $tags_array = get_field('tags_list', $filterId);
@@ -57,8 +58,10 @@ function tags_moreFilter($filterId){
         'tagsList' => pods('tags',podsFilterParams($tags_array))->data(),
         'groupName' => getFieldByLanguage(get_field('hebrew_title', $filterId), get_field('english_title', $filterId), get_field('arabic_title', $filterId), $sitepress->get_current_language()),
         'language' => $sitepress->get_current_language(),
+        'filterId' => $filterId,
     );
 }
+/** Getting the data of type - language */
 function languages_moreFilter($filterId){
     global $sitepress;
     //translating filter tags
@@ -76,8 +79,10 @@ function languages_moreFilter($filterId){
                 'languageList' => $languages,
                 'groupName' => getFieldByLanguage(get_field('hebrew_title', $filterId), get_field('english_title', $filterId), get_field('arabic_title', $filterId), $sitepress->get_current_language()),
                 'language' => $sitepress->get_current_language(),
+                'filterId' => $filterId,
             );
 }
+/** Getting the data of type - certificate */
 function certificate_moreFilter($filterId){
     global $sitepress;
     //translating filter tags
@@ -96,5 +101,6 @@ function certificate_moreFilter($filterId){
         'certificateList' => $certificates,
         'groupName' => getFieldByLanguage(get_field('hebrew_title', $filterId), get_field('english_title', $filterId), get_field('arabic_title', $filterId), $sitepress->get_current_language()),
         'language' => $sitepress->get_current_language(),
+        'filterId' => $filterId,
     );
 }
