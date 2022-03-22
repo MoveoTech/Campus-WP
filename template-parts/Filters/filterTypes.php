@@ -6,15 +6,15 @@ function getFilterType($filterId){
 
     switch ($filterType) {
 
-        case 'Academic Institutions':{
+        case 'Academic Institutions':
             academicInstitutionFilter($filterId);
             break;
-        }
 
-        case 'Tags':{
+
+        case 'Tags':
             tagsFilter($filterId);
             break;
-        }
+
 
         case 'Languages':
             languagesFilter($filterId);
@@ -98,25 +98,3 @@ function certificateFilter($filterId){
 
 }
 
-function podsFilterParams($tags_filter)
-{
-
-    $where = "t.id IN (";
-    $order = "FIELD(t.id,";
-
-    foreach ($tags_filter as $tag) {
-        $where = $where . $tag . ",";
-        $order = $order . $tag . ",";
-
-    }
-    $where = substr_replace($where, ")", -1);
-    $order = substr_replace($order, ")", -1);
-
-    $params = array(
-        'limit' => -1,
-        'where' => $where,
-        'orderby' => $order
-    );
-    return $params;
-
-}

@@ -47,9 +47,6 @@ $choose_str = __('Choose Institution', 'single_corse');
             ?>
 
         </div>
-
-<!--    <a href="javascript: void(0);" class="clear-link" role="button" id="clear_all_filters">--><?//= __('Clear All', 'single_corse') ?><!--</a>-->
-<!--    <a href="javascript: void(0);" class="ajax_filter_btn" role="button">--><?//= __('Filter Courses', 'single_corse') ?><!--</a>-->
 </div>
 
 

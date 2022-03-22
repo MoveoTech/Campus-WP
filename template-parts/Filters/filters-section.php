@@ -45,23 +45,19 @@ $current_lang = $sitepress->get_current_language();
 
         }
     }
-//    console_log($filtersInputs);
+
+    ?>
+    <div id="moreFiltersWrap">
+
+        <!--        append more filters group here-->
+
+    </div>
+
+    <?php
     if(count($filtersInputs)>0){
         getMoreFilters($filtersInputs);
     }
-    ?>
 
-    <?php
-//    $i= 0;
-//    foreach($filters as $filterId ) {
-//
-//        $i++;
-//        if($i>4){
-////            console_log($filterId);
-//            getMoreFilters($filters);
-//            break;
-//        }
-//    }
 
 
    function getMoreFilters($filtersInputs){

@@ -34,7 +34,7 @@ $moreFilters = $filter['filters'];
 
             <div class="filterInput">
                 <label class="term-filter-search" for="moreFilters_<?= $i ?>">
-                    <input <?= $checked ?> class="checkbox-filter-search" type="checkbox" data-name="moreFilters" data-value="<?= $title ?>" name=" moreFilters '[]'"  value="<?= $title ?>" id="moreFilters_<?= $i ?>">
+                    <input <?= $checked ?> class="checkbox-filter-search" type="checkbox" data-name="moreFilters" data-value="<?= $filterId ?>" name=" moreFilters '[]'"  value="<?= $title ?>" id="moreFilters_<?= $i ?>">
                     <div class="wrap-term-and-sum" >
                         <span class="term-name"><?= $title ?></span>
                     </div>

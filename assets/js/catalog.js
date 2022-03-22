@@ -4,6 +4,7 @@ $(document).ready(function () {
 
 
     $('.checkbox-filter-search').on('click', function (event) {
+        console.log("event.target : ", event.target)
         let filterData = {};
         let tagArray = [];
         let institutionArray = [];
@@ -89,6 +90,7 @@ $(document).ready(function () {
             let data = {
                 'action': 'filter_by_tag',
                 'type' : 'courses',
+                'lang' : getCookie('openedx-language-preference'),
                 'dataObject': filterData,
             }
 
@@ -117,22 +119,7 @@ $(document).ready(function () {
 // TO DO - change the function to fit the filtered courses data
 function appendFilteredCourses(coursesData) {
     let coursesBox = document.getElementById("coursesBox");
-    // coursesBox.innerHTML= "";
-    // console.log("coursesBox : ",coursesBox);
-    // console.log("coursesdata : ",coursesData);
-    let path = window.location.pathname
 
-    window.location.pathname = window.location.pathname + "filter"
-    // console.log("window.location.pathname : ",window.location.pathname);
-    // console.log("coursesBox : ",coursesData[0].getTemplatepart);
-
-
-    // coursesBox.replaceChildren()
-
-
-
-
-    // coursesBox.removeChild();
 
 
     coursesData.forEach(item =>{
