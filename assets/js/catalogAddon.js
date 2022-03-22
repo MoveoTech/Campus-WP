@@ -17,14 +17,14 @@ $(document).ready(function () {
 
     //click event - targeting each checkbox to open
     $('.wrapEachFiltergroup').on('click', function (event) {
-        console.log("event.targettttt", event.target);
+        // console.log("event.targettttt", event.target);
 
         let popupMenuDiv = event.target.closest(".wrapEachFiltergroup").querySelector(".inputsContainer")
 
         $(popupMenuDiv).toggle();
-        // $(popupMenuDiv).toggleClass('showInputsContainer');
     });
     //end of click event - targeting each checkbox to open
+
 
     // click event - adding more filters
     $('.moreFilters .checkbox-filter-search').on('click', function (event) {
@@ -40,7 +40,10 @@ $(document).ready(function () {
 
             //checking if value is checked
             if(element.checked) {
+                console.log("filterId : ", filterId)
                 groupsArray.push(filterId);
+                console.log("groupsArray : ", groupsArray)
+
                 getFiltersGroups(groupsArray)
             }
 
@@ -64,7 +67,7 @@ $(document).ready(function () {
 
             if(response.success){
                 const responseData = JSON.parse(response.data);
-                console.log("data Ajax : ", responseData)
+                // console.log("data Ajax : ", responseData)
 
                 if(responseData.length > 0) {
                     appendMoreFilters(responseData)
@@ -85,10 +88,12 @@ function appendMoreFilters(filtersData) {
     let container = document.getElementById('moreFiltersWrap');
     // let existFilters = document.getElementsByClassName('term-name');
 
-    filtersData.forEach((filterData,index) => {
+    filtersData.forEach(filterData => {
+
 
         let groupTitle = filterData.groupName;
         let groupFilters = '';
+        let currentLanguage =filterData.language;
 
 
     if(filterData.tagsList) {
@@ -108,13 +113,12 @@ function appendMoreFilters(filtersData) {
         groupFilters = filterData.certificateList;
     }
     else{
+        //remove after
         console.log("else - something nt working")
     }
 
-console.log("groupFilters : ", groupFilters)
 
         let temp = document.createElement("div");
-        // temp.id = item.id + id;
         temp.classList.add('wrapEachFiltergroup');
 
 
@@ -128,10 +132,20 @@ console.log("groupFilters : ", groupFilters)
                 '<div class="inputsContainer">';
 
         let middleTempPart;
+
             groupFilters.forEach(element => {
+
                 let id = element.id;
                 let name = element.name;
                 let checked = '';
+
+                if(element.english_name && currentLanguage == 'en' ) {
+                    name = element.english_name;
+                }
+                if(element.arabic_name && currentLanguage == 'ar'){
+                        name = element.arabic_name;
+                    }
+
 
                 middleTempPart =
                     '<div class="filterInput">'+
@@ -147,8 +161,6 @@ console.log("groupFilters : ", groupFilters)
         temp.innerHTML = startTempPart + middleTempPart + endTempPart;
 
 
-
-
         container.append(temp);
 
 
@@ -158,6 +170,7 @@ console.log("groupFilters : ", groupFilters)
     })
 
 }
+//end of function appendMoreFilters
 
 
 
