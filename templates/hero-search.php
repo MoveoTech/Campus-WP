@@ -1,11 +1,7 @@
-
-<form role="search" method="get" class="hero-search-form" action="<?= esc_url(home_url('/')); ?>" novalidate>
+<form role="search" class="hero-search-form" action="<?= esc_url(home_url('/new-courses')); ?>" novalidate>
     <label class="sr-only"><?php _e('Search for:', 'single_corse'); ?></label>
     <div class="input-group group-search-form">
-        <input type="search" value="<?= get_search_query(); ?>" name="s" class="search-field form-control" placeholder="<?php echo hero_search_placeholder(); ?>" aria-required="true">
-        <?php /* if(isset($_GET['termid'])){ ?>
-            <input type="hidden" name="termid" value="<?= fixXSS($_GET['termid']); ?>"  placeholder="<?php _e('Search Course', 'single_corse'); ?>">
-        <?php } */ ?>
+        <input type="search" value="<?= get_search_query(); ?>" name="text_s" class="search-field form-control" placeholder="<?php echo hero_search_placeholder(); ?>" aria-required="true">
         <span class="input-group-btn">
       <button type="submit" class="search-submit"><?php _e('Search', 'single_corse'); ?></button>
     </span>

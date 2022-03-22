@@ -25,7 +25,7 @@ $count = count($tags);
 
         <div class="wrap-filter-search">
             <label class="term-filter-search" for="<?= $tagId ?>">
-                <input <?= $checked ?> class="checkbox-filter-search" type="checkbox" data-name='tag' data-value="<?= $tagId ?>" name="tag_name '[]'" value="<?= $tag_name ?>" id="<?= $tagId ?>"/>
+                <input <?= $checked ?> class="checkbox-filter-search" type="checkbox" data-name='tag' data-group='<?= $title ?>' data-value="<?= $tagId ?>" name="tag_name '[]'" value="<?= $tag_name ?>" id="<?= $tagId ?>"/>
                 <div class="wrap-term-and-sum" >
                     <span class="term-name"><?= $tag_name ?></span>
                     <span class="sum">(<?= $count ?>)</span>

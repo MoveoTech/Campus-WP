@@ -9,7 +9,7 @@ if(empty($filter) || empty($filter['title']) || $filter['title'] == '' || empty(
 global $get_params;
 
 $academic_institutions_array = $filter['academic_institutions'];
-$title = $filter['title'];
+$filter_title = $filter['title'];
 $academic_institutions = pods('academic_institution', podsFilterParams($academic_institutions_array))->data();
 $choose_str = __('Choose Institution', 'single_corse');
 ?>
@@ -20,7 +20,7 @@ $choose_str = __('Choose Institution', 'single_corse');
     <p class="filter-title-mobile"><?= __('Filter Courses', 'single_corse') ?></p>
 
     <div class="wrap-terms-group wrap-terms-institution">
-        <h2 class="search-page-tax-name"><?= $title ?></h2>
+        <h2 class="search-page-tax-name"><?= $filter_title ?></h2>
 
         <select multiple class="sr-only selected-academic" name="academic_select[]" aria-hidden="true" tabindex="-1">
             <option><?= $choose_str ?></option>
@@ -56,7 +56,7 @@ $choose_str = __('Choose Institution', 'single_corse');
                 ?>
                 <div class="wrap-filter-search">
                     <label class="term-filter-search" for="institution_<?= $ID ?>">
-                        <input <?= $checked ?> class="checkbox-filter-search" type="checkbox" data-name="institution" data-value="<?= $ID ?>" value="<?= $title ?>" id="institution_<?= $ID ?>">
+                        <input <?= $checked ?> class="checkbox-filter-search" type="checkbox" data-name="institution" data-group='<?= $filter_title ?>' data-value="<?= $ID ?>" value="<?= $title ?>" id="institution_<?= $ID ?>">
                         <div class="wrap-term-and-sum">
                             <span class="term-name"><?= $title ?></span>
                         </div>

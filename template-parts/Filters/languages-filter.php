@@ -33,7 +33,7 @@ $count = count($languages);
 
             <div class="wrap-filter-search">
                 <label class="term-filter-search" for="language_<?= $i ?>">
-                    <input <?= $checked ?> class="checkbox-filter-search" type="checkbox" data-name='language' data-value="<?= $language ?>" name=" language '[]'" value="<?= $language ?>" id="language_<?= $i ?>"/>
+                    <input <?= $checked ?> class="checkbox-filter-search" type="checkbox" data-name='language' data-group='<?= $title ?>' data-value="<?= $language ?>" name=" language '[]'" value="<?= $language ?>" id="language_<?= $i ?>"/>
                     <div class="wrap-term-and-sum" >
                         <span class="term-name"><?= $language ?></span>
                         <span class="sum">(<?= $count ?>)</span>

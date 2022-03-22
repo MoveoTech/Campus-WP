@@ -1017,7 +1017,6 @@ function crb_insert_attachment_from_url( $url, $post_id = null ) {
 
 }
 
-
 //03/06/2020 new version popups
 
 add_action( 'site_popups', function () {
@@ -1081,7 +1080,6 @@ function get_day_in_week( $day_num ) {
 }
 
 add_filter( 'auto_update_plugin', '__return_false' );
-
 
 function get_course_strtotime( $date_str ) {
 
@@ -1158,6 +1156,7 @@ function orderByNewestLanguage() {
     }
     return $text;
 }
+
 function orderByNameLanguage() {
     global $sitepress;
     $current = $sitepress->get_current_language();
@@ -1170,6 +1169,7 @@ function orderByNameLanguage() {
     }
     return $text;
 }
+
 function orderByPopularityLanguage() {
     global $sitepress;
     $current = $sitepress->get_current_language();
@@ -1182,14 +1182,6 @@ function orderByPopularityLanguage() {
     }
     return $text;
 }
-
-
-//function blackBox() {
-//    return [
-//        'limit'   => 27,
-//        'orderBy' => 't.order DESC',
-//    ];
-//}
 
 function more_courses_text($carousel) {
     global $sitepress;
@@ -1246,7 +1238,6 @@ function getFieldByLanguageFromString($strField, $lang)
 
 }
 
-
 function disallow_posts_with_same_title($messages) {
 
     global $post;
@@ -1283,7 +1274,6 @@ function disallow_posts_with_same_title($messages) {
 
 add_action('post_updated_messages', 'disallow_posts_with_same_title');
 
-
 // Remove Stripes row actions
 function remove_row_actions_post( $actions ){
     if( get_post_type() === 'stripes' )
@@ -1291,7 +1281,6 @@ function remove_row_actions_post( $actions ){
 
 }
 add_filter( 'post_row_actions', 'remove_row_actions_post', 10, 1 );
-
 
 // Remove ability to trash Stripes
 function my_custom_admin_styles() {
@@ -1322,4 +1311,139 @@ function console_log($output, $with_script_tags = true) {
         $js_code = '<script>' . $js_code . '</script>';
     }
     echo $js_code;
+}
+
+function getPodsFilterParams($filters) {
+    if(!$filters) return null;
+
+    $sql = array();
+
+    if($filters['search']['text_s']){
+            $search_value = $filters['search']['text_s'][0];
+            $sqlSearch = array();
+
+            $sqlSearch[] = ' t.name LIKE "%'.$search_value.'%" ';
+            $sqlSearch[] = ' t.english_name LIKE "%'.$search_value.'%" ';
+            $sqlSearch[] = ' t.arabic_name LIKE "%'.$search_value.'%" ';
+            $sqlSearch[] = ' t.description LIKE "%'.$search_value.'%" ';
+            $sqlSearch[] = ' t.course_products LIKE "%'.$search_value.'%" ';
+            $sqlSearch[] = ' t.alternative_names LIKE "%'.$search_value.'%" ';
+
+            $searchQuery = "(" . implode('OR', $sqlSearch) . ")";
+            $sql[] = $searchQuery;
+        }
+
+    if($filters['search']['language']){
+        $params_items = $filters['search']['language'];
+        $sqlLang = array();
+
+        foreach($params_items as $value) {
+            $sqlLang[] = ' t.language LIKE "%'.$value.'%" ';
+        };
+
+        $langQuery = "(" . implode('OR', $sqlLang) . ")";
+        $sql[] = $langQuery;
+    };
+
+    if($filters['search']['certificate']){
+
+        $params_items = $filters['search']['certificate'];
+        $sqlCert = array();
+
+        foreach($params_items as $value) {
+            $sqlCert[] = ' t.certificate LIKE "%'.$value.'%" ';
+        }
+
+        $certQuery = "(" . implode('OR', $sqlCert) . ")";
+        $sql[] = $certQuery;
+    };
+
+    if($filters['search']['institution']){
+
+        $params_items = $filters['search']['institution'];
+        $sqlInst = array();
+
+        foreach($params_items as $value) {
+            $sqlInst[] = ' academic_institution.name LIKE "%'.$value.'%" ';
+            $sqlInst[] = ' academic_institution.english_name LIKE "%'.$value.'%" ';
+            $sqlInst[] = ' academic_institution.arabic_name LIKE "%'.$value.'%" ';
+        }
+
+        $instQuery ="(" . implode('OR', $sqlInst) . ")";
+        $sql[] = $instQuery;
+    };
+
+    if($filters['search']['tags']){
+
+        $tags_object = $filters['search']['tags'];
+        $sqlTags = array();
+
+        foreach($tags_object as $group) {
+            $sqlGroupTags = array();
+
+            foreach ($group  as $tag){
+                $sqlGroupTags[] = ' tags.name LIKE "%'.$tag.'%" ';
+                $sqlGroupTags[] = ' tags.english_name LIKE "%'.$tag.'%" ';
+                $sqlGroupTags[] = ' tags.arabic_name LIKE "%'.$tag.'%" ';
+            }
+
+            $sqlTags[] = implode('OR', $sqlGroupTags);
+        }
+
+        $tagsQuery ="(" . implode('AND', $sqlTags) . ")";
+        $sql[] = $tagsQuery;
+    };
+
+    /** GET ONLY COURSES THAT ARE NOT HIDDEN */
+    $sql[] = '(t.hide_in_site=0)';
+
+    $where = implode(" AND ", $sql);
+    $order = "t.order DESC";
+
+    $params = array(
+        'limit' => -1,
+        'where'=>$where,
+        'orderby'=> $order
+    );
+    return $params;
+}
+
+function getFiltersArray($paramsArray) {
+    if($paramsArray) {
+
+        foreach ($paramsArray as $key => $value) {
+
+            /** Check if the params from url is tags and put it in different arrays */
+            if(str_contains($key, 'tags_')) {
+                $key = substr($key,5);
+
+                if($tags[$key]){
+                    array_push($tags[$key], $value);
+
+                } else {
+                    $tags[$key] = [];
+                    array_push($tags[$key], $value);
+                }
+
+                $tags[$key] = explode(",", $tags[$key][0]);
+                $obj['tags'] = $tags;
+
+            } else {
+
+                if($obj[$key]){
+                    array_push($obj[$key], $value);
+
+                } else {
+                    $obj[$key] = [];
+                    array_push($obj[$key], $value);
+                }
+
+                $obj[$key] = explode(",", $obj[$key][0]);
+            }
+        }
+
+        $filters['search'] = $obj;
+
+        return $filters;
+    }
 }

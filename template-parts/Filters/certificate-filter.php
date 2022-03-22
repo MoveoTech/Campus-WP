@@ -45,7 +45,7 @@ $count = count($certificates);
 
             <div class="wrap-filter-search" >
                 <label class="term-filter-search" for="certificate_<?= $i ?>">
-                    <input <?= $checked ?> class="checkbox-filter-search" type="checkbox" data-name="certificate" data-value="<?= $certificate ?>" name=" $certificate '[]'"  value="<?= $certificate ?>" id="certificate_<?= $i ?>">
+                    <input <?= $checked ?> class="checkbox-filter-search" type="checkbox" data-name="certificate" data-group='<?= $title ?>' data-value="<?= $certificate ?>" name=" $certificate '[]'"  value="<?= $certificate ?>" id="certificate_<?= $i ?>">
 
                     <div class="wrap-term-and-sum" >
                         <span class="term-name"><?= $certificate ?></span>
