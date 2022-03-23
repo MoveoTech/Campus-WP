@@ -50,18 +50,18 @@ $current_lang = $sitepress->get_current_language();
            ));
    }
     ?>
-    <div class="wrapEachFilterButton">
+    <div class="wrapEachFilterButton" id="resetButton">
         <p class="resetFilterButton filterGroupTitle"><?= ResetFiltersLanguage(); ?></p>
     </div>
 </div>
 
-    <div>
-        <select>
-            <option name="orderByPopularity"><?php echo orderByPopularityLanguage() ?></option>
-            <option name="orderByName"><?php echo orderByNameLanguage() ?></option>
-            <option name="orderByNewest"><?php echo orderByNewestLanguage() ?></option>
-        </select>
-
-    </div>
+<!--    <div>-->
+<!--        <select>-->
+<!--            <option name="orderByPopularity">--><?php //echo orderByPopularityLanguage() ?><!--</option>-->
+<!--            <option name="orderByName">--><?php //echo orderByNameLanguage() ?><!--</option>-->
+<!--            <option name="orderByNewest">--><?php //echo orderByNewestLanguage() ?><!--</option>-->
+<!--        </select>-->
+<!---->
+<!--    </div>-->
 
 <!-- END FILTERS SECTION .-->

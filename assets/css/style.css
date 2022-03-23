@@ -19768,7 +19768,6 @@ body .course-item-hover {
       z-index: 3; }
 
 .inputsContainer {
-  border: 1px solid blue;
   /* Auto layout */
   flex-direction: column;
   align-items: flex-end;
@@ -19785,7 +19784,6 @@ body .course-item-hover {
   box-shadow: 0px 5px 15px rgba(40, 40, 40, 0.2);
   border-radius: 10px; }
   .inputsContainer .filterInput {
-    border: 1px solid purple;
     /* Auto layout */
     padding: 10px 15px 10px 20px;
     position: static;
@@ -19886,8 +19884,7 @@ body .course-item-hover {
     /* Inside auto layout */
     flex: none;
     order: 0;
-    flex-grow: 0;
-    border: 2px solid green; }
+    flex-grow: 0; }
     .filtersSection .allFiltersWrapDiv .checkboxFiltersWrap {
       /* Auto layout */
       display: flex;
@@ -19906,7 +19903,6 @@ body .course-item-hover {
         top: 0; }
       .filtersSection .allFiltersWrapDiv .checkboxFiltersWrap .wrapEachFilterTag, .filtersSection .allFiltersWrapDiv .checkboxFiltersWrap .wrapEachFilterButton {
         /* Auto layout */
-        border: 1px solid red;
         display: flex;
         flex-direction: row;
         justify-content: space-between;
@@ -19974,3 +19970,12 @@ body .course-item-hover {
 #groupFiltersContainer {
   display: flex;
   flex-direction: row; }
+
+#resetButton .resetFilterButton {
+  font-family: 'Assistant';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 18px;
+  text-align: right;
+  color: #589CA5; }
