@@ -28,10 +28,14 @@ $(document).ready(function () {
 
         /**Getting targeted input */
         let filterId = $(event.target).data('value');
+        let filterGroupName = event.target.value;
+        // console.log("event.target.value : ", event.target.value)
 
         /** If element checked appending it to menu, else - remove it */
         if(event.target.checked){
-            getFiltersGroups(filterId)
+            appendGroupFilter(filterGroupName, filterId)
+            openCheckboxEvent()
+            // getFiltersGroups(filterId)
         } else {
             let filterToRemove = document.getElementsByClassName(filterId)[0];
             filterToRemove.remove()
@@ -55,7 +59,6 @@ function getFiltersGroups(filterId) {
             const responseData = JSON.parse(response.data);
             appendMoreFilters(responseData)
             /** Calling events - targeting each checkbox to open & filtering inputs **/
-            openCheckboxEvent();
             filterByTagEvent()
         }
     })
@@ -64,15 +67,15 @@ function getFiltersGroups(filterId) {
 
 
 
-/** Appending filter group **/
+/** Appending filter tags **/
 function appendMoreFilters(filterData) {
 
     /**looping each filter group and appending it to the filters menu */
-    let vector = $('.filterVector').attr('src');
+    // let vector = $('.filterVector').attr('src');
 
-    let container = document.getElementById('groupFiltersContainer');
+    let container = document.getElementsByClassName('inputsContainer')[0];
 
-    let groupTitle = filterData.groupName;
+    // let groupTitle = filterData.groupName;
     let groupFilters = '';
     let currentLanguage =filterData.language;
     let filterId = filterData.filterId
@@ -101,18 +104,7 @@ function appendMoreFilters(filterData) {
     temp.classList.add(filterId);
 
 
-    let startTempPart =
-        '<div class="wrapEachFilterTag">'+
-        '<div class="buttonWrap">'+
-        '<p class="filterGroupTitle">'+ groupTitle +' </p>'+
-        '<img class="filterVector" src="'+vector+'"/>'+
-        '</div>'+
-        '</div>'+
-        '<div class="inputsContainer">';
-
-    let middleTempPart;
-
-    groupFilters.forEach(element => {
+        groupFilters.forEach(element => {
 
         let id = element.id;
         let name = element.name;
@@ -126,7 +118,7 @@ function appendMoreFilters(filterData) {
         }
 
 
-        middleTempPart =
+            temp.innerHTML =
             '<div class="filterInput">'+
             '<label class="filterTagLabel" for="'+id+'">'+
             '<input'+ checked +' class="checkbox-filter-search" type="checkbox" data-name="institution" data-value="'+id+'" value="'+name+'" id="'+id+'">'+
@@ -136,11 +128,36 @@ function appendMoreFilters(filterData) {
             '</label>'+
             '</div>';
     })
-    let endTempPart = '</div>';
-    temp.innerHTML = startTempPart + middleTempPart + endTempPart;
+
 
     container.append(temp);
 
+}
+/** End of function appendMoreFilters */
+
+
+/** Appending filter group **/
+function appendGroupFilter(filterGroupName, filterId) {
+
+    let vector = $('.filterVector').attr('src');
+    let container = document.getElementById('groupFiltersContainer');
+    let groupTitle = filterGroupName;
+
+    let temp = document.createElement("div");
+    temp.classList.add('wrapEachFiltergroup');
+    temp.classList.add('extraFilter');
+    temp.classList.add(filterId);
+    temp.innerHTML =
+        '<div class="wrapEachFilterTag">'+
+        '<div class="buttonWrap">'+
+        '<p id="'+filterId+'" class="filterGroupTitle">'+ groupTitle +' </p>'+
+        '<img class="filterVector" src="'+vector+'"/>'+
+        '</div>'+
+        '</div>'+
+        '<div class="inputsContainer">'+
+        '</div>';
+
+    container.append(temp);
 }
 /** End of function appendMoreFilters */
 
@@ -151,10 +168,24 @@ function openCheckboxEvent() {
     //click event - targeting each checkbox to open
     $('.wrapEachFiltergroup').on('click', function (event) {
 
+        let extraFilterGroup = event.target.closest(".wrapEachFiltergroup");
 
+        // console.log(box);
         let popupMenuDiv = event.target.closest(".wrapEachFiltergroup").querySelector(".inputsContainer")
 
-        $(popupMenuDiv).toggle();
+        if($(extraFilterGroup).hasClass('extraFilter')){
+            let extraFilterid = $(extraFilterGroup).find(".filterGroupTitle")[0].id;
+            console.log("extraFiltervalue", extraFiltervalue);
+            getFiltersGroups(extraFilterid)
+
+            // $(popupMenuDiv).toggle();
+        } else{
+            $(popupMenuDiv).toggle();
+        }
+
+
+
+
     });
 }
 /** End of function openCheckboxEvent */

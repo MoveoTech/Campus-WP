@@ -6,7 +6,7 @@ $filter = wp_parse_args(
 if(empty($filter) || empty($filter['title']) || $filter['title'] == '' || empty($filter['academic_institutions']) || count($filter['academic_institutions']) < 1)
     return;
 
-global $get_params;
+global $sitepress, $get_params;
 
 $academic_institutions_array = $filter['academic_institutions'];
 $title = $filter['title'];
@@ -22,11 +22,13 @@ $choose_str = __('Choose Institution', 'single_corse');
             <img class="filterVector" src="<?php echo get_bloginfo('stylesheet_directory'). '/assets/images/vector-black.svg'?>"/>
         </div>
     </div>
-    <div class="inputsContainer" id="org">
+    <div class="inputsContainer">
 
             <?php
             foreach ($academic_institutions as $single_academic_institution){
-                $title = $single_academic_institution->name;
+                $title = getFieldByLanguage($single_academic_institution->name, $single_academic_institution->english_name, $single_academic_institution->arabic_name, $sitepress->get_current_language());
+
+//                $title = $single_academic_institution->name;
                 $ID = $single_academic_institution->id;
                 $checked = $selected = '';
                 if(in_array($ID, $get_params['institution'])){

@@ -19735,9 +19735,21 @@ body .course-item-hover {
     position: absolute;
     left: 0;
     top: 0; }
+  .catalog-banner .catalog-banner-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; }
+    .catalog-banner .catalog-banner-content .catalog-header {
+      font-family: 'Assistant';
+      font-style: normal;
+      font-weight: 600;
+      font-size: 32px;
+      line-height: 42px;
+      text-align: center; }
   .catalog-banner .hero-search-form {
     z-index: 2;
-    display: inline-block; }
+    display: inline-block;
+    margin: 15px 0 18px 0; }
     .catalog-banner .hero-search-form .search-field.form-control {
       height: 55px;
       width: 375px;
@@ -19776,7 +19788,7 @@ body .course-item-hover {
   max-height: 300px;
   overflow-y: auto;
   background: #FFFFFF;
-  box-shadow: 0px 5px 15px rgba(40, 40, 40, 0.2);
+  box-shadow: 0 5px 15px rgba(40, 40, 40, 0.2);
   border-radius: 10px;
   margin: 0 5px 0 0;
   padding: 0 15px 0 0; }
@@ -19786,17 +19798,17 @@ body .course-item-hover {
     box-sizing: border-box;
     margin: 10px 0; }
     .inputsContainer .filterInput .filterTagLabel {
-      /* Auto layout */
       display: flex;
       align-items: center;
       padding: 0;
-      margin: 0;
-      /* Inside auto layout */ }
+      margin: 0; }
       .inputsContainer .filterInput .filterTagLabel .tagNameWrap {
-        padding: 0px;
+        display: flex;
+        padding: 0;
         text-align: unset;
         width: 100%;
-        cursor: pointer; }
+        cursor: pointer;
+        align-items: center; }
         .inputsContainer .filterInput .filterTagLabel .tagNameWrap::before {
           width: 20px;
           height: 20px;
@@ -19804,6 +19816,8 @@ body .course-item-hover {
           border-radius: 5px;
           line-height: 15px;
           font-size: 11px; }
+        .inputsContainer .filterInput .filterTagLabel .tagNameWrap::after {
+          width: 0; }
         .inputsContainer .filterInput .filterTagLabel .tagNameWrap .term-name {
           font-family: 'Assistant';
           font-style: normal;
@@ -19812,46 +19826,41 @@ body .course-item-hover {
           color: #333433;
           text-align: right;
           width: 200px;
-          line-height: 13px; }
+          line-height: 13px;
+          max-width: unset; }
 
 .filtersSection {
-  /* Auto layout */
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
   align-items: center;
-  padding: 0px;
+  padding: 0;
   position: static;
   height: 38px;
-  left: 0px;
-  top: 0px;
-  /* Inside auto layout */
+  left: 0;
+  top: 0;
   flex: none;
   order: 0;
   flex-grow: 0;
-  margin: 15px 0px; }
+  margin: 15px 0; }
   .filtersSection .allFiltersWrapDiv {
-    /* Auto layout */
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
     align-items: center;
-    padding: 0px;
-    top: 0px;
-    /* Inside auto layout */
+    padding: 0;
+    top: 0;
     flex: none;
     order: 0;
     flex-grow: 0; }
     .filtersSection .allFiltersWrapDiv .checkboxFiltersWrap {
-      /* Auto layout */
       display: flex;
       flex-direction: row;
       justify-content: flex-end;
       padding: 0px;
       position: relative;
       height: 38px;
-      top: 0px;
-      /* Inside auto layout */
+      top: 0;
       flex: none;
       flex-grow: 0;
       margin: 0px 15px; }
@@ -19861,19 +19870,15 @@ body .course-item-hover {
         display: flex;
         align-items: center;
         height: 38px;
-        /* Main/Early Grey */
         background: #F9F9F9;
         border-radius: 10px;
-        /* Inside auto layout */
         margin: 0 5px; }
         .filtersSection .allFiltersWrapDiv .checkboxFiltersWrap .wrapEachFilterTag .buttonWrap, .filtersSection .allFiltersWrapDiv .checkboxFiltersWrap .wrapEachFilterButton .buttonWrap {
-          /* Auto layout */
           display: flex;
           flex-direction: row;
           align-items: center;
           border-radius: 22px;
-          /* Inside auto layout */
-          margin: 0px 10px; }
+          margin: 0 10px; }
       .filtersSection .allFiltersWrapDiv .checkboxFiltersWrap .filterGroupTitle {
         font-family: 'Assistant';
         font-style: normal;
@@ -19881,13 +19886,10 @@ body .course-item-hover {
         font-size: 14px;
         line-height: 18px;
         text-align: right;
-        /* Main/Dark */
         color: #333433;
-        /* Inside auto layout */
         margin: auto; }
       .filtersSection .allFiltersWrapDiv .checkboxFiltersWrap .filterVector {
-        /* Inside auto layout */
-        margin: 0px;
+        margin: 0;
         margin-right: 7px; }
 
 #groupFiltersContainer {

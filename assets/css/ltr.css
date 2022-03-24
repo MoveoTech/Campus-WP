@@ -994,3 +994,44 @@ footer .footer-section .inners-footer-items {
   text-align: left !important; }
 
 /* New Catalog page */
+/* banner */
+.catalog-banner .hero-search-form .search-field.form-control {
+  padding-left: 25px; }
+
+.catalog-banner .hero-search-form .search-submit {
+  left: unset;
+  right: 5px; }
+
+/* filter by tag menu */
+.filtersSection .allFiltersWrapDiv .checkboxFiltersWrap .filterVector {
+  margin: 0 0 0 7px; }
+
+/* popup menu - filters */
+.inputsContainer {
+  margin: 0 0 0 5px;
+  padding: 0 0 0 15px; }
+  .inputsContainer .filterInput {
+    background: #FFFFFF;
+    border-radius: 10px;
+    box-sizing: border-box;
+    margin: 10px 0; }
+    .inputsContainer .filterInput .filterTagLabel {
+      display: flex;
+      align-items: center;
+      padding: 0;
+      margin: 0; }
+      .inputsContainer .filterInput .filterTagLabel .tagNameWrap {
+        padding: 0;
+        text-align: unset;
+        width: 100%;
+        cursor: pointer; }
+        .inputsContainer .filterInput .filterTagLabel .tagNameWrap::before {
+          width: 20px;
+          height: 20px;
+          border: 1px solid rgba(0, 0, 0, 0.1);
+          border-radius: 5px;
+          line-height: 15px;
+          font-size: 11px; }
+        .inputsContainer .filterInput .filterTagLabel .tagNameWrap .term-name {
+          text-align: left;
+          padding-left: 6px; }
