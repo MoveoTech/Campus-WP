@@ -65,33 +65,33 @@ function set_user_default_language() {
 
     $get_language = $_COOKIE['openedx-language-preference'];
     $url = home_url('/');
-
     $current_url = home_url($_SERVER['REQUEST_URI']);
+
     if (is_admin() || strpos($current_url, "wp-") != false)
         return;
 
     if($get_language == 'ar') {
         if(strpos($url, "en") != false)
-            redirect(str_replace("en", "ar", $url));
+            redirect(str_replace("en", "ar", $current_url));
 
         if(strpos($url, "ar") == false)
-            redirect(home_url('/'). $get_language);
+            redirect(str_replace($url, $url . $get_language . '/' , $current_url));
     }
 
     if($get_language == 'en') {
         if(strpos($url, "ar") != false)
-            redirect(str_replace("ar", "en", $url));
+            redirect(str_replace("ar", "en", $current_url));
 
-        if(strpos($url, "en") == false)
-            redirect(home_url('/'). $get_language);
+        if(strpos($current_url, "en/") == false)
+            redirect(str_replace($url, $url . $get_language . '/' , $current_url));
     }
 
     if($get_language == 'he') {
         if(strpos($url, "ar") != false)
-            redirect(str_replace("ar", "", $url));
+            redirect(str_replace("ar", "", $current_url));
 
         if(strpos($url, "en") != false)
-            redirect(str_replace("en", "", $url));
+            redirect(str_replace("en", "", $current_url));
     }
 
 }
