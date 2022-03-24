@@ -38,9 +38,9 @@ $title = $filter['title'];
             ?>
 
             <div class="filterInput">
-                <label class="term-filter-search" for="certificate_<?= $i ?>">
+                <label class="filterTagLabel" for="certificate_<?= $i ?>">
                     <input <?= $checked ?> class="checkbox-filter-search" type="checkbox" data-name="certificate" data-value="<?= $certificate ?>" name=" $certificate '[]'"  value="<?= $certificate ?>" id="certificate_<?= $i ?>">
-                    <div class="wrap-term-and-sum" >
+                    <div class="wrap-term-and-sum tagNameWrap" >
                         <span class="term-name"><?= $certificate ?></span>
                     </div>
                 </label>

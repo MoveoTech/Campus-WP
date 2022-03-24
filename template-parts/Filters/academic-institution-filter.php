@@ -22,7 +22,7 @@ $choose_str = __('Choose Institution', 'single_corse');
             <img class="filterVector" src="<?php echo get_bloginfo('stylesheet_directory'). '/assets/images/vector-black.svg'?>"/>
         </div>
     </div>
-    <div class="inputsContainer">
+    <div class="inputsContainer" id="org">
 
             <?php
             foreach ($academic_institutions as $single_academic_institution){
@@ -36,9 +36,9 @@ $choose_str = __('Choose Institution', 'single_corse');
                 ?>
 
                 <div class="filterInput">
-                    <label class="term-filter-search" for="institution_<?= $ID ?>">
+                    <label class="filterTagLabel" for="institution_<?= $ID ?>">
                         <input <?= $checked ?> class="checkbox-filter-search" type="checkbox" data-name="institution" data-value="<?= $ID ?>" value="<?= $title ?>" id="institution_<?= $ID ?>">
-                        <div class="wrap-term-and-sum">
+                        <div class="wrap-term-and-sum tagNameWrap">
                             <span class="term-name"><?= $title ?></span>
                         </div>
                     </label>

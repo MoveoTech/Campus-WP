@@ -19768,94 +19768,51 @@ body .course-item-hover {
       z-index: 3; }
 
 .inputsContainer {
-  /* Auto layout */
-  flex-direction: column;
-  align-items: flex-end;
-  padding: 0px;
+  display: none;
   z-index: 5;
   position: absolute;
-  margin: 10px 10px;
-  left: 0px;
-  right: 0px;
-  display: none;
-  /* White */
+  top: 44.5px;
+  max-width: 200px;
+  max-height: 300px;
+  overflow-y: auto;
   background: #FFFFFF;
-  /* Fields/Shadow */
   box-shadow: 0px 5px 15px rgba(40, 40, 40, 0.2);
-  border-radius: 10px; }
+  border-radius: 10px;
+  margin: 0 5px 0 0;
+  padding: 0 15px 0 0; }
   .inputsContainer .filterInput {
-    /* Auto layout */
-    padding: 10px 15px 10px 20px;
-    position: static;
-    width: 173px;
-    height: 40px;
-    left: 28px;
-    top: 168px;
     background: #FFFFFF;
     border-radius: 10px;
     box-sizing: border-box;
-    /* Inside auto layout */
-    flex: none;
-    order: 4;
-    flex-grow: 0;
-    margin: 2px 0px; }
-    .inputsContainer .filterInput .term-filter-search {
+    margin: 10px 0; }
+    .inputsContainer .filterInput .filterTagLabel {
       /* Auto layout */
       display: flex;
       align-items: center;
-      padding: 0px;
-      position: static;
-      width: 138px;
-      height: 20px;
-      left: 20px;
-      top: 10px;
-      /* Inside auto layout */
-      flex: none;
-      order: 0;
-      flex-grow: 0;
-      margin: 0px 0px; }
-      .inputsContainer .filterInput .term-filter-search .checkbox-filter-search {
-        /* Auto layout */
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-end;
-        align-items: center;
-        padding: 2px 10px;
-        position: static;
-        left: 85.51%;
-        right: 0%;
-        top: 0%;
-        bottom: 0%;
-        /* Outline Tags */
-        border: 1px solid rgba(0, 0, 0, 0.1);
-        box-sizing: border-box;
-        border-radius: 5px;
-        /* Inside auto layout */
-        flex: none;
-        order: 1;
-        flex-grow: 0;
-        margin: 0px 5px; }
-      .inputsContainer .filterInput .term-filter-search .wrap-term-and-sum {
-        /* Auto layout */
-        display: flex;
+      padding: 0;
+      margin: 0;
+      /* Inside auto layout */ }
+      .inputsContainer .filterInput .filterTagLabel .tagNameWrap {
         padding: 0px;
-        align-items: center;
-        /* Inside auto layout */
-        flex: none;
-        order: 0;
-        flex-grow: 0;
-        margin: 0px 5px; }
-        .inputsContainer .filterInput .term-filter-search .wrap-term-and-sum .term-name {
+        text-align: unset;
+        width: 100%;
+        cursor: pointer; }
+        .inputsContainer .filterInput .filterTagLabel .tagNameWrap::before {
+          width: 20px;
+          height: 20px;
+          border: 1px solid rgba(0, 0, 0, 0.1);
+          border-radius: 5px;
+          line-height: 15px;
+          font-size: 11px; }
+        .inputsContainer .filterInput .filterTagLabel .tagNameWrap .term-name {
           font-family: 'Assistant';
           font-style: normal;
           font-weight: 400;
           font-size: 14px;
-          line-height: 18px;
           color: #333433;
-          flex: none;
-          order: 0;
-          flex-grow: 0;
-          margin: 0px 0px; }
+          text-align: right;
+          width: 200px;
+          line-height: 13px; }
 
 .filtersSection {
   /* Auto layout */
@@ -19899,49 +19856,25 @@ body .course-item-hover {
       flex-grow: 0;
       margin: 0px 15px; }
       .filtersSection .allFiltersWrapDiv .checkboxFiltersWrap .wrapEachFiltergroup {
-        position: relative;
-        top: 0; }
+        position: relative; }
       .filtersSection .allFiltersWrapDiv .checkboxFiltersWrap .wrapEachFilterTag, .filtersSection .allFiltersWrapDiv .checkboxFiltersWrap .wrapEachFilterButton {
-        /* Auto layout */
         display: flex;
-        flex-direction: row;
-        justify-content: space-between;
         align-items: center;
-        padding: 5px;
-        position: relative;
         height: 38px;
-        top: 0px;
         /* Main/Early Grey */
         background: #F9F9F9;
         border-radius: 10px;
         /* Inside auto layout */
-        flex: none;
-        order: 6;
-        flex-grow: 0;
-        margin: 0px 10px; }
+        margin: 0 5px; }
         .filtersSection .allFiltersWrapDiv .checkboxFiltersWrap .wrapEachFilterTag .buttonWrap, .filtersSection .allFiltersWrapDiv .checkboxFiltersWrap .wrapEachFilterButton .buttonWrap {
           /* Auto layout */
           display: flex;
           flex-direction: row;
-          justify-content: flex-end;
           align-items: center;
-          padding: 5px 5px 5px 7px;
-          position: static;
-          height: 28px;
-          left: 5px;
-          top: 5px;
           border-radius: 22px;
           /* Inside auto layout */
-          flex: none;
-          order: 0;
-          flex-grow: 0;
-          margin: 0px 20px; }
+          margin: 0px 10px; }
       .filtersSection .allFiltersWrapDiv .checkboxFiltersWrap .filterGroupTitle {
-        position: static;
-        left: 41.18%;
-        right: 9.8%;
-        top: 17.86%;
-        bottom: 17.86%;
         font-family: 'Assistant';
         font-style: normal;
         font-weight: 400;
@@ -19951,31 +19884,23 @@ body .course-item-hover {
         /* Main/Dark */
         color: #333433;
         /* Inside auto layout */
-        flex: none;
-        order: 1;
-        flex-grow: 0;
-        margin: 0px 7px; }
+        margin: auto; }
       .filtersSection .allFiltersWrapDiv .checkboxFiltersWrap .filterVector {
-        position: static;
-        left: 13.73%;
-        right: 72.55%;
-        top: 42.86%;
-        bottom: 42.86%;
         /* Inside auto layout */
-        flex: none;
-        order: 0;
-        flex-grow: 0;
-        margin: 0px 7px; }
+        margin: 0px;
+        margin-right: 7px; }
 
 #groupFiltersContainer {
   display: flex;
   flex-direction: row; }
 
-#resetButton .resetFilterButton {
-  font-family: 'Assistant';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 14px;
-  line-height: 18px;
-  text-align: right;
-  color: #589CA5; }
+#resetButton {
+  background-color: transparent; }
+  #resetButton .resetFilterButton {
+    font-family: 'Assistant';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 18px;
+    text-align: right;
+    color: #589CA5; }

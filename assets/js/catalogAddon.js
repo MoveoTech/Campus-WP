@@ -104,7 +104,7 @@ function appendMoreFilters(filterData) {
     let startTempPart =
         '<div class="wrapEachFilterTag">'+
         '<div class="buttonWrap">'+
-        '<p class="filterGroupTitle">'+ groupTitle +'</p>'+
+        '<p class="filterGroupTitle">'+ groupTitle +' </p>'+
         '<img class="filterVector" src="'+vector+'"/>'+
         '</div>'+
         '</div>'+
@@ -128,9 +128,9 @@ function appendMoreFilters(filterData) {
 
         middleTempPart =
             '<div class="filterInput">'+
-            '<label class="term-filter-search" for="'+id+'">'+
+            '<label class="filterTagLabel" for="'+id+'">'+
             '<input'+ checked +' class="checkbox-filter-search" type="checkbox" data-name="institution" data-value="'+id+'" value="'+name+'" id="'+id+'">'+
-            '<div class="wrap-term-and-sum">'+
+            '<div class="wrap-term-and-sum tagNameWrap">'+
             '<span class="term-name">'+name+'</span>'+
             '</div>'+
             '</label>'+

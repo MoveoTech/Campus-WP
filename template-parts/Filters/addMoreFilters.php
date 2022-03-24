@@ -10,7 +10,10 @@ $moreFilters = $filter['filters'];
 
 <div class="moreFilters wrapEachFiltergroup">
     <div class="wrapEachFilterButton">
-        <p class="filterGroupTitle"><?= addingMoreFiltersLanguage(); ?><img src="<?php echo get_bloginfo('stylesheet_directory'). '/assets/images/plus-sign.svg'?>"/></p>
+        <div class="buttonWrap" >
+        <p class="filterGroupTitle"><?= addingMoreFiltersLanguage(); ?></p>
+        <img class="filterVector" src="<?php echo get_bloginfo('stylesheet_directory'). '/assets/images/plus-sign.svg'?>"/>
+        </div>
     </div>
 
     <div class="inputsContainer" >
@@ -22,9 +25,9 @@ $moreFilters = $filter['filters'];
             ?>
 
             <div class="filterInput">
-                <label class="term-filter-search" for="moreFilters_<?= $i ?>">
+                <label class="filterTagLabel" for="moreFilters_<?= $i ?>">
                     <input <?= $checked ?> class="checkbox-filter-search extraFilterCheckbox" type="checkbox" data-name="moreFilters" data-value="<?= $filterId ?>" name=" moreFilters '[]'"  value="<?= $title ?>" id="moreFilters_<?= $i ?>">
-                    <div class="wrap-term-and-sum" >
+                    <div class="wrap-term-and-sum tagNameWrap" >
                         <span class="term-name"><?= $title ?></span>
                     </div>
                 </label>

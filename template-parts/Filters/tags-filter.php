@@ -28,9 +28,9 @@ $tags = pods('tags',podsFilterParams($tagsArray))->data();
         ?>
 
         <div class="filterInput">
-            <label class="term-filter-search" for="<?= $tagId ?>">
+            <label class="filterTagLabel" for="<?= $tagId ?>">
                 <input <?= $checked ?> class="checkbox-filter-search" type="checkbox" data-name='tag' data-value="<?= $tagId ?>" name="tag_name '[]'" value="<?= $tag_name ?>" id="<?= $tagId ?>"/>
-                <div class="wrap-term-and-sum" >
+                <div class="wrap-term-and-sum tagNameWrap" >
                     <span class="term-name"><?= $tag_name ?></span>
                 </div>
             </label>
