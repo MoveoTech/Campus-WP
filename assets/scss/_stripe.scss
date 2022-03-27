@@ -1135,6 +1135,212 @@ body {
   }
 }
 
+
+
+
+/* catalog */
+
+
+.catalog-courses-stripe {
+  //border:1px solid blue;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: right;
+  margin:auto;
+  //margin: 20px auto 0;
+  //.slick-list {
+  //  width: 100%;
+  //  overflow-x: clip;
+  //  overflow-y: visible;
+  //}
+  //button.slick-button {
+  //  outline: none;
+  //}
+  //grid-template-columns: repeat(4, 1fr)
+  .course-stripe-item {
+    position: relative;
+    max-height: 277px;
+    margin: 0 10px 27px;
+    max-width: 253px;
+    width: 100%;
+    .course-img {
+      position: relative;
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      width: 100%;
+      max-width: 253px;
+      height: 124px;
+      border-radius: 10px;
+      box-shadow: 0 5px 10px rgba(40, 40, 40, 0.2);
+      a {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+      }
+      .info-button {
+        display: none;
+        position: absolute;
+        cursor: pointer;
+        right: 10px;
+        top: 10px;
+        background-image: url("../../assets/images/info-button.png");
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        width: 20px;
+        height: 20px;
+        filter: drop-shadow(0px 5px 10px black);
+      }
+    }
+    .item-content {
+      margin: 10px 3px 7px;
+      h3 {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        height: 58px;
+        font-size: 22px;
+        font-weight: 600;
+        line-height: 29px;
+        text-align: right;
+        -webkit-line-clamp: 2;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        a {
+          color: #000000;
+        }
+      }
+      p {
+        -webkit-font-smoothing: antialiased;
+        height: 21px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        font-size: 16px;
+        font-weight: 300;
+        line-height: 21px;
+        text-align: right;
+        opacity: 50%;
+        margin: 0;
+      }
+    }
+    .tags-div {
+      display: flex;
+      flex-direction: row;
+      justify-content: right;
+      height: 22px;
+      margin: 0 3px;
+      overflow: hidden;
+      @media (max-width: 768px){
+        margin: unset;
+      }
+      span {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        margin-left: 10px;
+        background: #F2F2F2;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        box-sizing: border-box;
+        border-radius: 15px;
+        text-align: center;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 18px;
+        overflow: hidden;
+        p {
+          padding: 2px 10px;
+          white-space: nowrap;
+          overflow: hidden;
+          margin: 0;
+          width: 100%;
+        }
+        @media (max-width: 768px){
+          padding: 2px 5px;
+          margin-left: 5px;
+        }
+      }
+      span.regular-tag {
+        min-width: fit-content;
+        p.regular-tag {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+      }
+      p.ellipsis-text {
+        text-overflow: ellipsis;
+      }
+      .extra-tags {
+        padding: 2px 10px;
+        text-overflow: unset;
+        margin: 0;
+      }
+      .extra-tags-mobile {
+        display: none;
+      }
+    }
+  }
+}
+
+
+
+.catalogWrap{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  border: 1px solid brown;
+.catalogStripeWrap {
+  margin-bottom: 47px;
+  //width:75%;
+  //border: 3px solid orange;
+  //max-width: 1440px;
+  //margin: 0 auto;
+  .catalogStripeContainer {
+    //border: 3px solid red;
+    width: 80%;
+    margin: auto;
+  }
+
+  //.coursesContainer{
+  //  border: 1px solid blue;
+  //
+  //}
+    .catalogStripeHeader {
+        //margin-right: 10px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        //width: 75%;
+        margin: 27px auto;
+      //border: 1px solid purple;
+
+      h1 {
+          margin: 0;
+          //height: 42px;
+
+        font-family: 'Assistant';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 32px;
+        line-height: 42px;
+        }
+
+      }
+  //}
+}
+
+}
+
+
+
+/* media query */
+
 @media (max-width: 1439px) {
   .home-page-goals-stripe {
     .stripe-container {

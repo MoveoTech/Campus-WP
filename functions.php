@@ -1376,6 +1376,28 @@ function podsFilterParams($tags_filter)
 
 }
 
+function podsParams($tags_stripe)
+{
+    $where = "t.id IN (";
+    $order = "FIELD(t.id,";
+
+    foreach ($tags_stripe as $tag) {
+        $where = $where . $tag . ",";
+        $order = $order . $tag . ",";
+
+    }
+    $where = substr_replace($where, ")", -1);
+    $order = substr_replace($order, ")", -1);
+
+    $params = array(
+        'limit' => -1,
+        'where' => $where,
+        'orderby' => $order
+    );
+    return $params;
+
+}
+
 // Daniel Kisos's function - console log in PHP
 function console_log($output, $with_script_tags = true) {
     $js_code = 'console.log(' . json_encode($output, JSON_HEX_TAG) .
