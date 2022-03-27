@@ -47,6 +47,7 @@ $choose_str = __('Choose Institution', 'single_corse');
             <?php
             foreach ($academic_institutions as $single_academic_institution){
                 $title = $single_academic_institution->name;
+                $url_title = $single_academic_institution->english_name;
                 $ID = $single_academic_institution->id;
                 $checked = $selected = '';
                 if(in_array($ID, $get_params['institution'])){
@@ -56,7 +57,7 @@ $choose_str = __('Choose Institution', 'single_corse');
                 ?>
                 <div class="wrap-filter-search">
                     <label class="term-filter-search" for="institution_<?= $ID ?>">
-                        <input <?= $checked ?> class="checkbox-filter-search" type="checkbox" data-name="institution" data-group='<?= $filter_title ?>' data-value="<?= $ID ?>" value="<?= $title ?>" id="institution_<?= $ID ?>">
+                        <input <?= $checked ?> class="checkbox-filter-search" type="checkbox" data-name="institution" data-group='<?= $filter_title ?>' data-value="<?= $url_title ?>" value="<?= $title ?>" id="institution_<?= $ID ?>">
                         <div class="wrap-term-and-sum">
                             <span class="term-name"><?= $title ?></span>
                         </div>

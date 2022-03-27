@@ -13,7 +13,9 @@ $languagesArray = $filter['languages'];
 $languages = [];
 foreach ($languagesArray as $language) {
     $language_name = getFieldByLanguageFromString($language, $sitepress->get_current_language());
-    array_push($languages, $language_name);
+    $english_name = getFieldByLanguageFromString($language, 'en');
+    $language_details = array('name' => $language_name, 'url_title' => $english_name);
+    array_push($languages, $language_details);
 }
 
 $title = $filter['title'];
@@ -29,13 +31,16 @@ $count = count($languages);
         foreach ($languages as $language) {
             $checked = '';
             //TODO get all courses that have this tag -> $count = result.
+
+            $name = $language['name'];
+            $url_title = $language['url_title'];
             ?>
 
             <div class="wrap-filter-search">
                 <label class="term-filter-search" for="language_<?= $i ?>">
-                    <input <?= $checked ?> class="checkbox-filter-search" type="checkbox" data-name='language' data-group='<?= $title ?>' data-value="<?= $language ?>" name=" language '[]'" value="<?= $language ?>" id="language_<?= $i ?>"/>
+                    <input <?= $checked ?> class="checkbox-filter-search" type="checkbox" data-name='language' data-group='<?= $title ?>' data-value="<?= $url_title ?>" name=" $name '[]'" value="<?= $name ?>" id="language_<?= $i ?>"/>
                     <div class="wrap-term-and-sum" >
-                        <span class="term-name"><?= $language ?></span>
+                        <span class="term-name"><?= $name ?></span>
                         <span class="sum">(<?= $count ?>)</span>
                     </div>
                 </label>

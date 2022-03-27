@@ -14,10 +14,11 @@ $title = $filter['title'];
 $certificates = [];
 foreach ($certificatesArray as $certificate) {
     $certificate_name = getFieldByLanguageFromString($certificate, $sitepress->get_current_language());
-
-    array_push($certificates, $certificate_name);
+    $english_name = getFieldByLanguageFromString($certificate, 'en');
+    $certificate_details = array('name' => $certificate_name, 'url_title' => $english_name);
+    array_push($certificates, $certificate_details);
 }
-//var_dump($certificates);
+
 
 $title = $filter['title'];
 $count = count($certificates);
@@ -34,7 +35,8 @@ $count = count($certificates);
 
             $checked = '';
 
-
+                $name = $certificate['name'];
+                $url_title = $certificate['url_title'];
 //            if(in_array($ID, $get_params['certificate'])){
 //                console_log("holi ffom if");
 //                $checked = 'checked';
@@ -45,10 +47,10 @@ $count = count($certificates);
 
             <div class="wrap-filter-search" >
                 <label class="term-filter-search" for="certificate_<?= $i ?>">
-                    <input <?= $checked ?> class="checkbox-filter-search" type="checkbox" data-name="certificate" data-group='<?= $title ?>' data-value="<?= $certificate ?>" name=" $certificate '[]'"  value="<?= $certificate ?>" id="certificate_<?= $i ?>">
+                    <input <?= $checked ?> class="checkbox-filter-search" type="checkbox" data-name="certificate" data-group='<?= $title ?>' data-value="<?= $url_title ?>" name=" $name '[]'"  value="<?= $name ?>" id="certificate_<?= $i ?>">
 
                     <div class="wrap-term-and-sum" >
-                        <span class="term-name"><?= $certificate ?></span>
+                        <span class="term-name"><?= $name ?></span>
                         <span class="sum">(<?= $count ?>)</span>
                     </div>
                 </label>
