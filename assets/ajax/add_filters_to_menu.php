@@ -43,7 +43,7 @@ function academicInstitution_moreFilter($filterId){
     global $sitepress;
     $academic_institutions_array = get_field('academic_institutions_list', $filterId);
     return array(
-        'academicInstitutionsList' => pods('academic_institution', podsFilterParams($academic_institutions_array))->data(),
+        'filtersList' => pods('academic_institution', podsFilterParams($academic_institutions_array))->data(),
         'groupName' => getFieldByLanguage(get_field('hebrew_title', $filterId), get_field('english_title', $filterId), get_field('arabic_title', $filterId), $sitepress->get_current_language()),
         'language' => $sitepress->get_current_language(),
         'filterId' => $filterId,
@@ -55,7 +55,7 @@ function tags_moreFilter($filterId){
     $tags_array = get_field('tags_list', $filterId);
 
     return array(
-        'tagsList' => pods('tags',podsFilterParams($tags_array))->data(),
+        'filtersList' => pods('tags',podsFilterParams($tags_array))->data(),
         'groupName' => getFieldByLanguage(get_field('hebrew_title', $filterId), get_field('english_title', $filterId), get_field('arabic_title', $filterId), $sitepress->get_current_language()),
         'language' => $sitepress->get_current_language(),
         'filterId' => $filterId,
@@ -76,7 +76,7 @@ function languages_moreFilter($filterId){
         $i++;
     }
             return array(
-                'languageList' => $languages,
+                'filtersList' => $languages,
                 'groupName' => getFieldByLanguage(get_field('hebrew_title', $filterId), get_field('english_title', $filterId), get_field('arabic_title', $filterId), $sitepress->get_current_language()),
                 'language' => $sitepress->get_current_language(),
                 'filterId' => $filterId,
@@ -98,7 +98,7 @@ function certificate_moreFilter($filterId){
         $i++;
     }
     return array(
-        'certificateList' => $certificates,
+        'filtersList' => $certificates,
         'groupName' => getFieldByLanguage(get_field('hebrew_title', $filterId), get_field('english_title', $filterId), get_field('arabic_title', $filterId), $sitepress->get_current_language()),
         'language' => $sitepress->get_current_language(),
         'filterId' => $filterId,

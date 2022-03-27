@@ -46,7 +46,7 @@ $(document).ready(function () {
     /** End of Jquery */
 
 /** Ajax call - getting filters group name and there tags **/
-function getFiltersGroups(filterId) {
+function getFiltersGroups(filterId,popupMenuDiv) {
 
     let data = {
         'action': 'add_filters_to_menu',
@@ -57,9 +57,13 @@ function getFiltersGroups(filterId) {
     jQuery.post(add_filters_to_menu_ajax.ajaxurl, data, function(response){
         if(response.success){
             const responseData = JSON.parse(response.data);
+            console.log("responseData : ", responseData);
+            console.log("responseData : ", responseData.filtersList);
             appendMoreFilters(responseData)
             /** Calling events - targeting each checkbox to open & filtering inputs **/
             filterByTagEvent()
+            $(popupMenuDiv).toggle();
+
         }
     })
 }
@@ -74,34 +78,32 @@ function appendMoreFilters(filterData) {
     // let vector = $('.filterVector').attr('src');
 
     let container = document.getElementsByClassName('inputsContainer')[0];
-
-    // let groupTitle = filterData.groupName;
-    let groupFilters = '';
+    let groupFilters = filterData.filtersList;
     let currentLanguage =filterData.language;
-    let filterId = filterData.filterId
+    // let filterId = filterData.filterId
 
 
-    if(filterData.tagsList) {
-
-        groupFilters = filterData.tagsList;
-
-    } else if(filterData.academicInstitutionsList) {
-
-        groupFilters = filterData.academicInstitutionsList;
-
-    } else if(filterData.languageList) {
-
-        groupFilters = filterData.languageList;
-
-    }else if(filterData.certificateList) {
-
-        groupFilters = filterData.certificateList;
-    }
+    // if(filterData.tagsList) {
+    //
+    //     groupFilters = filterData.tagsList;
+    //
+    // } else if(filterData.academicInstitutionsList) {
+    //
+    //     groupFilters = filterData.academicInstitutionsList;
+    //
+    // } else if(filterData.languageList) {
+    //
+    //     groupFilters = filterData.languageList;
+    //
+    // }else if(filterData.certificateList) {
+    //
+    //     groupFilters = filterData.certificateList;
+    // }
 
     let temp = document.createElement("div");
-    temp.classList.add('wrapEachFiltergroup');
-    temp.classList.add('extraFilter');
-    temp.classList.add(filterId);
+    temp.classList.add('filterInput');
+    // temp.classList.add('extraFilter');
+    // temp.classList.add(filterId);
 
 
         groupFilters.forEach(element => {
@@ -119,18 +121,19 @@ function appendMoreFilters(filterData) {
 
 
             temp.innerHTML =
-            '<div class="filterInput">'+
+            // '<div class="filterInput">'+
             '<label class="filterTagLabel" for="'+id+'">'+
             '<input'+ checked +' class="checkbox-filter-search" type="checkbox" data-name="institution" data-value="'+id+'" value="'+name+'" id="'+id+'">'+
             '<div class="wrap-term-and-sum tagNameWrap">'+
             '<span class="term-name">'+name+'</span>'+
             '</div>'+
-            '</label>'+
-            '</div>';
+            '</label>';
+            // '</div>';
+            console.log("temp :", temp);
+            container.append(temp);
     })
 
 
-    container.append(temp);
 
 }
 /** End of function appendMoreFilters */
@@ -153,8 +156,8 @@ function appendGroupFilter(filterGroupName, filterId) {
         '<p id="'+filterId+'" class="filterGroupTitle">'+ groupTitle +' </p>'+
         '<img class="filterVector" src="'+vector+'"/>'+
         '</div>'+
-        '</div>'+
-        '<div class="inputsContainer">'+
+        // '</div>'+
+        // '<div class="inputsContainer">'+
         '</div>';
 
     container.append(temp);
@@ -175,11 +178,13 @@ function openCheckboxEvent() {
 
         if($(extraFilterGroup).hasClass('extraFilter')){
             let extraFilterid = $(extraFilterGroup).find(".filterGroupTitle")[0].id;
-            console.log("extraFiltervalue", extraFiltervalue);
-            getFiltersGroups(extraFilterid)
+            console.log("extraFilterid", extraFilterid);
+            getFiltersGroups(extraFilterid, popupMenuDiv)
+            console.log("popupMenuDiv : ", popupMenuDiv)
 
-            // $(popupMenuDiv).toggle();
+            $(popupMenuDiv).toggle();
         } else{
+            console.log("else");
             $(popupMenuDiv).toggle();
         }
 
