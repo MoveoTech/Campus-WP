@@ -1140,24 +1140,13 @@ body {
 
 /* catalog */
 
-
+/* catalog stripe */
 .catalog-courses-stripe {
-  //border:1px solid blue;
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
   justify-content: right;
   margin:auto;
-  //margin: 20px auto 0;
-  //.slick-list {
-  //  width: 100%;
-  //  overflow-x: clip;
-  //  overflow-y: visible;
-  //}
-  //button.slick-button {
-  //  outline: none;
-  //}
-  //grid-template-columns: repeat(4, 1fr)
   .course-stripe-item {
     position: relative;
     max-height: 277px;
@@ -1286,60 +1275,120 @@ body {
   }
 }
 
-
-
 .catalogWrap{
   display: flex;
   flex-direction: column;
   width: 100%;
+  align-items: center;
 
-  border: 1px solid brown;
-.catalogStripeWrap {
-  margin-bottom: 47px;
-  //width:75%;
-  //border: 3px solid orange;
-  //max-width: 1440px;
-  //margin: 0 auto;
-  .catalogStripeContainer {
-    //border: 3px solid red;
-    width: 80%;
-    margin: auto;
+  .coursesResults{
+    width:85%;
   }
 
-  //.coursesContainer{
-  //  border: 1px solid blue;
-  //
-  //}
-    .catalogStripeHeader {
-        //margin-right: 10px;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        //width: 75%;
-        margin: 27px auto;
-      //border: 1px solid purple;
+  .catalogStripeWrap {
+    margin-bottom: 47px;
 
-      h1 {
-          margin: 0;
-          //height: 42px;
+    .catalogStripeContainer {
+      width: 85%;
+      margin: auto;
+    }
 
-        font-family: 'Assistant';
-        font-style: normal;
-        font-weight: 600;
-        font-size: 32px;
-        line-height: 42px;
+      .catalogStripeHeader {
+          margin: 27px auto;
+
+        h1 {
+          margin: 0 10px 0 0;
+          font-family: 'Assistant';
+          font-style: normal;
+          font-weight: 600;
+          font-size: 32px;
+          line-height: 42px;
+          }
+
         }
-
-      }
-  //}
-}
+    //}
+  }
 
 }
 
 
 
 /* media query */
+
+/* catalog stripe - media query */
+@media (max-width: 1440px) {
+  .container{
+    max-width: 1400px;
+  }
+}
+
+@media (max-width: 1285px) {
+  .catalogWrap {
+    .catalogStripeWrap {
+      .catalogStripeContainer {
+        width: 86%;
+      }
+    }
+  }
+}
+
+@media (max-width: 1269px) {
+  .catalog-courses-stripe{
+    justify-content: center;
+  }
+  .catalogWrap {
+    .catalogStripeWrap {
+      .catalogStripeHeader{
+        margin:27px auto;
+        width: 76%;
+      }
+    }
+  }
+}
+
+@media (max-width: 1130px) {
+  .catalogWrap {
+    .catalogStripeWrap {
+      .catalogStripeHeader{
+        margin: 27px auto;
+        width: 84%;
+      }
+    }
+  }
+}
+
+@media (max-width: 916px) {
+  .catalogWrap {
+    .catalogStripeWrap {
+      .catalogStripeHeader{
+        width: 70%;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .catalogWrap {
+    .catalogStripeWrap {
+      .catalogStripeHeader{
+        width: 84%;
+      }
+    }
+  }
+}
+
+@media (max-width: 634px) {
+  .catalogWrap {
+    .catalogStripeWrap {
+      .catalogStripeHeader{
+        width: 50%;
+      }
+    }
+  }
+}
+
+
+/* stripes media query */
 
 @media (max-width: 1439px) {
   .home-page-goals-stripe {

@@ -82,10 +82,10 @@ $catalog_title = getFieldByLanguage(get_field('catalog_title'), get_field('catal
                 </div>
                 </div>
             <div class="catalogWrap">
-                <div>
-                    <h1>דיב של תוצאות קורסים אם יש</h1>
-
-                </div>
+<!--                <div class="coursesResults">-->
+<!--                    <h1>דיב של תוצאות קורסים אם יש</h1>-->
+<!---->
+<!--                </div>-->
                 <div class="catalogStripeWrap">
 
                     <?php

@@ -19345,6 +19345,7 @@ body .course-item-hover {
         color: #808080; }
 
 /* catalog */
+/* catalog stripe */
 .catalog-courses-stripe {
   display: flex;
   flex-wrap: wrap;
@@ -19466,20 +19467,18 @@ body .course-item-hover {
   display: flex;
   flex-direction: column;
   width: 100%;
-  border: 1px solid brown; }
+  align-items: center; }
+  .catalogWrap .coursesResults {
+    width: 85%; }
   .catalogWrap .catalogStripeWrap {
     margin-bottom: 47px; }
     .catalogWrap .catalogStripeWrap .catalogStripeContainer {
-      width: 80%;
+      width: 85%;
       margin: auto; }
     .catalogWrap .catalogStripeWrap .catalogStripeHeader {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: center;
       margin: 27px auto; }
       .catalogWrap .catalogStripeWrap .catalogStripeHeader h1 {
-        margin: 0;
+        margin: 0 10px 0 0;
         font-family: 'Assistant';
         font-style: normal;
         font-weight: 600;
@@ -19487,6 +19486,40 @@ body .course-item-hover {
         line-height: 42px; }
 
 /* media query */
+/* catalog stripe - media query */
+@media (max-width: 1440px) {
+  .container {
+    max-width: 1400px; } }
+
+@media (max-width: 1285px) {
+  .catalogWrap .catalogStripeWrap .catalogStripeContainer {
+    width: 86%; } }
+
+@media (max-width: 1269px) {
+  .catalog-courses-stripe {
+    justify-content: center; }
+  .catalogWrap .catalogStripeWrap .catalogStripeHeader {
+    margin: 27px auto;
+    width: 76%; } }
+
+@media (max-width: 1130px) {
+  .catalogWrap .catalogStripeWrap .catalogStripeHeader {
+    margin: 27px auto;
+    width: 84%; } }
+
+@media (max-width: 916px) {
+  .catalogWrap .catalogStripeWrap .catalogStripeHeader {
+    width: 70%; } }
+
+@media (max-width: 768px) {
+  .catalogWrap .catalogStripeWrap .catalogStripeHeader {
+    width: 84%; } }
+
+@media (max-width: 634px) {
+  .catalogWrap .catalogStripeWrap .catalogStripeHeader {
+    width: 50%; } }
+
+/* stripes media query */
 @media (max-width: 1439px) {
   .home-page-goals-stripe .stripe-container .goals-slider {
     width: 80%; } }
@@ -19852,6 +19885,7 @@ body .course-item-hover {
   to {
     opacity: 1; } }
 
+/* Header */
 .catalog-banner {
   height: 194px;
   background: #333433;
@@ -19885,7 +19919,7 @@ body .course-item-hover {
     .catalog-banner .catalog-banner-content .catalog-header {
       font-family: 'Assistant';
       font-style: normal;
-      font-weight: 600;
+      font-weight: 500;
       font-size: 32px;
       line-height: 42px;
       text-align: center; }
@@ -19895,6 +19929,7 @@ body .course-item-hover {
     margin: 15px 0 18px 0; }
     .catalog-banner .hero-search-form .search-field.form-control {
       height: 55px;
+      font-weight: 400;
       width: 375px;
       font-size: 18px;
       padding-right: 25px; }
@@ -19922,9 +19957,75 @@ body .course-item-hover {
       background-position: center center;
       z-index: 3; }
 
+/* Filters menu */
+.filtersSection {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0;
+  position: static;
+  left: 0;
+  top: 0;
+  order: 0;
+  flex-grow: 0;
+  margin: 15px 50px 15px 0; }
+  .filtersSection .allFiltersWrapDiv {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0;
+    top: 0;
+    order: 0;
+    flex-grow: 0; }
+    .filtersSection .allFiltersWrapDiv .checkboxFiltersWrap {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end;
+      padding: 0;
+      position: relative;
+      top: 0;
+      flex-grow: 0;
+      margin: 0 15px;
+      flex-wrap: wrap; }
+      .filtersSection .allFiltersWrapDiv .checkboxFiltersWrap #groupFiltersContainer {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap; }
+      .filtersSection .allFiltersWrapDiv .checkboxFiltersWrap .wrapEachFiltergroup {
+        position: relative; }
+        .filtersSection .allFiltersWrapDiv .checkboxFiltersWrap .wrapEachFiltergroup .extraButtonsWrap {
+          display: flex; }
+      .filtersSection .allFiltersWrapDiv .checkboxFiltersWrap .wrapEachFilterTag, .filtersSection .allFiltersWrapDiv .checkboxFiltersWrap .wrapEachFilterButton {
+        display: flex;
+        align-items: center;
+        height: 38px;
+        background: #F9F9F9;
+        border-radius: 10px;
+        margin: 0 5px; }
+        .filtersSection .allFiltersWrapDiv .checkboxFiltersWrap .wrapEachFilterTag .buttonWrap, .filtersSection .allFiltersWrapDiv .checkboxFiltersWrap .wrapEachFilterButton .buttonWrap {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          border-radius: 22px;
+          margin: 0 10px; }
+      .filtersSection .allFiltersWrapDiv .checkboxFiltersWrap .filterGroupTitle {
+        font-family: 'Assistant';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 18px;
+        text-align: right;
+        color: #333433;
+        margin: auto; }
+      .filtersSection .allFiltersWrapDiv .checkboxFiltersWrap .filterVector {
+        margin: 0;
+        margin-right: 7px; }
+
+/* filter inputs- popup menu */
 .inputsContainer {
   display: none;
-  z-index: 5;
+  z-index: 3;
   position: absolute;
   top: 44.5px;
   max-width: 200px;
@@ -19972,73 +20073,6 @@ body .course-item-hover {
           line-height: 13px;
           max-width: unset; }
 
-.filtersSection {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  align-items: center;
-  padding: 0;
-  position: static;
-  height: 38px;
-  left: 0;
-  top: 0;
-  flex: none;
-  order: 0;
-  flex-grow: 0;
-  margin: 15px 0; }
-  .filtersSection .allFiltersWrapDiv {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    align-items: center;
-    padding: 0;
-    top: 0;
-    flex: none;
-    order: 0;
-    flex-grow: 0; }
-    .filtersSection .allFiltersWrapDiv .checkboxFiltersWrap {
-      display: flex;
-      flex-direction: row;
-      justify-content: flex-end;
-      padding: 0px;
-      position: relative;
-      height: 38px;
-      top: 0;
-      flex: none;
-      flex-grow: 0;
-      margin: 0px 15px; }
-      .filtersSection .allFiltersWrapDiv .checkboxFiltersWrap .wrapEachFiltergroup {
-        position: relative; }
-      .filtersSection .allFiltersWrapDiv .checkboxFiltersWrap .wrapEachFilterTag, .filtersSection .allFiltersWrapDiv .checkboxFiltersWrap .wrapEachFilterButton {
-        display: flex;
-        align-items: center;
-        height: 38px;
-        background: #F9F9F9;
-        border-radius: 10px;
-        margin: 0 5px; }
-        .filtersSection .allFiltersWrapDiv .checkboxFiltersWrap .wrapEachFilterTag .buttonWrap, .filtersSection .allFiltersWrapDiv .checkboxFiltersWrap .wrapEachFilterButton .buttonWrap {
-          display: flex;
-          flex-direction: row;
-          align-items: center;
-          border-radius: 22px;
-          margin: 0 10px; }
-      .filtersSection .allFiltersWrapDiv .checkboxFiltersWrap .filterGroupTitle {
-        font-family: 'Assistant';
-        font-style: normal;
-        font-weight: 400;
-        font-size: 14px;
-        line-height: 18px;
-        text-align: right;
-        color: #333433;
-        margin: auto; }
-      .filtersSection .allFiltersWrapDiv .checkboxFiltersWrap .filterVector {
-        margin: 0;
-        margin-right: 7px; }
-
-#groupFiltersContainer {
-  display: flex;
-  flex-direction: row; }
-
 #resetButton {
   background-color: transparent; }
   #resetButton .resetFilterButton {
@@ -20049,3 +20083,19 @@ body .course-item-hover {
     line-height: 18px;
     text-align: right;
     color: #589CA5; }
+
+/* media query */
+@media (max-width: 1200px) {
+  .filtersSection .allFiltersWrapDiv .checkboxFiltersWrap .wrapEachFilterTag, .filtersSection .allFiltersWrapDiv .checkboxFiltersWrap .wrapEachFilterButton {
+    margin-bottom: 5px; } }
+
+@media (max-width: 992px) {
+  #groupFiltersContainer {
+    flex-wrap: wrap; } }
+
+@media (max-width: 390px) {
+  .catalog-banner .hero-search-form .search-field.form-control {
+    width: 342px;
+    font-size: 16px; }
+    .catalog-banner .hero-search-form .search-field.form-control::placeholder {
+      font-size: 16px; } }

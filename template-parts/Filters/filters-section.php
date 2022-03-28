@@ -50,9 +50,7 @@ $current_lang = $sitepress->get_current_language();
            ));
    }
     ?>
-    <div class="wrapEachFilterButton" id="resetButton">
-        <p class="resetFilterButton filterGroupTitle"><?= ResetFiltersLanguage(); ?></p>
-    </div>
+
 </div>
 
 <!--    <div>-->

@@ -1,4 +1,4 @@
-
+/* Header */
 .catalog-banner{
   height: 194px;
   background: #333433;
@@ -36,7 +36,7 @@
       .catalog-header{
         font-family: 'Assistant';
         font-style: normal;
-        font-weight: 600;
+        font-weight: 500;
         font-size: 32px;
         line-height: 42px;
         text-align: center;
@@ -48,6 +48,7 @@
     margin: 15px 0 18px 0;
   .search-field.form-control {
     height: 55px;
+    font-weight: 400;
     width: 375px;
     font-size: 18px;
     padding-right: 25px;
@@ -81,9 +82,97 @@
 }
 }
 
+
+/* Filters menu */
+.filtersSection{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0;
+  position: static;
+  left: 0;
+  top: 0;
+  //flex: none;
+  order: 0;
+  flex-grow: 0;
+  margin: 15px 50px 15px 0;
+  //flex-wrap:wrap;
+
+  .allFiltersWrapDiv{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0;
+    top: 0;
+    //flex: none;
+    order: 0;
+    flex-grow: 0;
+
+    .checkboxFiltersWrap{
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end;
+      padding: 0;
+      position: relative;
+      top: 0;
+      flex-grow: 0;
+      margin: 0 15px;
+      flex-wrap: wrap;
+
+      #groupFiltersContainer{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+      }
+
+      .wrapEachFiltergroup {
+        position: relative;
+
+        .extraButtonsWrap{
+          display: flex;
+
+        }
+        }
+
+      .wrapEachFilterTag, .wrapEachFilterButton{
+        display: flex;
+        align-items: center;
+        height: 38px;
+        background: #F9F9F9;
+        border-radius: 10px;
+        margin: 0 5px;
+
+        .buttonWrap{
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          border-radius: 22px;
+          margin: 0 10px;
+          }
+        }
+      .filterGroupTitle{
+        font-family: 'Assistant';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 18px;
+        text-align: right;
+        color: #333433;
+        margin:auto;
+      }
+      .filterVector{
+        margin: 0;
+        margin-right: 7px;
+        }
+      }
+    }
+  }
+
+/* filter inputs- popup menu */
 .inputsContainer {
   display:none;
-  z-index: 5;
+  z-index: 3;
   position: absolute;
   top:44.5px;
   max-width: 200px;
@@ -124,7 +213,7 @@
           font-size: 11px;
         }
         &::after{
-            width:0;
+          width:0;
         }
         .term-name {
           font-family: 'Assistant';
@@ -136,92 +225,14 @@
           width: 200px;
           line-height: 13px;
           max-width:unset;
-          }
         }
       }
     }
   }
-
-.filtersSection{
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  align-items: center;
-  padding: 0;
-  position: static;
-  height: 38px;
-  left: 0;
-  top: 0;
-  flex: none;
-  order: 0;
-  flex-grow: 0;
-  margin: 15px 0;
-
-  .allFiltersWrapDiv{
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    align-items: center;
-    padding: 0;
-    top: 0;
-    flex: none;
-    order: 0;
-    flex-grow: 0;
-
-    .checkboxFiltersWrap{
-      display: flex;
-      flex-direction: row;
-      justify-content: flex-end;
-      padding: 0px;
-      position: relative;
-      height: 38px;
-      top: 0;
-      flex: none;
-      flex-grow: 0;
-      margin: 0px 15px;
-
-      .wrapEachFiltergroup {
-        position: relative;
-        }
-
-      .wrapEachFilterTag, .wrapEachFilterButton{
-        display: flex;
-        align-items: center;
-        height: 38px;
-        background: #F9F9F9;
-        border-radius: 10px;
-        margin: 0 5px;
-
-        .buttonWrap{
-          display: flex;
-          flex-direction: row;
-          align-items: center;
-          border-radius: 22px;
-          margin: 0 10px;
-          }
-        }
-      .filterGroupTitle{
-        font-family: 'Assistant';
-        font-style: normal;
-        font-weight: 400;
-        font-size: 14px;
-        line-height: 18px;
-        text-align: right;
-        color: #333433;
-        margin:auto;
-      }
-      .filterVector{
-        margin: 0;
-        margin-right: 7px;
-        }
-      }
-    }
-  }
-
-#groupFiltersContainer{
-  display: flex;
-  flex-direction: row;
 }
+
+
+
 
 #resetButton{
   background-color: transparent;
@@ -238,8 +249,47 @@
 }
 
 
+/* media query */
 
 
+@media (max-width: 1200px) {
+  .filtersSection{
+    .allFiltersWrapDiv{
+      .checkboxFiltersWrap{
+        .wrapEachFilterTag, .wrapEachFilterButton{
+          margin-bottom: 5px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 992px) {
+  #groupFiltersContainer{
+    flex-wrap: wrap;
+  }
+}
+
+//@media (max-width: 992px) {
+//  #groupFiltersContainer{
+//    flex-wrap: wrap;
+//  }
+//
+//}
+@media (max-width: 390px) {
+  .catalog-banner {
+    .hero-search-form {
+      .search-field.form-control {
+        width: 342px;
+        font-size: 16px;
+
+        &::placeholder {
+          font-size: 16px;
+        }
+      }
+    }
+  }
+}
 
 
 
