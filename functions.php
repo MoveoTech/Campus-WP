@@ -15,6 +15,7 @@ include locate_template( 'assets/ajax/stripe_data.php' );
 include locate_template( 'assets/ajax/my_courses.php' );
 include locate_template( 'assets/ajax/get_course_popup.php' );
 include locate_template( 'assets/ajax/filter_by_tag.php' );
+include locate_template( 'assets/ajax/add_filters_to_menu.php' );
 
 /**
  * Daat Ester
@@ -119,11 +120,13 @@ function style_of_campus_enqueue() {
 	wp_enqueue_script( 'bootstrap_js', get_bloginfo( 'stylesheet_directory' ) . '/assets/js/bootstrap.min.js' );
     wp_enqueue_script('search_js', get_bloginfo( 'stylesheet_directory' ) . '/assets/js/search.js', array('jquery'));
     wp_enqueue_script('catalog_js', get_bloginfo( 'stylesheet_directory' ) . '/assets/js/catalog.js', array('jquery'));
+    wp_enqueue_script('catalogAddon_js', get_bloginfo( 'stylesheet_directory' ) . '/assets/js/catalogAddon.js', array('jquery'));
     wp_enqueue_script('home_page_js', get_bloginfo( 'stylesheet_directory' ) . '/assets/js/home_page.js', array('jquery'));
     wp_localize_script('home_page_js', 'stripe_data_ajax', array('ajaxurl' => admin_url('admin-ajax.php')));
     wp_localize_script('home_page_js', 'my_courses_ajax', array('ajaxurl' => admin_url('admin-ajax.php')));
     //filtering tags ajax call
     wp_localize_script('catalog_js', 'filter_by_tag_ajax', array('ajaxurl' => admin_url('admin-ajax.php')));
+    wp_localize_script('catalogAddon_js', 'add_filters_to_menu_ajax', array('ajaxurl' => admin_url('admin-ajax.php')));
 
 	wp_localize_script( 'ready_js', 'global_vars', array(
 			'link_to_enrollment_api'        => get_field( 'link_to_enrollment_api', 'option' ),
@@ -1183,6 +1186,32 @@ function orderByPopularityLanguage() {
     return $text;
 }
 
+function addingMoreFiltersLanguage() {
+    global $sitepress;
+    $current = $sitepress->get_current_language();
+    $text = 'הוספת סינון';
+    if ($current === 'en') {
+        $text = 'Adding Filter';
+    }
+    if ($current === 'ar') {
+        $text = 'أضف التصفية';
+    }
+    return $text;
+}
+
+function ResetFiltersLanguage() {
+    global $sitepress;
+    $current = $sitepress->get_current_language();
+    $text = 'איפוס סינון';
+    if ($current === 'en') {
+        $text = 'Reset Filters';
+    }
+    if ($current === 'ar') {
+        $text = 'إعادة تعيين مرشح';
+    }
+    return $text;
+}
+
 function more_courses_text($carousel) {
     global $sitepress;
     $current = $sitepress->get_current_language();
@@ -1301,6 +1330,51 @@ function sortTagsByOrder($tags){
 
 function CompareTagsByOrder($tag1, $tag2) {
     return $tag2['order'] > $tag1['order'];
+}
+
+function podsFilterParams($tags_filter)
+{
+
+    $where = "t.id IN (";
+    $order = "FIELD(t.id,";
+
+    foreach ($tags_filter as $tag) {
+        $where = $where . $tag . ",";
+        $order = $order . $tag . ",";
+
+    }
+    $where = substr_replace($where, ")", -1);
+    $order = substr_replace($order, ")", -1);
+
+    $params = array(
+        'limit' => -1,
+        'where' => $where,
+        'orderby' => $order
+    );
+    return $params;
+
+}
+
+function podsParams($tags_stripe)
+{
+    $where = "t.id IN (";
+    $order = "FIELD(t.id,";
+
+    foreach ($tags_stripe as $tag) {
+        $where = $where . $tag . ",";
+        $order = $order . $tag . ",";
+
+    }
+    $where = substr_replace($where, ")", -1);
+    $order = substr_replace($order, ")", -1);
+
+    $params = array(
+        'limit' => -1,
+        'where' => $where,
+        'orderby' => $order
+    );
+    return $params;
+
 }
 
 // Daniel Kisos's function - console log in PHP

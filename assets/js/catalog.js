@@ -6,7 +6,9 @@ $(document).ready(function () {
     /** Mark selected checkboxes */
     markCheckboxes(params)
 
-    /** click event - targeting filters inputs */
+    filterByTagEvent()
+
+    // click event - targeting filters inputs
     $('.checkbox-filter-search').on('click', function (event) {
 
         let filterData = {"search": {}};
@@ -30,8 +32,7 @@ $(document).ready(function () {
             let type = $(`#${id}`).data('name');
             let group = $(`#${id}`).data('group');
             let englishValue = $(`#${id}`).data('value');
-            // let value = element.value;
-            // console.log(englishValue)
+           
             /** Checking if value is checked */
             if(element.checked) {
                 // console.log(element)
@@ -115,9 +116,75 @@ $(document).ready(function () {
             }
         })
     }
+
+    /** Filtering by tag function of catalog - need to remove  */
+    function filterByTagEvent(){
+        /** removing event from div */
+        $(`#groupFiltersContainer .checkbox-filter-search`).unbind('click');
+
+        /** click event - targeting each input for filtering */
+        $('#groupFiltersContainer .checkbox-filter-search').on('click', function (event) {
+            let filterData = {};
+            let tagArray = [];
+            let institutionArray = [];
+            let certificateArray = [];
+            let languageArray = [];
+
+            /**getting specific value - inside certificate-filter */
+            let certificates = $('.checkbox-filter-search');
+
+            /** looping all certificate inputs */
+            certificates.each((index, element) => {
+                let id = element.id;
+                let type = $(`#${id}`).data('name');
+                let value = element.value;
+
+                /** checking if value is checked */
+                if(element.checked) {
+
+                    switch (type) {
+                        case 'tag':
+                            tagArray.push(value);
+                            break;
+
+                        case 'institution':
+                            institutionArray.push(value);
+                            break;
+
+                        case 'certificate':
+                            certificateArray.push(value);
+                            break;
+
+                        case 'language':
+                            languageArray.push(value);
+                            break;
+                    }
+                }
+            });
+
+            if(tagArray || institutionArray || certificateArray || languageArray) {
+
+                /** pushing each array to object (key and values) */
+                if(tagArray.length > 0) {
+                    filterData['tags'] = tagArray;
+                }
+                if(institutionArray.length > 0) {
+                    filterData['institution'] = institutionArray;
+                }
+                if(certificateArray.length > 0) {
+                    filterData['certificate'] = certificateArray;
+                }
+                if(languageArray.length > 0) {
+                    filterData['language'] = languageArray;
+                }
+            };
+        })
+    }
+    /** End of function filterByTagEvent */
 });
 /** end of jquery */
 
+/** Ido made a new function for appending */
 function appendFilteredCourses(coursesData) {
     let coursesBox = document.getElementById("coursesBox");
     let output = document.createElement("div");
@@ -225,6 +292,7 @@ function appendUrlParams(filters) {
         return;
     }
 
+
     if(filters['search']) {
         let i = 0;
         Object.keys(filters['search']).some((k) => {
@@ -253,7 +321,6 @@ function appendUrlParams(filters) {
             }
         })
     }
-
 }
 
 function markCheckboxes(params) {

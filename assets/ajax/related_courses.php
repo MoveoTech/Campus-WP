@@ -56,12 +56,9 @@ $more_courses_args = array(
 
 );
 $query = new WP_Query($more_courses_args);
-//        print_r($query);
+
 $posts = $query->posts;
-echo "<pre class='debug_for_chaya hidden'>";
-echo "<h3>בדיקה שלב ראשון</h3>";
-//print_r($posts);
-echo "</pre>";
+
 if ($query->found_posts < 4) {
     $more_courses_args['tax_query']['relation'] = 'OR';
 
@@ -74,10 +71,7 @@ if ($query->found_posts < 4) {
     $more_courses_args['posts_per_page'] = 4 - $query->found_posts;
     $new_query = new WP_Query($more_courses_args);
     $query->posts = array_merge($query->posts, $new_query->posts);
-    echo "<pre class='debug_for_chaya hidden'>";
-    echo "<h3>בדיקה שלב שני - אחרי מיזוג עם הפוסטים מהשלב הקודם</h3>";
-//    print_r($posts);
-    echo "</pre>";
+
 
     if (count($query->posts) < 4) {
         $ids = array($post->ID);

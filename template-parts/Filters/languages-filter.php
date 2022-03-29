@@ -19,42 +19,35 @@ foreach ($languagesArray as $language) {
 }
 
 $title = $filter['title'];
-$count = count($languages);
+
 ?>
 
-<div class="wrap-terms-group">
-    <h2 class="search-page-tax-name"><?= $title ?></h2>
-    <div class="more-tags">
-
-        <?php
+<div class="wrapEachFiltergroup">
+    <div class="wrapEachFilterTag">
+        <div class="buttonWrap" >
+            <p  class="filterGroupTitle" ><?= $title ?></p>
+            <img class="filterVector" src="<?php echo get_bloginfo('stylesheet_directory'). '/assets/images/vector-black.svg'?>"/>
+        </div>
+    </div>
+    <div class="inputsContainer" > <?php
         $i=0;
         foreach ($languages as $language) {
             $checked = '';
-            //TODO get all courses that have this tag -> $count = result.
-
-            $name = $language['name'];
-            $url_title = $language['url_title'];
             ?>
 
-            <div class="wrap-filter-search">
-                <label class="term-filter-search" for="language_<?= $i ?>">
-                    <input <?= $checked ?> class="checkbox-filter-search" type="checkbox" data-name='language' data-group='<?= $title ?>' data-value="<?= $url_title ?>" name=" $name '[]'" value="<?= $name ?>" id="language_<?= $i ?>"/>
-                    <div class="wrap-term-and-sum" >
-                        <span class="term-name"><?= $name ?></span>
-                        <span class="sum">(<?= $count ?>)</span>
+            <div class="filterInput">
+                <label class="filterTagLabel" for="language_<?= $i ?>">
+                    <input <?= $checked ?> class="checkbox-filter-search" type="checkbox" data-name='language' data-value="<?= $language ?>" name=" language '[]'" value="<?= $language ?>" id="language_<?= $i ?>"/>
+                    <div class="wrap-term-and-sum tagNameWrap" >
+                        <span class="term-name"><?= $language ?></span>
                     </div>
                 </label>
             </div>
 
-            <?php if (count($languages) > 7) {?>
-                <button class="show-more-tags collapsed" type="button" aria-hidden="true">
-                    <span><?= __('Show More Tags', 'single_corse') ?></span>
-                    <span><?= __('Show Less Tags', 'single_corse') ?></span>
-                </button>
-
-
-            <?php }
-        $i++;
+            <?php
+            $i++;
         } ?>
     </div>
+
 </div>
+
