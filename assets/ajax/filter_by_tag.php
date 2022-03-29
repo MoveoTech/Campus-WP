@@ -1,35 +1,49 @@
 <?php
 
 function filter_by_tag() {
-    $dataObject = $_POST['dataObject'];
+    $filters = $_POST['filters'];
     $type = $_POST['type'];
     $lang = $_POST['lang'] ? $_POST['lang'] : 'he';
-//
-    if(!$type || ($type != "courses" ) || !$dataObject || count($dataObject) < 0)
+
+    if(!$type || ($type != "courses" ))
         wp_send_json_error( 'Error: Invalid data!' );
+    if(!$filters || count($filters) <= 0){
+        $params = array(
+            'limit' => 27,
+            'where'=> 't.hide_in_site=0',
+            'orderby'=> "t.order DESC"
+        );
+    } else {
+        $params = getPodsFilterParams($filters);
+
+    }
 
     // filtering each data type
     $dataToReturn = array();
-    $strictFilter = array();
+    $filtersCourses = array();
     $semiFilter = array();
+    $filteredCourses = pods($type, $params);
+    $idArrayOfBestMatches = array();
+//    $semifilteredCourses = pods($type, getSemiFilterParams($filters));
 
-
-
-    $strictfilteredCourses = pods($type, getFilterParams($dataObject));
-    $semifilteredCourses = pods($type, getSemiFilterParams($dataObject));
-
-
-
-
-    while ($strictfilteredCourses->fetch()) {
-        $strictFilter[] = filteredCoursesData($strictfilteredCourses,$lang);
-
-    }
-    while ($semifilteredCourses->fetch()) {
-        $semiFilter[] = filteredCoursesData($semifilteredCourses,$lang);
+    while ($filteredCourses->fetch()) {
+        $filtersCourses[] =  filteredCoursesData($filteredCourses, $lang);
+        $idArrayOfBestMatches[] = $filteredCourses->display('ID');
     }
 
-    $dataToReturn = ['strictFilter'=> $strictFilter,'semiFilter' => $semiFilter];
+    /** Get all courses that have at list 1 filter match */
+
+    $second_params = getSecondsFiltersParams($filters, $idArrayOfBestMatches);
+    if($second_params) {
+     $oneOrMoreMatches = pods($type, $second_params);
+        while ($oneOrMoreMatches->fetch()) {
+            $filtersCourses[] =  filteredCoursesData($oneOrMoreMatches, $lang);
+        }
+    }
+
+    $dataToReturn['courses'] = $filtersCourses;
+    $dataToReturn['filters'] = $filters;
+
     wp_send_json_success( json_encode($dataToReturn));
 
 }
@@ -39,13 +53,10 @@ add_action('wp_ajax_nopriv_filter_by_tag', 'filter_by_tag');
 
 function getSemiFilterParams($dataObject){
 
-    $where= '';
-    $order = "t.order DESC";
     $sql = array();
 
-
     // filter by language
-        if($dataObject['language']){
+    if($dataObject['language']){
             $tagsData = $dataObject['language'];
 
             foreach($tagsData as $tag) {
@@ -89,12 +100,10 @@ function getSemiFilterParams($dataObject){
     };
 
 
-
-
-
-
-       // declaring params for all filters
+    // declaring params for all filters
     $where = implode('OR', $sql);
+    $order = "t.order DESC";
+
     $params = array(
         'limit' => -1,
         'where'=>$where,
@@ -102,7 +111,6 @@ function getSemiFilterParams($dataObject){
     );
 
     return $params;
-
 }
 
 function getFilterParams($dataObject){
@@ -118,7 +126,7 @@ function getFilterParams($dataObject){
 
 
     // filter by language
-        if($dataObject['language']){
+    if($dataObject['language']){
             $tagsData = $dataObject['language'];
             $sqlLang = array();
             foreach($tagsData as $tag) {
@@ -201,6 +209,7 @@ function filteredCoursesData($filteredCourse,$lang){
         'buttonText' => course_popup_button_text()
     );
 }
+
 function filteredCourseTags($data, $lang) {
     $tags = [];
 
@@ -209,5 +218,4 @@ function filteredCourseTags($data, $lang) {
     }
     return $tags;
 }
-
 
