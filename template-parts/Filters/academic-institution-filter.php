@@ -27,8 +27,6 @@ $choose_str = __('Choose Institution', 'single_corse');
             <?php
             foreach ($academic_institutions as $single_academic_institution){
                 $title = getFieldByLanguage($single_academic_institution->name, $single_academic_institution->english_name, $single_academic_institution->arabic_name, $sitepress->get_current_language());
-
-//                $title = $single_academic_institution->name;
                 $ID = $single_academic_institution->id;
                 $checked = $selected = '';
                 if(in_array($ID, $get_params['institution'])){

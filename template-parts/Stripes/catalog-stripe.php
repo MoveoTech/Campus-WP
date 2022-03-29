@@ -8,17 +8,14 @@ if(empty($stripe) || empty($stripe['id']) || empty($stripe['courses']) )
     return;
 
 $courses_url = home_url('/') . 'course/' ;
-
 $stripeTitle = $stripe['title'];
 $stripeSubtitle = $stripe['subtitle'];
 $stripeId = $stripe['id'];
 $courses = $stripe['courses'];
-
 ?>
 
-<!--<div class="home-page-courses-stripe catalog-page-courses-stripe">-->
     <div class="catalogStripeContainer">
-<!--        <div class="stripe-header">-->
+
             <div class="catalogStripeHeader">
                 <?php
                 if($stripeTitle != '' && !empty($stripeTitle)) : ?>
@@ -26,9 +23,8 @@ $courses = $stripe['courses'];
                 <?php endif; ?>
 
             </div>
-<!--            <div class="show-all-courses"><a href="--><?php //echo $courses_url ?><!--"><p> --><?php //echo more_courses_text($stripe['carousel']) ?><!--</p></a></div>-->
-<!--        </div>-->
-<?php
+
+            <?php
         get_template_part('template', 'parts/Stripes/catalog-courses-carousel',
             array(
                 'args' => array(
@@ -38,4 +34,4 @@ $courses = $stripe['courses'];
             ));
         ?>
     </div>
-<!--</div>-->
+

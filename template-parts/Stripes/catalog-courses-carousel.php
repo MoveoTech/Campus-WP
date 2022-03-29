@@ -3,15 +3,12 @@ $stripe = wp_parse_args(
     $args["args"]
 );
 
-//if(empty($stripe) || empty($stripe['id']) || empty($stripe['courses']) || count($stripe['courses']) < 1 )
-//    return;
+if(empty($stripe) || empty($stripe['id']) || empty($stripe['courses']) || count($stripe['courses']) < 1 )
+    return;
 global $sitepress;
 
-//$courses_slice = array_slice($stripe['courses'], 0, 12);
-//console_log(podsParams($stripe['courses']));
-//console_log($stripe['courses']);
 $courses = pods('courses', podsParams($stripe['courses']));
-//console_log($courses_slice);
+
 
 ?>
 
@@ -36,12 +33,14 @@ $courses = pods('courses', podsParams($stripe['courses']));
                   <a href="<?= $url ?>"></a>
                 <span class="info-button"></span>
             </div>
+
             <div class="item-content">
                 <h3 ><a href="<?= $url ?>"><?= $title ?></a></h3>
                 <?php if ($institution_name) : ?>
                     <p><?= $institution_name?></p>
                 <?php endif; ?>
             </div>
+
             <div class="tags-div">
                 <?php
                 if (count($tags) > 0 && $tags[0] != '') {
@@ -59,15 +58,18 @@ $courses = pods('courses', podsParams($stripe['courses']));
                         <?php } else { ?>
                             <span class="<?php echo $class ?>"><p class="<?php echo $class ?>"><?php echo $tag ?></p></span>
                         <?php } $index++;
-                    endwhile;
-                    if (count($tags) > 2) { ?>
-                    <span class="extra-tags">+</span>
-                    <?php }
-                    if (count($tags) >= 2) { ?>
-                    <span class="extra-tags-mobile">+</span>
-                    <?php }
-                }?>
+                        endwhile;
+
+                        if (count($tags) > 2) { ?>
+                        <span class="extra-tags">+</span>
+                        <?php }
+
+                        if (count($tags) >= 2) { ?>
+                        <span class="extra-tags-mobile">+</span>
+                        <?php }
+                    }?>
             </div>
+
             <div class="course-item-hover <?php echo $id . $stripe['id'] ?>">
                <a href="<?= $url ?>">
                     <div class="course-img" style="background-image: url(<?= $thumb ?>);">
@@ -78,9 +80,10 @@ $courses = pods('courses', podsParams($stripe['courses']));
                             <p><?= $institution_name?></p>
                         <?php endif; ?>
                     </div>
+
                     <div class="tags-div">
-                        <?php
-                        if (count($tags) > 0 && $tags[0] != '') {
+
+                        <?php if (count($tags) > 0 && $tags[0] != '') {
                             $index = 0;
                             while ($index < count($tags) && $tags[$index] != '') :
                                 $tag = getFieldByLanguage($tags[$index]['name'], $tags[$index]['english_name'], $tags[$index]['arabic_name'], $sitepress->get_current_language());
@@ -95,13 +98,17 @@ $courses = pods('courses', podsParams($stripe['courses']));
                                 <?php
                                 $index++;
                             endwhile;
+
                         }?>
                     </div>
+
                     <div class="course-details">
                         <span><?php echo $duration ?></span>
                     </div>
+
                 </a>
             </div>
+
             <?php get_template_part(
                 'templates/mobileCourse',
                 'popup',
@@ -117,12 +124,13 @@ $courses = pods('courses', podsParams($stripe['courses']));
                     )
                 )
             ) ?>
-
         </div>
 
     <?php };?>
 <!--        end of while-->
+
     </div>
 <!--    end of div catalog courses stripe-->
+
 </div>
 

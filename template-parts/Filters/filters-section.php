@@ -18,22 +18,20 @@ $current_lang = $sitepress->get_current_language();
 <div class="checkboxFiltersWrap">
 
     <div id="groupFiltersContainer">
-    <?php
-    $filtersInputs = array();
-    $i= 0;
-    foreach($filters as $filterId ) {
+        <?php
+        $filtersInputs = array();
+        $i= 0;
+        foreach($filters as $filterId ) {
 
-        $i++;
-        if($i<=4){
-            getFilterType($filterId);
-        }
-        if($i>4){
-            array_push($filtersInputs,$filterId );
+            $i++;
+            if($i<=4){
+                getFilterType($filterId);
+            }
+            if($i>4){
+                array_push($filtersInputs,$filterId );
 
-        }
-    }
-
-    ?>
+            }
+        } ?>
     </div>
 
     <?php
@@ -52,6 +50,8 @@ $current_lang = $sitepress->get_current_language();
     ?>
 
 </div>
+
+                                    <!--order by section - DO NOT REMOVE - for the next version-->
 
 <!--    <div>-->
 <!--        <select>-->

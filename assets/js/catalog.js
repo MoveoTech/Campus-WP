@@ -18,58 +18,44 @@ $(document).ready(function () {
             jQuery.post(filter_by_tag_ajax.ajaxurl, data, function(response){
                 if(response.success){
                     const responseData = JSON.parse(response.data);
-                    // console.log("data in filterCoursesAjax strictt : ", responseData['strictFilter'])
-                    // console.log("data in filterCoursesAjax : ", responseData)
                     appendFilteredCourses(responseData['strictFilter'])
-                    // if(responseData.length > 0) {
-                    //
-                    //
-                    // } else {
-                    //     // showing "no courses found" message
-                    //
-                    // }
-
-
                 }
             })
     }
 
+    /** Filtering by tag function of catalog - need to remove  */
     function filterByTagEvent(){
         /** removing event from div */
         $(`#groupFiltersContainer .checkbox-filter-search`).unbind('click');
+
         /** click event - targeting each input for filtering */
-        $('.checkbox-filter-search').on('click', function (event) {
+        $('#groupFiltersContainer .checkbox-filter-search').on('click', function (event) {
             let filterData = {};
             let tagArray = [];
             let institutionArray = [];
             let certificateArray = [];
             let languageArray = [];
 
-            //getting specific value - inside certificate-filter
+            /**getting specific value - inside certificate-filter */
             let certificates = $('.checkbox-filter-search');
 
-
-            // looping all certificate inputs
+            /** looping all certificate inputs */
             certificates.each((index, element) => {
                 let id = element.id;
                 let type = $(`#${id}`).data('name');
                 let value = element.value;
 
-                //checking if value is checked
+                /** checking if value is checked */
                 if(element.checked) {
 
-
                     switch (type) {
-
                         case 'tag':
                             tagArray.push(value);
                             break;
 
-
                         case 'institution':
                             institutionArray.push(value);
                             break;
-
 
                         case 'certificate':
                             certificateArray.push(value);
@@ -82,11 +68,9 @@ $(document).ready(function () {
                 }
             });
 
-
-
             if(tagArray || institutionArray || certificateArray || languageArray) {
 
-                //pushing each array to object (key and values)
+                /** pushing each array to object (key and values) */
                 if(tagArray.length > 0) {
                     filterData['tags'] = tagArray;
                 }
@@ -101,36 +85,27 @@ $(document).ready(function () {
                 if(languageArray.length > 0) {
                     filterData['language'] = languageArray;
                 }
-
             };
-
-
 
         })
 
     }
-
+    /** End of function filterByTagEvent */
 });
-// end of jquery
+/** end of jquery */
 
-// TO DO - change the function to fit the filtered courses data
+
+
+/** Ido made a new function for appending */
 function appendFilteredCourses(coursesData) {
     let coursesBox = document.getElementById("coursesBox");
 
-
-
     coursesData.forEach(item =>{
-        // console.log("each item : ",item);
         let permalink = item.permalink ? item.permalink : '';
         let url = 'course/' + permalink;
         let tags = getDesktopTags(item.tags);
         let hoverTags = getHoverTags(item.tags);
-
         let academicInstitution = item.academic_institution ? item.academic_institution : '';
-
-
-
-
 
         let temp = document.createElement("div");
         temp.id = item.id;
@@ -179,15 +154,6 @@ function appendFilteredCourses(coursesData) {
             '</div>'+
             '</div>';
 
-        // jQuery(`#${id}`).slick('slickAdd',temp);
-        // console.log(" temp: ", temp);
-        // coursesBox.append(temp);
-        // mouseHoverOnCourse();
-        // coursesBox.append(temp)
 
     });
-
-    // changeArrowClass(id)
-    // clickOnCourseInfoButton()
-    // jQuery(`#${nextButton.id}`).prop('disabled', false);
 }

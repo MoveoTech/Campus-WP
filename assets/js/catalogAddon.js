@@ -6,18 +6,13 @@ $(document).ready(function () {
     $('.resetFilterButton').on('click', function (event) {
 
         let filtersInputs = $('.checkbox-filter-search');
-
         filtersInputs.each((index, element) => {
             element.checked = false;
         });
-
         /** removing extra filters **/
         $('.extraFilter').remove();
-
     });
         /**End of click event -reset filtering **/
-
-
 
  /** Calling events - targeting each checkbox to open & filtering inputs **/
     openCheckboxEvent()
@@ -64,14 +59,11 @@ function getFiltersGroups(filterId) {
 }
 /** End of function getFiltersGroups */
 
-
-
 /** Appending filter tags **/
 function appendMoreFilters(filterData) {
 
     /**looping each filter group and appending it to the filters menu */
-    let filterId = filterData.filterId
-
+    let filterId = filterData.filterId;
     let container = document.getElementById(`extraFilter_${filterId}`);
     let groupFilters = filterData.filtersList;
     let currentLanguage =filterData.language;
@@ -90,7 +82,6 @@ function appendMoreFilters(filterData) {
         if(element.arabic_name && currentLanguage == 'ar'){
             name = element.arabic_name;
         }
-
             temp.innerHTML =
             '<label class="filterTagLabel" for="'+id+'">'+
             '<input'+ checked +' class="checkbox-filter-search" type="checkbox" data-name="institution" data-value="'+id+'" value="'+name+'" id="'+id+'">'+
@@ -102,7 +93,6 @@ function appendMoreFilters(filterData) {
     })
 }
 /** End of function appendMoreFilters */
-
 
 /** Appending filter group **/
 function appendGroupFilter(filterGroupName, filterId) {
@@ -142,80 +132,6 @@ function openCheckboxEvent() {
 }
 /** End of function openCheckboxEvent */
 
-
-// TODO removing when merging to catalog.js
-
-/** Filtering by tag function of catalog - need to remove  */
-function filterByTagEvent(){
-    /** removing event from div */
-   $(`#groupFiltersContainer .checkbox-filter-search`).unbind('click');
-
-   /** click event - targeting each input for filtering */
-    $('#groupFiltersContainer .checkbox-filter-search').on('click', function (event) {
-        let filterData = {};
-        let tagArray = [];
-        let institutionArray = [];
-        let certificateArray = [];
-        let languageArray = [];
-
-        /**getting specific value - inside certificate-filter */
-        let certificates = $('.checkbox-filter-search');
-
-
-        /** looping all certificate inputs */
-        certificates.each((index, element) => {
-            let id = element.id;
-            let type = $(`#${id}`).data('name');
-            let value = element.value;
-
-            /** checking if value is checked */
-            if(element.checked) {
-
-                switch (type) {
-                    case 'tag':
-                        tagArray.push(value);
-                        break;
-
-                    case 'institution':
-                        institutionArray.push(value);
-                        break;
-
-                    case 'certificate':
-                        certificateArray.push(value);
-                        break;
-
-                    case 'language':
-                        languageArray.push(value);
-                        break;
-                }
-            }
-        });
-
-
-
-        if(tagArray || institutionArray || certificateArray || languageArray) {
-
-            /** pushing each array to object (key and values) */
-            if(tagArray.length > 0) {
-                filterData['tags'] = tagArray;
-            }
-            if(institutionArray.length > 0) {
-                filterData['institution'] = institutionArray;
-
-            }
-            if(certificateArray.length > 0) {
-                filterData['certificate'] = certificateArray;
-
-            }
-            if(languageArray.length > 0) {
-                filterData['language'] = languageArray;
-            }
-        };
-
-    })
-
-}
-/** End of function filterByTagEvent */
 
 
 /** hiding filter inputs when clicking on screen or other filter group */

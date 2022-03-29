@@ -151,6 +151,11 @@
           margin: 0 10px;
           }
         }
+      .wrapEachFilterButton{
+        .filterVector{
+          margin-top: 1px;
+        }
+      }
       .filterGroupTitle{
         font-family: 'Assistant';
         font-style: normal;
@@ -270,12 +275,6 @@
   }
 }
 
-//@media (max-width: 992px) {
-//  #groupFiltersContainer{
-//    flex-wrap: wrap;
-//  }
-//
-//}
 @media (max-width: 390px) {
   .catalog-banner {
     .hero-search-form {

@@ -42,6 +42,7 @@ function get_filter_type($filterType, $filterId){
 function academicInstitution_moreFilter($filterId){
     global $sitepress;
     $academic_institutions_array = get_field('academic_institutions_list', $filterId);
+
     return array(
         'filtersList' => pods('academic_institution', podsFilterParams($academic_institutions_array))->data(),
         'groupName' => getFieldByLanguage(get_field('hebrew_title', $filterId), get_field('english_title', $filterId), get_field('arabic_title', $filterId), $sitepress->get_current_language()),
@@ -63,8 +64,8 @@ function tags_moreFilter($filterId){
 }
 /** Getting the data of type - language */
 function languages_moreFilter($filterId){
+    /** translating filters */
     global $sitepress;
-    //translating filter tags
     $languagesArray = pods('courses')->fields('language', 'data');
     $languages = [];
     $i = 0;
@@ -84,8 +85,9 @@ function languages_moreFilter($filterId){
 }
 /** Getting the data of type - certificate */
 function certificate_moreFilter($filterId){
+
+    /** translating filters */
     global $sitepress;
-    //translating filter tags
     $certificatesArray = get_field('certificate_list', $filterId);
     $certificates = [];
     $i = 0;
@@ -93,10 +95,10 @@ function certificate_moreFilter($filterId){
 
         $certificate_name = getFieldByLanguageFromString($certificate, $sitepress->get_current_language());
         $certificateObject = ["id"=>$i, "name"=>$certificate_name];
-
         array_push($certificates, $certificateObject);
         $i++;
     }
+
     return array(
         'filtersList' => $certificates,
         'groupName' => getFieldByLanguage(get_field('hebrew_title', $filterId), get_field('english_title', $filterId), get_field('arabic_title', $filterId), $sitepress->get_current_language()),

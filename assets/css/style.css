@@ -20009,6 +20009,8 @@ body .course-item-hover {
           align-items: center;
           border-radius: 22px;
           margin: 0 10px; }
+      .filtersSection .allFiltersWrapDiv .checkboxFiltersWrap .wrapEachFilterButton .filterVector {
+        margin-top: 1px; }
       .filtersSection .allFiltersWrapDiv .checkboxFiltersWrap .filterGroupTitle {
         font-family: 'Assistant';
         font-style: normal;
