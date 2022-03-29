@@ -11,6 +11,8 @@ $(document).ready(function () {
         });
         /** removing extra filters **/
         $('.extraFilter').remove();
+
+       $('.catalog-banner .search-field').val('');
     });
         /**End of click event -reset filtering **/
 
@@ -20,6 +22,7 @@ $(document).ready(function () {
 
  /** Click event - adding more filters **/
     $('.moreFilters .extraFilterCheckbox').on('click', function (event) {
+
 
         /**Getting targeted input */
         let filterId = $(event.target).data('value');
@@ -125,15 +128,88 @@ function openCheckboxEvent() {
 
     /** click event - targeting each checkbox to open */
     $('.wrapEachFiltergroup').on('click', function (event) {
+        console.log("event : " ,event.target);
 
-        let popupMenuDiv = event.target.closest(".wrapEachFiltergroup").querySelector(".inputsContainer")
-        $(popupMenuDiv).toggle();
+
+            let popupMenuDiv = event.target.closest(".wrapEachFiltergroup").querySelector(".inputsContainer")
+            console.log("popupMenuDiv", popupMenuDiv)
+            $(popupMenuDiv).toggle();
+
+
+
     });
 }
 /** End of function openCheckboxEvent */
 
 
+/** Filtering by tag function of catalog - need to remove  */
+function filterByTagEvent(){
+    /** removing event from div */
+    $(`#groupFiltersContainer .checkbox-filter-search`).unbind('click');
 
+    /** click event - targeting each input for filtering */
+    $('#groupFiltersContainer .checkbox-filter-search').on('click', function (event) {
+        let filterData = {};
+        let tagArray = [];
+        let institutionArray = [];
+        let certificateArray = [];
+        let languageArray = [];
+
+        /**getting specific value - inside certificate-filter */
+        let certificates = $('.checkbox-filter-search');
+
+        /** looping all certificate inputs */
+        certificates.each((index, element) => {
+            let id = element.id;
+            let type = $(`#${id}`).data('name');
+            let value = element.value;
+
+            /** checking if value is checked */
+            if(element.checked) {
+
+                switch (type) {
+                    case 'tag':
+                        tagArray.push(value);
+                        break;
+
+                    case 'institution':
+                        institutionArray.push(value);
+                        break;
+
+                    case 'certificate':
+                        certificateArray.push(value);
+                        break;
+
+                    case 'language':
+                        languageArray.push(value);
+                        break;
+                }
+            }
+        });
+
+        if(tagArray || institutionArray || certificateArray || languageArray) {
+
+            /** pushing each array to object (key and values) */
+            if(tagArray.length > 0) {
+                filterData['tags'] = tagArray;
+            }
+            if(institutionArray.length > 0) {
+                filterData['institution'] = institutionArray;
+
+            }
+            if(certificateArray.length > 0) {
+                filterData['certificate'] = certificateArray;
+
+            }
+            if(languageArray.length > 0) {
+                filterData['language'] = languageArray;
+            }
+        };
+
+    })
+
+}
+/** End of function filterByTagEvent */
 /** hiding filter inputs when clicking on screen or other filter group */
 $(document).click(function(event) {
 

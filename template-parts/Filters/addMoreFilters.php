@@ -7,21 +7,21 @@ $filter = wp_parse_args(
 global $sitepress;
 $moreFilters = $filter['filters'];
 ?>
+<div id="wrapingExtraButtons">
+
 
 <div class="moreFilters wrapEachFiltergroup">
 
     <div class="extraButtonsWrap">
 
-        <div class="wrapEachFilterButton">
+        <div id="addingFilterButton" class="wrapEachFilterButton">
             <div class="buttonWrap" >
                 <p class="filterGroupTitle"><?= addingMoreFiltersLanguage(); ?></p>
                 <img class="filterVector" src="<?php echo get_bloginfo('stylesheet_directory'). '/assets/images/plus-sign.svg'?>"/>
             </div>
         </div>
 
-        <div class="wrapEachFilterButton" id="resetButton">
-            <p class="resetFilterButton filterGroupTitle"><?= ResetFiltersLanguage(); ?></p>
-        </div>
+
 
     </div>
 
@@ -32,6 +32,7 @@ $moreFilters = $filter['filters'];
             $title = getFieldByLanguage(get_field('hebrew_title', $filterId), get_field('english_title', $filterId), get_field('arabic_title', $filterId), $sitepress->get_current_language());
             $checked = '';
             ?>
+
             <div class="filterInput">
                 <label class="filterTagLabel" for="moreFilters_<?= $i ?>">
                     <input <?= $checked ?> class="checkbox-filter-search extraFilterCheckbox" type="checkbox" data-name="moreFilters" data-value="<?= $filterId ?>" name=" moreFilters '[]'"  value="<?= $title ?>" id="moreFilters_<?= $i ?>">
@@ -41,8 +42,12 @@ $moreFilters = $filter['filters'];
                 </label>
             </div>
             <?php $i++;
-            }?>
+        }?>
     </div>
 
+</div>
+<div class="wrapEachFilterButton" id="resetButton">
+    <p id="resetButtonText" class="resetFilterButton filterGroupTitle"><?= ResetFiltersLanguage(); ?></p>
+</div>
 </div>
 

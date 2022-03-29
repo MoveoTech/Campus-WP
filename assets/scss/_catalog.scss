@@ -109,7 +109,7 @@
     .checkboxFiltersWrap{
       display: flex;
       flex-direction: row;
-      justify-content: flex-end;
+      //justify-content: flex-end;
       padding: 0;
       position: relative;
       top: 0;
@@ -120,16 +120,18 @@
       #groupFiltersContainer{
         display: flex;
         flex-direction: row;
-        flex-wrap: wrap;
+        //flex-wrap: wrap;
+      }
+      #wrapingExtraButtons{
+        display: flex;
       }
 
       .wrapEachFiltergroup {
         position: relative;
-
-        .extraButtonsWrap{
-          display: flex;
         }
-        }
+      .extraButtonsWrap{
+        display: flex;
+      }
 
       .wrapEachFilterTag, .wrapEachFilterButton{
         display: flex;

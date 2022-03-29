@@ -19981,7 +19981,6 @@ body .course-item-hover {
     .filtersSection .allFiltersWrapDiv .checkboxFiltersWrap {
       display: flex;
       flex-direction: row;
-      justify-content: flex-end;
       padding: 0;
       position: relative;
       top: 0;
@@ -19990,12 +19989,13 @@ body .course-item-hover {
       flex-wrap: wrap; }
       .filtersSection .allFiltersWrapDiv .checkboxFiltersWrap #groupFiltersContainer {
         display: flex;
-        flex-direction: row;
-        flex-wrap: wrap; }
+        flex-direction: row; }
+      .filtersSection .allFiltersWrapDiv .checkboxFiltersWrap #wrapingExtraButtons {
+        display: flex; }
       .filtersSection .allFiltersWrapDiv .checkboxFiltersWrap .wrapEachFiltergroup {
         position: relative; }
-        .filtersSection .allFiltersWrapDiv .checkboxFiltersWrap .wrapEachFiltergroup .extraButtonsWrap {
-          display: flex; }
+      .filtersSection .allFiltersWrapDiv .checkboxFiltersWrap .extraButtonsWrap {
+        display: flex; }
       .filtersSection .allFiltersWrapDiv .checkboxFiltersWrap .wrapEachFilterTag, .filtersSection .allFiltersWrapDiv .checkboxFiltersWrap .wrapEachFilterButton {
         display: flex;
         align-items: center;
