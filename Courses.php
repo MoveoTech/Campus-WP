@@ -11,13 +11,31 @@
 
 global $site_settings, $field, $wp_query, $sitepress;
 
-$form_short_code_sidebar = $site_settings['form_short_code_sidebar'];
-$filters_list    = get_field( 'filters_list', 'courses_index_settings' );
-$academic_filter = get_field( 'campus_order_academic_institutions_list', 'courses_index_settings' );
+/**
+ * CHECK THE QUERY PARAMS
+ */
+
+$url = get_current_url();
+$components = parse_url($url);
+if($components['query']){
+    parse_str($components['query'], $url_params);
+
+    /** CHECK IF QUERY PARAMS ITEMS LENGTH >= 2 */
+    validatePathUrl($url_params);
+}
+
+if($url_params){
+    $params = podsGetParams($url_params);
+} else {
+    $params = [
+        'limit'   => 27,
+    ];
+}
+
+/** OLD PARAMETERS */
 $visible                   = 15;
 $form_short_code_no_result = '';
 $form_short_code_sidebar   = $site_settings['form_short_code_sidebar'];
-
 if ( empty( $_GET['termid'] ) ) {
     $class                  = 'search-course background-instead-banner';
     $text_on_banner_content = '';
@@ -28,24 +46,31 @@ if ( empty( $_GET['termid'] ) ) {
 $course_attrs = array(
     'class' => 'col-xs-12 col-md-6 col-xl-4 course-item-with-border',
 );
+
+$orderBy = 't.order DESC';
 $params = [
     'limit'   => 27,
+    'orderBy' => $orderBy,
 ];
+
 $academic_institutions = pods( 'academic_institution', array('limit'   => -1 ));
 $courses = pods( 'courses', $params, true);
-$count = $courses->total_found(); // TODO new count
+$count = $courses->total_found();
 $academic_name = cin_get_str('Institution_Name');
 $choose_str = __('Choose Institution', 'single_corse');
+$title_str = cin_get_str( 'filter_courses_title_ajax' );
+$my_class = "ajax_filter";
 
 
-/** The old archive course code **/
-
+/**
+ * The old archive course code *
+ */
 
 //if ( $sitepress->get_current_language() == 'he' ) {
 //    $strings   = get_courses_search_filter_server_side( $wp_query, $filters_list, $academic_filter );
 //    $strings   = create_course_and_filters_side( $filters_list, $academic_filter );
-    $title_str = cin_get_str( 'filter_courses_title_ajax' );
-    $my_class = "ajax_filter";
+//    $title_str = cin_get_str( 'filter_courses_title_ajax' );
+//    $my_class = "ajax_filter";
 //} else {
 //    $strings   = get_courses_search_filter( $wp_query, $filters_list, $academic_filter );
 //    $title_str = cin_get_str( 'filter_courses_title_no_ajax' );
@@ -56,7 +81,7 @@ $choose_str = __('Choose Institution', 'single_corse');
 
 
 ?>
-
+f
 <div class="wrap-search-page-course <?= $my_class ?>">
     <div class="container">
         <div class="row justify-content-between">
@@ -82,6 +107,7 @@ $choose_str = __('Choose Institution', 'single_corse');
                                 )
                             ));
                     ?>
+
                 </div>
                 <div class="lokking-for-form"><?= $form_short_code_sidebar ?></div>
             </aside>
@@ -156,7 +182,36 @@ $choose_str = __('Choose Institution', 'single_corse');
     </div>
 </div>
 
+<?php
 
+function podsGetParams($paramsArray)
+{
 
+    $order = "t.order DESC";
+    $sql = array();
 
+if($paramsArray['s'] && strlen($paramsArray['s']) >= 2){
+    $sql[] = 't.name LIKE "%'.$paramsArray['s'].'%"';
+    $sql[] = 't.english_name LIKE "%'.$paramsArray['s'].'%"';
+    $sql[] = 't.arabic_name LIKE "%'.$paramsArray['s'].'%"';
+    $sql[] = 't.description LIKE "%'.$paramsArray['s'].'%"';
+    $sql[] = 't.course_products LIKE "%'.$paramsArray['s'].'%"';
+    $sql[] = 't.alternative_names LIKE "%'.$paramsArray['s'].'%"';
+}
 
+    $where = implode(" OR ", $sql);
+    $params = array(
+        'limit' => -1,
+        'where' => $where,
+        'orderby' => $order
+    );
+    return $params;
+
+}
+
+function validatePathUrl($urlParams) {
+    if(strlen($urlParams['s']) < 2) {
+        wp_redirect( get_home_url() );
+        exit;
+    }
+}

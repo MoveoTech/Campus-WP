@@ -13,7 +13,9 @@ $languagesArray = $filter['languages'];
 $languages = [];
 foreach ($languagesArray as $language) {
     $language_name = getFieldByLanguageFromString($language, $sitepress->get_current_language());
-    array_push($languages, $language_name);
+    $english_name = getFieldByLanguageFromString($language, 'en');
+    $language_details = array('name' => $language_name, 'url_title' => $english_name);
+    array_push($languages, $language_details);
 }
 
 $title = $filter['title'];

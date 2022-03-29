@@ -30,7 +30,7 @@ function getMyCoursesParams($idsArray){
     $sql = array();
     foreach($idsArray as $id ) {
         $order = $order . "'". $id . "',";
-        $sql[] = 't.course_id_edx LIKE "'.$id.'+%"';
+        $sql[] = 't.course_id_edx LIKE "%'.$id.'+%"';
     }
     $where = implode(" OR ", $sql);
     $order = substr_replace($order, ")", -1);

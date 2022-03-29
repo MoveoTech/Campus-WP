@@ -9,6 +9,7 @@ if(empty($filter) || empty($filter['title']) || $filter['title'] == '' || empty(
 global $sitepress;
 $tagsArray = $filter['tags'];
 $title = $filter['title'];
+$english_name = $filter['english_title'];
 $tags = pods('tags',podsFilterParams($tagsArray))->data();
 
 ?>
@@ -24,6 +25,7 @@ $tags = pods('tags',podsFilterParams($tagsArray))->data();
         <?php foreach ($tags as $tag) {
             $tagId =  $tag->id;
             $tag_name = getFieldByLanguage($tag->name, $tag->english_name, $tag->arabic_name, $sitepress->get_current_language());
+            $url_title = $tag->english_name;
             $checked = '';
         ?>
 

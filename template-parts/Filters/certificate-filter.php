@@ -14,8 +14,9 @@ $title = $filter['title'];
 $certificates = [];
 foreach ($certificatesArray as $certificate) {
     $certificate_name = getFieldByLanguageFromString($certificate, $sitepress->get_current_language());
-
-    array_push($certificates, $certificate_name);
+    $english_name = getFieldByLanguageFromString($certificate, 'en');
+    $certificate_details = array('name' => $certificate_name, 'url_title' => $english_name);
+    array_push($certificates, $certificate_details);
 }
 
 
@@ -42,6 +43,7 @@ $title = $filter['title'];
                     <input <?= $checked ?> class="checkbox-filter-search" type="checkbox" data-name="certificate" data-value="<?= $certificate ?>" name=" $certificate '[]'"  value="<?= $certificate ?>" id="certificate_<?= $i ?>">
                     <div class="wrap-term-and-sum tagNameWrap" >
                         <span class="term-name"><?= $certificate ?></span>
+
                     </div>
                 </label>
             </div>

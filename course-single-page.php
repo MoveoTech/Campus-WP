@@ -48,7 +48,7 @@ $time_now = strtotime(date('Y-m-d'));
 
 
 //fields on Course page
-
+$name = getFieldByLanguage($course->display('name'), $course->display('english_name'), $course->display('arabic_name') ,$sitepress->get_current_language());
 $permalink = get_site_url() . '/NewCourse/' . $course->display('permalink');
 $course_id_edx = $course->display('course_id_edx');
 $course_image_banner = $course->display('banner_image');
@@ -74,50 +74,13 @@ $lecturers = $course->field(array('name'=>'lecturer', 'output'=>'pods'));
 $testimonials = $course->field(array('name'=>'testimonial', 'output'=>'pods'));
 $corporation_institution = $course->field(array('name'=>'corporation_institution', 'output'=>'pods'));
 $external_link = $course->display('external_link');
-
+$excerpt = $course->display('excerpt');
 
 $course_attrs = array(
     'class' => 'col-sm-12 col-md-6 col-lg-4 col-xl-3 course-item-with-border',
 );
 
-$relatedCourses = pods( 'courses', array('limit' => 4), true);
-var_dump($relatedCourses);
-//END fields on Course page
-
-
-
-
-
-
-//$subject_of_daat = $fields['subject_of_daat']; // TODO Change to Tags...
-
-//$prior = $fields['prior_knowledge'];  // TODO Change to Tags... or check with Oren
-//$ele_prior = "";
-//
-//if ($prior) {
-//    switch ($prior) {
-//        case 'none':
-//            $ele_prior = __('None', 'single_corse');
-//            break;
-//        case 'string':
-//            $ele_prior = $fields['string_prior_knowledge'];
-//            break;
-//        case 'link':
-//            $link_target = $fields['link_prior_knowledge']['target'] ? $fields['link_prior_knowledge']['target'] : '_self';
-//            $ele_prior = '<a href="' . $fields['link_prior_knowledge']['url'] . '" target="' . esc_attr($link_target) . '">' . $fields['link_prior_knowledge']['title'] . '</a>';
-//            break;
-//    }
-//}
-
-//$knowledge = $fields['knowledge']; // TODO not used
-//$more_details = $fields['more_details']; // TODO removed from new entity
-
-
-
-
-
-
-
+$relatedCourses = pods( 'courses', array('limit' => 4, 'orderby' => 'RAND()'), true);
 
 // Calc Fields :
 
@@ -146,17 +109,7 @@ if($org)
 else
     $org = null;
 
-
-
-
-
-
-
-
-
-
-
-//user connect
+/** user connect */
 $is_connect_to_site = false;
 $cookie_name = get_field('cookie_name', 'options');
 if (isset($_COOKIE[$cookie_name]) && !empty($_COOKIE[$cookie_name])) {
@@ -166,7 +119,6 @@ if (isset($_COOKIE['edxloggedin']) && !empty($_COOKIE['edxloggedin'])) {
     $is_connect_to_site = $_COOKIE['edxloggedin'];
 }
 echo '</div>';
-
 
 $enroll_time = $str_time_course = '';
 $time_course = '';
@@ -178,7 +130,6 @@ $register_api_n_con = false;
 $data_end_api = '';
 $two_btn = false;// שני כפתורים אחד - אם המשתמש רשום לקורס והשני אם משתמש לא רשום לקורס
 $class_link_n_con = $enroll_time_n_con = $data_end_api_n_con = $link_btn_n_con = '';
-
 
 if (!$is_connect_to_site) {//משתמש שלא רשום לאתר בכל מקרה קודם צריך להרשם לאתר
     $enroll_time = cin_get_str('registration_to_campus');
@@ -239,9 +190,7 @@ if ($pacingArray && $pacingArray[1] = 'self') {
     }
 }
 
-
 if ($start) {
-//    $start = date('d/m/Y', strtotime($start));
     if ($enrollment_start && ($time_st_enrollment_start > $time_now)) {//לפני תחילת ההרשמה
         $time_course = __('Registration starts at', 'single_corse');
         $str_time_course = $time_course . ' ' . $enrollment_start . ', ';
@@ -260,7 +209,6 @@ if ($start) {
     } elseif ($enrollment_end && ($time_st_enrollment_end >= $time_now)) {//לפני תאריך סיום ההרשמה
         $time_course = __('The course is over. Viewing content is possible', 'single_corse');
     } else {
-//        $time_course_n_con = __("The course is over" ,'single_corse');
         if ($is_connect_to_site)
             $time_course = __('The course is over. Viewing content is possible', 'single_corse');
         else
@@ -289,19 +237,17 @@ parse_str(parse_url($link, PHP_URL_QUERY), $query_string);
 $video_id = ($link) ? $query_string["v"] : '';
 ?>
 
-
 <?php if ($course_image_banner) {
 
-    $title = $course->display('title_on_banner');
-
-    $title = $title ? wrap_text_with_char($title) :  get_the_title();
+    $title_on_banner = $course->display('title_on_banner');
+    $title = $title_on_banner ? wrap_text_with_char($title_on_banner) :  $name;
 
     $banner_for_mobile = $course->display('banner_image_for_mobile');
 
     $class = 'about-course gray-part';
     $text_on_banner_content = '';
     $text_on_banner_content .= '<h1 class="title-course">' . $title . '</h1>';
-    $text_on_banner_content .= '<p class="excerpt-course">' . get_the_excerpt() . '</p>';
+    $text_on_banner_content .= '<div class="excerpt-course">' . $excerpt . '</div>';
     $text_on_banner_content .= '<span class="signup-course-button-wrap">';
 
     $text_on_banner_content .= '<a class="signup-course-button con_to_course ' . $class_link . '" target="_blank" href="' . $link_btn . '">' . $enroll_time . '</a>';
@@ -315,8 +261,7 @@ $video_id = ($link) ? $query_string["v"] : '';
     }
     $text_on_banner_content .= '</span>';
     if ($course_video) {
-        $video_on_banner = '<a href="#"  aria-haspopup="true" role="button" tabindex="0" title="' . get_the_title() . '" data-url="https://www.youtube.com/embed/' . $video_id . '?autoplay=1&showinfo=1&autohide=1&rel=0&enablejsapi=1&wmode=transparent" class="popup-about-course-video open-popup-button-2020"></a>';
-        //aria-pressed="false" data-classtoadd="popup-about-course"
+        $video_on_banner = '<a href="#"  aria-haspopup="true" role="button" tabindex="0" title="' . $title . '" data-url="https://www.youtube.com/embed/' . $video_id . '?autoplay=1&showinfo=1&autohide=1&rel=0&enablejsapi=1&wmode=transparent" class="popup-about-course-video open-popup-button-2020"></a>';
     } else {
         $video_on_banner = '';
     }
@@ -324,7 +269,6 @@ $video_id = ($link) ? $query_string["v"] : '';
     <?= get_banner_area($banner_for_mobile, array('url' => $course_image_banner), $text_on_banner_content, $class, $video_on_banner); ?>
     <?php
 } ?>
-
 
 <div class="information-bar" data-course_id_edx="<?= $course_id_edx ?>">
     <div class="container">
@@ -517,7 +461,6 @@ $video_id = ($link) ? $query_string["v"] : '';
             </div>
         </div>
     </div>
-</div>
 
 <?php if ( ! empty( $lecturers ) ) : ?>
     <div class="lecturer-about-course">
@@ -526,7 +469,9 @@ $video_id = ($link) ? $query_string["v"] : '';
                 <h2 class="course-staff-title"><?= __('The course staff', 'single_corse'); ?>:</h2>
             </div>
             <div class="row">
-                <?php foreach ( $lecturers as $lecturer ){
+
+                <?php
+                foreach ( $lecturers as $lecturer ){
                     $name = getFieldByLanguage($lecturer->display('name'), $lecturer->display('english_name'), $lecturer->display('arabic_name') ,$sitepress->get_current_language());
                     $content = getFieldByLanguage($lecturer->display('hebrew_description'), $lecturer->display('english_description'), $lecturer->display('arabic_description') ,$sitepress->get_current_language());
                     $thumb = $lecturer->display('image');
@@ -571,16 +516,10 @@ $video_id = ($link) ? $query_string["v"] : '';
                         </div>
                     </div>
                 <?php } ?>
-
-
-
-
-
             </div>
         </div>
     </div>
 <?php endif; ?>
-
 
 <?php if ( ! empty( $testimonials ) ) : ?>
     <div class="testimonial-course-page">
@@ -602,8 +541,6 @@ $video_id = ($link) ? $query_string["v"] : '';
     </div>
 <?php endif; ?>
 
-
-
 <!--more courses area 4 posts-->
 
 <!--the terms returns an id not an object-->
@@ -617,13 +554,13 @@ $video_id = ($link) ? $query_string["v"] : '';
         <div class="row more-courses-inner" id="single_course_related_container">
             <?php
             while ($relatedCourses->fetch()) {
-//                $output_courses .= get_template_part('template', 'parts/Courses/course-card',
-//                    array(
-//                        'args' => array(
-//                            'course' => $relatedCourses,
-//                            'attrs' => $course_attrs,
-//                        )
-//                    ));
+                $output_courses .= get_template_part('template', 'parts/Courses/course-card',
+                    array(
+                        'args' => array(
+                            'course' => $relatedCourses,
+                            'attrs' => $course_attrs,
+                        )
+                    ));
                 ?>
             <?php } ?>
         </div>
@@ -637,14 +574,6 @@ $video_id = ($link) ? $query_string["v"] : '';
     </div>
 </div>
 <?php endif; ?>
-
-
-<?php include locate_template( 'templates/footer.php' ); ?>
-
-
-
-
-
 
 <?php
 do_action('get_footer');

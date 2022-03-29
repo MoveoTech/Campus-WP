@@ -12,8 +12,7 @@ function filter_by_tag() {
     $dataToReturn = array();
     $strictFilter = array();
     $semiFilter = array();
-//    $strictFilterCourses = [];
-//    $semiFilterCourses = [];
+
 
 
     $strictfilteredCourses = pods($type, getFilterParams($dataObject));
@@ -25,16 +24,13 @@ function filter_by_tag() {
     while ($strictfilteredCourses->fetch()) {
         $strictFilter[] = filteredCoursesData($strictfilteredCourses,$lang);
 
-//        array_push($dataToReturn, filteredCoursesData($strictfilteredCourses,$lang));
     }
     while ($semifilteredCourses->fetch()) {
         $semiFilter[] = filteredCoursesData($semifilteredCourses,$lang);
-//        array_push($dataToReturn, filteredCoursesData($semifilteredCourses,$lang));
     }
 
     $dataToReturn = ['strictFilter'=> $strictFilter,'semiFilter' => $semiFilter];
     wp_send_json_success( json_encode($dataToReturn));
-//    wp_send_json_success( json_encode($filteredCourses));
 
 }
 add_action('wp_ajax_filter_by_tag', 'filter_by_tag');
@@ -68,7 +64,7 @@ function getSemiFilterParams($dataObject){
 
     };
 
-    // filter by language
+    // filter by institution
     if($dataObject['institution']){
         $tagsData = $dataObject['institution'];
 
@@ -80,7 +76,7 @@ function getSemiFilterParams($dataObject){
 
     };
 
-    // filter by language
+    // filter by tags
     if($dataObject['tags']){
         $tagsData = $dataObject['tags'];
 

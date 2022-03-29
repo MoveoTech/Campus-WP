@@ -3,9 +3,85 @@ $= jQuery.noConflict();
 $(document).ready(function () {
 
 
+
     filterByTagEvent()
 
+    // click event - targeting filters inputs
+    $('.checkbox-filter-search').on('click', function (event) {
 
+        let filterData = {};
+        let tagArray = [];
+        let institutionArray = [];
+        let certificateArray = [];
+        let languageArray = [];
+
+        //getting array of inputs
+        let certificates = $('.checkbox-filter-search');
+
+
+        // looping all certificate inputs
+        certificates.each((index, element) => {
+            let id = element.id;
+            let type = $(`#${id}`).data('name');
+            let value = element.value;
+
+            //checking if value is checked
+            if(element.checked) {
+
+                switch (type) {
+
+            case 'tag':
+                tagArray.push(value);
+                break;
+
+
+            case 'institution':
+                institutionArray.push(value);
+                break;
+
+
+            case 'certificate':
+                certificateArray.push(value);
+                break;
+
+            case 'language':
+                languageArray.push(value);
+                break;
+        }
+            }
+        });
+
+
+//checking if any filter checked
+        if(tagArray || institutionArray || certificateArray || languageArray) {
+
+            //checking which filters checked and pushing each array to object (key and values)
+            if(tagArray.length > 0) {
+                filterData['tags'] = tagArray;
+            }
+            if(institutionArray.length > 0) {
+                filterData['institution'] = institutionArray;
+
+            }
+            if(certificateArray.length > 0) {
+                filterData['certificate'] = certificateArray;
+
+            }
+            if(languageArray.length > 0) {
+                filterData['language'] = languageArray;
+            }
+
+            filterCoursesAjax(filterData)
+
+
+        };
+
+
+
+    })
+    // end of click event
+
+        // ajax call
     function filterCoursesAjax(filterData) {
 
             let data = {
@@ -18,7 +94,9 @@ $(document).ready(function () {
             jQuery.post(filter_by_tag_ajax.ajaxurl, data, function(response){
                 if(response.success){
                     const responseData = JSON.parse(response.data);
-                    appendFilteredCourses(responseData['strictFilter'])
+                    console.log("data in filterCoursesAjax : ", responseData)
+                    appendFilteredCourses(responseData)
+                   // need to add if statement that checks if the response have courses
                 }
             })
     }
@@ -76,29 +154,24 @@ $(document).ready(function () {
                 }
                 if(institutionArray.length > 0) {
                     filterData['institution'] = institutionArray;
-
                 }
                 if(certificateArray.length > 0) {
                     filterData['certificate'] = certificateArray;
-
                 }
                 if(languageArray.length > 0) {
                     filterData['language'] = languageArray;
                 }
             };
-
         })
-
     }
     /** End of function filterByTagEvent */
 });
 /** end of jquery */
 
-
-
 /** Ido made a new function for appending */
 function appendFilteredCourses(coursesData) {
     let coursesBox = document.getElementById("coursesBox");
+
 
     coursesData.forEach(item =>{
         let permalink = item.permalink ? item.permalink : '';

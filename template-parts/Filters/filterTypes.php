@@ -51,12 +51,13 @@ function tagsFilter($filterId){
 
     $tags = get_field('tags_list', $filterId);
     $title = getFieldByLanguage(get_field('hebrew_title', $filterId), get_field('english_title', $filterId), get_field('arabic_title', $filterId), $sitepress->get_current_language());
-
+    $english_title = get_field('english_title', $filterId);
     get_template_part('template', 'parts/Filters/tags-filter',
         array(
             'args' => array(
                 'id'=>  $filterId,
                 'title' => $title,
+                'english_title' => $english_title,
                 'tags' => $tags,
             )
         ));
