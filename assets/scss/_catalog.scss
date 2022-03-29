@@ -93,11 +93,9 @@
   position: static;
   left: 0;
   top: 0;
-  //flex: none;
   order: 0;
   flex-grow: 0;
   margin: 15px 50px 15px 0;
-  //flex-wrap:wrap;
 
   .allFiltersWrapDiv{
     display: flex;
@@ -105,7 +103,6 @@
     align-items: center;
     padding: 0;
     top: 0;
-    //flex: none;
     order: 0;
     flex-grow: 0;
 
@@ -131,7 +128,6 @@
 
         .extraButtonsWrap{
           display: flex;
-
         }
         }
 
@@ -255,7 +251,6 @@
 
 
 /* media query */
-
 
 @media (max-width: 1200px) {
   .filtersSection{
