@@ -6,27 +6,27 @@ $filter = wp_parse_args(
 if(empty($filter) || empty($filter['title']) || $filter['title'] == '' || empty($filter['academic_institutions']) || count($filter['academic_institutions']) < 1)
     return;
 
-global $get_params;
+global $sitepress, $get_params;
 
 $academic_institutions_array = $filter['academic_institutions'];
 $filter_title = $filter['title'];
 $academic_institutions = pods('academic_institution', podsFilterParams($academic_institutions_array))->data();
 $choose_str = __('Choose Institution', 'single_corse');
+
 ?>
 
-<div class="wrap-mobile-filter-title">
+<div class="wrapEachFiltergroup">
+    <div class="wrapEachFilterTag">
+        <div class="buttonWrap">
+            <p class="filterGroupTitle" ><?= $title ?></p>
+            <img class="filterVector" src="<?php echo get_bloginfo('stylesheet_directory'). '/assets/images/vector-black.svg'?>"/>
+        </div>
+    </div>
+    <div class="inputsContainer">
 
-    <button id="close-nav-search" class="close-nav-search" type="button"></button>
-    <p class="filter-title-mobile"><?= __('Filter Courses', 'single_corse') ?></p>
-
-    <div class="wrap-terms-group wrap-terms-institution">
-        <h2 class="search-page-tax-name"><?= $filter_title ?></h2>
-
-        <select multiple class="sr-only selected-academic" name="academic_select[]" aria-hidden="true" tabindex="-1">
-            <option><?= $choose_str ?></option>
             <?php
             foreach ($academic_institutions as $single_academic_institution){
-                $title = $single_academic_institution->name;
+                $title = getFieldByLanguage($single_academic_institution->name, $single_academic_institution->english_name, $single_academic_institution->arabic_name, $sitepress->get_current_language());
                 $ID = $single_academic_institution->id;
                 $checked = $selected = '';
                 if(in_array($ID, $get_params['institution'])){
@@ -34,31 +34,12 @@ $choose_str = __('Choose Institution', 'single_corse');
                     $selected = 'selected';
                 }
                 ?>
-                <option <?= $selected ?> class="academic-option-item" value="<?= $ID ?>"><?= $title ?></option>
-            <?php } ?>
-        </select>
 
-        <button role="combobox" aria-expanded="false" data-original="<?= $choose_str ?>" type="button" class="filter_main_button dropdown_open">
-            <?= $choose_str ?>
-        </button>
 
-        <div class="wrap-checkbox_institution wrap-terms-group">
-
-            <?php
-            foreach ($academic_institutions as $single_academic_institution){
-                $title = $single_academic_institution->name;
-                $url_title = $single_academic_institution->english_name;
-                $ID = $single_academic_institution->id;
-                $checked = $selected = '';
-                if(in_array($ID, $get_params['institution'])){
-                    $checked = 'checked';
-                    $selected = 'selected';
-                }
-                ?>
-                <div class="wrap-filter-search">
-                    <label class="term-filter-search" for="institution_<?= $ID ?>">
-                        <input <?= $checked ?> class="checkbox-filter-search" type="checkbox" data-name="institution" data-group='<?= $filter_title ?>' data-value="<?= $url_title ?>" value="<?= $title ?>" id="institution_<?= $ID ?>">
-                        <div class="wrap-term-and-sum">
+                <div class="filterInput">
+                    <label class="filterTagLabel" for="institution_<?= $ID ?>">
+                        <input <?= $checked ?> class="checkbox-filter-search" type="checkbox" data-name="institution" data-value="<?= $ID ?>" value="<?= $title ?>" id="institution_<?= $ID ?>">
+                        <div class="wrap-term-and-sum tagNameWrap">
                             <span class="term-name"><?= $title ?></span>
                         </div>
                     </label>
@@ -67,7 +48,7 @@ $choose_str = __('Choose Institution', 'single_corse');
             ?>
 
         </div>
-    </div>
-<!--    <a href="javascript: void(0);" class="clear-link" role="button" id="clear_all_filters">--><?//= __('Clear All', 'single_corse') ?><!--</a>-->
-<!--    <a href="javascript: void(0);" class="ajax_filter_btn" role="button">--><?//= __('Filter Courses', 'single_corse') ?><!--</a>-->
 </div>
+
+
+
