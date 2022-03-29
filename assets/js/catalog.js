@@ -6,181 +6,66 @@ $(document).ready(function () {
     /** Mark selected checkboxes */
     markCheckboxes(params)
 
+    /** Calling events - targeting each checkbox to open & filtering inputs **/
+    openCheckboxEvent()
+
+    /** Click event - targeting filters inputs */
     filterByTagEvent()
 
-    // click event - targeting filters inputs
-    $('.checkbox-filter-search').on('click', function (event) {
+    /** Click event - reset filtering **/
+    $('.resetFilterButton').on('click', function (event) {
 
-        let filterData = {"search": {}};
-        let tagArray = {};
-        let freeSearchData = [];
-        let institutionArray = [];
-        let certificateArray = [];
-        let languageArray = [];
-
-        /** Getting free search value from url params */
-        let params = new URLSearchParams(document.location.search);
-        let searchValue = params.get("text_s");
-        if(searchValue) freeSearchData.push(searchValue);
-
-        /** Getting array of inputs */
-        let filterItems = $('.checkbox-filter-search');
-
-        /** Looping all filter items inputs */
-        filterItems.each((index, element) => {
-            let id = element.id;
-            let type = $(`#${id}`).data('name');
-            let group = $(`#${id}`).data('group');
-            let englishValue = $(`#${id}`).data('value');
-           
-            /** Checking if value is checked */
-            if(element.checked) {
-                // console.log(element)
-                switch (type) {
-                    case 'tag':
-                        if(tagArray[group]){
-                            tagArray[group].push(englishValue);
-                        } else {
-                            tagArray[group] = [];
-                            tagArray[group].push(englishValue);
-                        }
-
-                        break;
-
-                    case 'institution':
-                        institutionArray.push(englishValue);
-                        break;
-
-
-                    case 'certificate':
-                        certificateArray.push(englishValue);
-                        break;
-
-                    case 'language':
-                        languageArray.push(englishValue);
-                        break;
-                }
-            }
+        let filtersInputs = $('.checkbox-filter-search');
+        filtersInputs.each((index, element) => {
+            element.checked = false;
         });
+        /** removing extra filters **/
+        $('.extraFilter').remove();
+    });
 
-        /** Checking if any filter checked */
-        if(Object.keys(tagArray).some(() => { return true; }) || institutionArray.length > 0 || certificateArray.length > 0 || languageArray.length > 0 || Object.keys(freeSearchData).some(() => { return true; })) {
+    /** Click event - adding more filters **/
+    $('.moreFilters .extraFilterCheckbox').on('click', function (event) {
 
-            /** checking which filters checked and pushing each array to object (key and values) */
-            if(freeSearchData.length > 0) {
-                filterData['search']['text_s'] = freeSearchData;
-            }
-            if(Object.keys(tagArray).some((k) => { return true; })) {
-                filterData['search']['tags'] = tagArray;
-            }
-            if(institutionArray.length > 0) {
-                filterData['search']['institution'] = institutionArray;
-            }
-
-            if(certificateArray.length > 0) {
-                filterData['search']['certificate'] = certificateArray;
-            }
-            if(languageArray.length > 0) {
-                filterData['search']['language'] = languageArray;
-            }
-
-            filterCoursesAjax(filterData)
+        /**Getting targeted input */
+        let filterId = $(event.target).data('value');
+        let filterGroupName = event.target.value;
+        /** If element checked appending it to menu, else - remove it */
+        if(event.target.checked){
+            appendGroupFilter(filterGroupName, filterId)
+            getFiltersGroups(filterId)
+            openCheckboxEvent()
         } else {
-            filterData = [];
-            filterCoursesAjax(filterData)
+            let filterToRemove = document.getElementsByClassName(filterId)[0];
+            filterToRemove.remove()
         }
+    });
 
-    })
-    /** end of click event */
+});
 
-    /** ajax call */
-    function filterCoursesAjax(filterData) {
+/** hiding filter inputs when clicking on screen or other filter group */
+$(document).click(function(event) {
 
-        let data = {
-            'action': 'filter_by_tag',
-            'type' : 'courses',
-            'lang' : getCookie('openedx-language-preference'),
-            'filters': filterData,
-        }
+    let filtergroup = $('.wrapEachFiltergroup');
+    let filtersInputs = $(`.inputsContainer`);
 
-        jQuery.post(filter_by_tag_ajax.ajaxurl, data, function(response){
-            if(response.success){
-                const responseData = JSON.parse(response.data);
-                // console.log(responseData['filters'])
-                appendUrlParams(responseData['filters'])
-                if(responseData['courses'].length > 0) {
-                    appendFilteredCourses(responseData['courses'])
-                } else {
-                    haveNoResults()
-                }
+    /** hiding input container when clicking on screen */
+    if (!filtergroup.is(event.target) && !filtergroup.has(event.target).length && !filtersInputs.is(event.target) && !filtersInputs.has(event.target).length) {
+        filtersInputs.hide();
+    }
+
+    /** hiding input container when clicking on other filter group */
+    if (filtergroup.is(event.target) || filtergroup.has(event.target).length || filtersInputs.is(event.target) || filtersInputs.has(event.target).length) {
+
+        let popupMenuDiv = event.target.closest(".wrapEachFiltergroup").querySelector(".inputsContainer");
+
+        filtersInputs.each((index, element) => {
+            if(element !== popupMenuDiv){
+                element.style.display = "none";
             }
         })
+
     }
 
-    /** Filtering by tag function of catalog - need to remove  */
-    function filterByTagEvent(){
-        /** removing event from div */
-        $(`#groupFiltersContainer .checkbox-filter-search`).unbind('click');
-
-        /** click event - targeting each input for filtering */
-        $('#groupFiltersContainer .checkbox-filter-search').on('click', function (event) {
-            let filterData = {};
-            let tagArray = [];
-            let institutionArray = [];
-            let certificateArray = [];
-            let languageArray = [];
-
-            /**getting specific value - inside certificate-filter */
-            let certificates = $('.checkbox-filter-search');
-
-            /** looping all certificate inputs */
-            certificates.each((index, element) => {
-                let id = element.id;
-                let type = $(`#${id}`).data('name');
-                let value = element.value;
-
-                /** checking if value is checked */
-                if(element.checked) {
-
-                    switch (type) {
-                        case 'tag':
-                            tagArray.push(value);
-                            break;
-
-                        case 'institution':
-                            institutionArray.push(value);
-                            break;
-
-                        case 'certificate':
-                            certificateArray.push(value);
-                            break;
-
-                        case 'language':
-                            languageArray.push(value);
-                            break;
-                    }
-                }
-            });
-
-            if(tagArray || institutionArray || certificateArray || languageArray) {
-
-                /** pushing each array to object (key and values) */
-                if(tagArray.length > 0) {
-                    filterData['tags'] = tagArray;
-                }
-                if(institutionArray.length > 0) {
-                    filterData['institution'] = institutionArray;
-                }
-                if(certificateArray.length > 0) {
-                    filterData['certificate'] = certificateArray;
-                }
-                if(languageArray.length > 0) {
-                    filterData['language'] = languageArray;
-                }
-            };
-        })
-    }
-    /** End of function filterByTagEvent */
 });
 /** end of jquery */
 
@@ -330,14 +215,13 @@ function markCheckboxes(params) {
     for (let entry of entries) {
         if(entry[0] == 'text_s') {
             $('.search-field').val(entry[1]);
-        } // TODO add the class name of search field to the search in catalog page .
+        }
 
         filterItems.each((index, element) => {
             let id = element.id;
             let type = $(`#${id}`).data('name'); //TODO using for language, certificate, institution.
             let group = $(`#${id}`).data('group'); //TODO using for tags.
             let englishValue = $(`#${id}`).data('value');
-            let value = element.value;
 
             if(entry[0] === type ) {
                 let itemValues = entry[1].split(",");
@@ -351,11 +235,10 @@ function markCheckboxes(params) {
 
             if(entry[0].includes('tags_')) {
                 let tagsGroup = entry[0].slice(5)
-                // console.log(tagsGroup , ':', group)
 
                 if(tagsGroup === group) {
                     let itemValues = entry[1].split(",");
-                    // console.log(tagsGroup)
+
                     for(let item of itemValues){
                         if(englishValue === item) {
                             $(`#${id}`).prop('checked', true)
@@ -365,7 +248,7 @@ function markCheckboxes(params) {
             }
         });
     }
-} // TODO verified the mark checkboxes works in english & arabic (maybe need to use the tagID)
+}
 
 function haveNoResults() {
     let coursesBox = document.getElementById("coursesBox");
@@ -383,3 +266,206 @@ function haveNoResults() {
 
     coursesBox.replaceWith(output)
 } // TODO build the div of 'no results', needs to be like the template in Courses.php
+
+/** Filtering by tag function of catalog - need to remove  */
+function filterByTagEvent(){
+    /** removing event from div */
+    $(`#groupFiltersContainer .checkbox-filter-search`).unbind('click');
+
+    /** click event - targeting each input for filtering */
+    $('#groupFiltersContainer .checkbox-filter-search').on('click', function (event) {
+
+        let filterData = {"search": {}};
+        let tagArray = {};
+        let freeSearchData = [];
+        let institutionArray = [];
+        let certificateArray = [];
+        let languageArray = [];
+
+        /** Getting free search value from url params */
+        let params = new URLSearchParams(document.location.search);
+        let searchValue = params.get("text_s");
+        if(searchValue) freeSearchData.push(searchValue);
+
+        /** Getting array of inputs */
+        let filterItems = $('.checkbox-filter-search');
+
+        /** Looping all filter items inputs */
+        filterItems.each((index, element) => {
+            let id = element.id;
+            let type = $(`#${id}`).data('name');
+            let group = $(`#${id}`).data('group');
+            let englishValue = $(`#${id}`).data('value');
+
+            /** Checking if value is checked */
+            if(element.checked) {
+                // console.log(element)
+                switch (type) {
+                    case 'tag':
+                        if(tagArray[group]){
+                            tagArray[group].push(englishValue);
+                        } else {
+                            tagArray[group] = [];
+                            tagArray[group].push(englishValue);
+                        }
+
+                        break;
+
+                    case 'institution':
+                        institutionArray.push(englishValue);
+                        break;
+
+
+                    case 'certificate':
+                        certificateArray.push(englishValue);
+                        break;
+
+                    case 'language':
+                        languageArray.push(englishValue);
+                        break;
+                }
+            }
+        });
+
+        /** Checking if any filter checked */
+        if(Object.keys(tagArray).some(() => { return true; }) || institutionArray.length > 0 || certificateArray.length > 0 || languageArray.length > 0 || Object.keys(freeSearchData).some(() => { return true; })) {
+
+            /** checking which filters checked and pushing each array to object (key and values) */
+            if(freeSearchData.length > 0) {
+                filterData['search']['text_s'] = freeSearchData;
+            }
+            if(Object.keys(tagArray).some((k) => { return true; })) {
+                filterData['search']['tags'] = tagArray;
+            }
+            if(institutionArray.length > 0) {
+                filterData['search']['institution'] = institutionArray;
+            }
+
+            if(certificateArray.length > 0) {
+                filterData['search']['certificate'] = certificateArray;
+            }
+            if(languageArray.length > 0) {
+                filterData['search']['language'] = languageArray;
+            }
+
+            filterCoursesAjax(filterData)
+        } else {
+            filterData = [];
+            filterCoursesAjax(filterData)
+        }
+
+    })}
+/** End of function filterByTagEvent */
+
+/** Ajax call - getting filters group name and there tags **/
+function getFiltersGroups(filterId) {
+
+    let data = {
+        'action': 'add_filters_to_menu',
+        'type' : 'moreFilters',
+        'dataArray': filterId,
+    }
+    jQuery.post(add_filters_to_menu_ajax.ajaxurl, data, function(response){
+        if(response.success){
+            const responseData = JSON.parse(response.data);
+            appendMoreFilters(responseData)
+            /** Calling event - targeting each filtering inputs **/
+            filterByTagEvent()
+        }
+    })
+}
+
+/** Appending filter tags **/
+function appendMoreFilters(filterData) {
+
+    /**looping each filter group and appending it to the filters menu */
+    let filterId = filterData.filterId;
+    let container = document.getElementById(`extraFilter_${filterId}`);
+    let groupFilters = filterData.filtersList;
+    let currentLanguage =filterData.language;
+
+    groupFilters.forEach(element => {
+
+        let temp = document.createElement("div");
+        temp.classList.add('filterInput');
+        let id = element.id;
+        let name = element.name;
+        let urlTitle = element.english_name;
+        let checked = '';
+
+        if(element.english_name && currentLanguage == 'en' ) {
+            name = element.english_name;
+        }
+        if(element.arabic_name && currentLanguage == 'ar'){
+            name = element.arabic_name;
+        }
+        temp.innerHTML =
+            '<label class="filterTagLabel" for="'+id+'">'+
+            '<input'+ checked +' class="checkbox-filter-search" type="checkbox" data-name="institution" data-value="'+urlTitle+'" value="'+name+'" id="'+id+'">'+
+            '<div class="wrap-term-and-sum tagNameWrap">'+
+            '<span class="term-name">'+name+'</span>'+
+            '</div>'+
+            '</label>';
+        container.append(temp);
+    })
+}
+
+/** ajax call */
+function filterCoursesAjax(filterData) {
+
+    let data = {
+        'action': 'filter_by_tag',
+        'type' : 'courses',
+        'lang' : getCookie('openedx-language-preference'),
+        'filters': filterData,
+    }
+
+    jQuery.post(filter_by_tag_ajax.ajaxurl, data, function(response){
+        if(response.success){
+            const responseData = JSON.parse(response.data);
+            // console.log(responseData['filters'])
+            appendUrlParams(responseData['filters'])
+            if(responseData['courses'].length > 0) {
+                appendFilteredCourses(responseData['courses'])
+            } else {
+                haveNoResults()
+            }
+        }
+    })
+}
+
+/** Appending filter group **/
+function appendGroupFilter(filterGroupName, filterId) {
+
+    let vector = $('.filterVector').attr('src');
+    let container = document.getElementById('groupFiltersContainer');
+    let groupTitle = filterGroupName;
+    let temp = document.createElement("div");
+    temp.classList.add('wrapEachFiltergroup');
+    temp.classList.add('extraFilter');
+    temp.classList.add(filterId);
+
+    temp.innerHTML =
+        '<div class="wrapEachFilterTag">'+
+        '<div class="buttonWrap">'+
+        '<p id="'+filterId+'" class="filterGroupTitle">'+ groupTitle +' </p>'+
+        '<img class="filterVector" src="'+vector+'"/>'+
+        '</div>'+
+        '</div>'+
+        '<div class="inputsContainer" id="extraFilter_'+filterId+'">'+
+        '</div>';
+
+    container.append(temp);
+}
+
+function openCheckboxEvent() {
+    /** removing event from div */
+    $(`.wrapEachFiltergroup`).unbind('click');
+
+    /** click event - targeting each checkbox to open */
+    $('.wrapEachFiltergroup').on('click', function (event) {
+
+        let popupMenuDiv = event.target.closest(".wrapEachFiltergroup").querySelector(".inputsContainer")
+        $(popupMenuDiv).toggle();
+    });
+}

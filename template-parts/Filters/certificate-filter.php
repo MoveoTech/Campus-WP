@@ -35,19 +35,19 @@ $title = $filter['title'];
 
         <?php $i = 0;
         foreach ($certificates as $certificate) {
+            $name = $certificate['name'];
+            $url_title = $certificate['url_title'];
             $checked = '';
             ?>
 
             <div class="filterInput">
                 <label class="filterTagLabel" for="certificate_<?= $i ?>">
-                    <input <?= $checked ?> class="checkbox-filter-search" type="checkbox" data-name="certificate" data-value="<?= $certificate ?>" name=" $certificate '[]'"  value="<?= $certificate ?>" id="certificate_<?= $i ?>">
+                    <input <?= $checked ?> class="checkbox-filter-search" type="checkbox" data-name="certificate" data-group='<?= $title ?>' data-value="<?= $url_title ?>" name=" $name '[]'"  value="<?= $name ?>" id="certificate_<?= $i ?>">
                     <div class="wrap-term-and-sum tagNameWrap" >
-                        <span class="term-name"><?= $certificate ?></span>
-
+                        <span class="term-name"><?= $name ?></span>
                     </div>
                 </label>
             </div>
-
 
             <?php $i++;
         };?>

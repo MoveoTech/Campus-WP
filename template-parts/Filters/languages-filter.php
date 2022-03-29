@@ -32,14 +32,16 @@ $title = $filter['title'];
     <div class="inputsContainer" > <?php
         $i=0;
         foreach ($languages as $language) {
+            $name = $language['name'];
+            $url_title = $language['url_title'];
             $checked = '';
             ?>
 
             <div class="filterInput">
                 <label class="filterTagLabel" for="language_<?= $i ?>">
-                    <input <?= $checked ?> class="checkbox-filter-search" type="checkbox" data-name='language' data-value="<?= $language ?>" name=" language '[]'" value="<?= $language ?>" id="language_<?= $i ?>"/>
+                    <input <?= $checked ?> class="checkbox-filter-search" type="checkbox" data-name='language' data-group='<?= $title ?>' data-value="<?= $url_title ?>" name=" $name '[]'" value="<?= $name ?>" id="language_<?= $i ?>"/>
                     <div class="wrap-term-and-sum tagNameWrap" >
-                        <span class="term-name"><?= $language ?></span>
+                        <span class="term-name"><?= $name ?></span>
                     </div>
                 </label>
             </div>

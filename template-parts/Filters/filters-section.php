@@ -1,15 +1,16 @@
 <?php
 require_once 'filterTypes.php';
 $filtersList = wp_parse_args(
-$args["args"]
+    $args["args"]
 );
-if(empty($filtersList) || empty($filtersList['filters_list']) || empty($filtersList['academic_filter']))
+
+if(empty($filtersList) || empty($filtersList['academic_filter']))
 return;
-$tags_filters = $filtersList['filters_list'];
+global $get_params, $sitepress;
+
 $academic_institutions = $filtersList['academic_filter'];
 $filters = get_field('filters');
 $academic_name = cin_get_str('Institution_Name');
-global $get_params, $sitepress;
 $current_lang = $sitepress->get_current_language();
 ?>
 
@@ -36,19 +37,16 @@ $current_lang = $sitepress->get_current_language();
 
     <?php
     if(count($filtersInputs)>0){
-        getMoreFilters($filtersInputs);
-    }
-    /** adding filter group template */
-   function getMoreFilters($filtersInputs){
-       get_template_part('template', 'parts/Filters/addMoreFilters',
-           array(
-               'args' => array(
-                   'filters'=>  $filtersInputs,
-               )
-           ));
-   }
-    ?>
 
+        /** adding filter group template */
+        get_template_part('template', 'parts/Filters/addMoreFilters',
+            array(
+                'args' => array(
+                    'filters'=>  $filtersInputs,
+                )
+            )
+        );
+    } ?>
 </div>
 
                                     <!--order by section - DO NOT REMOVE - for the next version-->
