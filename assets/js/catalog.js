@@ -39,6 +39,83 @@ $(document).ready(function () {
             filterToRemove.remove()
         }
     });
+    if($(window).width() <= 768){
+        //courses slick
+        jQuery('.catalog-courses-stripe').slick({
+            lazyLoad: 'ondemand',
+            slidesToShow: 4,
+            slidesToScroll: 4,
+            rtl: is_rtl,
+            // nextArrow: nexSlick,
+            // prevArrow: prevSlick,
+            speed: 1000,
+            infinite: false,
+            responsive: [
+                // {
+                //     breakpoint: 993,
+                //     settings: {
+                //         speed: 500,
+                //         slidesToShow: 3,
+                //         slidesToScroll: 3,
+                //     }
+                // },
+                {
+                    breakpoint: 768,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 3,
+                        speed: 500,
+                        arrows: false,
+                    }
+                },
+                {
+                    breakpoint: 710,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 3,
+                        arrows: false,
+                    }
+                },
+                {
+                    breakpoint: 650,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 3,
+                        arrows: false,
+                    }
+                },
+                {
+                    breakpoint: 600,
+                    settings: {
+                        slidesToShow: 2.5,
+                        slidesToScroll: 2,
+                        arrows: false,
+                    }
+                },
+                {
+                    breakpoint: 480,
+                    settings: {
+                        speed: 100,
+                        slidesToShow: 2.15,
+                        slidesToScroll: 2,
+                        arrows: false,
+                    }
+                },
+            ]
+
+        })
+    }
+
+
+    // if($(window).width() <= 480){
+    //
+    //     // $('.catalogStripeContainer .coursesContainerWeb').removeClass("removeClass");
+    //     // $('.catalogStripeContainer .coursesContainerWeb').addClass("stripe-slider-slick");
+    //     // $('.coursesContainerWeb .catalog_stripe_container').removeClass("catalog-courses-stripe");
+    //     $('.coursesContainerWeb .catalog_stripe_container').addClass("courses-stripe");
+    //     // console.log("small width ",  $('.catalogStripeContainer .coursesContainerWeb'))
+    //     // console.log("small width ",  $('.coursesContainerWeb .catalog_stripe_container'))
+    // }
 
 });
 

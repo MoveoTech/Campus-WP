@@ -8,8 +8,6 @@ if(empty($stripe) || empty($stripe['id']) || empty($stripe['courses']) || count(
 global $sitepress;
 
 $courses = pods('courses', podsParams($stripe['courses']));
-
-
 ?>
 
 <div class="coursesContainer">
@@ -109,21 +107,21 @@ $courses = pods('courses', podsParams($stripe['courses']));
                 </a>
             </div>
 
-            <?php get_template_part(
-                'templates/mobileCourse',
-                'popup',
-                array(
-                    'args' => array(
-                        'image' => $thumb,
-                        'title' => $title,
-                        'institution' => $institution_name,
-                        'tags' => $tags,
-                        'duration' => $duration,
-                        'id' => $id . $stripe['id'],
-                        'url' => $url
-                    )
-                )
-            ) ?>
+<!--            --><?php //get_template_part(
+//                'templates/mobileCourse',
+//                'popup',
+//                array(
+//                    'args' => array(
+//                        'image' => $thumb,
+//                        'title' => $title,
+//                        'institution' => $institution_name,
+//                        'tags' => $tags,
+//                        'duration' => $duration,
+//                        'id' => $id . $stripe['id'],
+//                        'url' => $url
+//                    )
+//                )
+//            ) ?>
         </div>
 
     <?php };?>
