@@ -26,7 +26,7 @@ if($url_params){
     $params = getPodsFilterParams($filters);
 } else {
     $params = [
-        'limit'   => 27,
+        'limit'   => 1,
         'orderBy' => 't.order DESC',
     ];
 }
@@ -42,7 +42,6 @@ $course_attrs = array(
 /** NEW PARAMETERS */
 $catalog_stripe_id = get_field('catalog_stripe')[0];
 $academic_institutions = pods( 'academic_institution', array('limit'   => -1 ));
-console_log($params);
 $courses = pods( 'courses', $params, true);
 $count = $courses->total_found();
 $academic_name = cin_get_str('Institution_Name');
