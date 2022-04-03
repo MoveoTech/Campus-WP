@@ -48,6 +48,7 @@ function academicInstitution_moreFilter($filterId){
         'groupName' => getFieldByLanguage(get_field('hebrew_title', $filterId), get_field('english_title', $filterId), get_field('arabic_title', $filterId), $sitepress->get_current_language()),
         'language' => $sitepress->get_current_language(),
         'filterId' => $filterId,
+        'dataType' => 'institution'
     );
 }
 /** Getting the data of type - tags */
@@ -60,6 +61,7 @@ function tags_moreFilter($filterId){
         'groupName' => getFieldByLanguage(get_field('hebrew_title', $filterId), get_field('english_title', $filterId), get_field('arabic_title', $filterId), $sitepress->get_current_language()),
         'language' => $sitepress->get_current_language(),
         'filterId' => $filterId,
+        'dataType' => 'tag_' . get_field('english_title', $filterId)
     );
 }
 /** Getting the data of type - language */
@@ -81,6 +83,7 @@ function languages_moreFilter($filterId){
                 'groupName' => getFieldByLanguage(get_field('hebrew_title', $filterId), get_field('english_title', $filterId), get_field('arabic_title', $filterId), $sitepress->get_current_language()),
                 'language' => $sitepress->get_current_language(),
                 'filterId' => $filterId,
+                'dataType' => 'language'
             );
 }
 /** Getting the data of type - certificate */
@@ -104,5 +107,6 @@ function certificate_moreFilter($filterId){
         'groupName' => getFieldByLanguage(get_field('hebrew_title', $filterId), get_field('english_title', $filterId), get_field('arabic_title', $filterId), $sitepress->get_current_language()),
         'language' => $sitepress->get_current_language(),
         'filterId' => $filterId,
+        'dataType' => 'certificate'
     );
 }
