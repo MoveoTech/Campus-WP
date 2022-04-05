@@ -40,7 +40,6 @@ $(document).ready(function () {
         }
     });
     $(window).resize(function() {
-        console.log($(window).width())
         if($(window).width() <= 768){
             /** catalog stripe slick */
             let rtl = true;
@@ -317,7 +316,6 @@ function filterByTagEvent(){
 
     /** click event - targeting each input for filtering */
     $('#groupFiltersContainer .catalogFilters .checkbox-filter-search').on('click', function (event) {
-console.log("holiii")
         let filterData = {"search": {}};
         let tagArray = {};
         let freeSearchData = [];
@@ -483,7 +481,6 @@ function appendGroupFilter(filterGroupName, filterId) {
     let container = document.getElementById('groupFiltersContainer');
     let groupTitle = filterGroupName;
     let addFilterbutton = document.getElementById('morefiltersBox');
-    console.log("addFilterbutton : ", addFilterbutton);
     let temp = document.createElement("div");
     temp.classList.add('wrapEachFiltergroup');
     temp.classList.add('extraFilter');
