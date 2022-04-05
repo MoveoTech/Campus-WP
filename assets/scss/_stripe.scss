@@ -1641,6 +1641,15 @@ body {
 }
 
 @media (max-width: 400px) {
+  .catalog-courses-stripe {
+    .course-stripe-item {
+      max-width: 166px;
+      .course-img{
+        max-width: 166px;
+
+      }
+    }
+  }
   .catalogWrap {
     .catalogStripeWrap {
       .catalogStripeContainer {

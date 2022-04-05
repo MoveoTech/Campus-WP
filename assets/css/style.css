@@ -19637,6 +19637,10 @@ body .course-item-hover {
     max-width: 400px; } }
 
 @media (max-width: 400px) {
+  .catalog-courses-stripe .course-stripe-item {
+    max-width: 166px; }
+    .catalog-courses-stripe .course-stripe-item .course-img {
+      max-width: 166px; }
   .catalogWrap .catalogStripeWrap .catalogStripeContainer {
     max-width: 390px; } }
 

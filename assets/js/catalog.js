@@ -39,39 +39,50 @@ $(document).ready(function () {
             filterToRemove.remove()
         }
     });
+    $(window).resize(function() {
+        console.log($(window).width())
+        if($(window).width() <= 768){
+            /** catalog stripe slick */
+            let rtl = true;
+            let currnetLanguage = $('.catalog-courses-stripe').data('language');
+            if(currnetLanguage == 'en'){
+                rtl = false;
+            }
+            jQuery('.catalog-courses-stripe').slick({
+                lazyLoad: 'ondemand',
+                slidesToShow: 2.5,
+                slidesToScroll: 2,
+                rtl: rtl,
+                arrows: false,
+                speed: 1000,
+                infinite: false,
+                responsive: [
+                    {
+                        breakpoint: 571,
+                        settings: {
+                            slidesToShow: 2.25,
+                            slidesToScroll: 2,
+                            arrows: false,
+                        }
+                    },
+                    {
+                        breakpoint: 480,
+                        settings: {
+                            speed: 100,
+                            slidesToShow: 2.15,
+                            slidesToScroll: 2,
+                            arrows: false,
+                        }
+                    },
+                ]
 
-    if($(window).width() <= 768){
-        /** catalog stripe slick */
-        jQuery('.catalog-courses-stripe').slick({
-            lazyLoad: 'ondemand',
-            slidesToShow: 2.5,
-            slidesToScroll: 2,
-            // rtl: is_rtl,
-            arrows: false,
-            speed: 1000,
-            infinite: false,
-            responsive: [
-                {
-                    breakpoint: 571,
-                    settings: {
-                        slidesToShow: 2.25,
-                        slidesToScroll: 2,
-                        arrows: false,
-                    }
-                },
-                {
-                    breakpoint: 480,
-                    settings: {
-                        speed: 100,
-                        slidesToShow: 2.15,
-                        slidesToScroll: 2,
-                        arrows: false,
-                    }
-                },
-            ]
+            })
+        } else{
+            console.log("test");
+            jQuery('.catalog-courses-stripe').slick('unslick');
+        }
+    });
 
-        })
-    }
 
 });
 
