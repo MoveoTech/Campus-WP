@@ -29,7 +29,7 @@ $title = $filter['title'];
             <img class="filterVector" src="<?php echo get_bloginfo('stylesheet_directory'). '/assets/images/vector-black.svg'?>"/>
         </div>
     </div>
-    <div class="inputsContainer" > <?php
+    <div class="inputsContainer catalogFilters" > <?php
         $i=0;
         foreach ($languages as $language) {
             $name = $language['name'];

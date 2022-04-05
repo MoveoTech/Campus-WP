@@ -33,20 +33,36 @@ $current_lang = $sitepress->get_current_language();
 
             }
         } ?>
+        <?php
+        if(count($filtersInputs)>0){
+
+            /** adding filter group template */
+            get_template_part('template', 'parts/Filters/addMoreFilters',
+                array(
+                    'args' => array(
+                        'filters'=>  $filtersInputs,
+                    )
+                )
+            );
+        } ?>
+
+        <div class="wrapEachFilterButton" id="resetButton">
+            <p class="resetFilterButton filterGroupTitle"><?= ResetFiltersLanguage(); ?></p>
+        </div>
     </div>
 
-    <?php
-    if(count($filtersInputs)>0){
-
-        /** adding filter group template */
-        get_template_part('template', 'parts/Filters/addMoreFilters',
-            array(
-                'args' => array(
-                    'filters'=>  $filtersInputs,
-                )
-            )
-        );
-    } ?>
+<!--    --><?php
+//    if(count($filtersInputs)>0){
+//
+//        /** adding filter group template */
+//        get_template_part('template', 'parts/Filters/addMoreFilters',
+//            array(
+//                'args' => array(
+//                    'filters'=>  $filtersInputs,
+//                )
+//            )
+//        );
+//    } ?>
 </div>
 
                                     <!--order by section - DO NOT REMOVE - for the next version-->

@@ -39,55 +39,22 @@ $(document).ready(function () {
             filterToRemove.remove()
         }
     });
+
     if($(window).width() <= 768){
-        //courses slick
+        /** catalog stripe slick */
         jQuery('.catalog-courses-stripe').slick({
             lazyLoad: 'ondemand',
-            slidesToShow: 4,
-            slidesToScroll: 4,
-            rtl: is_rtl,
-            // nextArrow: nexSlick,
-            // prevArrow: prevSlick,
+            slidesToShow: 2.5,
+            slidesToScroll: 2,
+            // rtl: is_rtl,
+            arrows: false,
             speed: 1000,
             infinite: false,
             responsive: [
-                // {
-                //     breakpoint: 993,
-                //     settings: {
-                //         speed: 500,
-                //         slidesToShow: 3,
-                //         slidesToScroll: 3,
-                //     }
-                // },
                 {
-                    breakpoint: 768,
+                    breakpoint: 571,
                     settings: {
-                        slidesToShow: 3,
-                        slidesToScroll: 3,
-                        speed: 500,
-                        arrows: false,
-                    }
-                },
-                {
-                    breakpoint: 710,
-                    settings: {
-                        slidesToShow: 3,
-                        slidesToScroll: 3,
-                        arrows: false,
-                    }
-                },
-                {
-                    breakpoint: 650,
-                    settings: {
-                        slidesToShow: 3,
-                        slidesToScroll: 3,
-                        arrows: false,
-                    }
-                },
-                {
-                    breakpoint: 600,
-                    settings: {
-                        slidesToShow: 2.5,
+                        slidesToShow: 2.25,
                         slidesToScroll: 2,
                         arrows: false,
                     }
@@ -105,17 +72,6 @@ $(document).ready(function () {
 
         })
     }
-
-
-    // if($(window).width() <= 480){
-    //
-    //     // $('.catalogStripeContainer .coursesContainerWeb').removeClass("removeClass");
-    //     // $('.catalogStripeContainer .coursesContainerWeb').addClass("stripe-slider-slick");
-    //     // $('.coursesContainerWeb .catalog_stripe_container').removeClass("catalog-courses-stripe");
-    //     $('.coursesContainerWeb .catalog_stripe_container').addClass("courses-stripe");
-    //     // console.log("small width ",  $('.catalogStripeContainer .coursesContainerWeb'))
-    //     // console.log("small width ",  $('.coursesContainerWeb .catalog_stripe_container'))
-    // }
 
 });
 
@@ -148,6 +104,7 @@ $(document).click(function(event) {
 
 /** Ido made a new function for appending */
 function appendFilteredCourses(coursesData) {
+    console.log("ttttttttt")
     let coursesBox = document.getElementById("coursesBox");
     let output = document.createElement("div");
 
@@ -239,7 +196,7 @@ function appendFilteredCourses(coursesData) {
 
         output.append(temp)
     });
-    coursesBox.replaceWith(output)
+    // coursesBox.replaceWith(output)
 
 }
 
@@ -346,12 +303,13 @@ function haveNoResults() {
 
 /** Filtering by tag function of catalog - need to remove  */
 function filterByTagEvent(){
+
     /** removing event from div */
-    $(`#groupFiltersContainer .checkbox-filter-search`).unbind('click');
+    $(`#groupFiltersContainer .catalogFilters .checkbox-filter-search`).unbind('click');
 
     /** click event - targeting each input for filtering */
-    $('#groupFiltersContainer .checkbox-filter-search').on('click', function (event) {
-
+    $('#groupFiltersContainer .catalogFilters .checkbox-filter-search').on('click', function (event) {
+console.log("holiii")
         let filterData = {"search": {}};
         let tagArray = {};
         let freeSearchData = [];
@@ -517,6 +475,8 @@ function appendGroupFilter(filterGroupName, filterId) {
     let vector = $('.filterVector').attr('src');
     let container = document.getElementById('groupFiltersContainer');
     let groupTitle = filterGroupName;
+    let addFilterbutton = document.getElementById('morefiltersBox');
+    console.log("addFilterbutton : ", addFilterbutton);
     let temp = document.createElement("div");
     temp.classList.add('wrapEachFiltergroup');
     temp.classList.add('extraFilter');
@@ -529,10 +489,16 @@ function appendGroupFilter(filterGroupName, filterId) {
         '<img class="filterVector" src="'+vector+'"/>'+
         '</div>'+
         '</div>'+
-        '<div class="inputsContainer" id="extraFilter_'+filterId+'">'+
+        '<div class="inputsContainer catalogFilters" id="extraFilter_'+filterId+'">'+
         '</div>';
 
-    container.append(temp);
+    // container.append(temp);
+    console.log('before append')
+
+    container.insertBefore(temp, addFilterbutton);
+
+    console.log('after append')
+
 }
 
 function openCheckboxEvent() {

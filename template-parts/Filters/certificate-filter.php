@@ -31,7 +31,7 @@ $title = $filter['title'];
             <img class="filterVector" src="<?php echo get_bloginfo('stylesheet_directory'). '/assets/images/vector-black.svg'?>"/>
         </div>
     </div>
-        <div class="inputsContainer" >
+        <div class="inputsContainer catalogFilters" >
 
         <?php $i = 0;
         foreach ($certificates as $certificate) {

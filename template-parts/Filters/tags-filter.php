@@ -20,7 +20,7 @@ $tags = pods('tags',podsFilterParams($tagsArray))->data();
             <img class="filterVector" src="<?php echo get_bloginfo('stylesheet_directory'). '/assets/images/vector-black.svg'?>"/>
         </div>
     </div>
-        <div class="inputsContainer">
+        <div class="inputsContainer catalogFilters">
 
         <?php foreach ($tags as $tag) {
             $tagId =  $tag->id;
