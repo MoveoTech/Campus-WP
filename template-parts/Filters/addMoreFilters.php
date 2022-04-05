@@ -18,10 +18,6 @@ $moreFilters = $filter['filters'];
                 <img class="filterVector" src="<?php echo get_bloginfo('stylesheet_directory'). '/assets/images/plus-sign.svg'?>"/>
             </div>
         </div>
-<!---->
-<!--        <div class="wrapEachFilterButton" id="resetButton">-->
-<!--            <p class="resetFilterButton filterGroupTitle">--><?//= ResetFiltersLanguage(); ?><!--</p>-->
-<!--        </div>-->
 
     </div>
 

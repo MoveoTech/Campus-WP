@@ -78,7 +78,6 @@ $(document).ready(function () {
 
             })
         } else{
-            console.log("test");
             jQuery('.catalog-courses-stripe').slick('unslick');
         }
     });

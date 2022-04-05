@@ -582,7 +582,6 @@ function closePopupIfOpen(id) {
     let array = document.querySelectorAll('body .course-popup-modal')
     let arrayLength = array.length
     let openCourse = array[arrayLength - 1]
-    console.log("openCourse : ", openCourse);
     if(openCourse.getAttribute('style')) {
         let courseClassName = openCourse.classList[openCourse.classList.length - 1]
         let courseId = courseClassName.slice(19)
