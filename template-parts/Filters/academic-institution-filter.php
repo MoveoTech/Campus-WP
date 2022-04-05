@@ -22,7 +22,7 @@ $choose_str = __('Choose Institution', 'single_corse');
             <img class="filterVector" src="<?php echo get_bloginfo('stylesheet_directory'). '/assets/images/vector-black.svg'?>"/>
         </div>
     </div>
-    <div class="inputsContainer">
+    <div class="inputsContainer catalogFilters">
 
             <?php
             foreach ($academic_institutions as $single_academic_institution){

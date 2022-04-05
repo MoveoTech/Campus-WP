@@ -39,6 +39,48 @@ $(document).ready(function () {
             filterToRemove.remove()
         }
     });
+    $(window).resize(function() {
+        if($(window).width() <= 768){
+            /** catalog stripe slick */
+            let rtl = true;
+            let currnetLanguage = $('.catalog-courses-stripe').data('language');
+            if(currnetLanguage == 'en'){
+                rtl = false;
+            }
+            jQuery('.catalog-courses-stripe').slick({
+                lazyLoad: 'ondemand',
+                slidesToShow: 2.5,
+                slidesToScroll: 2,
+                rtl: rtl,
+                arrows: false,
+                speed: 1000,
+                infinite: false,
+                responsive: [
+                    {
+                        breakpoint: 571,
+                        settings: {
+                            slidesToShow: 2.25,
+                            slidesToScroll: 2,
+                            arrows: false,
+                        }
+                    },
+                    {
+                        breakpoint: 480,
+                        settings: {
+                            speed: 100,
+                            slidesToShow: 2.15,
+                            slidesToScroll: 2,
+                            arrows: false,
+                        }
+                    },
+                ]
+
+            })
+        } else{
+            jQuery('.catalog-courses-stripe').slick('unslick');
+        }
+    });
+
 
 });
 
@@ -71,6 +113,7 @@ $(document).click(function(event) {
 
 /** Ido made a new function for appending */
 function appendFilteredCourses(coursesData) {
+
     let coursesBox = document.getElementById("coursesBox");
     let output = document.createElement("div");
 
@@ -91,7 +134,7 @@ function appendFilteredCourses(coursesData) {
         let haveYoutube = item.haveyoutube;
         let course_attrs = 'col-xs-12 col-md-6 col-xl-4 course-item-with-border';
 
-        // console.log("each item : ",item);
+
         let youtube;
         if(haveYoutube) {
              youtube = '<a class="course-item-image has_background_image haveyoutube " data-id="'+ id +'" data-popup aria-pressed="true" aria-haspopup="true" role="button" href="javascript:void(0)" aria-label="'+ name +'" data-classToAdd="course_info_popup" style="background-image: url('+image+')"></a>'
@@ -103,8 +146,6 @@ function appendFilteredCourses(coursesData) {
         }
 
         let temp = document.createElement("div");
-        // temp.id = 'coursesBox';
-        // temp.classList.add('row output-courses');
         temp.innerHTML =
             '<div class="item_post_type_course course-item '+ course_attrs +'" data-id="'+ id +'">'+
                 '<div class="course-item-inner">'+
@@ -269,12 +310,12 @@ function haveNoResults() {
 
 /** Filtering by tag function of catalog - need to remove  */
 function filterByTagEvent(){
+
     /** removing event from div */
-    $(`#groupFiltersContainer .checkbox-filter-search`).unbind('click');
+    $(`#groupFiltersContainer .catalogFilters .checkbox-filter-search`).unbind('click');
 
     /** click event - targeting each input for filtering */
-    $('#groupFiltersContainer .checkbox-filter-search').on('click', function (event) {
-
+    $('#groupFiltersContainer .catalogFilters .checkbox-filter-search').on('click', function (event) {
         let filterData = {"search": {}};
         let tagArray = {};
         let freeSearchData = [];
@@ -299,7 +340,6 @@ function filterByTagEvent(){
 
             /** Checking if value is checked */
             if(element.checked) {
-                // console.log(element)
                 switch (type) {
                     case 'tag':
                         if(tagArray[group]){
@@ -424,7 +464,7 @@ function filterCoursesAjax(filterData) {
     jQuery.post(filter_by_tag_ajax.ajaxurl, data, function(response){
         if(response.success){
             const responseData = JSON.parse(response.data);
-            // console.log(responseData['filters'])
+
             appendUrlParams(responseData['filters'])
             if(responseData['courses'].length > 0) {
                 appendFilteredCourses(responseData['courses'])
@@ -441,6 +481,7 @@ function appendGroupFilter(filterGroupName, filterId) {
     let vector = $('.filterVector').attr('src');
     let container = document.getElementById('groupFiltersContainer');
     let groupTitle = filterGroupName;
+    let addFilterbutton = document.getElementById('morefiltersBox');
     let temp = document.createElement("div");
     temp.classList.add('wrapEachFiltergroup');
     temp.classList.add('extraFilter');
@@ -453,10 +494,12 @@ function appendGroupFilter(filterGroupName, filterId) {
         '<img class="filterVector" src="'+vector+'"/>'+
         '</div>'+
         '</div>'+
-        '<div class="inputsContainer" id="extraFilter_'+filterId+'">'+
+        '<div class="inputsContainer catalogFilters" id="extraFilter_'+filterId+'">'+
         '</div>';
 
-    container.append(temp);
+    container.insertBefore(temp, addFilterbutton);
+
+
 }
 
 function openCheckboxEvent() {

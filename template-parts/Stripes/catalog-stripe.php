@@ -21,6 +21,9 @@ $courses = $stripe['courses'];
                 if($stripeTitle != '' && !empty($stripeTitle)) : ?>
                     <h1><?php echo $stripeTitle ?></h1>
                 <?php endif; ?>
+                <?php if($stripe['subtitle'] && $stripe['subtitle'] !== '') : ?>
+                    <p><?php echo $stripe['subtitle'] ?></p>
+                <?php endif; ?>
 
             </div>
 

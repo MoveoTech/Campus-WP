@@ -6,15 +6,13 @@ $stripe = wp_parse_args(
 if(empty($stripe) || empty($stripe['id']) || empty($stripe['courses']) || count($stripe['courses']) < 1 )
     return;
 global $sitepress;
-
+$currentLanguage = $sitepress->get_current_language();
 $courses = pods('courses', podsParams($stripe['courses']));
-
-
 ?>
 
 <div class="coursesContainer">
     <div hidden id="<?php echo $stripe['id'] . "courses" ?>" value="<?php  print_r(json_encode($stripe['courses'])); ?>" ></div>
-    <div id="<?php echo $stripe['id'] ?>" class="catalog-courses-stripe <?php echo ($stripe['type'] && $stripe['type'] == 'nerative' ) ? 'nerative-class' : '' ?>">
+    <div id="<?php echo $stripe['id'] ?>" class="catalog-courses-stripe <?php echo ($stripe['type'] && $stripe['type'] == 'nerative' ) ? 'nerative-class' : '' ?>" data-language="<?php echo $currentLanguage; ?>">
     <?php
     while ($courses->fetch()) {
         $title = getFieldByLanguage($courses->display('name'), $courses->display('english_name'), $courses->display('arabic_name'), $sitepress->get_current_language());

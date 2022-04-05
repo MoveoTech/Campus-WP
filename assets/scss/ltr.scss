@@ -1442,8 +1442,14 @@ footer .footer-section{
 /* filter by tag menu */
 
 .filtersSection{
+    margin-right: 0;
     .allFiltersWrapDiv{
         .checkboxFiltersWrap{
+            #groupFiltersContainer{
+                margin-left: unset;
+                margin-right: 80px;
+            }
+
             .filterVector{
                 margin: 0 0 0 7px;
             }
@@ -1485,6 +1491,57 @@ footer .footer-section{
                 .term-name {
                     text-align: left;
                     padding-left: 6px;
+                }
+            }
+        }
+    }
+}
+
+/* catalog stripe */
+.catalog-courses-stripe{
+    justify-content: left;
+    .course-stripe-item{
+        .item-content{
+            h3{
+                text-align: left;
+            }
+            p{
+                text-align: left;
+
+            }
+        }
+        .tags-div {
+            justify-content: left;
+            margin: 0;
+        }
+    }
+}
+.catalogWrap {
+    .catalogStripeWrap {
+        .catalogStripeContainer {
+            .catalogStripeHeader {
+                h1, p{
+                    margin-left: 10px;
+                }
+
+            }
+        }
+    }
+}
+
+/* catalog stripe - media query */
+@media (max-width: 1269px) {
+    .catalog-courses-stripe{
+        justify-content: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .catalogWrap {
+        .catalogStripeWrap {
+            .catalogStripeContainer {
+                .catalogStripeHeader {
+                    margin-left: 0px;
                 }
             }
         }
