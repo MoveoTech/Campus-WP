@@ -114,7 +114,7 @@ $(document).click(function(event) {
 
 /** Ido made a new function for appending */
 function appendFilteredCourses(coursesData) {
-    console.log("ttttttttt")
+
     let coursesBox = document.getElementById("coursesBox");
     let output = document.createElement("div");
 
@@ -344,7 +344,6 @@ console.log("holiii")
 
             /** Checking if value is checked */
             if(element.checked) {
-                // console.log(element)
                 switch (type) {
                     case 'tag':
                         if(tagArray[group]){
@@ -468,7 +467,7 @@ function filterCoursesAjax(filterData) {
     jQuery.post(filter_by_tag_ajax.ajaxurl, data, function(response){
         if(response.success){
             const responseData = JSON.parse(response.data);
-            // console.log(responseData['filters'])
+
             appendUrlParams(responseData['filters'])
             if(responseData['courses'].length > 0) {
                 appendFilteredCourses(responseData['courses'])
@@ -502,12 +501,8 @@ function appendGroupFilter(filterGroupName, filterId) {
         '<div class="inputsContainer catalogFilters" id="extraFilter_'+filterId+'">'+
         '</div>';
 
-    // container.append(temp);
-    console.log('before append')
-
     container.insertBefore(temp, addFilterbutton);
 
-    console.log('after append')
 
 }
 
