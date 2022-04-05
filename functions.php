@@ -63,33 +63,33 @@ function set_user_default_language() {
 
     $get_language = $_COOKIE['openedx-language-preference'];
     $url = home_url('/');
-
     $current_url = home_url($_SERVER['REQUEST_URI']);
+
     if (is_admin() || strpos($current_url, "wp-") != false)
         return;
 
     if($get_language == 'ar') {
         if(strpos($url, "en") != false)
-            redirect(str_replace("en", "ar", $url));
+            redirect(replace_first_str("en", "ar", $current_url));
 
         if(strpos($url, "ar") == false)
-            redirect(home_url('/'). $get_language);
+            redirect(replace_first_str($url, $url . $get_language . '/' , $current_url));
     }
 
     if($get_language == 'en') {
         if(strpos($url, "ar") != false)
-            redirect(str_replace("ar", "en", $url));
+            redirect(replace_first_str("ar", "en", $current_url));
 
-        if(strpos($url, "en") == false)
-            redirect(home_url('/'). $get_language);
+        if(strpos($current_url, "en/") == false)
+            redirect(replace_first_str($url, $url . $get_language . '/' , $current_url));
     }
 
     if($get_language == 'he') {
         if(strpos($url, "ar") != false)
-            redirect(str_replace("ar", "", $url));
+            redirect(replace_first_str("ar", "", $current_url));
 
         if(strpos($url, "en") != false)
-            redirect(str_replace("en", "", $url));
+            redirect(replace_first_str("en", "", $current_url));
     }
 
 }
@@ -1197,6 +1197,23 @@ function getFieldByLanguage($heField, $enField, $arField, $lang)
 
 }
 
+function getFieldByLanguageFromString($strField, $lang)
+{
+    try {
+        $fieldLanguageArray = explode(',', $strField);
+        if(count($fieldLanguageArray) != 3)
+            return null;
+        // TODO trim
+        $language_course = $fieldLanguageArray ? getFieldByLanguage($fieldLanguageArray[0], $fieldLanguageArray[1], $fieldLanguageArray[2], $lang) : null;
+        return $language_course;
+    }
+    catch (exception $e) {
+        //code to handle the exception
+        return null;
+    }
+
+}
+
 
 function disallow_posts_with_same_title($messages) {
 
@@ -1255,3 +1272,17 @@ function my_custom_admin_styles() {
     <?php
 }
 add_action('admin_head', 'my_custom_admin_styles');
+
+function sortTagsByOrder($tags){
+    usort($tags, "CompareTagsByOrder");
+    return $tags;
+}
+
+function CompareTagsByOrder($tag1, $tag2) {
+    return $tag2['order'] > $tag1['order'];
+}
+
+function replace_first_str($search_str, $replacement_str, $src_str){
+    return (false !== ($pos = strpos($src_str, $search_str))) ? substr_replace($src_str, $replacement_str, $pos, strlen($search_str)) : $src_str;
+}
+
