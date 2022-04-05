@@ -135,7 +135,7 @@ function appendFilteredCourses(coursesData) {
         let haveYoutube = item.haveyoutube;
         let course_attrs = 'col-xs-12 col-md-6 col-xl-4 course-item-with-border';
 
-        // console.log("each item : ",item);
+
         let youtube;
         if(haveYoutube) {
              youtube = '<a class="course-item-image has_background_image haveyoutube " data-id="'+ id +'" data-popup aria-pressed="true" aria-haspopup="true" role="button" href="javascript:void(0)" aria-label="'+ name +'" data-classToAdd="course_info_popup" style="background-image: url('+image+')"></a>'
@@ -147,8 +147,6 @@ function appendFilteredCourses(coursesData) {
         }
 
         let temp = document.createElement("div");
-        // temp.id = 'coursesBox';
-        // temp.classList.add('row output-courses');
         temp.innerHTML =
             '<div class="item_post_type_course course-item '+ course_attrs +'" data-id="'+ id +'">'+
                 '<div class="course-item-inner">'+
@@ -206,7 +204,7 @@ function appendFilteredCourses(coursesData) {
 
         output.append(temp)
     });
-    // coursesBox.replaceWith(output)
+    coursesBox.replaceWith(output)
 
 }
 
