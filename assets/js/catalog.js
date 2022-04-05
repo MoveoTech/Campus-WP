@@ -380,6 +380,7 @@ function appendMoreFilters(filterData) {
 
     /**looping each filter group and appending it to the filters menu */
     let filterId = filterData.filterId;
+    let dataType = filterData.dataType;
     let container = document.getElementById(`extraFilter_${filterId}`);
     let groupFilters = filterData.filtersList;
     let currentLanguage =filterData.language;
@@ -401,7 +402,7 @@ function appendMoreFilters(filterData) {
         }
         temp.innerHTML =
             '<label class="filterTagLabel" for="'+id+'">'+
-            '<input'+ checked +' class="checkbox-filter-search" type="checkbox" data-name="institution" data-value="'+urlTitle+'" value="'+name+'" id="'+id+'">'+
+            '<input'+ checked +' class="checkbox-filter-search" type="checkbox" data-name="'+dataType+'" data-value="'+urlTitle+'" value="'+name+'" id="'+id+'">'+
             '<div class="wrap-term-and-sum tagNameWrap">'+
             '<span class="term-name">'+name+'</span>'+
             '</div>'+
