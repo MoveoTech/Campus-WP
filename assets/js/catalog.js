@@ -82,6 +82,26 @@ $(document).ready(function () {
     });
 
 
+    $(".openFiltersMenu").click(function () {
+        jQuery(".nav-mobile-campus").toggleClass('open').animate({
+            width: "toggle"
+        });
+        jQuery(".filters-mobile-menu-popup").toggleClass('active');
+
+        if(!jQuery(".bg-overlay")[0].classList.contains('active') && jQuery(".filters-mobile-menu-popup")[0].classList.contains('active')) {
+            jQuery(".bg-overlay").addClass('active');
+            jQuery(".header_section").addClass('menu-open');
+
+        } else if(!jQuery(".filters-mobile-menu-popup")[0].classList.contains('active')) {
+            jQuery(".bg-overlay").removeClass('active');
+            jQuery(".header_section").removeClass('menu-open');
+
+        }
+        jQuery('html').toggleClass('menu_open');
+
+    });
+
+
 });
 
 /** hiding filter inputs when clicking on screen or other filter group */
@@ -105,12 +125,40 @@ $(document).click(function(event) {
                 element.style.display = "none";
             }
         })
-
     }
+
+    // openFiltersMobileMenu();
+    //opens filters mobile menu
+    // console.log("before unbind", jQuery(".search-button"));
+    // jQuery(`.search-button`).unbind('click');
+    // console.log("after unbind");
+
 
 });
 /** end of jquery */
-
+// function openFiltersMobileMenu() {
+//     console.log("befoire unbind");
+//     jQuery(`.search-button`).unbind('click');
+//     console.log("after unbind");
+//     jQuery(".search-button").click(function () {
+//         console.log("click")
+//         jQuery(".nav-mobile-campus").toggleClass('open').animate({
+//             width: "toggle"
+//         });
+//         jQuery(".filters-mobile-menu-popup").toggleClass('active');
+//         if(!jQuery(".bg-overlay")[0].classList.contains('active') && jQuery(".filters-mobile-menu-popup")[0].classList.contains('active')) {
+//             jQuery(".bg-overlay").addClass('active');
+//             jQuery(".header_section").addClass('menu-open');
+//
+//         } else if(!jQuery(".filters-mobile-menu-popup")[0].classList.contains('active')) {
+//             jQuery(".bg-overlay").removeClass('active');
+//             jQuery(".header_section").removeClass('menu-open');
+//
+//         }
+//         jQuery('html').toggleClass('menu_open');
+//
+//     });
+// }
 /** Ido made a new function for appending */
 function appendFilteredCourses(coursesData) {
 
