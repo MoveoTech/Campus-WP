@@ -39,53 +39,19 @@ $(document).ready(function () {
             filterToRemove.remove()
         }
     });
-    $(window).resize(function() {
-        if($(window).width() <= 768){
-            /** catalog stripe slick */
-            let rtl = true;
-            let currnetLanguage = $('.catalog-courses-stripe').data('language');
-            if(currnetLanguage == 'en'){
-                rtl = false;
-            }
-            jQuery('.catalog-courses-stripe').slick({
-                lazyLoad: 'ondemand',
-                slidesToShow: 2.5,
-                slidesToScroll: 2,
-                rtl: rtl,
-                arrows: false,
-                speed: 1000,
-                infinite: false,
-                responsive: [
-                    {
-                        breakpoint: 571,
-                        settings: {
-                            slidesToShow: 2.25,
-                            slidesToScroll: 2,
-                            arrows: false,
-                        }
-                    },
-                    {
-                        breakpoint: 480,
-                        settings: {
-                            speed: 100,
-                            slidesToShow: 2.15,
-                            slidesToScroll: 2,
-                            arrows: false,
-                        }
-                    },
-                ]
 
-            })
-        } else{
-            jQuery('.catalog-courses-stripe').slick('unslick');
-        }
+    /** checking screen size for filters menu and slick stripe */
+    slickStripeForMobile();
+    $(window).resize(function() {
+        slickStripeForMobile();
     });
 
-
+/** Open mobile filters menu */
     $(".openFiltersMenu").click(function () {
-        jQuery(".nav-mobile-campus").toggleClass('open').animate({
-            width: "toggle"
-        });
+        // jQuery(".nav-mobile-campus").toggleClass('open').animate({
+        //     width: "toggle"
+        // });
+        $('.bg-overlay').addClass('filtersMenuOverlay');
         jQuery(".filters-mobile-menu-popup").toggleClass('active');
 
         if(!jQuery(".bg-overlay")[0].classList.contains('active') && jQuery(".filters-mobile-menu-popup")[0].classList.contains('active')) {
@@ -101,8 +67,19 @@ $(document).ready(function () {
 
     });
 
+$(".bg-overlay").click(function () {
+    console.log("inside click");
+    console.log("clicking overlay");
+    $('.bg-overlay').removeClass('filtersMenuOverlay');
+    jQuery(".bg-overlay").removeClass('active');
+    jQuery(".header_section").removeClass('menu-open');
+    jQuery(".filters-mobile-menu-popup").toggleClass('active');
+
+    // jQuery(".filters-mobile-menu-popup").toggleClass('active');
+})
 
 });
+/** End of ducoment ready */
 
 /** hiding filter inputs when clicking on screen or other filter group */
 $(document).click(function(event) {
@@ -136,29 +113,67 @@ $(document).click(function(event) {
 
 });
 /** end of jquery */
+
+
+function slickStripeForMobile() {
+    if($(window).width() <= 768){
+        console.log("iffff");
+        /** hiding web filters menu */
+        // $('.allFiltersWrapDiv').hide();
+        // $('.openFiltersMenu').show();
+
+        /** catalog stripe slick */
+        let rtl = true;
+        let currnetLanguage = $('.catalog-courses-stripe').data('language');
+        if(currnetLanguage == 'en'){
+            rtl = false;
+        }
+        jQuery('.catalog-courses-stripe').slick({
+            lazyLoad: 'ondemand',
+            slidesToShow: 2.5,
+            slidesToScroll: 2,
+            rtl: rtl,
+            arrows: false,
+            speed: 1000,
+            infinite: false,
+            responsive: [
+                {
+                    breakpoint: 571,
+                    settings: {
+                        slidesToShow: 2.25,
+                        slidesToScroll: 2,
+                        arrows: false,
+                    }
+                },
+                {
+                    breakpoint: 480,
+                    settings: {
+                        speed: 100,
+                        slidesToShow: 2.15,
+                        slidesToScroll: 2,
+                        arrows: false,
+                    }
+                },
+            ]
+        })
+    } else{
+        jQuery('.catalog-courses-stripe').slick('unslick');
+        // $('.allFiltersWrapDiv').show();
+        // $('.openFiltersMenu').hide();
+    }
+
+
+}
+
+
+
+
+//
 // function openFiltersMobileMenu() {
-//     console.log("befoire unbind");
-//     jQuery(`.search-button`).unbind('click');
-//     console.log("after unbind");
-//     jQuery(".search-button").click(function () {
-//         console.log("click")
-//         jQuery(".nav-mobile-campus").toggleClass('open').animate({
-//             width: "toggle"
-//         });
-//         jQuery(".filters-mobile-menu-popup").toggleClass('active');
-//         if(!jQuery(".bg-overlay")[0].classList.contains('active') && jQuery(".filters-mobile-menu-popup")[0].classList.contains('active')) {
-//             jQuery(".bg-overlay").addClass('active');
-//             jQuery(".header_section").addClass('menu-open');
 //
-//         } else if(!jQuery(".filters-mobile-menu-popup")[0].classList.contains('active')) {
-//             jQuery(".bg-overlay").removeClass('active');
-//             jQuery(".header_section").removeClass('menu-open');
 //
-//         }
-//         jQuery('html').toggleClass('menu_open');
-//
-//     });
 // }
+
 /** Ido made a new function for appending */
 function appendFilteredCourses(coursesData) {
 

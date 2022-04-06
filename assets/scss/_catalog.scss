@@ -97,6 +97,16 @@
   flex-grow: 0;
   margin: 15px 50px 15px 0;
 
+  .openFiltersMenu{
+    display: none;
+    position: absolute;
+    left: 30px;
+
+    .filterVector{
+      margin-bottom: 3px;
+    }
+  }
+
   .allFiltersWrapDiv{
     display: flex;
     flex-direction: row;
@@ -163,12 +173,13 @@
         color: #333433;
         margin:auto;
       }
-      .filterVector{
-        margin: 0;
-        margin-right: 7px;
-        }
+
       }
     }
+  .filterVector{
+    margin: 0;
+    margin-right: 7px;
+  }
   }
 
 /* filter inputs- popup menu */
@@ -271,6 +282,21 @@
 @media (max-width: 992px) {
   #groupFiltersContainer{
     flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 768px) {
+  .filtersSection {
+    .openFiltersMenu{
+      display: block;
+    }
+    .allFiltersWrapDiv {
+      display: none;
+    }
+  }
+  .filtersMenuOverlay{
+    z-index:6;
+
   }
 }
 

@@ -480,13 +480,13 @@
 
 .filters-mobile-menu-popup {
   display: none;
-  z-index: 5;
+  z-index: 7;
   background-color: #ffffff;
   width: 75%;
   height: 100%;
   position: fixed;
   left: 0;
-  top: 63px;
+  top: 0;
   transition: transform 0.3s ease-in-out;
   transform: translateX(-135%);
   &.active{

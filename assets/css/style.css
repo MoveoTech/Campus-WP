@@ -18440,13 +18440,13 @@ html:not(.user_is_not_logged_in) .header_login {
 /* catalog page - mobile filters menu */
 .filters-mobile-menu-popup {
   display: none;
-  z-index: 5;
+  z-index: 7;
   background-color: #ffffff;
   width: 75%;
   height: 100%;
   position: fixed;
   left: 0;
-  top: 63px;
+  top: 0;
   transition: transform 0.3s ease-in-out;
   transform: translateX(-135%); }
   .filters-mobile-menu-popup.active {
@@ -20181,6 +20181,12 @@ body .course-item-hover {
   order: 0;
   flex-grow: 0;
   margin: 15px 50px 15px 0; }
+  .filtersSection .openFiltersMenu {
+    display: none;
+    position: absolute;
+    left: 30px; }
+    .filtersSection .openFiltersMenu .filterVector {
+      margin-bottom: 3px; }
   .filtersSection .allFiltersWrapDiv {
     display: flex;
     flex-direction: row;
@@ -20232,9 +20238,9 @@ body .course-item-hover {
         text-align: right;
         color: #333433;
         margin: auto; }
-      .filtersSection .allFiltersWrapDiv .checkboxFiltersWrap .filterVector {
-        margin: 0;
-        margin-right: 7px; }
+  .filtersSection .filterVector {
+    margin: 0;
+    margin-right: 7px; }
 
 /* filter inputs- popup menu */
 .inputsContainer {
@@ -20309,6 +20315,14 @@ body .course-item-hover {
 @media (max-width: 992px) {
   #groupFiltersContainer {
     flex-wrap: wrap; } }
+
+@media (max-width: 768px) {
+  .filtersSection .openFiltersMenu {
+    display: block; }
+  .filtersSection .allFiltersWrapDiv {
+    display: none; }
+  .filtersMenuOverlay {
+    z-index: 6; } }
 
 @media (max-width: 390px) {
   .catalog-banner .hero-search-form .search-field.form-control {
