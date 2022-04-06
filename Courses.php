@@ -114,9 +114,9 @@ $coursesIDs = implode(',', $coursesIdArray);
                         <?php } }
 
                     else {
-                        $i = 0;
+
                         while ($courses->fetch()) {
-                            if($i >= $visible) break;
+
                             get_template_part('template', 'parts/Courses/course-card',
                                 array(
                                     'args' => array(
@@ -125,7 +125,6 @@ $coursesIDs = implode(',', $coursesIdArray);
                                     )
                                 ));
 
-                            $i++;
                         } }?>
                     <!--. END Match Results -->
                       </div>
