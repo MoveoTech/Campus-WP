@@ -24,9 +24,10 @@ if($components['query']){
 if($url_params){
     $filters = getFiltersArray($url_params);
     $params = getPodsFilterParams($filters);
+    console_log($params);
 } else {
     $params = [
-        'limit'   => 1,
+        'limit'   => 27,
         'orderBy' => 't.order DESC',
     ];
 }
@@ -43,6 +44,7 @@ $course_attrs = array(
 $catalog_stripe_id = get_field('catalog_stripe')[0];
 $academic_institutions = pods( 'academic_institution', array('limit'   => -1 ));
 $courses = pods( 'courses', $params, true);
+console_log($courses);
 $count = $courses->total_found();
 $academic_name = cin_get_str('Institution_Name');
 $choose_str = __('Choose Institution', 'single_corse');
@@ -54,6 +56,14 @@ if($count == '0'){
     $no_results_found = true;
 }
 
+$coursesIdArray = [];
+$i = 0;
+foreach ($courses->rows as $course) {
+    $coursesIdArray[$i] = $course->id;
+    $i++;
+}
+$coursesIDs = implode(',', $coursesIdArray);
+
 ?>
 
 <div class="catalog-banner">
@@ -63,16 +73,7 @@ if($count == '0'){
 
     <div class="catalog-banner-content">
         <h1 class="catalog-header" style="color: #ffffff"><?=$catalog_title?></h1>
-
-        <form role="search" method="get" class="hero-search-form" action="<?= esc_url(home_url('/')); ?>" novalidate>
-            <label class="sr-only"><?php _e('Search for:', 'single_corse'); ?></label>
-            <div class="input-group group-search-form">
-                <input type="text" value="<?= get_search_query(); ?>" name="s" class="search-field form-control" placeholder="<?php echo hero_search_placeholder(); ?>" aria-required="true">
-                <span class="input-group-btn">
-                    <button class="search-submit"><?php _e('Search', 'single_corse'); ?></button>
-                </span>
-            </div>
-        </form>
+        <?= get_template_part('templates/hero', 'search') ?>
     </div>
 
 </div>
@@ -92,12 +93,16 @@ if($count == '0'){
                     ?>
                 </div>
             </div>
+            <?php
 
+            ?>
             <div class="catalogWrap">
-
+                <div hidden id="catalog_courses" value="<?php print_r($coursesIDs); ?>" ></div>
                 <div id="coursesBox" class="row output-courses coursesResults">
+
                     <!--. START Number of match courses OR No Results -->
                     <?php if ( $no_results_found ) { ?>
+
                         <div class="sum-all-course col-lg-12" role="alert">
                             <h2 class="wrap-sum">
                                 <span>'<?= __( 'No suitable courses found for', 'single_corse' ) ?></span>
@@ -107,9 +112,11 @@ if($count == '0'){
                         <?php if ( $form_short_code_no_result = get_field( 'form_short_code_no_result', 'options' ) ) { ?>
                             <div class="col-12 lokking-for-form no-result-form"><?= $form_short_code_no_result ?></div>
                         <?php } }
-                    else {
 
+                    else {
+                        $i = 0;
                         while ($courses->fetch()) {
+                            if($i >= $visible) break;
                             get_template_part('template', 'parts/Courses/course-card',
                                 array(
                                     'args' => array(
@@ -117,9 +124,15 @@ if($count == '0'){
                                         'attrs' => $course_attrs,
                                     )
                                 ));
+
+                            $i++;
                         } }?>
                     <!--. END Match Results -->
-                </div>
+                      </div>
+                <?php
+                $arialabel_acc = cin_get_str( 'load_more_courses' );
+                ?>
+                <button id='courses_load_more' class='load-more-wrap' aria-label=<?= $arialabel_acc ?> ><?= __( 'Load more', 'single_corse' )?></button>
 
                 <div class="catalogStripeWrap">
 
@@ -139,7 +152,6 @@ if($count == '0'){
                     ?>
 
                 </div>
-
             </div>
         </div>
     </div>

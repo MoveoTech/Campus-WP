@@ -40,6 +40,9 @@ $(document).ready(function () {
         }
     });
 
+    $('#courses_load_more').on('click', function () {
+        loadCourses()
+    })
 });
 
 /** hiding filter inputs when clicking on screen or other filter group */
@@ -177,7 +180,6 @@ function appendUrlParams(filters) {
         return;
     }
 
-
     if(filters['search']) {
         let i = 0;
         Object.keys(filters['search']).some((k) => {
@@ -299,7 +301,6 @@ function filterByTagEvent(){
 
             /** Checking if value is checked */
             if(element.checked) {
-                // console.log(element)
                 switch (type) {
                     case 'tag':
                         if(tagArray[group]){
@@ -317,6 +318,8 @@ function filterByTagEvent(){
 
 
                     case 'certificate':
+                        console.log(element)
+
                         certificateArray.push(englishValue);
                         break;
 
@@ -355,7 +358,6 @@ function filterByTagEvent(){
         }
 
     })}
-/** End of function filterByTagEvent */
 
 /** Ajax call - getting filters group name and there tags **/
 function getFiltersGroups(filterId) {
@@ -365,7 +367,7 @@ function getFiltersGroups(filterId) {
         'type' : 'moreFilters',
         'dataArray': filterId,
     }
-    jQuery.post(add_filters_to_menu_ajax.ajaxurl, data, function(response){
+    jQuery.post(filter_by_tag_ajax.ajaxurl, data, function(response){
         if(response.success){
             const responseData = JSON.parse(response.data);
             appendMoreFilters(responseData)
@@ -393,7 +395,7 @@ function appendMoreFilters(filterData) {
         let name = element.name;
         let urlTitle = element.english_name;
         let checked = '';
-
+        console.log(element)
         if(element.english_name && currentLanguage == 'en' ) {
             name = element.english_name;
         }
@@ -427,7 +429,8 @@ function filterCoursesAjax(filterData) {
             // console.log(responseData['filters'])
             appendUrlParams(responseData['filters'])
             if(responseData['courses'].length > 0) {
-                appendFilteredCourses(responseData['courses'])
+                loadCourses(responseData['courses'])
+                // appendFilteredCourses(responseData['courses'])
             } else {
                 haveNoResults()
             }
@@ -469,4 +472,34 @@ function openCheckboxEvent() {
         let popupMenuDiv = event.target.closest(".wrapEachFiltergroup").querySelector(".inputsContainer")
         $(popupMenuDiv).toggle();
     });
+}
+
+function loadCourses(coursesArray = []) {
+    if(coursesArray.length > 0){
+        appendFilteredCourses(coursesArray)
+    } else {
+        let divLength = $('#coursesBox').children()
+        let courses = $('#catalog_courses').attr('value')
+        let coursesIdArray = courses.split(',')
+
+        if(coursesIdArray.length > 15 && coursesIdArray.length > divLength + 1) {
+            coursesToGet = coursesIdArray.slice(divLength + 1, divLength + 16)
+            let data = {
+                'action': 'stripe_data',
+                'type' : 'courses',
+                'lang' : getCookie('openedx-language-preference'),
+                'idsArray': newCoursesArray,
+            }
+
+            jQuery.post(stripe_data_ajax.ajaxurl, data, function(response){
+                if(response.success){
+                    const data = JSON.parse(response.data);
+                    // apppendCourses(data, id);
+                    // button unable
+                    // jQuery(`#${nextButton.id}`).prop('disabled', false);
+                }
+            })
+        }
+        console.log( divLength.length)
+    }
 }

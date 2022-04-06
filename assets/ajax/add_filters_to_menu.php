@@ -37,7 +37,6 @@ function get_filter_type($filterType, $filterId){
     }
 }
 
-
 /** Getting the data of type - academic institution */
 function academicInstitution_moreFilter($filterId){
     global $sitepress;
@@ -51,6 +50,7 @@ function academicInstitution_moreFilter($filterId){
         'dataType' => 'institution'
     );
 }
+
 /** Getting the data of type - tags */
 function tags_moreFilter($filterId){
     global $sitepress;
@@ -64,6 +64,7 @@ function tags_moreFilter($filterId){
         'dataType' => 'tag_' . get_field('english_title', $filterId)
     );
 }
+
 /** Getting the data of type - language */
 function languages_moreFilter($filterId){
     /** translating filters */
@@ -86,6 +87,7 @@ function languages_moreFilter($filterId){
                 'dataType' => 'language'
             );
 }
+
 /** Getting the data of type - certificate */
 function certificate_moreFilter($filterId){
 
@@ -97,7 +99,8 @@ function certificate_moreFilter($filterId){
     foreach ($certificatesArray as $certificate) {
 
         $certificate_name = getFieldByLanguageFromString($certificate, $sitepress->get_current_language());
-        $certificateObject = ["id"=>$i, "name"=>$certificate_name];
+        $english_name = getFieldByLanguageFromString($certificate, 'en');
+        $certificateObject = ["id"=>$i, "name"=>$certificate_name, "english_name"=>$english_name];
         array_push($certificates, $certificateObject);
         $i++;
     }

@@ -120,13 +120,11 @@ function style_of_campus_enqueue() {
 	wp_enqueue_script( 'bootstrap_js', get_bloginfo( 'stylesheet_directory' ) . '/assets/js/bootstrap.min.js' );
     wp_enqueue_script('search_js', get_bloginfo( 'stylesheet_directory' ) . '/assets/js/search.js', array('jquery'));
     wp_enqueue_script('catalog_js', get_bloginfo( 'stylesheet_directory' ) . '/assets/js/catalog.js', array('jquery'));
-    wp_enqueue_script('catalogAddon_js', get_bloginfo( 'stylesheet_directory' ) . '/assets/js/catalogAddon.js', array('jquery'));
     wp_enqueue_script('home_page_js', get_bloginfo( 'stylesheet_directory' ) . '/assets/js/home_page.js', array('jquery'));
     wp_localize_script('home_page_js', 'stripe_data_ajax', array('ajaxurl' => admin_url('admin-ajax.php')));
     wp_localize_script('home_page_js', 'my_courses_ajax', array('ajaxurl' => admin_url('admin-ajax.php')));
     //filtering tags ajax call
     wp_localize_script('catalog_js', 'filter_by_tag_ajax', array('ajaxurl' => admin_url('admin-ajax.php')));
-    wp_localize_script('catalogAddon_js', 'add_filters_to_menu_ajax', array('ajaxurl' => admin_url('admin-ajax.php')));
 
 	wp_localize_script( 'ready_js', 'global_vars', array(
 			'link_to_enrollment_api'        => get_field( 'link_to_enrollment_api', 'option' ),
@@ -1392,6 +1390,9 @@ function getPodsFilterParams($filters) {
 
     $sql = array();
 
+    /** GET ONLY COURSES THAT ARE NOT HIDDEN */
+    $sql[] = 't.hide_in_site=0';
+
     if($filters['search']['text_s']){
             $search_value = $filters['search']['text_s'][0];
             $sqlSearch = array();
@@ -1461,15 +1462,12 @@ function getPodsFilterParams($filters) {
                 $sqlGroupTags[] = ' tags.arabic_name LIKE "%'.$tag.'%" ';
             }
 
-            $sqlTags[] = implode('OR', $sqlGroupTags) ;
+            $sqlTags[] ="(" . implode('OR', $sqlGroupTags) . ")" ;
         }
 
-        $tagsQuery ="(" . implode('AND', $sqlTags) . ")";
+        $tagsQuery = implode(' OR ', $sqlTags) ;
         $sql[] = $tagsQuery;
     };
-
-    /** GET ONLY COURSES THAT ARE NOT HIDDEN */
-    $sql[] = '(t.hide_in_site=0)';
 
     $where = implode(" AND ", $sql);
     $order = "t.order DESC";
