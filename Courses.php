@@ -24,7 +24,6 @@ if($components['query']){
 if($url_params){
     $filters = getFiltersArray($url_params);
     $params = getPodsFilterParams($filters);
-    console_log($params);
 } else {
     $params = [
         'limit'   => 27,
@@ -44,7 +43,6 @@ $course_attrs = array(
 $catalog_stripe_id = get_field('catalog_stripe')[0];
 $academic_institutions = pods( 'academic_institution', array('limit'   => -1 ));
 $courses = pods( 'courses', $params, true);
-console_log($courses);
 $count = $courses->total_found();
 $academic_name = cin_get_str('Institution_Name');
 $choose_str = __('Choose Institution', 'single_corse');
