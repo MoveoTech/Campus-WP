@@ -14,6 +14,8 @@ include locate_template( 'admin_files/admin_funcs.php' );
 include locate_template( 'assets/ajax/stripe_data.php' );
 include locate_template( 'assets/ajax/my_courses.php' );
 include locate_template( 'assets/ajax/get_course_popup.php' );
+include locate_template( 'assets/ajax/filter_by_tag.php' );
+include locate_template( 'assets/ajax/add_filters_to_menu.php' );
 
 /**
  * Daat Ester
@@ -116,9 +118,13 @@ function style_of_campus_enqueue() {
 		'cookie_js'
 	), '1.2.15' );
 	wp_enqueue_script( 'bootstrap_js', get_bloginfo( 'stylesheet_directory' ) . '/assets/js/bootstrap.min.js' );
+    wp_enqueue_script('search_js', get_bloginfo( 'stylesheet_directory' ) . '/assets/js/search.js', array('jquery'));
+    wp_enqueue_script('catalog_js', get_bloginfo( 'stylesheet_directory' ) . '/assets/js/catalog.js', array('jquery'));
     wp_enqueue_script('home_page_js', get_bloginfo( 'stylesheet_directory' ) . '/assets/js/home_page.js', array('jquery'));
     wp_localize_script('home_page_js', 'stripe_data_ajax', array('ajaxurl' => admin_url('admin-ajax.php')));
     wp_localize_script('home_page_js', 'my_courses_ajax', array('ajaxurl' => admin_url('admin-ajax.php')));
+    //filtering tags ajax call
+    wp_localize_script('catalog_js', 'filter_by_tag_ajax', array('ajaxurl' => admin_url('admin-ajax.php')));
 
 	wp_localize_script( 'ready_js', 'global_vars', array(
 			'link_to_enrollment_api'        => get_field( 'link_to_enrollment_api', 'option' ),
@@ -139,25 +145,6 @@ function style_of_campus_enqueue() {
 
 add_action( 'wp_enqueue_scripts', 'style_of_campus_enqueue' );
 
-// get lang menu
-//function get_lang_menu() {
-//	$output_lang_menu = '';
-//	if ( is_archive( 'course' ) or is_search() or is_singular( 'course' ) or is_singular( 'h_course' ) ) {
-//		$lang_class = '';
-//
-//		$output_lang_menu .= '<div class="menu-language-menu-container">
-//        <ul id="menu-language-menu-1" class="nav-lang">
-//        <li id="wpml-ls-item-he" class="wpml-ls-menu-item wpml-ls-item-he ' . current_active_lang( 'he' ) . '"><a href="' . get_lang_url( 'he' ) . '"><span class="wpml-ls-native">עב</span></a></li>
-//        <li id="wpml-ls-item-ar" class="wpml-ls-menu-item wpml-ls-item-ar ' . current_active_lang( 'ar' ) . '"><a href="' . get_lang_url( 'ar' ) . '"><span class="wpml-ls-native">العر</span></a></li>
-//        <li id="wpml-ls-item-en" class="wpml-ls-menu-item wpml-ls-item-en ' . current_active_lang( 'en' ) . '"><a href="' . get_lang_url( 'en' ) . '"><span class="wpml-ls-native">En</span></a></li>
-//        </ul></div>';
-//	} else {
-//		if ( has_nav_menu( 'lang_menu' ) ) :
-//			wp_nav_menu( [ 'theme_location' => 'lang_menu', 'menu_class' => 'nav-lang' ] );
-//		endif;
-//	}
-//	return $output_lang_menu;
-//}
 
 //get active lang with giving lang
 function current_active_lang( $given_lang ) {
@@ -1031,7 +1018,6 @@ function crb_insert_attachment_from_url( $url, $post_id = null ) {
 
 }
 
-
 //03/06/2020 new version popups
 
 add_action( 'site_popups', function () {
@@ -1096,7 +1082,6 @@ function get_day_in_week( $day_num ) {
 
 add_filter( 'auto_update_plugin', '__return_false' );
 
-
 function get_course_strtotime( $date_str ) {
 
 	$arr = explode( '/', $date_str );
@@ -1160,6 +1145,71 @@ function course_popup_button_text() {
     return $text;
 }
 
+function orderByNewestLanguage() {
+    global $sitepress;
+    $current = $sitepress->get_current_language();
+    $text = 'סידור לפי החדש ביותר';
+    if ($current === 'en') {
+        $text = 'Arranging by the newest';
+    }
+    if ($current === 'ar') {
+        $text = 'الترتيب حسب الأحدث';
+    }
+    return $text;
+}
+
+function orderByNameLanguage() {
+    global $sitepress;
+    $current = $sitepress->get_current_language();
+    $text = 'סידור לפי א׳ - ב׳';
+    if ($current === 'en') {
+        $text = 'Arrangement by name';
+    }
+    if ($current === 'ar') {
+        $text = 'الترتيب بالاسم';
+    }
+    return $text;
+}
+
+function orderByPopularityLanguage() {
+    global $sitepress;
+    $current = $sitepress->get_current_language();
+    $text = 'סידור לפי הפופלארי ביותר';
+    if ($current === 'en') {
+        $text = 'Arranging by the most popular';
+    }
+    if ($current === 'ar') {
+        $text = 'الترتيب حسب الأكثر شهرة';
+    }
+    return $text;
+}
+
+function addingMoreFiltersLanguage() {
+    global $sitepress;
+    $current = $sitepress->get_current_language();
+    $text = 'הוספת סינון';
+    if ($current === 'en') {
+        $text = 'Adding Filter';
+    }
+    if ($current === 'ar') {
+        $text = 'أضف التصفية';
+    }
+    return $text;
+}
+
+function ResetFiltersLanguage() {
+    global $sitepress;
+    $current = $sitepress->get_current_language();
+    $text = 'איפוס סינון';
+    if ($current === 'en') {
+        $text = 'Reset Filters';
+    }
+    if ($current === 'ar') {
+        $text = 'إعادة تعيين مرشح';
+    }
+    return $text;
+}
+
 function more_courses_text($carousel) {
     global $sitepress;
     $current = $sitepress->get_current_language();
@@ -1215,7 +1265,6 @@ function getFieldByLanguageFromString($strField, $lang)
 
 }
 
-
 function disallow_posts_with_same_title($messages) {
 
     global $post;
@@ -1252,7 +1301,6 @@ function disallow_posts_with_same_title($messages) {
 
 add_action('post_updated_messages', 'disallow_posts_with_same_title');
 
-
 // Remove Stripes row actions
 function remove_row_actions_post( $actions ){
     if( get_post_type() === 'stripes' )
@@ -1260,7 +1308,6 @@ function remove_row_actions_post( $actions ){
 
 }
 add_filter( 'post_row_actions', 'remove_row_actions_post', 10, 1 );
-
 
 // Remove ability to trash Stripes
 function my_custom_admin_styles() {
@@ -1283,7 +1330,308 @@ function CompareTagsByOrder($tag1, $tag2) {
     return $tag2['order'] > $tag1['order'];
 }
 
+function podsFilterParams($tags_filter)
+{
+
+    $where = "t.id IN (";
+    $order = "FIELD(t.id,";
+
+    foreach ($tags_filter as $tag) {
+        $where = $where . $tag . ",";
+        $order = $order . $tag . ",";
+
+    }
+    $where = substr_replace($where, ")", -1);
+    $order = substr_replace($order, ")", -1);
+
+    $params = array(
+        'limit' => -1,
+        'where' => $where,
+        'orderby' => $order
+    );
+    return $params;
+
+}
+
+function podsParams($tags_stripe)
+{
+    $where = "t.id IN (";
+    $order = "FIELD(t.id,";
+
+    foreach ($tags_stripe as $tag) {
+        $where = $where . $tag . ",";
+        $order = $order . $tag . ",";
+
+    }
+    $where = substr_replace($where, ")", -1);
+    $order = substr_replace($order, ")", -1);
+
+    $params = array(
+        'limit' => -1,
+        'where' => $where,
+        'orderby' => $order
+    );
+    return $params;
+
+}
+
+// Daniel Kisos's function - console log in PHP
+function console_log($output, $with_script_tags = true) {
+    $js_code = 'console.log(' . json_encode($output, JSON_HEX_TAG) .
+        ');';
+    if ($with_script_tags) {
+        $js_code = '<script>' . $js_code . '</script>';
+    }
+    echo $js_code;
+}
+
+function getPodsFilterParams($filters) {
+    if(!$filters) return null;
+
+    $sql = array();
+
+    /** GET ONLY COURSES THAT ARE NOT HIDDEN */
+    $sql[] = 't.hide_in_site=0';
+
+    if($filters['search']['text_s']){
+            $search_value = $filters['search']['text_s'][0];
+            $sqlSearch = array();
+
+            $sqlSearch[] = ' t.name LIKE "%'.$search_value.'%" ';
+            $sqlSearch[] = ' t.english_name LIKE "%'.$search_value.'%" ';
+            $sqlSearch[] = ' t.arabic_name LIKE "%'.$search_value.'%" ';
+            $sqlSearch[] = ' t.description LIKE "%'.$search_value.'%" ';
+            $sqlSearch[] = ' t.course_products LIKE "%'.$search_value.'%" ';
+            $sqlSearch[] = ' t.alternative_names LIKE "%'.$search_value.'%" ';
+
+            $searchQuery = "(" . implode('OR', $sqlSearch) . ")";
+            $sql[] = $searchQuery;
+        }
+
+    if($filters['search']['language']){
+        $params_items = $filters['search']['language'];
+        $sqlLang = array();
+
+        foreach($params_items as $value) {
+            $sqlLang[] = ' t.language LIKE "%'.$value.'%" ';
+        };
+
+        $langQuery = "(" . implode('OR', $sqlLang) . ")";
+        $sql[] = $langQuery;
+    };
+
+    if($filters['search']['certificate']){
+
+        $params_items = $filters['search']['certificate'];
+        $sqlCert = array();
+
+        foreach($params_items as $value) {
+            $sqlCert[] = ' t.certificate LIKE "%'.$value.'%" ';
+        }
+
+        $certQuery = "(" . implode('OR', $sqlCert) . ")";
+        $sql[] = $certQuery;
+    };
+
+    if($filters['search']['institution']){
+
+        $params_items = $filters['search']['institution'];
+        $sqlInst = array();
+
+        foreach($params_items as $value) {
+            $sqlInst[] = ' academic_institution.name LIKE "%'.$value.'%" ';
+            $sqlInst[] = ' academic_institution.english_name LIKE "%'.$value.'%" ';
+            $sqlInst[] = ' academic_institution.arabic_name LIKE "%'.$value.'%" ';
+        }
+
+        $instQuery ="(" . implode('OR', $sqlInst) . ")";
+        $sql[] = $instQuery;
+    };
+
+    if($filters['search']['tags']){
+
+        $tags_object = $filters['search']['tags'];
+        $sqlTags = array();
+
+        foreach($tags_object as $group) {
+            $sqlGroupTags = array();
+
+            foreach ($group  as $tag){
+                $sqlGroupTags[] = ' tags.name LIKE "%'.$tag.'%" ';
+                $sqlGroupTags[] = ' tags.english_name LIKE "%'.$tag.'%" ';
+                $sqlGroupTags[] = ' tags.arabic_name LIKE "%'.$tag.'%" ';
+            }
+
+            $sqlTags[] ="(" . implode('OR', $sqlGroupTags) . ")" ;
+        }
+
+        $tagsQuery = implode(' OR ', $sqlTags) ;
+        $sql[] = $tagsQuery;
+    };
+
+    $where = implode(" AND ", $sql);
+    $order = "t.order DESC";
+
+    $params = array(
+        'limit' => -1,
+        'where'=>$where,
+        'orderby'=> $order
+    );
+    return $params;
+}
+
+function getSecondsFiltersParams($filters, $idArray) {
+    if(!$filters) return null;
+
+    $sql = array();
+    $settings = array();
+    $allQuery = array();
+
+    if($filters['search']['text_s']){
+        $search_value = $filters['search']['text_s'][0];
+        $sqlSearch = array();
+
+        $sqlSearch[] = ' t.name LIKE "%'.$search_value.'%" ';
+        $sqlSearch[] = ' t.english_name LIKE "%'.$search_value.'%" ';
+        $sqlSearch[] = ' t.arabic_name LIKE "%'.$search_value.'%" ';
+        $sqlSearch[] = ' t.description LIKE "%'.$search_value.'%" ';
+        $sqlSearch[] = ' t.course_products LIKE "%'.$search_value.'%" ';
+        $sqlSearch[] = ' t.alternative_names LIKE "%'.$search_value.'%" ';
+
+        $searchQuery = "(" . implode('OR', $sqlSearch) . ")";
+        $sql[] = $searchQuery;
+    }
+
+    if($filters['search']['language']){
+        $params_items = $filters['search']['language'];
+        $sqlLang = array();
+
+        foreach($params_items as $value) {
+            $sqlLang[] = ' t.language LIKE "%'.$value.'%" ';
+        };
+
+        $langQuery = "(" . implode('OR', $sqlLang) . ")";
+        $sql[] = $langQuery;
+    };
+
+    if($filters['search']['certificate']){
+
+        $params_items = $filters['search']['certificate'];
+        $sqlCert = array();
+
+        foreach($params_items as $value) {
+            $sqlCert[] = ' t.certificate LIKE "%'.$value.'%" ';
+        }
+
+        $certQuery = "(" . implode('OR', $sqlCert) . ")";
+        $sql[] = $certQuery;
+    };
+
+    if($filters['search']['institution']){
+
+        $params_items = $filters['search']['institution'];
+        $sqlInst = array();
+
+        foreach($params_items as $value) {
+            $sqlInst[] = ' academic_institution.name LIKE "%'.$value.'%" ';
+            $sqlInst[] = ' academic_institution.english_name LIKE "%'.$value.'%" ';
+            $sqlInst[] = ' academic_institution.arabic_name LIKE "%'.$value.'%" ';
+        }
+
+        $instQuery ="(" . implode('OR', $sqlInst) . ")";
+        $sql[] = $instQuery;
+    };
+
+    if($filters['search']['tags']){
+
+        $tags_object = $filters['search']['tags'];
+        $sqlTags = array();
+
+        foreach($tags_object as $group) {
+            $sqlGroupTags = array();
+
+            foreach ($group  as $tag){
+                $sqlGroupTags[] = ' tags.name LIKE "%'.$tag.'%" ';
+                $sqlGroupTags[] = ' tags.english_name LIKE "%'.$tag.'%" ';
+                $sqlGroupTags[] = ' tags.arabic_name LIKE "%'.$tag.'%" ';
+            }
+
+            $sqlTags[] = implode('OR', $sqlGroupTags) ;
+        }
+
+        $tagsQuery ="(" . implode('OR', $sqlTags) . ")";
+        $sql[] = $tagsQuery;
+    };
+
+    /** GET ONLY COURSES THAT ARE NOT HIDDEN */
+    $settings[] = '(t.hide_in_site=0)';
+
+    if(count($idArray) > 1){
+        $settings[] = '(t.id NOT IN ('. implode(', ', $idArray) .'))';
+    } elseif (count($idArray) === 1) {
+        $settings[] = '(t.id != '. implode(', ', $idArray) .')';
+
+    }
+
+    $settingsQuery = implode('AND', $settings) ;
+    $filtersQuery ='('. implode(" OR ", $sql) .')';
+
+    $allQuery[] = $settingsQuery;
+    $allQuery[] = $filtersQuery;
+
+    $where = implode(" AND ", $allQuery);
+    $order = "t.order DESC";
+
+    $params = array(
+        'limit' => -1,
+        'where'=>$where,
+        'orderby'=> $order
+    );
+    return $params;
+}
+
+function getFiltersArray($paramsArray) {
+    if($paramsArray) {
+
+        foreach ($paramsArray as $key => $value) {
+
+            /** Check if the params from url is tags and put it in different arrays */
+            if(str_contains($key, 'tags_')) {
+                $key = substr($key,5);
+
+                if($tags[$key]){
+                    array_push($tags[$key], $value);
+
+                } else {
+                    $tags[$key] = [];
+                    array_push($tags[$key], $value);
+                }
+
+                $tags[$key] = explode(",", $tags[$key][0]);
+                $obj['tags'] = $tags;
+
+            } else {
+
+                if($obj[$key]){
+                    array_push($obj[$key], $value);
+
+                } else {
+                    $obj[$key] = [];
+                    array_push($obj[$key], $value);
+                }
+
+                $obj[$key] = explode(",", $obj[$key][0]);
+            }
+        }
+
+        $filters['search'] = $obj;
+
+        return $filters;
+    }
+}
+
 function replace_first_str($search_str, $replacement_str, $src_str){
     return (false !== ($pos = strpos($src_str, $search_str))) ? substr_replace($src_str, $replacement_str, $pos, strlen($search_str)) : $src_str;
 }
+
 

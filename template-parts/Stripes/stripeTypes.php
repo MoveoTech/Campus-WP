@@ -177,28 +177,7 @@ function tagsStripe($stripeId){
         ));
 }
 
-function podsParams($tags_stripe)
-{
 
-    $where = "t.id IN (";
-    $order = "FIELD(t.id,";
-
-    foreach ($tags_stripe as $tag) {
-        $where = $where . $tag . ",";
-        $order = $order . $tag . ",";
-
-    }
-    $where = substr_replace($where, ")", -1);
-    $order = substr_replace($order, ")", -1);
-
-    $params = array(
-        'limit' => -1,
-        'where' => $where,
-        'orderby' => $order
-    );
-    return $params;
-
-}
 
 function randomColor() {
     return array(

@@ -217,3 +217,48 @@ function stripes_custom_post_type() {
     register_post_type( 'stripes', $args );
 }
 add_action( 'init', 'stripes_custom_post_type', 0 );
+
+function filters_custom_post_type() {
+    $labels = array(
+        'name'               => __( 'Filters' ),
+        'singular_name'      => __( 'Filter' ),
+        'menu_name'          => __( 'Filters' ),
+        'all_items'          => __( 'All Filters' ),
+        'view_item'          => __( 'View Filter' ),
+        'add_new_item'       => __( 'Add New Filter' ),
+        'add_new'            => __( 'Add New' ),
+        'edit_item'          => __( 'Edit Filter' ),
+        'update_item'        => __( 'Update Filter' ),
+        'search_items'       => __( 'Search Filter' ),
+        'not_found'          => __( 'Not Found' ),
+        'not_found_in_trash' => __( 'Not found in Trash' )
+    );
+
+    $args = array(
+        'label'               => __( 'filters' ),
+        'description'         => __( 'Available filters' ),
+        'labels'              => $labels,
+        'supports'            => array(
+            'title',
+            'excerpt',
+            'author',
+            'revisions',
+            'custom-fields'
+        ),
+        'public'              => false,
+        'hierarchical'        => false,
+        'show_ui'             => true,
+        'show_in_menu'        => true,
+        'show_in_nav_menus'   => true,
+        'show_in_admin_bar'   => true,
+        'menu_icon'           => 'dashicons-filter',
+        'has_archive'         => false,
+        'can_export'          => false,
+        'exclude_from_search' => false,
+        'yarpp_support'       => true,
+        'taxonomies'          => array( 'filters_types' ),
+        'publicly_queryable'  => true,
+    );
+    register_post_type( 'filters', $args );
+}
+add_action( 'init', 'filters_custom_post_type', 0 );

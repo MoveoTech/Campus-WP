@@ -1419,3 +1419,131 @@ footer .footer-section{
         text-align: left!important;
     }
 }
+
+/* New Catalog page */
+
+/* banner */
+.catalog-banner{
+
+    .hero-search-form {
+
+        .search-field.form-control {
+            padding-left: 25px;
+
+        }
+        .search-submit {
+            left: unset;
+            right:5px;
+
+        }
+    }
+}
+
+/* filter by tag menu */
+
+.filtersSection{
+    margin-right: 0;
+    .allFiltersWrapDiv{
+        .checkboxFiltersWrap{
+            #groupFiltersContainer{
+                margin-left: unset;
+                margin-right: 80px;
+            }
+
+            .filterVector{
+                margin: 0 0 0 7px;
+            }
+        }
+    }
+}
+
+/* popup menu - filters */
+.inputsContainer {
+    margin: 0 0 0 5px;
+    padding: 0 0 0 15px;
+
+    .filterInput{
+        background: #FFFFFF;
+        border-radius: 10px;
+        box-sizing: border-box;
+        margin: 10px 0;
+
+        .filterTagLabel{
+            display: flex;
+            align-items: center;
+            padding: 0;
+            margin:0;
+
+            .tagNameWrap {
+                padding: 0;
+                text-align: unset;
+                width:100%;
+                cursor: pointer;
+
+                &::before{
+                    width:20px;
+                    height: 20px;
+                    border: 1px solid rgba(0, 0, 0, 0.1);
+                    border-radius: 5px;
+                    line-height: 15px;
+                    font-size: 11px;
+                }
+                .term-name {
+                    text-align: left;
+                    padding-left: 6px;
+                }
+            }
+        }
+    }
+}
+
+/* catalog stripe */
+.catalog-courses-stripe{
+    justify-content: left;
+    .course-stripe-item{
+        .item-content{
+            h3{
+                text-align: left;
+            }
+            p{
+                text-align: left;
+
+            }
+        }
+        .tags-div {
+            justify-content: left;
+            margin: 0;
+        }
+    }
+}
+.catalogWrap {
+    .catalogStripeWrap {
+        .catalogStripeContainer {
+            .catalogStripeHeader {
+                h1, p{
+                    margin-left: 10px;
+                }
+
+            }
+        }
+    }
+}
+
+/* catalog stripe - media query */
+@media (max-width: 1269px) {
+    .catalog-courses-stripe{
+        justify-content: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .catalogWrap {
+        .catalogStripeWrap {
+            .catalogStripeContainer {
+                .catalogStripeHeader {
+                    margin-left: 0px;
+                }
+            }
+        }
+    }
+}
