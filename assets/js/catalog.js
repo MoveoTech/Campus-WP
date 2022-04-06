@@ -470,8 +470,8 @@ function filterCoursesAjax(filterData) {
 
             appendUrlParams(responseData['filters'])
             if(responseData['courses'].length > 0) {
-                loadCourses(responseData['courses'])
-                // appendFilteredCourses(responseData['courses'])
+                // loadCourses(responseData['courses'])
+                appendFilteredCourses(responseData['courses'])
             } else {
                 haveNoResults()
             }
@@ -538,12 +538,9 @@ function loadCourses(coursesArray = []) {
             jQuery.post(stripe_data_ajax.ajaxurl, data, function(response){
                 if(response.success){
                     const data = JSON.parse(response.data);
-                    // apppendCourses(data, id);
-                    // button unable
-                    // jQuery(`#${nextButton.id}`).prop('disabled', false);
+                    //TODO needs to finish th function
                 }
             })
         }
-        console.log( divLength.length)
     }
 }

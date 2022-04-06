@@ -129,10 +129,13 @@ $coursesIDs = implode(',', $coursesIdArray);
                         } }?>
                     <!--. END Match Results -->
                       </div>
+
                 <?php
-                $arialabel_acc = cin_get_str( 'load_more_courses' );
-                ?>
-                <button id='courses_load_more' class='load-more-wrap' aria-label=<?= $arialabel_acc ?> ><?= __( 'Load more', 'single_corse' )?></button>
+               /** LOAD MORE COURSES BUTTON */
+//                $arialabel_acc = cin_get_str( 'load_more_courses' );
+//                ?>
+<!--                <button id='courses_load_more' class='load-more-wrap' aria-label=--><?//= $arialabel_acc ?><!-- >--><?//= __( 'Load more', 'single_corse' )?><!--</button>-->
+                <?php /** END LOAD MORE COURSES BUTTON */?>
 
                 <div class="catalogStripeWrap">
 
