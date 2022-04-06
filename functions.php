@@ -73,26 +73,26 @@ function set_user_default_language() {
 
     if($get_language == 'ar') {
         if(strpos($url, "en") != false)
-            redirect(str_replace("en", "ar", $current_url));
+            redirect(replace_first_str("en", "ar", $current_url));
 
         if(strpos($url, "ar") == false)
-            redirect(str_replace($url, $url . $get_language . '/' , $current_url));
+            redirect(replace_first_str($url, $url . $get_language . '/' , $current_url));
     }
 
     if($get_language == 'en') {
         if(strpos($url, "ar") != false)
-            redirect(str_replace("ar", "en", $current_url));
+            redirect(replace_first_str("ar", "en", $current_url));
 
         if(strpos($current_url, "en/") == false)
-            redirect(str_replace($url, $url . $get_language . '/' , $current_url));
+            redirect(replace_first_str($url, $url . $get_language . '/' , $current_url));
     }
 
     if($get_language == 'he') {
         if(strpos($url, "ar") != false)
-            redirect(str_replace("ar", "", $current_url));
+            redirect(replace_first_str("ar", "", $current_url));
 
         if(strpos($url, "en") != false)
-            redirect(str_replace("en", "", $current_url));
+            redirect(replace_first_str("en", "", $current_url));
     }
 
 }
@@ -1629,3 +1629,9 @@ function getFiltersArray($paramsArray) {
         return $filters;
     }
 }
+
+function replace_first_str($search_str, $replacement_str, $src_str){
+    return (false !== ($pos = strpos($src_str, $search_str))) ? substr_replace($src_str, $replacement_str, $pos, strlen($search_str)) : $src_str;
+}
+
+
