@@ -26,19 +26,19 @@ function filter_by_tag() {
     $idArrayOfBestMatches = array();
 //    $semifilteredCourses = pods($type, getSemiFilterParams($filters));
 
-    while ($filteredCourses->fetch()) {
-        $filtersCourses[] =  filteredCoursesData($filteredCourses, $lang);
-        $idArrayOfBestMatches[] = $filteredCourses->display('ID');
-    }
+//    while ($filteredCourses->fetch()) {
+//        $filtersCourses[] =  filteredCoursesData($filteredCourses, $lang);
+//        $idArrayOfBestMatches[] = $filteredCourses->display('ID');
+//    }
 
     /** Get all courses that have at list 1 filter match */
 
     $second_params = getSecondsFiltersParams($filters, $idArrayOfBestMatches);
     if($second_params) {
      $oneOrMoreMatches = pods($type, $second_params);
-        while ($oneOrMoreMatches->fetch()) {
-            $filtersCourses[] =  filteredCoursesData($oneOrMoreMatches, $lang);
-        }
+//        while ($oneOrMoreMatches->fetch()) {
+//            $filtersCourses[] =  filteredCoursesData($oneOrMoreMatches, $lang);
+//        }
     }
 
     $dataToReturn['courses'] = $filtersCourses;
