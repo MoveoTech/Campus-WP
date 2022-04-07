@@ -155,7 +155,7 @@ if($count == '0'){
 </div>
 <!--    <div class="bg-overlay filtersMenuOverlay"></div>-->
     <div class="filters-mobile-menu-popup">
-<!--        --><?//= $mobile_menu; ?>
+        <?= $mobile_menu; ?>
         <div class="mobile-menu-asset"></div>
     </div>
 
@@ -165,54 +165,54 @@ function get_filters_menu($menuFilters) {
 
     $encoded_path = urlencode($_SERVER['REQUEST_URI']);
     $current = cin_get_str('header_current_languages');
-//    get_template_part('template', 'parts/Filters/filtersMobileMenu',
-//        array(
-//            'args' => array(
-//                'menuFilters' => $menuFilters,
-//                'encoded_path' => $encoded_path,
-//                'currentLanguage' => $currentLanguage,
-//
-//            )
-//        ));
-
-
-
-    if ($current === 'עברית') :
-        {
-            $courses = 'הקורסים שלי';
-            $language = 'שינוי שפה';
-            $profile = 'פרופיל';
-            $controlpanel = 'לוח בקרה';
-            $logout = 'התנתקות';
-            $loginRegister = 'תפריט פילטרים';
-        }
-    elseif ($current === 'English') :
-        {
-            $courses = 'My Courses';
-            $language = 'Change Language';
-            $profile = 'Profile';
-            $controlpanel = 'Control Panel';
-            $logout = 'Log out';
-            $loginRegister = 'Login / Register';
-        }
-    elseif ($current === 'العربية') :
-        {
-            $courses = 'دوراتي';
-            $language = 'تغيير اللغة';
-            $profile = 'الملف الشخصي';
-            $controlpanel = 'لوحة المراقبة';
-            $logout = 'تسجيل خروج';
-            $loginRegister = 'تسجيل الدخول / تسجيل';
-        }
-    endif;
-
-
-    return get_template_part('template', 'parts/Filters/filtersMobileMenu',
+    get_template_part('template', 'parts/Filters/filtersMobileMenu',
         array(
             'args' => array(
                 'menuFilters' => $menuFilters,
+                'encoded_path' => $encoded_path,
+                'currentLanguage' => $current,
+
             )
         ));
+
+//
+//
+//    if ($current === 'עברית') :
+//        {
+//            $courses = 'הקורסים שלי';
+//            $language = 'שינוי שפה';
+//            $profile = 'פרופיל';
+//            $controlpanel = 'לוח בקרה';
+//            $logout = 'התנתקות';
+//            $loginRegister = 'תפריט פילטרים';
+//        }
+//    elseif ($current === 'English') :
+//        {
+//            $courses = 'My Courses';
+//            $language = 'Change Language';
+//            $profile = 'Profile';
+//            $controlpanel = 'Control Panel';
+//            $logout = 'Log out';
+//            $loginRegister = 'Login / Register';
+//        }
+//    elseif ($current === 'العربية') :
+//        {
+//            $courses = 'دوراتي';
+//            $language = 'تغيير اللغة';
+//            $profile = 'الملف الشخصي';
+//            $controlpanel = 'لوحة المراقبة';
+//            $logout = 'تسجيل خروج';
+//            $loginRegister = 'تسجيل الدخول / تسجيل';
+//        }
+//    endif;
+
+//
+//    return get_template_part('template', 'parts/Filters/filtersMobileMenu',
+//        array(
+//            'args' => array(
+//                'menuFilters' => $menuFilters,
+//            )
+//        ));
 //foreach ($menuFilters as $filterGroup) {
 //    return '<li class="mobile-list-item logged-in-item">' . $filterGroup . '</li>';
 //}

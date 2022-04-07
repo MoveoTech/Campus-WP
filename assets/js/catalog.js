@@ -130,13 +130,21 @@ function slickStripeForMobile() {
         }
         jQuery('.catalog-courses-stripe').slick({
             lazyLoad: 'ondemand',
-            slidesToShow: 2.5,
+            slidesToShow: 3,
             slidesToScroll: 2,
             rtl: rtl,
             arrows: false,
             speed: 1000,
             infinite: false,
             responsive: [
+                {
+                    breakpoint: 650,
+                    settings: {
+                        slidesToShow: 2.5,
+                        slidesToScroll: 2,
+                        arrows: false,
+                    }
+                },
                 {
                     breakpoint: 571,
                     settings: {
