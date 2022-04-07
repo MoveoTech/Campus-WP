@@ -156,7 +156,7 @@ if($count == '0'){
 <!--    <div class="bg-overlay filtersMenuOverlay"></div>-->
     <div class="filters-mobile-menu-popup">
         <?= $mobile_menu; ?>
-        <div class="mobile-menu-asset"></div>
+<!--        <div class="mobile-menu-asset"></div>-->
     </div>
 
 <?php
