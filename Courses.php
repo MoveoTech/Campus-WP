@@ -44,7 +44,7 @@ $course_attrs = array(
 );
 
 /** NEW PARAMETERS */
-$catalog_stripe_id = get_field('catalog_stripe')[0];
+$catalog_stripe_id = get_field('catalog_stripe');
 $academic_institutions = pods( 'academic_institution', array('limit'   => -1 ));
 $courses = pods( 'courses', $params, true);
 $count = $courses->total_found();
@@ -154,10 +154,10 @@ if($count == '0'){
     </div>
 </div>
 <!--    <div class="bg-overlay filtersMenuOverlay"></div>-->
-    <div class="filters-mobile-menu-popup">
+<!--    <div class="filters-mobile-menu-popup">-->
         <?= $mobile_menu; ?>
 <!--        <div class="mobile-menu-asset"></div>-->
-    </div>
+<!--    </div>-->
 
 <?php
 function get_filters_menu($menuFilters) {
