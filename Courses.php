@@ -40,7 +40,7 @@ $course_attrs = array(
 );
 
 /** NEW PARAMETERS */
-$catalog_stripe_id = get_field('catalog_stripe')[0];
+$catalog_stripe_id = get_field('catalog_stripe');
 $academic_institutions = pods( 'academic_institution', array('limit'   => -1 ));
 $courses = pods( 'courses', $params, true);
 $count = $courses->total_found();
