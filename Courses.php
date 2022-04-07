@@ -100,6 +100,7 @@ if($count == '0'){
                     <span>סינון</span>
                     <img class="filterVector" src="<?php echo get_bloginfo('stylesheet_directory'). '/assets/images/vector-black.svg'?>"/>
                 </div>
+
             </div>
             <div class="catalogWrap">
 
@@ -154,57 +155,76 @@ if($count == '0'){
 </div>
 <!--    <div class="bg-overlay filtersMenuOverlay"></div>-->
     <div class="filters-mobile-menu-popup">
-        <?= $mobile_menu; ?>
+<!--        --><?//= $mobile_menu; ?>
         <div class="mobile-menu-asset"></div>
     </div>
 
 <?php
 function get_filters_menu($menuFilters) {
-    console_log("hili");
 
-    get_template_part('template', 'parts/Filters/filtersMobileMenu',
+
+    $encoded_path = urlencode($_SERVER['REQUEST_URI']);
+    $current = cin_get_str('header_current_languages');
+//    get_template_part('template', 'parts/Filters/filtersMobileMenu',
+//        array(
+//            'args' => array(
+//                'menuFilters' => $menuFilters,
+//                'encoded_path' => $encoded_path,
+//                'currentLanguage' => $currentLanguage,
+//
+//            )
+//        ));
+
+
+
+    if ($current === 'עברית') :
+        {
+            $courses = 'הקורסים שלי';
+            $language = 'שינוי שפה';
+            $profile = 'פרופיל';
+            $controlpanel = 'לוח בקרה';
+            $logout = 'התנתקות';
+            $loginRegister = 'תפריט פילטרים';
+        }
+    elseif ($current === 'English') :
+        {
+            $courses = 'My Courses';
+            $language = 'Change Language';
+            $profile = 'Profile';
+            $controlpanel = 'Control Panel';
+            $logout = 'Log out';
+            $loginRegister = 'Login / Register';
+        }
+    elseif ($current === 'العربية') :
+        {
+            $courses = 'دوراتي';
+            $language = 'تغيير اللغة';
+            $profile = 'الملف الشخصي';
+            $controlpanel = 'لوحة المراقبة';
+            $logout = 'تسجيل خروج';
+            $loginRegister = 'تسجيل الدخول / تسجيل';
+        }
+    endif;
+
+
+    return get_template_part('template', 'parts/Filters/filtersMobileMenu',
         array(
             'args' => array(
                 'menuFilters' => $menuFilters,
             )
         ));
-
-
-//
-//    $encoded_path = urlencode($_SERVER['REQUEST_URI']);
-//    $current = cin_get_str('header_current_languages');
-//    if ($current === 'עברית') :
-//        {
-//            $courses = 'הקורסים שלי';
-//            $language = 'שינוי שפה';
-//            $profile = 'פרופיל';
-//            $controlpanel = 'לוח בקרה';
-//            $logout = 'התנתקות';
-//            $loginRegister = 'תפריט פילטרים';
-//        }
-//    elseif ($current === 'English') :
-//        {
-//            $courses = 'My Courses';
-//            $language = 'Change Language';
-//            $profile = 'Profile';
-//            $controlpanel = 'Control Panel';
-//            $logout = 'Log out';
-//            $loginRegister = 'Login / Register';
-//        }
-//    elseif ($current === 'العربية') :
-//        {
-//            $courses = 'دوراتي';
-//            $language = 'تغيير اللغة';
-//            $profile = 'الملف الشخصي';
-//            $controlpanel = 'لوحة المراقبة';
-//            $logout = 'تسجيل خروج';
-//            $loginRegister = 'تسجيل الدخول / تسجيل';
-//        }
-//    endif;
+//foreach ($menuFilters as $filterGroup) {
+//    return '<li class="mobile-list-item logged-in-item">' . $filterGroup . '</li>';
+//}
+//    $groupFilters =
 //
 //    return '
-//    <ul id="menu-mobile-menu-1" class="filters-mobile-menu">
-//       <li class="mobile-list-item logged-in-item"><img src="' . get_bloginfo('stylesheet_directory') . '/assets/images/courses-icon.svg' .'"><a target="_blank" href="'. get_field('link_to_dashboard_for_campus', 'option') .'"><span class="list-item-content">'.$courses.'</span></a></li>
+//    <ul id="menu-mobile-menu-1" class="filters-mobile-menu">';
+//
+//        foreach ($menuFilters as $filterGroup) {
+//            return '<li class="mobile-list-item logged-in-item">' . $filterGroup . '</li>';
+//        }
+//    '<li class="mobile-list-item logged-in-item"><img src="' . get_bloginfo('stylesheet_directory') . '/assets/images/courses-icon.svg' .'"><a target="_blank" href="'. get_field('link_to_dashboard_for_campus', 'option') .'"><span class="list-item-content">'.$courses.'</span></a></li>
 //       <li class="mobile-list-item change-mobile-lang"><img src="' . get_bloginfo('stylesheet_directory') . '/assets/images/lang-logo.svg' .'"><a class="a-link"><span class="list-item-content">'.$language.'</span><img class="mobile-menu-vector" width="9.93px" height="5.68px" src="' . get_bloginfo('stylesheet_directory') . '/assets/images/vector-black.svg' .'"/></a> </li>
 //       <div class="secondary-mobile-lang-menu">
 //           <ul id="menu-language-menu-1" class="nav-lang">
