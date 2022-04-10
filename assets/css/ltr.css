@@ -144,7 +144,17 @@
       right: 34px; } }
 
 /*home page*/
-.hero-banner .banner-image img.desktop-banner {
+.hero-banner .banner-image .bckg-1 {
+  transform: scaleX(-1);
+  right: 0;
+  left: unset; }
+
+.hero-banner .banner-image .bckg-2 {
+  transform: scaleX(-1);
+  right: unset;
+  left: 0; }
+
+.hero-banner .banner-image div.desktop-banner {
   left: unset;
   right: 0; }
 
@@ -153,101 +163,126 @@
   left: 0;
   transform: rotate(180deg); }
 
-.hero-banner .banner-image .container {
+.hero-banner .banner-image .hero-container .container {
   right: unset;
   left: 185px;
   width: 550px;
   align-items: flex-start; }
-  .hero-banner .banner-image .container .text-on-banner {
+  .hero-banner .banner-image .hero-container .container .text-on-banner {
     text-align: left; }
-  .hero-banner .banner-image .container .hero-search-form .search-field.form-control {
+  .hero-banner .banner-image .hero-container .container .hero-search-form .search-field.form-control {
     text-align: left;
     padding-left: 30px;
     padding-right: 5px; }
-  .hero-banner .banner-image .container .hero-search-form .search-submit {
+  .hero-banner .banner-image .hero-container .container .hero-search-form .search-submit {
     left: unset;
     right: 5px; }
 
 @media (max-width: 991px) {
   .hero-banner .banner-image {
     background: rgba(51, 52, 51, 0.7); }
-    .hero-banner .banner-image .container {
+    .hero-banner .banner-image .hero-container .container {
       align-items: center;
       right: 0;
       left: 0;
       margin: auto; }
-      .hero-banner .banner-image .container .text-on-banner {
+      .hero-banner .banner-image .hero-container .container .text-on-banner {
         text-align: center; }
-        .hero-banner .banner-image .container .text-on-banner h5 {
+        .hero-banner .banner-image .hero-container .container .text-on-banner h5 {
           width: 370px; } }
 
 @media (max-width: 768px) {
-  .hero-banner .banner-image img.mobile-banner {
+  .hero-banner .banner-image div.mobile-banner {
     left: unset;
     right: 0; }
-  .hero-banner .banner-image .container {
-    width: 90%;
-    top: 30%; }
-    .hero-banner .banner-image .container .text-on-banner {
+  .hero-banner .banner-image .hero-container .container {
+    width: 90%; }
+    .hero-banner .banner-image .hero-container .container .text-on-banner {
       margin-bottom: 15px; }
-      .hero-banner .banner-image .container .text-on-banner h1 {
-        font-size: 28px;
-        line-height: 35px; }
-      .hero-banner .banner-image .container .text-on-banner h5 {
+      .hero-banner .banner-image .hero-container .container .text-on-banner h1 {
+        font-size: 36px;
+        line-height: 40px; }
+      .hero-banner .banner-image .hero-container .container .text-on-banner h5 {
         width: 275px; } }
 
+.slick-prev {
+  right: unset;
+  left: -60px;
+  -webkit-transform: unset;
+  transform: rotate(0); }
+
+.slick-next {
+  left: unset;
+  right: -60px;
+  transform: rotate(180deg); }
+
 /* Slick Stripe */
-.home-page-courses-stripe .stripe-header .show-all-courses p:after {
+.home-page-courses-stripe .stripe-container .stripe-header .show-all-courses p:after {
   margin-right: unset;
   margin-left: 4px; }
 
-.home-page-nerative-stripe .stripe-header .stripe-title span {
+.home-page-nerative-stripe .stripe-container .stripe-header .stripe-title span {
   margin-left: unset;
   margin-right: 10px; }
 
-.home-page-nerative-stripe .stripe-header .stripe-title img {
+.home-page-nerative-stripe .stripe-container .stripe-header .stripe-title img {
   margin-left: unset;
   margin-right: 10px; }
 
-.home-page-tags-stripe .tags-stripe-header span {
+.home-page-tags-stripe .stripe-container .tags-stripe-header span {
   margin-left: unset;
   margin-right: 10px; }
 
-.home-page-tags-stripe .tags-div .tag-item a p:after {
+.home-page-tags-stripe .stripe-container .tags-div .tag-item a p:after {
   margin-right: unset;
   margin-left: 8px; }
 
-.home-page-info-stripe .info-stripe-header span {
+.home-page-info-stripe .stripe-container .info-stripe-header span {
   margin-left: unset;
   margin-right: 10px; }
 
-.home-page-institutions_stripe .institution-header span {
+.home-page-institutions_stripe .stripe-container .institution-header span {
   margin-right: 10px;
   margin-left: unset; }
 
-.home-page-goals-stripe .goals-stripe-header .stripe-title span {
+.home-page-goals-stripe .stripe-container .goals-stripe-header .stripe-title span {
   margin-left: unset;
   margin-right: 10px; }
 
-.home-page-goals-stripe .goals-slider .goal-item .goal-item-content span:after {
+.home-page-goals-stripe .stripe-container .goals-slider .goal-item .goal-item-content span:after {
   padding-right: unset;
   padding-left: 5px; }
 
-.home-page-testimonials_stripe .testimonials-stripe-header span {
+.home-page-testimonials_stripe .stripe-container .testimonials-stripe-header span {
   margin-left: unset;
   margin-right: 10px; }
 
-.home-page-myCourses-stripe .myCourses-slider .course-stripe-item .item-content h3 {
+.home-page-testimonials_stripe .stripe-container .testimonials-slider button.slick-prev {
+  right: unset;
+  left: -20px; }
+
+.home-page-testimonials_stripe .stripe-container .testimonials-slider button.slick-next {
+  left: unset;
+  right: -20px; }
+
+.home-page-myCourses-stripe .stripe-container .myCourses-slider .course-stripe-item .item-content h3 {
   text-align: left; }
 
-.home-page-myCourses-stripe .myCourses-slider .course-stripe-item .item-content p.institution-name {
+.home-page-myCourses-stripe .stripe-container .myCourses-slider .course-stripe-item .item-content p.institution-name {
   text-align: left; }
 
-.home-page-myCourses-stripe .myCourses-slider .course-stripe-item .item-content p.course-progress {
+.home-page-myCourses-stripe .stripe-container .myCourses-slider .course-stripe-item .item-content p.course-progress {
+  text-align: left; }
+
+.nerative-class .slick-list .slick-track .course-stripe-item .item-content h3 {
   text-align: left; }
 
 .nerative-class .slick-list .slick-track .course-stripe-item .tags-div {
   margin: 0 10px 0 0; }
+
+.courses-stripe .course-stripe-item .course-img .info-button {
+  right: unset;
+  left: 10px; }
 
 .courses-stripe .course-stripe-item .item-content {
   height: 87px;
@@ -263,26 +298,26 @@
     margin-left: unset;
     margin-right: 10px; }
 
-body .course-item-hover .item-content {
+body .course-item-hover a .item-content {
   margin: 10px 14px 7px 20px; }
-  body .course-item-hover .item-content h3 {
+  body .course-item-hover a .item-content h3 {
     text-align: left; }
-  body .course-item-hover .item-content p {
+  body .course-item-hover a .item-content p {
     text-align: left; }
 
-body .course-item-hover .tags-div {
+body .course-item-hover a .tags-div {
   justify-content: left;
   margin-right: unset;
   margin-left: 20px; }
-  body .course-item-hover .tags-div span {
+  body .course-item-hover a .tags-div span {
     margin-left: unset;
     margin-right: 10px; }
     @media (max-width: 768px) {
-      body .course-item-hover .tags-div span {
+      body .course-item-hover a .tags-div span {
         margin-left: unset;
         margin-right: 5px; } }
 
-body .course-item-hover .course-details {
+body .course-item-hover a .course-details {
   margin: 0 14px 15px 20px; }
 
 .course-popup-modal .popup-header {
@@ -313,40 +348,29 @@ body .course-item-hover .course-details {
           margin-right: 5px; } }
 
 @media (max-width: 650px) {
-  .home-page-myCourses-stripe .stripe-header span {
+  .home-page-myCourses-stripe .stripe-container .stripe-header span {
     margin-right: 10px;
     margin-left: 0; } }
 
 @media (max-width: 600px) {
   .courses-stripe {
     margin: 20px 0 20px 30px; }
-  .home-page-myCourses-stripe .myCourses-slider {
+  .home-page-myCourses-stripe .stripe-container .myCourses-slider {
     margin: 20px 0 0 30px; } }
 
 @media (max-width: 480px) {
   .courses-stripe {
     margin: 20px 0 20px 10px; }
-  .home-page-myCourses-stripe .stripe-header {
+  .home-page-myCourses-stripe .stripe-container .stripe-header {
     margin-right: unset;
     margin-left: 5px; }
-    .home-page-myCourses-stripe .stripe-header span {
+    .home-page-myCourses-stripe .stripe-container .stripe-header span {
       margin-left: 10px; }
-  .home-page-myCourses-stripe .myCourses-slider {
+  .home-page-myCourses-stripe .stripe-container .myCourses-slider {
     margin: 15px 0 0 10px; }
-  .home-page-courses-stripe .stripe-header {
+  .home-page-courses-stripe .stripe-container .stripe-header {
     margin-right: unset;
     margin-left: 15px; } }
-
-.slick-prev {
-  right: unset;
-  left: -60px;
-  -webkit-transform: unset;
-  transform: rotate(0); }
-
-.slick-next {
-  left: unset;
-  right: -60px;
-  transform: rotate(180deg); }
 
 .all_courses:before {
   transform: scaleX(-1);

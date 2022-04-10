@@ -1,8 +1,4 @@
-<?php
-/**
- * Template Name: Migrate Courses
- */
-?>
+
 <div style="height: 100px"></div>
 <?php
 
@@ -16,7 +12,10 @@
 
 global $wpdb;
 $results = $wpdb->get_results( "SELECT * FROM $wpdb->posts WHERE `post_type`='course'" );
-//var_dump($results);
+//var_dump(sizeof($results));
+//$myfile = fopen("logfile.txt", "w") or die("Unable to open file!");
+//    fwrite($myfile, $newPermalink.'\n');
+
 $index=1;
 foreach ( $results as $result )
 {
@@ -127,7 +126,6 @@ foreach ( $results as $result )
 
     endif;
 
-
     $PodslecturerArray = getPodslecturerArray($result->ID);
     $PodsTestimonialArray = getPodsTestimonialArray($result->ID);
     $PodAcademic_institution_id = getPodsAcademicInstitution($result->ID);
@@ -197,16 +195,20 @@ foreach ( $results as $result )
 //    if($result->ID == "43727"){
 
 
-        $pod = pods( 'courses' );
+    $pod = pods( 'courses' );
 
-        $CourseID = $pod->add( $data );
+    $CourseID = $pod->add( $data );
 
-        $data = pods("courses", $CourseID);
-        $newPermalink = $data->display('permalink');
-        wp_update_post( array(
+    $data = pods("courses", $CourseID);
+    $newPermalink = $data->display('permalink');
+
+    if($link[count($link)-2] != $newPermalink) {
+     fwrite($myfile, $newPermalink.'\n');
+        wp_update_post(array(
             'ID' => $result->ID,
             'post_name' => $newPermalink
         ));
+    }
 
 
 //    }
@@ -216,6 +218,7 @@ foreach ( $results as $result )
 
 
 }
+//fclose($myfile);
 
 
 

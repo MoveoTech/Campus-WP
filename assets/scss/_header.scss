@@ -353,7 +353,7 @@ header.scrolling-header {
 
 .banner-wrapper.no-image {
   top: 63px;
-  margin-bottom: 25px;
+  //margin-bottom: 25px;
   height: 150px; }
 
 
@@ -557,7 +557,7 @@ max-width: 165px}
   left: 3.64px;
   top: 50%;
   transform: translateY(-50%);
-  background-image: url("../../assets/images/search-red.png");
+  background-image: url("../../assets/images/search-red.svg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
@@ -606,7 +606,7 @@ div.user-information {
   width: 8px;
   height: 8px;
   cursor: pointer;
-  content: url("../images/vector.png");
+  content: url("../images/vector.svg");
   -moz-transform: rotate(45deg);
   -ms-transform: rotate(45deg);
   -o-transform: rotate(45deg);
@@ -627,6 +627,8 @@ div.user-information {
   font-weight: bold;
   line-height: 18px;
   width: 84px;
+  height: 100%;
+  border-radius: 22px;
   outline: transparent;
   padding-right: 20px;
  }
@@ -681,7 +683,7 @@ div.user-information {
 .header_wrap .lang:before {
   content: "";
   display: inline-block;
-  background-image: url("../../assets/images/lang-logo.png");
+  background-image: url("../../assets/images/lang-logo.svg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;

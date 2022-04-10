@@ -34,9 +34,9 @@ wp_head();
                     $url_logo_header_extra = $logo_header_extra['url'];
                     ?>
                     <div class="logo_items">
-                        <img class="social-logo" src="<?= $url_logo_header_extra ?>" alt="<?= cin_get_str('header_second_logo_alt') ?>" />
+                        <img class="social-logo" src="<?= $url_logo_header_extra ?>" alt="<?= cin_get_str('header_third_logo_alt') ?>" />
                         <img class="social-logo digital-isreal-logo" src="<?= $url_social_equality_logo_header ?>"
-                             alt="<?= cin_get_str('header_third_logo_alt') ?>"/>
+                             alt="<?= cin_get_str('header_second_logo_alt') ?>"/>
                     </div>
                 </div>
             </div>
@@ -51,7 +51,7 @@ wp_head();
                     </nav>
                 </div>
                 <div class="search-form login_search_lang_wrap ">
-                    <span class="search-button"><img src="<?= get_bloginfo('stylesheet_directory') . '/assets/images/search-mobile.png' ?>" /></span>
+                    <span class="search-button"><img src="<?= get_bloginfo('stylesheet_directory') . '/assets/images/search-mobile.svg' ?>" /></span>
                     <div class="header-courses">
                         <?php get_search_form(); ?>
                     </div>
@@ -76,9 +76,14 @@ wp_head();
                     </div>
                 </div>
                 <div class="header_login lang languages_menu_wrap">
-                    <?=
-                    lang_button();
-                    get_lang_menu(); ?>
+                    <?= lang_button(); ?>
+                    <div class="menu-language-menu-container">
+                        <ul id="menu-language-menu-1" class="nav-lang">
+                            <li id="wpml-ls-item-he" class="wpml-ls-menu-item wpml-ls-item-he <?= current_active_lang( 'he' ) ?>"><a href="<?= get_lang_url( 'he' ) ?>"><span class="wpml-ls-native">עב</span></a></li>
+                            <li id="wpml-ls-item-ar" class="wpml-ls-menu-item wpml-ls-item-ar <?= current_active_lang( 'ar' ) ?>"><a href="<?= get_lang_url( 'ar' ) ?>"><span class="wpml-ls-native">العر</span></a></li>
+                            <li id="wpml-ls-item-en" class="wpml-ls-menu-item wpml-ls-item-en <?= current_active_lang( 'en' ) ?>"><a href="<?= get_lang_url( 'en' ) ?>"><span class="wpml-ls-native">En</span></a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
@@ -97,9 +102,9 @@ function get_user_hello()
 {
     return '
     <div class="user-information show_for_connected_user">
-        <img width="30px" src="' . get_bloginfo('stylesheet_directory') . '/assets/images/cactus.png' .'" alt="user icon">
+        <img width="30px" src="' . get_bloginfo('stylesheet_directory') . '/assets/images/cactus.svg' .'" alt="user icon">
                   <span class="name-user"></span>            
-         <img src="' . get_bloginfo('stylesheet_directory') . '/assets/images/vector.png' .'" />
+         <img src="' . get_bloginfo('stylesheet_directory') . '/assets/images/vector.svg' .'" />
     </div>';
 }
 function get_user_login()
@@ -109,8 +114,8 @@ function get_user_login()
     $current_lang = $sitepress->get_current_language();
     if ($current_lang === 'en') :
         {
-            $login = 'log in';
-            $register = 'register';
+            $login = 'Log in';
+            $register = 'Register';
         }
     elseif ($current_lang === 'he') :
         {
@@ -128,7 +133,7 @@ function get_user_login()
     <div class="header_login has_profile_icon">
         <a class="login-item"
            href="'. get_field('link_to_login_and_register', 'option') .'/login?next=/home' . $encoded_path .'">'. __($login, 'single_corse') .'</a>
-        <a class="signin_'.$current_lang.'"
+        <a class="register-item signin_'.$current_lang.'"
            href="'. get_field('link_to_login_and_register', 'option') .'/register?next=/home' . $encoded_path .'"> ' . __($register, 'single_corse') .'</a>
     </div>';
 }
@@ -186,7 +191,7 @@ function get_user_menu() {
 
     return '
     <ul id="menu-user-menu-1" class="nav-user">
-       <li class="user-list-item change-lang-menu"><a class="a-link"></a><img src="' . get_bloginfo('stylesheet_directory') . '/assets/images/lang-logo.png' .'"><span class="list-item-content">'.$language.'</span><img class="mobile-menu-vector" src="' . get_bloginfo('stylesheet_directory') . '/assets/images/vector-black.png' .'"/> 
+       <li class="user-list-item change-lang-menu"><a class="a-link"></a><img src="' . get_bloginfo('stylesheet_directory') . '/assets/images/lang-logo.svg' .'"><span class="list-item-content">'.$language.'</span><img class="mobile-menu-vector" src="' . get_bloginfo('stylesheet_directory') . '/assets/images/vector-black.svg' .'"/> 
            <div class="secondary-lang-menu">
                <ul id="menu-language-menu-1" class="nav-lang">
                     <li id="wpml-ls-item-he" class="wpml-ls-menu-item wpml-ls-item-he ' . current_active_lang( 'he' ) . '"><a href="' . get_lang_url( 'he' ) . '"><span class="wpml-ls-native">עב</span></a></li>
@@ -195,9 +200,9 @@ function get_user_menu() {
                 </ul>
             </div>
        </li>
-        <li class="user-list-item "><a class="a-link profile-button" target="_blank"></a><img src="' . get_bloginfo('stylesheet_directory') . '/assets/images/profile.png' .'"><span class="list-item-content">'.$profile.'</span></li>
-        <li class="user-list-item"><a class="a-link" target="_blank" href="'. get_field('link_to_dashboard_for_campus', 'option') .'"></a><img src="' . get_bloginfo('stylesheet_directory') . '/assets/images/equalizer.png' .'"><span class="list-item-content">'.$controlpanel.'</span></li>
-        <li class="user-list-item user-logged-out"><a class="a-link logout-button" target="_blank"></a><img src="' . get_bloginfo('stylesheet_directory') . '/assets/images/logout.png' .'"><span class="list-item-content">'.$logout.'</span></li>         
+        <li class="user-list-item "><a class="a-link profile-button" target="_blank"></a><img src="' . get_bloginfo('stylesheet_directory') . '/assets/images/profile.svg' .'"><span class="list-item-content">'.$profile.'</span></li>
+        <li class="user-list-item"><a class="a-link" target="_blank" href="'. get_field('link_to_dashboard_for_campus', 'option') .'"></a><img src="' . get_bloginfo('stylesheet_directory') . '/assets/images/equalizer.svg' .'"><span class="list-item-content">'.$controlpanel.'</span></li>
+        <li class="user-list-item user-logged-out"><a class="a-link logout-button"></a><img src="' . get_bloginfo('stylesheet_directory') . '/assets/images/logout.svg' .'"><span class="list-item-content">'.$logout.'</span></li>         
     </ul>
     
     

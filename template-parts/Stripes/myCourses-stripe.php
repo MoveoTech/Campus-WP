@@ -2,12 +2,12 @@
 $stripe = wp_parse_args(
     $args["args"]
 );
-if(empty($stripe) || empty($stripe['id']) || empty($stripe['courses']) || count($stripe['courses']) < 1)
+if(empty($stripe) || empty($stripe['id']))
     return;
-//var_dump($stripe['courses']);
+
 ?>
 
-<div class="home-page-myCourses-stripe" style="margin: 20px 0" >
+<div id="myCoursesWrapper" class="home-page-myCourses-stripe" style="margin: 20px 0" >
     <div class="stripe-container">
         <div class="stripe-header">
             <?php if($stripe['title'] != '' && !empty($stripe['title'])) : ?>

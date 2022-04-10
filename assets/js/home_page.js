@@ -4,7 +4,11 @@ jQuery(document).ready(function () {
     let nexSlick = '<button type="button" id="slick-next" class="slick-next slick-button " tabindex="-1" aria-label="' + global_vars.next_btn_text + '"></button>';
 
     //Get My Courses
-    getMyCourses()
+    // check if user loggedIn
+    let edx_user_info = getCookie(global_vars.cookie_name);
+    if (edx_user_info) {
+        getMyCourses()
+    }
 
     //Course Card
     mouseHoverOnCourse()
@@ -45,11 +49,13 @@ jQuery(document).ready(function () {
         changeArrowClass(id, 'testimonials');
     })
 
+    /** SLICK SETTINGS **/
+
     //courses slick
     jQuery('.courses-stripe').slick({
         lazyLoad: 'ondemand',
         slidesToShow: 4,
-        slidesToScroll: 3,
+        slidesToScroll: 4,
         rtl: is_rtl,
         nextArrow: nexSlick,
         prevArrow: prevSlick,
@@ -264,70 +270,6 @@ jQuery(document).ready(function () {
 
     })
 
-    //my courses slick
-    jQuery('#myCoursesStripeId').slick({
-        lazyLoad: 'ondemand',
-        slidesToShow: 4,
-        slidesToScroll: 3,
-        rtl: is_rtl,
-        nextArrow: nexSlick,
-        prevArrow: prevSlick,
-        speed: 1000,
-        infinite: false,
-        responsive: [
-            {
-                breakpoint: 993,
-                settings: {
-                    speed: 500,
-                    slidesToShow: 3,
-                    slidesToScroll: 3,
-                }
-            },
-            {
-                breakpoint: 768,
-                settings: {
-                    slidesToShow: 3,
-                    slidesToScroll: 3,
-                    speed: 500,
-                    arrows: false,
-                }
-            },
-            {
-                breakpoint: 710,
-                settings: {
-                    slidesToShow: 3,
-                    slidesToScroll: 3,
-                    arrows: false,
-                }
-            },
-            {
-                breakpoint: 650,
-                settings: {
-                    slidesToShow: 3,
-                    slidesToScroll: 3,
-                    arrows: false,
-                }
-            },
-            {
-                breakpoint: 600,
-                settings: {
-                    slidesToShow: 2.5,
-                    slidesToScroll: 2,
-                    arrows: false,
-                }
-            },
-            {
-                breakpoint: 480,
-                settings: {
-                    speed: 500,
-                    slidesToShow: 2.15,
-                    slidesToScroll: 2,
-                    arrows: false,
-                }
-            },
-        ]
-    })
-
     //testimonials slick
     jQuery('.testimonials-slider').slick({
         slidesToShow: 3,
@@ -392,8 +334,15 @@ jQuery(document).ready(function () {
         setTimeout(function () {
             jQuery('#popup_overlay #popup').attr('aria-hidden', 'true');
             jQuery("#youtube-popup").removeClass('active');
+            jQuery("#login-register-popup").removeClass('active');
         }, 100);
     });
+    jQuery('#youtube-popup').on('click', function () {
+        setTimeout(function () {
+            jQuery('#popup_overlay #popup').attr('aria-hidden', 'true');
+            jQuery("#youtube-popup").removeClass('active');
+        }, 100);
+    })
 
     //Course popup overlay
     jQuery('.bg-overlay').on('click', function() {
@@ -411,6 +360,45 @@ jQuery(document).ready(function () {
             jQuery('body').remove(element);
         }
     })
+
+    // Login Iframe
+    //appending the iframe
+    jQuery('.login-item').on('click', function(e) {
+        e.preventDefault();
+        jQuery("#login-iframe").append("<iframe id='login-register-iframe' src='https://courses.campus.gov.il/login?next=/dashboard' height='300px' width='300px' title='Login page'></iframe>")
+        jQuery('#login-register-popup .popup').attr('aria-hidden', 'false');
+        jQuery("#login-register-popup").addClass('active');
+        jQuery('body').css('overflow-y', 'hidden');
+    })
+    //removing the iframe
+    jQuery('#login-register-popup').on('click', function () {
+        setTimeout(function () {
+            jQuery("#login-iframe").empty();
+            jQuery('#login-register-popup .popup').attr('aria-hidden', 'true');
+            jQuery("#login-register-popup").removeClass('active');
+            jQuery('body').css('overflow-y', 'unset');
+        }, 100);
+    })
+
+    // Register Iframe
+    //appending the iframe
+    jQuery('.register-item').on('click', function(e) {
+        e.preventDefault();
+        jQuery("#register-iframe").append("<iframe id='register-iframe' src='https://courses.campus.gov.il/register?next=/dashboard' height='300px' width='300px' title='Register page'></iframe>")
+        jQuery('#register-popup .popup').attr('aria-hidden', 'false');
+        jQuery("#register-popup").addClass('active');
+        jQuery('body').css('overflow-y', 'hidden');
+    })
+    //removing the iframe
+    jQuery('#register-popup').on('click', function () {
+        setTimeout(function () {
+            jQuery("#register-iframe").empty();
+            jQuery('#register-popup .popup').attr('aria-hidden', 'true');
+            jQuery("#register-popup").removeClass('active');
+            jQuery('body').css('overflow-y', 'unset');
+        }, 0);
+    })
+
 })
 
 function getCookie(cname) {
@@ -430,12 +418,17 @@ function getCookie(cname) {
 
 function getCoursesAjax(id) {
     const slickTrack = jQuery(`#${id} .slick-track`)[0]
+    // disable button
+    let nextButton = slickTrack.parentElement.parentElement.lastChild;
     const trackLength = parseInt(slickTrack.lastChild.getAttribute('data-slick-index'))
     const coursesIDs = JSON.parse(jQuery(`#${id}courses`).attr('value'))
     let currentIndex = jQuery(`#${id} .slick-track .slick-active`).attr("data-slick-index");
 
     if (coursesIDs.length > 10  && coursesIDs.length > trackLength + 1 && trackLength - currentIndex <= 8) {
-        let newCoursesArray = coursesIDs.slice(trackLength + 1, (trackLength + 11))
+        if(nextButton.classList.contains('slick-next')) {
+            jQuery(`#${nextButton.id}`).prop('disabled', true);
+        }
+        let newCoursesArray = coursesIDs.slice(trackLength + 1, (trackLength + 21))
 
         let data = {
             'action': 'stripe_data',
@@ -443,10 +436,13 @@ function getCoursesAjax(id) {
             'lang' : getCookie('openedx-language-preference'),
             'idsArray': newCoursesArray,
         }
+
         jQuery.post(stripe_data_ajax.ajaxurl, data, function(response){
             if(response.success){
                 const data = JSON.parse(response.data);
                 apppendCourses(data, id);
+                // button unable
+                // jQuery(`#${nextButton.id}`).prop('disabled', false);
             }
         })
     }
@@ -455,27 +451,31 @@ function getCoursesAjax(id) {
 function apppendCourses(coursesData, id) {
 
     coursesData.forEach(item =>{
-
+        let permalink = item.permalink ? item.permalink : '';
+        let url = 'course/' + permalink;
         let tags = getDesktopTags(item.tags);
         let hoverTags = getHoverTags(item.tags);
+
+        let academicInstitution = item.academic_institution ? item.academic_institution : '';
 
         let temp = document.createElement("div");
         temp.id = item.id + id;
         temp.classList.add('course-stripe-item');
         temp.innerHTML =
             '<div class="course-img" style="background-image: url('+item.image+');">'+
+            '<a href="'+ url +'"></a>'+
             '<span class="info-button"></span></div>'+
             '<div class="item-content"">'+
-            '<h3 ><a href="">'+item.name+'</a></h3>'+
-            '<p >'+item.academic_institution+'</p>'+
+            '<h3 ><a href="'+ url +'">'+item.name+'</a></h3>'+
+            '<p >'+academicInstitution+'</p>'+
             ' </div>'+
             '<div class=" tags-div">'+tags+ '</div>'+
             '<div class="course-item-hover '+ item.id + id +'">'+
-                '<a href="">'+
+                '<a href="'+ url +'">'+
                     '<div class="course-img" style="background-image: url('+item.image+');"></div>'+
                     '<div class="item-content"">'+
                         '<h3 >'+item.name+'</h3>'+
-                        '<p >'+item.academic_institution+'</p>'+
+                        '<p >'+academicInstitution+'</p>'+
                     '</div>'+
                     '<div class=" tags-div">'+ hoverTags +'</div>'+
                     '<div class="course-details">'+
@@ -491,8 +491,8 @@ function apppendCourses(coursesData, id) {
                     '<div class="course-img" style="background-image: url('+item.image+');"></div>'+
                     '<div class="course-details">'+
                         '<div class="course-header"">'+
-                            '<h3 ><a href="">'+item.name+'</a></h3>'+
-                            '<p >'+item.academic_institution+'</p>'+
+                            '<h3 ><a href="'+ url +'">'+item.name+'</a></h3>'+
+                            '<p >'+academicInstitution+'</p>'+
                         '</div>'+
                         '<div class="tags-div">'+ hoverTags +'</div>'+
                         '<div class="details">'+
@@ -501,15 +501,16 @@ function apppendCourses(coursesData, id) {
                     '</div>'+
                 '</div>'+
                 '<div class="popup-footer">'+
-                    '<a href=""><span>מעבר לקורס</span></a>'+
+                    '<a href="'+ url +'"><span>'+ item.button_text +'</span></a>'+
                 '</div>'+
             '</div>';
 
         jQuery(`#${id}`).slick('slickAdd',temp);
-        mouseHoverOnCourse()
+        mouseHoverOnCourse();
     });
     changeArrowClass(id)
     clickOnCourseInfoButton()
+    // jQuery(`#${nextButton.id}`).prop('disabled', false);
 }
 
 function closePopupIfOpen(id) {
@@ -527,238 +528,162 @@ function closePopupIfOpen(id) {
 }
 
 function getMyCourses() {
-    // let data = {
-    //     'action': 'stripe_data',
-    //     'type' : 'courses',
-    //     'lang' : getCookie('openedx-language-preference'),
-    //     'idsArray': newCoursesArray,
-    // }
-    // jQuery.post(stripe_data_ajax.ajaxurl, data, function(response){
-    //     if(response.success){
-    //         const data = JSON.parse(response.data);
-    //         console.log(data)
-    //         apppendCourses(data, id);
-    //     }
-    // })
+    let coursesData;
 
-    const mockData = [
-        {
-            "created":"2018-05-25T06:08:27.508362Z",
-            "mode":"audit",
-            "is_active":true,
-            "course_details":{
-                "course_id":"course-v1:edX+DemoX+Demo_Course",
-                "course_name":"edX DemoX",
-                "enrollment_start":null,
-                "enrollment_end":null,
-                "course_start":"2017-01-01T00:00:00Z",
-                "course_end":null,
-                "invite_only":false,
-                "academic_institution": 'אוניברסית אריאל בשומרון',
-                "progress": 'בואו נתחיל את הקורס >>',
-                'image': "http://127.0.0.1/app/uploads/2021/05/תמונת_קורס.jpg",
-                "course_modes":[
-                    {
-                        "slug":"audit",
-                        "name":"audit",
-                        "min_price":0,
-                        "suggested_prices":"",
-                        "currency":"usd",
-                        "expiration_datetime":null,
-                        "description":null,
-                        "sku":null,
-                        "bulk_sku":null
-                    }
-                ]
-            },
-            "user":"honor"
+    jQuery.ajax({
+        method: "GET",
+        url: 'https://courses.campus.gov.il/api/enrollment/v1/enrollment',
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
         },
-        {
-            "created":"2018-05-25T06:08:27.508362Z",
-            "mode":"audit",
-            "is_active":true,
-            "course_details":{
-                "course_id":"course-v1:edX+DemoX+Demo_Course",
-                "course_name":"edX DemoX",
-                "enrollment_start":null,
-                "enrollment_end":null,
-                "course_start":"2017-01-01T00:00:00Z",
-                "course_end":null,
-                "invite_only":false,
-                "academic_institution": 'אוניברסית אריאל בשומרון',
-                "progress": 'בואו נתחיל את הקורס >>',
-                'image': "http://127.0.0.1/app/uploads/2021/12/מבני-נתונים-תמונת-בקורס.jpg",
-                "course_modes":[
-                    {
-                        "slug":"audit",
-                        "name":"audit",
-                        "min_price":0,
-                        "suggested_prices":"",
-                        "currency":"usd",
-                        "expiration_datetime":null,
-                        "description":null,
-                        "sku":null,
-                        "bulk_sku":null
-                    }
-                ]
-            },
-            "user":"honor"
+        xhrFields: {withCredentials: true},
+        success: function (data) {
+            console.log('succeeded: authenticated');
+            coursesData = data;
+            // TODO check if data length < 0 : don't show my courses stripe
+
+            try {
+                if(data.length < 1)
+                    document.getElementById('myCoursesWrapper').style.display = 'none';
+
+            }catch {(e)=>{console.log(e)}}
+            coursesData.sort(function(a,b){
+                return new Date(b.created) - new Date(a.created);
+            });
+            getCoursesDetails(coursesData);
         },
-        {
-            "created":"2018-05-25T06:08:27.508362Z",
-            "mode":"audit",
-            "is_active":true,
-            "course_details":{
-                "course_id":"course-v1:edX+DemoX+Demo_Course",
-                "course_name":"edX DemoX",
-                "enrollment_start":null,
-                "enrollment_end":null,
-                "course_start":"2017-01-01T00:00:00Z",
-                "course_end":null,
-                "invite_only":false,
-                "academic_institution": 'אוניברסית אריאל בשומרון',
-                "progress": 'בואו נתחיל את הקורס >>',
-                'image': "http://127.0.0.1/app/uploads/2021/10/course_image_500X225_v3.jpg",
-                "course_modes":[
-                    {
-                        "slug":"audit",
-                        "name":"audit",
-                        "min_price":0,
-                        "suggested_prices":"",
-                        "currency":"usd",
-                        "expiration_datetime":null,
-                        "description":null,
-                        "sku":null,
-                        "bulk_sku":null
-                    }
-                ]
-            },
-            "user":"honor"
-        },
-        {
-            "created":"2018-05-25T06:08:27.508362Z",
-            "mode":"audit",
-            "is_active":true,
-            "course_details":{
-                "course_id":"course-v1:edX+DemoX+Demo_Course",
-                "course_name":"edX DemoX",
-                "enrollment_start":null,
-                "enrollment_end":null,
-                "course_start":"2017-01-01T00:00:00Z",
-                "course_end":null,
-                "invite_only":false,
-                "academic_institution": 'אוניברסית אריאל בשומרון',
-                "progress": 'בואו נתחיל את הקורס >>',
-                'image': "http://127.0.0.1/app/uploads/2021/11/course-image_500x225.jpg",
-                "course_modes":[
-                    {
-                        "slug":"audit",
-                        "name":"audit",
-                        "min_price":0,
-                        "suggested_prices":"",
-                        "currency":"usd",
-                        "expiration_datetime":null,
-                        "description":null,
-                        "sku":null,
-                        "bulk_sku":null
-                    }
-                ]
-            },
-            "user":"honor"
-        },
-        {
-            "created":"2018-05-25T06:08:27.508362Z",
-            "mode":"audit",
-            "is_active":true,
-            "course_details":{
-                "course_id":"course-v1:edX+DemoX+Demo_Course",
-                "course_name":"edX DemoX",
-                "enrollment_start":null,
-                "enrollment_end":null,
-                "course_start":"2017-01-01T00:00:00Z",
-                "course_end":null,
-                "invite_only":false,
-                "academic_institution": 'אוניברסית אריאל בשומרון',
-                "progress": 'בואו נתחיל את הקורס >>',
-                'image': "http://127.0.0.1/app/uploads/2021/05/תמונת_קורס.jpg",
-                "course_modes":[
-                    {
-                        "slug":"audit",
-                        "name":"audit",
-                        "min_price":0,
-                        "suggested_prices":"",
-                        "currency":"usd",
-                        "expiration_datetime":null,
-                        "description":null,
-                        "sku":null,
-                        "bulk_sku":null
-                    }
-                ]
-            },
-            "user":"honor"
-        },
-        {
-            "created":"2018-05-25T06:08:27.508362Z",
-            "mode":"audit",
-            "is_active":true,
-            "course_details":{
-                "course_id":"course-v1:edX+DemoX+Demo_Course",
-                "course_name":"edX DemoX",
-                "enrollment_start":null,
-                "enrollment_end":null,
-                "course_start":"2017-01-01T00:00:00Z",
-                "course_end":null,
-                "invite_only":false,
-                "academic_institution": 'אוניברסית אריאל בשומרון',
-                "progress": 'בואו נתחיל את הקורס >>',
-                'image': "http://127.0.0.1/app/uploads/2021/05/תמונת_קורס.jpg",
-                "course_modes":[
-                    {
-                        "slug":"audit",
-                        "name":"audit",
-                        "min_price":0,
-                        "suggested_prices":"",
-                        "currency":"usd",
-                        "expiration_datetime":null,
-                        "description":null,
-                        "sku":null,
-                        "bulk_sku":null
-                    }
-                ]
-            },
-            "user":"honor"
+        error: function (error) {
+            console.error(error)
         }
-    ];
-    const id = 'myCoursesStripeId';
+    });
+}
 
-    appendMyCourses(mockData, id);
+function getCoursesDetails(coursesArray) {
+    let edXIdCoursesArray = [];
 
+    coursesArray.forEach((item) => {
+        let courseId = item.course_details.course_id;
+        let startIndex = courseId.indexOf(':');
+        let endIndex = courseId.indexOf('+', 25);
+        let newCourseId = courseId.slice(startIndex + 1, endIndex);
+        if(courseId) edXIdCoursesArray.push(newCourseId);
+    })
+    getMyCoursesDataFromWordpress(edXIdCoursesArray);
+}
+
+function getMyCoursesDataFromWordpress(edXIdCoursesArray) {
+
+    let data = {
+        'action': 'my_courses',
+        'lang' : getCookie('openedx-language-preference'),
+        'idsArray': edXIdCoursesArray,
+    }
+
+    jQuery.post(stripe_data_ajax.ajaxurl, data, function(response){
+        if(response.success){
+            const data = JSON.parse(response.data);
+            try {
+                if(data.length < 1) {
+                    document.getElementById('myCoursesWrapper').style.display = 'none';
+                } else {
+                    const id = 'myCoursesStripeId';
+                    appendMyCourses(data, id)
+                }
+            }catch {(e)=>{console.log(e)}}
+        }
+    })
 }
 
 function appendMyCourses(coursesData, id) {
     let courseStripe = document.getElementById(id);
     if(!courseStripe) return;
-
     coursesData.forEach(item =>{
         let itemData = {
-            thumb: item.course_details.image,
-            progress: item.course_details.progress,
-            name: item.course_details.course_name,
-            academic_institution: item.course_details.academic_institution
+            thumb: item.image,
+            course_id: item.id,
+            name: item.name,
+            academic_institution: item.academic_institution,
+            permalink: item.permalink,
+            course_edXId: item.course_id_edx,
+            // progress: item.course_details.progress ? item.course_details.progress : '',
         }
+        let url = 'https://courses.campus.gov.il/courses/' + itemData.course_edXId + '/info'; // TODO check the url for KOA -> for koa 'https://courses.koastage.campus.gov.il/courses/' + itemData.course_edXId + '/course/'
         let temp = document.createElement("div");
         temp.className = 'course-stripe-item';
         temp.innerHTML =
-            '<div class="course-img" style="background-image: url('+itemData.thumb+');"></div>'+
+            '<div class="course-img" style="position: relative; background-image: url('+itemData.thumb+');"><a style="position:absolute; inset: 0; width: 100%; height: 100%" href="'+ url+'"></a></div>'+
             '<div class="item-content"">'+
-            '<p class="course-progress" ><a href="">' + itemData.progress +'</a></p>'+
-            '<h3><a href="">'+itemData.name+'</a></h3>'+
+            // '<p class="course-progress" ><a href="">' + itemData.progress +'</a></p>'+
+            '<h3><a href="'+ url+'">'+itemData.name+'</a></h3>'+
             '<p class="institution-name">'+itemData.academic_institution+'</p>'+
             ' </div>';
 
 
         courseStripe.append(temp)
     });
+    jQuery('#myCoursesStripeId').slick({
+        lazyLoad: 'ondemand',
+        slidesToShow: 4,
+        slidesToScroll: 4,
+        rtl: is_rtl,
+        nextArrow: nexSlick,
+        prevArrow: prevSlick,
+        speed: 1000,
+        infinite: false,
+        responsive: [
+            {
+                breakpoint: 993,
+                settings: {
+                    speed: 500,
+                    slidesToShow: 3,
+                    slidesToScroll: 3,
+                }
+            },
+            {
+                breakpoint: 768,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 3,
+                    speed: 500,
+                    arrows: false,
+                }
+            },
+            {
+                breakpoint: 710,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 3,
+                    arrows: false,
+                }
+            },
+            {
+                breakpoint: 650,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 3,
+                    arrows: false,
+                }
+            },
+            {
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 2.5,
+                    slidesToScroll: 2,
+                    arrows: false,
+                }
+            },
+            {
+                breakpoint: 480,
+                settings: {
+                    speed: 500,
+                    slidesToShow: 2.15,
+                    slidesToScroll: 2,
+                    arrows: false,
+                }
+            },
+        ]
+    })
 }
 
 function changeArrowClass(id, type=null) {
@@ -811,9 +736,16 @@ function mouseHoverOnCourse() {
 
                 let element = jQuery(`.${id}`);
                 let parentElem = jQuery(`#${id}`);
-                let top = parentElem.offset().top - 5 ;
-                let left = parentElem.offset().left - 10;
-                let pos = {top , left};
+                let top = parentElem.offset().top - 5;
+                let left;
+                if(width > 1200) {
+                     left = parentElem.offset().left - 12;
+                } else if(width > 768 && width <= 1200) {
+                    left = parentElem.offset().left - 30;
+                } else {
+                    left = parentElem.offset().left - 20;
+                }
+                let pos = {top, left};
                 element.appendTo(jQuery('body'));
                 element.css({
                     display : 'block',

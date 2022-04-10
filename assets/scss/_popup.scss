@@ -8,6 +8,8 @@
   &.active{
     @media (max-width: 991px) {
       display: block;
+      overflow-y: hidden;
+      touch-action: none;
     }
   }
 }
@@ -46,8 +48,6 @@
         align-items: center;
         display: flex;
         padding-right: 13px;
-
-
         a {
           display: flex;
           align-items: center;
@@ -81,12 +81,33 @@
           height: 43px;
           margin-left: 7px;
         }
-
       }
-      .mobile-logged-out {
+      .mobile-login-register {
+        display: none;
+        &.active {
+          display: flex;
+        }
+      }
+      .mobile-logged-out,
+      .mobile-login-register {
         border-top: 1px solid rgba(0, 0, 0, 0.05);;
       }
     }
+  .mobile-menu-asset {
+    display: none;
+    background-image: url("../../assets/images/mobileMenu-asset.svg");
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 141px;
+    position: absolute;
+    left: 0;
+    bottom: 63px;
+    &.active {
+      display: block;
+    }
+  }
 }
 .secondary-mobile-lang-menu {
   position: relative;
@@ -122,6 +143,7 @@
 
   }
 }
+
 @media (max-width: 991px) {
   .mobile-menu-popup {
     display: block;
@@ -389,6 +411,64 @@
 }
 
 #youtube-popup.active {
+  opacity: 1;
+  visibility: visible;
+  background-color: rgba(0, 0, 0, 0.3);
+  transition: opacity .2s, visibility .2s;
+}
+
+// login register popup
+#login-register-popup,
+#register-popup {
+  visibility: hidden;
+  position: fixed;
+  background: #141414;
+  opacity: 0.75;
+  z-index: 9999;
+  inset: 0;
+  .popup {
+    width: 425px;
+    height: 550px;
+    position: absolute;
+    top: 15%;
+    left: 0;
+    right: 0;
+    margin: auto;
+    border: 2px solid #bfbebe8c;
+    border-radius: 2px;
+    background: white;
+    max-width: 90%;
+    box-shadow: 15px 15px 41px rgba(75, 70, 70, 0.2);
+    .close-popup-iframe {
+      position: absolute;
+      bottom: 100%;
+      margin-bottom: 12px;
+      background: none;
+      border: none;
+      left: 0;
+      height: 29px;
+      width: 32px;
+      cursor: pointer;
+      outline: none;
+      filter: drop-shadow(0px 0px 8px black);
+    }
+    #login-register-iframe {
+      width: 100%;
+      height: 100%;
+    }
+    #register-iframe {
+      width: 100%;
+      height: 100%;
+    }
+    .login-register-iframe {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
+
+#login-register-popup.active,
+#register-popup.active {
   opacity: 1;
   visibility: visible;
   background-color: rgba(0, 0, 0, 0.3);

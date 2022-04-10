@@ -7,7 +7,7 @@ if(empty($stripe) || empty($stripe['id']) || empty($stripe['courses']) || count(
     return;
 global $sitepress;
 
-$courses_slice = array_slice($stripe['courses'], 0, 10);
+$courses_slice = array_slice($stripe['courses'], 0, 12);
 $courses = pods( 'courses', podsParams($courses_slice));
 
 ?>
@@ -19,21 +19,25 @@ $courses = pods( 'courses', podsParams($courses_slice));
     while ($courses->fetch()) {
         $title = getFieldByLanguage($courses->display( 'name' ), $courses->display( 'english_name' ), $courses->display( 'arabic_name' ),$sitepress->get_current_language());
         $institution_name = getFieldByLanguage($courses->field( 'academic_institution.name' ), $courses->field( 'academic_institution.english_name' ), $courses->field( 'academic_institution.arabic_name' ), $sitepress->get_current_language());
-        $tags = $courses->field('marketing_tags');
+        $tags = sortTagsByOrder($courses->field('marketing_tags'));
         $thumb = $courses->display( 'image' );
         $duration = $courses->display( 'duration' );
         $id = $courses->display( 'ID' );
         $course_permalink = $courses->display('permalink');
-        $site_url = get_site_url();
-        $url = $site_url . '/course/' . $course_permalink;
+        $site_url = get_current_url();
+        $url = $site_url . 'course/' . $course_permalink;
         ?>
         <div id="<?php echo $id . $stripe['id'] ?>" class="course-stripe-item " >
+
             <div class="course-img" style="background-image: url(<?= $thumb ?>);">
+                  <a href="<?= $url ?>"></a>
                 <span class="info-button"></span>
             </div>
             <div class="item-content">
                 <h3 ><a href="<?= $url ?>"><?= $title ?></a></h3>
-                <p><?= $institution_name?></p>
+                <?php if($institution_name) : ?>
+                    <p><?= $institution_name?></p>
+                <?php endif; ?>
             </div>
             <div class="tags-div">
                 <?php
@@ -64,7 +68,9 @@ $courses = pods( 'courses', podsParams($courses_slice));
                     </div>
                     <div class="item-content">
                         <h3 ><?= $title ?></h3>
-                        <p><?= $institution_name?></p>
+                        <?php if($institution_name) : ?>
+                            <p><?= $institution_name?></p>
+                        <?php endif; ?>
                     </div>
                     <div class="tags-div">
                         <?php
@@ -100,6 +106,7 @@ $courses = pods( 'courses', podsParams($courses_slice));
                     )
                 )
             ) ?>
+
         </div>
 
     <?php };?>

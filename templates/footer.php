@@ -125,11 +125,29 @@ $mobile_menu = get_mobile_menu();
                 </div>
             </div>
         </div>
+
+        <div id="login-register-popup" >
+            <div class="popup" style="" aria-hidden="true">
+                <button class="close-popup-iframe close-popup-button"></button>
+                <div class="login-register-iframe" id="login-iframe">
+
+                </div>
+            </div>
+        </div>
+        <div id="register-popup" >
+            <div class="popup" style="" aria-hidden="true">
+                <button class="close-popup-iframe close-popup-button"></button>
+                <div class="login-register-iframe" id="register-iframe">
+
+                </div>
+            </div>
+        </div>
     </footer>
 <?php wp_footer(); ?>
     <div class="bg-overlay"></div>
     <div class="mobile-menu-popup">
         <?= $mobile_menu; ?>
+        <div class="mobile-menu-asset"></div>
     </div>
     <script>
         function ajax_dir(){
@@ -139,6 +157,7 @@ $mobile_menu = get_mobile_menu();
 
 <?php
 function get_mobile_menu() {
+    $encoded_path = urlencode($_SERVER['REQUEST_URI']);
     $current = cin_get_str('header_current_languages');
     if ($current === 'עברית') :
         {
@@ -147,6 +166,7 @@ function get_mobile_menu() {
             $profile = 'פרופיל';
             $controlpanel = 'לוח בקרה';
             $logout = 'התנתקות';
+            $loginRegister = 'התחברות / הרשמה';
         }
     elseif ($current === 'English') :
         {
@@ -155,8 +175,7 @@ function get_mobile_menu() {
             $profile = 'Profile';
             $controlpanel = 'Control Panel';
             $logout = 'Log out';
-
-
+            $loginRegister = 'Login / Register';
         }
     elseif ($current === 'العربية') :
         {
@@ -165,13 +184,14 @@ function get_mobile_menu() {
             $profile = 'الملف الشخصي';
             $controlpanel = 'لوحة المراقبة';
             $logout = 'تسجيل خروج';
+            $loginRegister = 'تسجيل الدخول / تسجيل';
         }
     endif;
 
     return '
     <ul id="menu-mobile-menu-1" class="nav-mobile">
-       <li class="mobile-list-item"><img src="' . get_bloginfo('stylesheet_directory') . '/assets/images/courses-icon.png' .'"><a target="_blank" href="'. get_field('link_to_dashboard_for_campus', 'option') .'"><span class="list-item-content">'.$courses.'</span></a></li>
-       <li class="mobile-list-item change-mobile-lang"><img src="' . get_bloginfo('stylesheet_directory') . '/assets/images/lang-logo.png' .'"><a class="a-link"><span class="list-item-content">'.$language.'</span><img class="mobile-menu-vector" width="9.93px" height="5.68px" src="' . get_bloginfo('stylesheet_directory') . '/assets/images/vector-black.png' .'"/></a> </li>
+       <li class="mobile-list-item logged-in-item"><img src="' . get_bloginfo('stylesheet_directory') . '/assets/images/courses-icon.svg' .'"><a target="_blank" href="'. get_field('link_to_dashboard_for_campus', 'option') .'"><span class="list-item-content">'.$courses.'</span></a></li>
+       <li class="mobile-list-item change-mobile-lang"><img src="' . get_bloginfo('stylesheet_directory') . '/assets/images/lang-logo.svg' .'"><a class="a-link"><span class="list-item-content">'.$language.'</span><img class="mobile-menu-vector" width="9.93px" height="5.68px" src="' . get_bloginfo('stylesheet_directory') . '/assets/images/vector-black.svg' .'"/></a> </li>
        <div class="secondary-mobile-lang-menu">
            <ul id="menu-language-menu-1" class="nav-lang">
                 <li id="wpml-ls-item-he" class="wpml-ls-menu-item mobile-list-item ' . current_active_lang( 'he' ) . '"><a href="' . get_lang_url( 'he' ) . '"><span class="wpml-ls-native">עב</span></a></li>
@@ -179,9 +199,10 @@ function get_mobile_menu() {
                 <li id="wpml-ls-item-ar" class="wpml-ls-menu-item mobile-list-item ' . current_active_lang( 'ar' ) . '"><a href="' . get_lang_url( 'ar' ) . '"><span class="wpml-ls-native">العر</span></a></li>
             </ul>
         </div>
-        <li class="mobile-list-item"><img src="' . get_bloginfo('stylesheet_directory') . '/assets/images/profile.png' .'"><a class="profile-button" target="_blank"><span class="list-item-content">'.$profile.'</span></a></li>
-        <li class="mobile-list-item"><img src="' . get_bloginfo('stylesheet_directory') . '/assets/images/equalizer.png' .'"><a target="_blank" href="'. get_field('link_to_dashboard_for_campus', 'option') .'"><span class="list-item-content">'.$controlpanel.'</span></a></li>
-        <li class="mobile-list-item mobile-logged-out"><img src="' . get_bloginfo('stylesheet_directory') . '/assets/images/logout.png' .'"><a class="logout-button" target="_blank" ><span class="list-item-content">'.$logout.'</span></a></li>         
+        <li class="mobile-list-item logged-in-item"><img src="' . get_bloginfo('stylesheet_directory') . '/assets/images/profile.svg' .'"><a class="profile-button" target="_blank"><span class="list-item-content">'.$profile.'</span></a></li>
+        <li class="mobile-list-item logged-in-item"><img src="' . get_bloginfo('stylesheet_directory') . '/assets/images/equalizer.svg' .'"><a target="_blank" href="'. get_field('link_to_dashboard_for_campus', 'option') .'"><span class="list-item-content">'.$controlpanel.'</span></a></li>
+        <li class="mobile-list-item mobile-logged-out logged-in-item"><img src="' . get_bloginfo('stylesheet_directory') . '/assets/images/logout.svg' .'"><a class="logout-button" ><span class="list-item-content">'.$logout.'</span></a></li>         
+        <li class="mobile-list-item mobile-login-register"><img src="' . get_bloginfo('stylesheet_directory') . '/assets/images/login-register.svg' .'"><a class="login-register-button" href="'. get_field('link_to_login_and_register', 'option') .'/login?next=/home' . $encoded_path .'"><span class="list-item-content">'.$loginRegister.'</span></a></li>         
     </ul>
 
     ';

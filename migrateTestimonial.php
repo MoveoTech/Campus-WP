@@ -1,8 +1,4 @@
-<?php
-/**
- * Template Name: Migrate Testimonial
- */
-?>
+
 <div style="height: 100px"></div>
 <?php
 

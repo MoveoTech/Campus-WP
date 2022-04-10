@@ -23,7 +23,9 @@
         <div class="course-details">
             <div class="course-header">
                 <h3 ><a href="<?= $url ?>"><?= $title ?></a></h3>
-                <p><?= $institution_name?></p>
+                <?php if($institution_name) : ?>
+                    <p><?= $institution_name?></p>
+                <?php endif; ?>
             </div>
             <div class="tags-div">
                 <?php

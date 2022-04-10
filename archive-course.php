@@ -106,11 +106,6 @@ $courses_str = $strings['courses'];
 $aside_str   = $strings['aside'];
 echo '<div class="wrap-search-page-course '. $my_class .'">
     <div class="container">
-        <div class="row justify-content-end">
-            <div class="search-course-form col-lg-3">';
-get_search_form();
-echo '</div>
-        </div>
         <div class="row justify-content-between">
             <aside class="col-xs-12 col-md-12 col-lg-3 col-xl-3 col-sm-12 sidebar-search-course">
                 <div class="wrap-all-filter-names">
@@ -177,3 +172,9 @@ echo '
         </div>
     </div>
 </div>';
+
+//<div class="row justify-content-end">
+//            <div class="search-course-form col-lg-3">';
+//get_search_form();
+//echo '</div>
+//        </div>

@@ -59,11 +59,12 @@ function coursesData($data, $lang){
         'image' => $data->display('image'),
         'description' => $data->display('description'),
         'academic_institution' => getFieldByLanguage($academic_institution['name'], $academic_institution['english_name'], $academic_institution['arabic_name'], $lang),
-        'tags' => getCourseTags($data->field('tags'), $lang),
+        'tags' => getCourseTags($data->field('marketing_tags'), $lang),
         'permalink' => $data->display('permalink'),
         'id' => $data->display('ID'),
-        'duration' => $data->display('duration')
-
+        'course_id_edx' => $data->display('course_id_edx'),
+        'duration' => $data->display('duration'),
+        'button_text' => course_popup_button_text()
     );
 }
 

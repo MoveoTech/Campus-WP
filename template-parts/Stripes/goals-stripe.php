@@ -30,13 +30,14 @@ if(empty($stripe) || empty($stripe['carousel']) || count($stripe['carousel']) < 
                 $title = getFieldByLanguage($goal_item['title']['hebrew_title'], $goal_item['title']['english_title'], $goal_item['title']['arabic_title'], $sitepress->get_current_language());
 
                 $buttonText = getFieldByLanguage($goal_item['button_text']['hebrew_button_text'], $goal_item['button_text']['english_button_text'], $goal_item['button_text']['arabic_button_text'], $sitepress->get_current_language());
-//                ?>
+                $url = $goal_item['link']
+                ?>
                 <div class="goal-item" style="background-image: url(<?php echo $goal_item['image']['url'] ?>)" >
                     <div class="bg-gradient-hover"></div>
                     <div class="bg-gradient"></div>
                     <div class="goal-item-content">
                         <h1><?php echo $title ?></h1>
-                        <a href="#"><span><?php echo $buttonText ?></span></a>
+                        <a href="<?= $url ?>"><span><?php echo $buttonText ?></span></a>
                     </div>
                 </div>
             <?php endforeach;
