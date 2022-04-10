@@ -22,7 +22,7 @@ $courses = pods('courses', podsParams($stripe['courses']));
         $duration = $courses->display('duration');
         $id = $courses->display('ID');
         $course_permalink = $courses->display('permalink');
-        $site_url = get_current_url();
+        $site_url = getHomeUrlWithoutQuery();
         $url = $site_url . 'course/' . $course_permalink;
         ?>
         <div id="<?php echo $id . $stripe['id'] ?>" class="course-stripe-item " >
