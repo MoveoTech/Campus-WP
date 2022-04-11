@@ -2,8 +2,6 @@
 
 function my_courses() {
     $edxIdsArray = $_POST['idsArray'];
-//    $testingId = $edxIdsArray[0]['newCourseId'];
-//    $testingCreated = $edxIdsArray[0]['createdAt'];
     $lang = $_POST['lang'] ? $_POST['lang'] : 'he';
 
     if(!$edxIdsArray || count($edxIdsArray) < 1)
@@ -13,7 +11,6 @@ function my_courses() {
 
     $data = pods("courses");
     $data->find(getMyCoursesParams($edxIdsArray));
-//    $dataToReturn['paramTest'] = $edxIdsArray[0]['createdAt'];
     while ($data->fetch()) {
         array_push($dataToReturn, coursesData($data, $lang));
 
@@ -28,23 +25,19 @@ add_action('wp_ajax_nopriv_my_courses', 'my_courses');
 
 function getMyCoursesParams($idsArray){
 
-//    $order = "FIELD(t.course_id_edx,";
     $sql = array();
     foreach($idsArray as $id ) {
-//        $order = $order . "'". $id . "',";
         $sql[] = 't.course_id_edx LIKE "%'.$id.'+%"';
     }
     $where = implode(" OR ", $sql);
-//    $order = substr_replace($order, ")", -1);
 
     $params = array(
         'limit' => -1,
         'where'=>$where,
-//        'order'=> $order
     );
     return $params;
 
-}
+};
 
 /*
  *     request example
@@ -64,27 +57,3 @@ jQuery.post(my_courses_ajax.ajaxurl, data, function(response){
 })
 
 */
-
-
-//function getMyCoursesParams($idsArray){
-////    $testingId = $idsArray[0]['newCourseId'];
-////    $testingCreated = $idsArray[0]['createdAt'];
-//
-//    $order = "";
-//    $sql = array();
-//    foreach($idsArray as $id ) {
-//
-//        $order = $order . "'". $id['createdAt'] . "',";
-//        $sql[] = 't.course_id_edx LIKE "%'.$id['newCourseId'].'+%"';
-//    }
-//    $where = implode(" OR ", $sql);
-////    $order = substr_replace($order, ")", -1);
-//
-//    $params = array(
-//        'limit' => -1,
-//        'where'=>$where,
-//        'orderby'=> $order
-//    );
-//    return $params;
-//
-//}
