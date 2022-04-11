@@ -8,6 +8,7 @@ jQuery(document).ready(function () {
     let edx_user_info = getCookie(global_vars.cookie_name);
     if (edx_user_info) {
         getMyCourses()
+        getCoursesDetails(coursesArray);
     }
 
     //Course Card
@@ -629,7 +630,8 @@ function getCoursesDetails(coursesArray) {
     coursesArray.forEach((item) => {
         let courseId = item.course_details.course_id;
         let startIndex = courseId.indexOf(':');
-        let endIndex = courseId.indexOf('+', 25);
+        let endIndex = courseId.lastIndexOf('+');
+       let indexOfPlus = courseId.charAt(endIndex+1);
         let newCourseId = courseId.slice(startIndex + 1, endIndex);
         if(courseId) edXIdCoursesArray.push(newCourseId);
     })
