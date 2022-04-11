@@ -1637,9 +1637,9 @@ function replace_first_str($search_str, $replacement_str, $src_str){
 function getHomeUrlWithoutQuery(): string {
     $home_url = get_home_url();
     if($home_url[-1] == '/') {
-        $site_url = get_home_url();
+        $site_url = $home_url;
     } else {
-        $site_url = get_home_url() . '/';
+        $site_url = $home_url . '/';
     }
     return $site_url;
 }
