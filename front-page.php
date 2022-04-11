@@ -52,7 +52,7 @@ $edxUserValue =  $_COOKIE['edx-user-info'];
 
 global  $sitepress;
 ?>
-<div id="testingdiv" style="border: 2px solid red;"></div>
+<!--<div id="testingdiv" style="border: 2px solid red;"></div>-->
 <?php
 
 if ( $sitepress->get_current_language() == 'en' ) {

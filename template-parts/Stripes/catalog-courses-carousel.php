@@ -8,6 +8,7 @@ if(empty($stripe) || empty($stripe['id']) || empty($stripe['courses']) || count(
 global $sitepress;
 $currentLanguage = $sitepress->get_current_language();
 $courses = pods('courses', podsParams($stripe['courses']));
+
 ?>
 
 <div class="coursesContainer">

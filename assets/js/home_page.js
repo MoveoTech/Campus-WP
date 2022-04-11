@@ -669,7 +669,7 @@ function getMyCoursesDataFromWordpress(edXIdCoursesArray) {
                 if(data.length < 1) {
                     document.getElementById('myCoursesWrapper').style.display = 'none';
                 } else {
-                    const id = 'testingdiv';
+                    const id = 'myCoursesStripeId';
                     let coursesArray = [];
                     for(let i = 0; i < edXIdCoursesArray.length; i++) {
                         for(let j = 0; j < data.length; j++) {
