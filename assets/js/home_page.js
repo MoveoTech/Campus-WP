@@ -8,15 +8,8 @@ jQuery(document).ready(function () {
     let edx_user_info = getCookie(global_vars.cookie_name);
     if (edx_user_info) {
         // console.log("log in");
-        let edXIdCoursesArray = [ 'Achva+ACD_Achva_Fauna100_HE', 'HUJI+ACD_HUJI_85002', 'HIT+ProgAllVis', 'DigitalIsrael+GOV_Excel201', 'BIU+ACD_RFP4_BIU_Model-of-computation', 'HUJI+ACD_HUJI_nand2tetris', 'taasuka+GOV_Career_FindJob101', 'AAC+ACD_AAC_warandpeace', 'OUI+ACD_OUI_Introduction_to_Jewish_Thought_HE', 'molsa+GOV_molsa_260t_LearningRobotics101_HE', 'TAU+ACD_RFP5_Brain_most_wonderful_machine_HE'];
-        getMyCoursesDataFromWordpress(edXIdCoursesArray);
-//
-// let coursesData = [
-//          {created: '2022-04-08T21:49:57.567543Z', mode: 'audit', is_active: true, course_details:{course_id: "course-v1:Achva+ACD_Achva_Fauna100_HE+2022_1"}, user: 'sapir_abutbul'},
-//         {created: '2022-04-08T18:55:44.594001Z', mode: 'audit', is_active: true, course_details:{course_id: "course-v1:Achva+ACD_Achva_Fauna100_HE+2022_1"}, user: 'sapir_abutbul'},
-//          {created: '2022-04-08T17:52:41.356457Z', mode: 'audit', is_active: true, course_details:{course_id: "course-v1:HUJI+ACD_HUJI_85002+2022_2"}, user: 'sapir_abutbul'},
-//         {created: '2022-04-08T17:20:36.116043Z', mode: 'honor', is_active: true, course_details:{course_id: "course-v1:HIT+ProgAllVis+2019_1"}, user: 'sapir_abutbul'},
-//          {created: '2022-04-08T14:03:41.878279Z', mode: 'audit', is_active: true, course_details:{course_id: "course-v1:DigitalIsrael+GOV_Excel201+2021_1"}, user: 'sapir_abutbul'}];
+        // let edXIdCoursesArray = [ 'Achva+ACD_Achva_Fauna100_HE', 'HUJI+ACD_HUJI_85002', 'HIT+ProgAllVis', 'DigitalIsrael+GOV_Excel201', 'BIU+ACD_RFP4_BIU_Model-of-computation', 'HUJI+ACD_HUJI_nand2tetris', 'taasuka+GOV_Career_FindJob101', 'AAC+ACD_AAC_warandpeace', 'OUI+ACD_OUI_Introduction_to_Jewish_Thought_HE', 'molsa+GOV_molsa_260t_LearningRobotics101_HE', 'TAU+ACD_RFP5_Brain_most_wonderful_machine_HE'];
+        // getMyCoursesDataFromWordpress(edXIdCoursesArray);
 
 
         // getCoursesDetails(coursesData);
