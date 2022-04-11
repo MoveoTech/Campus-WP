@@ -7,7 +7,7 @@ jQuery(document).ready(function () {
     // check if user loggedIn
     let edx_user_info = getCookie(global_vars.cookie_name);
     if (edx_user_info) {
-        getMyCourses()
+        getMyCourses();
     }
 
     //Course Card
@@ -625,12 +625,18 @@ function getMyCourses() {
 
 function getCoursesDetails(coursesArray) {
     let edXIdCoursesArray = [];
-
+    let allNumbers = [0,1,2,3,4,5,6,7,8,9];
+    let newCourseId;
     coursesArray.forEach((item) => {
         let courseId = item.course_details.course_id;
         let startIndex = courseId.indexOf(':');
-        let endIndex = courseId.indexOf('+', 25);
-        let newCourseId = courseId.slice(startIndex + 1, endIndex);
+        let endIndex = courseId.lastIndexOf('+');
+       let indexOfPlus = parseInt(courseId.charAt(endIndex+1));
+       if(allNumbers.includes(indexOfPlus)){
+           newCourseId = courseId.slice(startIndex + 1, endIndex);
+       } else{
+           newCourseId = courseId.slice(startIndex + 1);
+       }
         if(courseId) edXIdCoursesArray.push(newCourseId);
     })
     getMyCoursesDataFromWordpress(edXIdCoursesArray);
@@ -652,7 +658,15 @@ function getMyCoursesDataFromWordpress(edXIdCoursesArray) {
                     document.getElementById('myCoursesWrapper').style.display = 'none';
                 } else {
                     const id = 'myCoursesStripeId';
-                    appendMyCourses(data, id)
+                    let coursesArray = [];
+                    for(let i = 0; i < edXIdCoursesArray.length; i++) {
+                        for(let j = 0; j < data.length; j++) {
+                            if(data[j].course_id_edx.includes(edXIdCoursesArray[i])) {
+                                coursesArray.push(data[j])
+                            }
+                        }
+                    }
+                    appendMyCourses(coursesArray, id)
                 }
             }catch {(e)=>{console.log(e)}}
         }
