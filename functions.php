@@ -1212,6 +1212,19 @@ function ResetFiltersLanguage() {
     return $text;
 }
 
+function filtersMobileMenuLanguage() {
+    global $sitepress;
+    $current = $sitepress->get_current_language();
+    $text = 'סינון';
+    if ($current === 'en') {
+        $text = 'Filter';
+    }
+    if ($current === 'ar') {
+        $text = 'فلتر';
+    }
+    return $text;
+}
+
 function more_courses_text($carousel) {
     global $sitepress;
     $current = $sitepress->get_current_language();

@@ -97,7 +97,7 @@ if($count == '0'){
                     ?>
                 </div>
                 <div class="openFiltersMenu">
-                    <span>סינון</span>
+                    <span><?= filtersMobileMenuLanguage() ?></span>
                     <img class="filterVector" src="<?php echo get_bloginfo('stylesheet_directory'). '/assets/images/vector-black.svg'?>"/>
                 </div>
 

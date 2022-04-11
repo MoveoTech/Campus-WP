@@ -20114,12 +20114,6 @@ body .course-item-hover {
   order: 0;
   flex-grow: 0;
   margin: 15px 50px 15px 0; }
-  .filtersSection .openFiltersMenu {
-    display: none;
-    position: absolute;
-    left: 30px; }
-    .filtersSection .openFiltersMenu .filterVector {
-      margin-bottom: 3px; }
   .filtersSection .allFiltersWrapDiv {
     display: flex;
     flex-direction: row;
@@ -20171,9 +20165,19 @@ body .course-item-hover {
         text-align: right;
         color: #333433;
         margin: auto; }
-  .filtersSection .filterVector {
-    margin: 0;
-    margin-right: 7px; }
+  .filtersSection .filterVectorMobile {
+    display: none; }
+
+.openFiltersMenu {
+  display: none;
+  position: absolute;
+  left: 30px; }
+  .openFiltersMenu .filterVector {
+    margin-bottom: 3px; }
+
+.filterVector {
+  margin: 0;
+  margin-right: 7px; }
 
 /* filter inputs- popup menu */
 .inputsContainer {
@@ -20250,9 +20254,21 @@ body .course-item-hover {
     flex-wrap: wrap; } }
 
 @media (max-width: 768px) {
-  .filtersSection .openFiltersMenu {
-    display: block; }
   .filtersSection .allFiltersWrapDiv {
+    display: none; }
+    .filtersSection .allFiltersWrapDiv .checkboxFiltersWrap .wrapEachFilterTag .buttonWrap {
+      display: flex;
+      justify-content: space-between;
+      background-color: red; }
+      .filtersSection .allFiltersWrapDiv .checkboxFiltersWrap .wrapEachFilterTag .buttonWrap .filterGroupTitle {
+        margin-right: 24px; }
+  .filtersSection .filterVectorMobile {
+    margin-left: 23px; }
+  .openFiltersMenu {
+    display: unset; }
+    .openFiltersMenu .filterVector {
+      display: unset; }
+  .filterVector {
     display: none; }
   .filtersMenuOverlay {
     z-index: 6; } }
