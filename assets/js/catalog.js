@@ -48,32 +48,33 @@ $(document).ready(function () {
 
 /** Open mobile filters menu */
     $(".openFiltersMenu").click(function () {
-        // jQuery(".nav-mobile-campus").toggleClass('open').animate({
-        //     width: "toggle"
-        // });
+        /** Canceling scrolling on body when menu mobile is open  */
+        $('body').css('overflow','hidden');
+        /** Open mobile menu popup */
         $('.bg-overlay').addClass('filtersMenuOverlay');
         jQuery(".filters-mobile-menu-popup").toggleClass('active');
 
         if(!jQuery(".bg-overlay")[0].classList.contains('active') && jQuery(".filters-mobile-menu-popup")[0].classList.contains('active')) {
             jQuery(".bg-overlay").addClass('active');
             jQuery(".header_section").addClass('menu-open');
-
         } else if(!jQuery(".filters-mobile-menu-popup")[0].classList.contains('active')) {
             jQuery(".bg-overlay").removeClass('active');
             jQuery(".header_section").removeClass('menu-open');
-
         }
         jQuery('html').toggleClass('menu_open');
-
     });
 
 $(".bg-overlay").click(function () {
+
     console.log("inside click");
+    $('body').css('overflow','auto');
     console.log("clicking overlay");
+
     $('.bg-overlay').removeClass('filtersMenuOverlay');
     jQuery(".bg-overlay").removeClass('active');
     jQuery(".header_section").removeClass('menu-open');
     jQuery(".filters-mobile-menu-popup").toggleClass('active');
+
 
     // jQuery(".filters-mobile-menu-popup").toggleClass('active');
 })
@@ -369,10 +370,10 @@ function haveNoResults() {
 function filterByTagEvent(){
 
     /** removing event from div */
-    $(`.catalogFilters .checkbox-filter-search`).unbind('click');
+    $(`#groupFiltersContainer .catalogFilters .checkbox-filter-search`).unbind('click');
 
     /** click event - targeting each input for filtering */
-    $('.catalogFilters .checkbox-filter-search').on('click', function (event) {
+    $('#groupFiltersContainer .catalogFilters .checkbox-filter-search').on('click', function (event) {
         console.log("hhhhhhhhh");
         let filterData = {"search": {}};
         let tagArray = {};

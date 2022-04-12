@@ -42,32 +42,21 @@ elseif ($current === 'العربية') :
     }
 endif;
 ?>
+
+
 <div class="filters-mobile-menu-popup">
-<!--    <div class="allFiltersWrapDiv">-->
-
-
+    <div class="navFiltersMenu">
+        <p class="resetFilterButton"><?= ResetFiltersLanguage(); ?></p>
+    </div>
+    <div id="filtersSectionMobile">
 
     <?php
     foreach ($filters as $filterGroupId) {
         getFilterType($filterGroupId);
     }
     ?>
-
-<!--<ul class="nav-mobile">-->
-<!--    <li class="mobile-list-item logged-in-item"><img src="' . get_bloginfo('stylesheet_directory') . '/assets/images/courses-icon.svg' .'"><a target="_blank" href="'. get_field('link_to_dashboard_for_campus', 'option') .'"><span class="list-item-content">--><?//= $courses ?><!--</span></a></li>-->
-<!--    <li class="mobile-list-item change-mobile-lang"><img src="' . get_bloginfo('stylesheet_directory') . '/assets/images/lang-logo.svg' .'"><a class="a-link"><span class="list-item-content"> --><?//=$language ?><!--</span><img class="mobile-menu-vector" width="9.93px" height="5.68px" src="' . get_bloginfo('stylesheet_directory') . '/assets/images/vector-black.svg' .'"/></a> </li>-->
-<!--    <div class="secondary-mobile-lang-menu">-->
-<!--        <ul id="menu-language-menu-1" class="nav-lang">-->
-<!--            <li id="wpml-ls-item-he" class="wpml-ls-menu-item mobile-list-item ' . current_active_lang( 'he' ) . '"><a href="' . get_lang_url( 'he' ) . '"><span class="wpml-ls-native">עב</span></a></li>-->
-<!--            <li id="wpml-ls-item-en" class="wpml-ls-menu-item mobile-list-item ' . current_active_lang( 'en' ) . '"><a href="' . get_lang_url( 'en' ) . '"><span class="wpml-ls-native">En</span></a></li>-->
-<!--            <li id="wpml-ls-item-ar" class="wpml-ls-menu-item mobile-list-item ' . current_active_lang( 'ar' ) . '"><a href="' . get_lang_url( 'ar' ) . '"><span class="wpml-ls-native">العر</span></a></li>-->
-<!--        </ul>-->
-<!--    </div>-->
-<!--    <li class="mobile-list-item logged-in-item"><img src="' . get_bloginfo('stylesheet_directory') . '/assets/images/profile.svg' .'"><a class="profile-button" target="_blank"><span class="list-item-content">--><?//= $profile ?><!-- </span></a></li>-->
-<!--    <li class="mobile-list-item logged-in-item"><img src="' . get_bloginfo('stylesheet_directory') . '/assets/images/equalizer.svg' .'"><a target="_blank" href="'. get_field('link_to_dashboard_for_campus', 'option') .'"><span class="list-item-content">--><?//= $controlpanel ?><!-- </span></a></li>-->
-<!--    <li class="mobile-list-item mobile-logged-out logged-in-item"><img src="' . get_bloginfo('stylesheet_directory') . '/assets/images/logout.svg' .'"><a class="logout-button" ><span class="list-item-content">--><?//= $logout ?><!--</span></a></li>-->
-<!--    <li class="mobile-list-item mobile-login-register"><img src="' . get_bloginfo('stylesheet_directory') . '/assets/images/login-register.svg' .'"><a class="login-register-button" href="'. get_field('link_to_login_and_register', 'option') .'/login?next=/home' . $encoded_path .'"><span class="list-item-content">checking --><?//= $loginRegister ?><!--</span></a></li>-->
-<!--</ul>-->
-<!--</div>-->
+    </div>
+    <div class="buttonNavFiltersMenu">
+        <p class="filterButtonMobileMenu"><?= filtersMobileMenuLanguage(); ?></p>
+    </div>
 </div>
-
