@@ -574,7 +574,6 @@ function apppendCourses(coursesData, id) {
     });
     changeArrowClass(id)
     clickOnCourseInfoButton()
-    // jQuery(`#${nextButton.id}`).prop('disabled', false);
 }
 
 function closePopupIfOpen(id) {
