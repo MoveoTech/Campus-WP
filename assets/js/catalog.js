@@ -117,11 +117,7 @@ $(document).click(function(event) {
 
 function slickStripeForMobile() {
     if($(window).width() <= 768){
-        console.log("iffff");
-        /** hiding web filters menu */
-        // $('.allFiltersWrapDiv').hide();
-        // $('.openFiltersMenu').show();
-
+        
         /** catalog stripe slick */
         let rtl = true;
         let currnetLanguage = $('.catalog-courses-stripe').data('language');
