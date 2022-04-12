@@ -145,11 +145,11 @@ function appendFilteredCourses(coursesData) {
         let hoverTags = getHoverTags(item.marketing_tags);
         let image = item.image;
         let duration = item.duration;
-        let permalink = item.permalink ? item.permalink : '';
-        let url = 'course/' + permalink;
         let haveYoutube = item.haveyoutube;
         let course_attrs = 'col-xs-12 col-md-6 col-xl-4 course-item-with-border';
-
+        let permalink = item.permalink ? item.permalink : '';
+        let baseUrl = window.location.origin;
+        let url = baseUrl + '/course/' + permalink;
 
         let youtube;
         if(haveYoutube) {
@@ -370,7 +370,7 @@ function appendMoreFilters(filterData) {
         let name = element.name;
         let urlTitle = element.english_name;
         let checked = '';
-        console.log(element)
+
         if(element.english_name && currentLanguage == 'en' ) {
             name = element.english_name;
         }
