@@ -103,14 +103,6 @@ $(document).click(function(event) {
             }
         })
     }
-
-    // openFiltersMobileMenu();
-    //opens filters mobile menu
-    // console.log("before unbind", jQuery(".search-button"));
-    // jQuery(`.search-button`).unbind('click');
-    // console.log("after unbind");
-
-
 });
 /** end of jquery */
 
@@ -377,10 +369,11 @@ function haveNoResults() {
 function filterByTagEvent(){
 
     /** removing event from div */
-    $(`#groupFiltersContainer .catalogFilters .checkbox-filter-search`).unbind('click');
+    $(`.catalogFilters .checkbox-filter-search`).unbind('click');
 
     /** click event - targeting each input for filtering */
-    $('#groupFiltersContainer .catalogFilters .checkbox-filter-search').on('click', function (event) {
+    $('.catalogFilters .checkbox-filter-search').on('click', function (event) {
+        console.log("hhhhhhhhh");
         let filterData = {"search": {}};
         let tagArray = {};
         let freeSearchData = [];
