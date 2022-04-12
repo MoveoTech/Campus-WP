@@ -20165,8 +20165,9 @@ body .course-item-hover {
         text-align: right;
         color: #333433;
         margin: auto; }
-  .filtersSection .filterVectorMobile {
-    display: none; }
+
+.filterVectorMobile {
+  display: none; }
 
 .openFiltersMenu {
   display: none;
@@ -20254,16 +20255,18 @@ body .course-item-hover {
     flex-wrap: wrap; } }
 
 @media (max-width: 768px) {
+  .wrapEachFiltergroup {
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1); }
+  .buttonWrap {
+    display: flex;
+    justify-content: space-between; }
+    .buttonWrap .filterGroupTitle {
+      margin-right: 24px; }
+  .filterVectorMobile {
+    display: unset;
+    margin-left: 23px; }
   .filtersSection .allFiltersWrapDiv {
     display: none; }
-    .filtersSection .allFiltersWrapDiv .checkboxFiltersWrap .wrapEachFilterTag .buttonWrap {
-      display: flex;
-      justify-content: space-between;
-      background-color: red; }
-      .filtersSection .allFiltersWrapDiv .checkboxFiltersWrap .wrapEachFilterTag .buttonWrap .filterGroupTitle {
-        margin-right: 24px; }
-  .filtersSection .filterVectorMobile {
-    margin-left: 23px; }
   .openFiltersMenu {
     display: unset; }
     .openFiltersMenu .filterVector {

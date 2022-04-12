@@ -3,8 +3,8 @@ require_once 'filterTypes.php';
 $filtersList = wp_parse_args(
     $args["args"]
 );
-//if(empty($filtersList) || empty($filtersList['menuFilters']))
-//    return;
+if(empty($filtersList) || empty($filtersList['menuFilters']))
+    return;
 global $get_params, $sitepress;
 
 $filters = $filtersList['menuFilters'];
@@ -43,13 +43,14 @@ elseif ($current === 'العربية') :
 endif;
 ?>
 <div class="filters-mobile-menu-popup">
+<!--    <div class="allFiltersWrapDiv">-->
+
+
 
     <?php
     foreach ($filters as $filterGroupId) {
         getFilterType($filterGroupId);
-
     }
-
     ?>
 
 <!--<ul class="nav-mobile">-->
@@ -67,5 +68,6 @@ endif;
 <!--    <li class="mobile-list-item mobile-logged-out logged-in-item"><img src="' . get_bloginfo('stylesheet_directory') . '/assets/images/logout.svg' .'"><a class="logout-button" ><span class="list-item-content">--><?//= $logout ?><!--</span></a></li>-->
 <!--    <li class="mobile-list-item mobile-login-register"><img src="' . get_bloginfo('stylesheet_directory') . '/assets/images/login-register.svg' .'"><a class="login-register-button" href="'. get_field('link_to_login_and_register', 'option') .'/login?next=/home' . $encoded_path .'"><span class="list-item-content">checking --><?//= $loginRegister ?><!--</span></a></li>-->
 <!--</ul>-->
+<!--</div>-->
 </div>
 

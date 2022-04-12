@@ -166,10 +166,11 @@
       }
     }
 
-  .filterVectorMobile{
-    display:none;
+
   }
-  }
+.filterVectorMobile{
+  display:none;
+}
 
 .openFiltersMenu{
   display: none;
@@ -288,26 +289,24 @@
 }
 
 @media (max-width: 768px) {
+  .wrapEachFiltergroup{
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+  }
+  .buttonWrap{
+    display: flex;
+    justify-content: space-between;
+    .filterGroupTitle{
+      margin-right: 24px;
+    }
 
+  }
+  .filterVectorMobile{
+    display: unset;
+    margin-left: 23px;
+  }
   .filtersSection{
     .allFiltersWrapDiv {
       display: none;
-      .checkboxFiltersWrap{
-        .wrapEachFilterTag{
-          .buttonWrap{
-            display: flex;
-            justify-content: space-between;
-            background-color: red;
-            .filterGroupTitle{
-              margin-right: 24px;
-            }
-
-          }
-        }
-      }
-    }
-    .filterVectorMobile{
-      margin-left: 23px;
     }
   }
   .openFiltersMenu{
