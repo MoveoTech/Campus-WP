@@ -19159,6 +19159,9 @@ html:not(.user_is_not_logged_in) .header_login {
   .nerative-class .slick-list .slick-track .course-stripe-item .course-item-hover .tags-div span {
     margin-bottom: 7px; }
 
+#myCoursesWrapper {
+  display: none; }
+
 .home-page-myCourses-stripe .stripe-container {
   max-width: 1440px;
   margin: 0 auto; }

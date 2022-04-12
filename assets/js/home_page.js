@@ -665,7 +665,9 @@ function getMyCoursesDataFromWordpress(edXIdCoursesArray) {
                             }
                         }
                     }
-                    appendMyCourses(coursesArray, id)
+                    jQuery('#myCoursesWrapper').show();
+                    appendMyCourses(coursesArray, id);
+
                 }
             }catch {(e)=>{console.log(e)}}
         }
