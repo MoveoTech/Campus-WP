@@ -4,7 +4,7 @@ jQuery(document).ready(function () {
         e.preventDefault();
 
         /** CHECK IF SEARCH VALUE LENGTH >= 2 */
-        if (jQuery(this).find('[name="text_s"]').val().length > 2) {
+        if (jQuery(this).find('[name="text_s"]').val().length > 0) {
 
             var $form = jQuery(this);
             $searchValue = $form.find('[name = "text_s"]').val();

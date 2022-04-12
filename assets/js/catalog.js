@@ -14,11 +14,24 @@ $(document).ready(function () {
 
     /** Click event - reset filtering **/
     $('.resetFilterButton').on('click', function (event) {
+        let currentUrl = window.location.href;
+        let resetUrl = currentUrl.split('?')[0]
+        let url = new URL(resetUrl);
+        window.history.replaceState({}, '', url);
 
         let filtersInputs = $('.checkbox-filter-search');
         filtersInputs.each((index, element) => {
             element.checked = false;
         });
+
+        /** Clear search input fields */
+        $('.search-field').val('');
+
+        /** Get the initial courses */
+        if(currentUrl.includes('?')){
+            getCourses()
+        }
+
         /** removing extra filters **/
         $('.extraFilter').remove();
     });
@@ -318,86 +331,7 @@ function filterByTagEvent(){
 
     /** click event - targeting each input for filtering */
     $('#groupFiltersContainer .catalogFilters .checkbox-filter-search').on('click', function (event) {
-        let filterData = {"search": {}};
-        let tagArray = {};
-        let freeSearchData = [];
-        let institutionArray = [];
-        let certificateArray = [];
-        let languageArray = [];
-
-        /** Getting free search value from url params */
-        let params = new URLSearchParams(document.location.search);
-        let searchValue = params.get("text_s");
-        if(searchValue) freeSearchData.push(searchValue);
-
-        /** Getting array of inputs */
-        let filterItems = $('.checkbox-filter-search');
-
-        /** Looping all filter items inputs */
-        filterItems.each((index, element) => {
-            let id = element.id;
-            let type = $(`#${id}`).data('name');
-            let group = $(`#${id}`).data('group');
-            let englishValue = $(`#${id}`).data('value');
-
-            /** Checking if value is checked */
-            if(element.checked) {
-                switch (type) {
-                    case 'tag':
-                        if(tagArray[group]){
-                            tagArray[group].push(englishValue);
-                        } else {
-                            tagArray[group] = [];
-                            tagArray[group].push(englishValue);
-                        }
-
-                        break;
-
-                    case 'institution':
-                        institutionArray.push(englishValue);
-                        break;
-
-
-                    case 'certificate':
-                        console.log(element)
-
-                        certificateArray.push(englishValue);
-                        break;
-
-                    case 'language':
-                        languageArray.push(englishValue);
-                        break;
-                }
-            }
-        });
-
-        /** Checking if any filter checked */
-        if(Object.keys(tagArray).some(() => { return true; }) || institutionArray.length > 0 || certificateArray.length > 0 || languageArray.length > 0 || Object.keys(freeSearchData).some(() => { return true; })) {
-
-            /** checking which filters checked and pushing each array to object (key and values) */
-            if(freeSearchData.length > 0) {
-                filterData['search']['text_s'] = freeSearchData;
-            }
-            if(Object.keys(tagArray).some((k) => { return true; })) {
-                filterData['search']['tags'] = tagArray;
-            }
-            if(institutionArray.length > 0) {
-                filterData['search']['institution'] = institutionArray;
-            }
-
-            if(certificateArray.length > 0) {
-                filterData['search']['certificate'] = certificateArray;
-            }
-            if(languageArray.length > 0) {
-                filterData['search']['language'] = languageArray;
-            }
-
-            filterCoursesAjax(filterData)
-        } else {
-            filterData = [];
-            filterCoursesAjax(filterData)
-        }
-
+        getCourses();
     })}
 
 /** Ajax call - getting filters group name and there tags **/
@@ -543,4 +477,85 @@ function loadCourses(coursesArray = []) {
             })
         }
     }
+}
+
+function getCourses() {
+    let filterData = {"search": {}};
+    let tagArray = {};
+    let freeSearchData = [];
+    let institutionArray = [];
+    let certificateArray = [];
+    let languageArray = [];
+
+    /** Getting free search value from url params */
+    let params = new URLSearchParams(document.location.search);
+    let searchValue = params.get("text_s");
+    if(searchValue) freeSearchData.push(searchValue);
+
+    /** Getting array of inputs */
+    let filterItems = $('.checkbox-filter-search');
+
+    /** Looping all filter items inputs */
+    filterItems.each((index, element) => {
+        let id = element.id;
+        let type = $(`#${id}`).data('name');
+        let group = $(`#${id}`).data('group');
+        let englishValue = $(`#${id}`).data('value');
+
+        /** Checking if value is checked */
+        if(element.checked) {
+            switch (type) {
+                case 'tag':
+                    if(tagArray[group]){
+                        tagArray[group].push(englishValue);
+                    } else {
+                        tagArray[group] = [];
+                        tagArray[group].push(englishValue);
+                    }
+
+                    break;
+
+                case 'institution':
+                    institutionArray.push(englishValue);
+                    break;
+
+
+                case 'certificate':
+                    certificateArray.push(englishValue);
+                    break;
+
+                case 'language':
+                    languageArray.push(englishValue);
+                    break;
+            }
+        }
+    });
+
+    /** Checking if any filter checked */
+    if(Object.keys(tagArray).some(() => { return true; }) || institutionArray.length > 0 || certificateArray.length > 0 || languageArray.length > 0 || Object.keys(freeSearchData).some(() => { return true; })) {
+
+        /** checking which filters checked and pushing each array to object (key and values) */
+        if(freeSearchData.length > 0) {
+            filterData['search']['text_s'] = freeSearchData;
+        }
+        if(Object.keys(tagArray).some((k) => { return true; })) {
+            filterData['search']['tags'] = tagArray;
+        }
+        if(institutionArray.length > 0) {
+            filterData['search']['institution'] = institutionArray;
+        }
+
+        if(certificateArray.length > 0) {
+            filterData['search']['certificate'] = certificateArray;
+        }
+        if(languageArray.length > 0) {
+            filterData['search']['language'] = languageArray;
+        }
+
+        filterCoursesAjax(filterData)
+    } else {
+        filterData = [];
+        filterCoursesAjax(filterData)
+    }
+
 }
