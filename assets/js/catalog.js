@@ -164,10 +164,8 @@ function slickStripeForMobile() {
                 },
             ]
         })
-    } else{
+    } else if (jQuery('.catalog-courses-stripe').slick()){
         jQuery('.catalog-courses-stripe').slick('unslick');
-        // $('.allFiltersWrapDiv').show();
-        // $('.openFiltersMenu').hide();
     }
 
 
