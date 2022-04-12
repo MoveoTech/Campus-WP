@@ -653,8 +653,8 @@ function getMyCoursesDataFromWordpress(edXIdCoursesArray) {
         if(response.success){
             const data = JSON.parse(response.data);
             try {
-                if(data.length < 1) {
-                    document.getElementById('myCoursesWrapper').style.display = 'none';
+                if(data.length === 0) {
+                    jQuery('#myCoursesWrapper').hide();
                 } else {
                     const id = 'myCoursesStripeId';
                     let coursesArray = [];
