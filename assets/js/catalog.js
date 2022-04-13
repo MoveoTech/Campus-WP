@@ -361,6 +361,7 @@ function appendMoreFilters(filterData) {
     let container = document.getElementById(`extraFilter_${filterId}`);
     let groupFilters = filterData.filtersList;
     let currentLanguage =filterData.language;
+    let groupName = filterData.group ? filterData.group : '';
 
     groupFilters.forEach(element => {
 
@@ -378,8 +379,8 @@ function appendMoreFilters(filterData) {
             name = element.arabic_name;
         }
         temp.innerHTML =
-            '<label class="filterTagLabel" for="'+id+'">'+
-            '<input'+ checked +' class="checkbox-filter-search" type="checkbox" data-name="'+dataType+'" data-value="'+urlTitle+'" value="'+name+'" id="'+id+'">'+
+            '<label class="filterTagLabel" for="'+dataType + '_' + id+'">'+
+            '<input'+ checked +' class="checkbox-filter-search" type="checkbox" data-name="'+dataType+'" data-group="'+ groupName +'" data-value="'+urlTitle+'" value="'+name+'" id="'+dataType + '_' + id+'">'+
             '<div class="wrap-term-and-sum tagNameWrap">'+
             '<span class="term-name">'+name+'</span>'+
             '</div>'+

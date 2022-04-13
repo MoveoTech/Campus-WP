@@ -43,7 +43,6 @@ $course_attrs = array(
 $catalog_stripe_id = get_field('catalog_stripe');
 $academic_institutions = pods( 'academic_institution', array('limit'   => -1 ));
 $courses = pods( 'courses', $params, true);
-$count = $courses->total_found();
 $academic_name = cin_get_str('Institution_Name');
 $choose_str = __('Choose Institution', 'single_corse');
 $title_str = cin_get_str( 'filter_courses_title_ajax' );
@@ -52,11 +51,8 @@ $catalog_title = getFieldByLanguage(get_field('catalog_title'), get_field('catal
 
 $allCoursesResults = array();
 $idArrayOfBestMatches = array();
-if($count == '0'){
-    $no_results_found = true;
-}
-
 $coursesIdArray = [];
+
 $i = 0;
 foreach ($courses->rows as $course) {
     array_push($allCoursesResults, $course);
@@ -67,21 +63,15 @@ foreach ($courses->rows as $course) {
 }
 
 $coursesIDs = implode(',', $coursesIdArray);
-
 $second_params = getSecondsFiltersParams($filters, $idArrayOfBestMatches);
 
 if($second_params) {
     $oneOrMoreMatches = pods('courses', $second_params);
-    foreach ($oneOrMoreMatches->rows as $secondCourse) {
-        array_push($allCoursesResults, $secondCourse);
-    }
 }
 
-//console_log($idArrayOfBestMatches);
-//console_log($oneOrMoreMatches);
-console_log($allCoursesResults); //TODO pass this courses to the template of course card
-
-
+if(count($oneOrMoreMatches->rows) === 0 && count($courses->rows) === 0){
+    $no_results_found = true;
+}
 
 ?>
 
@@ -133,7 +123,6 @@ console_log($allCoursesResults); //TODO pass this courses to the template of cou
                         <?php } }
 
                     else {
-
                         while ($courses->fetch()) {
 
                             get_template_part('template', 'parts/Courses/course-card',
@@ -144,9 +133,25 @@ console_log($allCoursesResults); //TODO pass this courses to the template of cou
                                     )
                                 ));
 
-                        } }?>
+                        }
+                        if($oneOrMoreMatches) {
+
+                            while ($oneOrMoreMatches->fetch()) {
+
+                                get_template_part('template', 'parts/Courses/course-card',
+                                    array(
+                                        'args' => array(
+                                            'course' => $oneOrMoreMatches,
+                                            'attrs' => $course_attrs,
+                                        )
+                                    )
+                                );
+                            }
+                        }
+                    }
+                    ?>
                     <!--. END Match Results -->
-                      </div>
+                </div>
 
                 <?php
                /** LOAD MORE COURSES BUTTON */

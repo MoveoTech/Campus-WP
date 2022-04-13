@@ -3,7 +3,7 @@ jQuery(document).ready(function () {
     jQuery('form[role = "search"]').on('submit', function (e) {
         e.preventDefault();
 
-        /** CHECK IF SEARCH VALUE LENGTH >= 2 */
+        /** CHECK IF SEARCH VALUE LENGTH >= 0 */
         if (jQuery(this).find('[name="text_s"]').val().length > 0) {
 
             var $form = jQuery(this);
