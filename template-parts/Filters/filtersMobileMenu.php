@@ -44,7 +44,7 @@ endif;
 ?>
 
 
-<div class="filters-mobile-menu-popup">
+<div hidden class="filters-mobile-menu-popup">
     <div class="navFiltersMenu">
         <p class="resetFilterButton"><?= ResetFiltersLanguage(); ?></p>
     </div>
@@ -57,6 +57,9 @@ endif;
     ?>
     </div>
     <div class="buttonNavFiltersMenu">
-        <p class="filterButtonMobileMenu"><?= filtersMobileMenuLanguage(); ?></p>
+        <div class="buttonFilterWrap">
+            <p class="filterButtonMobileMenu"><?= filtersMobileMenuLanguage(); ?></p>
+
+        </div>
     </div>
 </div>

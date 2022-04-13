@@ -155,6 +155,8 @@ function slickStripeForMobile() {
         /** Changing classes in filters menu inputs */
         $('.checkbox-filter-search').addClass('.checkboxFilterMobile');
         $('.checkbox-filter-search').removeClass('filtersInputWeb');
+        $('.filters-mobile-menu-popup').removeAttr('hidden');
+
 
     } else if (jQuery('.catalog-courses-stripe').slick()){
         jQuery('.catalog-courses-stripe').slick('unslick');
@@ -173,100 +175,100 @@ function slickStripeForMobile() {
 // }
 
 /** Ido made a new function for appending */
-function appendFilteredCourses(coursesData) {
-
-    let coursesBox = document.getElementById("coursesBox");
-    let output = document.createElement("div");
-
-    output.id = 'coursesBox';
-    output.classList.add('row');
-    output.classList.add('output-courses');
-
-    coursesData.forEach(item =>{
-        let id = item.id;
-        let name = item.name;
-        let academicInstitution = item.academic_institution ? item.academic_institution : '';
-        let tags = getDesktopTags(item.marketing_tags);
-        let hoverTags = getHoverTags(item.marketing_tags);
-        let image = item.image;
-        let duration = item.duration;
-        let permalink = item.permalink ? item.permalink : '';
-        let url = 'course/' + permalink;
-        let haveYoutube = item.haveyoutube;
-        let course_attrs = 'col-xs-12 col-md-6 col-xl-4 course-item-with-border';
-
-
-        let youtube;
-        if(haveYoutube) {
-             youtube = '<a class="course-item-image has_background_image haveyoutube " data-id="'+ id +'" data-popup aria-pressed="true" aria-haspopup="true" role="button" href="javascript:void(0)" aria-label="'+ name +'" data-classToAdd="course_info_popup" style="background-image: url('+image+')"></a>'
-        } else {
-             youtube = '<div class="course-item-image has_background_image donthaveyoutube " data-id="'+ id +'"data-classToAdd="course_info_popup" style="background-image: url('+image+')"></div>'
-        }
-        if(academicInstitution){
-            let institution_name = '<p class="course-item-org">'+ academicInstitution +' </p>'
-        }
-
-        let temp = document.createElement("div");
-        temp.innerHTML =
-            '<div class="item_post_type_course course-item '+ course_attrs +'" data-id="'+ id +'">'+
-                '<div class="course-item-inner">'+
-                    ''+ youtube +''+
-                    '<a class="course-item-details" tabindex="0" href="'+ url +'">'+
-                        '<h3 class="course-item-title"> '+ name +'</h3>'+
-                        '</a></div></div>'
-
-
-
-
-            // '<div class="course-img" style="background-image: url('+image+');">'+
-            // '<a href="'+ url +'"></a>'+
-            // '<span class="info-button"></span></div>'+
-            // '<div class="item-content"">'+
-            // '<h3 ><a href="'+ url +'">'+name+'</a></h3>'+
-            // '<p >'+academicInstitution+'</p>'+
-            // ' </div>'+
-            // '<div class=" tags-div">'+tags+ '</div>'+
-            // '<div class="course-item-hover '+ id +'">'+
-            // '<a href="'+ url +'">'+
-            // '<div class="course-img" style="background-image: url('+image+');"></div>'+
-            // '<div class="item-content"">'+
-            // '<h3 >'+name+'</h3>'+
-            // '<p >'+academicInstitution+'</p>'+
-            // '</div>'+
-            // '<div class=" tags-div">'+ hoverTags +'</div>'+
-            // '<div class="course-details">'+
-            // '<span>'+ duration +'</span>'+
-            // '</div>'+
-            // '</a>'+
-            // '</div>'+
-            // '<div class="course-popup-modal mobile-course-popup'+ id +'">'+
-            // '<div class="popup-header">'+
-            // '<span class="course-popup-close'+ id +' close">&times;</span>'+
-            // '</div>'+
-            // '<div class="course-content">'+
-            // '<div class="course-img" style="background-image: url('+image+');"></div>'+
-            // '<div class="course-details">'+
-            // '<div class="course-header"">'+
-            // '<h3 ><a href="'+ url +'">'+name+'</a></h3>'+
-            // '<p >'+academicInstitution+'</p>'+
-            // '</div>'+
-            // '<div class="tags-div">'+ hoverTags +'</div>'+
-            // '<div class="details">'+
-            // '<span>'+ duration +'</span>'+
-            // '</div>'+
-            // '</div>'+
-            // '</div>'+
-            // '<div class="popup-footer">'+
-            // '<a href="'+ url +'"><span></span></a>'+
-            // '</div>'+
-            // '</div>';
-
-
-        output.append(temp)
-    });
-    coursesBox.replaceWith(output)
-
-}
+// function appendFilteredCourses(coursesData) {
+//
+//     let coursesBox = document.getElementById("coursesBox");
+//     let output = document.createElement("div");
+//
+//     output.id = 'coursesBox';
+//     output.classList.add('row');
+//     output.classList.add('output-courses');
+//
+//     coursesData.forEach(item =>{
+//         let id = item.id;
+//         let name = item.name;
+//         let academicInstitution = item.academic_institution ? item.academic_institution : '';
+//         let tags = getDesktopTags(item.marketing_tags);
+//         let hoverTags = getHoverTags(item.marketing_tags);
+//         let image = item.image;
+//         let duration = item.duration;
+//         let permalink = item.permalink ? item.permalink : '';
+//         let url = 'course/' + permalink;
+//         let haveYoutube = item.haveyoutube;
+//         let course_attrs = 'col-xs-12 col-md-6 col-xl-4 course-item-with-border';
+//
+//
+//         let youtube;
+//         if(haveYoutube) {
+//              youtube = '<a class="course-item-image has_background_image haveyoutube " data-id="'+ id +'" data-popup aria-pressed="true" aria-haspopup="true" role="button" href="javascript:void(0)" aria-label="'+ name +'" data-classToAdd="course_info_popup" style="background-image: url('+image+')"></a>'
+//         } else {
+//              youtube = '<div class="course-item-image has_background_image donthaveyoutube " data-id="'+ id +'"data-classToAdd="course_info_popup" style="background-image: url('+image+')"></div>'
+//         }
+//         if(academicInstitution){
+//             let institution_name = '<p class="course-item-org">'+ academicInstitution +' </p>'
+//         }
+//
+//         let temp = document.createElement("div");
+//         temp.innerHTML =
+//             '<div class="item_post_type_course course-item '+ course_attrs +'" data-id="'+ id +'">'+
+//                 '<div class="course-item-inner">'+
+//                     ''+ youtube +''+
+//                     '<a class="course-item-details" tabindex="0" href="'+ url +'">'+
+//                         '<h3 class="course-item-title"> '+ name +'</h3>'+
+//                         '</a></div></div>'
+//
+//
+//
+//
+//             // '<div class="course-img" style="background-image: url('+image+');">'+
+//             // '<a href="'+ url +'"></a>'+
+//             // '<span class="info-button"></span></div>'+
+//             // '<div class="item-content"">'+
+//             // '<h3 ><a href="'+ url +'">'+name+'</a></h3>'+
+//             // '<p >'+academicInstitution+'</p>'+
+//             // ' </div>'+
+//             // '<div class=" tags-div">'+tags+ '</div>'+
+//             // '<div class="course-item-hover '+ id +'">'+
+//             // '<a href="'+ url +'">'+
+//             // '<div class="course-img" style="background-image: url('+image+');"></div>'+
+//             // '<div class="item-content"">'+
+//             // '<h3 >'+name+'</h3>'+
+//             // '<p >'+academicInstitution+'</p>'+
+//             // '</div>'+
+//             // '<div class=" tags-div">'+ hoverTags +'</div>'+
+//             // '<div class="course-details">'+
+//             // '<span>'+ duration +'</span>'+
+//             // '</div>'+
+//             // '</a>'+
+//             // '</div>'+
+//             // '<div class="course-popup-modal mobile-course-popup'+ id +'">'+
+//             // '<div class="popup-header">'+
+//             // '<span class="course-popup-close'+ id +' close">&times;</span>'+
+//             // '</div>'+
+//             // '<div class="course-content">'+
+//             // '<div class="course-img" style="background-image: url('+image+');"></div>'+
+//             // '<div class="course-details">'+
+//             // '<div class="course-header"">'+
+//             // '<h3 ><a href="'+ url +'">'+name+'</a></h3>'+
+//             // '<p >'+academicInstitution+'</p>'+
+//             // '</div>'+
+//             // '<div class="tags-div">'+ hoverTags +'</div>'+
+//             // '<div class="details">'+
+//             // '<span>'+ duration +'</span>'+
+//             // '</div>'+
+//             // '</div>'+
+//             // '</div>'+
+//             // '<div class="popup-footer">'+
+//             // '<a href="'+ url +'"><span></span></a>'+
+//             // '</div>'+
+//             // '</div>';
+//
+//
+//         output.append(temp)
+//     });
+//     coursesBox.replaceWith(output)
+//
+// }
 
 function appendUrlParams(filters) {
 
@@ -371,13 +373,14 @@ function haveNoResults() {
 
 /** Filtering by tag function of catalog - need to remove  */
 function filterByTagEvent(){
+    console.log("holi");
 
     /** removing event from div */
-    $(`#groupFiltersContainer .catalogFilters .filtersInputWeb`).unbind('click');
+    $(`.filtersInputWeb`).unbind('click');
 
     /** click event - targeting each input for filtering */
-    $('#groupFiltersContainer .catalogFilters .filtersInputWeb').on('click', function (event) {
-        console.log("hhhhhhhhh");
+    $('.filtersInputWeb').on('click', function (event) {
+        console.log(event);
         let filterData = {"search": {}};
         let tagArray = {};
         let freeSearchData = [];
@@ -479,7 +482,6 @@ function getFiltersGroups(filterId) {
 
 /** Appending filter tags **/
 function appendMoreFilters(filterData) {
-
     /**looping each filter group and appending it to the filters menu */
     let filterId = filterData.filterId;
     let dataType = filterData.dataType;
@@ -529,7 +531,7 @@ function filterCoursesAjax(filterData) {
 
             appendUrlParams(responseData['filters'])
             if(responseData['courses'].length > 0) {
-                appendFilteredCourses(responseData['courses'])
+                // appendFilteredCourses(responseData['courses'])
             } else {
                 haveNoResults()
             }
@@ -571,25 +573,27 @@ function openCheckboxEvent() {
 
     /** click event - targeting each checkbox to open */
     $('.wrapEachFiltergroup').on('click', function (event) {
-        console.log( event.target);
-        // console.log("filter selector",$('.filterInput'));
-        let popupMenuDiv = event.target.closest(".wrapEachFiltergroup").querySelector(".inputsContainer");
-        let filterInput = document.getElementsByClassName('inputsContainer')[0].getElementsByClassName('filterInput')[0];
-        let filterTagLabel = document.getElementsByClassName('inputsContainer')[0].getElementsByClassName('filterTagLabel')[0];
-        let checkbox = document.getElementsByClassName('inputsContainer')[0].getElementsByClassName('checkbox-filter-search')[0];
-        let tagNameWrap = document.getElementsByClassName('inputsContainer')[0].getElementsByClassName('tagNameWrap')[0];
-        let termname = document.getElementsByClassName('inputsContainer')[0].getElementsByClassName('term-name')[0];
-        // let input = event.target.closest(".wrapEachFiltergroup").querySelector(".inputsContainer");
-
-        // if(event.target !== ($('.filterInput') || $('.filterTagLabel') || $('.checkbox-filter-search') || $('.tagNameWrap') || $('.term-name'))){
-        console.log('Javascript', filterInput);
-
-        if(event.target !== (filterInput || filterTagLabel || checkbox || tagNameWrap || termname)){
-
-            console.log("ssssssss");
-
-            $(popupMenuDiv).toggle();
-        }
+        let popupMenuDiv = event.target.closest(".wrapEachFiltergroup").querySelector(".inputsContainer")
+        $(popupMenuDiv).toggle();
+        // console.log( event.target);
+        // // console.log("filter selector",$('.filterInput'));
+        // let popupMenuDiv = event.target.closest(".wrapEachFiltergroup").querySelector(".inputsContainer");
+        // let filterInput = document.getElementsByClassName('inputsContainer')[0].getElementsByClassName('filterInput')[0];
+        // let filterTagLabel = document.getElementsByClassName('inputsContainer')[0].getElementsByClassName('filterTagLabel')[0];
+        // let checkbox = document.getElementsByClassName('inputsContainer')[0].getElementsByClassName('checkbox-filter-search')[0];
+        // let tagNameWrap = document.getElementsByClassName('inputsContainer')[0].getElementsByClassName('tagNameWrap')[0];
+        // let termname = document.getElementsByClassName('inputsContainer')[0].getElementsByClassName('term-name')[0];
+        // // let input = event.target.closest(".wrapEachFiltergroup").querySelector(".inputsContainer");
+        //
+        // // if(event.target !== ($('.filterInput') || $('.filterTagLabel') || $('.checkbox-filter-search') || $('.tagNameWrap') || $('.term-name'))){
+        // console.log('Javascript', filterInput);
+        //
+        // if(event.target !== (filterInput || filterTagLabel || checkbox || tagNameWrap || termname)){
+        //
+        //     console.log("ssssssss");
+        //
+        //     $(popupMenuDiv).toggle();
+        // }
 
 
     });

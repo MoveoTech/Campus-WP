@@ -310,6 +310,22 @@
     z-index: 8;
     width: 100%;
     height: 13%;
+    .buttonFilterWrap{
+      display: flex;
+      background: #91C653;
+      border-radius: 30px;
+      width: 90%;
+      margin: auto;
+      height: 57px;
+      z-index: 8;
+      .filterButtonMobileMenu{
+        margin: auto;
+        font-weight: 700;
+        font-size: 18px;
+        line-height: 24px;
+        color: #FFFFFF;
+      }
+    }
   }
   .filters-mobile-menu-popup{
     //overflow-y: auto;
