@@ -89,7 +89,7 @@ $(document).ready(function () {
                 ]
 
             })
-        } else{
+        } else if (jQuery('.catalog-courses-stripe').slick()){
             jQuery('.catalog-courses-stripe').slick('unslick');
         }
     });

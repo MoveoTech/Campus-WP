@@ -574,7 +574,6 @@ function apppendCourses(coursesData, id) {
     });
     changeArrowClass(id)
     clickOnCourseInfoButton()
-    // jQuery(`#${nextButton.id}`).prop('disabled', false);
 }
 
 function closePopupIfOpen(id) {
@@ -655,8 +654,8 @@ function getMyCoursesDataFromWordpress(edXIdCoursesArray) {
         if(response.success){
             const data = JSON.parse(response.data);
             try {
-                if(data.length < 1) {
-                    document.getElementById('myCoursesWrapper').style.display = 'none';
+                if(data.length === 0) {
+                    jQuery('#myCoursesWrapper').hide();
                 } else {
                     const id = 'myCoursesStripeId';
                     let coursesArray = [];
@@ -667,7 +666,9 @@ function getMyCoursesDataFromWordpress(edXIdCoursesArray) {
                             }
                         }
                     }
-                    appendMyCourses(coursesArray, id)
+                    jQuery('#myCoursesWrapper').show();
+                    appendMyCourses(coursesArray, id);
+
                 }
             }catch {(e)=>{console.log(e)}}
         }
