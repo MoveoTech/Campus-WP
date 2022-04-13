@@ -51,9 +51,6 @@ $cookieValue = $_COOKIE['prod-olivex-user-info'];
 $edxUserValue =  $_COOKIE['edx-user-info'];
 
 global  $sitepress;
-?>
-<!--<div id="testingdiv" style="border: 2px solid red;"></div>-->
-<?php
 
 if ( $sitepress->get_current_language() == 'en' ) {
     $frontPageHe = apply_filters( 'wpml_object_id', get_option('page_on_front'), 'page', FALSE, 'he'  );

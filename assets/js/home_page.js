@@ -7,15 +7,7 @@ jQuery(document).ready(function () {
     // check if user loggedIn
     let edx_user_info = getCookie(global_vars.cookie_name);
     if (edx_user_info) {
-        // console.log("log in");
-        // let edXIdCoursesArray = [ 'Achva+ACD_Achva_Fauna100_HE', 'HUJI+ACD_HUJI_85002', 'HIT+ProgAllVis', 'DigitalIsrael+GOV_Excel201', 'BIU+ACD_RFP4_BIU_Model-of-computation', 'HUJI+ACD_HUJI_nand2tetris', 'taasuka+GOV_Career_FindJob101', 'AAC+ACD_AAC_warandpeace', 'OUI+ACD_OUI_Introduction_to_Jewish_Thought_HE', 'molsa+GOV_molsa_260t_LearningRobotics101_HE', 'TAU+ACD_RFP5_Brain_most_wonderful_machine_HE'];
-        // getMyCoursesDataFromWordpress(edXIdCoursesArray);
-
-
-        // getCoursesDetails(coursesData);
-
-
-        // getMyCourses()
+        getMyCourses()
     }
 
     //Course Card
@@ -637,7 +629,6 @@ function getCoursesDetails(coursesArray) {
 
     coursesArray.forEach((item) => {
         let courseId = item.course_details.course_id;
-        // let createdAt = item.created;
         let startIndex = courseId.indexOf(':');
         let endIndex = courseId.indexOf('+', 25);
         let newCourseId = courseId.slice(startIndex + 1, endIndex);
@@ -657,7 +648,6 @@ function getMyCoursesDataFromWordpress(edXIdCoursesArray) {
     jQuery.post(stripe_data_ajax.ajaxurl, data, function(response){
         if(response.success){
             const data = JSON.parse(response.data);
-            console.log("data", data);
             try {
                 if(data.length < 1) {
                     document.getElementById('myCoursesWrapper').style.display = 'none';
