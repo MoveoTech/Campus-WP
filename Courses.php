@@ -38,7 +38,7 @@ $form_short_code_sidebar   = $site_settings['form_short_code_sidebar'];
 $course_attrs = array(
     'class' => 'col-xs-12 col-md-6 col-xl-4 course-item-with-border',
 );
-console_log($params);
+//console_log($params);
 /** NEW PARAMETERS */
 $catalog_stripe_id = get_field('catalog_stripe');
 $academic_institutions = pods( 'academic_institution', array('limit'   => -1 ));
@@ -52,25 +52,6 @@ $catalog_title = getFieldByLanguage(get_field('catalog_title'), get_field('catal
 
 $allCoursesResults = array();
 $idArrayOfBestMatches = array();
-while ($courses->fetch()) {
-    array_push($allCoursesResults, $courses);
-//    $allCoursesResults[] = $courses;
-    $idArrayOfBestMatches[] = $courses->display('ID');
-}
-
-$second_params = getSecondsFiltersParams($filters, $idArrayOfBestMatches);
-
-if($second_params) {
-    $oneOrMoreMatches = pods('courses', $second_params);
-    while ($oneOrMoreMatches->fetch()) {
-        array_push($allCoursesResults, $oneOrMoreMatches);
-    }
-}
-
-console_log($oneOrMoreMatches);
-//console_log($allCoursesResults);
-
-
 if($count == '0'){
     $no_results_found = true;
 }
@@ -78,10 +59,29 @@ if($count == '0'){
 $coursesIdArray = [];
 $i = 0;
 foreach ($courses->rows as $course) {
+    array_push($allCoursesResults, $course);
+    array_push($idArrayOfBestMatches, $course->id);
+
     $coursesIdArray[$i] = $course->id;
     $i++;
 }
+
 $coursesIDs = implode(',', $coursesIdArray);
+
+$second_params = getSecondsFiltersParams($filters, $idArrayOfBestMatches);
+
+if($second_params) {
+    $oneOrMoreMatches = pods('courses', $second_params);
+    foreach ($oneOrMoreMatches->rows as $secondCourse) {
+        array_push($allCoursesResults, $secondCourse);
+    }
+}
+
+//console_log($idArrayOfBestMatches);
+//console_log($oneOrMoreMatches);
+console_log($allCoursesResults); //TODO pass this courses to the template of course card
+
+
 
 ?>
 
