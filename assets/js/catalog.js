@@ -40,7 +40,7 @@ $(document).ready(function () {
         }
     });
 
-    /** checking screen size for filters menu and slick stripe */
+    /** checking screen size for web or mobile menu */
     slickStripeForMobile();
     $(window).resize(function() {
         slickStripeForMobile();
@@ -49,7 +49,7 @@ $(document).ready(function () {
 /** Open mobile filters menu */
     $(".openFiltersMenu").click(function () {
         /** Canceling scrolling on body when menu mobile is open  */
-        $('body').css('overflow','hidden');
+        $('body').css('overflow-y', 'unset');
         /** Open mobile menu popup */
         $('.bg-overlay').addClass('filtersMenuOverlay');
         jQuery(".filters-mobile-menu-popup").toggleClass('active');
@@ -110,8 +110,7 @@ $(document).click(function(event) {
 
 function slickStripeForMobile() {
     if($(window).width() <= 768){
-        
-        /** catalog stripe slick */
+        /** catalog stripe slick for mobile*/
         let rtl = true;
         let currnetLanguage = $('.catalog-courses-stripe').data('language');
         if(currnetLanguage == 'en'){
@@ -153,6 +152,10 @@ function slickStripeForMobile() {
                 },
             ]
         })
+        /** Changing classes in filters menu inputs */
+        $('.checkbox-filter-search').addClass('.checkboxFilterMobile');
+        $('.checkbox-filter-search').removeClass('filtersInputWeb');
+
     } else if (jQuery('.catalog-courses-stripe').slick()){
         jQuery('.catalog-courses-stripe').slick('unslick');
     }
@@ -370,10 +373,10 @@ function haveNoResults() {
 function filterByTagEvent(){
 
     /** removing event from div */
-    $(`#groupFiltersContainer .catalogFilters .checkbox-filter-search`).unbind('click');
+    $(`#groupFiltersContainer .catalogFilters .filtersInputWeb`).unbind('click');
 
     /** click event - targeting each input for filtering */
-    $('#groupFiltersContainer .catalogFilters .checkbox-filter-search').on('click', function (event) {
+    $('#groupFiltersContainer .catalogFilters .filtersInputWeb').on('click', function (event) {
         console.log("hhhhhhhhh");
         let filterData = {"search": {}};
         let tagArray = {};
@@ -388,7 +391,7 @@ function filterByTagEvent(){
         if(searchValue) freeSearchData.push(searchValue);
 
         /** Getting array of inputs */
-        let filterItems = $('.checkbox-filter-search');
+        let filterItems = $('.filtersInputWeb');
 
         /** Looping all filter items inputs */
         filterItems.each((index, element) => {
@@ -562,13 +565,32 @@ function appendGroupFilter(filterGroupName, filterId) {
 }
 
 function openCheckboxEvent() {
+
     /** removing event from div */
     $(`.wrapEachFiltergroup`).unbind('click');
 
     /** click event - targeting each checkbox to open */
     $('.wrapEachFiltergroup').on('click', function (event) {
+        console.log( event.target);
+        // console.log("filter selector",$('.filterInput'));
+        let popupMenuDiv = event.target.closest(".wrapEachFiltergroup").querySelector(".inputsContainer");
+        let filterInput = document.getElementsByClassName('inputsContainer')[0].getElementsByClassName('filterInput')[0];
+        let filterTagLabel = document.getElementsByClassName('inputsContainer')[0].getElementsByClassName('filterTagLabel')[0];
+        let checkbox = document.getElementsByClassName('inputsContainer')[0].getElementsByClassName('checkbox-filter-search')[0];
+        let tagNameWrap = document.getElementsByClassName('inputsContainer')[0].getElementsByClassName('tagNameWrap')[0];
+        let termname = document.getElementsByClassName('inputsContainer')[0].getElementsByClassName('term-name')[0];
+        // let input = event.target.closest(".wrapEachFiltergroup").querySelector(".inputsContainer");
 
-        let popupMenuDiv = event.target.closest(".wrapEachFiltergroup").querySelector(".inputsContainer")
-        $(popupMenuDiv).toggle();
+        // if(event.target !== ($('.filterInput') || $('.filterTagLabel') || $('.checkbox-filter-search') || $('.tagNameWrap') || $('.term-name'))){
+        console.log('Javascript', filterInput);
+
+        if(event.target !== (filterInput || filterTagLabel || checkbox || tagNameWrap || termname)){
+
+            console.log("ssssssss");
+
+            $(popupMenuDiv).toggle();
+        }
+
+
     });
 }
