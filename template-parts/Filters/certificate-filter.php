@@ -29,6 +29,7 @@ $title = $filter['title'];
         <div class="buttonWrap">
             <p class="filterGroupTitle" ><?= $title ?></p>
             <img class="filterVector" src="<?php echo get_bloginfo('stylesheet_directory'). '/assets/images/vector-black.svg'?>"/>
+            <img class="filterVectorMobile" src="<?php echo get_bloginfo('stylesheet_directory'). '/assets/images/filtersMenuVectorDown.svg'?>"/>
         </div>
     </div>
         <div class="inputsContainer catalogFilters" >

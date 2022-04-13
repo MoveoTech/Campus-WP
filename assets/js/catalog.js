@@ -39,50 +39,48 @@ $(document).ready(function () {
             filterToRemove.remove()
         }
     });
-    $(window).resize(function() {
-        if($(window).width() <= 768){
-            /** catalog stripe slick */
-            let rtl = true;
-            let currnetLanguage = $('.catalog-courses-stripe').data('language');
-            if(currnetLanguage == 'en'){
-                rtl = false;
-            }
-            jQuery('.catalog-courses-stripe').slick({
-                lazyLoad: 'ondemand',
-                slidesToShow: 2.5,
-                slidesToScroll: 2,
-                rtl: rtl,
-                arrows: false,
-                speed: 1000,
-                infinite: false,
-                responsive: [
-                    {
-                        breakpoint: 571,
-                        settings: {
-                            slidesToShow: 2.25,
-                            slidesToScroll: 2,
-                            arrows: false,
-                        }
-                    },
-                    {
-                        breakpoint: 480,
-                        settings: {
-                            speed: 100,
-                            slidesToShow: 2.15,
-                            slidesToScroll: 2,
-                            arrows: false,
-                        }
-                    },
-                ]
 
-            })
-        } else{
-            jQuery('.catalog-courses-stripe').slick('unslick');
-        }
+    /** checking screen size for filters menu and slick stripe */
+    slickStripeForMobile();
+    $(window).resize(function() {
+        slickStripeForMobile();
     });
 
+/** Open mobile filters menu */
+    $(".openFiltersMenu").click(function () {
+        /** Canceling scrolling on body when menu mobile is open  */
+        $('body').css('overflow','hidden');
+        /** Open mobile menu popup */
+        $('.bg-overlay').addClass('filtersMenuOverlay');
+        jQuery(".filters-mobile-menu-popup").toggleClass('active');
+
+        if(!jQuery(".bg-overlay")[0].classList.contains('active') && jQuery(".filters-mobile-menu-popup")[0].classList.contains('active')) {
+            jQuery(".bg-overlay").addClass('active');
+            jQuery(".header_section").addClass('menu-open');
+        } else if(!jQuery(".filters-mobile-menu-popup")[0].classList.contains('active')) {
+            jQuery(".bg-overlay").removeClass('active');
+            jQuery(".header_section").removeClass('menu-open');
+        }
+        jQuery('html').toggleClass('menu_open');
+    });
+
+$(".bg-overlay").click(function () {
+
+    console.log("inside click");
+    $('body').css('overflow','auto');
+    console.log("clicking overlay");
+
+    $('.bg-overlay').removeClass('filtersMenuOverlay');
+    jQuery(".bg-overlay").removeClass('active');
+    jQuery(".header_section").removeClass('menu-open');
+    jQuery(".filters-mobile-menu-popup").toggleClass('active');
+
+
+    // jQuery(".filters-mobile-menu-popup").toggleClass('active');
+})
 
 });
+/** End of ducoment ready */
 
 /** hiding filter inputs when clicking on screen or other filter group */
 $(document).click(function(event) {
@@ -105,11 +103,71 @@ $(document).click(function(event) {
                 element.style.display = "none";
             }
         })
-
     }
-
 });
 /** end of jquery */
+
+
+function slickStripeForMobile() {
+    if($(window).width() <= 768){
+        
+        /** catalog stripe slick */
+        let rtl = true;
+        let currnetLanguage = $('.catalog-courses-stripe').data('language');
+        if(currnetLanguage == 'en'){
+            rtl = false;
+        }
+        jQuery('.catalog-courses-stripe').slick({
+            lazyLoad: 'ondemand',
+            slidesToShow: 3,
+            slidesToScroll: 2,
+            rtl: rtl,
+            arrows: false,
+            speed: 1000,
+            infinite: false,
+            responsive: [
+                {
+                    breakpoint: 650,
+                    settings: {
+                        slidesToShow: 2.5,
+                        slidesToScroll: 2,
+                        arrows: false,
+                    }
+                },
+                {
+                    breakpoint: 571,
+                    settings: {
+                        slidesToShow: 2.25,
+                        slidesToScroll: 2,
+                        arrows: false,
+                    }
+                },
+                {
+                    breakpoint: 480,
+                    settings: {
+                        speed: 100,
+                        slidesToShow: 2.15,
+                        slidesToScroll: 2,
+                        arrows: false,
+                    }
+                },
+            ]
+        })
+    } else if (jQuery('.catalog-courses-stripe').slick()){
+        jQuery('.catalog-courses-stripe').slick('unslick');
+    }
+
+
+}
+
+
+
+
+//
+// function openFiltersMobileMenu() {
+//
+//
+// }
 
 /** Ido made a new function for appending */
 function appendFilteredCourses(coursesData) {
@@ -316,6 +374,7 @@ function filterByTagEvent(){
 
     /** click event - targeting each input for filtering */
     $('#groupFiltersContainer .catalogFilters .checkbox-filter-search').on('click', function (event) {
+        console.log("hhhhhhhhh");
         let filterData = {"search": {}};
         let tagArray = {};
         let freeSearchData = [];
@@ -420,6 +479,7 @@ function appendMoreFilters(filterData) {
 
     /**looping each filter group and appending it to the filters menu */
     let filterId = filterData.filterId;
+    let dataType = filterData.dataType;
     let container = document.getElementById(`extraFilter_${filterId}`);
     let groupFilters = filterData.filtersList;
     let currentLanguage =filterData.language;
@@ -441,7 +501,7 @@ function appendMoreFilters(filterData) {
         }
         temp.innerHTML =
             '<label class="filterTagLabel" for="'+id+'">'+
-            '<input'+ checked +' class="checkbox-filter-search" type="checkbox" data-name="institution" data-value="'+urlTitle+'" value="'+name+'" id="'+id+'">'+
+            '<input'+ checked +' class="checkbox-filter-search" type="checkbox" data-name="'+dataType+'" data-value="'+urlTitle+'" value="'+name+'" id="'+id+'">'+
             '<div class="wrap-term-and-sum tagNameWrap">'+
             '<span class="term-name">'+name+'</span>'+
             '</div>'+

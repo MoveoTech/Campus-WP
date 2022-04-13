@@ -82,7 +82,6 @@
 }
 }
 
-
 /* Filters menu */
 .filtersSection{
   display: flex;
@@ -163,14 +162,29 @@
         color: #333433;
         margin:auto;
       }
-      .filterVector{
-        margin: 0;
-        margin-right: 7px;
-        }
+
       }
     }
-  }
 
+
+  }
+.filterVectorMobile{
+  display:none;
+}
+
+.openFiltersMenu{
+  display: none;
+  position: absolute;
+  left: 30px;
+
+  .filterVector{
+    margin-bottom: 3px;
+  }
+}
+.filterVector{
+  margin: 0;
+  margin-right: 7px;
+}
 /* filter inputs- popup menu */
 .inputsContainer {
   display:none;
@@ -271,6 +285,122 @@
 @media (max-width: 992px) {
   #groupFiltersContainer{
     flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 768px) {
+  .navFiltersMenu{
+    display: flex;
+    position: fixed;
+    top: 0;
+    z-index: 8;
+    width: 100%;
+    background-color: #333433;
+    height: 63px;
+    .resetFilterButton{
+      font-size: 12px;
+      line-height: 16px;
+      color: #70C6D1;
+      font-weight: 700;
+      margin: auto 16px auto;
+    }
+  }
+  .buttonNavFiltersMenu{
+    display: flex;
+    z-index: 8;
+    width: 100%;
+    height: 13%;
+  }
+  .filters-mobile-menu-popup{
+    //overflow-y: auto;
+    //border: 1px solid red;
+  }
+  #filtersSectionMobile{
+    position: relative;
+    height: 87%;
+    top: 63px;
+    overflow-y: auto;
+  }
+  .wrapEachFiltergroup{
+    display: flex;
+    //flex-direction: column;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+    height: fit-content;
+    //max-height: 200px;
+    flex-direction: column;
+    .wrapEachFilterTag{
+      display: flex;
+      width: 100%
+    }
+  }
+  .buttonWrap{
+    display: flex;
+    width: 100%;
+    height: 69px;
+    justify-content: space-between;
+    .filterGroupTitle{
+      margin: auto 24px auto auto;
+      font-weight: 600;
+      font-size: 22px;
+      line-height: 29px;
+    }
+  }
+  .filterVectorMobile{
+    display: unset;
+    //margin-left: 23px;
+    //width: 19px;
+    margin: auto auto auto 23px;
+  }
+  .filtersSection{
+    .allFiltersWrapDiv {
+      display: none;
+    }
+  }
+  .openFiltersMenu{
+    display: unset;
+    .filterVector{
+      display: unset;
+    }
+  }
+  .filterVector{
+    display: none;
+  }
+  .filtersMenuOverlay{
+    z-index:6;
+
+  }
+
+  .inputsContainer {
+    display: flex;
+    flex-direction: column;
+    position: unset;
+    box-shadow: unset;
+    max-width: unset;
+    max-height: unset;
+    overflow-y: unset;
+    padding: 0;
+    margin: 0 28px 0 0;
+    .filterInput{
+
+      .filterTagLabel{
+
+        .tagNameWrap {
+
+
+          &::before{
+            width: 20px;
+
+          }
+          &::after{
+
+          }
+          .term-name {
+            padding-right: 10px;
+
+          }
+        }
+      }
+    }
   }
 }
 
