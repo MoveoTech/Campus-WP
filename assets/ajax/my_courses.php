@@ -11,7 +11,6 @@ function my_courses() {
 
     $data = pods("courses");
     $data->find(getMyCoursesParams($edxIdsArray));
-
     while ($data->fetch()) {
         array_push($dataToReturn, coursesData($data, $lang));
 
@@ -26,23 +25,19 @@ add_action('wp_ajax_nopriv_my_courses', 'my_courses');
 
 function getMyCoursesParams($idsArray){
 
-    $order = "FIELD(t.course_id_edx,";
     $sql = array();
     foreach($idsArray as $id ) {
-        $order = $order . "'". $id . "',";
         $sql[] = 't.course_id_edx LIKE "%'.$id.'+%"';
     }
     $where = implode(" OR ", $sql);
-    $order = substr_replace($order, ")", -1);
 
     $params = array(
         'limit' => -1,
         'where'=>$where,
-        'orderby'=> $order
     );
     return $params;
 
-}
+};
 
 /*
  *     request example

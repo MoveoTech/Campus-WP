@@ -105,7 +105,9 @@ if($count == '0'){
             <div class="catalogWrap">
 
 <!--                <div id="coursesBox" class="row output-courses coursesResults">-->
+
 <!--                    . START Number of match courses OR No Results -->
+
 <!--                    --><?php //if ( $no_results_found ) { ?>
 <!--                        <div class="sum-all-course col-lg-12" role="alert">-->
 <!--                            <h2 class="wrap-sum">-->
@@ -127,7 +129,9 @@ if($count == '0'){
 //                                    )
 //                                ));
 //                        } }?>
+
 <!--                    . END Match Results -->
+
 <!--                </div>-->
 
                 <div class="catalogStripeWrap">
@@ -135,7 +139,6 @@ if($count == '0'){
                     <?php
                     $title = getFieldByLanguage(get_field('hebrew_title', $catalog_stripe_id), get_field('english_title', $catalog_stripe_id), get_field('arabic_title', $catalog_stripe_id), $sitepress->get_current_language());
                     $subTitle = getFieldByLanguage(get_field('hebrew_sub_title', $catalog_stripe_id), get_field('english_sub_title', $catalog_stripe_id), get_field('arabic_sub_title', $catalog_stripe_id), $sitepress->get_current_language());
-
                     get_template_part('template', 'parts/Stripes/catalog-stripe',
                         array(
                             'args' => array(

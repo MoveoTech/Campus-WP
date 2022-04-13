@@ -654,7 +654,15 @@ function getMyCoursesDataFromWordpress(edXIdCoursesArray) {
                     document.getElementById('myCoursesWrapper').style.display = 'none';
                 } else {
                     const id = 'myCoursesStripeId';
-                    appendMyCourses(data, id)
+                    let coursesArray = [];
+                    for(let i = 0; i < edXIdCoursesArray.length; i++) {
+                        for(let j = 0; j < data.length; j++) {
+                            if(data[j].course_id_edx.includes(edXIdCoursesArray[i])) {
+                                coursesArray.push(data[j])
+                            }
+                        }
+                    }
+                    appendMyCourses(coursesArray, id)
                 }
             }catch {(e)=>{console.log(e)}}
         }
