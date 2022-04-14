@@ -13,8 +13,6 @@ global $site_settings, $field, $wp_query, $sitepress, $filter_tags;
 $current_language = $sitepress->get_current_language();
 
 $menuFilters = get_field('filters');
-$mobile_menu = get_filters_menu($menuFilters);
-
 /**
  * CHECK THE QUERY PARAMS
  */
@@ -58,6 +56,10 @@ if($count == '0'){
     $no_results_found = true;
 }
 
+if (wp_is_mobile()) {
+    get_filters_menu($menuFilters);
+}
+
 ?>
 
 <div class="catalog-banner">
@@ -78,7 +80,6 @@ if($count == '0'){
             </div>
         </form>
     </div>
-
 </div>
 
 <div class="wrap-search-page-course <?= $my_class ?>">
@@ -87,17 +88,19 @@ if($count == '0'){
             <div class="filtersSection">
                 <div class="allFiltersWrapDiv">
                     <?php
-                    get_template_part('template', 'parts/Filters/filters-section',
-                        array(
-                            'args' => array(
-                                'academic_filter' => $academic_institutions->data(),
-                                'menuFilters' => $menuFilters,
-                            )
-                        ));
+                    if(!wp_is_mobile()){
+                        get_template_part('template', 'parts/Filters/filters-section',
+                            array(
+                                'args' => array(
+                                    'academic_filter' => $academic_institutions->data(),
+                                    'menuFilters' => $menuFilters,
+                                )
+                            ));
+                    }
                     ?>
                 </div>
                 <div class="openFiltersMenu">
-                    <span><?= filtersMobileMenuLanguage() ?></span>
+                    <span><?= filtersMobileMenuLanguage(); ?></span>
                     <img class="filterVector" src="<?php echo get_bloginfo('stylesheet_directory'). '/assets/images/vector-black.svg'?>"/>
                 </div>
 
@@ -156,15 +159,9 @@ if($count == '0'){
         </div>
     </div>
 </div>
-<!--    <div class="bg-overlay filtersMenuOverlay"></div>-->
-<!--    <div class="filters-mobile-menu-popup">-->
-        <?= $mobile_menu; ?>
-<!--        <div class="mobile-menu-asset"></div>-->
-<!--    </div>-->
 
 <?php
 function get_filters_menu($menuFilters) {
-
 
     $encoded_path = urlencode($_SERVER['REQUEST_URI']);
     $current = cin_get_str('header_current_languages');

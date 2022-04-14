@@ -7,10 +7,14 @@ $(document).ready(function () {
     markCheckboxes(params)
 
     /** Calling events - targeting each checkbox to open & filtering inputs **/
-    openCheckboxEvent()
+    openCheckboxEvent();
+
+    /** Click event - targeting tags filters on mobile filters menu */
+    filterByTagMobile();
 
     /** Click event - targeting filters inputs */
-    filterByTagEvent()
+    filterByTagEvent();
+
 
     /** Click event - reset filtering **/
     $('.resetFilterButton').on('click', function (event) {
@@ -25,7 +29,6 @@ $(document).ready(function () {
 
     /** Click event - adding more filters **/
     $('.moreFilters .extraFilterCheckbox').on('click', function (event) {
-
         /**Getting targeted input */
         let filterId = $(event.target).data('value');
         let filterGroupName = event.target.value;
@@ -48,39 +51,29 @@ $(document).ready(function () {
 
 /** Open mobile filters menu */
     $(".openFiltersMenu").click(function () {
-        /** Canceling scrolling on body when menu mobile is open  */
-        $('body').css('overflow-y', 'unset');
         /** Open mobile menu popup */
-        $('.bg-overlay').addClass('filtersMenuOverlay');
         jQuery(".filters-mobile-menu-popup").toggleClass('active');
-
         if(!jQuery(".bg-overlay")[0].classList.contains('active') && jQuery(".filters-mobile-menu-popup")[0].classList.contains('active')) {
             jQuery(".bg-overlay").addClass('active');
             jQuery(".header_section").addClass('menu-open');
         } else if(!jQuery(".filters-mobile-menu-popup")[0].classList.contains('active')) {
             jQuery(".bg-overlay").removeClass('active');
             jQuery(".header_section").removeClass('menu-open');
+
         }
         jQuery('html').toggleClass('menu_open');
     });
 
 $(".bg-overlay").click(function () {
-
-    console.log("inside click");
-    $('body').css('overflow','auto');
-    console.log("clicking overlay");
-
-    $('.bg-overlay').removeClass('filtersMenuOverlay');
     jQuery(".bg-overlay").removeClass('active');
     jQuery(".header_section").removeClass('menu-open');
-    jQuery(".filters-mobile-menu-popup").toggleClass('active');
-
-
-    // jQuery(".filters-mobile-menu-popup").toggleClass('active');
+    jQuery(".filters-mobile-menu-popup").removeClass('active');
+    jQuery(".mobile-menu-popup").removeClass('active');
+    jQuery('html').toggleClass('menu_open');
 })
 
 });
-/** End of ducoment ready */
+/** End of document ready */
 
 /** hiding filter inputs when clicking on screen or other filter group */
 $(document).click(function(event) {
@@ -153,9 +146,8 @@ function slickStripeForMobile() {
             ]
         })
         /** Changing classes in filters menu inputs */
-        $('.checkbox-filter-search').addClass('.checkboxFilterMobile');
         $('.checkbox-filter-search').removeClass('filtersInputWeb');
-        $('.filters-mobile-menu-popup').removeAttr('hidden');
+        $('.checkbox-filter-search').addClass('.checkboxFilterMobile');
 
 
     } else if (jQuery('.catalog-courses-stripe').slick()){
@@ -373,14 +365,14 @@ function haveNoResults() {
 
 /** Filtering by tag function of catalog - need to remove  */
 function filterByTagEvent(){
-    console.log("holi");
 
     /** removing event from div */
-    $(`.filtersInputWeb`).unbind('click');
+    $(`.filtersSection .filtersInputWeb`).unbind('click');
 
     /** click event - targeting each input for filtering */
-    $('.filtersInputWeb').on('click', function (event) {
-        console.log(event);
+    $('.filtersSection .filtersInputWeb').on('click', function (event) {
+
+
         let filterData = {"search": {}};
         let tagArray = {};
         let freeSearchData = [];
@@ -394,7 +386,7 @@ function filterByTagEvent(){
         if(searchValue) freeSearchData.push(searchValue);
 
         /** Getting array of inputs */
-        let filterItems = $('.filtersInputWeb');
+        let filterItems = $('.checkbox-filter-search');
 
         /** Looping all filter items inputs */
         filterItems.each((index, element) => {
@@ -462,6 +454,97 @@ function filterByTagEvent(){
     })}
 /** End of function filterByTagEvent */
 
+
+/** filterByTagMobile function of catalog  */
+function filterByTagMobile(){
+
+    /** removing event from div */
+    $(`.filterButtonMobileMenu`).unbind('click');
+
+    /** click event - targeting each input for filtering */
+    $('.filterButtonMobileMenu').on('click', function (event) {
+
+        let filterData = {"search": {}};
+        let tagArray = {};
+        let freeSearchData = [];
+        let institutionArray = [];
+        let certificateArray = [];
+        let languageArray = [];
+
+        /** Getting free search value from url params */
+        let params = new URLSearchParams(document.location.search);
+        let searchValue = params.get("text_s");
+        if(searchValue) freeSearchData.push(searchValue);
+
+        /** Getting array of inputs */
+        let filterItems = $('.checkbox-filter-search');
+
+        /** Looping all filter items inputs */
+        filterItems.each((index, element) => {
+            let id = element.id;
+            let type = $(`#${id}`).data('name');
+            let group = $(`#${id}`).data('group');
+            let englishValue = $(`#${id}`).data('value');
+
+            /** Checking if value is checked */
+            if(element.checked) {
+                switch (type) {
+                    case 'tag':
+                        if(tagArray[group]){
+                            tagArray[group].push(englishValue);
+                        } else {
+                            tagArray[group] = [];
+                            tagArray[group].push(englishValue);
+                        }
+
+                        break;
+
+                    case 'institution':
+                        institutionArray.push(englishValue);
+                        break;
+
+
+                    case 'certificate':
+                        certificateArray.push(englishValue);
+                        break;
+
+                    case 'language':
+                        languageArray.push(englishValue);
+                        break;
+                }
+            }
+        });
+
+        /** Checking if any filter checked */
+        if(Object.keys(tagArray).some(() => { return true; }) || institutionArray.length > 0 || certificateArray.length > 0 || languageArray.length > 0 || Object.keys(freeSearchData).some(() => { return true; })) {
+
+            /** checking which filters checked and pushing each array to object (key and values) */
+            if(freeSearchData.length > 0) {
+                filterData['search']['text_s'] = freeSearchData;
+            }
+            if(Object.keys(tagArray).some((k) => { return true; })) {
+                filterData['search']['tags'] = tagArray;
+            }
+            if(institutionArray.length > 0) {
+                filterData['search']['institution'] = institutionArray;
+            }
+
+            if(certificateArray.length > 0) {
+                filterData['search']['certificate'] = certificateArray;
+            }
+            if(languageArray.length > 0) {
+                filterData['search']['language'] = languageArray;
+            }
+console.log("filterData", filterData)
+            filterCoursesAjax(filterData)
+        } else {
+            filterData = [];
+            filterCoursesAjax(filterData)
+        }
+
+    })}
+/** End of function filterByTagMobile */
+
 /** Ajax call - getting filters group name and there tags **/
 function getFiltersGroups(filterId) {
 
@@ -473,9 +556,8 @@ function getFiltersGroups(filterId) {
     jQuery.post(add_filters_to_menu_ajax.ajaxurl, data, function(response){
         if(response.success){
             const responseData = JSON.parse(response.data);
-            appendMoreFilters(responseData)
-            /** Calling event - targeting each filtering inputs **/
-            filterByTagEvent()
+            appendMoreFilters(responseData);
+
         }
     })
 }
@@ -531,6 +613,7 @@ function filterCoursesAjax(filterData) {
 
             appendUrlParams(responseData['filters'])
             if(responseData['courses'].length > 0) {
+                console.log("responseData", responseData);
                 // appendFilteredCourses(responseData['courses'])
             } else {
                 haveNoResults()
@@ -575,26 +658,6 @@ function openCheckboxEvent() {
     $('.wrapEachFiltergroup').on('click', function (event) {
         let popupMenuDiv = event.target.closest(".wrapEachFiltergroup").querySelector(".inputsContainer")
         $(popupMenuDiv).toggle();
-        // console.log( event.target);
-        // // console.log("filter selector",$('.filterInput'));
-        // let popupMenuDiv = event.target.closest(".wrapEachFiltergroup").querySelector(".inputsContainer");
-        // let filterInput = document.getElementsByClassName('inputsContainer')[0].getElementsByClassName('filterInput')[0];
-        // let filterTagLabel = document.getElementsByClassName('inputsContainer')[0].getElementsByClassName('filterTagLabel')[0];
-        // let checkbox = document.getElementsByClassName('inputsContainer')[0].getElementsByClassName('checkbox-filter-search')[0];
-        // let tagNameWrap = document.getElementsByClassName('inputsContainer')[0].getElementsByClassName('tagNameWrap')[0];
-        // let termname = document.getElementsByClassName('inputsContainer')[0].getElementsByClassName('term-name')[0];
-        // // let input = event.target.closest(".wrapEachFiltergroup").querySelector(".inputsContainer");
-        //
-        // // if(event.target !== ($('.filterInput') || $('.filterTagLabel') || $('.checkbox-filter-search') || $('.tagNameWrap') || $('.term-name'))){
-        // console.log('Javascript', filterInput);
-        //
-        // if(event.target !== (filterInput || filterTagLabel || checkbox || tagNameWrap || termname)){
-        //
-        //     console.log("ssssssss");
-        //
-        //     $(popupMenuDiv).toggle();
-        // }
-
 
     });
 }

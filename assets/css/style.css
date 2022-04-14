@@ -18039,6 +18039,86 @@ html:not(.user_is_not_logged_in) .header_login {
       overflow-y: hidden;
       touch-action: none; } }
 
+.mobile-menu-popup {
+  display: none;
+  z-index: 5;
+  background-color: #ffffff;
+  width: 75%;
+  height: 100%;
+  position: fixed;
+  right: 0;
+  top: 63px;
+  transition: transform 0.3s ease-in-out;
+  transform: translateX(100%); }
+  .mobile-menu-popup.active {
+    transform: translateX(0); }
+  .mobile-menu-popup .nav-mobile {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 5px;
+    margin: 0 auto; }
+    .mobile-menu-popup .nav-mobile .change-mobile-lang.active {
+      background: rgba(0, 0, 0, 0.1);
+      border-radius: 14.192px;
+      margin-bottom: 7.62px; }
+    .mobile-menu-popup .nav-mobile .mobile-list-item {
+      height: 70px;
+      position: relative;
+      justify-content: flex-start;
+      align-items: center;
+      display: flex;
+      padding-right: 13px; }
+      .mobile-menu-popup .nav-mobile .mobile-list-item a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%; }
+        .mobile-menu-popup .nav-mobile .mobile-list-item a img.mobile-menu-vector {
+          width: 9.93px;
+          height: 5.68px;
+          position: absolute;
+          left: 0;
+          transition: transform 0.2s ease-in-out; }
+          .mobile-menu-popup .nav-mobile .mobile-list-item a img.mobile-menu-vector.active {
+            transform: rotate(180deg);
+            transition: transform 0.2s ease-in-out; }
+      .mobile-menu-popup .nav-mobile .mobile-list-item .list-item-content {
+        font-family: Assistant;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 24px;
+        letter-spacing: 0;
+        text-align: right;
+        color: #333433; }
+      .mobile-menu-popup .nav-mobile .mobile-list-item img {
+        width: 43px;
+        height: 43px;
+        margin-left: 7px; }
+    .mobile-menu-popup .nav-mobile .mobile-login-register {
+      display: none; }
+      .mobile-menu-popup .nav-mobile .mobile-login-register.active {
+        display: flex; }
+    .mobile-menu-popup .nav-mobile .mobile-logged-out,
+    .mobile-menu-popup .nav-mobile .mobile-login-register {
+      border-top: 1px solid rgba(0, 0, 0, 0.05); }
+  .mobile-menu-popup .mobile-menu-asset {
+    display: none;
+    background-image: url("../../assets/images/mobileMenu-asset.svg");
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 141px;
+    position: absolute;
+    left: 0;
+    bottom: 63px; }
+    .mobile-menu-popup .mobile-menu-asset.active {
+      display: block; }
+
 .secondary-mobile-lang-menu {
   position: relative;
   height: 0;
@@ -20322,7 +20402,7 @@ body .course-item-hover {
       display: unset; }
   .filterVector {
     display: none; }
-  .filtersMenuOverlay {
+  .filterMenuOverlay {
     z-index: 6; }
   .inputsContainer {
     display: flex;

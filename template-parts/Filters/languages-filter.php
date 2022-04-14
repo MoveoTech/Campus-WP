@@ -41,7 +41,7 @@ $title = $filter['title'];
 
             <div class="filterInput">
                 <label class="filterTagLabel" for="language_<?= $i ?>">
-                    <input <?= $checked ?> class="checkbox-filter-search" type="checkbox" data-name='language' data-group='<?= $title ?>' data-value="<?= $url_title ?>" name=" $name '[]'" value="<?= $name ?>" id="language_<?= $i ?>"/>
+                    <input <?= $checked ?> class="checkbox-filter-search filtersInputWeb" type="checkbox" data-name='language' data-group='<?= $title ?>' data-value="<?= $url_title ?>" name=" $name '[]'" value="<?= $name ?>" id="language_<?= $i ?>"/>
                     <div class="wrap-term-and-sum tagNameWrap" >
                         <span class="term-name"><?= $name ?></span>
                     </div>
