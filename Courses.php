@@ -49,15 +49,12 @@ $title_str = cin_get_str( 'filter_courses_title_ajax' );
 $my_class = "ajax_filter";
 $catalog_title = getFieldByLanguage(get_field('catalog_title'), get_field('catalog_english_title'), get_field('catalog_arabic_title'), $sitepress->get_current_language());
 
-$allCoursesResults = array();
 $idArrayOfBestMatches = array();
 $coursesIdArray = [];
 
 $i = 0;
 foreach ($courses->rows as $course) {
-    array_push($allCoursesResults, $course);
     array_push($idArrayOfBestMatches, $course->id);
-
     $coursesIdArray[$i] = $course->id;
     $i++;
 }

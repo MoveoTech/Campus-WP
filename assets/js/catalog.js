@@ -127,7 +127,6 @@ $(document).click(function(event) {
 });
 /** end of jquery */
 
-/** Ido made a new function for appending */
 function appendFilteredCourses(coursesData) {
 
     let coursesBox = document.getElementById("coursesBox");
@@ -221,7 +220,7 @@ function appendFilteredCourses(coursesData) {
     });
     coursesBox.replaceWith(output)
 
-}
+} //TODO build template for result course card
 
 function appendUrlParams(filters) {
 
@@ -402,7 +401,6 @@ function filterCoursesAjax(filterData) {
     jQuery.post(filter_by_tag_ajax.ajaxurl, data, function(response){
         if(response.success){
             const responseData = JSON.parse(response.data);
-
             appendUrlParams(responseData['filters'])
             if(responseData['courses'].length > 0) {
                 // loadCourses(responseData['courses'])
@@ -453,6 +451,7 @@ function openCheckboxEvent() {
     });
 }
 
+/** Load more courses (not in used 14-04-2022) */
 function loadCourses(coursesArray = []) {
     if(coursesArray.length > 0){
         appendFilteredCourses(coursesArray)

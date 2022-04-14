@@ -1455,17 +1455,20 @@ function getPodsFilterParams($filters) {
 
         foreach($tags_object as $group) {
             $sqlGroupTags = array();
+            $havingSql = array();
 
             foreach ($group  as $tag){
                 $sqlGroupTags[] = ' tags.name LIKE "%'.$tag.'%" ';
                 $sqlGroupTags[] = ' tags.english_name LIKE "%'.$tag.'%" ';
                 $sqlGroupTags[] = ' tags.arabic_name LIKE "%'.$tag.'%" ';
+                $havingSql[] = ' tags_id LIKE "%,' . $tag .',%" ';
             }
-
+            $havOr[] =  implode('OR', $havingSql) ;
             $sqlTags[] ="(" . implode('OR', $sqlGroupTags) . ")" ;
         }
 
         $tagsQuery = implode(' OR ', $sqlTags) ;
+        $having =  implode(' AND ', $havOr)  ;
         $sql[] = $tagsQuery;
     };
 
@@ -1473,8 +1476,11 @@ function getPodsFilterParams($filters) {
     $order = "t.order DESC";
 
     $params = array(
+        'select'=> '`t`.*, concat(",",group_concat(`tags`.`english_name` SEPARATOR ","), ",") as `tags_id`',
         'limit' => -1,
         'where'=>$where,
+        'groupby'=> 't.id',
+        'having'=> $having,
         'orderby'=> $order
     );
     return $params;
@@ -1556,10 +1562,10 @@ function getSecondsFiltersParams($filters, $idArray) {
                 $sqlGroupTags[] = ' tags.arabic_name LIKE "%'.$tag.'%" ';
             }
 
-            $sqlTags[] = implode('OR', $sqlGroupTags) ;
+            $sqlTags[] ="(" . implode('OR', $sqlGroupTags) . ")" ;
         }
 
-        $tagsQuery ="(" . implode('OR', $sqlTags) . ")";
+        $tagsQuery = implode(' OR ', $sqlTags) ;
         $sql[] = $tagsQuery;
     };
 
