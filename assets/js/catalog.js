@@ -535,7 +535,6 @@ function filterByTagMobile(){
             if(languageArray.length > 0) {
                 filterData['search']['language'] = languageArray;
             }
-console.log("filterData", filterData)
             filterCoursesAjax(filterData)
         } else {
             filterData = [];
