@@ -19,7 +19,6 @@ foreach ($certificatesArray as $certificate) {
     array_push($certificates, $certificate_details);
 }
 
-
 $title = $filter['title'];
 
 ?>

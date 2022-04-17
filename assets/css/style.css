@@ -20227,7 +20227,8 @@ body .course-item-hover {
         height: 38px;
         background: #F9F9F9;
         border-radius: 10px;
-        margin: 0 5px; }
+        margin: 0 5px;
+        cursor: pointer; }
         .filtersSection .allFiltersWrapDiv .checkboxFiltersWrap .wrapEachFilterTag .buttonWrap, .filtersSection .allFiltersWrapDiv .checkboxFiltersWrap .wrapEachFilterButton .buttonWrap {
           display: flex;
           flex-direction: row;
@@ -20394,6 +20395,8 @@ body .course-item-hover {
   .filterVectorMobile {
     display: unset;
     margin: auto auto auto 23px; }
+  .vectorUp {
+    transform: rotate(180deg); }
   .filtersSection .allFiltersWrapDiv {
     display: none; }
   .openFiltersMenu {

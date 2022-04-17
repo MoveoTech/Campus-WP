@@ -82,12 +82,13 @@ $(document).click(function(event) {
     if (!filtergroup.is(event.target) && !filtergroup.has(event.target).length && !filtersInputs.is(event.target) && !filtersInputs.has(event.target).length) {
         filtersInputs.hide();
     }
-
     /** hiding input container when clicking on other filter group */
     if (filtergroup.is(event.target) || filtergroup.has(event.target).length || filtersInputs.is(event.target) || filtersInputs.has(event.target).length) {
 
         let popupMenuDiv = event.target.closest(".wrapEachFiltergroup").querySelector(".inputsContainer");
-
+if(filtersInputs.is(event.target) || filtersInputs.has(event.target).length){
+    popupMenuDiv.style.display = "none";
+}
         filtersInputs.each((index, element) => {
             if(element !== popupMenuDiv){
                 element.style.display = "none";
@@ -378,6 +379,9 @@ function filterByTagEvent(){
     /** click event - targeting each input for filtering */
     $('.filtersSection .filtersInputWeb').on('click', function (event) {
 
+if($(event.target).hasClass("extraFilterCheckbox")){
+    return;
+}
 
         let filterData = {"search": {}};
         let tagArray = {};
@@ -450,7 +454,6 @@ function filterByTagEvent(){
             if(languageArray.length > 0) {
                 filterData['search']['language'] = languageArray;
             }
-
             filterCoursesAjax(filterData)
         } else {
             filterData = [];
@@ -541,7 +544,6 @@ function filterByTagMobile(){
             if(languageArray.length > 0) {
                 filterData['search']['language'] = languageArray;
             }
-            console.log("filterData", filterData);
             filterCoursesAjax(filterData);
             closingOverlay();
         } else {
@@ -663,8 +665,15 @@ function openCheckboxEvent() {
 
     /** click event - targeting each checkbox to open */
     $('.wrapEachFiltergroup').on('click', function (event) {
-        let popupMenuDiv = event.target.closest(".wrapEachFiltergroup").querySelector(".inputsContainer")
+        let popupMenuDiv = event.target.closest(".wrapEachFiltergroup").querySelector(".inputsContainer");
         $(popupMenuDiv).toggle();
-
+        rotateVectorFilterGroup();
     });
+}
+function rotateVectorFilterGroup(){
+    if($(window).width() <= 768){
+        let buttontag = $(event.target).closest('.wrapEachFilterTag').children().children(".filterVectorMobile")[0];
+        $(buttontag).toggleClass("vectorUp"); // TODO changing toggle to remove and add class with if and calling the function in al the relevant events
+
+    }
 }

@@ -138,6 +138,7 @@
         background: #F9F9F9;
         border-radius: 10px;
         margin: 0 5px;
+        cursor: pointer;
 
         .buttonWrap{
           display: flex;
@@ -363,9 +364,10 @@
   }
   .filterVectorMobile{
     display: unset;
-    //margin-left: 23px;
-    //width: 19px;
     margin: auto auto auto 23px;
+  }
+  .vectorUp{
+    transform: rotate(180deg);
   }
   .filtersSection{
     .allFiltersWrapDiv {
