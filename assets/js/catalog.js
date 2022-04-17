@@ -55,6 +55,7 @@ $(document).ready(function () {
         jQuery(".filters-mobile-menu-popup").toggleClass('active');
         if(!jQuery(".bg-overlay")[0].classList.contains('active') && jQuery(".filters-mobile-menu-popup")[0].classList.contains('active')) {
             jQuery(".bg-overlay").addClass('active');
+            jQuery(".bg-overlay").addClass('filterMenuOverlay');
             jQuery(".header_section").addClass('menu-open');
         } else if(!jQuery(".filters-mobile-menu-popup")[0].classList.contains('active')) {
             jQuery(".bg-overlay").removeClass('active');
@@ -65,11 +66,7 @@ $(document).ready(function () {
     });
 
 $(".bg-overlay").click(function () {
-    jQuery(".bg-overlay").removeClass('active');
-    jQuery(".header_section").removeClass('menu-open');
-    jQuery(".filters-mobile-menu-popup").removeClass('active');
-    jQuery(".mobile-menu-popup").removeClass('active');
-    jQuery('html').toggleClass('menu_open');
+    closingOverlay()
 })
 
 });
@@ -100,6 +97,15 @@ $(document).click(function(event) {
 });
 /** end of jquery */
 
+
+function closingOverlay(){
+    jQuery(".bg-overlay").removeClass('active');
+    jQuery(".bg-overlay").removeClass('filterMenuOverlay');
+    jQuery(".header_section").removeClass('menu-open');
+    jQuery(".filters-mobile-menu-popup").removeClass('active');
+    jQuery(".mobile-menu-popup").removeClass('active');
+    jQuery('html').toggleClass('menu_open');
+}
 
 function slickStripeForMobile() {
     if($(window).width() <= 768){
@@ -535,12 +541,14 @@ function filterByTagMobile(){
             if(languageArray.length > 0) {
                 filterData['search']['language'] = languageArray;
             }
-            filterCoursesAjax(filterData)
+            console.log("filterData", filterData);
+            filterCoursesAjax(filterData);
+            closingOverlay();
         } else {
             filterData = [];
-            filterCoursesAjax(filterData)
+            filterCoursesAjax(filterData);
+            closingOverlay();
         }
-
     })}
 /** End of function filterByTagMobile */
 
