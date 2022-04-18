@@ -1,6 +1,37 @@
 $= jQuery.noConflict();
 
+
+
+
 $(document).ready(function () {
+
+    let coursesArray = [
+        {   academic_institution: "מערך הסייבר הלאומי",
+            duration: "4-5 שעות בשבוע | 10 שבועות",
+            id: "4",
+            image: "http://localhost:8000/app/uploads/2018/12/Main-Icon.png",
+            language: "עברית , Hebrew  , العبرية",
+            marketing_tags: [],
+            name: "Self.py - הדרך שלך ללמוד פייתון",
+            order: "362",
+            permalink: "course-v1-cs-gov-cs-selfpy101",
+            tags: []
+        },
+        {   academic_institution: "מערך הסייבר הלאומי",
+            duration: "4-6 שעות בשבוע | 6 שבועות",
+            id: "131",
+            image: "http://localhost:8000/app/uploads/2019/11/עותק-של-course-nextpy.png",
+            language: "עברית , Hebrew  , العبرية",
+            marketing_tags: [],
+            name: "Next.py - הצעד הבא שלך בפייתון",
+            order: "358",
+            permalink: "cs-gov-cs-nextpy102",
+            tags: []
+        }
+    ];
+    console.log(coursesArray);
+
+
     let params = new URLSearchParams(document.location.search);
 
     /** Mark selected checkboxes */
