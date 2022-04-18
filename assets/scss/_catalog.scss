@@ -328,10 +328,6 @@
       }
     }
   }
-  .filters-mobile-menu-popup{
-    //overflow-y: auto;
-    //border: 1px solid red;
-  }
   #filtersSectionMobile{
     position: relative;
     height: 87%;
@@ -437,7 +433,72 @@
 }
 
 
+/* course result presentation */
+#coursesBox{
+  flex-direction: column;
+}
+.courseResultCard {
+  display: flex;
 
+  .courseImage {
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    max-width: 253px;
+    height: 124px;
+    border-radius: 10px;
+    box-shadow: 0 5px 10px rgba(40, 40, 40, 0.2);
+  }
+
+  .itemContent {
+    margin: auto 20px auto auto;
+
+    h3 {
+      text-overflow: ellipsis;
+      overflow: hidden;
+      height: 58px;
+      font-size: 22px;
+      font-weight: 600;
+      line-height: 29px;
+      text-align: right;
+      -webkit-line-clamp: 2;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+
+      a {
+        color: #000000;
+      }
+    }
+
+    p.institution-name {
+      -webkit-font-smoothing: antialiased;
+      height: 21px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+      font-size: 16px;
+      font-weight: 300;
+      line-height: 21px;
+      text-align: right;
+      opacity: 50%;
+      margin: 0;
+    }
+
+    p.course-progress {
+      margin-top: 7px;
+      margin-bottom: 9px;
+      font-weight: bold;
+      font-size: 18px;
+      line-height: 24px;
+      text-align: right;
+
+      a {
+        color: #91C653;
+      }
+    }
+  }
+}
 
 
 

@@ -20428,3 +20428,55 @@ body .course-item-hover {
     font-size: 16px; }
     .catalog-banner .hero-search-form .search-field.form-control::placeholder {
       font-size: 16px; } }
+
+/* course result presentation */
+#coursesBox {
+  flex-direction: column; }
+
+.courseResultCard {
+  display: flex; }
+  .courseResultCard .courseImage {
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    max-width: 253px;
+    height: 124px;
+    border-radius: 10px;
+    box-shadow: 0 5px 10px rgba(40, 40, 40, 0.2); }
+  .courseResultCard .itemContent {
+    margin: auto 20px auto auto; }
+    .courseResultCard .itemContent h3 {
+      text-overflow: ellipsis;
+      overflow: hidden;
+      height: 58px;
+      font-size: 22px;
+      font-weight: 600;
+      line-height: 29px;
+      text-align: right;
+      -webkit-line-clamp: 2;
+      display: -webkit-box;
+      -webkit-box-orient: vertical; }
+      .courseResultCard .itemContent h3 a {
+        color: #000000; }
+    .courseResultCard .itemContent p.institution-name {
+      -webkit-font-smoothing: antialiased;
+      height: 21px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+      font-size: 16px;
+      font-weight: 300;
+      line-height: 21px;
+      text-align: right;
+      opacity: 50%;
+      margin: 0; }
+    .courseResultCard .itemContent p.course-progress {
+      margin-top: 7px;
+      margin-bottom: 9px;
+      font-weight: bold;
+      font-size: 18px;
+      line-height: 24px;
+      text-align: right; }
+      .courseResultCard .itemContent p.course-progress a {
+        color: #91C653; }

@@ -1,8 +1,5 @@
 $= jQuery.noConflict();
 
-
-
-
 $(document).ready(function () {
 
     let coursesArray = [
@@ -11,7 +8,7 @@ $(document).ready(function () {
             id: "4",
             image: "http://localhost:8000/app/uploads/2018/12/Main-Icon.png",
             language: "עברית , Hebrew  , العبرية",
-            marketing_tags: [],
+            marketing_tags: ['20-30 שעות', 'אדריכלות', 'הנדסת חומרים', 'אבטחת מידע', 'הנדסת חשמל'],
             name: "Self.py - הדרך שלך ללמוד פייתון",
             order: "362",
             permalink: "course-v1-cs-gov-cs-selfpy101",
@@ -22,15 +19,14 @@ $(document).ready(function () {
             id: "131",
             image: "http://localhost:8000/app/uploads/2019/11/עותק-של-course-nextpy.png",
             language: "עברית , Hebrew  , العبرية",
-            marketing_tags: [],
+            marketing_tags: ['20-30 שעות', 'הנדסת חומרים' ,'הנדסת חשמל','אבטחת מידע', 'אדריכלות'],
             name: "Next.py - הצעד הבא שלך בפייתון",
             order: "358",
             permalink: "cs-gov-cs-nextpy102",
             tags: []
         }
     ];
-    console.log(coursesArray);
-
+    appendFilteredCourses(coursesArray);
 
     let params = new URLSearchParams(document.location.search);
 
@@ -198,11 +194,94 @@ function slickStripeForMobile() {
 
 
 
-//
-// function openFiltersMobileMenu() {
-//
-//
-// }
+function appendFilteredCourses(coursesData) {
+    console.log("inside func",coursesData);
+
+    let coursesBox = document.getElementById("coursesBox");
+    let output = document.createElement("div");
+
+    output.id = 'coursesBox';
+    output.classList.add('row');
+    output.classList.add('output-courses');
+    output.classList.add('coursesResults');
+
+    coursesData.forEach(item =>{
+        let id = item.id;
+        let name = item.name;
+        let academicInstitution = item.academic_institution ? item.academic_institution : '';
+        let tags = getDesktopTags(item.marketing_tags);
+        let image = item.image;
+        let duration = item.duration;
+        let permalink = item.permalink ? item.permalink : '';
+        let url = 'course/' + permalink;
+        // let haveYoutube = item.haveyoutube;
+        let course_attrs = 'col-xs-12 col-md-6 col-xl-4 course-item-with-border';
+        let institutionName = '';
+        if(academicInstitution){
+            institutionName = '<p class="course-item-org">'+ academicInstitution +' </p>'
+        }
+
+        let temp = document.createElement("div");
+        temp.innerHTML =
+            '<div class="courseResultCard" data-id="'+ id +'">'+
+            '<div class="courseImage" style="background-image: url('+item.image+');">'+
+            '<a href="'+ url +'"></a>'+
+            '</div>'+
+            '<div class="itemContent"">'+
+            '<h3 ><a href="'+ url +'">'+item.name+'</a></h3>'
+            +institutionName+
+            '</div>'+
+            '<div class=" tags-div">'+tags+ '</div>'+
+            '</div>'
+            // '<div class="courseResultCard '+ course_attrs +'" data-id="'+ id +'">'+
+            // '<div class="courseImage" style="background-image: url('+item.image+');">'+
+            // '<a href="'+ url +'"></a>'+
+            // '</div>'+
+            // '<div class="itemContent"">'+
+            // '<h3 ><a href="'+ url +'">'+item.name+'</a></h3>'
+            // +institutionName+
+            // ' </div>'+
+            // '<div class=" tags-div">'+tags+ '</div>'+
+            // '<div class="course-item-hover '+ item.id + id +'">'+
+            // '<a href="'+ url +'">'+
+            // '<div class="course-img" style="background-image: url('+item.image+');"></div>'+
+            // '<div class="item-content"">'+
+            // '<h3 >'+item.name+'</h3>'+
+            // '<p >'+institutionName+'</p>'+
+            // '</div>'+
+            // '</a>'+
+            // '</div>'+
+            // '<div class="course-popup-modal mobile-course-popup'+ item.id + id +'">'+
+            // '<div class="popup-header">'+
+            // '<span class="course-popup-close'+ item.id + id +' close">&times;</span>'+
+            // '</div>'+
+            // '<div class="course-content">'+
+            // '<div class="course-img" style="background-image: url('+item.image+');"></div>'+
+            // '<div class="course-details">'+
+            // '<div class="course-header"">'+
+            // '<h3 ><a href="'+ url +'">'+item.name+'</a></h3>'+
+            // '<p >'+academicInstitution+'</p>'+
+            // '</div>'+
+            // '<div class="tags-div">'+ hoverTags +'</div>'+
+            // '<div class="details">'+
+            // '<span>'+ item.duration +'</span>'+
+            // '</div>'+
+            // '</div>'+
+            // '</div>'+
+            // '<div class="popup-footer">'+
+            // '<a href="'+ url +'"><span>'+ item.button_text +'</span></a>'+
+            // '</div>'+
+            // '</div>';
+            //
+            // '</div>'
+
+        output.append(temp)
+    });
+    coursesBox.replaceWith(output)
+
+}
+
+
 
 /** Ido made a new function for appending */
 // function appendFilteredCourses(coursesData) {

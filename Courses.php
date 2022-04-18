@@ -28,7 +28,7 @@ if($url_params){
     $params = getPodsFilterParams($filters);
 } else {
     $params = [
-        'limit'   => 1,
+        'limit'   => 5,
         'orderBy' => 't.order DESC',
     ];
 }
@@ -107,35 +107,35 @@ if (wp_is_mobile()) {
             </div>
             <div class="catalogWrap">
 
-<!--                <div id="coursesBox" class="row output-courses coursesResults">-->
+                <div id="coursesBox" class="row output-courses coursesResults">
 
 <!--                    . START Number of match courses OR No Results -->
 
-<!--                    --><?php //if ( $no_results_found ) { ?>
-<!--                        <div class="sum-all-course col-lg-12" role="alert">-->
-<!--                            <h2 class="wrap-sum">-->
-<!--                                <span>'--><?//= __( 'No suitable courses found for', 'single_corse' ) ?><!--</span>-->
-<!--                                <span class="">"--><?//= fixXSS( $_GET['text_s'] ) ?><!--"</span>-->
-<!--                            </h2>-->
-<!--                        </div>-->
-<!--                        --><?php //if ( $form_short_code_no_result = get_field( 'form_short_code_no_result', 'options' ) ) { ?>
-<!--                            <div class="col-12 lokking-for-form no-result-form">--><?//= $form_short_code_no_result ?><!--</div>-->
-<!--                        --><?php //} }
-//                    else {
-//
-//                        while ($courses->fetch()) {
-//                            get_template_part('template', 'parts/Courses/course-card',
-//                                array(
-//                                    'args' => array(
-//                                        'course' => $courses,
-//                                        'attrs' => $course_attrs,
-//                                    )
-//                                ));
-//                        } }?>
+                    <?php if ( $no_results_found ) { ?>
+                        <div class="sum-all-course col-lg-12" role="alert">
+                            <h2 class="wrap-sum">
+                                <span>'<?= __( 'No suitable courses found for', 'single_corse' ) ?></span>
+                                <span class="">"<?= fixXSS( $_GET['text_s'] ) ?>"</span>
+                            </h2>
+                        </div>
+                        <?php if ( $form_short_code_no_result = get_field( 'form_short_code_no_result', 'options' ) ) { ?>
+                            <div class="col-12 lokking-for-form no-result-form"><?= $form_short_code_no_result ?></div>
+                        <?php } }
+                    else {
+
+                        while ($courses->fetch()) {
+                            get_template_part('template', 'parts/Courses/course-card',
+                                array(
+                                    'args' => array(
+                                        'course' => $courses,
+                                        'attrs' => $course_attrs,
+                                    )
+                                ));
+                        } }?>
 
 <!--                    . END Match Results -->
 
-<!--                </div>-->
+                </div>
 
                 <div class="catalogStripeWrap">
 
