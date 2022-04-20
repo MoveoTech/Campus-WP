@@ -75,6 +75,9 @@ $(document).ready(function () {
             jQuery(".bg-overlay").removeClass('active');
             jQuery(".header_section").removeClass('menu-open');
 
+            })
+        } else if (jQuery('.catalog-courses-stripe').slick()){
+            jQuery('.catalog-courses-stripe').slick('unslick');
         }
         jQuery('html').toggleClass('menu_open');
     });
