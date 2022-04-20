@@ -577,7 +577,6 @@ function filterCoursesAjax(filterData) {
 
             appendUrlParams(responseData['filters'])
             if(responseData['courses'].length > 0) {
-                console.log("responseData", responseData);
                 appendFilteredCourses(responseData['courses'])
             } else {
                 haveNoResults()
