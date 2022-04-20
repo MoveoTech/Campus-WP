@@ -174,6 +174,10 @@ function slickStripeForMobile() {
         $('.checkbox-filter-search').removeClass('filtersInputWeb');
         $('.checkbox-filter-search').addClass('.checkboxFilterMobile');
 
+        /** changing classes for tags mobile in result course card */
+        $('.hiddenCourseTagMobile').css("display"," none");
+
+
 
     } else if (jQuery('.catalog-courses-stripe').slick()){
         jQuery('.catalog-courses-stripe').slick('unslick');

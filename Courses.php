@@ -89,7 +89,7 @@ if(count($oneOrMoreMatches->rows) === 0 && count($courses->rows) === 0){
 
 <div class="wrap-search-page-course <?= $my_class ?>">
     <div class="container">
-        <div class="row justify-content-between">
+        <div class="row justify-content-between catalogPageBox">
             <div class="filtersSection">
                 <div class="allFiltersWrapDiv">
                     <?php

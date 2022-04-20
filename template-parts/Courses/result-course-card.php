@@ -29,16 +29,37 @@ $attrs['class'] .= $attrs['hybrid_course'] ? ' hybrid_course' : '';
     if($institution_name) {?>
         <p class="institutionName"><?= $institution_name ?> </p>
     <?php } ?>
-    <div class="tagsDiv">
+
         <?php
-        if ( $marketing_feature ):
+        if ( $marketing_feature ):?>
+        <div class="tagsDiv">
+        <?php
+        if (count($marketing_feature) >= 3) {
+
+            $i=0;
+            foreach ($marketing_feature as $tagInfo){
+                $tag = getFieldByLanguage($tagInfo['name'], $tagInfo['english_name'], $tagInfo['arabic_name'], $sitepress->get_current_language());
+                $i++;
+                if($i<=2){
+                ?>
+                <span class='courseTag'><p><?= $tag ?></p></span> <?php
+            } else {
+                    ?>
+                    <span class='courseTag hiddenCourseTagMobile'><p><?= $tag ?></p></span> <?php
+                }
+
+            }?>
+            <span class="courseTag extra-tags">+</span>
+
+            <?php } else{
             $tags_array = [];
             foreach ($marketing_feature as $tagInfo) {
                 $tag = getFieldByLanguage($tagInfo['name'], $tagInfo['english_name'], $tagInfo['arabic_name'], $sitepress->get_current_language());?>
                 <span class='courseTag'><p><?= $tag ?></p></span>
-        <?php } ?>
+            <?php }
+        } ?>
+        </div>
         <?php endif; ?>
-    </div>
     <p class="courseDuration"><?= $duration ?></p>
     </div>
 </div>
