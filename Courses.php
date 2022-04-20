@@ -124,7 +124,7 @@ if (wp_is_mobile()) {
                     else {
 
                         while ($courses->fetch()) {
-                            get_template_part('template', 'parts/Courses/course-card-new',
+                            get_template_part('template', 'parts/Courses/result-course-card',
                                 array(
                                     'args' => array(
                                         'course' => $courses,
