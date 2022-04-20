@@ -267,6 +267,18 @@ function markCheckboxes(params) {
     let entries = params.entries();
     let filterItems = $('.checkbox-filter-search');
 
+    // /** Check if has params in the url */
+    // if(!entries.next().value) {
+    //     let currentUrl = window.location.href;
+    //     let url = new URL(currentUrl);
+    //     let key = 'language';
+    //     let value = 'English';
+    //     url.searchParams.set(key, value);
+    //     window.history.pushState({}, '', url);
+    //     let newParams = new URLSearchParams(window.location.search);
+    //     entries = newParams.entries();
+    // }
+
     for (let entry of entries) {
         if(entry[0] == 'text_s') {
             $('.search-field').val(entry[1]);
@@ -295,7 +307,7 @@ function markCheckboxes(params) {
                     let itemValues = entry[1].split(",");
 
                     for(let item of itemValues){
-                        if(englishValue === item) {
+                        if(englishValue.toLowerCase() === item.toLowerCase()) {
                             $(`#${id}`).prop('checked', true)
                         }
                     }

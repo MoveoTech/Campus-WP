@@ -20,13 +20,28 @@ $components = parse_url($url);
 if($components['query']){
     parse_str($components['query'], $url_params);
 }
-
 if($url_params){
     $filters = getFiltersArray($url_params);
     $params = getPodsFilterParams($filters);
 } else {
+//    $current_lang = $sitepress->get_current_language();
+//    if($current_lang === 'he'){
+//        $default_lang = 'Hebrew';
+//    } else if($current_lang === 'en'){
+//        $default_lang = 'English';
+//    } else if($current_lang === 'ar'){
+//        $default_lang = 'Arabic';
+//    }
+//    $url = $url.(parse_url($url, PHP_URL_QUERY) ? '&' : '?').'language=' . $default_lang;
+//    $components = parse_url($url);
+//    if($components['query']){
+//        parse_str($components['query'], $url_params);
+//    }
+//    $filters = getFiltersArray($url_params);
+//    $params = getPodsFilterParams($filters);
     $params = [
         'limit'   => 27,
+//        'where'   => 't.language LIKE "%'. $default_lang .'%" ',
         'orderBy' => 't.order DESC',
     ];
 }
