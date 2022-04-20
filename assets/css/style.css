@@ -20395,8 +20395,6 @@ body .course-item-hover {
   .filterVectorMobile {
     display: unset;
     margin: auto auto auto 23px; }
-  .vectorUp {
-    transform: rotate(180deg); }
   .filtersSection .allFiltersWrapDiv {
     display: none; }
   .openFiltersMenu {

@@ -56,9 +56,7 @@ if($count == '0'){
     $no_results_found = true;
 }
 
-if (wp_is_mobile()) {
-    get_filters_menu($menuFilters);
-}
+
 
 ?>
 
@@ -161,6 +159,9 @@ if (wp_is_mobile()) {
 </div>
 
 <?php
+if (wp_is_mobile()) {
+    get_filters_menu($menuFilters);
+}
 function get_filters_menu($menuFilters) {
 
     $encoded_path = urlencode($_SERVER['REQUEST_URI']);

@@ -21,7 +21,6 @@ jQuery(document).ready(function () {
     })
     jQuery('.courses-stripe').on('afterChange', function (event) {
         const id = event.target.id
-        console.log("ttttt id : ", id)
         mouseHoverOnCourse()
         getCoursesAjax(id)
         let width = jQuery(document).width();
@@ -635,7 +634,6 @@ function getCoursesDetails(coursesArray) {
         if(courseId) edXIdCoursesArray.push(newCourseId);
     })
     getMyCoursesDataFromWordpress(edXIdCoursesArray);
-    console.log(edXIdCoursesArray);
 }
 
 function getMyCoursesDataFromWordpress(edXIdCoursesArray) {

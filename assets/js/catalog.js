@@ -621,14 +621,6 @@ function openCheckboxEvent() {
     $('.wrapEachFiltergroup').on('click', function (event) {
         let popupMenuDiv = event.target.closest(".wrapEachFiltergroup").querySelector(".inputsContainer");
         $(popupMenuDiv).toggle();
-        rotateVectorFilterGroup();
+
     });
-}
-
-function rotateVectorFilterGroup(){
-    if($(window).width() <= 768){
-        let buttontag = $(event.target).closest('.wrapEachFilterTag').children().children(".filterVectorMobile")[0];
-        $(buttontag).toggleClass("vectorUp"); // TODO changing toggle to remove and add class with if and calling the function in al the relevant events
-
-    }
 }

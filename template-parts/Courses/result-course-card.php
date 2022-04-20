@@ -15,7 +15,6 @@ $marketing_feature = $course->field('marketing_tags') ;
 $url_course_img_slick = $course->display( 'image' );
 $duration = $course->display( 'duration' );
 $course_permalink = $course->display('permalink');
-//$site_url = get_home_url();
 $url = 'course/' . $course_permalink;
 $attrs['class'] .= $attrs['hybrid_course'] ? ' hybrid_course' : '';
 ?>
