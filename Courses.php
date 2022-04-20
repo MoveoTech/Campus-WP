@@ -40,19 +40,35 @@ $form_short_code_sidebar   = $site_settings['form_short_code_sidebar'];
 $course_attrs = array(
     'class' => 'col-xs-12 col-md-6 col-xl-4 course-item-with-border',
 );
-
+//console_log($params);
 /** NEW PARAMETERS */
 $catalog_stripe_id = get_field('catalog_stripe');
 $academic_institutions = pods( 'academic_institution', array('limit'   => -1 ));
 $courses = pods( 'courses', $params, true);
-$count = $courses->total_found();
 $academic_name = cin_get_str('Institution_Name');
 $choose_str = __('Choose Institution', 'single_corse');
 $title_str = cin_get_str( 'filter_courses_title_ajax' );
 $my_class = "ajax_filter";
 $catalog_title = getFieldByLanguage(get_field('catalog_title'), get_field('catalog_english_title'), get_field('catalog_arabic_title'), $sitepress->get_current_language());
 
-if($count == '0'){
+$idArrayOfBestMatches = array();
+$coursesIdArray = [];
+
+$i = 0;
+foreach ($courses->rows as $course) {
+    array_push($idArrayOfBestMatches, $course->id);
+    $coursesIdArray[$i] = $course->id;
+    $i++;
+}
+
+$coursesIDs = implode(',', $coursesIdArray);
+$second_params = getSecondsFiltersParams($filters, $idArrayOfBestMatches);
+
+if($second_params) {
+    $oneOrMoreMatches = pods('courses', $second_params);
+}
+
+if(count($oneOrMoreMatches->rows) === 0 && count($courses->rows) === 0){
     $no_results_found = true;
 }
 
@@ -69,16 +85,7 @@ if (wp_is_mobile()) {
 
     <div class="catalog-banner-content">
         <h1 class="catalog-header" style="color: #ffffff"><?=$catalog_title?></h1>
-
-        <form role="search" method="get" class="hero-search-form" action="<?= esc_url(home_url('/')); ?>" novalidate>
-            <label class="sr-only"><?php _e('Search for:', 'single_corse'); ?></label>
-            <div class="input-group group-search-form">
-                <input type="text" value="<?= get_search_query(); ?>" name="s" class="search-field form-control" placeholder="<?php echo hero_search_placeholder(); ?>" aria-required="true">
-                <span class="input-group-btn">
-                    <button class="search-submit"><?php _e('Search', 'single_corse'); ?></button>
-                </span>
-            </div>
-        </form>
+        <?= get_template_part('templates/hero', 'search') ?>
     </div>
 </div>
 
@@ -105,13 +112,14 @@ if (wp_is_mobile()) {
                 </div>
 
             </div>
-            <div class="catalogWrap">
 
+            <div class="catalogWrap">
+                <div hidden id="catalog_courses" value="<?php print_r($coursesIDs); ?>" ></div>
                 <div id="coursesBox" class="row output-courses coursesResults">
 
-<!--                    . START Number of match courses OR No Results -->
-
+                    <!--. START Number of match courses OR No Results -->
                     <?php if ( $no_results_found ) { ?>
+
                         <div class="sum-all-course col-lg-12" role="alert">
                             <h2 class="wrap-sum">
                                 <span>'<?= __( 'No suitable courses found for', 'single_corse' ) ?></span>
@@ -121,9 +129,10 @@ if (wp_is_mobile()) {
                         <?php if ( $form_short_code_no_result = get_field( 'form_short_code_no_result', 'options' ) ) { ?>
                             <div class="col-12 lokking-for-form no-result-form"><?= $form_short_code_no_result ?></div>
                         <?php } }
-                    else {
 
+                    else {
                         while ($courses->fetch()) {
+
                             get_template_part('template', 'parts/Courses/result-course-card',
                                 array(
                                     'args' => array(
@@ -131,11 +140,33 @@ if (wp_is_mobile()) {
                                         'attrs' => $course_attrs,
                                     )
                                 ));
-                        } }?>
 
-<!--                    . END Match Results -->
+                        }
+                        if($oneOrMoreMatches) {
 
+                            while ($oneOrMoreMatches->fetch()) {
+
+                                get_template_part('template', 'parts/Courses/course-card',
+                                    array(
+                                        'args' => array(
+                                            'course' => $oneOrMoreMatches,
+                                            'attrs' => $course_attrs,
+                                        )
+                                    )
+                                );
+                            }
+                        }
+                    }
+                    ?>
+                    <!--. END Match Results -->
                 </div>
+
+                <?php
+               /** LOAD MORE COURSES BUTTON */
+//                $arialabel_acc = cin_get_str( 'load_more_courses' );
+//                ?>
+<!--                <button id='courses_load_more' class='load-more-wrap' aria-label=--><?//= $arialabel_acc ?><!-- >--><?//= __( 'Load more', 'single_corse' )?><!--</button>-->
+                <?php /** END LOAD MORE COURSES BUTTON */?>
 
                 <div class="catalogStripeWrap">
 
@@ -154,7 +185,6 @@ if (wp_is_mobile()) {
                     ?>
 
                 </div>
-
             </div>
         </div>
     </div>

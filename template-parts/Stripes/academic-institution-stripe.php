@@ -25,7 +25,7 @@ $academic_institutions = pods( 'academic_institution', podsParams($stripe['carou
         <?php
         while ($academic_institutions->fetch()) { // academic_institution Loop
             $thumb = $academic_institutions->display('image');
-            $site_url = get_current_url();
+            $site_url = getHomeUrlWithoutQuery();
             $institution_permalink = $academic_institutions->display('permalink');
             if($thumb){
                 ?>
