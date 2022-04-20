@@ -1,4 +1,6 @@
 jQuery(document).ready(function () {
+    let envURL = env();
+
     let is_rtl = !(jQuery('html[lang = "en-US"]').length > 0);
     let prevSlick = '<button type="button" class="slick-prev slick-button" tabindex="-1" aria-label="' + global_vars.prev_btn_text + '"></button>';
     let nexSlick = '<button type="button" id="slick-next" class="slick-next slick-button " tabindex="-1" aria-label="' + global_vars.next_btn_text + '"></button>';
@@ -7,7 +9,7 @@ jQuery(document).ready(function () {
     // check if user loggedIn
     let edx_user_info = getCookie(global_vars.cookie_name);
     if (edx_user_info) {
-        getMyCourses()
+        getMyCourses();
     }
 
     //Course Card
@@ -270,70 +272,6 @@ jQuery(document).ready(function () {
 
     })
 
-    //my courses slick
-    // jQuery('#myCoursesStripeId').slick({
-    //     lazyLoad: 'ondemand',
-    //     slidesToShow: 4,
-    //     slidesToScroll: 3,
-    //     rtl: is_rtl,
-    //     nextArrow: nexSlick,
-    //     prevArrow: prevSlick,
-    //     speed: 1000,
-    //     infinite: false,
-    //     responsive: [
-    //         {
-    //             breakpoint: 993,
-    //             settings: {
-    //                 speed: 500,
-    //                 slidesToShow: 3,
-    //                 slidesToScroll: 3,
-    //             }
-    //         },
-    //         {
-    //             breakpoint: 768,
-    //             settings: {
-    //                 slidesToShow: 3,
-    //                 slidesToScroll: 3,
-    //                 speed: 500,
-    //                 arrows: false,
-    //             }
-    //         },
-    //         {
-    //             breakpoint: 710,
-    //             settings: {
-    //                 slidesToShow: 3,
-    //                 slidesToScroll: 3,
-    //                 arrows: false,
-    //             }
-    //         },
-    //         {
-    //             breakpoint: 650,
-    //             settings: {
-    //                 slidesToShow: 3,
-    //                 slidesToScroll: 3,
-    //                 arrows: false,
-    //             }
-    //         },
-    //         {
-    //             breakpoint: 600,
-    //             settings: {
-    //                 slidesToShow: 2.5,
-    //                 slidesToScroll: 2,
-    //                 arrows: false,
-    //             }
-    //         },
-    //         {
-    //             breakpoint: 480,
-    //             settings: {
-    //                 speed: 500,
-    //                 slidesToShow: 2.15,
-    //                 slidesToScroll: 2,
-    //                 arrows: false,
-    //             }
-    //         },
-    //     ]
-    // })
-
     //testimonials slick
     jQuery('.testimonials-slider').slick({
         slidesToShow: 3,
@@ -429,7 +367,7 @@ jQuery(document).ready(function () {
     //appending the iframe
     jQuery('.login-item').on('click', function(e) {
         e.preventDefault();
-        jQuery("#login-iframe").append("<iframe id='login-register-iframe' src='https://courses.stage.campus.gov.il/login?next=/dashboard' height='300px' width='300px' title='Login page'></iframe>")
+        jQuery("#login-iframe").append(`<iframe id='login-register-iframe' src='https://courses${envURL}.campus.gov.il/login?next=/dashboard' height='300px' width='300px' title='Login page'></iframe>`)
         jQuery('#login-register-popup .popup').attr('aria-hidden', 'false');
         jQuery("#login-register-popup").addClass('active');
         jQuery('body').css('overflow-y', 'hidden');
@@ -448,7 +386,7 @@ jQuery(document).ready(function () {
     //appending the iframe
     jQuery('.register-item').on('click', function(e) {
         e.preventDefault();
-        jQuery("#register-iframe").append("<iframe id='register-iframe' src='https://courses.stage.campus.gov.il/register?next=/dashboard' height='300px' width='300px' title='Register page'></iframe>")
+        jQuery("#register-iframe").append(`<iframe id='register-iframe' src='https://courses${envURL}.campus.gov.il/register?next=/dashboard' height='300px' width='300px' title='Register page'></iframe>`)
         jQuery('#register-popup .popup').attr('aria-hidden', 'false');
         jQuery("#register-popup").addClass('active');
         jQuery('body').css('overflow-y', 'hidden');
@@ -505,8 +443,6 @@ function getCoursesAjax(id) {
             if(response.success){
                 const data = JSON.parse(response.data);
                 apppendCourses(data, id);
-                // button unable
-                // jQuery(`#${nextButton.id}`).prop('disabled', false);
             }
         })
     }
@@ -592,11 +528,12 @@ function closePopupIfOpen(id) {
 }
 
 function getMyCourses() {
+    let envURL = env();
     let coursesData;
 
     jQuery.ajax({
         method: "GET",
-        url: 'https://courses.campus.gov.il/api/enrollment/v1/enrollment',
+        url: `https://courses${envURL}.campus.gov.il/api/enrollment/v1/enrollment`,
         headers: {
             "Accept": "application/json",
             "Content-Type": "application/json",
@@ -625,12 +562,18 @@ function getMyCourses() {
 
 function getCoursesDetails(coursesArray) {
     let edXIdCoursesArray = [];
-
+    let allNumbers = [0,1,2,3,4,5,6,7,8,9];
+    let newCourseId;
     coursesArray.forEach((item) => {
-        let courseId = item.course_details.course_id;
-        let startIndex = courseId.indexOf(':');
-        let endIndex = courseId.lastIndexOf('+');
-        let newCourseId = courseId.slice(startIndex + 1, endIndex +1);
+      let courseId = item.course_details.course_id;
+      let startIndex = courseId.indexOf(':');
+      let endIndex = courseId.lastIndexOf('+');
+      let indexOfPlus = parseInt(courseId.charAt(endIndex+1));
+       if(allNumbers.includes(indexOfPlus)){
+           newCourseId = courseId.slice(startIndex + 1, endIndex);
+       } else{
+           newCourseId = courseId.slice(startIndex + 1);
+       }
         if(courseId) edXIdCoursesArray.push(newCourseId);
     })
     getMyCoursesDataFromWordpress(edXIdCoursesArray);
@@ -680,8 +623,8 @@ function appendMyCourses(coursesData, id) {
             course_edXId: item.course_id_edx,
             // progress: item.course_details.progress ? item.course_details.progress : '',
         }
-        let url = 'https://courses.campus.gov.il/courses/' + itemData.course_edXId + '/info'; // TODO check the url for KOA -> for koa 'https://courses.koastage.campus.gov.il/courses/' + itemData.course_edXId + '/course/'
-        // let url = 'https://campus.gov.il/course/' + itemData.permalink + '/';
+        let envURL = env();
+        let url = `https://courses${envURL}.campus.gov.il/courses/` + itemData.course_edXId + '/info'; // TODO check the url for KOA -> for koa 'https://courses.koastage.campus.gov.il/courses/' + itemData.course_edXId + '/course/'
         let temp = document.createElement("div");
         temp.className = 'course-stripe-item';
         temp.innerHTML =
@@ -920,4 +863,25 @@ function goalGradient() {
     let goalDiv = document.createElement('div');
     goalDiv.className = 'goal-stripe-gradient';
     jQuery('.goals-slider').children('div.slick-list')[0].append(goalDiv);
+}
+
+function env() {
+    if(document.URL.startsWith("http://campus-test")){
+        envURL = ".localhost"
+        return envURL;
+
+    } else if(document.URL.startsWith("https://stage")){
+        envURL = ".stage"
+
+        return envURL;
+
+    } else if(document.URL.startsWith("https://koaprod")){
+        envURL = ".koaprod"
+        return envURL;
+
+    } else if(document.URL.startsWith("https://campus")){
+        envURL = ""
+        return envURL;
+
+    }
 }

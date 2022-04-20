@@ -39,21 +39,3 @@ function getMyCoursesParams($idsArray){
 
 };
 
-/*
- *     request example
- *
-let data = {
-    'action': 'my_courses',
-    'lang' : getCookie('openedx-language-preference'),
-    'idsArray': ['course-v1:CS+GOV_CS_selfpy101+1_2022','course-v1:moin+GOV_moin_me001+2018_1'],
-}
-
-jQuery.post(my_courses_ajax.ajaxurl, data, function(response){
-    if(response.success){
-        const data = JSON.parse(response.data);
-        console.log(data)
-        // button unable
-    }
-})
-
-*/

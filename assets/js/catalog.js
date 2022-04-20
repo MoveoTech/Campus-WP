@@ -19,11 +19,24 @@ $(document).ready(function () {
 
     /** Click event - reset filtering **/
     $('.resetFilterButton').on('click', function (event) {
+        let currentUrl = window.location.href;
+        let resetUrl = currentUrl.split('?')[0]
+        let url = new URL(resetUrl);
+        window.history.replaceState({}, '', url);
 
         let filtersInputs = $('.checkbox-filter-search');
         filtersInputs.each((index, element) => {
             element.checked = false;
         });
+
+        /** Clear search input fields */
+        $('.search-field').val('');
+
+        /** Get the initial courses */
+        if(currentUrl.includes('?')){
+            getCourses()
+        }
+
         /** removing extra filters **/
         $('.extraFilter').remove();
     });
@@ -70,6 +83,9 @@ $(".bg-overlay").click(function () {
     closingOverlay()
 })
 
+    $('#courses_load_more').on('click', function () {
+        loadCourses()
+    })
 });
 /** End of document ready */
 
@@ -98,7 +114,6 @@ if(filtersInputs.is(event.target) || filtersInputs.has(event.target).length){
     }
 });
 /** end of jquery */
-
 
 function closingOverlay(){
     jQuery(".bg-overlay").removeClass('active');
@@ -165,9 +180,6 @@ function slickStripeForMobile() {
 
 }
 
-
-
-
 function appendFilteredCourses(coursesData) {
 
     let coursesBox = document.getElementById("coursesBox");
@@ -186,8 +198,9 @@ function appendFilteredCourses(coursesData) {
         let image = item.image;
         let duration = item.duration;
         let permalink = item.permalink ? item.permalink : '';
-        let url = 'course/' + permalink;
-        let institutionName = '';
+        let baseUrl = window.location.origin;
+        let url = baseUrl + '/course/' + permalink;
+
         if(academicInstitution){
             institutionName = '<p class="institutionName">'+ academicInstitution +' </p>'
         }
@@ -209,7 +222,7 @@ function appendFilteredCourses(coursesData) {
     });
     coursesBox.replaceWith(output)
 
-}
+} //TODO build template for result course card
 
 
 function getCourseResultTags(tags) {
@@ -234,7 +247,6 @@ function appendUrlParams(filters) {
         window.history.replaceState({}, '', url);
         return;
     }
-
 
     if(filters['search']) {
         let i = 0;
@@ -334,89 +346,13 @@ function filterByTagEvent(){
     /** click event - targeting each input for filtering */
     $('.filtersSection .filtersInputWeb').on('click', function (event) {
 
-if($(event.target).hasClass("extraFilterCheckbox")){
-    return;
-}
+      if($(event.target).hasClass("extraFilterCheckbox")){
+          return;
+      }
 
-        let filterData = {"search": {}};
-        let tagArray = {};
-        let freeSearchData = [];
-        let institutionArray = [];
-        let certificateArray = [];
-        let languageArray = [];
-
-        /** Getting free search value from url params */
-        let params = new URLSearchParams(document.location.search);
-        let searchValue = params.get("text_s");
-        if(searchValue) freeSearchData.push(searchValue);
-
-        /** Getting array of inputs */
-        let filterItems = $('.checkbox-filter-search');
-
-        /** Looping all filter items inputs */
-        filterItems.each((index, element) => {
-            let id = element.id;
-            let type = $(`#${id}`).data('name');
-            let group = $(`#${id}`).data('group');
-            let englishValue = $(`#${id}`).data('value');
-
-            /** Checking if value is checked */
-            if(element.checked) {
-                switch (type) {
-                    case 'tag':
-                        if(tagArray[group]){
-                            tagArray[group].push(englishValue);
-                        } else {
-                            tagArray[group] = [];
-                            tagArray[group].push(englishValue);
-                        }
-
-                        break;
-
-                    case 'institution':
-                        institutionArray.push(englishValue);
-                        break;
-
-
-                    case 'certificate':
-                        certificateArray.push(englishValue);
-                        break;
-
-                    case 'language':
-                        languageArray.push(englishValue);
-                        break;
-                }
-            }
-        });
-
-        /** Checking if any filter checked */
-        if(Object.keys(tagArray).some(() => { return true; }) || institutionArray.length > 0 || certificateArray.length > 0 || languageArray.length > 0 || Object.keys(freeSearchData).some(() => { return true; })) {
-
-            /** checking which filters checked and pushing each array to object (key and values) */
-            if(freeSearchData.length > 0) {
-                filterData['search']['text_s'] = freeSearchData;
-            }
-            if(Object.keys(tagArray).some((k) => { return true; })) {
-                filterData['search']['tags'] = tagArray;
-            }
-            if(institutionArray.length > 0) {
-                filterData['search']['institution'] = institutionArray;
-            }
-
-            if(certificateArray.length > 0) {
-                filterData['search']['certificate'] = certificateArray;
-            }
-            if(languageArray.length > 0) {
-                filterData['search']['language'] = languageArray;
-            }
-            filterCoursesAjax(filterData)
-        } else {
-            filterData = [];
-            filterCoursesAjax(filterData)
-        }
+      getCourses();
 
     })}
-/** End of function filterByTagEvent */
 
 
 /** filterByTagMobile function of catalog  */
@@ -517,7 +453,7 @@ function getFiltersGroups(filterId) {
         'type' : 'moreFilters',
         'dataArray': filterId,
     }
-    jQuery.post(add_filters_to_menu_ajax.ajaxurl, data, function(response){
+    jQuery.post(filter_by_tag_ajax.ajaxurl, data, function(response){
         if(response.success){
             const responseData = JSON.parse(response.data);
             appendMoreFilters(responseData);
@@ -534,6 +470,7 @@ function appendMoreFilters(filterData) {
     let container = document.getElementById(`extraFilter_${filterId}`);
     let groupFilters = filterData.filtersList;
     let currentLanguage =filterData.language;
+    let groupName = filterData.group ? filterData.group : '';
 
     groupFilters.forEach(element => {
 
@@ -551,8 +488,8 @@ function appendMoreFilters(filterData) {
             name = element.arabic_name;
         }
         temp.innerHTML =
-            '<label class="filterTagLabel" for="'+id+'">'+
-            '<input'+ checked +' class="checkbox-filter-search" type="checkbox" data-name="'+dataType+'" data-value="'+urlTitle+'" value="'+name+'" id="'+id+'">'+
+            '<label class="filterTagLabel" for="'+dataType + '_' + id+'">'+
+            '<input'+ checked +' class="checkbox-filter-search" type="checkbox" data-name="'+dataType+'" data-group="'+ groupName +'" data-value="'+urlTitle+'" value="'+name+'" id="'+dataType + '_' + id+'">'+
             '<div class="wrap-term-and-sum tagNameWrap">'+
             '<span class="term-name">'+name+'</span>'+
             '</div>'+
@@ -574,9 +511,9 @@ function filterCoursesAjax(filterData) {
     jQuery.post(filter_by_tag_ajax.ajaxurl, data, function(response){
         if(response.success){
             const responseData = JSON.parse(response.data);
-
             appendUrlParams(responseData['filters'])
             if(responseData['courses'].length > 0) {
+                // loadCourses(responseData['courses'])
                 appendFilteredCourses(responseData['courses'])
             } else {
                 haveNoResults()
@@ -623,4 +560,113 @@ function openCheckboxEvent() {
         $(popupMenuDiv).toggle();
 
     });
+}
+
+/** Load more courses (not in used 14-04-2022) */
+function loadCourses(coursesArray = []) {
+    if(coursesArray.length > 0){
+        appendFilteredCourses(coursesArray)
+    } else {
+        let divLength = $('#coursesBox').children()
+        let courses = $('#catalog_courses').attr('value')
+        let coursesIdArray = courses.split(',')
+
+        if(coursesIdArray.length > 15 && coursesIdArray.length > divLength + 1) {
+            coursesToGet = coursesIdArray.slice(divLength + 1, divLength + 16)
+            let data = {
+                'action': 'stripe_data',
+                'type' : 'courses',
+                'lang' : getCookie('openedx-language-preference'),
+                'idsArray': newCoursesArray,
+            }
+
+            jQuery.post(stripe_data_ajax.ajaxurl, data, function(response){
+                if(response.success){
+                    const data = JSON.parse(response.data);
+                    //TODO needs to finish th function
+                }
+            })
+        }
+    }
+}
+
+function getCourses() {
+    let filterData = {"search": {}};
+    let tagArray = {};
+    let freeSearchData = [];
+    let institutionArray = [];
+    let certificateArray = [];
+    let languageArray = [];
+
+    /** Getting free search value from url params */
+    let params = new URLSearchParams(document.location.search);
+    let searchValue = params.get("text_s");
+    if(searchValue) freeSearchData.push(searchValue);
+
+    /** Getting array of inputs */
+    let filterItems = $('.checkbox-filter-search');
+
+    /** Looping all filter items inputs */
+    filterItems.each((index, element) => {
+        let id = element.id;
+        let type = $(`#${id}`).data('name');
+        let group = $(`#${id}`).data('group');
+        let englishValue = $(`#${id}`).data('value');
+
+        /** Checking if value is checked */
+        if(element.checked) {
+            switch (type) {
+                case 'tag':
+                    if(tagArray[group]){
+                        tagArray[group].push(englishValue);
+                    } else {
+                        tagArray[group] = [];
+                        tagArray[group].push(englishValue);
+                    }
+
+                    break;
+
+                case 'institution':
+                    institutionArray.push(englishValue);
+                    break;
+
+
+                case 'certificate':
+                    certificateArray.push(englishValue);
+                    break;
+
+                case 'language':
+                    languageArray.push(englishValue);
+                    break;
+            }
+        }
+    });
+
+    /** Checking if any filter checked */
+    if(Object.keys(tagArray).some(() => { return true; }) || institutionArray.length > 0 || certificateArray.length > 0 || languageArray.length > 0 || Object.keys(freeSearchData).some(() => { return true; })) {
+
+        /** checking which filters checked and pushing each array to object (key and values) */
+        if(freeSearchData.length > 0) {
+            filterData['search']['text_s'] = freeSearchData;
+        }
+        if(Object.keys(tagArray).some((k) => { return true; })) {
+            filterData['search']['tags'] = tagArray;
+        }
+        if(institutionArray.length > 0) {
+            filterData['search']['institution'] = institutionArray;
+        }
+
+        if(certificateArray.length > 0) {
+            filterData['search']['certificate'] = certificateArray;
+        }
+        if(languageArray.length > 0) {
+            filterData['search']['language'] = languageArray;
+        }
+
+        filterCoursesAjax(filterData)
+    } else {
+        filterData = [];
+        filterCoursesAjax(filterData)
+    }
+
 }

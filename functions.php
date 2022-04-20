@@ -73,26 +73,26 @@ function set_user_default_language() {
 
     if($get_language == 'ar') {
         if(strpos($url, "en") != false)
-            redirect(str_replace("en", "ar", $current_url));
+            redirect(replace_first_str("en", "ar", $current_url));
 
         if(strpos($url, "ar") == false)
-            redirect(str_replace($url, $url . $get_language . '/' , $current_url));
+            redirect(replace_first_str($url, $url . $get_language . '/' , $current_url));
     }
 
     if($get_language == 'en') {
         if(strpos($url, "ar") != false)
-            redirect(str_replace("ar", "en", $current_url));
+            redirect(replace_first_str("ar", "en", $current_url));
 
         if(strpos($current_url, "en/") == false)
-            redirect(str_replace($url, $url . $get_language . '/' , $current_url));
+            redirect(replace_first_str($url, $url . $get_language . '/' , $current_url));
     }
 
     if($get_language == 'he') {
         if(strpos($url, "ar") != false)
-            redirect(str_replace("ar", "", $current_url));
+            redirect(replace_first_str("ar", "", $current_url));
 
         if(strpos($url, "en") != false)
-            redirect(str_replace("en", "", $current_url));
+            redirect(replace_first_str("en", "", $current_url));
     }
 
 }
@@ -120,13 +120,11 @@ function style_of_campus_enqueue() {
 	wp_enqueue_script( 'bootstrap_js', get_bloginfo( 'stylesheet_directory' ) . '/assets/js/bootstrap.min.js' );
     wp_enqueue_script('search_js', get_bloginfo( 'stylesheet_directory' ) . '/assets/js/search.js', array('jquery'));
     wp_enqueue_script('catalog_js', get_bloginfo( 'stylesheet_directory' ) . '/assets/js/catalog.js', array('jquery'));
-    wp_enqueue_script('catalogAddon_js', get_bloginfo( 'stylesheet_directory' ) . '/assets/js/catalogAddon.js', array('jquery'));
     wp_enqueue_script('home_page_js', get_bloginfo( 'stylesheet_directory' ) . '/assets/js/home_page.js', array('jquery'));
     wp_localize_script('home_page_js', 'stripe_data_ajax', array('ajaxurl' => admin_url('admin-ajax.php')));
     wp_localize_script('home_page_js', 'my_courses_ajax', array('ajaxurl' => admin_url('admin-ajax.php')));
     //filtering tags ajax call
     wp_localize_script('catalog_js', 'filter_by_tag_ajax', array('ajaxurl' => admin_url('admin-ajax.php')));
-    wp_localize_script('catalogAddon_js', 'add_filters_to_menu_ajax', array('ajaxurl' => admin_url('admin-ajax.php')));
 
 	wp_localize_script( 'ready_js', 'global_vars', array(
 			'link_to_enrollment_api'        => get_field( 'link_to_enrollment_api', 'option' ),
@@ -1405,6 +1403,9 @@ function getPodsFilterParams($filters) {
 
     $sql = array();
 
+    /** GET ONLY COURSES THAT ARE NOT HIDDEN */
+    $sql[] = 't.hide_in_site=0';
+
     if($filters['search']['text_s']){
             $search_value = $filters['search']['text_s'][0];
             $sqlSearch = array();
@@ -1467,29 +1468,32 @@ function getPodsFilterParams($filters) {
 
         foreach($tags_object as $group) {
             $sqlGroupTags = array();
+            $havingSql = array();
 
             foreach ($group  as $tag){
                 $sqlGroupTags[] = ' tags.name LIKE "%'.$tag.'%" ';
                 $sqlGroupTags[] = ' tags.english_name LIKE "%'.$tag.'%" ';
                 $sqlGroupTags[] = ' tags.arabic_name LIKE "%'.$tag.'%" ';
+                $havingSql[] = ' tags_id LIKE "%,' . $tag .',%" ';
             }
-
-            $sqlTags[] = implode('OR', $sqlGroupTags) ;
+            $havOr[] =  implode('OR', $havingSql) ;
+            $sqlTags[] ="(" . implode('OR', $sqlGroupTags) . ")" ;
         }
 
-        $tagsQuery ="(" . implode('AND', $sqlTags) . ")";
+        $tagsQuery = implode(' OR ', $sqlTags) ;
+        $having =  implode(' AND ', $havOr)  ;
         $sql[] = $tagsQuery;
     };
-
-    /** GET ONLY COURSES THAT ARE NOT HIDDEN */
-    $sql[] = '(t.hide_in_site=0)';
 
     $where = implode(" AND ", $sql);
     $order = "t.order DESC";
 
     $params = array(
+        'select'=> '`t`.*, concat(",",group_concat(`tags`.`english_name` SEPARATOR ","), ",") as `tags_id`',
         'limit' => -1,
         'where'=>$where,
+        'groupby'=> 't.id',
+        'having'=> $having,
         'orderby'=> $order
     );
     return $params;
@@ -1571,10 +1575,10 @@ function getSecondsFiltersParams($filters, $idArray) {
                 $sqlGroupTags[] = ' tags.arabic_name LIKE "%'.$tag.'%" ';
             }
 
-            $sqlTags[] = implode('OR', $sqlGroupTags) ;
+            $sqlTags[] ="(" . implode('OR', $sqlGroupTags) . ")" ;
         }
 
-        $tagsQuery ="(" . implode('OR', $sqlTags) . ")";
+        $tagsQuery = implode(' OR ', $sqlTags) ;
         $sql[] = $tagsQuery;
     };
 
@@ -1643,4 +1647,18 @@ function getFiltersArray($paramsArray) {
 
         return $filters;
     }
+}
+
+function replace_first_str($search_str, $replacement_str, $src_str){
+    return (false !== ($pos = strpos($src_str, $search_str))) ? substr_replace($src_str, $replacement_str, $pos, strlen($search_str)) : $src_str;
+}
+
+function getHomeUrlWithoutQuery(): string {
+    $home_url = get_home_url();
+    if($home_url[-1] == '/') {
+        $site_url = $home_url;
+    } else {
+        $site_url = $home_url . '/';
+    }
+    return $site_url;
 }
