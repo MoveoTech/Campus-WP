@@ -1547,3 +1547,34 @@ footer .footer-section{
         }
     }
 }
+
+/* mobile menu filter */
+
+.openFiltersMenu{
+    left: unset;
+    right: 30px;
+    top: 219px;
+}
+
+.filters-mobile-menu-popup{
+    transform: translateX(135%);
+    &.active{
+        transform: translateX(34%);
+    }
+}
+
+/* mobile menu filter - media query */
+@media (max-width: 768px) {
+    .filterVectorMobile{
+        margin: auto 23px auto auto;
+    }
+
+.inputsContainer{
+    margin: 0 0 0 28px;
+    padding: 0;
+    .filterInput .filterTagLabel .tagNameWrap .term-name{
+        padding-left: 10px;
+        padding-right: 0;
+    }
+}
+}

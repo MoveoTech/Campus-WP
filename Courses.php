@@ -10,7 +10,9 @@
 <?php
 
 global $site_settings, $field, $wp_query, $sitepress, $filter_tags;
+$current_language = $sitepress->get_current_language();
 
+$menuFilters = get_field('filters');
 /**
  * CHECK THE QUERY PARAMS
  */
@@ -26,7 +28,7 @@ if($url_params){
     $params = getPodsFilterParams($filters);
 } else {
     $params = [
-        'limit'   => 27,
+        'limit'   => 5,
         'orderBy' => 't.order DESC',
     ];
 }
@@ -70,6 +72,8 @@ if(count($oneOrMoreMatches->rows) === 0 && count($courses->rows) === 0){
     $no_results_found = true;
 }
 
+
+
 ?>
 
 <div class="catalog-banner">
@@ -81,7 +85,6 @@ if(count($oneOrMoreMatches->rows) === 0 && count($courses->rows) === 0){
         <h1 class="catalog-header" style="color: #ffffff"><?=$catalog_title?></h1>
         <?= get_template_part('templates/hero', 'search') ?>
     </div>
-
 </div>
 
 <div class="wrap-search-page-course <?= $my_class ?>">
@@ -90,18 +93,24 @@ if(count($oneOrMoreMatches->rows) === 0 && count($courses->rows) === 0){
             <div class="filtersSection">
                 <div class="allFiltersWrapDiv">
                     <?php
-                    get_template_part('template', 'parts/Filters/filters-section',
-                        array(
-                            'args' => array(
-                                'academic_filter' => $academic_institutions->data(),
-                            )
-                        ));
+                    if(!wp_is_mobile()){
+                        get_template_part('template', 'parts/Filters/filters-section',
+                            array(
+                                'args' => array(
+                                    'academic_filter' => $academic_institutions->data(),
+                                    'menuFilters' => $menuFilters,
+                                )
+                            ));
+                    }
                     ?>
                 </div>
-            </div>
-            <?php
+                <div class="openFiltersMenu">
+                    <span><?= filtersMobileMenuLanguage(); ?></span>
+                    <img class="filterVector" src="<?php echo get_bloginfo('stylesheet_directory'). '/assets/images/vector-black.svg'?>"/>
+                </div>
 
-            ?>
+            </div>
+
             <div class="catalogWrap">
                 <div hidden id="catalog_courses" value="<?php print_r($coursesIDs); ?>" ></div>
                 <div id="coursesBox" class="row output-courses coursesResults">
@@ -121,8 +130,8 @@ if(count($oneOrMoreMatches->rows) === 0 && count($courses->rows) === 0){
 
                     else {
                         while ($courses->fetch()) {
+                            get_template_part('template', 'parts/Courses/result-course-card',
 
-                            get_template_part('template', 'parts/Courses/course-card',
                                 array(
                                     'args' => array(
                                         'course' => $courses,
@@ -130,12 +139,13 @@ if(count($oneOrMoreMatches->rows) === 0 && count($courses->rows) === 0){
                                     )
                                 ));
 
+
                         }
                         if($oneOrMoreMatches) {
 
                             while ($oneOrMoreMatches->fetch()) {
 
-                                get_template_part('template', 'parts/Courses/course-card',
+                                get_template_part('template', 'parts/Courses/result-course-card',
                                     array(
                                         'args' => array(
                                             'course' => $oneOrMoreMatches,
@@ -162,7 +172,6 @@ if(count($oneOrMoreMatches->rows) === 0 && count($courses->rows) === 0){
                     <?php
                     $title = getFieldByLanguage(get_field('hebrew_title', $catalog_stripe_id), get_field('english_title', $catalog_stripe_id), get_field('arabic_title', $catalog_stripe_id), $sitepress->get_current_language());
                     $subTitle = getFieldByLanguage(get_field('hebrew_sub_title', $catalog_stripe_id), get_field('english_sub_title', $catalog_stripe_id), get_field('arabic_sub_title', $catalog_stripe_id), $sitepress->get_current_language());
-
                     get_template_part('template', 'parts/Stripes/catalog-stripe',
                         array(
                             'args' => array(
@@ -181,5 +190,21 @@ if(count($oneOrMoreMatches->rows) === 0 && count($courses->rows) === 0){
 </div>
 
 <?php
+if (wp_is_mobile()) {
+    get_filters_menu($menuFilters);
+}
+function get_filters_menu($menuFilters) {
 
+    $encoded_path = urlencode($_SERVER['REQUEST_URI']);
+    $current = cin_get_str('header_current_languages');
+    get_template_part('template', 'parts/Filters/filtersMobileMenu',
+        array(
+            'args' => array(
+                'menuFilters' => $menuFilters,
+                'encoded_path' => $encoded_path,
+                'currentLanguage' => $current,
+
+            )
+        ));
+}
 

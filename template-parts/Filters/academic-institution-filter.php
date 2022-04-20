@@ -20,6 +20,7 @@ $choose_str = __('Choose Institution', 'single_corse');
         <div class="buttonWrap">
             <p class="filterGroupTitle" ><?= $filter_title ?></p>
             <img class="filterVector" src="<?php echo get_bloginfo('stylesheet_directory'). '/assets/images/vector-black.svg'?>"/>
+            <img class="filterVectorMobile" src="<?php echo get_bloginfo('stylesheet_directory'). '/assets/images/filtersMenuVectorDown.svg'?>"/>
         </div>
     </div>
     <div class="inputsContainer catalogFilters">
@@ -39,7 +40,7 @@ $choose_str = __('Choose Institution', 'single_corse');
 
                 <div class="filterInput">
                     <label class="filterTagLabel" for="institution_<?= $ID ?>">
-                        <input <?= $checked ?> class="checkbox-filter-search" type="checkbox" data-name="institution" data-group='<?= $filter_title ?>' data-value="<?= $url_title ?>" value="<?= $title ?>" id="institution_<?= $ID ?>">
+                        <input <?= $checked ?> class="checkbox-filter-search filtersInputWeb" type="checkbox" data-name="institution" data-group='<?= $filter_title ?>' data-value="<?= $url_title ?>" value="<?= $title ?>" id="institution_<?= $ID ?>">
                         <div class="wrap-term-and-sum tagNameWrap">
                             <span class="term-name"><?= $title ?></span>
                         </div>
