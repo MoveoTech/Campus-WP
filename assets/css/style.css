@@ -18458,71 +18458,10 @@ html:not(.user_is_not_logged_in) .header_login {
     justify-content: center;
     padding: 5px;
     margin: 0 auto; }
-    .filters-mobile-menu-popup .nav-mobile .change-mobile-lang.active {
-      background: rgba(0, 0, 0, 0.1);
-      border-radius: 14.192px;
-      margin-bottom: 7.62px; }
-    .filters-mobile-menu-popup .nav-mobile .mobile-list-item {
-      height: 70px;
-      position: relative;
-      justify-content: flex-start;
-      align-items: center;
-      display: flex;
-      padding-right: 13px; }
-      .filters-mobile-menu-popup .nav-mobile .mobile-list-item a {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-        height: 100%; }
-        .filters-mobile-menu-popup .nav-mobile .mobile-list-item a img.mobile-menu-vector {
-          width: 9.93px;
-          height: 5.68px;
-          position: absolute;
-          left: 0;
-          transition: transform 0.2s ease-in-out; }
-          .filters-mobile-menu-popup .nav-mobile .mobile-list-item a img.mobile-menu-vector.active {
-            transform: rotate(180deg);
-            transition: transform 0.2s ease-in-out; }
-      .filters-mobile-menu-popup .nav-mobile .mobile-list-item .list-item-content {
-        font-family: Assistant;
-        font-size: 18px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: 24px;
-        letter-spacing: 0;
-        text-align: right;
-        color: #333433; }
-      .filters-mobile-menu-popup .nav-mobile .mobile-list-item img {
-        width: 43px;
-        height: 43px;
-        margin-left: 7px; }
-    .filters-mobile-menu-popup .nav-mobile .mobile-login-register {
-      display: none; }
-      .filters-mobile-menu-popup .nav-mobile .mobile-login-register.active {
-        display: flex; }
-    .filters-mobile-menu-popup .nav-mobile .mobile-logged-out,
-    .filters-mobile-menu-popup .nav-mobile .mobile-login-register {
-      border-top: 1px solid rgba(0, 0, 0, 0.05); }
-  .filters-mobile-menu-popup .mobile-menu-asset {
-    display: none;
-    background-image: url("../../assets/images/mobileMenu-asset.svg");
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
-    width: 100%;
-    height: 141px;
-    position: absolute;
-    left: 0;
-    bottom: 63px; }
-    .filters-mobile-menu-popup .mobile-menu-asset.active {
-      display: block; }
 
 @media (max-width: 991px) {
   .filters-mobile-menu-popup {
-    display: block; }
-  .filters-mobile-menu-popup .nav-lang li.wpml-ls-current-language {
-    display: none; } }
+    display: block; } }
 
 /* Courses Stripe */
 .home-page-courses-stripe {

@@ -40,7 +40,7 @@ $form_short_code_sidebar   = $site_settings['form_short_code_sidebar'];
 $course_attrs = array(
     'class' => 'col-xs-12 col-md-6 col-xl-4 course-item-with-border',
 );
-//console_log($params);
+
 /** NEW PARAMETERS */
 $catalog_stripe_id = get_field('catalog_stripe');
 $academic_institutions = pods( 'academic_institution', array('limit'   => -1 ));
