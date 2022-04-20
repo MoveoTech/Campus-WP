@@ -2,43 +2,6 @@ $= jQuery.noConflict();
 
 $(document).ready(function () {
 
-    let coursesArray = [
-        {   academic_institution: "מערך הסייבר הלאומי",
-            duration: "4-5 שעות בשבוע | 10 שבועות",
-            id: "4",
-            image: "http://localhost:8000/app/uploads/2018/12/Main-Icon.png",
-            language: "עברית , Hebrew  , العبرية",
-            marketing_tags: ['20-30 שעות', 'אדריכלות', 'הנדסת חומרים', 'אבטחת מידע', 'הנדסת חשמל'],
-            name: "Self.py - הדרך שלך ללמוד פייתון",
-            order: "362",
-            permalink: "course-v1-cs-gov-cs-selfpy101",
-            tags: []
-        },
-        {   academic_institution: "מערך הסייבר הלאומי",
-            duration: "4-6 שעות בשבוע | 6 שבועות",
-            id: "131",
-            image: "http://localhost:8000/app/uploads/2019/11/עותק-של-course-nextpy.png",
-            language: "עברית , Hebrew  , العبرية",
-            marketing_tags: ['20-30 שעות', 'הנדסת חומרים' ,'הנדסת חשמל','אבטחת מידע', 'אדריכלות'],
-            name: "Next.py - הצעד הבא שלך בפייתון",
-            order: "358",
-            permalink: "cs-gov-cs-nextpy102",
-            tags: []
-        },
-        {   academic_institution: "מערך הסייבר הלאומי",
-            duration: "4-6 שעות בשבוע | 6 שבועות",
-            id: "131",
-            image: "http://localhost:8000/app/uploads/2019/11/עותק-של-course-nextpy.png",
-            language: "עברית , Hebrew  , العبرية",
-            marketing_tags: [],
-            name: "Next.py - הצעד הבא שלך בפייתון",
-            order: "358",
-            permalink: "cs-gov-cs-nextpy102",
-            tags: []
-        }
-    ];
-    appendFilteredCourses(coursesArray);
-
     let params = new URLSearchParams(document.location.search);
 
     /** Mark selected checkboxes */
@@ -260,103 +223,6 @@ function getCourseResultTags(tags) {
     return tagsHtml;
 }
 
-
-
-/** Ido made a new function for appending */
-// function appendFilteredCourses(coursesData) {
-//
-//     let coursesBox = document.getElementById("coursesBox");
-//     let output = document.createElement("div");
-//
-//     output.id = 'coursesBox';
-//     output.classList.add('row');
-//     output.classList.add('output-courses');
-//
-//     coursesData.forEach(item =>{
-//         let id = item.id;
-//         let name = item.name;
-//         let academicInstitution = item.academic_institution ? item.academic_institution : '';
-//         let tags = getDesktopTags(item.marketing_tags);
-//         let hoverTags = getHoverTags(item.marketing_tags);
-//         let image = item.image;
-//         let duration = item.duration;
-//         let permalink = item.permalink ? item.permalink : '';
-//         let url = 'course/' + permalink;
-//         let haveYoutube = item.haveyoutube;
-//         let course_attrs = 'col-xs-12 col-md-6 col-xl-4 course-item-with-border';
-//
-//
-//         let youtube;
-//         if(haveYoutube) {
-//              youtube = '<a class="course-item-image has_background_image haveyoutube " data-id="'+ id +'" data-popup aria-pressed="true" aria-haspopup="true" role="button" href="javascript:void(0)" aria-label="'+ name +'" data-classToAdd="course_info_popup" style="background-image: url('+image+')"></a>'
-//         } else {
-//              youtube = '<div class="course-item-image has_background_image donthaveyoutube " data-id="'+ id +'"data-classToAdd="course_info_popup" style="background-image: url('+image+')"></div>'
-//         }
-//         if(academicInstitution){
-//             let institution_name = '<p class="course-item-org">'+ academicInstitution +' </p>'
-//         }
-//
-//         let temp = document.createElement("div");
-//         temp.innerHTML =
-//             '<div class="item_post_type_course course-item '+ course_attrs +'" data-id="'+ id +'">'+
-//                 '<div class="course-item-inner">'+
-//                     ''+ youtube +''+
-//                     '<a class="course-item-details" tabindex="0" href="'+ url +'">'+
-//                         '<h3 class="course-item-title"> '+ name +'</h3>'+
-//                         '</a></div></div>'
-//
-//
-//
-//
-//             // '<div class="course-img" style="background-image: url('+image+');">'+
-//             // '<a href="'+ url +'"></a>'+
-//             // '<span class="info-button"></span></div>'+
-//             // '<div class="item-content"">'+
-//             // '<h3 ><a href="'+ url +'">'+name+'</a></h3>'+
-//             // '<p >'+academicInstitution+'</p>'+
-//             // ' </div>'+
-//             // '<div class=" tags-div">'+tags+ '</div>'+
-//             // '<div class="course-item-hover '+ id +'">'+
-//             // '<a href="'+ url +'">'+
-//             // '<div class="course-img" style="background-image: url('+image+');"></div>'+
-//             // '<div class="item-content"">'+
-//             // '<h3 >'+name+'</h3>'+
-//             // '<p >'+academicInstitution+'</p>'+
-//             // '</div>'+
-//             // '<div class=" tags-div">'+ hoverTags +'</div>'+
-//             // '<div class="course-details">'+
-//             // '<span>'+ duration +'</span>'+
-//             // '</div>'+
-//             // '</a>'+
-//             // '</div>'+
-//             // '<div class="course-popup-modal mobile-course-popup'+ id +'">'+
-//             // '<div class="popup-header">'+
-//             // '<span class="course-popup-close'+ id +' close">&times;</span>'+
-//             // '</div>'+
-//             // '<div class="course-content">'+
-//             // '<div class="course-img" style="background-image: url('+image+');"></div>'+
-//             // '<div class="course-details">'+
-//             // '<div class="course-header"">'+
-//             // '<h3 ><a href="'+ url +'">'+name+'</a></h3>'+
-//             // '<p >'+academicInstitution+'</p>'+
-//             // '</div>'+
-//             // '<div class="tags-div">'+ hoverTags +'</div>'+
-//             // '<div class="details">'+
-//             // '<span>'+ duration +'</span>'+
-//             // '</div>'+
-//             // '</div>'+
-//             // '</div>'+
-//             // '<div class="popup-footer">'+
-//             // '<a href="'+ url +'"><span></span></a>'+
-//             // '</div>'+
-//             // '</div>';
-//
-//
-//         output.append(temp)
-//     });
-//     coursesBox.replaceWith(output)
-//
-// }
 
 function appendUrlParams(filters) {
 
@@ -712,7 +578,7 @@ function filterCoursesAjax(filterData) {
             appendUrlParams(responseData['filters'])
             if(responseData['courses'].length > 0) {
                 console.log("responseData", responseData);
-                // appendFilteredCourses(responseData['courses'])
+                appendFilteredCourses(responseData['courses'])
             } else {
                 haveNoResults()
             }

@@ -18,7 +18,6 @@ $course_permalink = $course->display('permalink');
 //$site_url = get_home_url();
 $url = 'course/' . $course_permalink;
 $attrs['class'] .= $attrs['hybrid_course'] ? ' hybrid_course' : '';
-//var_dump($url);
 ?>
 <div class="courseResultCard" data-id="<?= $ID ?>">
     <div class="courseImage" style="background-image: url(<?= $url_course_img_slick ?>);">

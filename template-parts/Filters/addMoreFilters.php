@@ -20,9 +20,7 @@ $moreFilters = $filter['filters'];
         </div>
 
     </div>
-
     <div class="inputsContainer" >
-
         <?php $i = 0;
         foreach($moreFilters as $filterId ) {
             $title = getFieldByLanguage(get_field('hebrew_title', $filterId), get_field('english_title', $filterId), get_field('arabic_title', $filterId), $sitepress->get_current_language());

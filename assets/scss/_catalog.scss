@@ -336,10 +336,8 @@
   }
   .wrapEachFiltergroup{
     display: flex;
-    //flex-direction: column;
     box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
     height: fit-content;
-    //max-height: 200px;
     flex-direction: column;
     .wrapEachFilterTag{
       display: flex;
@@ -394,22 +392,13 @@
     padding: 0;
     margin: 0 28px 0 0;
     .filterInput{
-
       .filterTagLabel{
-
         .tagNameWrap {
-
-
           &::before{
             width: 20px;
-
-          }
-          &::after{
-
           }
           .term-name {
             padding-right: 10px;
-
           }
         }
       }
