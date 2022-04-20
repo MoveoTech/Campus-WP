@@ -1,16 +1,21 @@
 $= jQuery.noConflict();
 
 $(document).ready(function () {
+
     let params = new URLSearchParams(document.location.search);
 
     /** Mark selected checkboxes */
     markCheckboxes(params)
 
     /** Calling events - targeting each checkbox to open & filtering inputs **/
-    openCheckboxEvent()
+    openCheckboxEvent();
+
+    /** Click event - targeting tags filters on mobile filters menu */
+    filterByTagMobile();
 
     /** Click event - targeting filters inputs */
-    filterByTagEvent()
+    filterByTagEvent();
+
 
     /** Click event - reset filtering **/
     $('.resetFilterButton').on('click', function (event) {
@@ -38,7 +43,6 @@ $(document).ready(function () {
 
     /** Click event - adding more filters **/
     $('.moreFilters .extraFilterCheckbox').on('click', function (event) {
-
         /**Getting targeted input */
         let filterId = $(event.target).data('value');
         let filterGroupName = event.target.value;
@@ -52,53 +56,41 @@ $(document).ready(function () {
             filterToRemove.remove()
         }
     });
+
+    /** checking screen size for web or mobile menu */
+    slickStripeForMobile();
     $(window).resize(function() {
-        if($(window).width() <= 768){
-            /** catalog stripe slick */
-            let rtl = true;
-            let currnetLanguage = $('.catalog-courses-stripe').data('language');
-            if(currnetLanguage == 'en'){
-                rtl = false;
-            }
-            jQuery('.catalog-courses-stripe').slick({
-                lazyLoad: 'ondemand',
-                slidesToShow: 2.5,
-                slidesToScroll: 2,
-                rtl: rtl,
-                arrows: false,
-                speed: 1000,
-                infinite: false,
-                responsive: [
-                    {
-                        breakpoint: 571,
-                        settings: {
-                            slidesToShow: 2.25,
-                            slidesToScroll: 2,
-                            arrows: false,
-                        }
-                    },
-                    {
-                        breakpoint: 480,
-                        settings: {
-                            speed: 100,
-                            slidesToShow: 2.15,
-                            slidesToScroll: 2,
-                            arrows: false,
-                        }
-                    },
-                ]
+        slickStripeForMobile();
+    });
+
+/** Open mobile filters menu */
+    $(".openFiltersMenu").click(function () {
+        /** Open mobile menu popup */
+        jQuery(".filters-mobile-menu-popup").toggleClass('active');
+        if(!jQuery(".bg-overlay")[0].classList.contains('active') && jQuery(".filters-mobile-menu-popup")[0].classList.contains('active')) {
+            jQuery(".bg-overlay").addClass('active');
+            jQuery(".bg-overlay").addClass('filterMenuOverlay');
+            jQuery(".header_section").addClass('menu-open');
+        } else if(!jQuery(".filters-mobile-menu-popup")[0].classList.contains('active')) {
+            jQuery(".bg-overlay").removeClass('active');
+            jQuery(".header_section").removeClass('menu-open');
 
             })
         } else if (jQuery('.catalog-courses-stripe').slick()){
             jQuery('.catalog-courses-stripe').slick('unslick');
         }
+        jQuery('html').toggleClass('menu_open');
     });
 
+$(".bg-overlay").click(function () {
+    closingOverlay()
+})
 
     $('#courses_load_more').on('click', function () {
         loadCourses()
     })
 });
+/** End of document ready */
 
 /** hiding filter inputs when clicking on screen or other filter group */
 $(document).click(function(event) {
@@ -110,24 +102,87 @@ $(document).click(function(event) {
     if (!filtergroup.is(event.target) && !filtergroup.has(event.target).length && !filtersInputs.is(event.target) && !filtersInputs.has(event.target).length) {
         filtersInputs.hide();
     }
-
     /** hiding input container when clicking on other filter group */
     if (filtergroup.is(event.target) || filtergroup.has(event.target).length || filtersInputs.is(event.target) || filtersInputs.has(event.target).length) {
 
         let popupMenuDiv = event.target.closest(".wrapEachFiltergroup").querySelector(".inputsContainer");
-
+if(filtersInputs.is(event.target) || filtersInputs.has(event.target).length){
+    popupMenuDiv.style.display = "none";
+}
         filtersInputs.each((index, element) => {
             if(element !== popupMenuDiv){
                 element.style.display = "none";
             }
         })
-
     }
-
 });
 /** end of jquery */
 
-/** Ido made a new function for appending */
+function closingOverlay(){
+    jQuery(".bg-overlay").removeClass('active');
+    jQuery(".bg-overlay").removeClass('filterMenuOverlay');
+    jQuery(".header_section").removeClass('menu-open');
+    jQuery(".filters-mobile-menu-popup").removeClass('active');
+    jQuery(".mobile-menu-popup").removeClass('active');
+    jQuery('html').toggleClass('menu_open');
+}
+
+function slickStripeForMobile() {
+    if($(window).width() <= 768){
+        /** catalog stripe slick for mobile*/
+        let rtl = true;
+        let currnetLanguage = $('.catalog-courses-stripe').data('language');
+        if(currnetLanguage == 'en'){
+            rtl = false;
+        }
+        jQuery('.catalog-courses-stripe').slick({
+            lazyLoad: 'ondemand',
+            slidesToShow: 3,
+            slidesToScroll: 2,
+            rtl: rtl,
+            arrows: false,
+            speed: 1000,
+            infinite: false,
+            responsive: [
+                {
+                    breakpoint: 650,
+                    settings: {
+                        slidesToShow: 2.5,
+                        slidesToScroll: 2,
+                        arrows: false,
+                    }
+                },
+                {
+                    breakpoint: 571,
+                    settings: {
+                        slidesToShow: 2.25,
+                        slidesToScroll: 2,
+                        arrows: false,
+                    }
+                },
+                {
+                    breakpoint: 480,
+                    settings: {
+                        speed: 100,
+                        slidesToShow: 2.15,
+                        slidesToScroll: 2,
+                        arrows: false,
+                    }
+                },
+            ]
+        })
+        /** Changing classes in filters menu inputs */
+        $('.checkbox-filter-search').removeClass('filtersInputWeb');
+        $('.checkbox-filter-search').addClass('.checkboxFilterMobile');
+
+
+    } else if (jQuery('.catalog-courses-stripe').slick()){
+        jQuery('.catalog-courses-stripe').slick('unslick');
+    }
+
+
+}
+
 function appendFilteredCourses(coursesData) {
 
     let coursesBox = document.getElementById("coursesBox");
@@ -136,92 +191,54 @@ function appendFilteredCourses(coursesData) {
     output.id = 'coursesBox';
     output.classList.add('row');
     output.classList.add('output-courses');
+    output.classList.add('coursesResults');
 
     coursesData.forEach(item =>{
         let id = item.id;
         let name = item.name;
         let academicInstitution = item.academic_institution ? item.academic_institution : '';
-        let tags = getDesktopTags(item.marketing_tags);
-        let hoverTags = getHoverTags(item.marketing_tags);
+        let tags = getCourseResultTags(item.marketing_tags);
         let image = item.image;
         let duration = item.duration;
         let permalink = item.permalink ? item.permalink : '';
-        let url = 'course/' + permalink;
-        let haveYoutube = item.haveyoutube;
-        let course_attrs = 'col-xs-12 col-md-6 col-xl-4 course-item-with-border';
+        let baseUrl = window.location.origin;
+        let url = baseUrl + '/course/' + permalink;
 
-
-        let youtube;
-        if(haveYoutube) {
-             youtube = '<a class="course-item-image has_background_image haveyoutube " data-id="'+ id +'" data-popup aria-pressed="true" aria-haspopup="true" role="button" href="javascript:void(0)" aria-label="'+ name +'" data-classToAdd="course_info_popup" style="background-image: url('+image+')"></a>'
-        } else {
-             youtube = '<div class="course-item-image has_background_image donthaveyoutube " data-id="'+ id +'"data-classToAdd="course_info_popup" style="background-image: url('+image+')"></div>'
-        }
         if(academicInstitution){
-            let institution_name = '<p class="course-item-org">'+ academicInstitution +' </p>'
+            institutionName = '<p class="institutionName">'+ academicInstitution +' </p>'
         }
-
         let temp = document.createElement("div");
+        temp.classList.add('courseResultCard');
+        temp.setAttribute('data-id',id);
         temp.innerHTML =
-            '<div class="item_post_type_course course-item '+ course_attrs +'" data-id="'+ id +'">'+
-                '<div class="course-item-inner">'+
-                    ''+ youtube +''+
-                    '<a class="course-item-details" tabindex="0" href="'+ url +'">'+
-                        '<h3 class="course-item-title"> '+ name +'</h3>'+
-                        '</a></div></div>'
-
-
-
-
-            // '<div class="course-img" style="background-image: url('+image+');">'+
-            // '<a href="'+ url +'"></a>'+
-            // '<span class="info-button"></span></div>'+
-            // '<div class="item-content"">'+
-            // '<h3 ><a href="'+ url +'">'+name+'</a></h3>'+
-            // '<p >'+academicInstitution+'</p>'+
-            // ' </div>'+
-            // '<div class=" tags-div">'+tags+ '</div>'+
-            // '<div class="course-item-hover '+ id +'">'+
-            // '<a href="'+ url +'">'+
-            // '<div class="course-img" style="background-image: url('+image+');"></div>'+
-            // '<div class="item-content"">'+
-            // '<h3 >'+name+'</h3>'+
-            // '<p >'+academicInstitution+'</p>'+
-            // '</div>'+
-            // '<div class=" tags-div">'+ hoverTags +'</div>'+
-            // '<div class="course-details">'+
-            // '<span>'+ duration +'</span>'+
-            // '</div>'+
-            // '</a>'+
-            // '</div>'+
-            // '<div class="course-popup-modal mobile-course-popup'+ id +'">'+
-            // '<div class="popup-header">'+
-            // '<span class="course-popup-close'+ id +' close">&times;</span>'+
-            // '</div>'+
-            // '<div class="course-content">'+
-            // '<div class="course-img" style="background-image: url('+image+');"></div>'+
-            // '<div class="course-details">'+
-            // '<div class="course-header"">'+
-            // '<h3 ><a href="'+ url +'">'+name+'</a></h3>'+
-            // '<p >'+academicInstitution+'</p>'+
-            // '</div>'+
-            // '<div class="tags-div">'+ hoverTags +'</div>'+
-            // '<div class="details">'+
-            // '<span>'+ duration +'</span>'+
-            // '</div>'+
-            // '</div>'+
-            // '</div>'+
-            // '<div class="popup-footer">'+
-            // '<a href="'+ url +'"><span></span></a>'+
-            // '</div>'+
-            // '</div>';
-
+            '<div class="courseImage" style="background-image: url('+image+');">'+
+            '<a href="'+ url +'"></a>'+
+            '</div>'+
+            '<div class="itemContent">'+
+            '<h3 ><a href="'+ url +'">'+name+'</a></h3>'
+            +institutionName+
+            '<div class="tagsDiv">'+tags+ '</div>'+
+            '<p class="courseDuration">'+duration+ '</p>'+
+            '</div>'
 
         output.append(temp)
     });
     coursesBox.replaceWith(output)
 
+} //TODO build template for result course card
+
+
+function getCourseResultTags(tags) {
+    let tagsHtml = '';
+    tags.forEach((item, index) => {
+        if(index > 4){
+            return;
+        }
+        tagsHtml = tagsHtml+"<span class='courseTag'><p>"+item+"</p></span>";
+    })
+    return tagsHtml;
 }
+
 
 function appendUrlParams(filters) {
 
@@ -327,12 +344,109 @@ function haveNoResults() {
 function filterByTagEvent(){
 
     /** removing event from div */
-    $(`#groupFiltersContainer .catalogFilters .checkbox-filter-search`).unbind('click');
+    $(`.filtersSection .filtersInputWeb`).unbind('click');
 
     /** click event - targeting each input for filtering */
-    $('#groupFiltersContainer .catalogFilters .checkbox-filter-search').on('click', function (event) {
-        getCourses();
+    $('.filtersSection .filtersInputWeb').on('click', function (event) {
+
+      if($(event.target).hasClass("extraFilterCheckbox")){
+          return;
+      }
+
+      getCourses();
+
     })}
+
+
+/** filterByTagMobile function of catalog  */
+function filterByTagMobile(){
+
+    /** removing event from div */
+    $(`.filterButtonMobileMenu`).unbind('click');
+
+    /** click event - targeting each input for filtering */
+    $('.filterButtonMobileMenu').on('click', function (event) {
+
+        let filterData = {"search": {}};
+        let tagArray = {};
+        let freeSearchData = [];
+        let institutionArray = [];
+        let certificateArray = [];
+        let languageArray = [];
+
+        /** Getting free search value from url params */
+        let params = new URLSearchParams(document.location.search);
+        let searchValue = params.get("text_s");
+        if(searchValue) freeSearchData.push(searchValue);
+
+        /** Getting array of inputs */
+        let filterItems = $('.checkbox-filter-search');
+
+        /** Looping all filter items inputs */
+        filterItems.each((index, element) => {
+            let id = element.id;
+            let type = $(`#${id}`).data('name');
+            let group = $(`#${id}`).data('group');
+            let englishValue = $(`#${id}`).data('value');
+
+            /** Checking if value is checked */
+            if(element.checked) {
+                switch (type) {
+                    case 'tag':
+                        if(tagArray[group]){
+                            tagArray[group].push(englishValue);
+                        } else {
+                            tagArray[group] = [];
+                            tagArray[group].push(englishValue);
+                        }
+
+                        break;
+
+                    case 'institution':
+                        institutionArray.push(englishValue);
+                        break;
+
+
+                    case 'certificate':
+                        certificateArray.push(englishValue);
+                        break;
+
+                    case 'language':
+                        languageArray.push(englishValue);
+                        break;
+                }
+            }
+        });
+
+        /** Checking if any filter checked */
+        if(Object.keys(tagArray).some(() => { return true; }) || institutionArray.length > 0 || certificateArray.length > 0 || languageArray.length > 0 || Object.keys(freeSearchData).some(() => { return true; })) {
+
+            /** checking which filters checked and pushing each array to object (key and values) */
+            if(freeSearchData.length > 0) {
+                filterData['search']['text_s'] = freeSearchData;
+            }
+            if(Object.keys(tagArray).some((k) => { return true; })) {
+                filterData['search']['tags'] = tagArray;
+            }
+            if(institutionArray.length > 0) {
+                filterData['search']['institution'] = institutionArray;
+            }
+
+            if(certificateArray.length > 0) {
+                filterData['search']['certificate'] = certificateArray;
+            }
+            if(languageArray.length > 0) {
+                filterData['search']['language'] = languageArray;
+            }
+            filterCoursesAjax(filterData);
+            closingOverlay();
+        } else {
+            filterData = [];
+            filterCoursesAjax(filterData);
+            closingOverlay();
+        }
+    })}
+/** End of function filterByTagMobile */
 
 /** Ajax call - getting filters group name and there tags **/
 function getFiltersGroups(filterId) {
@@ -345,22 +459,21 @@ function getFiltersGroups(filterId) {
     jQuery.post(filter_by_tag_ajax.ajaxurl, data, function(response){
         if(response.success){
             const responseData = JSON.parse(response.data);
-            appendMoreFilters(responseData)
-            /** Calling event - targeting each filtering inputs **/
-            filterByTagEvent()
+            appendMoreFilters(responseData);
+
         }
     })
 }
 
 /** Appending filter tags **/
 function appendMoreFilters(filterData) {
-
     /**looping each filter group and appending it to the filters menu */
     let filterId = filterData.filterId;
     let dataType = filterData.dataType;
     let container = document.getElementById(`extraFilter_${filterId}`);
     let groupFilters = filterData.filtersList;
     let currentLanguage =filterData.language;
+    let groupName = filterData.group ? filterData.group : '';
 
     groupFilters.forEach(element => {
 
@@ -370,7 +483,7 @@ function appendMoreFilters(filterData) {
         let name = element.name;
         let urlTitle = element.english_name;
         let checked = '';
-        console.log(element)
+
         if(element.english_name && currentLanguage == 'en' ) {
             name = element.english_name;
         }
@@ -378,8 +491,8 @@ function appendMoreFilters(filterData) {
             name = element.arabic_name;
         }
         temp.innerHTML =
-            '<label class="filterTagLabel" for="'+id+'">'+
-            '<input'+ checked +' class="checkbox-filter-search" type="checkbox" data-name="'+dataType+'" data-value="'+urlTitle+'" value="'+name+'" id="'+id+'">'+
+            '<label class="filterTagLabel" for="'+dataType + '_' + id+'">'+
+            '<input'+ checked +' class="checkbox-filter-search" type="checkbox" data-name="'+dataType+'" data-group="'+ groupName +'" data-value="'+urlTitle+'" value="'+name+'" id="'+dataType + '_' + id+'">'+
             '<div class="wrap-term-and-sum tagNameWrap">'+
             '<span class="term-name">'+name+'</span>'+
             '</div>'+
@@ -401,7 +514,6 @@ function filterCoursesAjax(filterData) {
     jQuery.post(filter_by_tag_ajax.ajaxurl, data, function(response){
         if(response.success){
             const responseData = JSON.parse(response.data);
-
             appendUrlParams(responseData['filters'])
             if(responseData['courses'].length > 0) {
                 // loadCourses(responseData['courses'])
@@ -441,17 +553,19 @@ function appendGroupFilter(filterGroupName, filterId) {
 }
 
 function openCheckboxEvent() {
+
     /** removing event from div */
     $(`.wrapEachFiltergroup`).unbind('click');
 
     /** click event - targeting each checkbox to open */
     $('.wrapEachFiltergroup').on('click', function (event) {
-
-        let popupMenuDiv = event.target.closest(".wrapEachFiltergroup").querySelector(".inputsContainer")
+        let popupMenuDiv = event.target.closest(".wrapEachFiltergroup").querySelector(".inputsContainer");
         $(popupMenuDiv).toggle();
+
     });
 }
 
+/** Load more courses (not in used 14-04-2022) */
 function loadCourses(coursesArray = []) {
     if(coursesArray.length > 0){
         appendFilteredCourses(coursesArray)

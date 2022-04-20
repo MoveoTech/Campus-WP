@@ -18,6 +18,7 @@ $tags = pods('tags',podsFilterParams($tagsArray))->data();
         <div class="buttonWrap">
             <p class="filterGroupTitle" ><?= $title ?></p>
             <img class="filterVector" src="<?php echo get_bloginfo('stylesheet_directory'). '/assets/images/vector-black.svg'?>"/>
+            <img class="filterVectorMobile" src="<?php echo get_bloginfo('stylesheet_directory'). '/assets/images/filtersMenuVectorDown.svg'?>"/>
         </div>
     </div>
         <div class="inputsContainer catalogFilters">
@@ -30,14 +31,13 @@ $tags = pods('tags',podsFilterParams($tagsArray))->data();
         ?>
 
         <div class="filterInput">
-            <label class="filterTagLabel" for="<?= $tagId ?>">
-                <input <?= $checked ?> class="checkbox-filter-search" type="checkbox" data-name='tag' data-group='<?= $english_name ?>' data-value="<?= $url_title ?>" name="tag_name '[]'" value="<?= $tag_name ?>" id="<?= $tagId ?>"/>
+            <label class="filterTagLabel" for="tag_<?= $tagId ?>">
+                <input <?= $checked ?> class="checkbox-filter-search filtersInputWeb" type="checkbox" data-name='tag' data-group='<?= $english_name ?>' data-value="<?= $url_title ?>" name="tag_name '[]'" value="<?= $tag_name ?>" id="tag_<?= $tagId ?>"/>
                 <div class="wrap-term-and-sum tagNameWrap" >
                     <span class="term-name"><?= $tag_name ?></span>
                 </div>
             </label>
         </div>
-
 
         <?php  } ?>
     </div>

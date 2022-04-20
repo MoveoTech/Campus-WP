@@ -274,70 +274,6 @@ jQuery(document).ready(function () {
 
     })
 
-    //my courses slick
-    // jQuery('#myCoursesStripeId').slick({
-    //     lazyLoad: 'ondemand',
-    //     slidesToShow: 4,
-    //     slidesToScroll: 3,
-    //     rtl: is_rtl,
-    //     nextArrow: nexSlick,
-    //     prevArrow: prevSlick,
-    //     speed: 1000,
-    //     infinite: false,
-    //     responsive: [
-    //         {
-    //             breakpoint: 993,
-    //             settings: {
-    //                 speed: 500,
-    //                 slidesToShow: 3,
-    //                 slidesToScroll: 3,
-    //             }
-    //         },
-    //         {
-    //             breakpoint: 768,
-    //             settings: {
-    //                 slidesToShow: 3,
-    //                 slidesToScroll: 3,
-    //                 speed: 500,
-    //                 arrows: false,
-    //             }
-    //         },
-    //         {
-    //             breakpoint: 710,
-    //             settings: {
-    //                 slidesToShow: 3,
-    //                 slidesToScroll: 3,
-    //                 arrows: false,
-    //             }
-    //         },
-    //         {
-    //             breakpoint: 650,
-    //             settings: {
-    //                 slidesToShow: 3,
-    //                 slidesToScroll: 3,
-    //                 arrows: false,
-    //             }
-    //         },
-    //         {
-    //             breakpoint: 600,
-    //             settings: {
-    //                 slidesToShow: 2.5,
-    //                 slidesToScroll: 2,
-    //                 arrows: false,
-    //             }
-    //         },
-    //         {
-    //             breakpoint: 480,
-    //             settings: {
-    //                 speed: 500,
-    //                 slidesToShow: 2.15,
-    //                 slidesToScroll: 2,
-    //                 arrows: false,
-    //             }
-    //         },
-    //     ]
-    // })
-
     //testimonials slick
     jQuery('.testimonials-slider').slick({
         slidesToShow: 3,
@@ -631,11 +567,11 @@ function getCoursesDetails(coursesArray) {
     let edXIdCoursesArray = [];
     let allNumbers = [0,1,2,3,4,5,6,7,8,9];
     let newCourseId;
-    coursesArray.forEach((item, index) => {
-        let courseId = item.course_details.course_id;
-        let startIndex = courseId.indexOf(':');
-        let endIndex = courseId.lastIndexOf('+');
-       let indexOfPlus = parseInt(courseId.charAt(endIndex+1));
+    coursesArray.forEach((item) => {
+      let courseId = item.course_details.course_id;
+      let startIndex = courseId.indexOf(':');
+      let endIndex = courseId.lastIndexOf('+');
+      let indexOfPlus = parseInt(courseId.charAt(endIndex+1));
 
        if(allNumbers.includes(indexOfPlus)){
            newCourseId = courseId.slice(startIndex + 1, endIndex);
