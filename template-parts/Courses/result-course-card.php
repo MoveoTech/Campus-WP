@@ -15,7 +15,8 @@ $marketing_feature = $course->field('marketing_tags') ;
 $url_course_img_slick = $course->display( 'image' );
 $duration = $course->display( 'duration' );
 $course_permalink = $course->display('permalink');
-$url = 'course/' . $course_permalink;
+$site_url = getHomeUrlWithoutQuery();
+$url = $site_url . 'course/' . $course_permalink;
 $attrs['class'] .= $attrs['hybrid_course'] ? ' hybrid_course' : '';
 ?>
 <div class="courseResultCard" data-id="<?= $ID ?>">

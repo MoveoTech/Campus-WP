@@ -74,8 +74,7 @@ $(document).ready(function () {
         } else if(!jQuery(".filters-mobile-menu-popup")[0].classList.contains('active')) {
             jQuery(".bg-overlay").removeClass('active');
             jQuery(".header_section").removeClass('menu-open');
-
-            })
+            
         } else if (jQuery('.catalog-courses-stripe').slick()){
             jQuery('.catalog-courses-stripe').slick('unslick');
         }
