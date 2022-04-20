@@ -328,10 +328,6 @@
       }
     }
   }
-  .filters-mobile-menu-popup{
-    //overflow-y: auto;
-    //border: 1px solid red;
-  }
   #filtersSectionMobile{
     position: relative;
     height: 87%;
@@ -340,10 +336,8 @@
   }
   .wrapEachFiltergroup{
     display: flex;
-    //flex-direction: column;
     box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
     height: fit-content;
-    //max-height: 200px;
     flex-direction: column;
     .wrapEachFilterTag{
       display: flex;
@@ -398,22 +392,13 @@
     padding: 0;
     margin: 0 28px 0 0;
     .filterInput{
-
       .filterTagLabel{
-
         .tagNameWrap {
-
-
           &::before{
             width: 20px;
-
-          }
-          &::after{
-
           }
           .term-name {
             padding-right: 10px;
-
           }
         }
       }
@@ -437,6 +422,78 @@
 }
 
 
+/* course result presentation */
+#coursesBox{
+  flex-direction: column;
+  margin-top: 50px;
+}
+.courseResultCard {
+  display: flex;
+  height: 160px;
+  .courseImage {
+    position: relative;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    max-width: 253px;
+    height: 124px;
+    border-radius: 10px;
+    box-shadow: 0 5px 10px rgba(40, 40, 40, 0.2);
+    a {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .itemContent {
+    margin: 0 20px 0 0;
+
+    h3 {
+      font-weight: 600;
+      font-size: 22px;
+      line-height: 29px;
+      margin: 2px 0 8px 0;;
+      a {
+        color: #000000;
+      }
+    }
+    .tagsDiv{
+      display: flex;
+      .courseTag{
+        background: #F2F2F2;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        box-sizing: border-box;
+        border-radius: 10px;
+        margin-left: 10px;
+        p{
+          font-weight: 500;
+          font-size: 14px;
+          line-height: 18px;
+          margin: 1px 10px;
+        }
+      }
+    }
+    .institutionName{
+      font-weight: 300;
+      font-size: 16px;
+      line-height: 21px;
+      opacity: 0.5;
+      margin: 8px 0px;
+    }
+
+    .courseDuration{
+      font-weight: 300;
+      font-size: 14px;
+      line-height: 18px;
+      opacity: 0.5;
+      margin: 5px 0;
+    }
+  }
+
+}
 
 
 

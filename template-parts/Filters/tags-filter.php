@@ -39,7 +39,6 @@ $tags = pods('tags',podsFilterParams($tagsArray))->data();
             </label>
         </div>
 
-
         <?php  } ?>
     </div>
 </div>

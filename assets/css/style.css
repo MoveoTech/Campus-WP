@@ -20428,3 +20428,61 @@ body .course-item-hover {
     font-size: 16px; }
     .catalog-banner .hero-search-form .search-field.form-control::placeholder {
       font-size: 16px; } }
+
+/* course result presentation */
+#coursesBox {
+  flex-direction: column;
+  margin-top: 50px; }
+
+.courseResultCard {
+  display: flex;
+  height: 160px; }
+  .courseResultCard .courseImage {
+    position: relative;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    max-width: 253px;
+    height: 124px;
+    border-radius: 10px;
+    box-shadow: 0 5px 10px rgba(40, 40, 40, 0.2); }
+    .courseResultCard .courseImage a {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%; }
+  .courseResultCard .itemContent {
+    margin: 0 20px 0 0; }
+    .courseResultCard .itemContent h3 {
+      font-weight: 600;
+      font-size: 22px;
+      line-height: 29px;
+      margin: 2px 0 8px 0; }
+      .courseResultCard .itemContent h3 a {
+        color: #000000; }
+    .courseResultCard .itemContent .tagsDiv {
+      display: flex; }
+      .courseResultCard .itemContent .tagsDiv .courseTag {
+        background: #F2F2F2;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        box-sizing: border-box;
+        border-radius: 10px;
+        margin-left: 10px; }
+        .courseResultCard .itemContent .tagsDiv .courseTag p {
+          font-weight: 500;
+          font-size: 14px;
+          line-height: 18px;
+          margin: 1px 10px; }
+    .courseResultCard .itemContent .institutionName {
+      font-weight: 300;
+      font-size: 16px;
+      line-height: 21px;
+      opacity: 0.5;
+      margin: 8px 0px; }
+    .courseResultCard .itemContent .courseDuration {
+      font-weight: 300;
+      font-size: 14px;
+      line-height: 18px;
+      opacity: 0.5;
+      margin: 5px 0; }
