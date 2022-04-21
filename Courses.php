@@ -85,7 +85,7 @@ if(count($oneOrMoreMatches->rows) === 0 && count($courses->rows) === 0){
 
 <div class="wrap-search-page-course <?= $my_class ?>">
     <div class="container">
-        <div class="row justify-content-between">
+        <div class="row justify-content-between catalogPageBox">
             <div class="filtersSection">
                 <div class="allFiltersWrapDiv">
                     <?php
@@ -109,7 +109,7 @@ if(count($oneOrMoreMatches->rows) === 0 && count($courses->rows) === 0){
 
             <div class="catalogWrap">
                 <div hidden id="catalog_courses" value="<?php print_r($coursesIDs); ?>" ></div>
-                <div id="coursesBox" class="row output-courses coursesResults">
+                <div id="coursesBox" class="row output-courses coursesResults catalogPageBox">
 
                     <!--. START Number of match courses OR No Results -->
                     <?php if ( $no_results_found ) { ?>

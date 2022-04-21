@@ -12,16 +12,17 @@ $ID = $course->display('id');
 $title = getFieldByLanguage($course->display( 'name' ), $course->display( 'english_name' ), $course->display( 'arabic_name' ),$sitepress->get_current_language());
 $institution_name = getFieldByLanguage($course->field( 'academic_institution.name' ), $course->field( 'academic_institution.english_name' ), $course->field( 'academic_institution.arabic_name' ), $sitepress->get_current_language());
 $marketing_feature = $course->field('marketing_tags') ;
-$url_course_img_slick = $course->display( 'image' );
+$thumb = $course->display( 'image' );
 $duration = $course->display( 'duration' );
 $course_permalink = $course->display('permalink');
 $site_url = getHomeUrlWithoutQuery();
 $url = $site_url . 'course/' . $course_permalink;
 $attrs['class'] .= $attrs['hybrid_course'] ? ' hybrid_course' : '';
 ?>
-<div class="courseResultCard" data-id="<?= $ID ?>">
-    <div class="courseImage" style="background-image: url(<?= $url_course_img_slick ?>);">
+<div class="courseResultCard" data-id="<?= $ID ?>" id="<?= $ID ?>">
+    <div class="courseImage" style="background-image: url(<?= $thumb ?>);">
         <a href="<?= $url ?>"></a>
+        <span class="info-button"></span>
         </div>
     <div class="itemContent">
     <h3 ><a href="<?= $url ?>"><?= $title ?></a></h3>
@@ -29,18 +30,54 @@ $attrs['class'] .= $attrs['hybrid_course'] ? ' hybrid_course' : '';
     if($institution_name) {?>
         <p class="institutionName"><?= $institution_name ?> </p>
     <?php } ?>
-    <div class="tagsDiv">
+
         <?php
-        if ( $marketing_feature ):
+        if ( $marketing_feature ):?>
+        <div class="tagsDiv">
+        <?php
+        if (count($marketing_feature) >= 3) {
+
+            $i=0;
+            foreach ($marketing_feature as $tagInfo){
+                $tag = getFieldByLanguage($tagInfo['name'], $tagInfo['english_name'], $tagInfo['arabic_name'], $sitepress->get_current_language());
+                $i++;
+                if($i<=2){
+                ?>
+                <span class='courseTag'><p><?= $tag ?></p></span> <?php
+            } else {
+                    ?>
+                    <span class='courseTag hiddenCourseTagMobile'><p><?= $tag ?></p></span> <?php
+                }
+
+            }?>
+            <span class="courseTag extra-tags plusTag">+</span>
+
+            <?php } else{
             $tags_array = [];
             foreach ($marketing_feature as $tagInfo) {
                 $tag = getFieldByLanguage($tagInfo['name'], $tagInfo['english_name'], $tagInfo['arabic_name'], $sitepress->get_current_language());?>
                 <span class='courseTag'><p><?= $tag ?></p></span>
-        <?php } ?>
+            <?php }
+        } ?>
+        </div>
         <?php endif; ?>
-    </div>
     <p class="courseDuration"><?= $duration ?></p>
     </div>
 </div>
 
+<?php get_template_part(
+    'templates/mobileCourse',
+    'popup',
+    array(
+        'args' => array(
+            'image' => $thumb,
+            'title' => $title,
+            'institution' => $institution_name,
+            'tags' => $marketing_feature,
+            'duration' => $duration,
+            'id' => $ID,
+            'url' => $url
+        )
+    )
+) ?>
 
