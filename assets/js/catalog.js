@@ -127,6 +127,14 @@ function closingOverlay(){
 }
 
 function slickStripeForMobile() {
+    if($(window).width() <= 1200){
+        /** changing classes for tags mobile in result course card */
+        $('.hiddenCourseTagMobile').css("display"," none");
+        $('.plusTag').css("display"," flex");
+    }else{
+        $('.hiddenCourseTagMobile').css("display"," flex");
+        $('.plusTag').css("display"," none");
+    }
     if($(window).width() <= 768){
         /** catalog stripe slick for mobile*/
         let rtl = true;
@@ -174,8 +182,7 @@ function slickStripeForMobile() {
         $('.checkbox-filter-search').removeClass('filtersInputWeb');
         $('.checkbox-filter-search').addClass('.checkboxFilterMobile');
 
-        /** changing classes for tags mobile in result course card */
-        $('.hiddenCourseTagMobile').css("display"," none");
+
 
 
 
