@@ -24,26 +24,7 @@ if($url_params){
     $filters = getFiltersArray($url_params);
     $params = getPodsFilterParams($filters);
 } else {
-//    $current_lang = $sitepress->get_current_language();
-//    if($current_lang === 'he'){
-//        $default_lang = 'Hebrew';
-//    } else if($current_lang === 'en'){
-//        $default_lang = 'English';
-//    } else if($current_lang === 'ar'){
-//        $default_lang = 'Arabic';
-//    }
-//    $url = $url.(parse_url($url, PHP_URL_QUERY) ? '&' : '?').'language=' . $default_lang;
-//    $components = parse_url($url);
-//    if($components['query']){
-//        parse_str($components['query'], $url_params);
-//    }
-//    $filters = getFiltersArray($url_params);
-//    $params = getPodsFilterParams($filters);
-    $params = [
-        'limit'   => 27,
-//        'where'   => 't.language LIKE "%'. $default_lang .'%" ',
-        'orderBy' => 't.order DESC',
-    ];
+    $params = getParamsForDefaultLang();
 }
 
 /** OLD PARAMETERS */
@@ -53,7 +34,7 @@ $form_short_code_sidebar   = $site_settings['form_short_code_sidebar'];
 $course_attrs = array(
     'class' => 'col-xs-12 col-md-6 col-xl-4 course-item-with-border',
 );
-//console_log($params);
+
 /** NEW PARAMETERS */
 $catalog_stripe_id = get_field('catalog_stripe');
 $academic_institutions = pods( 'academic_institution', array('limit'   => -1 ));

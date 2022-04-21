@@ -1649,3 +1649,20 @@ function getHomeUrlWithoutQuery(): string {
     }
     return $site_url;
 }
+
+function getParamsForDefaultLang() {
+    global $sitepress;
+    $current_lang = $sitepress->get_current_language();
+    if($current_lang === 'he'){
+        $default_lang = 'Hebrew';
+    } else if($current_lang === 'en'){
+        $default_lang = 'English';
+    } else if($current_lang === 'ar'){
+        $default_lang = 'Arabic';
+    }
+    return [
+        'limit'   => -1,
+        'where'   => 't.language LIKE "%'. $default_lang .'%" ',
+        'orderBy' => 't.order DESC',
+    ];
+}
