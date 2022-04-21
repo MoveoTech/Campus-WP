@@ -109,6 +109,7 @@
     }
   }
 }
+
 .secondary-mobile-lang-menu {
   position: relative;
   height: 0;
@@ -473,4 +474,38 @@
   visibility: visible;
   background-color: rgba(0, 0, 0, 0.3);
   transition: opacity .2s, visibility .2s;
+}
+
+
+/* catalog page - mobile filters menu */
+
+.filters-mobile-menu-popup {
+  display: none;
+  z-index: 7;
+  background-color: #ffffff;
+  width: 75%;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  transition: transform 0.3s ease-in-out;
+  transform: translateX(-135%);
+  &.active{
+    transform: translateX(0);
+  }
+  .nav-mobile {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 5px;
+    margin: 0 auto;
+  }
+}
+
+
+@media (max-width: 991px) {
+  .filters-mobile-menu-popup {
+    display: block;
+  }
 }

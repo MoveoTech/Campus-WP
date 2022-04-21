@@ -9,7 +9,7 @@ return;
 global $get_params, $sitepress;
 
 $academic_institutions = $filtersList['academic_filter'];
-$filters = get_field('filters');
+$filters = $filtersList['menuFilters'];
 $academic_name = cin_get_str('Institution_Name');
 $current_lang = $sitepress->get_current_language();
 ?>

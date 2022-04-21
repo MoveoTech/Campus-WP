@@ -19,7 +19,6 @@ foreach ($certificatesArray as $certificate) {
     array_push($certificates, $certificate_details);
 }
 
-
 $title = $filter['title'];
 
 ?>
@@ -29,12 +28,14 @@ $title = $filter['title'];
         <div class="buttonWrap">
             <p class="filterGroupTitle" ><?= $title ?></p>
             <img class="filterVector" src="<?php echo get_bloginfo('stylesheet_directory'). '/assets/images/vector-black.svg'?>"/>
+            <img class="filterVectorMobile" src="<?php echo get_bloginfo('stylesheet_directory'). '/assets/images/filtersMenuVectorDown.svg'?>"/>
         </div>
     </div>
         <div class="inputsContainer catalogFilters" >
 
         <?php $i = 0;
         foreach ($certificates as $certificate) {
+
             $name = $certificate['name'];
             $url_title = $certificate['url_title'];
             $checked = '';
@@ -42,7 +43,7 @@ $title = $filter['title'];
 
             <div class="filterInput">
                 <label class="filterTagLabel" for="certificate_<?= $i ?>">
-                    <input <?= $checked ?> class="checkbox-filter-search" type="checkbox" data-name="certificate" data-group='<?= $title ?>' data-value="<?= $url_title ?>" name=" $name '[]'"  value="<?= $name ?>" id="certificate_<?= $i ?>">
+                    <input <?= $checked ?> class="checkbox-filter-search filtersInputWeb" type="checkbox" data-name="certificate" data-group='<?= $title ?>' data-value="<?= $url_title ?>" name=" $name '[]'"  value="<?= $name ?>" id="certificate_<?= $i ?>">
                     <div class="wrap-term-and-sum tagNameWrap" >
                         <span class="term-name"><?= $name ?></span>
                     </div>

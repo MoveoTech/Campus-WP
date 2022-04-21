@@ -82,7 +82,6 @@
 }
 }
 
-
 /* Filters menu */
 .filtersSection{
   display: flex;
@@ -139,6 +138,7 @@
         background: #F9F9F9;
         border-radius: 10px;
         margin: 0 5px;
+        cursor: pointer;
 
         .buttonWrap{
           display: flex;
@@ -163,14 +163,29 @@
         color: #333433;
         margin:auto;
       }
-      .filterVector{
-        margin: 0;
-        margin-right: 7px;
-        }
+
       }
     }
-  }
 
+
+  }
+.filterVectorMobile{
+  display:none;
+}
+
+.openFiltersMenu{
+  display: none;
+  position: absolute;
+  left: 30px;
+
+  .filterVector{
+    margin-bottom: 3px;
+  }
+}
+.filterVector{
+  margin: 0;
+  margin-right: 7px;
+}
 /* filter inputs- popup menu */
 .inputsContainer {
   display:none;
@@ -274,6 +289,120 @@
   }
 }
 
+@media (max-width: 768px) {
+  .navFiltersMenu{
+    display: flex;
+    position: fixed;
+    top: 0;
+    z-index: 8;
+    width: 100%;
+    background-color: #333433;
+    height: 63px;
+    .resetFilterButton{
+      font-size: 12px;
+      line-height: 16px;
+      color: #70C6D1;
+      font-weight: 700;
+      margin: auto 16px auto;
+    }
+  }
+  .buttonNavFiltersMenu{
+    display: flex;
+    z-index: 8;
+    width: 100%;
+    height: 13%;
+    .buttonFilterWrap{
+      display: flex;
+      background: #91C653;
+      border-radius: 30px;
+      width: 90%;
+      margin: auto;
+      height: 57px;
+      z-index: 8;
+      .filterButtonMobileMenu{
+        margin: auto;
+        font-weight: 700;
+        font-size: 18px;
+        line-height: 24px;
+        color: #FFFFFF;
+      }
+    }
+  }
+  #filtersSectionMobile{
+    position: relative;
+    height: 87%;
+    top: 63px;
+    overflow-y: auto;
+  }
+  .wrapEachFiltergroup{
+    display: flex;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+    height: fit-content;
+    flex-direction: column;
+    .wrapEachFilterTag{
+      display: flex;
+      width: 100%
+    }
+  }
+  .buttonWrap{
+    display: flex;
+    width: 100%;
+    height: 69px;
+    justify-content: space-between;
+    .filterGroupTitle{
+      margin: auto 24px auto auto;
+      font-weight: 600;
+      font-size: 22px;
+      line-height: 29px;
+    }
+  }
+  .filterVectorMobile{
+    display: unset;
+    margin: auto auto auto 23px;
+  }
+  .filtersSection{
+    .allFiltersWrapDiv {
+      display: none;
+    }
+  }
+  .openFiltersMenu{
+    display: unset;
+    .filterVector{
+      display: unset;
+    }
+  }
+  .filterVector{
+    display: none;
+  }
+  .filterMenuOverlay{
+    z-index:6;
+  }
+
+  .inputsContainer {
+    display: flex;
+    flex-direction: column;
+    position: unset;
+    box-shadow: unset;
+    max-width: unset;
+    max-height: unset;
+    overflow-y: unset;
+    padding: 0;
+    margin: 0 28px 0 0;
+    .filterInput{
+      .filterTagLabel{
+        .tagNameWrap {
+          &::before{
+            width: 20px;
+          }
+          .term-name {
+            padding-right: 10px;
+          }
+        }
+      }
+    }
+  }
+}
+
 @media (max-width: 390px) {
   .catalog-banner {
     .hero-search-form {
@@ -290,6 +419,78 @@
 }
 
 
+/* course result presentation */
+#coursesBox{
+  flex-direction: column;
+  margin-top: 50px;
+}
+.courseResultCard {
+  display: flex;
+  height: 160px;
+  .courseImage {
+    position: relative;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    max-width: 253px;
+    height: 124px;
+    border-radius: 10px;
+    box-shadow: 0 5px 10px rgba(40, 40, 40, 0.2);
+    a {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .itemContent {
+    margin: 0 20px 0 0;
+
+    h3 {
+      font-weight: 600;
+      font-size: 22px;
+      line-height: 29px;
+      margin: 2px 0 8px 0;;
+      a {
+        color: #000000;
+      }
+    }
+    .tagsDiv{
+      display: flex;
+      .courseTag{
+        background: #F2F2F2;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        box-sizing: border-box;
+        border-radius: 10px;
+        margin-left: 10px;
+        p{
+          font-weight: 500;
+          font-size: 14px;
+          line-height: 18px;
+          margin: 1px 10px;
+        }
+      }
+    }
+    .institutionName{
+      font-weight: 300;
+      font-size: 16px;
+      line-height: 21px;
+      opacity: 0.5;
+      margin: 8px 0px;
+    }
+
+    .courseDuration{
+      font-weight: 300;
+      font-size: 14px;
+      line-height: 18px;
+      opacity: 0.5;
+      margin: 5px 0;
+    }
+  }
+
+}
 
 
 
