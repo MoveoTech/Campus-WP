@@ -284,6 +284,39 @@ function markCheckboxes(params) {
     let entries = params.entries();
     let filterItems = $('.checkbox-filter-search');
 
+    /** Check if has params in the url */
+    if(!entries.next().value) {
+        const currentLang = getCookie('openedx-language-preference');
+        filterItems.each((index, element) => {
+            let id = element.id;
+            let type = $(`#${id}`).data('name');
+            let englishValue = $(`#${id}`).data('value');
+
+            if(type === 'language') {
+                let lang;
+                switch (currentLang) {
+                    case 'he':
+                        lang = 'Hebrew';
+                        break;
+                    case 'en':
+                        lang = 'English';
+                        break;
+                    case 'ar':
+                        lang = 'Arabic';
+                        break;
+                }
+
+                if(englishValue.includes(lang)) {
+                    $(`#${id}`).prop('checked', true)
+                    let currentUrl = window.location.href;
+                    let url = new URL(currentUrl);
+                    url.searchParams.set(type, lang);
+                    window.history.pushState({}, '', url);
+                }
+            }
+        });
+    }
+
     for (let entry of entries) {
         if(entry[0] == 'text_s') {
             $('.search-field').val(entry[1]);
@@ -312,7 +345,7 @@ function markCheckboxes(params) {
                     let itemValues = entry[1].split(",");
 
                     for(let item of itemValues){
-                        if(englishValue === item) {
+                        if(englishValue.toLowerCase() === item.toLowerCase()) {
                             $(`#${id}`).prop('checked', true)
                         }
                     }
@@ -322,7 +355,7 @@ function markCheckboxes(params) {
     }
 }
 
-function haveNoResults() {
+function haveNoResults(afterSearching= true) {
     let coursesBox = document.getElementById("coursesBox");
     let output = document.createElement("div");
 
@@ -331,8 +364,10 @@ function haveNoResults() {
     output.classList.add('output-courses');
 
         let temp = document.createElement("div");
-        temp.innerHTML =
-            '<div class="no-results">Sorry but there are no search results :(</div>'
+        if(afterSearching) {
+            temp.innerHTML =
+                '<div class="no-results">Sorry but there are no search results :(</div>'
+        }
 
         output.append(temp)
 
@@ -517,6 +552,8 @@ function filterCoursesAjax(filterData) {
             if(responseData['courses'].length > 0) {
                 // loadCourses(responseData['courses'])
                 appendFilteredCourses(responseData['courses'])
+            } else if(responseData['params'] == null) {
+                haveNoResults(false)
             } else {
                 haveNoResults()
             }

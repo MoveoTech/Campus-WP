@@ -22,15 +22,11 @@ $components = parse_url($url);
 if($components['query']){
     parse_str($components['query'], $url_params);
 }
-
 if($url_params){
     $filters = getFiltersArray($url_params);
     $params = getPodsFilterParams($filters);
 } else {
-    $params = [
-        'limit'   => 5,
-        'orderBy' => 't.order DESC',
-    ];
+    $params = getParamsForDefaultLang();
 }
 
 /** OLD PARAMETERS */

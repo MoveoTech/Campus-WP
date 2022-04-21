@@ -8,11 +8,7 @@ function filter_by_tag() {
     if(!$type || ($type != "courses" ))
         wp_send_json_error( 'Error: Invalid data!' );
     if(!$filters || count($filters) <= 0){
-        $params = array(
-            'limit' => 27,
-            'where'=> 't.hide_in_site=0',
-            'orderby'=> "t.order DESC"
-        );
+        $params = null;
     } else {
         $params = getPodsFilterParams($filters);
 
@@ -21,16 +17,16 @@ function filter_by_tag() {
     /** filtering each data type */
     $dataToReturn = array();
     $filtersCoursesToReturn = array();
-    $filteredCourses = pods($type, $params);
     $idArrayOfBestMatches = array();
-
-    while ($filteredCourses->fetch()) {
-        $filtersCoursesToReturn[] =  filteredCoursesData($filteredCourses, $lang);
-        $idArrayOfBestMatches[] = $filteredCourses->display('ID');
+    if($params){
+        $filteredCourses = pods($type, $params);
+        while ($filteredCourses->fetch()) {
+            $filtersCoursesToReturn[] =  filteredCoursesData($filteredCourses, $lang);
+            $idArrayOfBestMatches[] = $filteredCourses->display('ID');
+        }
     }
 
     /** Get all courses that have at list 1 filter match */
-
     $second_params = getSecondsFiltersParams($filters, $idArrayOfBestMatches);
     if($second_params) {
      $oneOrMoreMatches = pods($type, $second_params);
@@ -38,7 +34,7 @@ function filter_by_tag() {
             $filtersCoursesToReturn[] =  filteredCoursesData($oneOrMoreMatches, $lang);
         }
     }
-
+    $dataToReturn['params']  = $params;
     $dataToReturn['courses'] = $filtersCoursesToReturn;
     $dataToReturn['filters'] = $filters;
 
