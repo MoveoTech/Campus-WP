@@ -20448,3 +20448,12 @@ body .course-item-hover {
       line-height: 18px;
       opacity: 0.5;
       margin: 5px 0; }
+
+/** No result in course search */
+.noResultText {
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 29px; }
+
+.coursesResults {
+  margin: 0; }
