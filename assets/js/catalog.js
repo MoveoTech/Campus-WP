@@ -333,7 +333,7 @@ function markCheckboxes(params) {
     }
 
     /** Check if has params in the url */
-    if(!entries.next().value) {
+    if(!params.entries().next().value) {
         const currentLang = getCookie('openedx-language-preference') ? getCookie('openedx-language-preference') : getCookie('wp-wpml_current_language');
         filterItems.each((index, element) => {
             let id = element.id;
