@@ -127,70 +127,66 @@ function closingOverlay(){
 }
 
 function slickStripeForMobile() {
-    if($(window).width() <= 1200){
-        /** changing classes for tags mobile in result course card */
-        $('.hiddenCourseTagMobile').css("display"," none");
-        $('.plusTag').css("display"," flex");
-    }else{
-        $('.hiddenCourseTagMobile').css("display"," flex");
-        $('.plusTag').css("display"," none");
-    }
     if($(window).width() <= 768){
-        /** catalog stripe slick for mobile*/
-        let rtl = true;
-        let currnetLanguage = $('.catalog-courses-stripe').data('language');
-        if(currnetLanguage == 'en'){
-            rtl = false;
+
+        if(!jQuery('.catalog-courses-stripe').hasClass( "slick-initialized" )){
+            /** catalog stripe slick for mobile*/
+            let rtl = true;
+            let currnetLanguage = $('.catalog-courses-stripe').data('language');
+            if(currnetLanguage == 'en'){
+                rtl = false;
+            }
+            jQuery('.catalog-courses-stripe').slick({
+                lazyLoad: 'ondemand',
+                slidesToShow: 3,
+                slidesToScroll: 2,
+                rtl: rtl,
+                arrows: false,
+                speed: 1000,
+                infinite: false,
+                responsive: [
+                    {
+                        breakpoint: 768,
+                        settings: {
+                            slidesToShow: 2.5,
+                            slidesToScroll: 2,
+                            arrows: false,
+                        }
+                    },
+                    {
+                        breakpoint: 650,
+                        settings: {
+                            slidesToShow: 2.5,
+                            slidesToScroll: 2,
+                            arrows: false,
+                        }
+                    },
+                    {
+                        breakpoint: 571,
+                        settings: {
+                            slidesToShow: 2.25,
+                            slidesToScroll: 2,
+                            arrows: false,
+                        }
+                    },
+                    {
+                        breakpoint: 480,
+                        settings: {
+                            speed: 100,
+                            slidesToShow: 2.15,
+                            slidesToScroll: 2,
+                            arrows: false,
+                        }
+                    },
+                ]
+            })
+            /** Changing classes in filters menu inputs */
+            $('.checkbox-filter-search').removeClass('filtersInputWeb');
+            $('.checkbox-filter-search').addClass('.checkboxFilterMobile');
         }
-        jQuery('.catalog-courses-stripe').slick({
-            lazyLoad: 'ondemand',
-            slidesToShow: 3,
-            slidesToScroll: 2,
-            rtl: rtl,
-            arrows: false,
-            speed: 1000,
-            infinite: false,
-            responsive: [
-                {
-                    breakpoint: 650,
-                    settings: {
-                        slidesToShow: 2.5,
-                        slidesToScroll: 2,
-                        arrows: false,
-                    }
-                },
-                {
-                    breakpoint: 571,
-                    settings: {
-                        slidesToShow: 2.25,
-                        slidesToScroll: 2,
-                        arrows: false,
-                    }
-                },
-                {
-                    breakpoint: 480,
-                    settings: {
-                        speed: 100,
-                        slidesToShow: 2.15,
-                        slidesToScroll: 2,
-                        arrows: false,
-                    }
-                },
-            ]
-        })
-        /** Changing classes in filters menu inputs */
-        $('.checkbox-filter-search').removeClass('filtersInputWeb');
-        $('.checkbox-filter-search').addClass('.checkboxFilterMobile');
-
-
-
-
-
-    } else if (jQuery('.catalog-courses-stripe').slick()){
+    } else if (jQuery('.catalog-courses-stripe').hasClass( "slick-initialized" )){
         jQuery('.catalog-courses-stripe').slick('unslick');
     }
-
-
 }
 
 function appendFilteredCourses(coursesData) {
@@ -392,17 +388,14 @@ function haveNoResults(afterSearching= true) {
 
 /** Filtering by tag function of catalog - need to remove  */
 function filterByTagEvent(){
-
     /** removing event from div */
-    $(`.filtersSection .filtersInputWeb`).unbind('click');
+   $(`.filtersSection .filtersInputWeb`).unbind('click');
 
     /** click event - targeting each input for filtering */
     $('.filtersSection .filtersInputWeb').on('click', function (event) {
-
       if($(event.target).hasClass("extraFilterCheckbox")){
           return;
       }
-
       getCourses();
 
     })}
@@ -549,6 +542,7 @@ function appendMoreFilters(filterData) {
             '</label>';
         container.append(temp);
     })
+    filterByTagEvent();
 }
 
 /** ajax call */
