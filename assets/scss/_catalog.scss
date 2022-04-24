@@ -284,6 +284,35 @@
 }
 
 @media (max-width: 992px) {
+  .catalog-banner{
+    height: 158px;
+    .back-img-1 {
+      background: url("../../assets/images/catalog-img1-mobile.svg");
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      width: 242px;
+      height: 100%;
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+    .back-img-2 {
+      background: url("../../assets/images/catalog-img2-mobile.svg");
+      background-position: unset;
+      background-repeat: no-repeat;
+      background-size: unset;
+      top: 13px;
+    }
+    .catalog-banner-content{
+
+
+      .catalog-header{
+        display: none;
+      }
+    }
+  }
+
   #groupFiltersContainer{
     flex-wrap: wrap;
   }
@@ -400,6 +429,9 @@
         }
       }
     }
+  }
+  .catalog-banner {
+    height: 93px;
   }
 }
 
@@ -537,6 +569,18 @@
 
 }
 
+/** No result in course search */
+.noResultText{
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 29px;
+}
+
+
+.coursesResults{
+  margin: 0;
+  width:85%;
+}
 
   @media (max-width: 1200px) {
     .courseResultCard {
@@ -654,6 +698,4 @@
 
     }
   }
-
-
 

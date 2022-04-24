@@ -369,21 +369,26 @@ function markCheckboxes(params) {
 function haveNoResults(afterSearching= true) {
     let coursesBox = document.getElementById("coursesBox");
     let output = document.createElement("div");
+    const currentLang = getCookie('openedx-language-preference');
+    let noResultText_he = "לא מצאנו בדיוק את מה שחיפשת אבל אולי יעניין אותך...";
+    let noResultText_en = "We didn't find exactly what you were looking for but maybe you will be interested ...";
+    let noResultText_ar = "لم نعثر على ما كنت تبحث عنه بالضبط ولكن ربما تكون مهتمًا ...";
 
     output.id = 'coursesBox';
     output.classList.add('row');
     output.classList.add('output-courses');
+    output.classList.add('coursesResults');
 
         let temp = document.createElement("div");
         if(afterSearching) {
             temp.innerHTML =
-                '<div class="no-results">Sorry but there are no search results :(</div>'
+                '<p class="noResultText">' +getFieldByLanguage(noResultText_he, noResultText_en, noResultText_ar, currentLang)+ '</p>'
         }
 
         output.append(temp)
 
     coursesBox.replaceWith(output)
-} // TODO build the div of 'no results', needs to be like the template in Courses.php
+}
 
 /** Filtering by tag function of catalog - need to remove  */
 function filterByTagEvent(){
@@ -537,7 +542,7 @@ function appendMoreFilters(filterData) {
         }
         temp.innerHTML =
             '<label class="filterTagLabel" for="'+dataType + '_' + id+'">'+
-            '<input'+ checked +' class="checkbox-filter-search" type="checkbox" data-name="'+dataType+'" data-group="'+ groupName +'" data-value="'+urlTitle+'" value="'+name+'" id="'+dataType + '_' + id+'">'+
+            '<input'+ checked +' class="checkbox-filter-search filtersInputWeb" type="checkbox" data-name="'+dataType+'" data-group="'+ groupName +'" data-value="'+urlTitle+'" value="'+name+'" id="'+dataType + '_' + id+'">'+
             '<div class="wrap-term-and-sum tagNameWrap">'+
             '<span class="term-name">'+name+'</span>'+
             '</div>'+
@@ -719,4 +724,16 @@ function getCourses() {
         filterCoursesAjax(filterData)
     }
 
+}
+
+/** General function for translate */
+function getFieldByLanguage(heField, enField, arField, lang) {
+
+    if(lang == "en" && enField && enField != ""){
+        return enField;
+    } else if (lang == "ar" && arField && arField != "" ){
+        return arField;
+    } else {
+        return heField;
+    }
 }
