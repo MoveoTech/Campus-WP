@@ -377,10 +377,7 @@ function haveNoResults(afterSearching= true) {
         output.append(temp)
 
     coursesBox.replaceWith(output)
-} // TODO build the div of 'no results', needs to be like the template in Courses.php
-
-
-
+}
 
 /** Filtering by tag function of catalog - need to remove  */
 function filterByTagEvent(){
