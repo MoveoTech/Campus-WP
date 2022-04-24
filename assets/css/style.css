@@ -20382,7 +20382,7 @@ body .course-item-hover {
   .catalog-banner {
     height: 93px; } }
 
-@media (max-width: 390px) {
+@media (max-width: 360px) {
   .catalog-banner .hero-search-form .search-field.form-control {
     width: 342px;
     font-size: 16px; }
@@ -20390,13 +20390,18 @@ body .course-item-hover {
       font-size: 16px; } }
 
 /* course result presentation */
+.catalogPageBox {
+  margin: 0; }
+
 #coursesBox {
   flex-direction: column;
-  margin-top: 50px; }
+  margin: 50px 0 0 0;
+  align-self: center; }
 
 .courseResultCard {
   display: flex;
-  height: 160px; }
+  height: 160px;
+  max-width: 100%; }
   .courseResultCard .courseImage {
     position: relative;
     background-position: center center;
@@ -20412,13 +20417,33 @@ body .course-item-hover {
       inset: 0;
       width: 100%;
       height: 100%; }
+    .courseResultCard .courseImage .info-button {
+      display: none;
+      position: absolute;
+      cursor: pointer;
+      right: 10px;
+      top: 10px;
+      background-image: url("../../assets/images/info-button.png");
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      width: 20px;
+      height: 20px;
+      filter: drop-shadow(0px 5px 10px black); }
   .courseResultCard .itemContent {
-    margin: 0 20px 0 0; }
+    margin: 0 20px 0 0;
+    max-width: 100%; }
     .courseResultCard .itemContent h3 {
       font-weight: 600;
       font-size: 22px;
       line-height: 29px;
-      margin: 2px 0 8px 0; }
+      margin: 0 0 8px 0;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      text-align: right;
+      -webkit-line-clamp: 2;
+      display: -webkit-box;
+      -webkit-box-orient: vertical; }
       .courseResultCard .itemContent h3 a {
         color: #000000; }
     .courseResultCard .itemContent .tagsDiv {
@@ -20428,12 +20453,28 @@ body .course-item-hover {
         border: 1px solid rgba(0, 0, 0, 0.1);
         box-sizing: border-box;
         border-radius: 10px;
-        margin-left: 10px; }
+        margin-left: 10px;
+        font-weight: normal;
+        font-size: 12px;
+        line-height: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        text-align: center; }
         .courseResultCard .itemContent .tagsDiv .courseTag p {
           font-weight: 500;
           font-size: 14px;
           line-height: 18px;
-          margin: 1px 10px; }
+          margin: 1px 10px;
+          padding: 2px 10px;
+          white-space: nowrap;
+          overflow: hidden;
+          margin: 0;
+          width: 100%;
+          text-overflow: ellipsis; }
+      .courseResultCard .itemContent .tagsDiv .plusTag {
+        display: none; }
     .courseResultCard .itemContent .institutionName {
       font-weight: 300;
       font-size: 16px;
@@ -20456,3 +20497,73 @@ body .course-item-hover {
 .coursesResults {
   margin: 0;
   width: 85%; }
+
+@media (max-width: 1200px) {
+  .courseResultCard .itemContent .tagsDiv .plusTag {
+    display: unset;
+    width: 100%;
+    max-width: 26px;
+    height: 22px; }
+  .courseResultCard .itemContent .courseDuration {
+    display: none; } }
+
+@media (max-width: 768px) {
+  #coursesBox {
+    flex-direction: column;
+    margin-top: 50px; }
+  .courseResultCard {
+    display: flex;
+    height: 160px; }
+    .courseResultCard .courseImage .info-button {
+      display: block; }
+    .courseResultCard .itemContent {
+      margin: 0 20px 0 0;
+      max-width: 50%; }
+      .courseResultCard .itemContent .tagsDiv {
+        display: flex;
+        flex-direction: row;
+        justify-content: right;
+        height: 22px;
+        margin: 0 3px;
+        overflow: hidden;
+        max-width: 100%;
+        overflow: unset; }
+        .courseResultCard .itemContent .tagsDiv .courseTag {
+          overflow: hidden; }
+          .courseResultCard .itemContent .tagsDiv .courseTag p {
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 18px;
+            margin: 0; } }
+
+@media (max-width: 480px) {
+  #coursesBox {
+    width: 95%; }
+  .courseResultCard {
+    margin-bottom: 25px;
+    height: unset; }
+    .courseResultCard .courseImage {
+      max-width: 166px;
+      height: 97px; }
+    .courseResultCard .itemContent h3 {
+      line-height: 24px;
+      font-size: 18px;
+      margin: 0; }
+    .courseResultCard .itemContent .institutionName {
+      margin: 0 0 3px 0; }
+    .courseResultCard .itemContent .tagsDiv .courseTag {
+      margin-left: 2px; } }
+
+@media (max-width: 360px) {
+  .courseResultCard {
+    display: flex;
+    height: 160px; }
+    .courseResultCard .itemContent {
+      margin: 0 20px 0 0; }
+      .courseResultCard .itemContent h3 {
+        font-weight: 600;
+        font-size: 22px;
+        line-height: 29px;
+        margin: 2px 0 8px 0; }
+      .courseResultCard .itemContent .tagsDiv {
+        display: flex; } }

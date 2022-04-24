@@ -1085,3 +1085,9 @@ footer .footer-section .inners-footer-items {
     .inputsContainer .filterInput .filterTagLabel .tagNameWrap .term-name {
       padding-left: 10px;
       padding-right: 0; } }
+
+/* course result presentation */
+.courseResultCard .itemContent {
+  margin: 0 0 0 20px; }
+  .courseResultCard .itemContent h3 {
+    text-align: left; }
