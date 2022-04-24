@@ -295,40 +295,7 @@ function markCheckboxes(params) {
     let entries = params.entries();
     let filterItems = $('.checkbox-filter-search');
 
-    /** Check if has params in the url */
-    if(!entries.next().value) {
-        const currentLang = getCookie('openedx-language-preference');
-        filterItems.each((index, element) => {
-            let id = element.id;
-            let type = $(`#${id}`).data('name');
-            let englishValue = $(`#${id}`).data('value');
-
-            if(type === 'language') {
-                let lang;
-                switch (currentLang) {
-                    case 'he':
-                        lang = 'Hebrew';
-                        break;
-                    case 'en':
-                        lang = 'English';
-                        break;
-                    case 'ar':
-                        lang = 'Arabic';
-                        break;
-                }
-
-                if(englishValue.includes(lang)) {
-                    $(`#${id}`).prop('checked', true)
-                    let currentUrl = window.location.href;
-                    let url = new URL(currentUrl);
-                    url.searchParams.set(type, lang);
-                    window.history.pushState({}, '', url);
-                }
-            }
-        });
-    }
-
-    for (let entry of entries) {
+    for ( entry of entries) {
         if(entry[0] == 'text_s') {
             $('.search-field').val(entry[1]);
         }
@@ -360,6 +327,39 @@ function markCheckboxes(params) {
                             $(`#${id}`).prop('checked', true)
                         }
                     }
+                }
+            }
+        });
+    }
+
+    /** Check if has params in the url */
+    if(!entries.next().value) {
+        const currentLang = getCookie('openedx-language-preference');
+        filterItems.each((index, element) => {
+            let id = element.id;
+            let type = $(`#${id}`).data('name');
+            let englishValue = $(`#${id}`).data('value');
+
+            if(type === 'language') {
+                let lang;
+                switch (currentLang) {
+                    case 'he':
+                        lang = 'Hebrew';
+                        break;
+                    case 'en':
+                        lang = 'English';
+                        break;
+                    case 'ar':
+                        lang = 'Arabic';
+                        break;
+                }
+
+                if(englishValue.includes(lang)) {
+                    $(`#${id}`).prop('checked', true)
+                    let currentUrl = window.location.href;
+                    let url = new URL(currentUrl);
+                    url.searchParams.set(type, lang);
+                    window.history.pushState({}, '', url);
                 }
             }
         });
