@@ -19497,8 +19497,6 @@ body .course-item-hover {
   flex-direction: column;
   width: 100%;
   align-items: center; }
-  .catalogWrap .coursesResults {
-    width: 85%; }
   .catalogWrap .catalogStripeWrap {
     margin-bottom: 47px; }
     .catalogWrap .catalogStripeWrap .catalogStripeContainer {
@@ -20456,4 +20454,5 @@ body .course-item-hover {
   line-height: 29px; }
 
 .coursesResults {
-  margin: 0; }
+  margin: 0;
+  width: 85%; }
