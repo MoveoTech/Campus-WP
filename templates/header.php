@@ -51,13 +51,13 @@ wp_head();
                     </nav>
                 </div>
                 <div class="search-form login_search_lang_wrap ">
-                    <span class="search-button"><img src="<?= get_bloginfo('stylesheet_directory') . '/assets/images/search-mobile.svg' ?>" /></span>
-                    <div class="header-courses">
-                        <?php get_search_form(); ?>
-                    </div>
+                    <a  href="<?= esc_url(home_url("/catalog")); ?>">
+                        <span class="search-button"><img src="<?= get_bloginfo('stylesheet_directory') . '/assets/images/search-mobile.svg' ?>" /></span>
+                        <div class="header-courses">
+                            <?php get_search_form(); ?>
+                        </div>
+                    </a>
                 </div>
-
-
 
             </div>
             <div class="user-login-container">

@@ -3,7 +3,6 @@ $= jQuery.noConflict();
 $(document).ready(function () {
 
     let params = new URLSearchParams(document.location.search);
-
     /** Mark selected checkboxes */
     markCheckboxes(params)
 
@@ -15,7 +14,6 @@ $(document).ready(function () {
 
     /** Click event - targeting filters inputs */
     filterByTagEvent();
-
 
     /** Click event - reset filtering **/
     $('.resetFilterButton').on('click', function (event) {
@@ -103,9 +101,10 @@ $(document).click(function(event) {
     }
     /** hiding input container when clicking on other filter group */
     if (filtergroup.is(event.target) || filtergroup.has(event.target).length || filtersInputs.is(event.target) || filtersInputs.has(event.target).length) {
-
+        let filterGroupVector = event.target.closest(".wrapEachFiltergroup").querySelector(".filterVectorMobile");
         let popupMenuDiv = event.target.closest(".wrapEachFiltergroup").querySelector(".inputsContainer");
 if(filtersInputs.is(event.target) || filtersInputs.has(event.target).length){
+    $(filterGroupVector).removeClass('active');
     popupMenuDiv.style.display = "none";
 }
         filtersInputs.each((index, element) => {
@@ -123,6 +122,12 @@ function closingOverlay(){
     jQuery(".header_section").removeClass('menu-open');
     jQuery(".filters-mobile-menu-popup").removeClass('active');
     jQuery(".mobile-menu-popup").removeClass('active');
+    jQuery(".filterVectorMobile").removeClass('active');
+    /** closing open menu inside user menu */
+    jQuery(".mobile-menu-vector").removeClass('active');
+    jQuery(".change-mobile-lang").removeClass('active');
+    jQuery(".secondary-mobile-lang-menu").removeClass('active');
+
     jQuery('html').toggleClass('menu_open');
 }
 
@@ -180,10 +185,22 @@ function slickStripeForMobile() {
                     },
                 ]
             })
-            /** Changing classes in filters menu inputs */
-            $('.checkbox-filter-search').removeClass('filtersInputWeb');
-            $('.checkbox-filter-search').addClass('.checkboxFilterMobile');
+            /** Changing classe in filters menu inputs */
+            $('#filtersSectionMobile .checkbox-filter-search').addClass('.checkboxFilterMobile');
+
+            /** changing inputs id, for mobile */
+           let checkboxArray =  $('#filtersSectionMobile .checkbox-filter-search');
+            checkboxArray.each((index,item) => {
+                item.id = "mobile_" + item.id;
+
+            })
+           /** changing inputs attribute for, for mobile */
+            let labelsArray =  $('#filtersSectionMobile .filterTagLabel');
+            labelsArray.each((index,item) => {
+                item.htmlFor = "mobile_" + item.htmlFor;
+            })
         }
+
     } else if (jQuery('.catalog-courses-stripe').hasClass( "slick-initialized" )){
         jQuery('.catalog-courses-stripe').slick('unslick');
     }
@@ -236,12 +253,21 @@ function appendFilteredCourses(coursesData) {
 
 function getCourseResultTags(tags) {
     let tagsHtml = '';
-    tags.forEach((item, index) => {
-        if(index > 4){
-            return;
-        }
-        tagsHtml = tagsHtml+"<span class='courseTag'><p>"+item+"</p></span>";
-    })
+    if(tags.length >=3){
+        tags.forEach((item, index) => {
+            if(index >=2){
+                tagsHtml = tagsHtml+"<span class='courseTag hiddenCourseTagMobile'><p>"+item+"</p></span>";
+            } else{
+                tagsHtml = tagsHtml+"<span class='courseTag'><p>"+item+"</p></span>";
+            }
+        })
+
+        tagsHtml = tagsHtml+"<span class='courseTag extra-tags plusTag' >+</span>"
+    }else{
+        tags.forEach(item => {
+            tagsHtml = tagsHtml+"<span class='courseTag'><p>"+item+"</p></span>";
+        })
+    }
     return tagsHtml;
 }
 
@@ -365,7 +391,7 @@ function markCheckboxes(params) {
 function haveNoResults(afterSearching= true) {
     let coursesBox = document.getElementById("coursesBox");
     let output = document.createElement("div");
-    const currentLang = getCookie('openedx-language-preference');
+    const currentLang = getCookie('openedx-language-preference') ? getCookie('openedx-language-preference') : getCookie('wp-wpml_current_language');
     let noResultText_he = "לא מצאנו בדיוק את מה שחיפשת אבל אולי יעניין אותך...";
     let noResultText_en = "We didn't find exactly what you were looking for but maybe you will be interested ...";
     let noResultText_ar = "لم نعثر على ما كنت تبحث عنه بالضبط ولكن ربما تكون مهتمًا ...";
@@ -405,11 +431,10 @@ function filterByTagEvent(){
 function filterByTagMobile(){
 
     /** removing event from div */
-    $(`.filterButtonMobileMenu`).unbind('click');
+    $(`.buttonFilterWrap`).unbind('click');
 
     /** click event - targeting each input for filtering */
-    $('.filterButtonMobileMenu').on('click', function (event) {
-
+    $('.buttonFilterWrap').on('click', function (event) {
         let filterData = {"search": {}};
         let tagArray = {};
         let freeSearchData = [];
@@ -606,6 +631,8 @@ function openCheckboxEvent() {
     /** click event - targeting each checkbox to open */
     $('.wrapEachFiltergroup').on('click', function (event) {
         let popupMenuDiv = event.target.closest(".wrapEachFiltergroup").querySelector(".inputsContainer");
+        let filterGroupVector = event.target.closest(".wrapEachFiltergroup").querySelector(".filterVectorMobile");
+        $(filterGroupVector).toggleClass('active');
         $(popupMenuDiv).toggle();
 
     });

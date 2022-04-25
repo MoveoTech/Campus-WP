@@ -91,7 +91,6 @@ if(count($oneOrMoreMatches->rows) === 0 && count($courses->rows) === 0){
             <div class="filtersSection">
                 <div class="allFiltersWrapDiv">
                     <?php
-                    if(!wp_is_mobile()){
                         get_template_part('template', 'parts/Filters/filters-section',
                             array(
                                 'args' => array(
@@ -99,7 +98,6 @@ if(count($oneOrMoreMatches->rows) === 0 && count($courses->rows) === 0){
                                     'menuFilters' => $menuFilters,
                                 )
                             ));
-                    }
                     ?>
                 </div>
                 <div class="openFiltersMenu">
@@ -179,9 +177,8 @@ if(count($oneOrMoreMatches->rows) === 0 && count($courses->rows) === 0){
 </div>
 
 <?php
-if (wp_is_mobile()) {
+
     get_filters_menu($menuFilters);
-}
 function get_filters_menu($menuFilters) {
 
     $encoded_path = urlencode($_SERVER['REQUEST_URI']);
