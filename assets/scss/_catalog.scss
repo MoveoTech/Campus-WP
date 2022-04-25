@@ -471,7 +471,6 @@
     background-repeat: no-repeat;
     background-size: cover;
     flex-basis: 253px;
-
     height: 124px;
     border-radius: 10px;
     box-shadow: 0 5px 10px rgba(40, 40, 40, 0.2);
@@ -500,6 +499,7 @@
   .itemContent {
     margin: 0 20px 0 0;
     max-width: 100%;
+    flex-basis:calc(100% - 253px);
 
     h3 {
       font-weight: 600;
