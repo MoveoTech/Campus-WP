@@ -89,7 +89,6 @@
   justify-content: flex-start;
   align-items: center;
   padding: 0;
-  position: static;
   left: 0;
   top: 0;
   order: 0;
@@ -533,6 +532,9 @@
         justify-content: center;
         height: 100%;
         text-align: center;
+        text-overflow: ellipsis;
+        flex-basis: 30%;
+        max-width: fit-content;
         p{
           font-weight: 500;
           font-size: 14px;
@@ -586,14 +588,18 @@
     .courseResultCard {
       .itemContent {
         .tagsDiv{
+          .courseTag {
+            overflow: hidden;
+          }
           .hiddenCourseTagMobile{
             display: none;
           }
           .plusTag{
             display: unset;
-            width: 100%;
             width: 26px;
-            height: 22px;
+            height: 20px;
+            max-width: unset;
+            flex-basis: unset;
           }
         }
         .courseDuration{
@@ -605,6 +611,9 @@
   }
   @media (max-width: 768px) {
 
+    .coursesResults{
+      width:95%;
+    }
     #coursesBox{
       flex-direction: column;
       margin-top: 50px;
@@ -621,25 +630,26 @@
       .itemContent {
         margin: 0 20px 0 0;
         flex-basis:calc(100% - 190px);
+        max-width: 50%;
 
         .tagsDiv{
           display: flex;
           flex-direction: row;
           justify-content: right;
           height: 22px;
-          margin: 0 3px;
+          margin: 0;
           overflow: hidden;
           max-width: 100%;
           overflow: unset;
 
           .courseTag{
-            overflow: hidden;
 
             p{
               font-weight: 500;
               font-size: 14px;
               line-height: 18px;
               margin:0;
+              padding: 2px 3px;
             }
           }
         }
@@ -647,7 +657,7 @@
     }
   }
 
-@media (max-width: 480px) {
+@media (max-width: 490px) {
   #coursesBox{
     width: 95%;
   }
@@ -659,6 +669,7 @@
       height: 97px;
     }
     .itemContent {
+      flex-basis:calc(100% - 120px);
       h3{
         line-height: 24px;
         font-size: 18px;
@@ -674,33 +685,13 @@
       }
     }
   }
+  }
 
+  @media (max-width: 389px) {
 
   }
 
-  @media (max-width: 360px) {
-    .courseResultCard {
-      display: flex;
-      height: 160px;
 
-      .itemContent {
-        margin: 0 20px 0 0;
-
-        h3 {
-          font-weight: 600;
-          font-size: 22px;
-          line-height: 29px;
-          margin: 2px 0 8px 0;;
-        }
-        .tagsDiv{
-          display: flex;
-        }
-
-
-      }
-
-    }
-  }
 .coursesContainer {
   width: 100%;
   padding: 0;

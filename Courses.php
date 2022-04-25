@@ -72,7 +72,6 @@ $no_result_text_ar = "لم نعثر على ما كنت تبحث عنه بالض�
 if(count($oneOrMoreMatches->rows) === 0 && count($courses->rows) === 0){
     $no_results_found = true;
 }
-
 ?>
 
 <div class="catalog-banner">
