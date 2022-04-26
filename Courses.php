@@ -1,6 +1,6 @@
 <?php
 /**
- * Template Name: New-Courses
+ * Template Name: Catalog
  * Created by Ido Leybovitch.
  * Date: 28/02/2022
  * Time: 11:00
