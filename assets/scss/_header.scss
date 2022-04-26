@@ -326,6 +326,11 @@ header.scrolling-header {
   }
   .search-form {
     display: block;
+    a{
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
     .search-button {
       display: block;
       background: transparent;

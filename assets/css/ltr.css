@@ -1003,13 +1003,12 @@ footer .footer-section .inners-footer-items {
   right: 5px; }
 
 /* filter by tag menu */
-.filtersSection {
-  margin-right: 0; }
-  .filtersSection .allFiltersWrapDiv .checkboxFiltersWrap #groupFiltersContainer {
-    margin-left: unset;
-    margin-right: 80px; }
-  .filtersSection .allFiltersWrapDiv .checkboxFiltersWrap .filterVector {
-    margin: 0 0 0 7px; }
+.filtersSection .allFiltersWrapDiv .checkboxFiltersWrap #groupFiltersContainer {
+  margin-left: unset;
+  margin-right: 80px; }
+
+.filtersSection .allFiltersWrapDiv .checkboxFiltersWrap .filterVector {
+  margin: 0 0 0 7px; }
 
 /* popup menu - filters */
 .inputsContainer {
@@ -1067,8 +1066,7 @@ footer .footer-section .inners-footer-items {
 /* mobile menu filter */
 .openFiltersMenu {
   left: unset;
-  right: 30px;
-  top: 219px; }
+  right: 30px; }
 
 .filters-mobile-menu-popup {
   transform: translateX(135%); }
