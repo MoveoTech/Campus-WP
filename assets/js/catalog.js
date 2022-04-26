@@ -210,7 +210,6 @@ function appendFilteredCourses(coursesData) {
 
     let coursesBox = document.getElementById("coursesBox");
     let output = document.createElement("div");
-
     output.id = 'coursesBox';
     output.classList.add('row');
     output.classList.add('output-courses');

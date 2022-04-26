@@ -19505,9 +19505,9 @@ body .course-item-hover {
     margin-bottom: 47px; }
     .catalogWrap .catalogStripeWrap .catalogStripeContainer {
       width: 85%;
-      margin: auto; }
+      margin: auto 185px auto auto; }
     .catalogWrap .catalogStripeWrap .catalogStripeHeader {
-      margin: 27px auto; }
+      margin: 0 auto 26px; }
       .catalogWrap .catalogStripeWrap .catalogStripeHeader h1 {
         margin: 0 10px 0 0;
         font-family: 'Assistant';
@@ -20065,7 +20065,7 @@ body .course-item-hover {
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
-    width: 242px;
+    width: 245px;
     height: 100%;
     position: absolute;
     right: 0;
@@ -20090,7 +20090,8 @@ body .course-item-hover {
       font-weight: 500;
       font-size: 32px;
       line-height: 42px;
-      text-align: center; }
+      text-align: center;
+      margin-bottom: 0; }
   .catalog-banner .hero-search-form {
     z-index: 2;
     display: inline-block;
@@ -20136,7 +20137,7 @@ body .course-item-hover {
   top: 0;
   order: 0;
   flex-grow: 0;
-  margin: 15px 50px 15px 0; }
+  margin: 23px 100px 14px 0; }
   .filtersSection .allFiltersWrapDiv {
     display: flex;
     flex-direction: row;
@@ -20402,8 +20403,10 @@ body .course-item-hover {
 
 #coursesBox {
   flex-direction: column;
-  margin: 60px 0 0 0;
-  align-self: center; }
+  margin: 60px 0 45px 0;
+  align-self: center;
+  width: 100%;
+  padding-right: 190px; }
 
 .courseResultCard {
   display: flex;
@@ -20504,10 +20507,6 @@ body .course-item-hover {
   font-size: 22px;
   line-height: 29px; }
 
-.coursesResults {
-  margin: 0;
-  width: 90%; }
-
 @media (max-width: 1200px) {
   .courseResultCard .itemContent .tagsDiv .courseTag {
     overflow: hidden; }
@@ -20523,11 +20522,6 @@ body .course-item-hover {
     display: none; } }
 
 @media (max-width: 768px) {
-  .coursesResults {
-    width: 95%; }
-  #coursesBox {
-    flex-direction: column;
-    margin-top: 50px; }
   .courseResultCard {
     display: flex;
     height: 160px; }
@@ -20556,8 +20550,6 @@ body .course-item-hover {
           padding: 2px 3px; } }
 
 @media (max-width: 490px) {
-  #coursesBox {
-    width: 95%; }
   .courseResultCard {
     margin-bottom: 25px;
     height: unset; }
@@ -20580,3 +20572,7 @@ body .course-item-hover {
   padding: 0;
   margin-right: auto;
   margin-left: auto; }
+
+.wrapCourseContent {
+  max-width: 1440px;
+  margin: 0 auto; }
