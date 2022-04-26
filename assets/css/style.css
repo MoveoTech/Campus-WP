@@ -20255,6 +20255,11 @@ body .course-item-hover {
           line-height: 13px;
           max-width: unset; }
 
+#morefiltersBox .filterInput {
+  margin: 22px 0; }
+  #morefiltersBox .filterInput .tagNameWrap::before {
+    display: none; }
+
 .checkbox-filter-search:checked ~ .wrap-term-and-sum:before {
   background-color: black; }
 
