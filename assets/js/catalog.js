@@ -41,6 +41,7 @@ $(document).ready(function () {
 
     /** Click event - adding more filters **/
     $('.moreFilters .extraFilterCheckbox').on('click', function (event) {
+
         /**Getting targeted input */
         let filterId = $(event.target).data('value');
         let filterGroupName = event.target.value;
@@ -518,7 +519,6 @@ function filterByTagMobile(){
 
 /** Ajax call - getting filters group name and there tags **/
 function getFiltersGroups(filterId) {
-
     let data = {
         'action': 'add_filters_to_menu',
         'type' : 'moreFilters',
@@ -567,7 +567,7 @@ function appendMoreFilters(filterData) {
             '</label>';
         container.append(temp);
     })
-    filterByTagEvent();
+    // filterByTagEvent();
 }
 
 /** ajax call */
@@ -598,7 +598,6 @@ function filterCoursesAjax(filterData) {
 
 /** Appending filter group **/
 function appendGroupFilter(filterGroupName, filterId) {
-
     let vector = $('.filterVector').attr('src');
     let container = document.getElementById('groupFiltersContainer');
     let groupTitle = filterGroupName;
