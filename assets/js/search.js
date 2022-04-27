@@ -10,7 +10,7 @@ jQuery(document).ready(function () {
             $searchValue = $form.find('[name = "text_s"]').val();
             grecaptcha.ready(function () {
                 grecaptcha.execute('6LclyM8aAAAAAMttjBLWQ6mu9QQoW9GBACQTaeAE', {action: 'submit'}).then(function (token) {
-                    var url = $form.attr('action') + '?text_s=' + $searchValue;
+                    var url = $form.attr('action') + '/?text_s=' + $searchValue;
                     window.location.href = url;
                 });
             });
