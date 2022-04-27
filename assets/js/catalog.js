@@ -415,16 +415,13 @@ function haveNoResults(afterSearching= true) {
 /** Filtering by tag function of catalog - need to remove  */
 function filterByTagEvent(){
     /** removing event from div */
-   $(`.filtersSection .filtersInputWeb`).unbind('click');
+   $('.filtersSection .filtersInputWeb').off('click');
 
     /** click event - targeting each input for filtering */
-    $('.filtersSection .filtersInputWeb').on('click', function (event) {
-      if($(event.target).hasClass("extraFilterCheckbox")){
-          return;
-      }
+    $('.filtersSection .filtersInputWeb').click(function (event) {
       getCourses();
-
-    })}
+    })
+}
 
 
 /** filterByTagMobile function of catalog  */
@@ -528,7 +525,6 @@ function getFiltersGroups(filterId) {
         if(response.success){
             const responseData = JSON.parse(response.data);
             appendMoreFilters(responseData);
-
         }
     })
 }
