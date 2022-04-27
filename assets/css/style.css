@@ -20266,8 +20266,6 @@ body .course-item-hover {
 #resetButton {
   background-color: transparent; }
   #resetButton .resetFilterButton {
-    font-family: 'Assistant';
-    font-style: normal;
     font-weight: 700;
     font-size: 14px;
     line-height: 18px;

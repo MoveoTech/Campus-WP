@@ -15,6 +15,7 @@ $(document).ready(function () {
     /** Click event - targeting filters inputs */
     filterByTagEvent();
 
+
     /** Click event - reset filtering **/
     $('.resetFilterButton').on('click', function (event) {
         let currentUrl = window.location.href;
@@ -26,7 +27,6 @@ $(document).ready(function () {
         filtersInputs.each((index, element) => {
             element.checked = false;
         });
-
         /** Clear search input fields */
         $('.search-field').val('');
 
@@ -34,9 +34,9 @@ $(document).ready(function () {
         if(currentUrl.includes('?')){
             getCourses()
         }
-
         /** removing extra filters **/
         $('.extraFilter').remove();
+
     });
 
     /** Click event - adding more filters **/
@@ -47,9 +47,9 @@ $(document).ready(function () {
         let filterGroupName = event.target.value;
         /** If element checked appending it to menu, else - remove it */
         if(event.target.checked){
-            appendGroupFilter(filterGroupName, filterId)
-            getFiltersGroups(filterId)
-            openCheckboxEvent()
+            appendGroupFilter(filterGroupName, filterId);
+            getFiltersGroups(filterId);
+            openCheckboxEvent();
         } else {
             let filterToRemove = document.getElementsByClassName(filterId)[0];
             filterToRemove.remove()
@@ -251,7 +251,6 @@ function appendFilteredCourses(coursesData) {
 
 } //TODO build template for result course card
 
-
 function getCourseResultTags(tags) {
     let tagsHtml = '';
     if(tags.length >=3){
@@ -271,7 +270,6 @@ function getCourseResultTags(tags) {
     }
     return tagsHtml;
 }
-
 
 function appendUrlParams(filters) {
 
@@ -379,6 +377,7 @@ function markCheckboxes(params) {
 
                 if(englishValue.includes(lang)) {
                     $(`#${id}`).prop('checked', true)
+                    $(`#mobile_${id}`).prop('checked', true)
                     let currentUrl = window.location.href;
                     let url = new URL(currentUrl);
                     url.searchParams.set(type, lang);
@@ -413,19 +412,18 @@ function haveNoResults(afterSearching= true) {
     coursesBox.replaceWith(output)
 }
 
+
 /** Filtering by tag function of catalog - need to remove  */
 function filterByTagEvent(){
     /** removing event from div */
    $(`.filtersSection .filtersInputWeb`).unbind('click');
-
     /** click event - targeting each input for filtering */
     $('.filtersSection .filtersInputWeb').on('click', function (event) {
-      if($(event.target).hasClass("extraFilterCheckbox")){
-          return;
-      }
+
       getCourses();
 
-    })}
+    })
+}
 
 
 /** filterByTagMobile function of catalog  */
@@ -528,7 +526,6 @@ function getFiltersGroups(filterId) {
         if(response.success){
             const responseData = JSON.parse(response.data);
             appendMoreFilters(responseData);
-
         }
     })
 }
@@ -566,13 +563,12 @@ function appendMoreFilters(filterData) {
             '</div>'+
             '</label>';
         container.append(temp);
-    })
-    // filterByTagEvent();
+    });
+    filterByTagEvent();
 }
 
 /** ajax call */
 function filterCoursesAjax(filterData) {
-
     let data = {
         'action': 'filter_by_tag',
         'type' : 'courses',
@@ -586,6 +582,7 @@ function filterCoursesAjax(filterData) {
             appendUrlParams(responseData['filters'])
             if(responseData['courses'].length > 0) {
                 // loadCourses(responseData['courses'])
+
                 appendFilteredCourses(responseData['courses'])
             } else if(responseData['params'] == null) {
                 haveNoResults(false)
@@ -618,6 +615,7 @@ function appendGroupFilter(filterGroupName, filterId) {
         '</div>';
 
     container.insertBefore(temp, addFilterbutton);
+
 
 
 }

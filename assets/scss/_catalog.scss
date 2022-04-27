@@ -259,7 +259,6 @@
 
 }
 
-
 .checkbox-filter-search:checked ~ .wrap-term-and-sum:before {
   background-color: black;
 }
@@ -269,8 +268,6 @@
   background-color: transparent;
 
   .resetFilterButton {
-    font-family: 'Assistant';
-    font-style: normal;
     font-weight: 700;
     font-size: 14px;
     line-height: 18px;
