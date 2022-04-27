@@ -26,7 +26,7 @@ if($url_params){
     $filters = getFiltersArray($url_params);
     $params = getPodsFilterParams($filters);
 } else {
-    $params = getParamsForDefaultLang();
+    $params = getPodsFilterParams(null);
 }
 
 /** PARAMETERS */
