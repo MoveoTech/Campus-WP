@@ -1442,6 +1442,7 @@ footer .footer-section{
 /* filter by tag menu */
 
 .filtersSection{
+    margin: 23px 0 14px 100px;
     .allFiltersWrapDiv{
         .checkboxFiltersWrap{
             #groupFiltersContainer{
@@ -1500,6 +1501,7 @@ footer .footer-section{
 .catalog-courses-stripe{
     justify-content: left;
     .course-stripe-item{
+        margin: 0 20px 27px 0;
         .item-content{
             h3{
                 text-align: left;
@@ -1518,6 +1520,8 @@ footer .footer-section{
 .catalogWrap {
     .catalogStripeWrap {
         .catalogStripeContainer {
+            padding-right: 0;
+            padding-left: 190px;
             .catalogStripeHeader {
                 h1, p{
                     margin-left: 10px;
@@ -1528,23 +1532,59 @@ footer .footer-section{
     }
 }
 
-/* catalog stripe - media query */
-@media (max-width: 1269px) {
-    .catalog-courses-stripe{
-        justify-content: center;
+/* course result presentation */
+#coursesBox{
+    padding-right: 0;
+    padding-left: 190px;
+}
+.courseResultCard{
+    .info-button{
+        right: unset;
+        left: 10px;
+    }
+    .itemContent{
+        margin: 0 0 0 20px;
+        h3{
+            text-align: left;
+        }
+        .tagsDiv{
+            justify-content: left;
+        }
     }
 }
 
-@media (max-width: 768px) {
+/* catalog stripe - media query */
+@media (max-width: 1200px) {
+    #coursesBox{
+        padding-right: 0;
+        padding-left: 80px;
+    }
     .catalogWrap {
         .catalogStripeWrap {
             .catalogStripeContainer {
-                .catalogStripeHeader {
-                    margin-left: 0px;
-                }
+                padding-right: 0;
+                padding-left: 80px;
             }
         }
     }
+
+}
+
+@media (max-width: 768px) {
+    #coursesBox{
+        padding-left: 0;
+    }
+
+    .catalogWrap {
+        padding-left: 11px;
+        padding-right: 0;
+        .catalogStripeWrap {
+            .catalogStripeContainer {
+                padding-left: 0;
+            }
+        }
+    }
+
 }
 
 /* mobile menu filter */
@@ -1575,14 +1615,4 @@ footer .footer-section{
         padding-right: 0;
     }
 }
-}
-
-/* course result presentation */
-.courseResultCard{
-    .itemContent{
-        margin: 0 0 0 20px;
-        h3{
-            text-align: left;
-        }
-    }
 }
