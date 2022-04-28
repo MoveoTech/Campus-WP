@@ -31,6 +31,7 @@ $choose_str = __('Choose Institution', 'single_corse');
                 $url_title = $single_academic_institution->english_name;
                 $ID = $single_academic_institution->id;
                 $checked = $selected = '';
+                $rand_ID = rand();
                 if(in_array($ID, $get_params['institution'])){
                     $checked = 'checked';
                     $selected = 'selected';
@@ -39,8 +40,8 @@ $choose_str = __('Choose Institution', 'single_corse');
 
 
                 <div class="filterInput">
-                    <label class="filterTagLabel" for="institution_<?= $ID ?>">
-                        <input <?= $checked ?> class="checkbox-filter-search filtersInputWeb" type="checkbox" data-name="institution" data-group='<?= $filter_title ?>' data-value="<?= $url_title ?>" value="<?= $title ?>" id="institution_<?= $ID ?>">
+                    <label class="filterTagLabel" for="institution_<?= $rand_ID ?>">
+                        <input <?= $checked ?> class="checkbox-filter-search filtersInputWeb" type="checkbox" data-name="institution" data-group='<?= $filter_title ?>' data-value="<?= $url_title ?>" value="<?= $title ?>" id="institution_<?= $rand_ID ?>">
                         <div class="wrap-term-and-sum tagNameWrap">
                             <span class="term-name"><?= $title ?></span>
                         </div>

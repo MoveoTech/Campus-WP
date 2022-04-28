@@ -6613,6 +6613,9 @@ html body {
 [lang="ar"] body {
   font-family: Assistant, arial; }
 
+html[lang="en-US"] {
+  overflow-x: hidden; }
+
 body {
   margin: auto; }
 
@@ -20149,8 +20152,6 @@ body .course-item-hover {
 #resetButton {
   background-color: transparent; }
   #resetButton .resetFilterButton {
-    font-family: 'Assistant';
-    font-style: normal;
     font-weight: 700;
     font-size: 14px;
     line-height: 18px;
