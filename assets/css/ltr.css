@@ -1003,12 +1003,13 @@ footer .footer-section .inners-footer-items {
   right: 5px; }
 
 /* filter by tag menu */
-.filtersSection .allFiltersWrapDiv .checkboxFiltersWrap #groupFiltersContainer {
-  margin-left: unset;
-  margin-right: 80px; }
-
-.filtersSection .allFiltersWrapDiv .checkboxFiltersWrap .filterVector {
-  margin: 0 0 0 7px; }
+.filtersSection {
+  margin: 23px 0 14px 100px; }
+  .filtersSection .allFiltersWrapDiv .checkboxFiltersWrap #groupFiltersContainer {
+    margin-left: unset;
+    margin-right: 80px; }
+  .filtersSection .allFiltersWrapDiv .checkboxFiltersWrap .filterVector {
+    margin: 0 0 0 7px; }
 
 /* popup menu - filters */
 .inputsContainer {
@@ -1043,25 +1044,55 @@ footer .footer-section .inners-footer-items {
 /* catalog stripe */
 .catalog-courses-stripe {
   justify-content: left; }
-  .catalog-courses-stripe .course-stripe-item .item-content h3 {
-    text-align: left; }
-  .catalog-courses-stripe .course-stripe-item .item-content p {
-    text-align: left; }
-  .catalog-courses-stripe .course-stripe-item .tags-div {
-    justify-content: left;
-    margin: 0; }
+  .catalog-courses-stripe .course-stripe-item {
+    margin: 0 20px 27px 0; }
+    .catalog-courses-stripe .course-stripe-item .item-content h3 {
+      text-align: left; }
+    .catalog-courses-stripe .course-stripe-item .item-content p {
+      text-align: left; }
+    .catalog-courses-stripe .course-stripe-item .tags-div {
+      justify-content: left;
+      margin: 0; }
 
-.catalogWrap .catalogStripeWrap .catalogStripeContainer .catalogStripeHeader h1, .catalogWrap .catalogStripeWrap .catalogStripeContainer .catalogStripeHeader p {
-  margin-left: 10px; }
+.catalogWrap .catalogStripeWrap .catalogStripeContainer {
+  padding-right: 0;
+  padding-left: 190px; }
+  .catalogWrap .catalogStripeWrap .catalogStripeContainer .catalogStripeHeader h1, .catalogWrap .catalogStripeWrap .catalogStripeContainer .catalogStripeHeader p {
+    margin-left: 10px; }
+
+/* course result presentation */
+#coursesBox {
+  padding-right: 0;
+  padding-left: 190px; }
+
+.courseResultCard .info-button {
+  right: unset;
+  left: 10px; }
+
+.courseResultCard .itemContent {
+  margin: 0 0 0 20px; }
+  .courseResultCard .itemContent h3 {
+    text-align: left; }
+  .courseResultCard .itemContent .tagsDiv {
+    justify-content: left; }
 
 /* catalog stripe - media query */
-@media (max-width: 1269px) {
-  .catalog-courses-stripe {
-    justify-content: center; } }
+@media (max-width: 1200px) {
+  #coursesBox {
+    padding-right: 0;
+    padding-left: 80px; }
+  .catalogWrap .catalogStripeWrap .catalogStripeContainer {
+    padding-right: 0;
+    padding-left: 80px; } }
 
 @media (max-width: 768px) {
-  .catalogWrap .catalogStripeWrap .catalogStripeContainer .catalogStripeHeader {
-    margin-left: 0px; } }
+  #coursesBox {
+    padding-left: 0; }
+  .catalogWrap {
+    padding-left: 11px;
+    padding-right: 0; }
+    .catalogWrap .catalogStripeWrap .catalogStripeContainer {
+      padding-left: 0; } }
 
 /* mobile menu filter */
 .openFiltersMenu {
@@ -1083,9 +1114,3 @@ footer .footer-section .inners-footer-items {
     .inputsContainer .filterInput .filterTagLabel .tagNameWrap .term-name {
       padding-left: 10px;
       padding-right: 0; } }
-
-/* course result presentation */
-.courseResultCard .itemContent {
-  margin: 0 0 0 20px; }
-  .courseResultCard .itemContent h3 {
-    text-align: left; }

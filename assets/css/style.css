@@ -19388,7 +19388,7 @@ body .course-item-hover {
   .catalog-courses-stripe .course-stripe-item {
     position: relative;
     max-height: 277px;
-    margin: 0 10px 27px;
+    margin: 0 0 27px 20px;
     max-width: 253px;
     width: 100%; }
     .catalog-courses-stripe .course-stripe-item .course-img {
@@ -19504,14 +19504,12 @@ body .course-item-hover {
   .catalogWrap .catalogStripeWrap {
     margin-bottom: 47px; }
     .catalogWrap .catalogStripeWrap .catalogStripeContainer {
-      width: 85%;
-      margin: auto 185px auto auto; }
+      width: 100%;
+      margin: auto;
+      padding-right: 190px; }
     .catalogWrap .catalogStripeWrap .catalogStripeHeader {
       margin: 0 auto 26px; }
       .catalogWrap .catalogStripeWrap .catalogStripeHeader h1 {
-        margin: 0 10px 0 0;
-        font-family: 'Assistant';
-        font-style: normal;
         font-weight: 600;
         font-size: 32px;
         line-height: 42px; }
@@ -19524,47 +19522,15 @@ body .course-item-hover {
   .coursesContainer {
     max-width: 1440px; } }
 
-@media (max-width: 1285px) {
+@media (max-width: 1200px) {
   .catalogWrap .catalogStripeWrap .catalogStripeContainer {
-    width: 86%; } }
-
-@media (max-width: 1269px) {
-  .catalog-courses-stripe {
-    justify-content: center; }
-  .catalogWrap .catalogStripeWrap .catalogStripeContainer {
-    width: 97%; }
-    .catalogWrap .catalogStripeWrap .catalogStripeContainer .catalogStripeHeader {
-      width: 91%; } }
-
-@media (max-width: 1125px) {
-  .catalogWrap .catalogStripeWrap .catalogStripeContainer .catalogStripeHeader {
-    width: 74%; } }
-
-@media (max-width: 1040px) {
-  .catalogWrap .catalogStripeWrap .catalogStripeHeader {
-    width: 80%; } }
-
-@media (max-width: 952px) {
-  .catalogWrap .catalogStripeWrap .catalogStripeContainer .catalogStripeHeader {
-    width: 84%; } }
-
-@media (max-width: 916px) {
-  .catalogWrap .catalogStripeWrap .catalogStripeContainer {
-    width: 100%; }
-    .catalogWrap .catalogStripeWrap .catalogStripeContainer .catalogStripeHeader {
-      width: 88%; } }
-
-@media (max-width: 818px) {
-  .catalogWrap .catalogStripeWrap .catalogStripeContainer {
-    width: 100%; }
-    .catalogWrap .catalogStripeWrap .catalogStripeContainer .catalogStripeHeader {
-      width: 65%; } }
+    padding-right: 80px; } }
 
 @media (max-width: 768px) {
   .catalog-courses-stripe button.slick-button {
     display: none !important; }
   .catalog-courses-stripe .course-stripe-item {
-    margin: 0 5px; }
+    margin-left: 10px; }
     .catalog-courses-stripe .course-stripe-item .course-img {
       height: 97px; }
       .catalog-courses-stripe .course-stripe-item .course-img .info-button {
@@ -19591,101 +19557,22 @@ body .course-item-hover {
     .catalog-courses-stripe .course-stripe-item .tags-div .tag-2 {
       display: none; }
   .catalogWrap {
-    align-items: end; }
-    .catalogWrap .catalogStripeWrap .catalogStripeContainer {
-      max-width: 748px;
-      width: 100%;
-      margin-bottom: 25px; }
-      .catalogWrap .catalogStripeWrap .catalogStripeContainer .catalogStripeHeader {
-        width: 94%;
-        margin-right: 0px; }
-        .catalogWrap .catalogStripeWrap .catalogStripeContainer .catalogStripeHeader h1 {
-          font-size: 26px;
-          line-height: 34px; } }
-
-@media (max-width: 748px) {
-  .catalogWrap .catalogStripeWrap .catalogStripeContainer {
-    max-width: 728px; } }
-
-@media (max-width: 728px) {
-  .catalogWrap .catalogStripeWrap .catalogStripeContainer {
-    max-width: 710px; } }
-
-@media (max-width: 710px) {
-  .catalogWrap .catalogStripeWrap .catalogStripeContainer {
-    max-width: 690px; } }
-
-@media (max-width: 690px) {
-  .catalogWrap .catalogStripeWrap .catalogStripeContainer {
-    max-width: 670px; } }
-
-@media (max-width: 670px) {
-  .catalogWrap .catalogStripeWrap .catalogStripeContainer {
-    max-width: 650px; } }
-
-@media (max-width: 650px) {
-  .catalogWrap .catalogStripeWrap .catalogStripeContainer {
-    max-width: 630px; } }
-
-@media (max-width: 630px) {
-  .catalogWrap .catalogStripeWrap .catalogStripeContainer {
-    max-width: 610px; } }
-
-@media (max-width: 610px) {
-  .catalogWrap .catalogStripeWrap .catalogStripeContainer {
-    max-width: 590px; } }
-
-@media (max-width: 590px) {
-  .catalogWrap .catalogStripeWrap .catalogStripeContainer {
-    max-width: 570px; } }
-
-@media (max-width: 570px) {
-  .catalogWrap .catalogStripeWrap .catalogStripeContainer {
-    max-width: 540px; } }
-
-@media (max-width: 540px) {
-  .catalogWrap .catalogStripeWrap .catalogStripeContainer {
-    max-width: 505px; } }
-
-@media (max-width: 505px) {
-  .catalogWrap .catalogStripeWrap .catalogStripeContainer {
-    max-width: 480px; } }
-
-@media (max-width: 480px) {
-  .catalogWrap .catalogStripeWrap .catalogStripeContainer {
-    max-width: 460px; } }
-
-@media (max-width: 460px) {
-  .catalogWrap .catalogStripeWrap .catalogStripeContainer {
-    max-width: 440px; } }
-
-@media (max-width: 440px) {
-  .catalogWrap .catalogStripeWrap .catalogStripeContainer {
-    max-width: 420px; } }
-
-@media (max-width: 420px) {
-  .catalogWrap .catalogStripeWrap .catalogStripeContainer {
-    max-width: 400px; } }
+    padding-right: 11px; }
+    .catalogWrap .catalogStripeWrap {
+      width: 100%; }
+      .catalogWrap .catalogStripeWrap .catalogStripeContainer {
+        padding-right: 0;
+        margin-bottom: 25px; } }
 
 @media (max-width: 400px) {
   .catalog-courses-stripe .course-stripe-item {
     max-width: 166px; }
     .catalog-courses-stripe .course-stripe-item .course-img {
-      max-width: 166px; }
-  .catalogWrap .catalogStripeWrap .catalogStripeContainer {
-    max-width: 390px; } }
+      max-width: 166px; } }
 
 @media (max-width: 390px) {
   .catalog-courses-stripe .course-stripe-item {
-    min-width: unset; }
-  .catalogWrap .catalogStripeWrap .catalogStripeContainer {
-    max-width: 380px; }
-    .catalogWrap .catalogStripeWrap .catalogStripeContainer .catalogStripeHeader {
-      margin-right: 0; } }
-
-@media (max-width: 380px) {
-  .catalogWrap .catalogStripeWrap .catalogStripeContainer {
-    max-width: 360px; } }
+    min-width: unset; } }
 
 /* stripes media query */
 @media (max-width: 1439px) {
@@ -20316,15 +20203,19 @@ body .course-item-hover {
       margin: auto 16px auto; }
   .buttonNavFiltersMenu {
     display: flex;
+    position: fixed;
     z-index: 8;
     width: 100%;
-    height: 13%; }
+    bottom: 0;
+    background-color: #ffffff;
+    -webkit-box-shadow: 0px -9px 19px -10px rgba(0, 0, 0, 0.06);
+    box-shadow: 0px -9px 19px -10px rgba(0, 0, 0, 0.06); }
     .buttonNavFiltersMenu .buttonFilterWrap {
       display: flex;
       background: #91C653;
       border-radius: 30px;
       width: 90%;
-      margin: auto;
+      margin: 21.5px auto;
       height: 57px;
       z-index: 8; }
       .buttonNavFiltersMenu .buttonFilterWrap .filterButtonMobileMenu {
@@ -20335,9 +20226,10 @@ body .course-item-hover {
         color: #FFFFFF; }
   #filtersSectionMobile {
     position: relative;
-    height: 87%;
+    height: 92%;
     top: 63px;
-    overflow-y: auto; }
+    overflow-y: auto;
+    padding-bottom: 100px; }
   .wrapEachFiltergroup {
     display: flex;
     box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
@@ -20442,7 +20334,7 @@ body .course-item-hover {
   .courseResultCard .itemContent {
     margin: 0 20px 0 0;
     max-width: 100%;
-    flex-basis: calc(100% - 253px); }
+    flex-basis: calc(100% - 120px); }
     .courseResultCard .itemContent h3 {
       font-weight: 600;
       font-size: 22px;
@@ -20508,6 +20400,8 @@ body .course-item-hover {
   line-height: 29px; }
 
 @media (max-width: 1200px) {
+  #coursesBox {
+    padding-right: 80px; }
   .courseResultCard .itemContent .tagsDiv .courseTag {
     overflow: hidden; }
   .courseResultCard .itemContent .tagsDiv .hiddenCourseTagMobile {
@@ -20522,6 +20416,8 @@ body .course-item-hover {
     display: none; } }
 
 @media (max-width: 768px) {
+  #coursesBox {
+    padding-right: 0; }
   .courseResultCard {
     display: flex;
     height: 160px; }
@@ -20552,7 +20448,7 @@ body .course-item-hover {
 @media (max-width: 490px) {
   .courseResultCard {
     margin-bottom: 25px;
-    height: unset; }
+    height: 97px; }
     .courseResultCard .courseImage {
       max-width: 166px;
       height: 97px; }

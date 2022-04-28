@@ -1137,7 +1137,7 @@ function course_popup_button_text() {
     $current = $sitepress->get_current_language();
     $text = 'מעבר לעמוד הקורס';
     if ($current === 'en') {
-        $text = 'Go to the course page';
+        $text = 'Go to course page';
     }
     if ($current === 'ar') {
         $text = 'اذهب إلى صفحة الدورة';

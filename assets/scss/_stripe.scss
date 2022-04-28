@@ -1153,7 +1153,7 @@ body {
   .course-stripe-item {
     position: relative;
     max-height: 277px;
-    margin: 0 10px 27px;
+    margin: 0 0 27px 20px;
     max-width: 253px;
     width: 100%;
     .course-img {
@@ -1288,16 +1288,14 @@ body {
     margin-bottom: 47px;
 
     .catalogStripeContainer {
-      width: 85%;
-      margin: auto 185px auto auto;
+      width: 100%;
+      margin: auto;
+      padding-right: 190px;
     }
 
       .catalogStripeHeader {
           margin: 0 auto 26px;
         h1 {
-          margin: 0 10px 0 0;
-          font-family: 'Assistant';
-          font-style: normal;
           font-weight: 600;
           font-size: 32px;
           line-height: 42px;
@@ -1322,92 +1320,17 @@ body {
   }
 }
 
-@media (max-width: 1285px) {
+
+@media (max-width: 1200px) {
   .catalogWrap {
     .catalogStripeWrap {
       .catalogStripeContainer {
-        width: 86%;
+        padding-right: 80px;
       }
     }
   }
 }
 
-@media (max-width: 1269px) {
-  .catalog-courses-stripe{
-    justify-content: center;
-  }
-  .catalogWrap {
-    .catalogStripeWrap {
-      .catalogStripeContainer {
-        width: 97%;
-        .catalogStripeHeader{
-          width: 91%;
-        }
-      }
-    }
-  }
-}
-
-@media (max-width: 1125px) {
-  .catalogWrap {
-    .catalogStripeWrap {
-      .catalogStripeContainer {
-        .catalogStripeHeader {
-          width: 74%;
-        }
-      }
-    }
-  }
-}
-
-@media (max-width: 1040px) {
-  .catalogWrap {
-    .catalogStripeWrap {
-      .catalogStripeHeader{
-        width: 80%;
-      }
-    }
-  }
-}
-
-@media (max-width: 952px) {
-  .catalogWrap {
-    .catalogStripeWrap {
-      .catalogStripeContainer {
-        .catalogStripeHeader {
-          width: 84%;
-        }
-      }
-    }
-  }
-}
-
-@media (max-width: 916px) {
-  .catalogWrap {
-    .catalogStripeWrap {
-      .catalogStripeContainer {
-        width: 100%;
-
-        .catalogStripeHeader {
-          width: 88%;
-        }
-      }
-    }
-  }
-}
-
-@media (max-width: 818px) {
-  .catalogWrap {
-    .catalogStripeWrap {
-      .catalogStripeContainer {
-        width: 100%;
-        .catalogStripeHeader {
-          width: 65%;
-        }
-      }
-    }
-  }
-}
 
 @media (max-width: 768px) {
   .catalog-courses-stripe {
@@ -1415,7 +1338,7 @@ body {
       display: none !important;
     }
     .course-stripe-item {
-      margin: 0 5px;
+      margin-left: 10px;
       .course-img {
         height: 97px;
         .info-button {
@@ -1454,186 +1377,12 @@ body {
     }
   }
   .catalogWrap {
-    align-items: end;
+   padding-right: 11px;
     .catalogStripeWrap {
+      width: 100%;
       .catalogStripeContainer {
-        max-width: 748px;
-        width:100%;
+        padding-right: 0;
         margin-bottom: 25px;
-        .catalogStripeHeader {
-          width: 94%;
-          margin-right: 0px;
-          h1 {
-            font-size: 26px;
-            line-height: 34px;
-          }
-        }
-      }
-    }
-  }
-}
-
-@media (max-width: 748px) {
-  .catalogWrap {
-    .catalogStripeWrap {
-      .catalogStripeContainer {
-        max-width: 728px;
-      }
-    }
-  }
-}
-
-@media (max-width: 728px) {
-  .catalogWrap {
-    .catalogStripeWrap {
-      .catalogStripeContainer {
-        max-width: 710px;
-      }
-    }
-  }
-}
-
-@media (max-width: 710px) {
-  .catalogWrap {
-    .catalogStripeWrap {
-      .catalogStripeContainer {
-        max-width: 690px;
-      }
-    }
-  }
-}
-
-@media (max-width: 690px) {
-  .catalogWrap {
-    .catalogStripeWrap {
-      .catalogStripeContainer {
-        max-width: 670px;
-      }
-    }
-  }
-}
-
-@media (max-width: 670px) {
-  .catalogWrap {
-    .catalogStripeWrap {
-      .catalogStripeContainer {
-        max-width: 650px;
-      }
-    }
-  }
-}
-
-@media (max-width: 650px) {
-  .catalogWrap {
-    .catalogStripeWrap {
-      .catalogStripeContainer {
-        max-width: 630px;
-      }
-    }
-  }
-}
-
-@media (max-width: 630px) {
-  .catalogWrap {
-    .catalogStripeWrap {
-      .catalogStripeContainer {
-        max-width: 610px;
-      }
-    }
-  }
-}
-
-@media (max-width: 610px) {
-  .catalogWrap {
-    .catalogStripeWrap {
-      .catalogStripeContainer {
-        max-width: 590px;
-      }
-    }
-  }
-}
-
-@media (max-width: 590px) {
-  .catalogWrap {
-    .catalogStripeWrap {
-      .catalogStripeContainer {
-        max-width: 570px;
-      }
-    }
-  }
-}
-
-@media (max-width: 570px) {
-  .catalogWrap {
-    .catalogStripeWrap {
-      .catalogStripeContainer {
-        max-width: 540px;
-      }
-    }
-  }
-}
-
-@media (max-width: 540px) {
-  .catalogWrap {
-    .catalogStripeWrap {
-      .catalogStripeContainer {
-        max-width: 505px;
-      }
-    }
-  }
-}
-
-@media (max-width: 505px) {
-  .catalogWrap {
-    .catalogStripeWrap {
-      .catalogStripeContainer {
-        max-width: 480px;
-      }
-    }
-  }
-}
-
-@media (max-width: 480px) {
-  .catalogWrap {
-    .catalogStripeWrap {
-      .catalogStripeContainer {
-        max-width: 460px;
-      }
-    }
-  }
-
-
-
-}
-
-@media (max-width: 460px) {
-  .catalogWrap {
-    .catalogStripeWrap {
-      .catalogStripeContainer {
-        max-width: 440px;
-      }
-    }
-  }
-
-
-
-}
-
-@media (max-width: 440px) {
-  .catalogWrap {
-    .catalogStripeWrap {
-      .catalogStripeContainer {
-        max-width: 420px;
-      }
-    }
-  }
-}
-
-@media (max-width: 420px) {
-  .catalogWrap {
-    .catalogStripeWrap {
-      .catalogStripeContainer {
-        max-width: 400px;
       }
     }
   }
@@ -1649,13 +1398,6 @@ body {
       }
     }
   }
-  .catalogWrap {
-    .catalogStripeWrap {
-      .catalogStripeContainer {
-        max-width: 390px;
-      }
-    }
-  }
 }
 
 @media (max-width: 390px) {
@@ -1664,28 +1406,7 @@ body {
       min-width: unset;
     }
   }
-  .catalogWrap {
-    .catalogStripeWrap {
-      .catalogStripeContainer {
-        max-width: 380px;
-        .catalogStripeHeader {
-          margin-right: 0;
-        }
-      }
-    }
-  }
 }
-
-@media (max-width: 380px) {
-  .catalogWrap {
-    .catalogStripeWrap {
-      .catalogStripeContainer {
-        max-width: 360px;
-      }
-    }
-  }
-}
-
 
 
 /* stripes media query */
