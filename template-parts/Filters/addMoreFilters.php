@@ -28,8 +28,8 @@ $moreFilters = $filter['filters'];
             $checked = '';
             ?>
             <div class="filterInput">
-                <label class="filterTagLabel" for="moreFilters_<?= $i ?>">
-                    <input <?= $checked ?> class="checkbox-filter-search extraFilterCheckbox " type="checkbox" data-name="moreFilters" data-value="<?= $filterId ?>" name=" moreFilters '[]'"  value="<?= $title ?>" id="moreFilters_<?= $i ?>">
+                <label class="filterTagLabel" for="moreFilters_<?= $rand_ID ?>">
+                    <input <?= $checked ?> class="checkbox-filter-search extraFilterCheckbox " type="checkbox" data-name="moreFilters" data-value="<?= $filterId ?>" name=" moreFilters '[]'"  value="<?= $title ?>" id="moreFilters_<?= $rand_ID ?>">
                     <div class="wrap-term-and-sum tagNameWrap" >
                         <span class="term-name"><?= $title ?></span>
                     </div>
