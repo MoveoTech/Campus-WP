@@ -1398,7 +1398,7 @@ function console_log($output, $with_script_tags = true) {
     echo $js_code;
 }
 
-function getPodsFilterParams($filters) {
+function getPodsFilterParams($filters = null) {
     $sql = array();
     if(!$filters) {
         global $sitepress;
