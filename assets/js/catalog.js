@@ -400,7 +400,6 @@ function markCheckboxes(params) {
 
                 if(englishValue.includes(lang)) {
                     $(`#${id}`).prop('checked', true)
-                    $(`#mobile_${id}`).prop('checked', true)
                     let currentUrl = window.location.href;
                     let url = new URL(currentUrl);
                     url.searchParams.set(type, lang);
