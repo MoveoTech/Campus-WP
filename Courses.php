@@ -8,19 +8,13 @@
 ?>
 
 <?php
-
-global $site_settings, $field, $wp_query, $sitepress, $filter_tags;
-$current_language = $sitepress->get_current_language();
-
-$menuFilters = get_field('filters');
 /**
  * CHECK THE QUERY PARAMS
  */
-$url = get_current_url();
-$components = parse_url($url);
+$components = parse_url($_SERVER['QUERY_STRING']);
 
-if($components['query']){
-    parse_str($components['query'], $url_params);
+if($components['path']){
+    parse_str($components['path'], $url_params);
 }
 if($url_params){
     $filters = getFiltersArray($url_params);
@@ -28,9 +22,12 @@ if($url_params){
 } else {
     $params = getPodsFilterParams();
 }
+global $site_settings, $field, $wp_query, $sitepress, $filter_tags;
 
 /** PARAMETERS */
+$current_language = $sitepress->get_current_language();
 $catalog_stripe_id = get_field('catalog_stripe');
+$menuFilters = get_field('filters');
 $academic_institutions = pods( 'academic_institution', array('limit'   => -1 ));
 $courses = pods( 'courses', $params, true);
 $academic_name = cin_get_str('Institution_Name');

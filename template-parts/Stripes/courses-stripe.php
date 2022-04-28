@@ -6,7 +6,7 @@ $stripe = wp_parse_args(
 if(empty($stripe) || empty($stripe['id']) || empty($stripe['carousel']) || count($stripe['carousel']) < 1 )
     return;
 
-$courses_url = home_url('/') . 'course/' ;
+$courses_url = home_url('/catalog') ;
 
 ?>
 
