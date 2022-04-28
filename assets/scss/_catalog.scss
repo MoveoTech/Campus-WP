@@ -247,17 +247,6 @@
     }
   }
 }
-#morefiltersBox {
-  .filterInput{
-    margin: 22px 0;
-    .tagNameWrap{
-      &::before{
-        display: none;
-      }
-    }
-  }
-
-}
 
 .checkbox-filter-search:checked ~ .wrap-term-and-sum:before {
   background-color: black;
