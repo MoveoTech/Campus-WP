@@ -15,7 +15,6 @@ $(document).ready(function () {
     /** Click event - targeting filters inputs */
     filterByTagEvent();
 
-
     /** Click event - reset filtering **/
     $('.resetFilterButton').on('click', function (event) {
         let currentUrl = window.location.href;
@@ -65,7 +64,7 @@ $(document).ready(function () {
 /** Open mobile filters menu */
     $(".openFiltersMenu").click(function () {
         /** Open mobile menu popup */
-        jQuery(".filters-mobile-menu-popup").toggleClass('active');
+        jQuery(".filters-mobile-menu-popup").addClass('active');
         if(!jQuery(".bg-overlay")[0].classList.contains('active') && jQuery(".filters-mobile-menu-popup")[0].classList.contains('active')) {
             jQuery(".bg-overlay").addClass('active');
             jQuery(".bg-overlay").addClass('filterMenuOverlay');
@@ -77,7 +76,7 @@ $(document).ready(function () {
         } else if (jQuery('.catalog-courses-stripe').slick()){
             jQuery('.catalog-courses-stripe').slick('unslick');
         }
-        jQuery('html').toggleClass('menu_open');
+        jQuery('html').addClass('menu_open');
     });
 
 $(".bg-overlay").click(function () {
@@ -128,8 +127,7 @@ function closingOverlay(){
     jQuery(".mobile-menu-vector").removeClass('active');
     jQuery(".change-mobile-lang").removeClass('active');
     jQuery(".secondary-mobile-lang-menu").removeClass('active');
-
-    jQuery('html').toggleClass('menu_open');
+    jQuery('html').removeClass('menu_open');
 }
 
 function slickStripeForMobile() {
@@ -222,11 +220,13 @@ function appendFilteredCourses(coursesData) {
         let name = item.name;
         let academicInstitution = item.academic_institution ? item.academic_institution : '';
         let tags = getCourseResultTags(item.marketing_tags);
+        let hoverTags = getHoverTags(item.marketing_tags);
         let image = item.image;
         let duration = item.duration;
         let permalink = item.permalink ? item.permalink : '';
         let baseUrl = window.location.origin;
         let url = baseUrl + '/course/' + permalink;
+        let buttonText = item.buttonText;
 
         if(academicInstitution){
             institutionName = '<p class="institutionName">'+ academicInstitution +' </p>'
@@ -234,20 +234,43 @@ function appendFilteredCourses(coursesData) {
         let temp = document.createElement("div");
         temp.classList.add('courseResultCard');
         temp.setAttribute('data-id',id);
+        temp.setAttribute('id',id);
         temp.innerHTML =
             '<div class="courseImage" style="background-image: url('+image+');">'+
             '<a href="'+ url +'"></a>'+
-            '</div>'+
+            '<span class="info-button"></span></div>'+
             '<div class="itemContent">'+
             '<h3 ><a href="'+ url +'">'+name+'</a></h3>'
             +institutionName+
             '<div class="tagsDiv">'+tags+ '</div>'+
             '<p class="courseDuration">'+duration+ '</p>'+
-            '</div>'
+            '</div>'+
+            '<div class="course-popup-modal mobile-course-popup'+ id +'">'+
+            '<div class="popup-header">'+
+            '<span class="course-popup-close'+ id +' close">&times;</span>'+
+            '</div>'+
+            '<div class="course-content">'+
+            '<div class="course-img" style="background-image: url('+image+');"></div>'+
+            '<div class="course-details">'+
+            '<div class="course-header"">'+
+            '<h3 ><a href="'+ url +'">'+name+'</a></h3>'+
+            '<p >'+institutionName+'</p>'+
+            '</div>'+
+            '<div class="tags-div">'+ hoverTags +'</div>'+
+            '<div class="details">'+
+            '<span>'+ duration +'</span>'+
+            '</div>'+
+            '</div>'+
+            '</div>'+
+            '<div class="popup-footer">'+
+            '<a href="'+ url +'"><span>'+ buttonText +'</span></a>'+
+            '</div>'+
+            '</div>';
 
         output.append(temp)
     });
-    coursesBox.replaceWith(output)
+    coursesBox.replaceWith(output);
+    clickOnCourseInfoButton();
 
 } //TODO build template for result course card
 
@@ -544,7 +567,7 @@ function appendMoreFilters(filterData) {
 
         let temp = document.createElement("div");
         temp.classList.add('filterInput');
-        let id = element.id;
+        let id = Math.floor(Math.random()*90000) + 10000;;
         let name = element.name;
         let urlTitle = element.english_name;
         let checked = '';

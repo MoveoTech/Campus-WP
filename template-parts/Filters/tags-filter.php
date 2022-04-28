@@ -24,15 +24,15 @@ $tags = pods('tags',podsFilterParams($tagsArray))->data();
         <div class="inputsContainer catalogFilters">
 
         <?php foreach ($tags as $tag) {
-            $tagId =  $tag->id;
+            $rand_ID = rand();
             $tag_name = getFieldByLanguage($tag->name, $tag->english_name, $tag->arabic_name, $sitepress->get_current_language());
             $url_title = $tag->english_name;
             $checked = '';
         ?>
 
         <div class="filterInput">
-            <label class="filterTagLabel" for="tag_<?= $tagId ?>">
-                <input <?= $checked ?> class="checkbox-filter-search filtersInputWeb" type="checkbox" data-name='tag' data-group='<?= $english_name ?>' data-value="<?= $url_title ?>" name="tag_name '[]'" value="<?= $tag_name ?>" id="tag_<?= $tagId ?>"/>
+            <label class="filterTagLabel" for="tag_<?= $rand_ID ?>">
+                <input <?= $checked ?> class="checkbox-filter-search filtersInputWeb" type="checkbox" data-name='tag' data-group='<?= $english_name ?>' data-value="<?= $url_title ?>" name="tag_name '[]'" value="<?= $tag_name ?>" id="tag_<?= $rand_ID ?>"/>
                 <div class="wrap-term-and-sum tagNameWrap" >
                     <span class="term-name"><?= $tag_name ?></span>
                 </div>
