@@ -438,12 +438,11 @@ function haveNoResults(afterSearching= true) {
 /** Filtering by tag function of catalog - need to remove  */
 function filterByTagEvent(){
     /** removing event from div */
-   $(`.filtersSection .filtersInputWeb`).unbind('click');
+   $('.filtersSection .filtersInputWeb').off('click');
+
     /** click event - targeting each input for filtering */
-    $('.filtersSection .filtersInputWeb').on('click', function (event) {
-
+    $('.filtersSection .filtersInputWeb').click(function (event) {
       getCourses();
-
     })
 }
 
