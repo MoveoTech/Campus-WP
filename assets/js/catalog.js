@@ -26,7 +26,6 @@ $(document).ready(function () {
         filtersInputs.each((index, element) => {
             element.checked = false;
         });
-
         /** Clear search input fields */
         $('.search-field').val('');
 
@@ -34,21 +33,22 @@ $(document).ready(function () {
         if(currentUrl.includes('?')){
             getCourses()
         }
-
         /** removing extra filters **/
         $('.extraFilter').remove();
+
     });
 
     /** Click event - adding more filters **/
     $('.moreFilters .extraFilterCheckbox').on('click', function (event) {
+
         /**Getting targeted input */
         let filterId = $(event.target).data('value');
         let filterGroupName = event.target.value;
         /** If element checked appending it to menu, else - remove it */
         if(event.target.checked){
-            appendGroupFilter(filterGroupName, filterId)
-            getFiltersGroups(filterId)
-            openCheckboxEvent()
+            appendGroupFilter(filterGroupName, filterId);
+            getFiltersGroups(filterId);
+            openCheckboxEvent();
         } else {
             let filterToRemove = document.getElementsByClassName(filterId)[0];
             filterToRemove.remove()
@@ -64,7 +64,7 @@ $(document).ready(function () {
 /** Open mobile filters menu */
     $(".openFiltersMenu").click(function () {
         /** Open mobile menu popup */
-        jQuery(".filters-mobile-menu-popup").toggleClass('active');
+        jQuery(".filters-mobile-menu-popup").addClass('active');
         if(!jQuery(".bg-overlay")[0].classList.contains('active') && jQuery(".filters-mobile-menu-popup")[0].classList.contains('active')) {
             jQuery(".bg-overlay").addClass('active');
             jQuery(".bg-overlay").addClass('filterMenuOverlay');
@@ -76,7 +76,7 @@ $(document).ready(function () {
         } else if (jQuery('.catalog-courses-stripe').slick()){
             jQuery('.catalog-courses-stripe').slick('unslick');
         }
-        jQuery('html').toggleClass('menu_open');
+        jQuery('html').addClass('menu_open');
     });
 
 $(".bg-overlay").click(function () {
@@ -127,8 +127,7 @@ function closingOverlay(){
     jQuery(".mobile-menu-vector").removeClass('active');
     jQuery(".change-mobile-lang").removeClass('active');
     jQuery(".secondary-mobile-lang-menu").removeClass('active');
-
-    jQuery('html').toggleClass('menu_open');
+    jQuery('html').removeClass('menu_open');
 }
 
 function slickStripeForMobile() {
@@ -221,11 +220,13 @@ function appendFilteredCourses(coursesData) {
         let name = item.name;
         let academicInstitution = item.academic_institution ? item.academic_institution : '';
         let tags = getCourseResultTags(item.marketing_tags);
+        let hoverTags = getHoverTags(item.marketing_tags);
         let image = item.image;
         let duration = item.duration;
         let permalink = item.permalink ? item.permalink : '';
         let baseUrl = window.location.origin;
         let url = baseUrl + '/course/' + permalink;
+        let buttonText = item.buttonText;
 
         if(academicInstitution){
             institutionName = '<p class="institutionName">'+ academicInstitution +' </p>'
@@ -233,23 +234,45 @@ function appendFilteredCourses(coursesData) {
         let temp = document.createElement("div");
         temp.classList.add('courseResultCard');
         temp.setAttribute('data-id',id);
+        temp.setAttribute('id',id);
         temp.innerHTML =
             '<div class="courseImage" style="background-image: url('+image+');">'+
             '<a href="'+ url +'"></a>'+
-            '</div>'+
+            '<span class="info-button"></span></div>'+
             '<div class="itemContent">'+
             '<h3 ><a href="'+ url +'">'+name+'</a></h3>'
             +institutionName+
             '<div class="tagsDiv">'+tags+ '</div>'+
             '<p class="courseDuration">'+duration+ '</p>'+
-            '</div>'
+            '</div>'+
+            '<div class="course-popup-modal mobile-course-popup'+ id +'">'+
+            '<div class="popup-header">'+
+            '<span class="course-popup-close'+ id +' close">&times;</span>'+
+            '</div>'+
+            '<div class="course-content">'+
+            '<div class="course-img" style="background-image: url('+image+');"></div>'+
+            '<div class="course-details">'+
+            '<div class="course-header"">'+
+            '<h3 ><a href="'+ url +'">'+name+'</a></h3>'+
+            '<p >'+institutionName+'</p>'+
+            '</div>'+
+            '<div class="tags-div">'+ hoverTags +'</div>'+
+            '<div class="details">'+
+            '<span>'+ duration +'</span>'+
+            '</div>'+
+            '</div>'+
+            '</div>'+
+            '<div class="popup-footer">'+
+            '<a href="'+ url +'"><span>'+ buttonText +'</span></a>'+
+            '</div>'+
+            '</div>';
 
         output.append(temp)
     });
-    coursesBox.replaceWith(output)
+    coursesBox.replaceWith(output);
+    clickOnCourseInfoButton();
 
 } //TODO build template for result course card
-
 
 function getCourseResultTags(tags) {
     let tagsHtml = '';
@@ -270,7 +293,6 @@ function getCourseResultTags(tags) {
     }
     return tagsHtml;
 }
-
 
 function appendUrlParams(filters) {
 
@@ -412,6 +434,7 @@ function haveNoResults(afterSearching= true) {
     coursesBox.replaceWith(output)
 }
 
+
 /** Filtering by tag function of catalog - need to remove  */
 function filterByTagEvent(){
     /** removing event from div */
@@ -515,7 +538,6 @@ function filterByTagMobile(){
 
 /** Ajax call - getting filters group name and there tags **/
 function getFiltersGroups(filterId) {
-
     let data = {
         'action': 'add_filters_to_menu',
         'type' : 'moreFilters',
@@ -543,7 +565,7 @@ function appendMoreFilters(filterData) {
 
         let temp = document.createElement("div");
         temp.classList.add('filterInput');
-        let id = element.id;
+        let id = Math.floor(Math.random()*90000) + 10000;;
         let name = element.name;
         let urlTitle = element.english_name;
         let checked = '';
@@ -562,13 +584,12 @@ function appendMoreFilters(filterData) {
             '</div>'+
             '</label>';
         container.append(temp);
-    })
+    });
     filterByTagEvent();
 }
 
 /** ajax call */
 function filterCoursesAjax(filterData) {
-
     let data = {
         'action': 'filter_by_tag',
         'type' : 'courses',
@@ -582,6 +603,7 @@ function filterCoursesAjax(filterData) {
             appendUrlParams(responseData['filters'])
             if(responseData['courses'].length > 0) {
                 // loadCourses(responseData['courses'])
+
                 appendFilteredCourses(responseData['courses'])
             } else if(responseData['params'] == null) {
                 haveNoResults(false)
@@ -594,7 +616,6 @@ function filterCoursesAjax(filterData) {
 
 /** Appending filter group **/
 function appendGroupFilter(filterGroupName, filterId) {
-
     let vector = $('.filterVector').attr('src');
     let container = document.getElementById('groupFiltersContainer');
     let groupTitle = filterGroupName;
@@ -615,6 +636,7 @@ function appendGroupFilter(filterGroupName, filterId) {
         '</div>';
 
     container.insertBefore(temp, addFilterbutton);
+
 
 
 }

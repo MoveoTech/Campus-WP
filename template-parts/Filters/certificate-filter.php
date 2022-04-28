@@ -33,8 +33,9 @@ $title = $filter['title'];
     </div>
         <div class="inputsContainer catalogFilters" >
 
-        <?php $i = 0;
+        <?php
         foreach ($certificates as $certificate) {
+            $rand_ID = rand();
 
             $name = $certificate['name'];
             $url_title = $certificate['url_title'];
@@ -42,15 +43,14 @@ $title = $filter['title'];
             ?>
 
             <div class="filterInput">
-                <label class="filterTagLabel" for="certificate_<?= $i ?>">
-                    <input <?= $checked ?> class="checkbox-filter-search filtersInputWeb" type="checkbox" data-name="certificate" data-group='<?= $title ?>' data-value="<?= $url_title ?>" name=" $name '[]'"  value="<?= $name ?>" id="certificate_<?= $i ?>">
+                <label class="filterTagLabel" for="certificate_<?= $rand_ID ?>">
+                    <input <?= $checked ?> class="checkbox-filter-search filtersInputWeb" type="checkbox" data-name="certificate" data-group='<?= $title ?>' data-value="<?= $url_title ?>" name=" $name '[]'"  value="<?= $name ?>" id="certificate_<?= $rand_ID ?>">
                     <div class="wrap-term-and-sum tagNameWrap" >
                         <span class="term-name"><?= $name ?></span>
                     </div>
                 </label>
             </div>
 
-            <?php $i++;
-        };?>
+            <?php }?>
     </div>
 </div>

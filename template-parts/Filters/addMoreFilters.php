@@ -21,9 +21,10 @@ $moreFilters = $filter['filters'];
 
     </div>
     <div class="inputsContainer" >
-        <?php $i = 0;
+        <?php
         foreach($moreFilters as $filterId ) {
             $title = getFieldByLanguage(get_field('hebrew_title', $filterId), get_field('english_title', $filterId), get_field('arabic_title', $filterId), $sitepress->get_current_language());
+            $rand_ID = rand();
             $checked = '';
             ?>
             <div class="filterInput">
@@ -34,8 +35,7 @@ $moreFilters = $filter['filters'];
                     </div>
                 </label>
             </div>
-            <?php $i++;
-            }?>
+            <?php }?>
     </div>
 
 </div>
