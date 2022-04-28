@@ -875,27 +875,19 @@ function goalGradient() {
 }
 
 function env() {
-    let envURL;
+    let envURL = '';
     if(document.URL.startsWith("http://campus-test")){
         envURL = ".localhost";
-        return envURL;
-
+    } else if(document.URL.startsWith("https://dev")){
+        envURL = ".dev";
     } else if(document.URL.startsWith("https://stage")){
         envURL = ".stage";
-        return envURL;
-
-    } else if(document.URL.startsWith("https://koaprod")){
-        envURL = ".koaprod";
-        return envURL;
-
-    } else if(document.URL.startsWith("https://backup")){
-        envURL = "";
-        return envURL;
-
     } else if(document.URL.startsWith("https://campus")){
         envURL = "";
-        return envURL;
+    } else if(document.URL.startsWith("https://backup")){
+        envURL = "";
     }
+    return envURL;
 }
 
 function getCurrentEnvURLs(partURL) {

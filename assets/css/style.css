@@ -6613,6 +6613,9 @@ html body {
 [lang="ar"] body {
   font-family: Assistant, arial; }
 
+html[lang="en-US"] {
+  overflow-x: hidden; }
+
 body {
   margin: auto; }
 

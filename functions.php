@@ -1398,70 +1398,80 @@ function console_log($output, $with_script_tags = true) {
     echo $js_code;
 }
 
-function getPodsFilterParams($filters) {
-    if(!$filters) return null;
-
+function getPodsFilterParams($filters = null) {
     $sql = array();
+    if(!$filters) {
+        global $sitepress;
+        $current_lang = $sitepress->get_current_language();
+        if($current_lang === 'he'){
+            $default_lang = '(t.language LIKE "%Hebrew%")';
+        } else if($current_lang === 'en'){
+            $default_lang = '(t.language LIKE "%English%")';
+        } else if($current_lang === 'ar'){
+            $default_lang = '(t.language LIKE "%Arabic%")';
+        }
 
+        $sql[] = $default_lang;
+    }
     /** GET ONLY COURSES THAT ARE NOT HIDDEN */
     $sql[] = 't.hide_in_site=0';
+    if($filters) {
+        if($filters['search']['text_s']){
+                $search_value = $filters['search']['text_s'][0];
+                $sqlSearch = array();
 
-    if($filters['search']['text_s']){
-            $search_value = $filters['search']['text_s'][0];
-            $sqlSearch = array();
+                $sqlSearch[] = ' t.name LIKE "%'.$search_value.'%" ';
+                $sqlSearch[] = ' t.english_name LIKE "%'.$search_value.'%" ';
+                $sqlSearch[] = ' t.arabic_name LIKE "%'.$search_value.'%" ';
+                $sqlSearch[] = ' t.description LIKE "%'.$search_value.'%" ';
+                $sqlSearch[] = ' t.course_products LIKE "%'.$search_value.'%" ';
+                $sqlSearch[] = ' t.alternative_names LIKE "%'.$search_value.'%" ';
 
-            $sqlSearch[] = ' t.name LIKE "%'.$search_value.'%" ';
-            $sqlSearch[] = ' t.english_name LIKE "%'.$search_value.'%" ';
-            $sqlSearch[] = ' t.arabic_name LIKE "%'.$search_value.'%" ';
-            $sqlSearch[] = ' t.description LIKE "%'.$search_value.'%" ';
-            $sqlSearch[] = ' t.course_products LIKE "%'.$search_value.'%" ';
-            $sqlSearch[] = ' t.alternative_names LIKE "%'.$search_value.'%" ';
+                $searchQuery = "(" . implode('OR', $sqlSearch) . ")";
+                $sql[] = $searchQuery;
+            }
 
-            $searchQuery = "(" . implode('OR', $sqlSearch) . ")";
-            $sql[] = $searchQuery;
-        }
+        if($filters['search']['language']){
+            $params_items = $filters['search']['language'];
+            $sqlLang = array();
 
-    if($filters['search']['language']){
-        $params_items = $filters['search']['language'];
-        $sqlLang = array();
+            foreach($params_items as $value) {
+                $sqlLang[] = ' t.language LIKE "%'.$value.'%" ';
+            };
 
-        foreach($params_items as $value) {
-            $sqlLang[] = ' t.language LIKE "%'.$value.'%" ';
+            $langQuery = "(" . implode('OR', $sqlLang) . ")";
+            $sql[] = $langQuery;
         };
 
-        $langQuery = "(" . implode('OR', $sqlLang) . ")";
-        $sql[] = $langQuery;
-    };
+        if($filters['search']['certificate']){
 
-    if($filters['search']['certificate']){
+            $params_items = $filters['search']['certificate'];
+            $sqlCert = array();
 
-        $params_items = $filters['search']['certificate'];
-        $sqlCert = array();
+            foreach($params_items as $value) {
+                $sqlCert[] = ' t.certificate LIKE "%'.$value.'%" ';
+            }
 
-        foreach($params_items as $value) {
-            $sqlCert[] = ' t.certificate LIKE "%'.$value.'%" ';
-        }
+            $certQuery = "(" . implode('OR', $sqlCert) . ")";
+            $sql[] = $certQuery;
+        };
 
-        $certQuery = "(" . implode('OR', $sqlCert) . ")";
-        $sql[] = $certQuery;
-    };
+        if($filters['search']['institution']){
 
-    if($filters['search']['institution']){
+            $params_items = $filters['search']['institution'];
+            $sqlInst = array();
 
-        $params_items = $filters['search']['institution'];
-        $sqlInst = array();
+            foreach($params_items as $value) {
+                $sqlInst[] = ' academic_institution.name LIKE "%'.$value.'%" ';
+                $sqlInst[] = ' academic_institution.english_name LIKE "%'.$value.'%" ';
+                $sqlInst[] = ' academic_institution.arabic_name LIKE "%'.$value.'%" ';
+            }
 
-        foreach($params_items as $value) {
-            $sqlInst[] = ' academic_institution.name LIKE "%'.$value.'%" ';
-            $sqlInst[] = ' academic_institution.english_name LIKE "%'.$value.'%" ';
-            $sqlInst[] = ' academic_institution.arabic_name LIKE "%'.$value.'%" ';
-        }
+            $instQuery ="(" . implode('OR', $sqlInst) . ")";
+            $sql[] = $instQuery;
+        };
 
-        $instQuery ="(" . implode('OR', $sqlInst) . ")";
-        $sql[] = $instQuery;
-    };
-
-    if($filters['search']['tags']){
+        if($filters['search']['tags']){
 
         $tags_object = $filters['search']['tags'];
         $sqlTags = array();
@@ -1484,7 +1494,7 @@ function getPodsFilterParams($filters) {
         $having =  implode(' AND ', $havOr)  ;
         $sql[] = $tagsQuery;
     };
-
+    }
     $where = implode(" AND ", $sql);
     $order = "t.order DESC";
 
@@ -1661,21 +1671,4 @@ function getHomeUrlWithoutQuery(): string {
         $site_url = $home_url . '/';
     }
     return $site_url;
-}
-
-function getParamsForDefaultLang() {
-    global $sitepress;
-    $current_lang = $sitepress->get_current_language();
-    if($current_lang === 'he'){
-        $default_lang = 'Hebrew';
-    } else if($current_lang === 'en'){
-        $default_lang = 'English';
-    } else if($current_lang === 'ar'){
-        $default_lang = 'Arabic';
-    }
-    return [
-        'limit'   => -1,
-        'where'   => 't.language LIKE "%'. $default_lang .'%" ',
-        'orderBy' => 't.order DESC',
-    ];
 }

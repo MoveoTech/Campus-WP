@@ -26,18 +26,10 @@ if($url_params){
     $filters = getFiltersArray($url_params);
     $params = getPodsFilterParams($filters);
 } else {
-    $params = getParamsForDefaultLang();
+    $params = getPodsFilterParams();
 }
 
-/** OLD PARAMETERS */
-$visible                   = 15;
-$form_short_code_no_result = '';
-$form_short_code_sidebar   = $site_settings['form_short_code_sidebar'];
-$course_attrs = array(
-    'class' => 'col-xs-12 col-md-6 col-xl-4 course-item-with-border',
-);
-
-/** NEW PARAMETERS */
+/** PARAMETERS */
 $catalog_stripe_id = get_field('catalog_stripe');
 $academic_institutions = pods( 'academic_institution', array('limit'   => -1 ));
 $courses = pods( 'courses', $params, true);
@@ -46,7 +38,9 @@ $choose_str = __('Choose Institution', 'single_corse');
 $title_str = cin_get_str( 'filter_courses_title_ajax' );
 $my_class = "ajax_filter";
 $catalog_title = getFieldByLanguage(get_field('catalog_title'), get_field('catalog_english_title'), get_field('catalog_arabic_title'), $sitepress->get_current_language());
-
+$course_attrs = array(
+    'class' => 'col-xs-12 col-md-6 col-xl-4 course-item-with-border',
+);
 $idArrayOfBestMatches = array();
 $coursesIdArray = [];
 
