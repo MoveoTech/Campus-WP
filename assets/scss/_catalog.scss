@@ -175,6 +175,7 @@
 
 .openFiltersMenu{
   display: none;
+  cursor: pointer;
   position: absolute;
   left: 30px;
 
@@ -373,7 +374,8 @@
     flex-direction: column;
     .wrapEachFilterTag{
       display: flex;
-      width: 100%
+      width: 100%;
+      cursor: pointer;
     }
   }
   .buttonWrap{
