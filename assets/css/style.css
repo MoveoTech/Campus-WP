@@ -18466,7 +18466,7 @@ html:not(.user_is_not_logged_in) .header_login {
     padding: 5px;
     margin: 0 auto; }
 
-@media (max-width: 991px) {
+@media (max-width: 768px) {
   .filters-mobile-menu-popup {
     display: block; } }
 
@@ -20201,7 +20201,8 @@ body .course-item-hover {
       line-height: 16px;
       color: #70C6D1;
       font-weight: 700;
-      margin: auto 16px auto; }
+      margin: auto 16px auto;
+      cursor: pointer; }
   .buttonNavFiltersMenu {
     display: flex;
     position: fixed;
@@ -20218,7 +20219,8 @@ body .course-item-hover {
       width: 90%;
       margin: 21.5px auto;
       height: 57px;
-      z-index: 8; }
+      z-index: 8;
+      cursor: pointer; }
       .buttonNavFiltersMenu .buttonFilterWrap .filterButtonMobileMenu {
         margin: auto;
         font-weight: 700;
