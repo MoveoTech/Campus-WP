@@ -17461,6 +17461,7 @@ nav.header-nav ul li a {
   line-height: 16px; }
 
 .header_wrap .login_search_lang_wrap .search-submit {
+  cursor: pointer;
   width: 36px;
   height: 36px;
   background: #F1595A;

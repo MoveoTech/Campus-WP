@@ -94,7 +94,6 @@ $(document).click(function(event) {
 
     let filtergroup = $('.wrapEachFiltergroup');
     let filtersInputs = $(`.inputsContainer`);
-
     /** hiding input container when clicking on screen */
     if (!filtergroup.is(event.target) && !filtergroup.has(event.target).length && !filtersInputs.is(event.target) && !filtersInputs.has(event.target).length) {
         filtersInputs.hide();
@@ -103,9 +102,9 @@ $(document).click(function(event) {
     if (filtergroup.is(event.target) || filtergroup.has(event.target).length || filtersInputs.is(event.target) || filtersInputs.has(event.target).length) {
         let filterGroupVector = event.target.closest(".wrapEachFiltergroup").querySelector(".filterVectorMobile");
         let popupMenuDiv = event.target.closest(".wrapEachFiltergroup").querySelector(".inputsContainer");
-if(filtersInputs.is(event.target) || filtersInputs.has(event.target).length){
-    $(filterGroupVector).removeClass('active');
-    popupMenuDiv.style.display = "none";
+    if(filtersInputs.is(event.target) || filtersInputs.has(event.target).length){
+        $(filterGroupVector).removeClass('active');
+        popupMenuDiv.style.display = "none";
 }
         filtersInputs.each((index, element) => {
             if(element !== popupMenuDiv){
@@ -649,9 +648,15 @@ function openCheckboxEvent() {
     $('.wrapEachFiltergroup').on('click', function (event) {
         let popupMenuDiv = event.target.closest(".wrapEachFiltergroup").querySelector(".inputsContainer");
         let filterGroupVector = event.target.closest(".wrapEachFiltergroup").querySelector(".filterVectorMobile");
-        $(filterGroupVector).toggleClass('active');
+        let allFiltersGroupVector = $(".filterVectorMobile");
         $(popupMenuDiv).toggle();
-
+        allFiltersGroupVector.each((index,item) => {
+          if(item == filterGroupVector){
+              $(filterGroupVector).toggleClass('active');
+          }else {
+              $(item).removeClass('active');
+          }
+        })
     });
 }
 
