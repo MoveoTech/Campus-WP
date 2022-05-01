@@ -1087,7 +1087,8 @@ footer .footer-section .inners-footer-items {
 
 @media (max-width: 768px) {
   #coursesBox {
-    padding-left: 0; }
+    padding-left: 0;
+    padding-right: 10px; }
   .catalogWrap {
     padding-left: 11px;
     padding-right: 0; }
