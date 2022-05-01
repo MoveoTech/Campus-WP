@@ -1672,3 +1672,10 @@ function getHomeUrlWithoutQuery(): string {
     }
     return $site_url;
 }
+
+if (!function_exists('str_contains')) {
+    function str_contains(string $haystack, string $needle): bool
+    {
+        return '' === $needle || false !== strpos($haystack, $needle);
+    }
+}
