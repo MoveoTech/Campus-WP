@@ -20418,7 +20418,8 @@ body .course-item-hover {
 
 @media (max-width: 768px) {
   #coursesBox {
-    padding-right: 0; }
+    padding-right: 0;
+    padding-left: 10px; }
   .courseResultCard {
     display: flex;
     height: 160px; }

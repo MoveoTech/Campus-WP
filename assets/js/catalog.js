@@ -252,8 +252,8 @@ function appendFilteredCourses(coursesData) {
             '<div class="course-img" style="background-image: url('+image+');"></div>'+
             '<div class="course-details">'+
             '<div class="course-header"">'+
-            '<h3 ><a href="'+ url +'">'+name+'</a></h3>'+
-            '<p >'+institutionName+'</p>'+
+            '<h3 ><a href="'+ url +'">'+name+'</a></h3>'
+            +institutionName+
             '</div>'+
             '<div class="tags-div">'+ hoverTags +'</div>'+
             '<div class="details">'+
