@@ -103,10 +103,10 @@ add_action( 'wp_loaded', 'set_user_default_language' );
 
 function style_of_campus_enqueue() {
 	wp_enqueue_style( 'assistant', 'https://fonts.googleapis.com/css?family=Assistant:500,400,600,700,800&amp;subset=hebrew' );
-	wp_enqueue_style( 'style', get_bloginfo( 'stylesheet_directory' ) . '/assets/css/style.css', array(), '1.9.7' );
+	wp_enqueue_style( 'style', get_bloginfo( 'stylesheet_directory' ) . '/assets/css/style.css', array(), '1.9.8' );
     global  $sitepress;
     if ( $sitepress->get_current_language() == 'en' ) {
-        wp_enqueue_style( 'css_ltr_css', get_bloginfo( 'stylesheet_directory' ) . '/assets/css/ltr.css', null, '1.9' );
+        wp_enqueue_style( 'css_ltr_css', get_bloginfo( 'stylesheet_directory' ) . '/assets/css/ltr.css', null, '1.9.8' );
     }
 
 	wp_enqueue_script( 'popper_js', 'https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js' );
@@ -119,8 +119,8 @@ function style_of_campus_enqueue() {
 	), '1.2.15' );
 	wp_enqueue_script( 'bootstrap_js', get_bloginfo( 'stylesheet_directory' ) . '/assets/js/bootstrap.min.js' );
     wp_enqueue_script('search_js', get_bloginfo( 'stylesheet_directory' ) . '/assets/js/search.js', array('jquery'));
-    wp_enqueue_script('catalog_js', get_bloginfo( 'stylesheet_directory' ) . '/assets/js/catalog.js', array('jquery'));
-    wp_enqueue_script('home_page_js', get_bloginfo( 'stylesheet_directory' ) . '/assets/js/home_page.js', array('jquery'));
+    wp_enqueue_script('catalog_js', get_bloginfo( 'stylesheet_directory' ) . '/assets/js/catalog.js', array('jquery'),'5.9.2');
+    wp_enqueue_script('home_page_js', get_bloginfo( 'stylesheet_directory' ) . '/assets/js/home_page.js', array('jquery'), '5.9.2');
     wp_localize_script('home_page_js', 'stripe_data_ajax', array('ajaxurl' => admin_url('admin-ajax.php')));
     wp_localize_script('home_page_js', 'my_courses_ajax', array('ajaxurl' => admin_url('admin-ajax.php')));
     //filtering tags ajax call
