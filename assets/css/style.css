@@ -18498,18 +18498,19 @@ html:not(.user_is_not_logged_in) .header_login {
           font-size: 16px;
           font-weight: 300;
           line-height: 21px; }
-      .home-page-courses-stripe .stripe-container .stripe-header .show-all-courses p {
-        color: #333433;
-        font-family: Assistant;
-        font-size: 14px;
-        font-style: normal;
-        font-weight: 700;
-        line-height: 18px;
-        letter-spacing: 0em;
-        text-align: left; }
-        .home-page-courses-stripe .stripe-container .stripe-header .show-all-courses p:after {
-          content: '>>';
-          margin-right: 4px; }
+      .home-page-courses-stripe .stripe-container .stripe-header .show-all-courses {
+        z-index: 3; }
+        .home-page-courses-stripe .stripe-container .stripe-header .show-all-courses p {
+          color: #333433;
+          font-size: 14px;
+          font-style: normal;
+          font-weight: 700;
+          line-height: 18px;
+          letter-spacing: 0em;
+          text-align: left; }
+          .home-page-courses-stripe .stripe-container .stripe-header .show-all-courses p:after {
+            content: '>>';
+            margin-right: 4px; }
 
 .home-page-info-stripe {
   z-index: 0;
@@ -20313,7 +20314,8 @@ body .course-item-hover {
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
-    flex-basis: 253px;
+    max-width: 253px;
+    width: 100%;
     height: 124px;
     border-radius: 10px;
     box-shadow: 0 5px 10px rgba(40, 40, 40, 0.2); }
@@ -20427,7 +20429,7 @@ body .course-item-hover {
     display: flex;
     height: 160px; }
     .courseResultCard .courseImage {
-      flex-basis: 190px; }
+      max-width: 190px; }
       .courseResultCard .courseImage .info-button {
         display: block; }
     .courseResultCard .itemContent {
@@ -20455,6 +20457,7 @@ body .course-item-hover {
     margin-bottom: 25px;
     height: 97px; }
     .courseResultCard .courseImage {
+      flex-basis: 166px;
       max-width: 166px;
       height: 97px; }
     .courseResultCard .itemContent {
