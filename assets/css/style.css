@@ -18071,6 +18071,7 @@ html:not(.user_is_not_logged_in) .header_login {
       border-radius: 14.192px;
       margin-bottom: 7.62px; }
     .mobile-menu-popup .nav-mobile .mobile-list-item {
+      cursor: pointer;
       height: 70px;
       position: relative;
       justify-content: flex-start;
@@ -20086,6 +20087,7 @@ body .course-item-hover {
 
 .openFiltersMenu {
   display: none;
+  cursor: pointer;
   position: absolute;
   left: 30px; }
   .openFiltersMenu .filterVector {
@@ -20238,7 +20240,8 @@ body .course-item-hover {
     flex-direction: column; }
     .wrapEachFiltergroup .wrapEachFilterTag {
       display: flex;
-      width: 100%; }
+      width: 100%;
+      cursor: pointer; }
   .buttonWrap {
     display: flex;
     width: 100%;
