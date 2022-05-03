@@ -61,6 +61,7 @@ $(document).ready(function () {
         slickStripeForMobile();
     });
 
+
 /** Open mobile filters menu */
     $(".openFiltersMenu").click(function () {
         /** Open mobile menu popup */
@@ -69,10 +70,13 @@ $(document).ready(function () {
             jQuery(".bg-overlay").addClass('active');
             jQuery(".bg-overlay").addClass('filterMenuOverlay');
             jQuery(".header_section").addClass('menu-open');
+
         } else if(!jQuery(".filters-mobile-menu-popup")[0].classList.contains('active')) {
             jQuery(".bg-overlay").removeClass('active');
             jQuery(".header_section").removeClass('menu-open');
-            
+
+
+
         } else if (jQuery('.catalog-courses-stripe').slick()){
             jQuery('.catalog-courses-stripe').slick('unslick');
         }
@@ -89,6 +93,8 @@ $(".bg-overlay").click(function () {
 });
 /** End of document ready */
 
+
+
 /** hiding filter inputs when clicking on screen or other filter group */
 $(document).click(function(event) {
 
@@ -102,7 +108,7 @@ $(document).click(function(event) {
     if (filtergroup.is(event.target) || filtergroup.has(event.target).length || filtersInputs.is(event.target) || filtersInputs.has(event.target).length) {
         let filterGroupVector = event.target.closest(".wrapEachFiltergroup").querySelector(".filterVectorMobile");
         let popupMenuDiv = event.target.closest(".wrapEachFiltergroup").querySelector(".inputsContainer");
-    if(filtersInputs.is(event.target) || filtersInputs.has(event.target).length){
+        if((filtersInputs.is(event.target) || filtersInputs.has(event.target).length) && event.target.closest("#groupFiltersContainer")){
         $(filterGroupVector).removeClass('active');
         popupMenuDiv.style.display = "none";
 }
@@ -112,9 +118,9 @@ $(document).click(function(event) {
             }
         })
     }
+
 });
 /** end of jquery */
-
 function closingOverlay(){
     jQuery(".bg-overlay").removeClass('active');
     jQuery(".bg-overlay").removeClass('filterMenuOverlay');
