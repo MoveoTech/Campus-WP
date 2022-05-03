@@ -17461,6 +17461,7 @@ nav.header-nav ul li a {
   line-height: 16px; }
 
 .header_wrap .login_search_lang_wrap .search-submit {
+  cursor: pointer;
   width: 36px;
   height: 36px;
   background: #F1595A;
@@ -18467,7 +18468,7 @@ html:not(.user_is_not_logged_in) .header_login {
     padding: 5px;
     margin: 0 auto; }
 
-@media (max-width: 991px) {
+@media (max-width: 768px) {
   .filters-mobile-menu-popup {
     display: block; } }
 
@@ -18498,18 +18499,19 @@ html:not(.user_is_not_logged_in) .header_login {
           font-size: 16px;
           font-weight: 300;
           line-height: 21px; }
-      .home-page-courses-stripe .stripe-container .stripe-header .show-all-courses p {
-        color: #333433;
-        font-family: Assistant;
-        font-size: 14px;
-        font-style: normal;
-        font-weight: 700;
-        line-height: 18px;
-        letter-spacing: 0em;
-        text-align: left; }
-        .home-page-courses-stripe .stripe-container .stripe-header .show-all-courses p:after {
-          content: '>>';
-          margin-right: 4px; }
+      .home-page-courses-stripe .stripe-container .stripe-header .show-all-courses {
+        z-index: 3; }
+        .home-page-courses-stripe .stripe-container .stripe-header .show-all-courses p {
+          color: #333433;
+          font-size: 14px;
+          font-style: normal;
+          font-weight: 700;
+          line-height: 18px;
+          letter-spacing: 0em;
+          text-align: left; }
+          .home-page-courses-stripe .stripe-container .stripe-header .show-all-courses p:after {
+            content: '>>';
+            margin-right: 4px; }
 
 .home-page-info-stripe {
   z-index: 0;
@@ -20070,6 +20072,10 @@ body .course-item-hover {
           align-items: center;
           border-radius: 22px;
           margin: 0 10px; }
+        .filtersSection .allFiltersWrapDiv .checkboxFiltersWrap .wrapEachFilterTag .resetFilterButton, .filtersSection .allFiltersWrapDiv .checkboxFiltersWrap .wrapEachFilterButton .resetFilterButton {
+          cursor: pointer; }
+      .filtersSection .allFiltersWrapDiv .checkboxFiltersWrap #resetButton {
+        cursor: unset; }
       .filtersSection .allFiltersWrapDiv .checkboxFiltersWrap .wrapEachFilterButton .filterVector {
         margin-top: 1px; }
       .filtersSection .allFiltersWrapDiv .checkboxFiltersWrap .filterGroupTitle {
@@ -20203,7 +20209,8 @@ body .course-item-hover {
       line-height: 16px;
       color: #70C6D1;
       font-weight: 700;
-      margin: auto 16px auto; }
+      margin: auto 16px auto;
+      cursor: pointer; }
   .buttonNavFiltersMenu {
     display: flex;
     position: fixed;
@@ -20220,7 +20227,8 @@ body .course-item-hover {
       width: 90%;
       margin: 21.5px auto;
       height: 57px;
-      z-index: 8; }
+      z-index: 8;
+      cursor: pointer; }
       .buttonNavFiltersMenu .buttonFilterWrap .filterButtonMobileMenu {
         margin: auto;
         font-weight: 700;
@@ -20313,7 +20321,8 @@ body .course-item-hover {
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
-    flex-basis: 253px;
+    max-width: 253px;
+    width: 100%;
     height: 124px;
     border-radius: 10px;
     box-shadow: 0 5px 10px rgba(40, 40, 40, 0.2); }
@@ -20427,7 +20436,7 @@ body .course-item-hover {
     display: flex;
     height: 160px; }
     .courseResultCard .courseImage {
-      flex-basis: 190px; }
+      max-width: 190px; }
       .courseResultCard .courseImage .info-button {
         display: block; }
     .courseResultCard .itemContent {
@@ -20455,6 +20464,7 @@ body .course-item-hover {
     margin-bottom: 25px;
     height: 97px; }
     .courseResultCard .courseImage {
+      flex-basis: 166px;
       max-width: 166px;
       height: 97px; }
     .courseResultCard .itemContent {
