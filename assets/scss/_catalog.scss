@@ -147,7 +147,13 @@
           border-radius: 22px;
           margin: 0 10px;
           }
+        .resetFilterButton{
+          cursor: pointer;
         }
+        }
+      #resetButton{
+        cursor: unset;
+      }
       .wrapEachFilterButton{
         .filterVector{
           margin-top: 1px;
