@@ -467,7 +467,7 @@ function apppendCourses(coursesData, id) {
             '<div class="course-img" style="background-image: url('+item.image+');">'+
             '<a href="'+ url +'"></a>'+
             '<span class="info-button"></span></div>'+
-            '<div class="item-content"">'+
+            '<div class="item-content">'+
             '<h3 ><a href="'+ url +'">'+item.name+'</a></h3>'+
             '<p >'+academicInstitution+'</p>'+
             ' </div>'+
@@ -627,8 +627,12 @@ function appendMyCourses(coursesData, id) {
             academic_institution: item.academic_institution,
             permalink: item.permalink,
             course_edXId: item.course_id_edx,
+            tags:item.tags,
             // progress: item.course_details.progress ? item.course_details.progress : '',
         }
+        let tags = getDesktopTags(itemData.tags);
+        let hoverTags = getHoverTags(itemData.tags);
+        let academicInstitution = itemData.academic_institution ? itemData.academic_institution : '';
 
         const envPartURL = env();
         const envURLs = getCurrentEnvURLs(envPartURL);
@@ -641,9 +645,22 @@ function appendMyCourses(coursesData, id) {
             '<div class="item-content"">'+
             // '<p class="course-progress" ><a href="">' + itemData.progress +'</a></p>'+
             '<h3><a href="'+ url+'">'+itemData.name+'</a></h3>'+
-            '<p class="institution-name">'+itemData.academic_institution+'</p>'+
-            ' </div>';
-
+            '<p class="institution-name">'+academicInstitution+'</p>'+
+            ' </div>'+
+            '<div class="tags-div">'+tags+ '</div>'+
+            '<div class="course-item-hover '+ itemData.course_id + id +'">'+
+            '<a href="'+ url +'">'+
+            '<div class="course-img" style="background-image: url('+itemData.thumb+');"></div>'+
+            '<div class="item-content"">'+
+            '<h3 >'+itemData.name+'</h3>'+
+            '<p >'+academicInstitution+'</p>'+
+            '</div>'+
+            '<div class="tags-div">'+ hoverTags +'</div>'+
+            '<div class="course-details">'+
+            '<span>'+ itemData.duration +'</span>'+
+            '</div>'+
+            '</a>'+
+            '</div>';
 
         courseStripe.append(temp)
     });
