@@ -1075,6 +1075,9 @@ footer .footer-section .inners-footer-items {
     text-align: left; }
   .courseResultCard .itemContent .tagsDiv {
     justify-content: left; }
+    .courseResultCard .itemContent .tagsDiv .courseTag {
+      margin-left: 0;
+      margin-right: 10px; }
 
 /* catalog stripe - media query */
 @media (max-width: 1200px) {

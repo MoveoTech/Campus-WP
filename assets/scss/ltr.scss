@@ -1549,6 +1549,10 @@ footer .footer-section{
         }
         .tagsDiv{
             justify-content: left;
+            .courseTag{
+                margin-left: 0;
+                margin-right: 10px;
+            }
         }
     }
 }

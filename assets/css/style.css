@@ -20110,7 +20110,7 @@ body .course-item-hover {
   position: absolute;
   top: 44.5px;
   max-width: 200px;
-  max-height: 300px;
+  max-height: 310px;
   overflow-y: auto;
   background: #FFFFFF;
   box-shadow: 0 5px 15px rgba(40, 40, 40, 0.2);
@@ -20172,26 +20172,30 @@ body .course-item-hover {
     margin-bottom: 10px; } }
 
 @media (max-width: 992px) {
-  .catalog-banner {
-    height: 158px; }
-    .catalog-banner .back-img-1 {
-      background: url("../../assets/images/catalog-img1-mobile.svg");
-      background-position: center center;
-      background-repeat: no-repeat;
-      background-size: cover;
-      width: 242px;
-      height: 100%;
-      position: absolute;
-      right: 0;
-      top: 0; }
-    .catalog-banner .back-img-2 {
-      background: url("../../assets/images/catalog-img2-mobile.svg");
-      background-position: unset;
-      background-repeat: no-repeat;
-      background-size: unset;
-      top: 13px; }
-    .catalog-banner .catalog-banner-content .catalog-header {
-      display: none; }
+  .catalog-banner .back-img-1 {
+    background: url("../../assets/images/catalog-img1-mobile.svg");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 66px;
+    height: 81px;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    top: unset; }
+  .catalog-banner .back-img-2 {
+    background: url("../../assets/images/catalog-img2-mobile.svg");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 51px;
+    height: 128px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    top: unset; }
+  .catalog-banner .catalog-banner-content .catalog-header {
+    display: none; }
   #groupFiltersContainer {
     flex-wrap: wrap; } }
 
@@ -20292,7 +20296,7 @@ body .course-item-hover {
     .inputsContainer .filterInput .filterTagLabel .tagNameWrap .term-name {
       padding-right: 10px; }
   .catalog-banner {
-    height: 93px; } }
+    height: 131px; } }
 
 @media (max-width: 360px) {
   .catalog-banner .hero-search-form .search-field.form-control {
@@ -20345,7 +20349,7 @@ body .course-item-hover {
       height: 20px;
       filter: drop-shadow(0px 5px 10px black); }
   .courseResultCard .itemContent {
-    margin: 0 20px 0 0;
+    margin: 7px 20px 0 0;
     max-width: 100%;
     flex-basis: calc(100% - 120px); }
     .courseResultCard .itemContent h3 {
