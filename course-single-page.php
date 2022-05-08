@@ -28,6 +28,7 @@ $slug = sanitize_text_field(rawurldecode($slug));
 
 $course = pods( 'courses', $slug, true);
 
+
 // Check if the pod is valid and exists.
 if ( false == $course || ! $course->exists()) {
     // The pod item doesn't exists.
@@ -69,7 +70,7 @@ $mobile_available = $course->display('mobile_available') === 'Yes' ? true : fals
 $certificate = $course->display('certificate');
 $course_video = $course->display('trailer');
 $js_code = $course->display('javascript_code');
-$org = $course->display('institution');
+$org = $course->display('academic_institution');
 $lecturers = $course->field(array('name'=>'lecturer', 'output'=>'pods'));
 $testimonials = $course->field(array('name'=>'testimonial', 'output'=>'pods'));
 $corporation_institution = $course->field(array('name'=>'corporation_institution', 'output'=>'pods'));
@@ -94,11 +95,14 @@ $language_course = $language_course ? getFieldByLanguageFromString($language_cou
 $certificate = $certificate ? getFieldByLanguageFromString($certificate, $sitepress->get_current_language()) : null;
 
 if($subtitle_lang){
+
     $fieldSubTitleLanguageArray = explode('&', $subtitle_lang);
+
     $subtitle_lang = array();
     foreach ($fieldSubTitleLanguageArray as $lang){
         array_push($subtitle_lang,getFieldByLanguageFromString($lang, $sitepress->get_current_language()));
     }
+
 }
 
 if (!empty($js_code)) {
@@ -108,6 +112,7 @@ if($org)
     $org = pods('academic_institution',array('limit'   => -1,'where'   => 't.name = "'. $org . '"'), true);
 else
     $org = null;
+
 
 /** user connect */
 $is_connect_to_site = false;
@@ -297,7 +302,7 @@ $video_id = ($link) ? $query_string["v"] : '';
             </div>
             <?php if ($org) : ?>
                 <div class="org-logo d-flex row justify-content-end col-12 col-xl-2 col-md-2 col-sm-3 col-lg-2 align-items-center">
-                    <a aria-label='<?= $org->display( 'name' ); ?>' href="<?= get_site_url() . '/academic_institution/' . $org->display( 'permalink' ); ?>">
+                    <a aria-label='<?= $org->display( 'name' ); ?>' href="<?= get_site_url() . '/institution/' . $org->display( 'permalink' ); ?>">
                         <div style="background-image: url(<?= $org->display( 'image' ); ?>)" class="academic-course-image"></div>
                     </a>
                 </div>
@@ -360,7 +365,7 @@ $video_id = ($link) ? $query_string["v"] : '';
                                     foreach ($corporation_institution as $item){
                                         $name = getFieldByLanguage($item->display('name'), $item->display('english_name'), $item->display('arabic_name') ,$sitepress->get_current_language());
                                         $thumb = $item->display('image');
-                                        $url = get_site_url() . '/academic_institution/' . $item->display('permalink');
+                                        $url = get_site_url() . '/institution/' . $item->display('permalink');
                                         ?>
                                         <a href="<?= $url ?>" class="item_corporation_institution"
                                            target="_blank"> <?= $name; ?>
@@ -376,7 +381,7 @@ $video_id = ($link) ? $query_string["v"] : '';
 <!--                                    --><?php //foreach ($subject_of_daat as $subject_of_daat_item) { ?>
 <!--                                        <span class="info_subject_span">--><?php //echo $subject_of_daat_item->name; ?><!--</span>-->
 <!--                                    --><?php //} ?>
-                                </div>
+<!--                                </div>-->
 <!--                            --><?php //endif; ?>
                             <?php if ($duration) : ?>
                                 <div class="">
@@ -420,7 +425,7 @@ $video_id = ($link) ? $query_string["v"] : '';
                                     <span><?= $language_course; ?></span>
                                 </div>
                             <?php endif; ?>
-                            <?php if ($subtitle_lang) : ?>
+                            <?php if ($subtitle_lang) :?>
                                 <div class="">
                                     <span class="subtitle_lang info-course-list-bold"><?= cin_get_str('Subtitle_language'); ?>:</span>
                                     <?php foreach ($subtitle_lang as $lang): ?>
@@ -448,15 +453,15 @@ $video_id = ($link) ? $query_string["v"] : '';
                             <?php endif; ?>
                         </div>
                     </div>
-                </div>
-                <div class="sharing">
-                    <span class="sharing-text"><?= __('Sharing: ', 'single_corse'); ?></span>
-                    <a target="_blank" class="socials-post linkdin" aria-label='<?= cin_get_str('social_network_linkedin'); ?>'
-                       href="https://www.linkedin.com/shareArticle?mini=true&url=<?= $permalink; ?>"></a>
-                    <a target="_blank" class="socials-post facebook" aria-label='<?= cin_get_str('social_network_facebook'); ?>'
-                       href="https://www.facebook.com/sharer/sharer.php?u=<?= $permalink; ?>"></a>
-                    <a target="_blank" class="socials-post twitter" aria-label='<?= cin_get_str('social_network_twitter'); ?>'
-                       href="https://twitter.com/home?status=<?= $permalink; ?>"></a>
+                    <div class="sharing">
+                        <span class="sharing-text"><?= __('Sharing: ', 'single_corse'); ?></span>
+                        <a target="_blank" class="socials-post linkdin" aria-label='<?= cin_get_str('social_network_linkedin'); ?>'
+                           href="https://www.linkedin.com/shareArticle?mini=true&url=<?= $permalink; ?>"></a>
+                        <a target="_blank" class="socials-post facebook" aria-label='<?= cin_get_str('social_network_facebook'); ?>'
+                           href="https://www.facebook.com/sharer/sharer.php?u=<?= $permalink; ?>"></a>
+                        <a target="_blank" class="socials-post twitter" aria-label='<?= cin_get_str('social_network_twitter'); ?>'
+                           href="https://twitter.com/home?status=<?= $permalink; ?>"></a>
+                    </div>
                 </div>
             </div>
         </div>

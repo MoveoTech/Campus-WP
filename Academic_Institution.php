@@ -101,7 +101,7 @@ $found_lecturer = $lecturers->total_found();
                     </div>
                     <?php if($institution_site_link): ?>
                         <div class="external-site-institut">
-                            <a target="_blank" class="external-site-institut-link" href="<?= $institution_site_link; ?>"><?= __('To The Site Of: ','single_corse').' '. get_the_title(); ?></a>
+                            <a target="_blank" class="external-site-institut-link" href="<?= $institution_site_link; ?>"><?= __('To The Site Of: ','single_corse').' '. $academicInstitutionTitle; ?></a>
                         </div>
                     <?php endif; ?>
                 </div>
@@ -118,7 +118,7 @@ $found_lecturer = $lecturers->total_found();
 <div class="more-courses-section">
     <div class="container">
         <div class="row justify-content-center">
-            <h3 class="more-courses-interest"><?= __('The Courses Of:','single_corse').' '. wrap_text_with_char(get_the_title()); ?></h3>
+            <h3 class="more-courses-interest"><?= __('The Courses Of:','single_corse').' '. $academicInstitutionTitle; ?></h3>
         </div>
         <div class="row more-courses-inner">
             <?php
