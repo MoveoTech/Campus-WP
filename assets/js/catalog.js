@@ -17,6 +17,8 @@ $(document).ready(function () {
 
     /** Click event - reset filtering **/
     $('.resetFilterButton').on('click', function (event) {
+
+        jQuery(".filterVectorMobile").removeClass('active');
         let currentUrl = window.location.href;
         let resetUrl = currentUrl.split('?')[0]
         let url = new URL(resetUrl);
