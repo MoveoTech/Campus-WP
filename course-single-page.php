@@ -67,7 +67,7 @@ $pacing = $course->display('pacing');
 $language_course = $course->display('language');
 $subtitle_lang = $course->display('subtitle_language');
 $mobile_available = $course->display('mobile_available') === 'Yes' ? true : false;
-$certificate = $course->display('certificate');
+$certificates = $course->display('certificate');
 $course_video = $course->display('trailer');
 $js_code = $course->display('javascript_code');
 $org = $course->display('academic_institution');
@@ -81,6 +81,9 @@ $course_attrs = array(
     'class' => 'col-sm-12 col-md-6 col-lg-4 col-xl-3 course-item-with-border',
 );
 
+$allLanguagesCertificate =  explode(',',$certificates,3);
+$certificate = $allLanguagesCertificate ? getFieldByLanguage($allLanguagesCertificate[0],$allLanguagesCertificate[1],$allLanguagesCertificate[2], $sitepress->get_current_language()) :null;
+
 $relatedCourses = pods( 'courses', array('limit' => 4, 'orderby' => 'RAND()'), true);
 
 // Calc Fields :
@@ -92,7 +95,6 @@ $time_st_end = $end ? get_course_strtotime($end) : null;
 $pacingArray = $pacing ? explode(',', $pacing) : null;
 $pacing = $pacingArray ? getFieldByLanguage($pacingArray[0], $pacingArray[1], $pacingArray[2], $sitepress->get_current_language()) : null;
 $language_course = $language_course ? getFieldByLanguageFromString($language_course, $sitepress->get_current_language()) : null;
-$certificate = $certificate ? getFieldByLanguageFromString($certificate, $sitepress->get_current_language()) : null;
 
 if($subtitle_lang){
 
@@ -112,7 +114,6 @@ if($org)
     $org = pods('academic_institution',array('limit'   => -1,'where'   => 't.name = "'. $org . '"'), true);
 else
     $org = null;
-
 
 /** user connect */
 $is_connect_to_site = false;
@@ -300,9 +301,9 @@ $video_id = ($link) ? $query_string["v"] : '';
                     <?php endif; ?>
                 </div>
             </div>
-            <?php if ($org) : ?>
+            <?php if ($org) :?>
                 <div class="org-logo d-flex row justify-content-end col-12 col-xl-2 col-md-2 col-sm-3 col-lg-2 align-items-center">
-                    <a aria-label='<?= $org->display( 'name' ); ?>' href="<?= get_site_url() . '/institution/' . $org->display( 'permalink' ); ?>">
+                    <a aria-label='<?= $org->display( 'name' ); ?>' href="<?= getHomeUrlWithoutQuery() . 'institution/' . $org->display( 'permalink' ); ?>">
                         <div style="background-image: url(<?= $org->display( 'image' ); ?>)" class="academic-course-image"></div>
                     </a>
                 </div>
@@ -439,13 +440,13 @@ $video_id = ($link) ? $query_string["v"] : '';
 <!--                                    <span>--><?//= $ele_prior; ?><!--</span>-->
 <!--                                </div>-->
 <!--                            --><?php //endif; ?>
-                            <?php if ($mobile_available) : ?>
+                            <?php if ($mobile_available) :?>
                                 <div class="">
                                     <span class="mobile_available info-course-list-bold"><?= __('Mobile', 'single_corse'); ?>:</span>
                                     <span><?= __('Includes support', 'single_corse'); ?></span>
                                 </div>
                             <?php endif; ?>
-                            <?php if ($certificate) : ?>
+                            <?php if ($certificate) :?>
                                 <div class="">
                                     <span class="certificate info-course-list-bold"><?= __('Diploma', 'single_corse'); ?>:</span>
                                     <span><?= $certificate; ?> </span>
@@ -574,7 +575,7 @@ $video_id = ($link) ? $query_string["v"] : '';
         </div>
         <div class="row justify-content-center for-all-courses">
             <a class="for-all-courses-link"
-               href="<?= get_post_type_archive_link('course'); ?>"><?= cin_get_str('All_Courses'); ?></a>
+               href="<?= home_url('/catalog'); ?>"><?= cin_get_str('All_Courses'); ?></a>
         </div>
     </div>
 </div>
