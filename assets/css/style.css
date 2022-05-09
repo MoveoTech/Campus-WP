@@ -19282,6 +19282,55 @@ html:not(.user_is_not_logged_in) .header_login {
           text-align: right; }
           .home-page-myCourses-stripe .stripe-container .myCourses-slider .course-stripe-item .item-content p.course-progress a {
             color: #91C653; }
+      .home-page-myCourses-stripe .stripe-container .myCourses-slider .course-stripe-item .tags-div {
+        display: flex;
+        flex-direction: row;
+        justify-content: right;
+        height: 22px;
+        margin: 0 3px;
+        overflow: hidden; }
+        @media (max-width: 768px) {
+          .home-page-myCourses-stripe .stripe-container .myCourses-slider .course-stripe-item .tags-div {
+            margin: unset; } }
+        .home-page-myCourses-stripe .stripe-container .myCourses-slider .course-stripe-item .tags-div span {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          height: 100%;
+          margin-left: 10px;
+          background: #F2F2F2;
+          border: 1px solid rgba(0, 0, 0, 0.1);
+          box-sizing: border-box;
+          border-radius: 15px;
+          text-align: center;
+          font-weight: 600;
+          font-size: 14px;
+          line-height: 18px;
+          overflow: hidden; }
+          .home-page-myCourses-stripe .stripe-container .myCourses-slider .course-stripe-item .tags-div span p {
+            padding: 2px 10px;
+            white-space: nowrap;
+            overflow: hidden;
+            margin: 0;
+            width: 100%; }
+          @media (max-width: 768px) {
+            .home-page-myCourses-stripe .stripe-container .myCourses-slider .course-stripe-item .tags-div span {
+              padding: 2px 5px;
+              margin-left: 5px; } }
+        .home-page-myCourses-stripe .stripe-container .myCourses-slider .course-stripe-item .tags-div span.regular-tag {
+          min-width: fit-content; }
+          .home-page-myCourses-stripe .stripe-container .myCourses-slider .course-stripe-item .tags-div span.regular-tag p.regular-tag {
+            display: flex;
+            align-items: center;
+            justify-content: center; }
+        .home-page-myCourses-stripe .stripe-container .myCourses-slider .course-stripe-item .tags-div p.ellipsis-text {
+          text-overflow: ellipsis; }
+        .home-page-myCourses-stripe .stripe-container .myCourses-slider .course-stripe-item .tags-div .extra-tags {
+          padding: 2px 10px;
+          text-overflow: unset;
+          margin: 0; }
+        .home-page-myCourses-stripe .stripe-container .myCourses-slider .course-stripe-item .tags-div .extra-tags-mobile {
+          display: none; }
 
 body .course-item-hover {
   animation: courseFadeIn;
