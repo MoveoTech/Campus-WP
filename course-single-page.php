@@ -426,12 +426,6 @@ $video_id = ($link) ? $query_string["v"] : '';
                                     <?php endforeach; ?>
                                 </div>
                             <?php endif; ?>
-<!--                            --><?php //if ($prior) : ?>
-<!--                                <div class="">-->
-<!--                                    <span class="prior info-course-list-bold">--><?//= __('Prior knowledge', 'single_corse'); ?><!--:</span>-->
-<!--                                    <span>--><?//= $ele_prior; ?><!--</span>-->
-<!--                                </div>-->
-<!--                            --><?php //endif; ?>
                             <?php if ($mobile_available) :?>
                                 <div class="">
                                     <span class="mobile_available info-course-list-bold"><?= __('Mobile', 'single_corse'); ?>:</span>
