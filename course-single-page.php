@@ -366,7 +366,7 @@ $video_id = ($link) ? $query_string["v"] : '';
                                     foreach ($corporation_institution as $item){
                                         $name = getFieldByLanguage($item->display('name'), $item->display('english_name'), $item->display('arabic_name') ,$sitepress->get_current_language());
                                         $thumb = $item->display('image');
-                                        $url = get_site_url() . '/institution/' . $item->display('permalink');
+                                        $url = getHomeUrlWithoutQuery() . 'institution/' . $item->display('permalink');
                                         ?>
                                         <a href="<?= $url ?>" class="item_corporation_institution"
                                            target="_blank"> <?= $name; ?>
@@ -376,14 +376,6 @@ $video_id = ($link) ? $query_string["v"] : '';
                                     <?php } ?>
                                 </div>
                             <?php endif; ?>
-<!--                            --><?php //if ($subject_of_daat) ://TODO Check with oren ?>
-<!--                                <div class="info_subject">-->
-<!--                                    <span class="subject info-course-list-bold">--><?//= cin_get_str('Subjects'); ?><!--:</span>-->
-<!--                                    --><?php //foreach ($subject_of_daat as $subject_of_daat_item) { ?>
-<!--                                        <span class="info_subject_span">--><?php //echo $subject_of_daat_item->name; ?><!--</span>-->
-<!--                                    --><?php //} ?>
-<!--                                </div>-->
-<!--                            --><?php //endif; ?>
                             <?php if ($duration) : ?>
                                 <div class="">
                                     <span class="duration info-course-list-bold"><?= __('Duration', 'single_corse'); ?>:</span>
