@@ -152,7 +152,7 @@ $found_lecturer = $lecturers->total_found();
                                     ?>
                                     <div class="course-item-image has_background_image <?= $haveyoutube; ?>" data-id="<?= $course_ID; ?>" <?= $data_popup; ?>   data-classToAdd="course_info_popup" style="background-image: url(<?= $courseImageUrl; ?>)" ></div>
                               <?php } ?>
-                                <a class="course-item-details" tabindex="0" href="<?= getHomeUrlWithoutQuery() . 'NewCourse/' . $course_permalink ?>">
+                                <a class="course-item-details" tabindex="0" href="<?= getHomeUrlWithoutQuery() . 'onlinecourse/' . $course_permalink ?>">
                                     <h3 class="course-item-title"> <?= wrap_text_with_char( $course_title ) ?></h3>
                                    <?php
                                    if($orgName):  ?>
