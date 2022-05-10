@@ -50,7 +50,7 @@ $time_now = strtotime(date('Y-m-d'));
 
 //fields on Course page
 $name = getFieldByLanguage($course->display('name'), $course->display('english_name'), $course->display('arabic_name') ,$sitepress->get_current_language());
-$permalink = get_site_url() . '/onlinecourse/' . $course->display('permalink');
+$permalink = getHomeUrlWithoutQuery() . 'onlinecourse/' . $course->display('permalink');
 $course_id_edx = $course->display('course_id_edx');
 $course_image_banner = $course->display('banner_image');
 $enrollment_start = $course->display('enrollment_start');
