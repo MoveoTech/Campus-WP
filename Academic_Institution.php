@@ -101,7 +101,7 @@ $found_lecturer = $lecturers->total_found();
                     </div>
                     <?php if($institution_site_link): ?>
                         <div class="external-site-institut">
-                            <a target="_blank" class="external-site-institut-link" href="<?= $institution_site_link; ?>"><?= __('To The Site Of: ','single_corse').' '. get_the_title(); ?></a>
+                            <a target="_blank" class="external-site-institut-link" href="<?= $institution_site_link; ?>"><?= __('To The Site Of: ','single_corse').' '. $academicInstitutionTitle; ?></a>
                         </div>
                     <?php endif; ?>
                 </div>
@@ -118,7 +118,7 @@ $found_lecturer = $lecturers->total_found();
 <div class="more-courses-section">
     <div class="container">
         <div class="row justify-content-center">
-            <h3 class="more-courses-interest"><?= __('The Courses Of:','single_corse').' '. wrap_text_with_char(get_the_title()); ?></h3>
+            <h3 class="more-courses-interest"><?= __('The Courses Of:','single_corse').' '. $academicInstitutionTitle; ?></h3>
         </div>
         <div class="row more-courses-inner">
             <?php
@@ -152,7 +152,7 @@ $found_lecturer = $lecturers->total_found();
                                     ?>
                                     <div class="course-item-image has_background_image <?= $haveyoutube; ?>" data-id="<?= $course_ID; ?>" <?= $data_popup; ?>   data-classToAdd="course_info_popup" style="background-image: url(<?= $courseImageUrl; ?>)" ></div>
                               <?php } ?>
-                                <a class="course-item-details" tabindex="0" href="<?= get_home_url() . '/course/' . $course_permalink ?>">
+                                <a class="course-item-details" tabindex="0" href="<?= getHomeUrlWithoutQuery() . 'NewCourse/' . $course_permalink ?>">
                                     <h3 class="course-item-title"> <?= wrap_text_with_char( $course_title ) ?></h3>
                                    <?php
                                    if($orgName):  ?>
