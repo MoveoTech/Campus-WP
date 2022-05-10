@@ -213,7 +213,7 @@ jQuery(document).ready(function () {
             jQuery('#popup_overlay #popup').attr("aria-hidden", "true");
             close_popup();
         });
-        var is_event = jQuery(this).closest('.course-item').is('.item_post_type_event') ? 'event_popup' : 'course_popup';
+        let is_event = jQuery(this).closest('.course-item').is('.item_post_type_event') ? 'event_popup' : 'course_popup';
         jQuery('#popup > div #popup-course-hp .popup-course-link').addClass(is_event);
         jQuery.ajax({
             type: 'POST',
@@ -225,7 +225,7 @@ jQuery(document).ready(function () {
 
             },
         }).done(function (response) {
-            var json = response.data;
+            let json = response.data;
             jQuery('#popup > div #popup-course-hp .popup-video').attr('title', json.popup_title);
             jQuery('#popup > div #popup-course-hp .popup-video').attr('src', json.popup_video);
 
