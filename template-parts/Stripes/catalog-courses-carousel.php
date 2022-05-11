@@ -8,6 +8,8 @@ if(empty($stripe) || empty($stripe['id']) || empty($stripe['courses']) || count(
 global $sitepress;
 $currentLanguage = $sitepress->get_current_language();
 $courses = pods('courses', podsParams($stripe['courses']));
+/** single pages slug */
+$single_course_slug = 'onlinecourse/';
 ?>
 
 <div class="coursesContainer">
@@ -23,7 +25,7 @@ $courses = pods('courses', podsParams($stripe['courses']));
         $id = $courses->display('ID');
         $course_permalink = $courses->display('permalink');
         $site_url = getHomeUrlWithoutQuery();
-        $url = $site_url . 'course/' . $course_permalink;
+        $url = $site_url . $single_course_slug . $course_permalink;
         ?>
         <div id="<?php echo $id . $stripe['id'] ?>" class="course-stripe-item " >
 

@@ -231,7 +231,7 @@ function appendFilteredCourses(coursesData) {
         let duration = item.duration;
         let permalink = item.permalink ? item.permalink : '';
         let baseUrl = window.location.origin;
-        let url = baseUrl + '/course/' + permalink;
+        let url = baseUrl + '/onlinecourse/' + permalink;
         let buttonText = item.buttonText;
 
         if(academicInstitution){

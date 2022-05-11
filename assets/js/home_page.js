@@ -454,7 +454,7 @@ function apppendCourses(coursesData, id) {
 
     coursesData.forEach(item =>{
         let permalink = item.permalink ? item.permalink : '';
-        let url = 'course/' + permalink;
+        let url = 'onlinecourse/' + permalink;
         let tags = getDesktopTags(item.tags);
         let hoverTags = getHoverTags(item.tags);
 

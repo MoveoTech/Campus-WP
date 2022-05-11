@@ -28,6 +28,9 @@ $slug = sanitize_text_field(rawurldecode($slug));
 
 $course = pods( 'courses', $slug, true);
 
+/** single pages slugs */
+$single_course_slug = 'onlinecourse/';
+$single_institution_slug = 'institution/';
 
 // Check if the pod is valid and exists.
 if ( false == $course || ! $course->exists()) {
@@ -50,7 +53,7 @@ $time_now = strtotime(date('Y-m-d'));
 
 //fields on Course page
 $name = getFieldByLanguage($course->display('name'), $course->display('english_name'), $course->display('arabic_name') ,$sitepress->get_current_language());
-$permalink = getHomeUrlWithoutQuery() . 'onlinecourse/' . $course->display('permalink');
+$permalink = getHomeUrlWithoutQuery() . $single_course_slug . $course->display('permalink');
 $course_id_edx = $course->display('course_id_edx');
 $course_image_banner = $course->display('banner_image');
 $enrollment_start = $course->display('enrollment_start');
@@ -303,7 +306,7 @@ $video_id = ($link) ? $query_string["v"] : '';
             </div>
             <?php if ($org) :?>
                 <div class="org-logo d-flex row justify-content-end col-12 col-xl-2 col-md-2 col-sm-3 col-lg-2 align-items-center">
-                    <a aria-label='<?= $org->display( 'name' ); ?>' href="<?= getHomeUrlWithoutQuery() . 'institution/' . $org->display( 'permalink' ); ?>">
+                    <a aria-label='<?= $org->display( 'name' ); ?>' href="<?= getHomeUrlWithoutQuery() . $single_institution_slug . $org->display( 'permalink' ); ?>">
                         <div style="background-image: url(<?= $org->display( 'image' ); ?>)" class="academic-course-image"></div>
                     </a>
                 </div>
@@ -366,7 +369,7 @@ $video_id = ($link) ? $query_string["v"] : '';
                                     foreach ($corporation_institution as $item){
                                         $name = getFieldByLanguage($item->display('name'), $item->display('english_name'), $item->display('arabic_name') ,$sitepress->get_current_language());
                                         $thumb = $item->display('image');
-                                        $url = getHomeUrlWithoutQuery() . 'institution/' . $item->display('permalink');
+                                        $url = getHomeUrlWithoutQuery() . $single_institution_slug . $item->display('permalink');
                                         ?>
                                         <a href="<?= $url ?>" class="item_corporation_institution"
                                            target="_blank"> <?= $name; ?>

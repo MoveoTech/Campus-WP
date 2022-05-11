@@ -8,6 +8,10 @@ $attrs = $courseDetails['attrs'];
 $course = $courseDetails['course'];
 
 global $sitepress;
+
+/** single pages slugs */
+$single_course_slug = 'onlinecourse/';
+
 $ID = $course->display('id');
 $title = getFieldByLanguage($course->display( 'name' ), $course->display( 'english_name' ), $course->display( 'arabic_name' ),$sitepress->get_current_language());
 $institution_name = getFieldByLanguage($course->field( 'academic_institution.name' ), $course->field( 'academic_institution.english_name' ), $course->field( 'academic_institution.arabic_name' ), $sitepress->get_current_language());
@@ -15,10 +19,12 @@ $marketing_feature = sortTagsByOrder($course->field('marketing_tags')) ;
 $url_course_img_slick = $course->display( 'image' );
 $duration = $course->display( 'duration' );
 $course_permalink = $course->display('permalink');
-$url = getHomeUrlWithoutQuery() . 'onlinecourse/' . $course_permalink;
+$url = getHomeUrlWithoutQuery() . $single_course_slug . $course_permalink;
 $haveyoutube          = $course->display( 'trailer' );
 $output = '';
 $attrs['class'] .= $attrs['hybrid_course'] ? ' hybrid_course' : '';
+
+
 ?>
 
 <div class="item_post_type_course course-item <?= $attrs['class'] ?>" data-id="<?= $ID ?>" <?= $attrs['filters']?>>

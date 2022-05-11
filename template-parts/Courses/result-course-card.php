@@ -8,6 +8,10 @@ $attrs = $courseDetails['attrs'];
 $course = $courseDetails['course'];
 
 global $sitepress;
+
+/** single pages slugs */
+$single_course_slug = 'onlinecourse/';
+
 $ID = $course->display('id');
 $title = getFieldByLanguage($course->display( 'name' ), $course->display( 'english_name' ), $course->display( 'arabic_name' ),$sitepress->get_current_language());
 $institution_name = getFieldByLanguage($course->field( 'academic_institution.name' ), $course->field( 'academic_institution.english_name' ), $course->field( 'academic_institution.arabic_name' ), $sitepress->get_current_language());
@@ -16,7 +20,7 @@ $thumb = $course->display( 'image' );
 $duration = $course->display( 'duration' );
 $course_permalink = $course->display('permalink');
 $site_url = getHomeUrlWithoutQuery();
-$url = $site_url . 'course/' . $course_permalink;
+$url = $site_url . $single_course_slug . $course_permalink;
 $attrs['class'] .= $attrs['hybrid_course'] ? ' hybrid_course' : '';
 ?>
 <div class="courseResultCard" data-id="<?= $ID ?>" id="<?= $ID ?>">

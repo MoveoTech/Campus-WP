@@ -519,7 +519,7 @@ function draw_new_course_item( $attrs, $course ) {
     $duration = $course->display( 'duration' );
     $course_permalink = $course->display('permalink');
     $site_url = get_home_url();
-    $url = $site_url . '/course/' . $course_permalink;
+    $url = $site_url . '/onlinecourse/' . $course_permalink;
     $haveyoutube          = $course->display( 'trailer' );
     $output = '';
     $attrs['class'] .= $attrs['hybrid_course'] ? ' hybrid_course' : '';
