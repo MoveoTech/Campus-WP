@@ -80,6 +80,25 @@ $corporation_institution = $course->field(array('name'=>'corporation_institution
 $external_link = $course->display('external_link');
 $excerpt = $course->display('excerpt');
 
+/** prior knowledge */
+$prior = $course->display('prior_knowledge_type');
+$prior_link = $course->field('link_prior_knowledge')[0];
+$prior_knowledge = "";
+
+if ($prior) {
+    switch ($prior) {
+        case 'None':
+            $prior_knowledge = __('None', 'single_corse');
+            break;
+        case 'String':
+            $prior_knowledge = $course->display('string_prior_knowledge');
+            break;
+        case 'Link':
+            $url = getHomeUrlWithoutQuery() . 'onlinecourse/' . $prior_link['permalink'];
+            $prior_knowledge = '<a href="' . $url . '" target="_self">' . $prior_link['name'] . '</a>';
+            break;
+    }
+}
 $course_attrs = array(
     'class' => 'col-sm-12 col-md-6 col-lg-4 col-xl-3 course-item-with-border',
 );
@@ -424,6 +443,12 @@ $video_id = ($link) ? $query_string["v"] : '';
                                     <?php foreach ($subtitle_lang as $lang): ?>
                                         <span class="info_lang_span"><?= $lang; ?></span>
                                     <?php endforeach; ?>
+                                </div>
+                            <?php endif; ?>
+                            <?php if ($prior) : ?>
+                                <div class="">
+                                    <span class="prior info-course-list-bold"><?= __('Prior knowledge', 'single_corse'); ?>:</span>
+                                    <span><?= $prior_knowledge; ?></span>
                                 </div>
                             <?php endif; ?>
                             <?php if ($mobile_available) :?>
