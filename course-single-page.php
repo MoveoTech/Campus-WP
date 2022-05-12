@@ -110,9 +110,6 @@ if($subtitle_lang){
 
 }
 
-//if (!empty($js_code)) {
-//    echo '<script type="text/javascript">' . $js_code . '</script>';
-//}
 if($org)
     $org = pods('academic_institution',array('limit'   => -1,'where'   => 't.name = "'. $org . '"'), true);
 else
