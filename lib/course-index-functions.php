@@ -233,11 +233,6 @@ function get_courses_search_filter_server_side($query, $filters_list, $academic_
     );
 }
 
-//add_filter('terms_clauses', function($pieces, $taxonomies, $args ){
-//    print_r($pieces);
-//
-//    return $pieces;
-//}, 10, 3);
 
 function draw_filter_item_from_term($tax, $term, $index)
 {
@@ -519,7 +514,7 @@ function draw_new_course_item( $attrs, $course ) {
     $duration = $course->display( 'duration' );
     $course_permalink = $course->display('permalink');
     $site_url = get_home_url();
-    $url = $site_url . '/course/' . $course_permalink;
+    $url = $site_url . '/onlinecourse/' . $course_permalink;
     $haveyoutube          = $course->display( 'trailer' );
     $output = '';
     $attrs['class'] .= $attrs['hybrid_course'] ? ' hybrid_course' : '';

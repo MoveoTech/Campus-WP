@@ -7,7 +7,6 @@ $stripe = wp_parse_args(
 if(empty($stripe) || empty($stripe['id']) || empty($stripe['courses']) )
     return;
 
-$courses_url = home_url('/') . 'course/' ;
 $stripeTitle = $stripe['title'];
 $stripeSubtitle = $stripe['subtitle'];
 $stripeId = $stripe['id'];

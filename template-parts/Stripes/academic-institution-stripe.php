@@ -8,6 +8,8 @@ if(empty($stripe) || empty($stripe['id']) || empty($stripe['carousel']) || count
 
 $academic_institutions = pods( 'academic_institution', podsParams($stripe['carousel']));
 
+/** single pages slugs */
+$single_institution_slug = 'institution/';
 ?>
 
 <div class="home-page-institutions_stripe"  >
@@ -31,7 +33,7 @@ $academic_institutions = pods( 'academic_institution', podsParams($stripe['carou
                 ?>
                 <div class="course-stripe-item" style="margin: auto">
                     <div class="course-img" style="background-image: url(<?php echo $thumb ?>);  ">
-                        <a href="<?php echo $site_url?>academic_institution/<?php echo $institution_permalink ?>"></a>
+                        <a href="<?php echo $site_url . $single_institution_slug . $institution_permalink ?>"></a>
                     </div>
                 </div>
             <?php } } ?>

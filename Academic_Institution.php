@@ -26,6 +26,9 @@ $slug = pods_v( 'last', 'url' );
 $slug = sanitize_text_field(rawurldecode($slug));
 $academicInstitution = pods( 'academic_institution', $slug, true);
 
+/** single pages slugs */
+$single_course_slug = 'onlinecourse/';
+
 // Check if the pod is valid and exists.
 if ( false == $academicInstitution || ! $academicInstitution->exists()) {
     // The pod item doesn't exists.
@@ -51,7 +54,12 @@ $params = [
     'where'   => 'academic_institution.id = '.$academicInstitution->display( 'id' ),
 ];
 
-$courses = pods( 'courses', $params, true);
+$academic_params = [
+    'limit'   => -1,
+    'where'   => '(academic_institution.id = '.$academicInstitution->display( 'id' ) . ') OR (corporation_institution.id = '.$academicInstitution->display( 'id' ). ')',
+];
+
+$courses = pods( 'courses', $academic_params, true);
 $found_courses = $courses->total_found();
 
 $lecturers = pods( 'lecturer', $params, true);
@@ -152,7 +160,7 @@ $found_lecturer = $lecturers->total_found();
                                     ?>
                                     <div class="course-item-image has_background_image <?= $haveyoutube; ?>" data-id="<?= $course_ID; ?>" <?= $data_popup; ?>   data-classToAdd="course_info_popup" style="background-image: url(<?= $courseImageUrl; ?>)" ></div>
                               <?php } ?>
-                                <a class="course-item-details" tabindex="0" href="<?= getHomeUrlWithoutQuery() . 'onlinecourse/' . $course_permalink ?>">
+                                <a class="course-item-details" tabindex="0" href="<?= getHomeUrlWithoutQuery() . $single_course_slug . $course_permalink ?>">
                                     <h3 class="course-item-title"> <?= wrap_text_with_char( $course_title ) ?></h3>
                                    <?php
                                    if($orgName):  ?>

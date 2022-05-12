@@ -231,7 +231,12 @@ function appendFilteredCourses(coursesData) {
         let duration = item.duration;
         let permalink = item.permalink ? item.permalink : '';
         let baseUrl = window.location.origin;
-        let url = baseUrl + '/course/' + permalink;
+        if(window.location.pathname.includes('/en/')) {
+            baseUrl = baseUrl + '/en';
+        } else if(window.location.pathname.includes('/ar/')) {
+            baseUrl = baseUrl + '/ar';
+        }
+        let url = baseUrl + '/onlinecourse/' + permalink;
         let buttonText = item.buttonText;
 
         if(academicInstitution){
@@ -278,7 +283,7 @@ function appendFilteredCourses(coursesData) {
     coursesBox.replaceWith(output);
     clickOnCourseInfoButton();
 
-} //TODO build template for result course card
+}
 
 function getCourseResultTags(tags) {
     let tagsHtml = '';

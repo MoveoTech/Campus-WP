@@ -12,6 +12,9 @@
         $duration_popup_course = $item->display('duration');
         $post_excerpt_popup_course = $item->field('excerpt');
         $academic_institution_popup_course = $item->field('academic_institution');
+        /** single pages slugs */
+        $single_course_slug = 'onlinecourse/';
+
         if ($academic_institution_popup_course) {
             $academic_title = getFieldByLanguage($academic_institution_popup_course['name'],$academic_institution_popup_course['english_name'],$academic_institution_popup_course['arabic_name'], $sitepress->get_current_language());
         }
@@ -21,7 +24,7 @@
         $post_title_popup_course = $item->display('title_on_banner');
         $post_title_popup_course = $post_title_popup_course ? wrap_text_with_char($post_title_popup_course) : getFieldByLanguage($item->display('name'),$item->display('english_name'),$item->display('arabic_name'), $sitepress->get_current_language());
         $course_permalink = $item->display('permalink');
-        $url = getHomeUrlWithoutQuery() . 'onlinecourse/' . $course_permalink;
+        $url = getHomeUrlWithoutQuery() . $single_course_slug . $course_permalink;
 
         $query_string = array();
         parse_str(parse_url($item_video_popup_course, PHP_URL_QUERY), $query_string);
