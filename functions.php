@@ -89,10 +89,10 @@ function set_user_default_language() {
 
     if($get_language == 'he') {
         if(strpos($url, "ar") != false)
-            redirect(replace_first_str("ar", "", $current_url));
+            redirect(replace_first_str("ar/", "", $current_url));
 
         if(strpos($url, "en") != false)
-            redirect(replace_first_str("en", "", $current_url));
+            redirect(replace_first_str("en/", "", $current_url));
     }
 
 }

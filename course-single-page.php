@@ -110,9 +110,9 @@ if($subtitle_lang){
 
 }
 
-if (!empty($js_code)) {
-    echo '<script type="text/javascript">' . $js_code . '</script>';
-}
+//if (!empty($js_code)) {
+//    echo '<script type="text/javascript">' . $js_code . '</script>';
+//}
 if($org)
     $org = pods('academic_institution',array('limit'   => -1,'where'   => 't.name = "'. $org . '"'), true);
 else
@@ -133,7 +133,7 @@ $enroll_time = $str_time_course = '';
 $time_course = '';
 $time_course_n_con = "";
 $class_link = '';
-$link_btn = $site_settings['link_to_api_courses'] . "/courses/" . $course_id_edx . "/info";
+$link_btn = $site_settings['link_to_api_courses'] . "/courses/" . $course_id_edx . "/course";
 $link_dashboard = $site_settings['link_to_dashboard_for_campus'];
 $register_api_n_con = false;
 $data_end_api = '';
@@ -532,6 +532,14 @@ $video_id = ($link) ? $query_string["v"] : '';
                     </div>
                 <?php } ?>
             </div>
+        </div>
+    </div>
+<?php endif; ?>
+
+<?php if ($js_code) : ?>
+    <div class="more_details">
+        <div class="container">
+            <div class="more_details-text"><?= $js_code; ?></div>
         </div>
     </div>
 <?php endif; ?>

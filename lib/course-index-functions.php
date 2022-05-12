@@ -233,11 +233,6 @@ function get_courses_search_filter_server_side($query, $filters_list, $academic_
     );
 }
 
-//add_filter('terms_clauses', function($pieces, $taxonomies, $args ){
-//    print_r($pieces);
-//
-//    return $pieces;
-//}, 10, 3);
 
 function draw_filter_item_from_term($tax, $term, $index)
 {

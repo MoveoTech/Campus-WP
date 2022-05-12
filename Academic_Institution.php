@@ -54,7 +54,12 @@ $params = [
     'where'   => 'academic_institution.id = '.$academicInstitution->display( 'id' ),
 ];
 
-$courses = pods( 'courses', $params, true);
+$academic_params = [
+    'limit'   => -1,
+    'where'   => '(academic_institution.id = '.$academicInstitution->display( 'id' ) . ') OR (corporation_institution.id = '.$academicInstitution->display( 'id' ). ')',
+];
+
+$courses = pods( 'courses', $academic_params, true);
 $found_courses = $courses->total_found();
 
 $lecturers = pods( 'lecturer', $params, true);
