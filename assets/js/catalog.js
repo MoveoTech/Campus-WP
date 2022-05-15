@@ -213,7 +213,8 @@ function slickStripeForMobile() {
 }
 
 function appendFilteredCourses(coursesData) {
-    const currentLang = getCookie('openedx-language-preference') ? getCookie('openedx-language-preference') : getCookie('wp-wpml_current_language');
+    const edxLang = getCookie('openedx-language-preference');
+    const currentLang = edxLang ? edxLang.toLowerCase() : getCookie('wp-wpml_current_language').toLowerCase();
     let coursesBox = document.getElementById("coursesBox");
     let output = document.createElement("div");
     output.id = 'coursesBox';
