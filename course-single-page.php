@@ -82,23 +82,32 @@ $excerpt = $course->display('excerpt');
 
 /** prior knowledge */
 $prior = $course->display('prior_knowledge_type');
-$prior_link = $course->field('link_prior_knowledge')[0];
+$prior_link = $course->field('link_prior_knowledge');
+$prior_string = $course->display('string_prior_knowledge');
 $prior_knowledge = "";
 
 if ($prior) {
     switch ($prior) {
         case 'None':
-            $prior_knowledge = __('None', 'single_corse');
+            $prior_knowledge = '<span>' . __('None', 'single_corse') . '</span>';
             break;
         case 'String':
-            $prior_knowledge = $course->display('string_prior_knowledge');
+            $prior_knowledge ='<span>' . $prior_string . '</span>' ;
             break;
         case 'Link':
-            $url = getHomeUrlWithoutQuery() . 'onlinecourse/' . $prior_link['permalink'];
-            $prior_knowledge = '<a href="' . $url . '" target="_self">' . $prior_link['name'] . '</a>';
+            $prior_knowledge = getPriorLinkKnowledge($prior_link);
             break;
     }
 }
+function getPriorLinkKnowledge($prior_link){
+    $prior_knowledge_links = "";
+foreach($prior_link as $link){
+    $url = getHomeUrlWithoutQuery() . 'onlinecourse/' . $link['permalink'];
+    $prior_knowledge_links .= '<span><a href="' . $url . '" >' . $link['name'] . " " . '</a></span>';
+}
+   return $prior_knowledge_links;
+}
+
 $course_attrs = array(
     'class' => 'col-sm-12 col-md-6 col-lg-4 col-xl-3 course-item-with-border',
 );
@@ -448,7 +457,7 @@ $video_id = ($link) ? $query_string["v"] : '';
                             <?php if ($prior) : ?>
                                 <div class="">
                                     <span class="prior info-course-list-bold"><?= __('Prior knowledge', 'single_corse'); ?>:</span>
-                                    <span><?= $prior_knowledge; ?></span>
+                                    <?= $prior_knowledge; ?>
                                 </div>
                             <?php endif; ?>
                             <?php if ($mobile_available) :?>
