@@ -213,7 +213,7 @@ function slickStripeForMobile() {
 }
 
 function appendFilteredCourses(coursesData) {
-
+    const currentLang = getCookie('openedx-language-preference') ? getCookie('openedx-language-preference') : getCookie('wp-wpml_current_language');
     let coursesBox = document.getElementById("coursesBox");
     let output = document.createElement("div");
     output.id = 'coursesBox';
@@ -231,10 +231,8 @@ function appendFilteredCourses(coursesData) {
         let duration = item.duration;
         let permalink = item.permalink ? item.permalink : '';
         let baseUrl = window.location.origin;
-        if(window.location.pathname.includes('/en/')) {
-            baseUrl = baseUrl + '/en';
-        } else if(window.location.pathname.includes('/ar/')) {
-            baseUrl = baseUrl + '/ar';
+        if(window.location.pathname.includes('/'+ currentLang +'/')) {
+            baseUrl = baseUrl + '/'+ currentLang;
         }
         let url = baseUrl + '/onlinecourse/' + permalink;
         let buttonText = item.buttonText;
