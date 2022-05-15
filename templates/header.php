@@ -3,6 +3,8 @@ $user_courses = get_user_courses_link();
 $user_name = get_user_hello();
 $user_login = get_user_login();
 $user_menu = get_user_menu();
+$no_script_tags= get_no_script_tags();
+echo get_no_script_tags();
 ?>
     <header class="above-banner header_section header_wrap" role="above_banner">
         <div class="flex-div">
@@ -202,5 +204,12 @@ function get_user_menu() {
     
     
        ';
+}
+function get_no_script_tags() {
+    return '    <!-- Google Tag Manager (noscript) -->
+
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MS8JL77" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+    <!-- End Google Tag Manager (noscript) -->';
 }
 
