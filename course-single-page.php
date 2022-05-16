@@ -21,7 +21,6 @@
 do_action('get_header');
 get_template_part('templates/header');
 
-
 $slug = pods_v( 'last', 'url' );
 
 $slug = sanitize_text_field(rawurldecode($slug));
@@ -115,7 +114,7 @@ $course_attrs = array(
 $allLanguagesCertificate =  explode(',',$certificates,3);
 $certificate = $allLanguagesCertificate ? getFieldByLanguage($allLanguagesCertificate[0],$allLanguagesCertificate[1],$allLanguagesCertificate[2], $sitepress->get_current_language()) :null;
 
-$relatedCourses = pods( 'courses', array('limit' => 4, 'orderby' => 'RAND()'), true);
+$relatedCourses = pods( 'courses', array('limit' => 4, 'where'=> 'hide_in_site = 0', 'orderby' => 'RAND()'), true);
 
 // Calc Fields :
 

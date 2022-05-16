@@ -56,8 +56,7 @@ $params = [
 
 $academic_params = [
     'limit'   => -1,
-    'where'   => '(academic_institution.id = '.$academicInstitution->display( 'id' ) . ') OR (corporation_institution.id = '.$academicInstitution->display( 'id' ). ')',
-];
+    'where'   => '((academic_institution.id = '.$academicInstitution->display( 'id' ) . ') OR (corporation_institution.id = '.$academicInstitution->display( 'id' ). ')) AND hide_in_site = 0',];
 
 $courses = pods( 'courses', $academic_params, true);
 $found_courses = $courses->total_found();

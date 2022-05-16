@@ -18,6 +18,8 @@ $single_course_slug = 'onlinecourse/';
     <div id="<?php echo $stripe['id'] ?>" class="courses-stripe <?php echo ($stripe['type'] && $stripe['type'] == 'nerative' ) ? 'nerative-class' : '' ?>">
     <?php
     while ($courses->fetch()) {
+        $hide_in_site = $courses->display('hide_in_site');
+        if($hide_in_site == 'No'){
         $title = getFieldByLanguage($courses->display( 'name' ), $courses->display( 'english_name' ), $courses->display( 'arabic_name' ),$sitepress->get_current_language());
         $institution_name = getFieldByLanguage($courses->field( 'academic_institution.name' ), $courses->field( 'academic_institution.english_name' ), $courses->field( 'academic_institution.arabic_name' ), $sitepress->get_current_language());
         $tags = sortTagsByOrder($courses->field('marketing_tags'));
@@ -28,7 +30,7 @@ $single_course_slug = 'onlinecourse/';
         $site_url = getHomeUrlWithoutQuery();
         $url = $site_url . $single_course_slug . $course_permalink;
         ?>
-        <div id="<?php echo $id . $stripe['id'] ?>" class="course-stripe-item " >
+        <div id="<?php echo $id . $stripe['id'] ?>" class="course-stripe-item" >
 
             <div class="course-img" style="background-image: url(<?= $thumb ?>);">
                   <a href="<?= $url ?>"></a>
@@ -111,6 +113,8 @@ $single_course_slug = 'onlinecourse/';
         </div>
 
     <?php };?>
+<!--        End of while loop-->
+        <?php };?>
     </div>
 </div>
 
