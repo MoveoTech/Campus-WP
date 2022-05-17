@@ -81,7 +81,7 @@ $found_lecturer = $lecturers->total_found();
     <?=  get_banner_area(array('url' => $banner_mobile_institute) , array('url' => $banner_image_institute) , $text_on_banner_content,$class); ?>
 <?php endif;?>
 <!--End Banner area-->
-<div class="content-institution-page">
+<div class="content-institution-page" id="institutionTemplate">
     <div class="container">
         <div class="row justify-content-between">
             <div class="col-xs-12 col-sm-12 col-lg-8 col-xl-9">

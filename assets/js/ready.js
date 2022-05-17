@@ -998,6 +998,10 @@ jQuery(document).ready(function () {
         jQuery('.mobile-menu-asset').addClass('active')
     }
 
+
+    // added by Sapir
+    appendTabTitleOnSinglePage()
+
 });
 
 jQuery(document).on('scroll', function () {
@@ -1437,4 +1441,13 @@ function enroll(json) {
     xhr.setRequestHeader('X-CSRFToken', getCookie('csrftoken-marketing'));
 
     xhr.send(JSON.stringify(json));
+}
+
+// added by Sapir - append title on browser tab on single pages
+function appendTabTitleOnSinglePage() {
+    if(jQuery('#singleCourseTemplate')[0]){
+        document.title = jQuery('.title-course')[0].innerHTML;
+    } else if (jQuery('#institutionTemplate')[0]) {
+        document.title = jQuery('.title-opacity-on-banner')[0].innerHTML;
+    }
 }

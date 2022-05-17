@@ -303,7 +303,7 @@ $video_id = ($link) ? $query_string["v"] : '';
     <?php
 } ?>
 
-<div class="information-bar" data-course_id_edx="<?= $course_id_edx ?>">
+<div class="information-bar" data-course_id_edx="<?= $course_id_edx ?>" id="singleCourseTemplate">
     <div class="container">
         <div class="row information-bar-inner">
             <div class="col-12 col-xl-9 col-md-10 col-sm-12 col-lg-10">
