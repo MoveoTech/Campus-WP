@@ -86,13 +86,13 @@ $found_lecturer = $lecturers->total_found();
         <div class="row justify-content-between">
             <div class="col-xs-12 col-sm-12 col-lg-8 col-xl-9">
                 <?php if($content) : ?>
-                    <p class="title-content-insitut"><?= __('About University:','single_course'); ?></p>
+                    <p class="title-content-insitut"><?= __('About University:','single_corse'); ?></p>
                     <div class="text-description-of-course content-inner-insti-page">
                         <span class="read-more-text"><?php echo wpautop($content); ?></span>
                     </div>
                     <button class="course_test_type_readmore course_test_readmore_collapse collapsed" aria-hidden="true">
-                        <span><?= __('Read More','single_course'); ?></span>
-                        <span><?= __('Read Less','single_course'); ?></span>
+                        <span><?= __('Read More','single_corse'); ?></span>
+                        <span><?= __('Read Less','single_corse'); ?></span>
                     </button>
                 <?php endif; ?>
             </div>

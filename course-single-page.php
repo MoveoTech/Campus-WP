@@ -178,7 +178,7 @@ if (!$is_connect_to_site) {//משתמש שלא רשום לאתר בכל מקרה
     $data_end_api_n_con = 'dashboard';
 
 } else if (empty($enrollment_start) || $time_st_enrollment_start > $time_now) {//לפני פתיחת ההרשמה
-    $enroll_time = __('Registration will begin soon', 'single_course');;
+    $enroll_time = __('Registration will begin soon', 'single_corse');;
     $class_link = 'disabled';
 
 } elseif (!empty($enrollment_end) && $time_st_enrollment_end < $time_now) {//אחרי סיום ההרשמה
@@ -186,13 +186,13 @@ if (!$is_connect_to_site) {//משתמש שלא רשום לאתר בכל מקרה
 
     $enroll_time = cin_get_str('Course_Page');
 
-    $enroll_time_n_con = __('Registration completed', 'single_course');
+    $enroll_time_n_con = __('Registration completed', 'single_corse');
     $class_link_n_con = 'disabled';
 } else { //בין פתיחת ההרשמה
     $two_btn = true;
     if ($time_st_start > $time_now) {//לפתיחת הקורס
         $class_link = 'disabled';
-        $enroll_time = __('Start soon', 'single_course');
+        $enroll_time = __('Start soon', 'single_corse');
 
         $enroll_time_n_con = cin_get_str('Enroll');
         $data_end_api_n_con = 'popup';//עוברים לפופאפ
@@ -235,7 +235,7 @@ if ($start) {
         $time_course = __('Registration is open', 'single_corse');
         $str_time_course .= $time_course;
     } elseif ($time_st_start <= $time_now && $time_st_end >= $time_now) {//בין בין תאריכי הקורס
-        $time_course = __('The course is open', 'single_course');
+        $time_course = __('The course is open', 'single_corse');
         if (!($enrollment_end && ($time_st_enrollment_end < $time_now))) {
             $time_course .= '. ' . __('Registration is open', 'single_corse');
         }
