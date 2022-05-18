@@ -116,7 +116,7 @@ if ($start) {
         $time_course = __('Registration is open', 'single_corse');
         $str_time_course .= $time_course;
     } elseif ($time_st_start <= $time_now && $time_st_end >= $time_now) {//בין בין תאריכי הקורס
-        $time_course = __('The course is open', 'single_course');
+        $time_course = __('The course is open', 'single_corse');
         if (!($enrollment_end && ($time_st_enrollment_end < $time_now))) {
             $time_course .= '. ' . __('Registration is open', 'single_corse');
         }

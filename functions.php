@@ -1658,11 +1658,9 @@ function getFiltersArray($paramsArray) {
         return $filters;
     }
 }
-
 function replace_first_str($search_str, $replacement_str, $src_str){
     return (false !== ($pos = strpos($src_str, $search_str))) ? substr_replace($src_str, $replacement_str, $pos, strlen($search_str)) : $src_str;
 }
-
 function getHomeUrlWithoutQuery(): string {
     $home_url = get_home_url();
     if($home_url[-1] == '/') {
@@ -1672,7 +1670,6 @@ function getHomeUrlWithoutQuery(): string {
     }
     return $site_url;
 }
-
 if (!function_exists('str_contains')) {
     function str_contains(string $haystack, string $needle): bool
     {

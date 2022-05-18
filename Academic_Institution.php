@@ -56,8 +56,7 @@ $params = [
 
 $academic_params = [
     'limit'   => -1,
-    'where'   => '(academic_institution.id = '.$academicInstitution->display( 'id' ) . ') OR (corporation_institution.id = '.$academicInstitution->display( 'id' ). ')',
-];
+    'where'   => '((academic_institution.id = '.$academicInstitution->display( 'id' ) . ') OR (corporation_institution.id = '.$academicInstitution->display( 'id' ). ')) AND hide_in_site = 0',];
 
 $courses = pods( 'courses', $academic_params, true);
 $found_courses = $courses->total_found();
@@ -82,18 +81,18 @@ $found_lecturer = $lecturers->total_found();
     <?=  get_banner_area(array('url' => $banner_mobile_institute) , array('url' => $banner_image_institute) , $text_on_banner_content,$class); ?>
 <?php endif;?>
 <!--End Banner area-->
-<div class="content-institution-page">
+<div class="content-institution-page" id="institutionTemplate">
     <div class="container">
         <div class="row justify-content-between">
             <div class="col-xs-12 col-sm-12 col-lg-8 col-xl-9">
                 <?php if($content) : ?>
-                    <p class="title-content-insitut"><?= __('About University:','single_course'); ?></p>
+                    <p class="title-content-insitut"><?= __('About University:','single_corse'); ?></p>
                     <div class="text-description-of-course content-inner-insti-page">
                         <span class="read-more-text"><?php echo wpautop($content); ?></span>
                     </div>
                     <button class="course_test_type_readmore course_test_readmore_collapse collapsed" aria-hidden="true">
-                        <span><?= __('Read More','single_course'); ?></span>
-                        <span><?= __('Read Less','single_course'); ?></span>
+                        <span><?= __('Read More','single_corse'); ?></span>
+                        <span><?= __('Read Less','single_corse'); ?></span>
                     </button>
                 <?php endif; ?>
             </div>
