@@ -103,7 +103,7 @@ jQuery(document).ready(function () {
     /*Runs the enrollment only the first time you log in - to check the login,
      and every time you enter a course page*/
     // if((getCookie("edxloggedin") != "true") || (jQuery('body.single-course').length)){
-    if ((!getCookie(global_vars.cookie_name)) || (jQuery('body.single-course').length)) {
+    if ((!getCookie(global_vars.cookie_name)) || (jQuery('body.pod-courses').length)) {
         jQuery.ajax({
             method: "GET",
             url: global_vars.link_to_enrollment_api,
@@ -114,10 +114,8 @@ jQuery(document).ready(function () {
             xhrFields: {withCredentials: true},
             success: function (data, textStatus, jqXHR) {
                 console.log('succeeded: authenticated');
-                //console.log(data);
-
                 show_username();
-                if ((jQuery('body.single-course').length)) {
+                if ((jQuery('body.pod-courses').length)) {
                     var course_id_edx = jQuery('.information-bar').data('course_id_edx');
                     var connect_to_course = false;
                     jQuery.each(data, function (index, value) {
@@ -1267,7 +1265,6 @@ function change_select_val() {
 }
 
 function change_select_text() {
-    console.log('change text');
     var select1 = jQuery('.selected-academic');
     var selected = jQuery(select1).children(':selected');
     var i = 0;
