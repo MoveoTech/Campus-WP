@@ -10,7 +10,7 @@ jQuery(document).ready(function () {
     //Get My Courses
     // check if user loggedIn
     let edx_user_info = getCookie(global_vars.cookie_name);
-    if (edx_user_info) {
+    if (edx_user_info && (jQuery('body.page-template-default').length)) {
         getMyCourses();
     }
 
