@@ -120,7 +120,7 @@ $relatedCourses = pods( 'courses', array('limit' => 4, 'where'=> 'hide_in_site =
 
 $time_st_enrollment_start = $enrollment_start ? get_course_strtotime($enrollment_start) : null;
 $time_st_enrollment_end = $enrollment_end ? get_course_strtotime($enrollment_end) : null;
-$time_st_start = $start ? strtotime(date('m/d/Y', strtotime($start))) : null;
+$time_st_start = $start ? strtotime(date('d/m/Y', strtotime($start))) : null;
 $time_st_end = $end ? get_course_strtotime($end) : null;
 $pacingArray = $pacing ? explode(',', $pacing) : null;
 $pacing = $pacingArray ? getFieldByLanguage($pacingArray[0], $pacingArray[1], $pacingArray[2], $sitepress->get_current_language()) : null;
