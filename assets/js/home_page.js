@@ -13,7 +13,6 @@ jQuery(document).ready(function () {
     if (edx_user_info) {
         getMyCourses();
     }
-
     //Course Card
     mouseHoverOnCourse()
 
@@ -479,7 +478,7 @@ function apppendCourses(coursesData, id) {
                         '<h3 >'+item.name+'</h3>'+
                         '<p >'+academicInstitution+'</p>'+
                     '</div>'+
-                    '<div class=" tags-div">'+ hoverTags +'</div>'+
+                    '<div class="tags-div">'+ hoverTags +'</div>'+
                     '<div class="course-details">'+
                         '<span>'+ item.duration +'</span>'+
                     '</div>'+
@@ -628,6 +627,7 @@ function appendMyCourses(coursesData, id) {
             permalink: item.permalink,
             course_edXId: item.course_id_edx,
             tags:item.tags,
+            duration: item.duration,
             // progress: item.course_details.progress ? item.course_details.progress : '',
         }
         let tags = getDesktopTags(itemData.tags);
@@ -639,7 +639,8 @@ function appendMyCourses(coursesData, id) {
 
         let url = envURLs.EDX_COURSE_URL + itemData.course_edXId + '/course';
         let temp = document.createElement("div");
-        temp.className = 'course-stripe-item';
+        temp.id = itemData.course_id + id;
+        temp.classList.add('course-stripe-item');
         temp.innerHTML =
             '<div class="course-img" style="position: relative; background-image: url('+itemData.thumb+');"><a style="position:absolute; inset: 0; width: 100%; height: 100%" href="'+ url+'"></a></div>'+
             '<div class="item-content"">'+
@@ -662,7 +663,7 @@ function appendMyCourses(coursesData, id) {
             '</a>'+
             '</div>';
 
-        courseStripe.append(temp)
+        courseStripe.append(temp);
     });
     jQuery('#myCoursesStripeId').slick({
         lazyLoad: 'ondemand',

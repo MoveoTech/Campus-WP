@@ -113,7 +113,6 @@ $single_course_slug = 'onlinecourse/';
         </div>
 
     <?php };?>
-<!--        End of while loop-->
         <?php };?>
     </div>
 </div>

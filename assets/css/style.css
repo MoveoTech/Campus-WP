@@ -19235,7 +19235,6 @@ html:not(.user_is_not_logged_in) .header_login {
       outline: none; }
     .home-page-myCourses-stripe .stripe-container .myCourses-slider .course-stripe-item {
       position: relative;
-      max-width: 253px;
       max-height: 277px;
       height: 100%;
       margin: 0 10px; }
@@ -19639,9 +19638,9 @@ body .course-item-hover {
 @media (max-width: 1250px) {
   .courses-stripe {
     width: 78%; }
-  .home-page-myCourses-stripe .stripe-header {
+  .home-page-myCourses-stripe .stripe-container .stripe-header {
     width: 78%; }
-  .home-page-myCourses-stripe .myCourses-slider {
+  .home-page-myCourses-stripe .stripe-container .myCourses-slider {
     width: 78%; }
   .home-page-courses-stripe .stripe-header {
     width: 78%; }
@@ -19658,9 +19657,9 @@ body .course-item-hover {
     max-width: 250px; }
   .courses-stripe {
     width: 85%; }
-  .home-page-myCourses-stripe .stripe-header {
+  .home-page-myCourses-stripe .stripe-container .stripe-header {
     width: 85%; }
-  .home-page-myCourses-stripe .myCourses-slider {
+  .home-page-myCourses-stripe .stripe-container .myCourses-slider {
     width: 85%; }
   .home-page-courses-stripe .stripe-header {
     width: 85%; }
