@@ -279,10 +279,7 @@ main {
       right: 0;
       height: 100%;
       width: 100%;
-      background: linear-gradient(270deg, #333433 34.02%, rgba(51, 52, 51, 0) 100%);
-      @media (min-width: 1441px) {
-        background: linear-gradient(270deg, #333433 45%, rgba(51, 52, 51, 0) 100%);
-      }
+      background: linear-gradient(270deg, #333433 34.02%, rgba(51, 52, 51, 0) 72.71%);
     }
     div.desktop-banner {
       background-repeat: no-repeat;
@@ -376,16 +373,6 @@ main {
   }
 }
 
-@media (min-width: 2000px) {
-  .hero-banner {
-    .banner-image {
-      div.desktop-banner {
-        width: 55%;
-      }
-    }
-
-  }
-}
 
 @media (max-width: 991px) {
   .hero-banner {

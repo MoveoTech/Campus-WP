@@ -351,7 +351,8 @@ function markCheckboxes(params) {
 
     for ( entry of entries) {
         if(entry[0] == 'text_s') {
-            $('.search-field').val(entry[1]);
+            let inputValue = entry[1].replaceAll(`\\`, "");
+            $('.search-field').val(inputValue);
         }
 
         filterItems.each((index, element) => {

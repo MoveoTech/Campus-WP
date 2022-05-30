@@ -6842,10 +6842,7 @@ main {
       right: 0;
       height: 100%;
       width: 100%;
-      background: linear-gradient(270deg, #333433 34.02%, rgba(51, 52, 51, 0) 100%); }
-      @media (min-width: 1441px) {
-        .hero-banner .banner-image .hero-gradient {
-          background: linear-gradient(270deg, #333433 45%, rgba(51, 52, 51, 0) 100%); } }
+      background: linear-gradient(270deg, #333433 34.02%, rgba(51, 52, 51, 0) 72.71%); }
     .hero-banner .banner-image div.desktop-banner {
       background-repeat: no-repeat;
       background-size: cover;
@@ -6923,10 +6920,6 @@ main {
             background-repeat: no-repeat;
             background-position: center center;
             z-index: 3; }
-
-@media (min-width: 2000px) {
-  .hero-banner .banner-image div.desktop-banner {
-    width: 55%; } }
 
 @media (max-width: 991px) {
   .hero-banner {
