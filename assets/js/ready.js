@@ -9,6 +9,9 @@ var focusables = 'input, button, a, textarea, select, [tabindex]';
 var class_to_add;
 jQuery(document).ready(function () {
 
+    /** Check the cookie to set the header for logged in user or for logged out user */
+    show_username();
+
     jQuery('.single_project_quote_long_text').each(function () {
         var height = jQuery(this).height();
         var innerHeight = jQuery(this).children('span').height();
@@ -102,8 +105,7 @@ jQuery(document).ready(function () {
 
     /*Runs the enrollment only the first time you log in - to check the login,
      and every time you enter a course page*/
-    // if((getCookie("edxloggedin") != "true") || (jQuery('body.single-course').length)){
-    if ((!getCookie(global_vars.cookie_name)) || (jQuery('body.pod-courses').length)) {
+    if ((getCookie(global_vars.cookie_name)) && (jQuery('body.pod-courses').length)) {
         jQuery.ajax({
             method: "GET",
             url: global_vars.link_to_enrollment_api,
@@ -114,7 +116,6 @@ jQuery(document).ready(function () {
             xhrFields: {withCredentials: true},
             success: function (data, textStatus, jqXHR) {
                 console.log('succeeded: authenticated');
-                show_username();
                 if ((jQuery('body.pod-courses').length)) {
                     var course_id_edx = jQuery('.information-bar').data('course_id_edx');
                     var connect_to_course = false;
@@ -138,15 +139,12 @@ jQuery(document).ready(function () {
                     }
                 }
             },
-            error: function () {//user not connect
-                show_username();
+            error: function () {
+                console.error(`Error: Failed authenticated (API: ${global_vars.link_to_enrollment_api})`)
             }
         });
-    } else if (getCookie(global_vars.cookie_name)) {
-        // else if(getCookie("edxloggedin") == "true" && getCookie(global_vars.cookie_name)){
-        //Retrieves the name of the surfer from the cookie
-        show_username();
     }
+
 //להרשם לקורס
     jQuery('body').on('click', '.register_api', function () {
         var course_id_edx = jQuery('.information-bar').data('course_id_edx');
