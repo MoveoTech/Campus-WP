@@ -69,17 +69,17 @@ jQuery(document).ready(function () {
     var title = jQuery('.nav-lang .wpml-ls-current-language a span')[1].lang
     var lang = title === 'en' ? 'en' : (title === 'he' ? 'he' : (title === 'ar' ? 'ar' : null))
     if(lang) {
-        setCookie('openedx-language-preference', lang, 30,window.location.host);
+        setCookie('openedx-language-preference', lang, 30);
     }
     jQuery('.wpml-ls-menu-item').click(function(event) {
 
         const id = event.currentTarget.id;
         if(id === 'menu-item-wpml-ls-83-en' || id === 'wpml-ls-item-en') {
-            setCookie('openedx-language-preference', 'en', 30,window.location.host);
+            setCookie('openedx-language-preference', 'en', 30);
         } else if(id === 'menu-item-wpml-ls-83-ar' || id === 'wpml-ls-item-ar') {
-            setCookie('openedx-language-preference', 'ar', 30,window.location.host);
+            setCookie('openedx-language-preference', 'ar', 30);
         } else if(id === 'menu-item-wpml-ls-83-he' || id === 'wpml-ls-item-he') {
-            setCookie('openedx-language-preference', 'he', 30,window.location.host);
+            setCookie('openedx-language-preference', 'he', 30);
         }
     })
 
@@ -1098,17 +1098,11 @@ function getCookie(cname) {
     return "";
 }
 
-function setCookie(cname, cvalue, exdays, domain=null) {
+function setCookie(cname, cvalue, exdays) {
     var d = new Date();
     d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
     var expires = "expires=" + d.toUTCString();
-    if(domain){
-        const cdomain = "domain=." + domain;
-        document.cookie = cname + "=" + cvalue + ";" + expires+";"+cdomain+"; path=/";
-    } else{
-        document.cookie = cname + "=" + cvalue + ";" + expires+"; path=/";
-
-    }
+    document.cookie = cname + "=" + cvalue + ";" + expires+"; path=/";
 }
 
 function show_username() {
