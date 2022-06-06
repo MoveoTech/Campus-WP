@@ -137,10 +137,13 @@ if($subtitle_lang){
 
 }
 
-if($org)
+if($org){
+     $org = str_replace('"', '\\"', $org);
     $org = pods('academic_institution',array('limit'   => -1,'where'   => 't.name = "'. $org . '"'), true);
-else
+} else {
     $org = null;
+}
+
 
 /** user connect */
 $is_connect_to_site = false;
