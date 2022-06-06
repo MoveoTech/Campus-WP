@@ -543,7 +543,6 @@ function getMyCourses() {
         success: function (data) {
             console.log('succeeded: authenticated');
             coursesData = data;
-            // TODO check if data length < 0 : don't show my courses stripe
 
             try {
                 if(data.length < 1)
@@ -556,8 +555,8 @@ function getMyCourses() {
             });
             getCoursesDetails(coursesData);
         },
-        error: function (error) {
-            console.error(error)
+        error: function () {
+            console.error(`Error: Failed authenticated and get My Courses (API: ${envURLs.EDX_API_ENROLLMENT})`)
         }
     });
 }
