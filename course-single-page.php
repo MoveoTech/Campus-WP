@@ -216,7 +216,8 @@ if (!$is_connect_to_site) {//משתמש שלא רשום לאתר בכל מקרה
 }
 
 /*טקסט שיופיע על הקוביה עם נתוני הקורס*/
-if ($pacingArray && $pacingArray[1] = 'Self') {
+$pacing_lower = strtolower($pacingArray[1]);
+if ($pacingArray && $pacingArray[1] = 'self') {
     // עבור קורסים בלימוד עצמי - כאשר היום הוא בין תאריך התחלה וסיום של הקורס - צריך להיות כתוב טקסט ייעודי שינוהל בתרגומים, ולא תאריך ההתחלה
     if ($time_st_start <= $time_now && $time_st_end >= $time_now) {
         $start_text = cin_get_str('selp_pacing_start_text');
