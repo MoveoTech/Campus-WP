@@ -355,6 +355,11 @@ function markCheckboxes(params) {
             $('.search-field').val(inputValue);
         }
 
+        if(entry[0] === 'tags_Stripe') {
+            appendTagStripeGroupFilter(entry[1])
+            openCheckboxEvent();
+        }
+
         filterItems.each((index, element) => {
             let id = element.id;
             let type = $(`#${id}`).data('name'); //TODO using for language, certificate, institution.
@@ -646,10 +651,55 @@ function appendGroupFilter(filterGroupName, filterId) {
         '<div class="inputsContainer catalogFilters" id="extraFilter_'+filterId+'">'+
         '</div>';
 
+    let specialTagGroup = document.querySelector('.stripe_tag_filter');
+    if(specialTagGroup) {
+        container.insertBefore(temp, specialTagGroup);
+    } else {
+        container.insertBefore(temp, addFilterbutton);
+    }
+
+}
+
+/** Append tags stripe special group */
+function appendTagStripeGroupFilter($tagEnglishName) {
+    let vector = $('.filterVector').attr('src');
+    let container = document.getElementById('groupFiltersContainer');
+    let groupTitle = 'התאמה מיוחדת';
+    let addFilterbutton = document.getElementById('morefiltersBox');
+    let temp = document.createElement("div");
+    let filterId = 'stripe_tag_filter';
+    temp.classList.add('wrapEachFiltergroup');
+    temp.classList.add('extraFilter');
+    temp.classList.add(filterId);
+
+    temp.innerHTML =
+        '<div class="wrapEachFilterTag">'+
+        '<div class="buttonWrap">'+
+        '<p id="'+filterId+'" class="filterGroupTitle">'+ groupTitle +' </p>'+
+        '<img class="filterVector" src="'+vector+'"/>'+
+        '</div>'+
+        '</div>'+
+        '<div class="inputsContainer catalogFilters" id="extraFilter_'+filterId+'">'+
+        '</div>';
+
     container.insertBefore(temp, addFilterbutton);
 
+    let container2 = document.getElementById('extraFilter_stripe_tag_filter');
+    let temp2 = document.createElement("div");
+    temp2.classList.add('filterInput');
+    let id = Math.floor(Math.random()*90000) + 10000;;
+    let name = $tagEnglishName;
+    let checked = ' checked';
 
-
+    temp2.innerHTML =
+        '<label class="filterTagLabel" for="tag_'+id+'">'+
+        '<input'+ checked +' class="checkbox-filter-search filtersInputWeb" type="checkbox" data-name="tag" data-group="Stripe" data-value="'+name+'" value="'+name+'" id="tag_'+id+'">'+
+        '<div class="wrap-term-and-sum tagNameWrap">'+
+        '<span class="term-name">'+name+'</span>'+
+        '</div>'+
+        '</label>';
+    container2.append(temp2);
+    filterByTagEvent();
 }
 
 function openCheckboxEvent() {

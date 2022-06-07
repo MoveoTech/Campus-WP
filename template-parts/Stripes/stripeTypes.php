@@ -48,12 +48,15 @@ function getStripeType($stripeId){
 function academicInstitutionStripe($stripeId){
 
     global $sitepress;
+    $lang = $sitepress->get_current_language() ;
+    if($lang != 'he') $title = get_field($lang.'_title', $stripeId);
+    if(!$title) $title = get_field('he_title', $stripeId);
 
     get_template_part('template', 'parts/Stripes/academic-institution-stripe',
         array(
             'args' => array(
                 'id'=>  $stripeId,
-                'title' => getFieldByLanguage(get_field('hebrew_title', $stripeId), get_field('english_title', $stripeId), get_field('arabic_title', $stripeId), $sitepress->get_current_language()),
+                'title' => $title,
                 'carousel' => get_field('academic_institution', $stripeId),
             )
         ));
@@ -63,9 +66,9 @@ function academicInstitutionStripe($stripeId){
 function nerativeCoursesStripe($stripeId){
 
     global $sitepress;
-
-    $title = getFieldByLanguage(get_field('hebrew_title', $stripeId), get_field('english_title', $stripeId), get_field('arabic_title', $stripeId), $sitepress->get_current_language());
-
+    $lang = $sitepress->get_current_language() ;
+    if($lang != 'he') $title = get_field($lang.'_title', $stripeId);
+    if(!$title) $title = get_field('he_title', $stripeId);
     $subTitle = getFieldByLanguage(get_field('hebrew_sub_title', $stripeId), get_field('english_sub_title', $stripeId), get_field('arabic_sub_title', $stripeId), $sitepress->get_current_language());
 
 
@@ -85,9 +88,9 @@ function nerativeCoursesStripe($stripeId){
 function coursesStripe($stripeId){
 
     global $sitepress;
-
-    $title = getFieldByLanguage(get_field('hebrew_title', $stripeId), get_field('english_title', $stripeId), get_field('arabic_title', $stripeId), $sitepress->get_current_language());
-
+    $lang = $sitepress->get_current_language() ;
+    if($lang != 'he') $title = get_field($lang.'_title', $stripeId);
+    if(!$title) $title = get_field('he_title', $stripeId);
     $subTitle = getFieldByLanguage(get_field('hebrew_sub_title', $stripeId), get_field('english_sub_title', $stripeId), get_field('arabic_sub_title', $stripeId), $sitepress->get_current_language());
 
 
@@ -104,8 +107,9 @@ function coursesStripe($stripeId){
 
 function myCoursesStripe($stripeId){
     global $sitepress;
-
-    $title = getFieldByLanguage(get_field('hebrew_title', $stripeId), get_field('english_title', $stripeId), get_field('arabic_title', $stripeId), $sitepress->get_current_language());
+    $lang = $sitepress->get_current_language() ;
+    if($lang != 'he') $title = get_field($lang.'_title', $stripeId);
+    if(!$title) $title = get_field('he_title', $stripeId);
 
     get_template_part('template', 'parts/Stripes/myCourses-stripe',
         array(
@@ -118,8 +122,9 @@ function myCoursesStripe($stripeId){
 
 function testimonialsStripe($stripeId){
     global $sitepress;
-
-    $title = getFieldByLanguage(get_field('hebrew_title', $stripeId), get_field('english_title', $stripeId), get_field('arabic_title', $stripeId), $sitepress->get_current_language());
+    $lang = $sitepress->get_current_language() ;
+    if($lang != 'he') $title = get_field($lang.'_title', $stripeId);
+    if(!$title) $title = get_field('he_title', $stripeId);
 
     get_template_part('template', 'parts/Stripes/testimonials-stripe',
         array(
@@ -134,8 +139,9 @@ function testimonialsStripe($stripeId){
 function infoStripe($stripeId){
 
     global $sitepress;
-
-    $title = getFieldByLanguage(get_field('hebrew_title', $stripeId), get_field('english_title', $stripeId), get_field('arabic_title', $stripeId), $sitepress->get_current_language());
+    $lang = $sitepress->get_current_language() ;
+    if($lang != 'he') $title = get_field($lang.'_title', $stripeId);
+    if(!$title) $title = get_field('he_title', $stripeId);
 
     get_template_part('template', 'parts/Stripes/info-stripe',
         array(
@@ -150,8 +156,9 @@ function infoStripe($stripeId){
 function goalsStripe($stripeId){
 
     global $sitepress;
-
-    $title = getFieldByLanguage(get_field('hebrew_title', $stripeId), get_field('english_title', $stripeId), get_field('arabic_title', $stripeId), $sitepress->get_current_language());
+    $lang = $sitepress->get_current_language() ;
+    if($lang != 'he') $title = get_field($lang.'_title', $stripeId);
+    if(!$title) $title = get_field('he_title', $stripeId);
 
     get_template_part('template', 'parts/Stripes/goals-stripe',
         array(
@@ -166,7 +173,9 @@ function goalsStripe($stripeId){
 function tagsStripe($stripeId){
 
     global $sitepress;
-    $title = getFieldByLanguage(get_field('hebrew_title', $stripeId), get_field('english_title', $stripeId), get_field('arabic_title', $stripeId), $sitepress->get_current_language());
+    $lang = $sitepress->get_current_language() ;
+    if($lang != 'he') $title = get_field($lang.'_title', $stripeId);
+    if(!$title) $title = get_field('he_title', $stripeId);
 
     get_template_part('template', 'parts/Stripes/tags-stripe',
         array(
