@@ -7,7 +7,14 @@ jQuery(document).ready(function () {
         if (jQuery(this).find('[name="text_s"]').val().length > 0) {
             var form = jQuery(this);
             let searchValue = form.find('[name = "text_s"]').val();
-            searchValue = searchValue.replaceAll(`"`, '%5C%22');
+            let spChars = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/g;
+            if(spChars.test(searchValue)){
+                searchValue = searchValue.replaceAll(`%`, '%25');
+                searchValue = searchValue.replaceAll(`"`, '%5C%22');
+                searchValue = searchValue.replaceAll(`?`, '%3F');
+                searchValue = searchValue.replaceAll(`#`, '%23');
+            }
+
             grecaptcha.ready(function () {
                 grecaptcha.execute('6LclyM8aAAAAAMttjBLWQ6mu9QQoW9GBACQTaeAE', {action: 'submit'}).then(function (token) {
                     var url = form.attr('action') + '/?text_s=' + searchValue;
