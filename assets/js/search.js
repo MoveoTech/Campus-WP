@@ -9,7 +9,11 @@ jQuery(document).ready(function () {
             let searchValue = form.find('[name = "text_s"]').val();
             let spChars = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/g;
             if(spChars.test(searchValue)){
-                searchValue = encodeURIComponent(searchValue);
+                let special_char = searchValue.match(spChars);
+                special_char.forEach(element => {
+                    searchValue = searchValue.replace(element, '\\'+element);
+                })
+                    searchValue = encodeURIComponent(searchValue)
             }
             grecaptcha.ready(function () {
                 grecaptcha.execute('6LclyM8aAAAAAMttjBLWQ6mu9QQoW9GBACQTaeAE', {action: 'submit'}).then(function (token) {

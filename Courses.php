@@ -17,20 +17,6 @@ if($components['path']){
     parse_str($components['path'], $url_params);
 }
 if($url_params){
-    $searchResult = $url_params['text_s'];
-    if(preg_match('/[^A-Za-z0-9\-]/', $searchResult)){
-        $new_content = '';
-        $pattern = "/[^A-Za-z0-9\-]/i";
-
-        for($i = 0; $i < strlen($searchResult); $i++) {
-            if(!preg_match($pattern, $searchResult[$i])) {
-                $new_content .= $searchResult[$i];
-            } else {
-                $new_content .= '\\'.$searchResult[$i];
-            }
-        }
-        $url_params['text_s'] = $new_content;
-    }
     $filters = getFiltersArray($url_params);
     $params = getPodsFilterParams($filters);
 } else {
