@@ -350,10 +350,15 @@ function markCheckboxes(params) {
     let filterItems = $('.checkbox-filter-search');
 
     for ( entry of entries) {
+        let inputValue;
         if(entry[0] == 'text_s') {
-            let inputValue = entry[1].replaceAll(`\\`, "");
+            console.log("entry[1]",entry[1])
+
+            inputValue = entry[1].replaceAll(`\\`, "");
+            console.log("inputValue",inputValue)
             $('.search-field').val(inputValue);
         }
+        console.log("inputValue",inputValue)
 
         filterItems.each((index, element) => {
             let id = element.id;
@@ -712,8 +717,12 @@ function getCourses() {
     /** Getting free search value from url params */
     let params = new URLSearchParams(document.location.search);
     let searchValue = params.get("text_s");
-    if(searchValue) freeSearchData.push(searchValue);
-
+    console.log("freeSearchData bfore",freeSearchData)
+    searchValue = searchValue.replaceAll(`\\`, "");
+    freeSearchData = [searchValue];
+    // if(searchValue) freeSearchData.push(searchValue);
+    console.log("ssssval",searchValue);
+    console.log("freeSearchData",freeSearchData);
     /** Getting array of inputs */
     let filterItems = $('.checkbox-filter-search');
 
