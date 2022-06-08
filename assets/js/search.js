@@ -9,12 +9,8 @@ jQuery(document).ready(function () {
             let searchValue = form.find('[name = "text_s"]').val();
             let spChars = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/g;
             if(spChars.test(searchValue)){
-                searchValue = searchValue.replaceAll(`%`, '%25');
-                searchValue = searchValue.replaceAll(`"`, '%5C%22');
-                searchValue = searchValue.replaceAll(`?`, '%3F');
-                searchValue = searchValue.replaceAll(`#`, '%23');
+                searchValue = encodeURIComponent(searchValue);
             }
-
             grecaptcha.ready(function () {
                 grecaptcha.execute('6LclyM8aAAAAAMttjBLWQ6mu9QQoW9GBACQTaeAE', {action: 'submit'}).then(function (token) {
                     var url = form.attr('action') + '/?text_s=' + searchValue;
