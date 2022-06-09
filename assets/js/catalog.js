@@ -112,7 +112,6 @@ $(document).click(function(event) {
         let popupMenuDiv = event.target.closest(".wrapEachFiltergroup").querySelector(".inputsContainer");
         if((filtersInputs.is(event.target) || filtersInputs.has(event.target).length) && event.target.closest("#groupFiltersContainer")){
         $(filterGroupVector).removeClass('active');
-        popupMenuDiv.style.display = "none";
 }
         filtersInputs.each((index, element) => {
             if(element !== popupMenuDiv){
@@ -475,7 +474,10 @@ function filterByTagMobile(){
         /** Getting free search value from url params */
         let params = new URLSearchParams(document.location.search);
         let searchValue = params.get("text_s");
-        if(searchValue) freeSearchData.push(searchValue);
+        if(searchValue){
+            searchValue = searchValue.replaceAll(`\\`, "");
+            freeSearchData.push(searchValue);
+        }
 
         /** Getting array of inputs */
         let filterItems = $('.checkbox-filter-search');
@@ -606,14 +608,12 @@ function filterCoursesAjax(filterData) {
         'lang' : getCookie('openedx-language-preference'),
         'filters': filterData,
     }
-
     jQuery.post(filter_by_tag_ajax.ajaxurl, data, function(response){
         if(response.success){
             const responseData = JSON.parse(response.data);
             appendUrlParams(responseData['filters'])
             if(responseData['courses'].length > 0) {
                 // loadCourses(responseData['courses'])
-
                 appendFilteredCourses(responseData['courses'])
             } else if(responseData['params'] == null) {
                 haveNoResults(false)
@@ -711,8 +711,10 @@ function getCourses() {
     /** Getting free search value from url params */
     let params = new URLSearchParams(document.location.search);
     let searchValue = params.get("text_s");
-    searchValue = searchValue.replaceAll(`\\`, "");
-    if(searchValue) freeSearchData.push(searchValue);
+    if(searchValue){
+        searchValue = searchValue.replaceAll(`\\`, "");
+        freeSearchData.push(searchValue);
+    }
     /** Getting array of inputs */
     let filterItems = $('.checkbox-filter-search');
 
