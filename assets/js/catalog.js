@@ -350,12 +350,10 @@ function markCheckboxes(params) {
     let filterItems = $('.checkbox-filter-search');
 
     for ( entry of entries) {
-        let inputValue;
         if(entry[0] == 'text_s') {
-            inputValue = entry[1].replaceAll(`\\`, "");
+           let inputValue = entry[1].replaceAll(`\\`, "");
             $('.search-field').val(inputValue);
         }
-
         filterItems.each((index, element) => {
             let id = element.id;
             let type = $(`#${id}`).data('name'); //TODO using for language, certificate, institution.
