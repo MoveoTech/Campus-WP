@@ -8,6 +8,10 @@
 ?>
 
 <?php
+
+global $site_settings, $field, $wp_query, $sitepress, $filter_tags;
+$current_language = $sitepress->get_current_language();
+
 /**
  * CHECK THE QUERY PARAMS
  */
@@ -18,14 +22,25 @@ if($components['path']){
 }
 if($url_params){
     $filters = getFiltersArray($url_params);
+
+    /**
+     * Checking if have tag from tags stripe and
+     * get the current name by tag id
+     */
+    if($filters['search']['tags']['Stripe']) {
+        $tag_params = $filters['search']['tags']['Stripe'][0];
+        $tag_id = explode('-',$tag_params)[0];
+        $tag = pods('tags',$tag_id);
+        $tag_name = getFieldByLanguage($tag->display('name'),$tag->display('english_name'),$tag->display('arabic_name'),$current_language);
+        $filters['search']['tags']['Stripe'][0] = $tag_name;
+    }
+
     $params = getPodsFilterParams($filters);
 } else {
     $params = getPodsFilterParams();
 }
-global $site_settings, $field, $wp_query, $sitepress, $filter_tags;
 
 /** PARAMETERS */
-$current_language = $sitepress->get_current_language();
 $catalog_stripe_id = get_field('catalog_stripe');
 $menuFilters = get_field('filters');
 $academic_institutions = pods( 'academic_institution', array('limit'   => -1 ));

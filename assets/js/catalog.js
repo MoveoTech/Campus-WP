@@ -63,8 +63,7 @@ $(document).ready(function () {
         slickStripeForMobile();
     });
 
-
-/** Open mobile filters menu */
+    /** Open mobile filters menu */
     $(".openFiltersMenu").click(function () {
         /** Open mobile menu popup */
         jQuery(".filters-mobile-menu-popup").addClass('active');
@@ -95,9 +94,9 @@ $(".bg-overlay").click(function () {
 });
 /** End of document ready */
 
-
-
-/** hiding filter inputs when clicking on screen or other filter group */
+/**
+ * hiding filter inputs when clicking on screen or other filter group
+ * */
 $(document).click(function(event) {
 
     let filtergroup = $('.wrapEachFiltergroup');
@@ -123,6 +122,7 @@ $(document).click(function(event) {
 
 });
 /** end of jquery */
+
 function closingOverlay(){
     jQuery(".bg-overlay").removeClass('active');
     jQuery(".bg-overlay").removeClass('filterMenuOverlay');
@@ -139,6 +139,23 @@ function closingOverlay(){
 
 function slickStripeForMobile() {
     if($(window).width() <= 768){
+
+        if($('#filtersSectionMobile')){
+            /** Changing classe in filters menu inputs */
+            $('#filtersSectionMobile .checkbox-filter-search').addClass('.checkboxFilterMobile');
+
+            /** changing inputs id, for mobile */
+            let checkboxArray =  $('#filtersSectionMobile .checkbox-filter-search');
+            checkboxArray.each((index,item) => {
+                item.id = "mobile_" + item.id;
+            })
+
+            /** changing inputs attribute for, for mobile */
+            let labelsArray =  $('#filtersSectionMobile .filterTagLabel');
+            labelsArray.each((index,item) => {
+                item.htmlFor = "mobile_" + item.htmlFor;
+            })
+        }
 
         if(!jQuery('.catalog-courses-stripe').hasClass( "slick-initialized" )){
             /** catalog stripe slick for mobile*/
@@ -191,20 +208,7 @@ function slickStripeForMobile() {
                     },
                 ]
             })
-            /** Changing classe in filters menu inputs */
-            $('#filtersSectionMobile .checkbox-filter-search').addClass('.checkboxFilterMobile');
 
-            /** changing inputs id, for mobile */
-           let checkboxArray =  $('#filtersSectionMobile .checkbox-filter-search');
-            checkboxArray.each((index,item) => {
-                item.id = "mobile_" + item.id;
-
-            })
-           /** changing inputs attribute for, for mobile */
-            let labelsArray =  $('#filtersSectionMobile .filterTagLabel');
-            labelsArray.each((index,item) => {
-                item.htmlFor = "mobile_" + item.htmlFor;
-            })
         }
 
     } else if (jQuery('.catalog-courses-stripe').hasClass( "slick-initialized" )){
@@ -310,7 +314,7 @@ function appendUrlParams(filters) {
     let resetUrl = currentUrl.split('?')[0]
     let url = new URL(resetUrl);
 
-    if(!filters) {
+    if(!filters || filters.length === 0) {
         window.history.replaceState({}, '', url);
         return;
     }
@@ -356,8 +360,9 @@ function markCheckboxes(params) {
         }
 
         if(entry[0] === 'tags_Stripe') {
-            appendTagStripeGroupFilter(entry[1])
-            openCheckboxEvent();
+            const tagId = entry[1].split('-')[0];
+            appendSpecialGroupFilter()
+            getTagById(tagId);
         }
 
         filterItems.each((index, element) => {
@@ -450,8 +455,9 @@ function haveNoResults(afterSearching= true) {
     coursesBox.replaceWith(output)
 }
 
-
-/** Filtering by tag function of catalog - need to remove  */
+/**
+ * Filtering by tag function of catalog - need to remove
+ * */
 function filterByTagEvent(){
     /** removing event from div */
    $('.filtersSection .filtersInputWeb').off('click');
@@ -462,8 +468,9 @@ function filterByTagEvent(){
     })
 }
 
-
-/** filterByTagMobile function of catalog  */
+/**
+ * filterByTagMobile function of catalog
+ * */
 function filterByTagMobile(){
 
     /** removing event from div */
@@ -552,7 +559,9 @@ function filterByTagMobile(){
     })}
 /** End of function filterByTagMobile */
 
-/** Ajax call - getting filters group name and there tags **/
+/**
+ * Ajax call - getting filters group name and there tags
+ * **/
 function getFiltersGroups(filterId) {
     let data = {
         'action': 'add_filters_to_menu',
@@ -567,7 +576,9 @@ function getFiltersGroups(filterId) {
     })
 }
 
-/** Appending filter tags **/
+/**
+ * Appending filter tags
+ * **/
 function appendMoreFilters(filterData) {
     /**looping each filter group and appending it to the filters menu */
     let filterId = filterData.filterId;
@@ -604,8 +615,16 @@ function appendMoreFilters(filterData) {
     filterByTagEvent();
 }
 
-/** ajax call */
+/**
+ * ajax call
+ * */
 function filterCoursesAjax(filterData) {
+    appendUrlParams(filterData)
+    if(filterData.length != 0 && filterData['search']['tags'] && filterData['search']['tags']['Stripe']){
+        let tagName = filterData['search']['tags']['Stripe'][0].split('-')[1]
+        filterData['search']['tags']['Stripe'][0] = tagName;
+        console.log(filterData)
+    }
     let data = {
         'action': 'filter_by_tag',
         'type' : 'courses',
@@ -616,7 +635,6 @@ function filterCoursesAjax(filterData) {
     jQuery.post(filter_by_tag_ajax.ajaxurl, data, function(response){
         if(response.success){
             const responseData = JSON.parse(response.data);
-            appendUrlParams(responseData['filters'])
             if(responseData['courses'].length > 0) {
                 // loadCourses(responseData['courses'])
 
@@ -630,7 +648,9 @@ function filterCoursesAjax(filterData) {
     })
 }
 
-/** Appending filter group **/
+/**
+ * Appending filter group
+ * **/
 function appendGroupFilter(filterGroupName, filterId) {
     let vector = $('.filterVector').attr('src');
     let container = document.getElementById('groupFiltersContainer');
@@ -660,48 +680,6 @@ function appendGroupFilter(filterGroupName, filterId) {
 
 }
 
-/** Append tags stripe special group */
-function appendTagStripeGroupFilter($tagEnglishName) {
-    let vector = $('.filterVector').attr('src');
-    let container = document.getElementById('groupFiltersContainer');
-    let groupTitle = 'התאמה מיוחדת';
-    let addFilterbutton = document.getElementById('morefiltersBox');
-    let temp = document.createElement("div");
-    let filterId = 'stripe_tag_filter';
-    temp.classList.add('wrapEachFiltergroup');
-    temp.classList.add('extraFilter');
-    temp.classList.add(filterId);
-
-    temp.innerHTML =
-        '<div class="wrapEachFilterTag">'+
-        '<div class="buttonWrap">'+
-        '<p id="'+filterId+'" class="filterGroupTitle">'+ groupTitle +' </p>'+
-        '<img class="filterVector" src="'+vector+'"/>'+
-        '</div>'+
-        '</div>'+
-        '<div class="inputsContainer catalogFilters" id="extraFilter_'+filterId+'">'+
-        '</div>';
-
-    container.insertBefore(temp, addFilterbutton);
-
-    let container2 = document.getElementById('extraFilter_stripe_tag_filter');
-    let temp2 = document.createElement("div");
-    temp2.classList.add('filterInput');
-    let id = Math.floor(Math.random()*90000) + 10000;;
-    let name = $tagEnglishName;
-    let checked = ' checked';
-
-    temp2.innerHTML =
-        '<label class="filterTagLabel" for="tag_'+id+'">'+
-        '<input'+ checked +' class="checkbox-filter-search filtersInputWeb" type="checkbox" data-name="tag" data-group="Stripe" data-value="'+name+'" value="'+name+'" id="tag_'+id+'">'+
-        '<div class="wrap-term-and-sum tagNameWrap">'+
-        '<span class="term-name">'+name+'</span>'+
-        '</div>'+
-        '</label>';
-    container2.append(temp2);
-    filterByTagEvent();
-}
-
 function openCheckboxEvent() {
 
     /** removing event from div */
@@ -723,7 +701,9 @@ function openCheckboxEvent() {
     });
 }
 
-/** Load more courses (not in used 14-04-2022) */
+/**
+ * Load more courses (not in used 14-04-2022)
+ * */
 function loadCourses(coursesArray = []) {
     if(coursesArray.length > 0){
         appendFilteredCourses(coursesArray)
@@ -749,6 +729,82 @@ function loadCourses(coursesArray = []) {
             })
         }
     }
+}
+
+function getTagById(tagId) {
+    let data = {
+        'action': 'get_tag_data',
+        'type' : 'tags',
+        'lang' : getCookie('openedx-language-preference'),
+        'id': tagId,
+    }
+
+    jQuery.post(filter_by_tag_ajax.ajaxurl, data, function(response){
+        if(response.success) {
+            const responseData = JSON.parse(response.data);
+            const tag = responseData['tag'];
+            appendSpecialTagToGroup(tag)
+            openCheckboxEvent();
+        }
+    })
+}
+
+/**
+ *  Append tags stripe special group
+ *  */
+function appendSpecialGroupFilter() {
+    let vector = $('.filterVector').attr('src');
+    let mobileVector = $('.filterVectorMobile').attr('src');
+    let container = document.getElementById('groupFiltersContainer');
+    let mobileContainer = document.getElementById('filtersSectionMobile');
+    let groupTitle = 'התאמה מיוחדת';
+    let addFilterbutton = document.getElementById('morefiltersBox');
+    let filterId = 'stripe_tag_filter';
+    let temp = document.createElement("div");
+    temp.classList.add('wrapEachFiltergroup');
+    temp.classList.add('extraFilter');
+    temp.classList.add(filterId);
+
+    temp.innerHTML =
+        '<div class="wrapEachFilterTag">'+
+        '<div class="buttonWrap">'+
+        '<p id="'+filterId+'" class="filterGroupTitle">'+ groupTitle +' </p>'+
+        '<img class="filterVector" src="'+vector+'"/>'+
+        '<img class="filterVectorMobile" src="'+mobileVector+'"/>'+
+        '</div>'+
+        '</div>'+
+        '<div class="inputsContainer catalogFilters" id="extraFilter_'+filterId+'">'+
+        '</div>';
+
+    container.insertBefore(temp, addFilterbutton);
+    if($(window).width() <= 768){
+        mobileContainer.append(temp);
+    }
+}
+
+/**
+ *  Add tag from tags stripe to special filters group
+ *  after tag data return from Ajax call
+ *  */
+function appendSpecialTagToGroup(tag) {
+    let container = document.getElementById('extraFilter_stripe_tag_filter');
+    let temp = document.createElement("div");
+    temp.classList.add('filterInput');
+    let id = Math.floor(Math.random()*90000) + 10000;
+    let name = tag['name'];
+    let tagId = tag['id'];
+    let checked = ' checked';
+
+    temp.innerHTML =
+        '<label class="filterTagLabel" for="tag_'+id+'">'+
+        '<input'+ checked +' class="checkbox-filter-search filtersInputWeb" type="checkbox" data-name="tag" data-group="Stripe" data-value="'+tagId+'-'+name+'" value="'+name+'" id="tag_'+id+'">'+
+        '<div class="wrap-term-and-sum tagNameWrap">'+
+        '<span class="term-name">'+name+'</span>'+
+        '</div>'+
+        '</label>';
+    container.append(temp);
+
+    filterByTagEvent();
 }
 
 function getCourses() {
@@ -832,7 +888,9 @@ function getCourses() {
 
 }
 
-/** General function for translate */
+/**
+ *  General function for translate
+ *  */
 function getFieldByLanguage(heField, enField, arField, lang) {
 
     if(lang == "en" && enField && enField != ""){

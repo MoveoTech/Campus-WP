@@ -15,6 +15,7 @@ include locate_template( 'assets/ajax/stripe_data.php' );
 include locate_template( 'assets/ajax/my_courses.php' );
 include locate_template( 'assets/ajax/get_course_popup.php' );
 include locate_template( 'assets/ajax/filter_by_tag.php' );
+include locate_template( 'assets/ajax/get_tag_data.php' );
 include locate_template( 'assets/ajax/add_filters_to_menu.php' );
 
 /**
