@@ -351,10 +351,9 @@ function markCheckboxes(params) {
 
     for ( entry of entries) {
         if(entry[0] == 'text_s') {
-            let inputValue = entry[1].replaceAll(`\\`, "");
+           let inputValue = entry[1].replaceAll(`\\`, "");
             $('.search-field').val(inputValue);
         }
-
         filterItems.each((index, element) => {
             let id = element.id;
             let type = $(`#${id}`).data('name'); //TODO using for language, certificate, institution.
@@ -712,8 +711,8 @@ function getCourses() {
     /** Getting free search value from url params */
     let params = new URLSearchParams(document.location.search);
     let searchValue = params.get("text_s");
+    searchValue = searchValue.replaceAll(`\\`, "");
     if(searchValue) freeSearchData.push(searchValue);
-
     /** Getting array of inputs */
     let filterItems = $('.checkbox-filter-search');
 
