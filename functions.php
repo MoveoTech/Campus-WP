@@ -1498,7 +1498,6 @@ function getPodsFilterParams($filters = null) {
     }
     $where = implode(" AND ", $sql);
     $order = "t.order DESC";
-
     $params = array(
         'select'=> '`t`.*, concat(",",group_concat(`tags`.`english_name` SEPARATOR ","), ",") as `tags_id`',
         'limit' => -1,
@@ -1650,7 +1649,6 @@ function getFiltersArray($paramsArray) {
                     array_push($obj[$key], $value);
                 }
 
-                $obj[$key] = explode(",", $obj[$key][0]);
             }
         }
 
