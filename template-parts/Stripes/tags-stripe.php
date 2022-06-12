@@ -23,10 +23,12 @@ global $sitepress;
         <div class="tags-div">
         <?php
         while ($tags->fetch()) { // tags Loop
+            $tag_id = $tags->id();
             $tag_name = getFieldByLanguage($tags->display('name'), $tags->display('english_name'), $tags->display('arabic_name'), $sitepress->get_current_language());
+            $english_name = $tags->display('english_name');
                 ?>
             <div class="tag-item" >
-                <a href="https://www.google.com/">
+                <a href="/catalog/?tags_Stripe=<?= $tag_id.'-'.$english_name?>">
                     <p><?php echo $tag_name ?></p>
                 </a>
             </div>
