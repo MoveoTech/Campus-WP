@@ -42,7 +42,6 @@ $(document).ready(function () {
 
     /** Click event - adding more filters **/
     $('.moreFilters .extraFilterCheckbox').on('click', function (event) {
-
         /**Getting targeted input */
         let filterId = $(event.target).data('value');
         let filterGroupName = event.target.value;
@@ -106,18 +105,26 @@ $(document).click(function(event) {
     if (!filtergroup.is(event.target) && !filtergroup.has(event.target).length && !filtersInputs.is(event.target) && !filtersInputs.has(event.target).length) {
         filtersInputs.hide();
     }
-    /** hiding input container when clicking on other filter group */
+    /** Checking if the event is a filter group or input container */
     if (filtergroup.is(event.target) || filtergroup.has(event.target).length || filtersInputs.is(event.target) || filtersInputs.has(event.target).length) {
-        let filterGroupVector = event.target.closest(".wrapEachFiltergroup").querySelector(".filterVectorMobile");
+
         let popupMenuDiv = event.target.closest(".wrapEachFiltergroup").querySelector(".inputsContainer");
-        if((filtersInputs.is(event.target) || filtersInputs.has(event.target).length) && event.target.closest("#groupFiltersContainer")){
-        $(filterGroupVector).removeClass('active');
-}
-        filtersInputs.each((index, element) => {
-            if(element !== popupMenuDiv){
-                element.style.display = "none";
+        let extraFilterMenu;
+        if((filtersInputs.is(event.target) || filtersInputs.has(event.target).length)){
+            /** Closing extra filter menu when adding new extra filter */
+            if(event.target.closest(".moreFilters")){
+                extraFilterMenu = event.target.closest(".moreFilters").querySelector(".inputsContainer");
+                extraFilterMenu.style.display = "none";
             }
-        })
+            /** hiding input container when clicking on other filter group */
+        } else if ((filtergroup.is(event.target) || filtergroup.has(event.target).length)){
+
+            filtersInputs.each((index, element) => {
+                if(element !== popupMenuDiv){
+                    element.style.display = "none";
+                }
+            })
+        }
     }
 
 });
@@ -646,9 +653,8 @@ function appendGroupFilter(filterGroupName, filterId) {
         '</div>';
 
     container.insertBefore(temp, addFilterbutton);
-
-
-
+    let extraFilterMenuDiv = temp.querySelector(".inputsContainer");
+    $(extraFilterMenuDiv).toggle();
 }
 
 function openCheckboxEvent() {

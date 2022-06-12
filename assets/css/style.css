@@ -20158,13 +20158,13 @@ body .course-item-hover {
   background: #FFFFFF;
   box-shadow: 0 5px 15px rgba(40, 40, 40, 0.2);
   border-radius: 10px;
-  margin: 0 5px 0 0;
+  margin: 0 5px 0 5px;
   padding: 0 15px 0 0; }
   .inputsContainer .filterInput {
     background: #FFFFFF;
     border-radius: 10px;
     box-sizing: border-box;
-    margin: 10px 0; }
+    margin: 10px 0 10px 14px; }
     .inputsContainer .filterInput .filterTagLabel {
       display: flex;
       align-items: center;
@@ -20178,14 +20178,14 @@ body .course-item-hover {
         cursor: pointer;
         align-items: center; }
         .inputsContainer .filterInput .filterTagLabel .tagNameWrap::before {
-          width: 22px;
-          height: 20px;
+          min-width: 20px;
+          min-height: 20px;
           border: 1px solid rgba(0, 0, 0, 0.1);
           border-radius: 5px;
           line-height: 16px;
           font-size: 10px; }
         .inputsContainer .filterInput .filterTagLabel .tagNameWrap::after {
-          width: 0; }
+          display: none; }
         .inputsContainer .filterInput .filterTagLabel .tagNameWrap .term-name {
           font-family: 'Assistant';
           font-style: normal;
@@ -20193,9 +20193,14 @@ body .course-item-hover {
           font-size: 14px;
           color: #333433;
           text-align: right;
-          width: 200px;
+          width: max-content;
           line-height: 13px;
-          max-width: unset; }
+          max-width: unset;
+          display: -webkit-box;
+          overflow: hidden;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          height: auto; }
 
 .checkbox-filter-search:checked ~ .wrap-term-and-sum:before {
   background-color: black; }
@@ -20334,8 +20339,6 @@ body .course-item-hover {
     overflow-y: unset;
     padding: 0;
     margin: 0 28px 0 0; }
-    .inputsContainer .filterInput .filterTagLabel .tagNameWrap::before {
-      width: 20px; }
     .inputsContainer .filterInput .filterTagLabel .tagNameWrap .term-name {
       padding-right: 10px; }
   .catalog-banner {
