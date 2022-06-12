@@ -623,8 +623,8 @@ function filterCoursesAjax(filterData) {
     if(filterData.length != 0 && filterData['search']['tags'] && filterData['search']['tags']['Stripe']){
         let tagName = filterData['search']['tags']['Stripe'][0].split('-')[1]
         filterData['search']['tags']['Stripe'][0] = tagName;
-        console.log(filterData)
     }
+    
     let data = {
         'action': 'filter_by_tag',
         'type' : 'courses',
