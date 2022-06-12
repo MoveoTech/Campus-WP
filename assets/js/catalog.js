@@ -355,7 +355,7 @@ function markCheckboxes(params) {
 
     for ( entry of entries) {
         if(entry[0] == 'text_s') {
-            let inputValue = entry[1].replaceAll(`\\`, "");
+           let inputValue = entry[1].replaceAll(`\\`, "");
             $('.search-field').val(inputValue);
         }
 
@@ -488,7 +488,10 @@ function filterByTagMobile(){
         /** Getting free search value from url params */
         let params = new URLSearchParams(document.location.search);
         let searchValue = params.get("text_s");
-        if(searchValue) freeSearchData.push(searchValue);
+        if(searchValue){
+            searchValue = searchValue.replaceAll(`\\`, "");
+            freeSearchData.push(searchValue);
+        }
 
         /** Getting array of inputs */
         let filterItems = $('.checkbox-filter-search');
@@ -818,8 +821,10 @@ function getCourses() {
     /** Getting free search value from url params */
     let params = new URLSearchParams(document.location.search);
     let searchValue = params.get("text_s");
-    if(searchValue) freeSearchData.push(searchValue);
-
+    if(searchValue){
+        searchValue = searchValue.replaceAll(`\\`, "");
+        freeSearchData.push(searchValue);
+    }
     /** Getting array of inputs */
     let filterItems = $('.checkbox-filter-search');
 
