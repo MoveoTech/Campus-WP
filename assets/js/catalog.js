@@ -42,7 +42,6 @@ $(document).ready(function () {
 
     /** Click event - adding more filters **/
     $('.moreFilters .extraFilterCheckbox').on('click', function (event) {
-
         /**Getting targeted input */
         let filterId = $(event.target).data('value');
         let filterGroupName = event.target.value;
@@ -105,19 +104,26 @@ $(document).click(function(event) {
     if (!filtergroup.is(event.target) && !filtergroup.has(event.target).length && !filtersInputs.is(event.target) && !filtersInputs.has(event.target).length) {
         filtersInputs.hide();
     }
-    /** hiding input container when clicking on other filter group */
+    /** Checking if the event is a filter group or input container */
     if (filtergroup.is(event.target) || filtergroup.has(event.target).length || filtersInputs.is(event.target) || filtersInputs.has(event.target).length) {
-        let filterGroupVector = event.target.closest(".wrapEachFiltergroup").querySelector(".filterVectorMobile");
+
         let popupMenuDiv = event.target.closest(".wrapEachFiltergroup").querySelector(".inputsContainer");
-        if((filtersInputs.is(event.target) || filtersInputs.has(event.target).length) && event.target.closest("#groupFiltersContainer")){
-        $(filterGroupVector).removeClass('active');
-        popupMenuDiv.style.display = "none";
-}
-        filtersInputs.each((index, element) => {
-            if(element !== popupMenuDiv){
-                element.style.display = "none";
+        let extraFilterMenu;
+        if((filtersInputs.is(event.target) || filtersInputs.has(event.target).length)){
+            /** Closing extra filter menu when adding new extra filter */
+            if(event.target.closest(".moreFilters")){
+                extraFilterMenu = event.target.closest(".moreFilters").querySelector(".inputsContainer");
+                extraFilterMenu.style.display = "none";
             }
-        })
+            /** hiding input container when clicking on other filter group */
+        } else if ((filtergroup.is(event.target) || filtergroup.has(event.target).length)){
+
+            filtersInputs.each((index, element) => {
+                if(element !== popupMenuDiv){
+                    element.style.display = "none";
+                }
+            })
+        }
     }
 
 });
@@ -634,13 +640,11 @@ function filterCoursesAjax(filterData) {
         'lang' : getCookie('openedx-language-preference'),
         'filters': filterData,
     }
-
     jQuery.post(filter_by_tag_ajax.ajaxurl, data, function(response){
         if(response.success){
             const responseData = JSON.parse(response.data);
             if(responseData['courses'].length > 0) {
                 // loadCourses(responseData['courses'])
-
                 appendFilteredCourses(responseData['courses'])
             } else if(responseData['params'] == null) {
                 haveNoResults(false)
@@ -673,6 +677,10 @@ function appendGroupFilter(filterGroupName, filterId) {
         '</div>'+
         '<div class="inputsContainer catalogFilters" id="extraFilter_'+filterId+'">'+
         '</div>';
+
+    container.insertBefore(temp, addFilterbutton);
+    let extraFilterMenuDiv = temp.querySelector(".inputsContainer");
+    $(extraFilterMenuDiv).toggle();
 
     let specialTagGroup = document.querySelector('.stripe_tag_filter');
     if(specialTagGroup) {
