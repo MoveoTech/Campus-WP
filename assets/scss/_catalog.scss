@@ -479,6 +479,21 @@
 .catalogPageBox{
   margin: 0;
 }
+.counterWrap{
+  position: relative;
+  left: 120px;
+  top: 34px;
+  p{
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 18px;
+    span{
+      font-weight: 700;
+    }
+  }
+
+}
+
 #coursesBox{
   flex-direction: column;
   margin: 60px 0 45px 0;

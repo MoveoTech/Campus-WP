@@ -293,7 +293,9 @@ function appendFilteredCourses(coursesData) {
     clickOnCourseInfoButton();
 
 }
-
+function updateCoursesCounter(count){
+    // let element = document.getElementById('counterValue');
+}
 function getCourseResultTags(tags) {
     let tagsHtml = '';
     if(tags.length >=3){
@@ -643,9 +645,13 @@ function filterCoursesAjax(filterData) {
     jQuery.post(filter_by_tag_ajax.ajaxurl, data, function(response){
         if(response.success){
             const responseData = JSON.parse(response.data);
-            if(responseData['courses'].length > 0) {
+            const coursesLength = responseData['courses'].length
+            if(coursesLength > 0) {
                 // loadCourses(responseData['courses'])
+                console.log(coursesLength);
+                updateCoursesCounter(coursesLength)
                 appendFilteredCourses(responseData['courses'])
+
             } else if(responseData['params'] == null) {
                 haveNoResults(false)
             } else {

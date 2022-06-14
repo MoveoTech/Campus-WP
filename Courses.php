@@ -115,8 +115,7 @@ if(count($oneOrMoreMatches->rows) === 0 && count($courses->rows) === 0){
                 </div>
             </div>
             <div class="counterWrap">
-                <span><?= $countShow ." ". $countNumber ." ". $countCourses ?></span>
-
+                <p><?= $countShow ." " ?> <span id="counterValue"><?= $countNumber ?></span><?= " ". $countCourses ?></p>
             </div>
 
             <div class="catalogWrap">
