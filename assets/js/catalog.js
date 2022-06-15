@@ -294,7 +294,8 @@ function appendFilteredCourses(coursesData) {
 
 }
 function updateCoursesCounter(count){
-    // let element = document.getElementById('counterValue');
+    let counterValue = $('#counterValue');
+    counterValue.text(count);
 }
 function getCourseResultTags(tags) {
     let tagsHtml = '';
@@ -648,14 +649,15 @@ function filterCoursesAjax(filterData) {
             const coursesLength = responseData['courses'].length
             if(coursesLength > 0) {
                 // loadCourses(responseData['courses'])
-                console.log(coursesLength);
-                updateCoursesCounter(coursesLength)
-                appendFilteredCourses(responseData['courses'])
+                updateCoursesCounter(coursesLength);
+                appendFilteredCourses(responseData['courses']);
 
             } else if(responseData['params'] == null) {
-                haveNoResults(false)
+                haveNoResults(false);
+                updateCoursesCounter(0);
             } else {
-                haveNoResults()
+                haveNoResults();
+                updateCoursesCounter(0);
             }
         }
     })
@@ -859,13 +861,11 @@ function getCourses() {
                         tagArray[group] = [];
                         tagArray[group].push(englishValue);
                     }
-
                     break;
 
                 case 'institution':
                     institutionArray.push(englishValue);
                     break;
-
 
                 case 'certificate':
                     certificateArray.push(englishValue);
@@ -898,7 +898,6 @@ function getCourses() {
         if(languageArray.length > 0) {
             filterData['search']['language'] = languageArray;
         }
-
         filterCoursesAjax(filterData)
     } else {
         filterData = [];
