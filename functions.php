@@ -1416,21 +1416,62 @@ function getPodsFilterParams($filters = null) {
     }
     /** GET ONLY COURSES THAT ARE NOT HIDDEN */
     $sql[] = 't.hide_in_site=0';
+    $order = '';
+
     if($filters) {
         if($filters['search']['text_s']){
-                $search_value = $filters['search']['text_s'][0];
-                $sqlSearch = array();
+            $search_value = $filters['search']['text_s'][0];
+            $search_array = explode(' ', $search_value);
+            $sqlSearch = array();
+            $search_orderBy = array();
 
-                $sqlSearch[] = ' t.name LIKE "%'.$search_value.'%" ';
-                $sqlSearch[] = ' t.english_name LIKE "%'.$search_value.'%" ';
-                $sqlSearch[] = ' t.arabic_name LIKE "%'.$search_value.'%" ';
-                $sqlSearch[] = ' t.description LIKE "%'.$search_value.'%" ';
-                $sqlSearch[] = ' t.course_products LIKE "%'.$search_value.'%" ';
-                $sqlSearch[] = ' t.alternative_names LIKE "%'.$search_value.'%" ';
+        /**
+         * First, check if the course contains the exact search value string
+         */
+        $sqlSearchFullText = array();
+        $full_text_search = '';
 
-                $searchQuery = "(" . implode('OR', $sqlSearch) . ")";
-                $sql[] = $searchQuery;
+        $sqlSearchFullText[] = ' t.name LIKE "%'.$search_value.'%" ';
+        $sqlSearchFullText[] = ' t.english_name LIKE "%'.$search_value.'%" ';
+        $sqlSearchFullText[] = ' t.arabic_name LIKE "%'.$search_value.'%" ';
+        $sqlSearchFullText[] = ' t.description LIKE "%'.$search_value.'%" ';
+        $sqlSearchFullText[] = ' t.course_products LIKE "%'.$search_value.'%" ';
+        $sqlSearchFullText[] = ' t.alternative_names LIKE "%'.$search_value.'%" ';
+
+        $full_text_search .= 'CASE WHEN ';
+        $full_text_search .= "(" . implode('OR', $sqlSearchFullText) . ")";
+        $full_text_search .= 'THEN 1000 ELSE 0 END';
+
+        $search_orderBy[] = $full_text_search;
+
+        /**
+         * Search for each word in the text in a separate search
+         */
+            foreach($search_array as $word) {
+                $sqlSearchText = array();
+                $orderBy_text = '';
+
+                $sqlSearchText[] = ' t.name LIKE "%'.$word.'%" ';
+                $sqlSearchText[] = ' t.english_name LIKE "%'.$word.'%" ';
+                $sqlSearchText[] = ' t.arabic_name LIKE "%'.$word.'%" ';
+                $sqlSearchText[] = ' t.description LIKE "%'.$word.'%" ';
+                $sqlSearchText[] = ' t.course_products LIKE "%'.$word.'%" ';
+                $sqlSearchText[] = ' t.alternative_names LIKE "%'.$word.'%" ';
+
+                $sqlSearch[] ="(" . implode('OR', $sqlSearchText) . ")" ;
+
+                $orderBy_text .= 'CASE WHEN ';
+                $orderBy_text .= "(" . implode('OR', $sqlSearchText) . ")";
+                $orderBy_text .= 'THEN 1 ELSE 0 END';
+
+                $search_orderBy[] = $orderBy_text;
             }
+
+            $singleSearchQuery = implode(' OR ', $sqlSearch) ;
+            $sql[] = $singleSearchQuery;
+            $order .= "(" . implode('+', $search_orderBy) . ") DESC, " ;
+        }
+
 
         if($filters['search']['language']){
             $params_items = $filters['search']['language'];
@@ -1497,7 +1538,8 @@ function getPodsFilterParams($filters = null) {
     };
     }
     $where = implode(" AND ", $sql);
-    $order = "t.order DESC";
+    $order .= "t.order DESC";
+
     $params = array(
         'select'=> '`t`.*, concat(",",group_concat(`tags`.`english_name` SEPARATOR ","), ",") as `tags_id`',
         'limit' => -1,
@@ -1510,26 +1552,11 @@ function getPodsFilterParams($filters = null) {
 }
 
 function getSecondsFiltersParams($filters, $idArray) {
-    if(!$filters) return null;
+    if(!$filters || $filters['search']['text_s']) return null;
 
     $sql = array();
     $settings = array();
     $allQuery = array();
-
-    if($filters['search']['text_s']){
-        $search_value = $filters['search']['text_s'][0];
-        $sqlSearch = array();
-
-        $sqlSearch[] = ' t.name LIKE "%'.$search_value.'%" ';
-        $sqlSearch[] = ' t.english_name LIKE "%'.$search_value.'%" ';
-        $sqlSearch[] = ' t.arabic_name LIKE "%'.$search_value.'%" ';
-        $sqlSearch[] = ' t.description LIKE "%'.$search_value.'%" ';
-        $sqlSearch[] = ' t.course_products LIKE "%'.$search_value.'%" ';
-        $sqlSearch[] = ' t.alternative_names LIKE "%'.$search_value.'%" ';
-
-        $searchQuery = "(" . implode('OR', $sqlSearch) . ")";
-        $sql[] = $searchQuery;
-    }
 
     if($filters['search']['language']){
         $params_items = $filters['search']['language'];

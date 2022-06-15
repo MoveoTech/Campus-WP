@@ -642,7 +642,7 @@ function filterCoursesAjax(filterData) {
                 // loadCourses(responseData['courses'])
 
                 appendFilteredCourses(responseData['courses'])
-            } else if(responseData['params'] == null) {
+            } else if(responseData['params'] == null && responseData['second_params'] == null) {
                 haveNoResults(false)
             } else {
                 haveNoResults()
