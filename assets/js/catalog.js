@@ -630,7 +630,8 @@ function appendMoreFilters(filterData) {
 function filterCoursesAjax(filterData) {
     appendUrlParams(filterData)
     if(filterData.length != 0 && filterData['search']['tags'] && filterData['search']['tags']['Stripe']){
-        let tagName = filterData['search']['tags']['Stripe'][0].split('-')[1]
+        let [tagId, ...tagName] = filterData['search']['tags']['Stripe'][0].split('-');
+        tagName = tagName.join('-');
         filterData['search']['tags']['Stripe'][0] = tagName;
     }
     
