@@ -653,8 +653,9 @@ function filterCoursesAjax(filterData) {
                 updateCoursesCounter(coursesLength);
                 appendFilteredCourses(responseData['courses']);
 
-            } else if(responseData['params'] == null) {
-                haveNoResults(false);
+                appendFilteredCourses(responseData['courses'])
+            } else if(responseData['params'] == null && responseData['second_params'] == null) {
+                haveNoResults(false)
                 updateCoursesCounter(0);
             } else {
                 haveNoResults();
