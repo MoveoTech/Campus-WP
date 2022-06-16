@@ -1459,14 +1459,14 @@ footer .footer-section{
 
 /* popup menu - filters */
 .inputsContainer {
-    margin: 0 0 0 5px;
+    margin: 0 5px 0 5px;
     padding: 0 0 0 15px;
 
     .filterInput{
         background: #FFFFFF;
         border-radius: 10px;
         box-sizing: border-box;
-        margin: 10px 0;
+        margin: 10px 14px 10px 0;
 
         .filterTagLabel{
             display: flex;
@@ -1536,6 +1536,10 @@ footer .footer-section{
 #coursesBox{
     padding-right: 0;
     padding-left: 190px;
+}
+.counterWrap{
+    left: unset;
+    right: 120px;
 }
 .courseResultCard{
     .info-button{
