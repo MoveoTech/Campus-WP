@@ -360,7 +360,7 @@ function appendUrlParams(filters) {
 
 function markCheckboxes(params) {
     let entries = params.entries();
-    let filterItems = $('.checkbox-filter-search');
+    let filterItems = $('.filtersInputWeb');
 
     for ( entry of entries) {
         if(entry[0] == 'text_s') {
@@ -407,7 +407,6 @@ function markCheckboxes(params) {
     }
 
     /** Check if has params in the url */
-    if(!params.entries().next().value) {
         const currentLang = getCookie('openedx-language-preference') ? getCookie('openedx-language-preference') : getCookie('wp-wpml_current_language');
         filterItems.each((index, element) => {
             let id = element.id;
@@ -437,7 +436,6 @@ function markCheckboxes(params) {
                 }
             }
         });
-    }
 }
 
 function haveNoResults(afterSearching= true) {
@@ -843,8 +841,13 @@ function getCourses() {
         searchValue = searchValue.replaceAll(`\\`, "");
         freeSearchData.push(searchValue);
     }
-    /** Getting array of inputs */
-    let filterItems = $('.checkbox-filter-search');
+    /** Getting array of inputs depend desktop/mobile */
+    let filterItems;
+    if($(window).width() <= 768) {
+        filterItems = $('#filtersSectionMobile .checkbox-filter-search');
+    } else {
+        filterItems = $('.filtersSection .checkbox-filter-search');
+    }
 
     /** Looping all filter items inputs */
     filterItems.each((index, element) => {

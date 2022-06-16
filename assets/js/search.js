@@ -5,9 +5,12 @@ jQuery(document).ready(function () {
 
         /** CHECK IF SEARCH VALUE LENGTH >= 2 */
         if (jQuery(this).find('[name="text_s"]').val().length >= 2) {
+            const currentLang = getCookie('openedx-language-preference') ? getCookie('openedx-language-preference') : getCookie('wp-wpml_current_language');
+            let lang = getFieldByLanguage('Hebrew','English','Arabic', currentLang);
             var form = jQuery(this);
             let searchValue = form.find('[name = "text_s"]').val();
             let spChars = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/g;
+
             if(spChars.test(searchValue)){
                 let special_char = searchValue.match(spChars);
                 special_char.forEach(element => {
@@ -17,7 +20,7 @@ jQuery(document).ready(function () {
             }
             grecaptcha.ready(function () {
                 grecaptcha.execute('6LclyM8aAAAAAMttjBLWQ6mu9QQoW9GBACQTaeAE', {action: 'submit'}).then(function (token) {
-                    var url = form.attr('action') + '/?text_s=' + searchValue;
+                    var url = form.attr('action') + '/?language=' + lang + '&text_s=' + searchValue;
                     window.location.href = url;
                 })
             });
