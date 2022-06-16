@@ -221,7 +221,6 @@ main {
 }
 
 .background-on-banner {
-  margin-top: 10px;
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -439,6 +438,9 @@ main {
         }
       }
     }
+  }
+  .pod-courses .background-on-banner {
+    margin-top: 63px;
   }
 }
 

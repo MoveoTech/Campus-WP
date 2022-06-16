@@ -6789,7 +6789,6 @@ main {
   overflow: hidden; }
 
 .background-on-banner {
-  margin-top: 10px;
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -6965,7 +6964,9 @@ main {
               font-size: 16px; }
           .hero-banner .banner-image .hero-container .container .hero-search-form .search-submit {
             width: 46px;
-            height: 46px; } }
+            height: 46px; }
+  .pod-courses .background-on-banner {
+    margin-top: 63px; } }
 
 @media (max-width: 768px) {
   .hero-banner {
