@@ -66,11 +66,15 @@ foreach ($courses->rows as $course) {
 $coursesIDs = implode(',', $coursesIdArray);
 $second_params = getSecondsFiltersParams($filters, $idArrayOfBestMatches);
 
+$countShow = getFieldByLanguage("מוצגים", "Show", "يتم تقديم", $sitepress->get_current_language());
+$countCourses = getFieldByLanguage("קורסים", "courses", "دورة", $sitepress->get_current_language());
+$countNumber = $courses->total();
+
 if($second_params) {
     $oneOrMoreMatches = pods('courses', $second_params);
+    $countNumber += $oneOrMoreMatches->total();
 }
-
-/** No result translate */
+    /** No result translate */
 $no_result_text_he = "לא מצאנו בדיוק את מה שחיפשת אבל אולי יעניין אותך...";
 $no_result_text_en = "We didn't find exactly what you were looking for but maybe you will be interested ...";
 $no_result_text_ar = "لم نعثر على ما كنت تبحث عنه بالضبط ولكن ربما تكون مهتمًا ...";
@@ -110,7 +114,9 @@ if(count($oneOrMoreMatches->rows) === 0 && count($courses->rows) === 0){
                     <span><?= filtersMobileMenuLanguage(); ?></span>
                     <img class="filterVector" src="<?php echo get_bloginfo('stylesheet_directory'). '/assets/images/vector-black.svg'?>"/>
                 </div>
-
+            </div>
+            <div class="counterWrap">
+                <p><?= $countShow ." " ?> <span id="counterValue"><?= $countNumber ?></span><?= " ". $countCourses ?></p>
             </div>
 
             <div class="catalogWrap">
