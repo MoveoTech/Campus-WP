@@ -20064,6 +20064,32 @@ body .course-item-hover {
       z-index: 3; }
 
 /* Filters menu */
+.counterWrap {
+  position: relative;
+  left: 120px;
+  top: 34px; }
+  .counterWrap p {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 18px; }
+    .counterWrap p span {
+      font-weight: 700; }
+
+.sortByWrapper {
+  position: relative;
+  top: 34px; }
+  .sortByWrapper #sortByOptions {
+    height: 150px;
+    width: 150px;
+    display: flex;
+    flex-direction: column;
+    background: #FFFFFF;
+    box-shadow: 0 5px 15px rgba(40, 40, 40, 0.2);
+    border-radius: 10px; }
+    .sortByWrapper #sortByOptions .sortOption {
+      border: 1px solid red;
+      margin: 3px; }
+
 .filtersSection {
   display: flex;
   flex-direction: row;
@@ -20355,17 +20381,6 @@ body .course-item-hover {
 /* course result presentation */
 .catalogPageBox {
   margin: 0; }
-
-.counterWrap {
-  position: relative;
-  left: 120px;
-  top: 34px; }
-  .counterWrap p {
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 18px; }
-    .counterWrap p span {
-      font-weight: 700; }
 
 #coursesBox {
   flex-direction: column;

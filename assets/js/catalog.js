@@ -56,6 +56,35 @@ $(document).ready(function () {
         }
     });
 
+    /** Click event - sort by courses **/
+    $('.sortOption').on('click', function (event) {
+    let sortId = event.target.id;
+        console.log("sortId", sortId);
+
+      let coursesContainer = $('#coursesBox');
+        console.log("coursesContainer", coursesContainer);
+        console.log("coursesContainerlentg", coursesContainer.children());
+
+        switch (sortId) {
+            case "sortByRelevance":
+                sortByRelevance(sortId);
+                break;
+            case "sortByNewest":
+                sortByNewest(sortId);
+                break;
+            case "sortByOldest":
+                sortByOldest(sortId);
+                break;
+            case "sortByAtoZ":
+                sortByAtoZ(sortId);
+                break;
+            case "sortByZtoA":
+                sortByZtoA(sortId);
+                break;
+        }
+
+    })
+
     /** checking screen size for web or mobile menu */
     slickStripeForMobile();
     $(window).resize(function() {
@@ -907,6 +936,7 @@ function getCourses() {
     }
 
 }
+
 
 /**
  *  General function for translate

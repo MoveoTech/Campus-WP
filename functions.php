@@ -1162,7 +1162,7 @@ function orderByNewestLanguage() {
 function orderByNameLanguage() {
     global $sitepress;
     $current = $sitepress->get_current_language();
-    $text = 'סידור לפי א׳ - ב׳';
+    $text = 'סידור לפי א׳ - ת׳';
     if ($current === 'en') {
         $text = 'Arrangement by name';
     }

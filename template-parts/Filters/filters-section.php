@@ -53,15 +53,4 @@ $current_lang = $sitepress->get_current_language();
 
 </div>
 
-                                    <!--order by section - DO NOT REMOVE - for the next version-->
-
-<!--    <div>-->
-<!--        <select>-->
-<!--            <option name="orderByPopularity">--><?php //echo orderByPopularityLanguage() ?><!--</option>-->
-<!--            <option name="orderByName">--><?php //echo orderByNameLanguage() ?><!--</option>-->
-<!--            <option name="orderByNewest">--><?php //echo orderByNewestLanguage() ?><!--</option>-->
-<!--        </select>-->
-<!---->
-<!--    </div>-->
-
 <!-- END FILTERS SECTION .-->

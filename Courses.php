@@ -115,6 +115,20 @@ if(count($oneOrMoreMatches->rows) === 0 && count($courses->rows) === 0){
                     <img class="filterVector" src="<?php echo get_bloginfo('stylesheet_directory'). '/assets/images/vector-black.svg'?>"/>
                 </div>
             </div>
+
+            <!--order by section-->
+
+                <div class="sortByWrapper">
+                    <p id="sortByButton">סידור לפי</p>
+                    <div id="sortByOptions">
+                        <span class="sortOption" id="sortByRelevance"><?php echo orderByPopularityLanguage() ?></span>
+                        <span class="sortOption" id="sortByNewest"><?php echo orderByNewestLanguage() ?></span>
+                        <span class="sortOption" id="sortByOldest">סדר לפי הישן ביותר</span>
+                        <span class="sortOption" id="sortByAtoZ"><?php echo orderByNameLanguage() ?></span>
+                        <span class="sortOption" id="sortByZtoA">סדר לפי ת׳-א׳</span>
+
+                    </div>
+                </div>
             <div class="counterWrap">
                 <p><?= $countShow ." " ?> <span id="counterValue"><?= $countNumber ?></span><?= " ". $countCourses ?></p>
             </div>
