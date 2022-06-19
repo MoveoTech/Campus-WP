@@ -56,12 +56,19 @@ $(document).ready(function () {
         }
     });
 
+    /** Click event - open 'sort by' menu **/
+    $('#sortByButton').on('click', function (event) {
+        console.log(event);
+
+        $('#sortByOptions').css('display', 'flex');
+    });
+
     /** Click event - sort by courses **/
     $('.sortOption').on('click', function (event) {
     let sortId = event.target.id;
         console.log("sortId", sortId);
 
-      let coursesContainer = $('#coursesBox');
+      let coursesContainer = $('#coursesBox .courseResultCard');
         console.log("coursesContainer", coursesContainer);
         console.log("coursesContainerlentg", coursesContainer.children());
 

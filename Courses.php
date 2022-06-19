@@ -65,7 +65,6 @@ foreach ($courses->rows as $course) {
 
 $coursesIDs = implode(',', $coursesIdArray);
 $second_params = getSecondsFiltersParams($filters, $idArrayOfBestMatches);
-
 $countShow = getFieldByLanguage("מוצגים", "Show", "يتم تقديم", $sitepress->get_current_language());
 $countCourses = getFieldByLanguage("קורסים", "courses", "دورة", $sitepress->get_current_language());
 $countNumber = $courses->total();

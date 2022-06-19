@@ -20079,9 +20079,10 @@ body .course-item-hover {
   position: relative;
   top: 34px; }
   .sortByWrapper #sortByOptions {
+    display: none;
+    position: relative;
     height: 150px;
     width: 150px;
-    display: flex;
     flex-direction: column;
     background: #FFFFFF;
     box-shadow: 0 5px 15px rgba(40, 40, 40, 0.2);
