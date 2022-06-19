@@ -774,11 +774,12 @@ function getTagById(tagId) {
  *  Append tags stripe special group
  *  */
 function appendSpecialGroupFilter() {
+    const currentLang = getCookie('openedx-language-preference') ? getCookie('openedx-language-preference') : getCookie('wp-wpml_current_language');
     let vector = $('.filterVector').attr('src');
     let mobileVector = $('.filterVectorMobile').attr('src');
     let container = document.getElementById('groupFiltersContainer');
     let mobileContainer = document.getElementById('filtersSectionMobile');
-    let groupTitle = 'התאמה מיוחדת';
+    let groupTitle = getFieldByLanguage('התאמה מיוחדת', 'Customize Tag', 'تناسب خاص', currentLang);
     let addFilterbutton = document.getElementById('morefiltersBox');
     let filterId = 'stripe_tag_filter';
     let temp = document.createElement("div");
