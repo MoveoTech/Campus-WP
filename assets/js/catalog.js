@@ -384,7 +384,7 @@ function markCheckboxes(params) {
                 let itemValues = entry[1].split(",");
 
                 for(let item of itemValues){
-                    if(englishValue === item) {
+                    if(englishValue.split(' ').join('') === item.split(' ').join('')) {
                         $(`#${id}`).prop('checked', true)
                     }
                 }
@@ -407,13 +407,14 @@ function markCheckboxes(params) {
     }
 
     /** Check if has params in the url */
+    if(!params.entries().next().value) {
         const currentLang = getCookie('openedx-language-preference') ? getCookie('openedx-language-preference') : getCookie('wp-wpml_current_language');
         filterItems.each((index, element) => {
             let id = element.id;
             let type = $(`#${id}`).data('name');
             let englishValue = $(`#${id}`).data('value');
 
-            if(type === 'language') {
+            if (type === 'language') {
                 let lang;
                 switch (currentLang) {
                     case 'he':
@@ -427,7 +428,7 @@ function markCheckboxes(params) {
                         break;
                 }
 
-                if(englishValue.includes(lang)) {
+                if (englishValue.includes(lang)) {
                     $(`#${id}`).prop('checked', true)
                     let currentUrl = window.location.href;
                     let url = new URL(currentUrl);
@@ -436,6 +437,7 @@ function markCheckboxes(params) {
                 }
             }
         });
+    }
 }
 
 function haveNoResults(afterSearching= true) {
@@ -810,12 +812,13 @@ function appendSpecialTagToGroup(tag) {
     temp.classList.add('filterInput');
     let id = Math.floor(Math.random()*90000) + 10000;
     let name = tag['name'];
+    let englishName = tag['english_name'];
     let tagId = tag['id'];
     let checked = ' checked';
 
     temp.innerHTML =
         '<label class="filterTagLabel" for="tag_'+id+'">'+
-        '<input'+ checked +' class="checkbox-filter-search filtersInputWeb" type="checkbox" data-name="tag" data-group="Stripe" data-value="'+tagId+'-'+name+'" value="'+name+'" id="tag_'+id+'">'+
+        '<input'+ checked +' class="checkbox-filter-search filtersInputWeb" type="checkbox" data-name="tag" data-group="Stripe" data-value="'+tagId+'-'+englishName+'" value="'+name+'" id="tag_'+id+'">'+
         '<div class="wrap-term-and-sum tagNameWrap">'+
         '<span class="term-name">'+name+'</span>'+
         '</div>'+

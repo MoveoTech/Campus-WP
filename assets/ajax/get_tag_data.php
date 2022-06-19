@@ -15,6 +15,7 @@ function get_tag_data() {
     $tag_name = getFieldByLanguage($tag->display('name'),$tag->display('english_name'),$tag->display('arabic_name'),$lang);
 
     $dataToReturn['tag']['name']  = $tag_name;
+    $dataToReturn['tag']['english_name']  = $tag->display('english_name');
     $dataToReturn['tag']['id']  = $tag_id;
 
     wp_send_json_success( json_encode($dataToReturn));

@@ -1670,13 +1670,17 @@ function getFiltersArray($paramsArray) {
                 $obj['tags'] = $tags;
 
             } else {
-                //TODO if its certificate need to explode the value by "," and then push the values
+                $itemsArray = explode(',', $value);
                 if($obj[$key]){
-                    array_push($obj[$key], $value);
+                    foreach ($itemsArray as $item) {
+                        array_push($obj[$key], $item);
+                    }
 
                 } else {
                     $obj[$key] = [];
-                    array_push($obj[$key], $value);
+                    foreach ($itemsArray as $item) {
+                        array_push($obj[$key], $item);
+                    }
                 }
 
             }

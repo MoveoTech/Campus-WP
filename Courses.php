@@ -31,7 +31,7 @@ if($url_params){
         $tag_params = $filters['search']['tags']['Stripe'][0];
         $tag_id = explode('-',$tag_params)[0];
         $tag = pods('tags',$tag_id);
-        $tag_name = getFieldByLanguage($tag->display('name'),$tag->display('english_name'),$tag->display('arabic_name'),$current_language);
+        $tag_name = $tag->display('english_name');
         $filters['search']['tags']['Stripe'][0] = $tag_name;
     }
 
