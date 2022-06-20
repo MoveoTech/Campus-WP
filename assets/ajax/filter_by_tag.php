@@ -11,7 +11,6 @@ function filter_by_tag() {
         $params = null;
     } else {
         $params = getPodsFilterParams($filters);
-
     }
 
     /** filtering each data type */

@@ -671,7 +671,6 @@ function appendMoreFilters(filterData) {
  * ajax call
  * */
 function filterCoursesAjax(filterData) {
-    console.log("filterData",filterData);
     appendUrlParams(filterData)
     if(filterData.length != 0 && filterData['search']['tags'] && filterData['search']['tags']['Stripe']){
         let [tagId, ...tagName] = filterData['search']['tags']['Stripe'][0].split('-');
@@ -686,11 +685,9 @@ function filterCoursesAjax(filterData) {
         'filters': filterData,
     }
     jQuery.post(filter_by_tag_ajax.ajaxurl, data, function(response){
-
         if(response.success){
             const responseData = JSON.parse(response.data);
             const coursesLength = responseData['courses'].length
-            console.log("response",responseData['params']);
             if(coursesLength > 0) {
                 // loadCourses(responseData['courses'])
                 updateCoursesCounter(coursesLength);
@@ -962,18 +959,14 @@ function sortByAjax(idsArray,sortType){
         'coursesIds':idsArray,
 
     }
-    // let data = {
-    //     'action': 'sort_by_courses',
-    //     'type' : 'courses',
-    //     'lang' : getCookie('openedx-language-preference'),
-    //     'filters': filterData,
-    // }
 
     jQuery.post(sort_by_courses_ajax.ajaxurl, data, function(response){
         console.log("ajax response",response);
         if(response.success){
             const responseData = JSON.parse(response.data);
-            console.log("ajax response data",response.data);
+            // console.log("responseData",responseData);
+            // console.log("ajax response data",responseData['courses']);
+            // console.log("ajax response data",responseData['params']);
             // const responseData = JSON.parse(response.data);
             // const coursesLength = responseData['courses'].length
             // if(coursesLength > 0) {

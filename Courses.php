@@ -36,7 +36,6 @@ if($url_params){
     }
 
     $params = getPodsFilterParams($filters);
-//    console_log($params);
 } else {
     $params = getPodsFilterParams();
 }

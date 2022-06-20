@@ -1553,8 +1553,6 @@ function getPodsFilterParams($filters = null) {
     return $params;
 }
 
-
-
 function getSecondsFiltersParams($filters, $idArray) {
     if(!$filters || $filters['search']['text_s']) return null;
 
