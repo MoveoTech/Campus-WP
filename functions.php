@@ -15,6 +15,7 @@ include locate_template( 'assets/ajax/stripe_data.php' );
 include locate_template( 'assets/ajax/my_courses.php' );
 include locate_template( 'assets/ajax/get_course_popup.php' );
 include locate_template( 'assets/ajax/filter_by_tag.php' );
+include locate_template( 'assets/ajax/sort_by_courses.php' );
 include locate_template( 'assets/ajax/get_tag_data.php' );
 include locate_template( 'assets/ajax/add_filters_to_menu.php' );
 
@@ -126,6 +127,7 @@ function style_of_campus_enqueue() {
     wp_localize_script('home_page_js', 'my_courses_ajax', array('ajaxurl' => admin_url('admin-ajax.php')));
     //filtering tags ajax call
     wp_localize_script('catalog_js', 'filter_by_tag_ajax', array('ajaxurl' => admin_url('admin-ajax.php')));
+    wp_localize_script('catalog_js', 'sort_by_courses_ajax', array('ajaxurl' => admin_url('admin-ajax.php')));
 
 	wp_localize_script( 'ready_js', 'global_vars', array(
 			'link_to_enrollment_api'        => get_field( 'link_to_enrollment_api', 'option' ),
@@ -1162,7 +1164,7 @@ function orderByNewestLanguage() {
 function orderByNameLanguage() {
     global $sitepress;
     $current = $sitepress->get_current_language();
-    $text = 'סידור לפי א׳ - ת׳';
+    $text = 'סידור לפי א׳ - ב׳';
     if ($current === 'en') {
         $text = 'Arrangement by name';
     }
@@ -1550,6 +1552,8 @@ function getPodsFilterParams($filters = null) {
     );
     return $params;
 }
+
+
 
 function getSecondsFiltersParams($filters, $idArray) {
     if(!$filters || $filters['search']['text_s']) return null;

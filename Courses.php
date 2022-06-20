@@ -36,6 +36,7 @@ if($url_params){
     }
 
     $params = getPodsFilterParams($filters);
+//    console_log($params);
 } else {
     $params = getPodsFilterParams();
 }
@@ -68,7 +69,6 @@ $second_params = getSecondsFiltersParams($filters, $idArrayOfBestMatches);
 $countShow = getFieldByLanguage("מוצגים", "Show", "يتم تقديم", $sitepress->get_current_language());
 $countCourses = getFieldByLanguage("קורסים", "courses", "دورة", $sitepress->get_current_language());
 $countNumber = $courses->total();
-
 if($second_params) {
     $oneOrMoreMatches = pods('courses', $second_params);
     $countNumber += $oneOrMoreMatches->total();
@@ -124,7 +124,7 @@ if(count($oneOrMoreMatches->rows) === 0 && count($courses->rows) === 0){
                         <span class="sortOption" id="sortByNewest"><?php echo orderByNewestLanguage() ?></span>
                         <span class="sortOption" id="sortByOldest">סדר לפי הישן ביותר</span>
                         <span class="sortOption" id="sortByAtoZ"><?php echo orderByNameLanguage() ?></span>
-                        <span class="sortOption" id="sortByZtoA">סדר לפי ת׳-א׳</span>
+                        <span class="sortOption" id="sortByZtoA">סדר לפי ב׳-א׳</span>
 
                     </div>
                 </div>
@@ -133,7 +133,7 @@ if(count($oneOrMoreMatches->rows) === 0 && count($courses->rows) === 0){
             </div>
 
             <div class="catalogWrap">
-                <div hidden id="catalog_courses" value="<?php print_r($coursesIDs); ?>" ></div>
+                <div hidden id="catalog_courses" data-value="<?php print_r($coursesIDs); ?>" ></div>
                 <div id="coursesBox" class="row output-courses coursesResults catalogPageBox">
 
                     <!--. START Number of match courses OR No Results -->

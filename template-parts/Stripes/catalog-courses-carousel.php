@@ -7,6 +7,7 @@ if(empty($stripe) || empty($stripe['id']) || empty($stripe['courses']) || count(
     return;
 global $sitepress;
 $currentLanguage = $sitepress->get_current_language();
+console_log(podsParams($stripe['courses']));
 $courses = pods('courses', podsParams($stripe['courses']));
 /** single pages slug */
 $single_course_slug = 'onlinecourse/';

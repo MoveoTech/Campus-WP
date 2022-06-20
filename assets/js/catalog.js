@@ -58,37 +58,41 @@ $(document).ready(function () {
 
     /** Click event - open 'sort by' menu **/
     $('#sortByButton').on('click', function (event) {
-        console.log(event);
-
         $('#sortByOptions').css('display', 'flex');
     });
 
     /** Click event - sort by courses **/
     $('.sortOption').on('click', function (event) {
-    let sortId = event.target.id;
-        console.log("sortId", sortId);
-
-      let coursesContainer = $('#coursesBox .courseResultCard');
+        const sortType = event.target.id;
+        const coursesContainer = $('#catalog_courses').data('value');
+        let idsArray = coursesContainer.split(",");
+        console.log("sortId", sortType);
         console.log("coursesContainer", coursesContainer);
-        console.log("coursesContainerlentg", coursesContainer.children());
+        console.log("arraysId",idsArray);
 
-        switch (sortId) {
-            case "sortByRelevance":
-                sortByRelevance(sortId);
-                break;
-            case "sortByNewest":
-                sortByNewest(sortId);
-                break;
-            case "sortByOldest":
-                sortByOldest(sortId);
-                break;
-            case "sortByAtoZ":
-                sortByAtoZ(sortId);
-                break;
-            case "sortByZtoA":
-                sortByZtoA(sortId);
-                break;
-        }
+        sortByAjax(idsArray,sortType)
+
+
+
+
+
+        // switch (sortId) {
+        //     case "sortByRelevance":
+        //         sortByRelevance(sortId);
+        //         break;
+        //     case "sortByNewest":
+        //         sortByNewest(sortId);
+        //         break;
+        //     case "sortByOldest":
+        //         sortByOldest(sortId);
+        //         break;
+        //     case "sortByAtoZ":
+        //         sortByAtoZ(sortId);
+        //         break;
+        //     case "sortByZtoA":
+        //         sortByZtoA(sortId);
+        //         break;
+        // }
 
     })
 
@@ -667,6 +671,7 @@ function appendMoreFilters(filterData) {
  * ajax call
  * */
 function filterCoursesAjax(filterData) {
+    console.log("filterData",filterData);
     appendUrlParams(filterData)
     if(filterData.length != 0 && filterData['search']['tags'] && filterData['search']['tags']['Stripe']){
         let [tagId, ...tagName] = filterData['search']['tags']['Stripe'][0].split('-');
@@ -681,9 +686,11 @@ function filterCoursesAjax(filterData) {
         'filters': filterData,
     }
     jQuery.post(filter_by_tag_ajax.ajaxurl, data, function(response){
+
         if(response.success){
             const responseData = JSON.parse(response.data);
             const coursesLength = responseData['courses'].length
+            console.log("response",responseData['params']);
             if(coursesLength > 0) {
                 // loadCourses(responseData['courses'])
                 updateCoursesCounter(coursesLength);
@@ -865,7 +872,7 @@ function appendSpecialTagToGroup(tag) {
 }
 
 function getCourses() {
-    let filterData = {"search": {}};
+    let filterData = {"search": {}, "sortBy": []};
     let tagArray = {};
     let freeSearchData = [];
     let institutionArray = [];
@@ -944,6 +951,47 @@ function getCourses() {
 
 }
 
+function sortByAjax(idsArray,sortType){
+    let filterData = {"search": {}};
+    // filterData['search']['certificate'] = ["No certificate"];
+
+    let data = {
+        'action': 'sort_by_courses',
+        'lang' : getCookie('openedx-language-preference'),
+        'sortType': sortType,
+        'coursesIds':idsArray,
+
+    }
+    // let data = {
+    //     'action': 'sort_by_courses',
+    //     'type' : 'courses',
+    //     'lang' : getCookie('openedx-language-preference'),
+    //     'filters': filterData,
+    // }
+
+    jQuery.post(sort_by_courses_ajax.ajaxurl, data, function(response){
+        console.log("ajax response",response);
+        if(response.success){
+            const responseData = JSON.parse(response.data);
+            console.log("ajax response data",response.data);
+            // const responseData = JSON.parse(response.data);
+            // const coursesLength = responseData['courses'].length
+            // if(coursesLength > 0) {
+            //     // loadCourses(responseData['courses'])
+            //     updateCoursesCounter(coursesLength);
+            //     appendFilteredCourses(responseData['courses']);
+            //
+            //     appendFilteredCourses(responseData['courses'])
+            // } else if(responseData['params'] == null && responseData['second_params'] == null) {
+            //     haveNoResults(false)
+            //     updateCoursesCounter(0);
+            // } else {
+            //     haveNoResults();
+            //     updateCoursesCounter(0);
+            // }
+        }
+    })
+}
 
 /**
  *  General function for translate
