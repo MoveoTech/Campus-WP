@@ -1472,7 +1472,6 @@ function getPodsFilterParams($filters = null) {
             $order .= "(" . implode('+', $search_orderBy) . ") DESC, " ;
         }
 
-
         if($filters['search']['language']){
             $params_items = $filters['search']['language'];
             $sqlLang = array();
@@ -1528,7 +1527,7 @@ function getPodsFilterParams($filters = null) {
                 $sqlGroupTags[] = ' tags.arabic_name LIKE "%'.$tag.'%" ';
                 $havingSql[] = ' tags_id LIKE "%,' . $tag .',%" ';
             }
-            $havOr[] =  implode('OR', $havingSql) ;
+            $havOr[] = "(" . implode('OR', $havingSql) . ")";
             $sqlTags[] ="(" . implode('OR', $sqlGroupTags) . ")" ;
         }
 
@@ -1551,6 +1550,10 @@ function getPodsFilterParams($filters = null) {
     return $params;
 }
 
+/**
+ * NEEDS TO DELETE 16/06/2022 - Ido Leybovitch
+ * function => getSecondsFiltersParams()
+ */
 function getSecondsFiltersParams($filters, $idArray) {
     if(!$filters || $filters['search']['text_s']) return null;
 
@@ -1667,13 +1670,17 @@ function getFiltersArray($paramsArray) {
                 $obj['tags'] = $tags;
 
             } else {
-
+                $itemsArray = explode(',', $value);
                 if($obj[$key]){
-                    array_push($obj[$key], $value);
+                    foreach ($itemsArray as $item) {
+                        array_push($obj[$key], $item);
+                    }
 
                 } else {
                     $obj[$key] = [];
-                    array_push($obj[$key], $value);
+                    foreach ($itemsArray as $item) {
+                        array_push($obj[$key], $item);
+                    }
                 }
 
             }

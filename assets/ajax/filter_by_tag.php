@@ -17,30 +17,15 @@ function filter_by_tag() {
     /** filtering each data type */
     $dataToReturn = array();
     $filtersCoursesToReturn = array();
-    $idArrayOfBestMatches = array();
+
     if($params){
         $filteredCourses = pods($type, $params);
         while ($filteredCourses->fetch()) {
             $filtersCoursesToReturn[] =  filteredCoursesData($filteredCourses, $lang);
-            $idArrayOfBestMatches[] = $filteredCourses->display('ID');
-        }
-    }
-
-    /** Get all courses that have at list 1 filter match */
-    if(!$filters || count($filters) <= 0){
-        $second_params = null;
-    } else {
-        $second_params = getSecondsFiltersParams($filters, $idArrayOfBestMatches);
-    }
-    if($second_params) {
-     $oneOrMoreMatches = pods($type, $second_params);
-        while ($oneOrMoreMatches->fetch()) {
-            $filtersCoursesToReturn[] =  filteredCoursesData($oneOrMoreMatches, $lang);
         }
     }
 
     $dataToReturn['params']  = $params;
-    $dataToReturn['second_params']  = $second_params;
     $dataToReturn['courses'] = $filtersCoursesToReturn;
     $dataToReturn['filters'] = $filters;
 
