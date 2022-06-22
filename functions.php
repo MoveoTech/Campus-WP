@@ -1403,9 +1403,9 @@ function console_log($output, $with_script_tags = true) {
 
 function getPodsFilterParams($filters = null) {
     $sql = array();
+    global $sitepress;
+    $current_lang = $sitepress->get_current_language();
     if(!$filters) {
-        global $sitepress;
-        $current_lang = $sitepress->get_current_language();
         if($current_lang === 'he'){
             $default_lang = '(t.language LIKE "%Hebrew%")';
         } else if($current_lang === 'en'){
@@ -1539,8 +1539,9 @@ function getPodsFilterParams($filters = null) {
         $sql[] = $tagsQuery;
     };
     }
+    $byName = getFieldByLanguage("t.name", "t.english_name", "t.arabic_name", $current_lang);
     $where = implode(" AND ", $sql);
-    $order .= "t.order DESC";
+    $order .= "t.order DESC," . $byName;
 
     $params = array(
         'select'=> '`t`.*, concat(",",group_concat(`tags`.`english_name` SEPARATOR ","), ",") as `tags_id`',

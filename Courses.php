@@ -34,7 +34,6 @@ if($url_params){
         $tag_name = getFieldByLanguage($tag->display('name'),$tag->display('english_name'),$tag->display('arabic_name'),$current_language);
         $filters['search']['tags']['Stripe'][0] = $tag_name;
     }
-
     $params = getPodsFilterParams($filters);
 } else {
     $params = getPodsFilterParams();

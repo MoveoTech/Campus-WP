@@ -692,8 +692,6 @@ function filterCoursesAjax(filterData) {
                 // loadCourses(responseData['courses'])
                 updateCoursesCounter(coursesLength);
                 appendFilteredCourses(responseData['courses']);
-
-                appendFilteredCourses(responseData['courses'])
             } else if(responseData['params'] == null && responseData['second_params'] == null) {
                 haveNoResults(false)
                 updateCoursesCounter(0);
@@ -949,8 +947,6 @@ function getCourses() {
 }
 
 function sortByAjax(idsArray,sortType){
-    let filterData = {"search": {}};
-    // filterData['search']['certificate'] = ["No certificate"];
 
     let data = {
         'action': 'sort_by_courses',
@@ -964,18 +960,17 @@ function sortByAjax(idsArray,sortType){
         console.log("ajax response",response);
         if(response.success){
             const responseData = JSON.parse(response.data);
-            // console.log("responseData",responseData);
-            // console.log("ajax response data",responseData['courses']);
-            // console.log("ajax response data",responseData['params']);
-            // const responseData = JSON.parse(response.data);
-            // const coursesLength = responseData['courses'].length
-            // if(coursesLength > 0) {
-            //     // loadCourses(responseData['courses'])
-            //     updateCoursesCounter(coursesLength);
-            //     appendFilteredCourses(responseData['courses']);
-            //
-            //     appendFilteredCourses(responseData['courses'])
-            // } else if(responseData['params'] == null && responseData['second_params'] == null) {
+            const coursesLength = responseData['courses'].length
+            console.log("ajax response data",responseData['courses']);
+            console.log("ajax response data",responseData['params']);
+
+            if(coursesLength > 0) {
+                // loadCourses(responseData['courses'])
+                // updateCoursesCounter(coursesLength);
+                appendFilteredCourses(responseData['courses']);
+
+            }
+            // else if(responseData['params'] == null && responseData['second_params'] == null) {
             //     haveNoResults(false)
             //     updateCoursesCounter(0);
             // } else {

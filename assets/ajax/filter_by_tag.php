@@ -56,18 +56,11 @@ function filteredCoursesData($filteredCourse,$lang){
     return array(
         'name' => getFieldByLanguage($filteredCourse->display('name'), $filteredCourse->display('english_name'), $filteredCourse->display('arabic_name'), $lang),
         'image' => $filteredCourse->display('image'),
-        'certificate' => $filteredCourse->display('certificate'),
-        'excerpt' => $filteredCourse->display('excerpt'),
-        'language' => $filteredCourse->display('language'),
-        'order' => $filteredCourse->display('order'),
-        'haveyoutube' => $filteredCourse->display('trailer'),
         'academic_institution' => getFieldByLanguage($academic_institution['name'], $academic_institution['english_name'], $academic_institution['arabic_name'], $lang),
-        'tags' => getCourseTags($filteredCourse->field('tags'), $lang),
         'marketing_tags' => getCourseTags($filteredCourse->field('marketing_tags'), $lang),
         'permalink' => $filteredCourse->display('permalink'),
         'id' => $filteredCourse->display('ID'),
         'duration' => $filteredCourse->display('duration'),
-        'buttonText' => course_popup_button_text()
     );
 }
 

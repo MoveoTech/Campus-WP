@@ -10,7 +10,7 @@ function sort_by_courses() {
         wp_send_json_error( 'Error: Invalid data!' );
 
     $dataToReturn = array();
-    $params = getSortByParams($sortType,$coursesIds);
+    $params = getSortByParams($sortType,$coursesIds, $lang);
 
     $courses = pods( 'courses',$params,true);
 
@@ -34,43 +34,37 @@ function sortedCoursesData($filteredCourse,$lang){
     return array(
         'name' => getFieldByLanguage($filteredCourse->display('name'), $filteredCourse->display('english_name'), $filteredCourse->display('arabic_name'), $lang),
         'image' => $filteredCourse->display('image'),
-        'certificate' => $filteredCourse->display('certificate'),
-        'excerpt' => $filteredCourse->display('excerpt'),
-        'language' => $filteredCourse->display('language'),
-        'order' => $filteredCourse->display('order'),
-        'haveyoutube' => $filteredCourse->display('trailer'),
         'academic_institution' => getFieldByLanguage($academic_institution['name'], $academic_institution['english_name'], $academic_institution['arabic_name'], $lang),
-        'tags' => getCourseTags($filteredCourse->field('tags'), $lang),
         'marketing_tags' => getCourseTags($filteredCourse->field('marketing_tags'), $lang),
         'permalink' => $filteredCourse->display('permalink'),
         'id' => $filteredCourse->display('ID'),
         'duration' => $filteredCourse->display('duration'),
-        'buttonText' => course_popup_button_text()
     );
 }
 
-function  getSortByParams($sortType,$coursesIds) {
+function  getSortByParams($sortType,$coursesIds, $lang) {
 
+    $byName = getFieldByLanguage("t.name", "t.english_name", "t.arabic_name", $lang);
     $where = "t.id IN (";
     $sortBy ="";
     switch ($sortType) {
         case "sortByRelevance":
-            $sortBy = "t.order";
+            $sortBy = "t.order," . $byName;
             break;
         case "sortByNewest":
-            $sortBy = "t.start_date DESC";
+            $sortBy = "t.start_date DESC , t.enrollment_start DESC , " . $byName;
             break;
         case "sortByOldest":
-            $sortBy = "t.start_date";
+            $sortBy = "t.start_date , t.enrollment_start , ". $byName;
             break;
         case "sortByAtoZ":
-            $sortBy = "t.name , t.start_date DESC";
+            $sortBy = $byName .", t.order , RAND()";
             break;
         case "sortByZtoA":
-            $sortBy = "t.name DESC";
+            $sortBy = $byName . " DESC, t.order , RAND()";
             break;
         default:
-            $sortBy ="t.order";
+            $sortBy = "t.order," . $byName;
     }
 
     foreach ($coursesIds as $singleId) {
