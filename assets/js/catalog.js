@@ -58,42 +58,22 @@ $(document).ready(function () {
 
     /** Click event - open 'sort by' menu **/
     $('#sortByButton').on('click', function (event) {
-        $('#sortByOptions').css('display', 'flex');
+        $('#sortByOptions').toggleClass('active');
     });
 
     /** Click event - sort by courses **/
     $('.sortOption').on('click', function (event) {
         const sortType = event.target.id;
+        const sortingValue = event.target.innerText;
+        const sortByText = $('#sortByText');
         const coursesContainer = $('#catalog_courses').data('value');
-        let idsArray = coursesContainer.split(",");
-        console.log("sortId", sortType);
-        console.log("coursesContainer", coursesContainer);
-        console.log("arraysId",idsArray);
-
-        sortByAjax(idsArray,sortType)
-
-
-
-
-
-        // switch (sortId) {
-        //     case "sortByRelevance":
-        //         sortByRelevance(sortId);
-        //         break;
-        //     case "sortByNewest":
-        //         sortByNewest(sortId);
-        //         break;
-        //     case "sortByOldest":
-        //         sortByOldest(sortId);
-        //         break;
-        //     case "sortByAtoZ":
-        //         sortByAtoZ(sortId);
-        //         break;
-        //     case "sortByZtoA":
-        //         sortByZtoA(sortId);
-        //         break;
-        // }
-
+        const idsArray = coursesContainer.split(",");
+        /** targeting input to color the selected value  */
+        $('.sortOption').removeClass('active');
+        $(event.target).addClass('active');
+        /** changing button text to the selected value */
+        sortByText.text(sortingValue);
+        sortByAjax(idsArray,sortType);
     })
 
     /** checking screen size for web or mobile menu */
@@ -140,19 +120,26 @@ $(document).click(function(event) {
 
     let filtergroup = $('.wrapEachFiltergroup');
     let filtersInputs = $(`.inputsContainer`);
-    /** hiding input container when clicking on screen */
-    if (!filtergroup.is(event.target) && !filtergroup.has(event.target).length && !filtersInputs.is(event.target) && !filtersInputs.has(event.target).length) {
+    let sortByButton = $(`#sortByButton`);
+    let sortByOptions = $(`#sortByOptions`);
+
+
+    /** hiding input container when clicking on screen - when the event.target in not one of the filters menu / inputs */
+    if (!filtergroup.is(event.target) && !filtergroup.has(event.target).length && !filtersInputs.is(event.target) && !filtersInputs.has(event.target).length ) {
         filtersInputs.hide();
+    }
+    /** hiding sort by menu when the event.target in not the sort by menu button */
+    if(!sortByButton.is(event.target) && !sortByButton.has(event.target).length){
+        sortByOptions.removeClass('active');
     }
     /** Checking if the event is a filter group or input container */
     if (filtergroup.is(event.target) || filtergroup.has(event.target).length || filtersInputs.is(event.target) || filtersInputs.has(event.target).length) {
 
         let popupMenuDiv = event.target.closest(".wrapEachFiltergroup").querySelector(".inputsContainer");
-        let extraFilterMenu;
         if((filtersInputs.is(event.target) || filtersInputs.has(event.target).length)){
             /** Closing extra filter menu when adding new extra filter */
             if(event.target.closest(".moreFilters")){
-                extraFilterMenu = event.target.closest(".moreFilters").querySelector(".inputsContainer");
+               let extraFilterMenu = event.target.closest(".moreFilters").querySelector(".inputsContainer");
                 extraFilterMenu.style.display = "none";
             }
             /** hiding input container when clicking on other filter group */
@@ -263,6 +250,8 @@ function slickStripeForMobile() {
 }
 
 function appendFilteredCourses(coursesData) {
+    let idsArray = [];
+    let coursesIdsDiv =  document.getElementById("catalog_courses");
     const edxLang = getCookie('openedx-language-preference');
     const currentLang = edxLang ? edxLang.toLowerCase() : getCookie('wp-wpml_current_language').toLowerCase();
     let coursesBox = document.getElementById("coursesBox");
@@ -274,6 +263,7 @@ function appendFilteredCourses(coursesData) {
 
     coursesData.forEach(item =>{
         let id = item.id;
+        idsArray.push(id);
         let name = item.name;
         let academicInstitution = item.academic_institution ? item.academic_institution : '';
         let tags = getCourseResultTags(item.marketing_tags);
@@ -327,11 +317,11 @@ function appendFilteredCourses(coursesData) {
             '</div>'+
             '</div>';
 
-        output.append(temp)
+        output.append(temp);
     });
     coursesBox.replaceWith(output);
+    coursesIdsDiv.setAttribute("data-value",idsArray);
     clickOnCourseInfoButton();
-
 }
 function updateCoursesCounter(count){
     let counterValue = $('#counterValue');
@@ -957,19 +947,16 @@ function sortByAjax(idsArray,sortType){
     }
 
     jQuery.post(sort_by_courses_ajax.ajaxurl, data, function(response){
-        console.log("ajax response",response);
         if(response.success){
             const responseData = JSON.parse(response.data);
             const coursesLength = responseData['courses'].length
-            console.log("ajax response data",responseData['courses']);
-            console.log("ajax response data",responseData['params']);
-
             if(coursesLength > 0) {
                 // loadCourses(responseData['courses'])
                 // updateCoursesCounter(coursesLength);
                 appendFilteredCourses(responseData['courses']);
 
             }
+            // TO DO - else situation ? let the user know something went wrong
             // else if(responseData['params'] == null && responseData['second_params'] == null) {
             //     haveNoResults(false)
             //     updateCoursesCounter(0);

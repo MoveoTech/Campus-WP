@@ -64,8 +64,8 @@ foreach ($courses->rows as $course) {
 
 $coursesIDs = implode(',', $coursesIdArray);
 $second_params = getSecondsFiltersParams($filters, $idArrayOfBestMatches);
-$countShow = getFieldByLanguage("מוצגים", "Show", "يتم تقديم", $sitepress->get_current_language());
-$countCourses = getFieldByLanguage("קורסים", "courses", "دورة", $sitepress->get_current_language());
+$countShow = getFieldByLanguage("מוצגים", "Show", "يتم تقديم", $current_language);
+$countCourses = getFieldByLanguage("קורסים", "courses", "دورة", $current_language);
 $countNumber = $courses->total();
 if($second_params) {
     $oneOrMoreMatches = pods('courses', $second_params);
@@ -75,6 +75,13 @@ if($second_params) {
 $no_result_text_he = "לא מצאנו בדיוק את מה שחיפשת אבל אולי יעניין אותך...";
 $no_result_text_en = "We didn't find exactly what you were looking for but maybe you will be interested ...";
 $no_result_text_ar = "لم نعثر على ما كنت تبحث عنه بالضبط ولكن ربما تكون مهتمًا ...";
+
+/** sort by translate */
+$sortByRelevance = getFieldByLanguage("סידור לפי רלוונטיות", "Sort by Relevance", "الترتيب حسب الصلة", $current_language);
+$sortByNewest = getFieldByLanguage("סידור לפי החדש ביותר", "Sort by The Newest", "فرز حسب الأحدث", $current_language);
+$sortByOldest = getFieldByLanguage("סידור לפי הישן ביותר", "Sort by The Oldest", "فرز حسب الأقدم", $current_language);
+$sortByAtoZ = getFieldByLanguage("סידור לפי א' עד ת'", "Sort by A to Z", "فرز من الألف إلى الياء", $current_language);
+$sortByZtoA = getFieldByLanguage("סידור לפי ת' עד א'", "Sort by Z to A", "الترتيب حسب ي إلى أ", $current_language);
 
 if(count($oneOrMoreMatches->rows) === 0 && count($courses->rows) === 0){
     $no_results_found = true;
@@ -95,9 +102,10 @@ if(count($oneOrMoreMatches->rows) === 0 && count($courses->rows) === 0){
 <div class="wrapCourseContent <?= $my_class ?>">
     <div class="coursesContainer">
         <div class="row justify-content-between catalogPageBox">
-            <div class="filtersSection">
-                <div class="allFiltersWrapDiv">
-                    <?php
+            <div class="filtersWrap">
+                <div class="filtersSection">
+                    <div class="allFiltersWrapDiv">
+                        <?php
                         get_template_part('template', 'parts/Filters/filters-section',
                             array(
                                 'args' => array(
@@ -105,27 +113,31 @@ if(count($oneOrMoreMatches->rows) === 0 && count($courses->rows) === 0){
                                     'menuFilters' => $menuFilters,
                                 )
                             ));
-                    ?>
+                        ?>
+                    </div>
+                    <div class="openFiltersMenu">
+                        <span><?= filtersMobileMenuLanguage(); ?></span>
+                        <img class="filterVector" src="<?php echo get_bloginfo('stylesheet_directory'). '/assets/images/vector-black.svg'?>"/>
+                    </div>
                 </div>
-                <div class="openFiltersMenu">
-                    <span><?= filtersMobileMenuLanguage(); ?></span>
-                    <img class="filterVector" src="<?php echo get_bloginfo('stylesheet_directory'). '/assets/images/vector-black.svg'?>"/>
-                </div>
-            </div>
 
-            <!--order by section-->
+                <!--order by section-->
 
                 <div class="sortByWrapper">
-                    <p id="sortByButton">סידור לפי</p>
+                    <div id="sortByButton">
+                        <p id="sortByText"><?= $sortByRelevance ?></p>
+                        <img class="filterVector" src="<?php echo get_bloginfo('stylesheet_directory'). '/assets/images/vector-black.svg'?>"/>
+                    </div>
                     <div id="sortByOptions">
-                        <span class="sortOption" id="sortByRelevance"><?php echo orderByPopularityLanguage() ?></span>
-                        <span class="sortOption" id="sortByNewest"><?php echo orderByNewestLanguage() ?></span>
-                        <span class="sortOption" id="sortByOldest">סדר לפי הישן ביותר</span>
-                        <span class="sortOption" id="sortByAtoZ"><?php echo orderByNameLanguage() ?></span>
-                        <span class="sortOption" id="sortByZtoA">סדר לפי ב׳-א׳</span>
+                        <span class="sortOption active" id="sortByRelevance"><?= $sortByRelevance ?></span>
+                        <span class="sortOption" id="sortByNewest"><?= $sortByNewest ?></span>
+                        <span class="sortOption" id="sortByOldest"><?= $sortByOldest ?></span>
+                        <span class="sortOption" id="sortByAtoZ"><?= $sortByAtoZ ?></span>
+                        <span class="sortOption" id="sortByZtoA"><?= $sortByZtoA ?></span>
 
                     </div>
                 </div>
+            </div>
             <div class="counterWrap">
                 <p><?= $countShow ." " ?> <span id="counterValue"><?= $countNumber ?></span><?= " ". $countCourses ?></p>
             </div>

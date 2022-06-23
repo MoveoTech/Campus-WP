@@ -47,9 +47,10 @@ function  getSortByParams($sortType,$coursesIds, $lang) {
     $byName = getFieldByLanguage("t.name", "t.english_name", "t.arabic_name", $lang);
     $where = "t.id IN (";
     $sortBy ="";
+
     switch ($sortType) {
         case "sortByRelevance":
-            $sortBy = "t.order," . $byName;
+            $sortBy = "t.order DESC," . $byName;
             break;
         case "sortByNewest":
             $sortBy = "t.start_date DESC , t.enrollment_start DESC , " . $byName;
@@ -58,7 +59,7 @@ function  getSortByParams($sortType,$coursesIds, $lang) {
             $sortBy = "t.start_date , t.enrollment_start , ". $byName;
             break;
         case "sortByAtoZ":
-            $sortBy = $byName .", t.order , RAND()";
+            $sortBy = $byName . ", t.order , RAND()";
             break;
         case "sortByZtoA":
             $sortBy = $byName . " DESC, t.order , RAND()";
