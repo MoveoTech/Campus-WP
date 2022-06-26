@@ -1006,7 +1006,6 @@ jQuery(document).click(function(event) {
 });
 
 jQuery(document).on('scroll', function () {
-    // console.log(jQuery(this).scrollTop());
     if (jQuery(this).scrollTop() > 0)
         jQuery('.scroll-top').addClass('show');
     else
