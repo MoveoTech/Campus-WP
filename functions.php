@@ -1709,3 +1709,16 @@ if (!function_exists('str_contains')) {
         return '' === $needle || false !== strpos($haystack, $needle);
     }
 }
+
+function getSearchErrorMessage() {
+    global $sitepress;
+    $current = $sitepress->get_current_language();
+    $text = 'יש להזין לפחות 2 תוים';
+    if ($current === 'en') {
+        $text = 'At least 2 characters must be entered';
+    }
+    if ($current === 'ar') {
+        $text = 'يجب إدخال حرفين على الأقل';
+    }
+    return $text;
+}

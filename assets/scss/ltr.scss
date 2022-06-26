@@ -138,6 +138,15 @@
             right: 3.64px;
             left: auto;
         }
+        .search-form {
+            .search-error-message-header {
+                right: unset;
+                left: 32px;
+                span {
+                    text-align: left;
+                }
+            }
+        }
     }
     .login-item {
         &:after {
@@ -232,10 +241,17 @@
                         padding-left: 30px;
                         padding-right: 5px;
                     }
-
                     .search-submit {
                         left: unset;
                         right: 5px;
+                    }
+                    .search-error-message {
+                        left: 22px;
+                        right: unset;
+
+                        span {
+                            text-align: left;
+                        }
                     }
                 }
             }
@@ -1435,6 +1451,13 @@ footer .footer-section{
             left: unset;
             right:5px;
 
+        }
+        .search-error-message {
+            left: 22px;
+            right: unset;
+            span {
+                text-align: left;
+            }
         }
     }
 }
