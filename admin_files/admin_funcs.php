@@ -416,3 +416,193 @@ function pods_RELPODNAME_pick_data($data, $name, $value, $options, $pod, $id){
 }
 
 add_filter('pods_field_pick_data', 'pods_RELPODNAME_pick_data', 1, 6);
+
+
+function pods_import_files(){
+
+    // parameters - page title, menu title, capability, slog, function that comunicate with that function, icon, position in the menu
+    add_menu_page('Import Courses', 'Import Courses', 'administrator', 'pods_import_files', 'import_courses_file', '', 60);
+
+//    add_submenu_page('lapizzeria_options', 'Reservations', 'Reservations', 'administrator' , 'lapizzeria_reservation','lapizzeria_reservation' );
+}
+add_action('admin_menu','pods_import_files');
+
+function import_courses_settings(){
+
+    // Google maps group
+    register_setting('import_courses_file','import_file');
+//    register_setting('import_courses_file','lapizzeria_gmap_longitude');
+//    register_setting('import_courses_file','lapizzeria_gmap_zoom');
+//    register_setting('import_courses_file','lapizzeria_gmap_apikey');
+
+    //Information group
+//    register_setting('lapizzeria_options_info', 'lapizzeria_location');
+//    register_setting('lapizzeria_options_info', 'lapizzeria_phonenumber');
+
+
+}
+add_action('init','import_courses_settings');
+
+function import_courses_file() {
+    if ( empty( $_FILES ) ){
+        ?>
+        <div>
+            <h2>Upload a csv file here to import categories</h2>
+            <form action="" method="post" enctype="multipart/form-data">
+                <?php wp_nonce_field('csv-import'); ?>
+
+                <label for="file">Filename:</label>
+                <input type="file" name="file" id="file"><br>
+                <input type="submit" name="save" value="save">
+            </form>
+        </div>
+    <?php }
+    else{
+        if ( ! function_exists( 'wp_handle_upload' ) )
+            require_once( ABSPATH . 'wp-admin/includes/file.php' );
+        $uploadedfile = $_FILES['file'];
+        $upload_overrides = array( 'test_form' => false );
+        $movefile = wp_handle_upload( $uploadedfile, $upload_overrides );
+        if ( $movefile ) {
+            echo "File is valid, and was successfully uploaded.\n";
+//var_dump($movefile['file']);
+//            $csv = array_map('str_getcsv', file( $movefile['file'] ) );
+            my_import_csv($movefile['file']);
+            // the file should be a csv of categories.
+//            $cnt =0;
+//            foreach($csv as $row){
+//                $my_cat = array('cat_name' => $row[0], 'category_description' => $row[1], 'category_nicename' => $row[2], 'category_parent' => '');
+//                // Create the category
+//                $my_cat_id = wp_insert_category($my_cat);
+//
+//                if($my_cat_id > 0)
+//                    $cnt++;
+//            }
+
+//            echo "$cnt categories added";
+
+            // here you can do some stuff with this
+        } else {
+            echo "Possible file upload attack!\n";
+        }
+    }
+}
+
+//function import_courses_file(){
+//    if ( empty( $_FILES ) ){
+//        ?>
+<!--        <div>-->
+<!--            <h2>Upload a file here</h2>-->
+<!--            <form action="" method="post" enctype="multipart/form-data">-->
+<!--                --><?php //wp_nonce_field('csv-import'); ?>
+<!---->
+<!--                <label for="file">Filename:</label>-->
+<!--                <input type="file" name="file" id="file"><br>-->
+<!--                <input type="submit" name="save" value="save">-->
+<!--            </form>-->
+<!--        </div>-->
+<!--    --><?php //}
+//    else{
+//        if ( ! function_exists( 'wp_handle_upload' ) )
+//            require_once( ABSPATH . 'wp-admin/includes/file.php' );
+//        $uploadedfile = $_FILES['file'];
+//        $upload_overrides = array( 'test_form' => false );
+//        $movefile = wp_handle_upload( $uploadedfile, $upload_overrides );
+//        if ( $movefile ) {
+//            var_dump( $movefile );
+//            echo "File is valid, and was successfully uploaded.\n";
+//
+//            var_dump( $uploadedfile );
+//            my_import_csv($uploadedfile);
+//            // here you can do some stuff with this
+//        } else {
+//            echo "Possible file upload attack!\n";
+//        }
+//    }
+//}
+
+
+
+//function import_courses_file(){  ?>
+<!--    <div>-->
+<!--        <h1>Import</h1>-->
+<!--    <form action="" enctype="multipart/form-data" method="post">-->
+<!---->
+<!--        --><?php
+//    settings_fields('import_courses_file');
+//    do_settings_sections('import_courses_file');
+////        $file = include  'pods_export_test.csv';
+////        my_import_csv($file);
+//
+//  ?>
+<!---->
+<!--    <input type="file" name='import_file' id='import_file' value="--><?php //echo esc_attr(get_option('import_file')); ?><!--" >-->
+<!--<input type="submit" name="action" value="submit_content">-->
+<!---->
+<!--    </form>-->
+<!--    </div>-->
+<!---->
+<?php
+//
+//}
+
+//add_action( 'wp_ajax_nopriv_submit_content', 'my_submission_processor' );
+//add_action( 'wp_ajax_submit_content', 'my_submission_processor' );
+
+//function my_submission_processor(){
+//    console_log("hola");
+//    console_log($_POST);
+//}
+/**
+ * Import CSV example for Pods
+ *
+ *
+ * @param string $file File location
+ *
+ *
+ * @return true|WP_Error Returns true on success, WP_Error if there was a problem
+ */
+
+//$file = include 'pods_export_test.csv';
+//console_log($file);
+function my_import_csv($file)
+{
+
+//    if (!is_readable($file)) {
+//        return new WP_Error('', sprintf('Can\'t read file: %', $file));
+//    }
+//    var_dump($file);
+    if (!function_exists('pods_migrate')) {
+        return new WP_Error('', 'pods_migrate function not found');
+    }
+    /**
+     * @var $migrate \PodsMigrate
+     */
+    $migrate = pods_migrate();
+    $contents = file_get_contents($file);
+
+    $parsed_data = $migrate->parse_sv($file, ',');
+    $pod = pods('courses'); // @todo Update to your pod name
+
+    if (!empty($parsed_data['items'])) {
+        $total_found = count($parsed_data['items']);
+
+//        console_log($parsed_data['items']);
+        foreach ($parsed_data['items'] as $row) {
+
+            // Do what you want with $row
+            // $row has the column names from the first row of the CSV
+            // Example: $row['column heading 1']
+            // Example: $row['user_email']
+            $data = array(
+                'some_field' => $row['some_field'],
+            );
+            $new_item_id = $pod->add($data);
+        }
+    } else {
+        return new WP_Error('', 'No items to import.');
+    }
+    return true;
+}
+
+$data = PodsMigrate::get_data_from_file( $assoc_args['csv-path'] );
