@@ -996,6 +996,15 @@ jQuery(document).ready(function () {
     appendTabTitleOnSinglePage()
 });
 
+jQuery(document).click(function(event) {
+    let searchErrorDiv =  jQuery('.search-error-message');
+    let searchErrorDivHeader =  jQuery('.search-error-message-header');
+    if (!searchErrorDiv.is(event.target) || !searchErrorDiv.has(event.target).length || !searchErrorDivHeader.is(event.target) || !searchErrorDivHeader.has(event.target).length) {
+        jQuery('.search-error-message').hide();
+        jQuery('.search-error-message-header').hide()
+    }
+});
+
 jQuery(document).on('scroll', function () {
     // console.log(jQuery(this).scrollTop());
     if (jQuery(this).scrollTop() > 0)

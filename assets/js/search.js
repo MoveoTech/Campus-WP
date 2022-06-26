@@ -26,6 +26,13 @@ jQuery(document).ready(function () {
             });
         } else {
             jQuery(this).find('[name="text_s"]').focus();
+            //TODO display div of validation error message
+            console.log(jQuery(this).is(jQuery('.hero-search-form')))
+            if(jQuery(this).is(jQuery('.hero-search-form'))) {
+                jQuery('.search-error-message').show()
+            } else if(jQuery(this).is(jQuery('.search-form'))) {
+                jQuery('.search-error-message-header').show()
+            }
         }
     });
 

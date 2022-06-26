@@ -402,6 +402,31 @@ jQuery(document).ready(function () {
         }, 0);
     })
 
+    /**
+     * search Event Listener
+     * */
+
+    /** Banner & catalog search fields */
+    const search = document.getElementById('search-text')
+    search.addEventListener('input', (event) => {
+        let searchValue = event.target.value;
+        if(searchValue.length >= 2) {
+            if(jQuery('.search-error-message').is(':visible')) {
+                jQuery('.search-error-message').hide();
+            }
+        }
+    });
+
+    /** Header search field */
+    const headerSearch = document.getElementById('header-search-text')
+    headerSearch.addEventListener('input', (event) => {
+        let searchValue = event.target.value;
+        if(searchValue.length >= 2) {
+            if(jQuery('.search-error-message-header').is(':visible')) {
+                jQuery('.search-error-message-header').hide();
+            }
+        }
+    });
 })
 
 function getCookie(cname) {
