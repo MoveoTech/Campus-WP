@@ -129,7 +129,6 @@ $(document).click(function(event) {
     let sortByButton = $(`#sortByButton`);
     let sortByOptions = $(`#sortByOptions`);
 
-
     /** hiding input container when clicking on screen - when the event.target in not one of the filters menu / inputs */
     if (!filtergroup.is(event.target) && !filtergroup.has(event.target).length && !filtersInputs.is(event.target) && !filtersInputs.has(event.target).length ) {
         filtersInputs.hide();
@@ -867,7 +866,7 @@ function appendSpecialTagToGroup(tag) {
 }
 
 function getCourses() {
-    let filterData = {"search": {}, "sortBy": []};
+    let filterData = {"search": {}};
     let tagArray = {};
     let freeSearchData = [];
     let institutionArray = [];

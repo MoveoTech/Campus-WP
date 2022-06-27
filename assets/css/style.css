@@ -19567,7 +19567,6 @@ body .course-item-hover {
         margin: 0 11px 0 0; }
 
 /* media query */
-/* catalog stripe - media query */
 @media (max-width: 1200px) {
   .catalogWrap .catalogStripeWrap .catalogStripeContainer {
     padding-right: 80px; } }

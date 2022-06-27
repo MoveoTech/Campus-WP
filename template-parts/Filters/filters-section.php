@@ -59,7 +59,6 @@ $sortByZtoA = getFieldByLanguage("סידור לפי ת' עד א'", "Sort by Z to
         </div>
 
         <!--order by section-->
-
         <div class="sortByWrapper">
             <span id="border"></span>
             <div id="sortByButton">
@@ -72,11 +71,9 @@ $sortByZtoA = getFieldByLanguage("סידור לפי ת' עד א'", "Sort by Z to
                 <span class="sortOption" id="sortByOldest"><?= $sortByOldest ?></span>
                 <span class="sortOption" id="sortByAtoZ"><?= $sortByAtoZ ?></span>
                 <span class="sortOption" id="sortByZtoA"><?= $sortByZtoA ?></span>
-
             </div>
         </div>
     </div>
-
 </div>
 
 <!-- END FILTERS SECTION .-->
