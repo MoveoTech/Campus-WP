@@ -71,17 +71,17 @@ if($second_params) {
     $oneOrMoreMatches = pods('courses', $second_params);
     $countNumber += $oneOrMoreMatches->total();
 }
+
+/** translate numbers to arabic */
+if($current_language == 'ar'){
+    $english_numbers = array('0','1','2','3','4','5','6','7','8','9');
+    $arabic_numbers = array('٠','١','٢','٣','٤','٥','٦','٧','٨','٩');
+    $countNumber = str_replace($english_numbers, $arabic_numbers, $countNumber);
+}
     /** No result translate */
 $no_result_text_he = "לא מצאנו בדיוק את מה שחיפשת אבל אולי יעניין אותך...";
 $no_result_text_en = "We didn't find exactly what you were looking for but maybe you will be interested ...";
 $no_result_text_ar = "لم نعثر على ما كنت تبحث عنه بالضبط ولكن ربما تكون مهتمًا ...";
-
-/** sort by translate */
-$sortByRelevance = getFieldByLanguage("סידור לפי רלוונטיות", "Sort by Relevance", "الترتيب حسب الصلة", $current_language);
-$sortByNewest = getFieldByLanguage("סידור לפי החדש ביותר", "Sort by The Newest", "فرز حسب الأحدث", $current_language);
-$sortByOldest = getFieldByLanguage("סידור לפי הישן ביותר", "Sort by The Oldest", "فرز حسب الأقدم", $current_language);
-$sortByAtoZ = getFieldByLanguage("סידור לפי א' עד ת'", "Sort by A to Z", "فرز من الألف إلى الياء", $current_language);
-$sortByZtoA = getFieldByLanguage("סידור לפי ת' עד א'", "Sort by Z to A", "الترتيب حسب ي إلى أ", $current_language);
 
 if(count($oneOrMoreMatches->rows) === 0 && count($courses->rows) === 0){
     $no_results_found = true;
@@ -118,23 +118,6 @@ if(count($oneOrMoreMatches->rows) === 0 && count($courses->rows) === 0){
                     <div class="openFiltersMenu">
                         <span><?= filtersMobileMenuLanguage(); ?></span>
                         <img class="filterVector" src="<?php echo get_bloginfo('stylesheet_directory'). '/assets/images/vector-black.svg'?>"/>
-                    </div>
-                </div>
-
-                <!--order by section-->
-
-                <div class="sortByWrapper">
-                    <div id="sortByButton">
-                        <p id="sortByText"><?= $sortByRelevance ?></p>
-                        <img class="filterVector" src="<?php echo get_bloginfo('stylesheet_directory'). '/assets/images/vector-black.svg'?>"/>
-                    </div>
-                    <div id="sortByOptions">
-                        <span class="sortOption active" id="sortByRelevance"><?= $sortByRelevance ?></span>
-                        <span class="sortOption" id="sortByNewest"><?= $sortByNewest ?></span>
-                        <span class="sortOption" id="sortByOldest"><?= $sortByOldest ?></span>
-                        <span class="sortOption" id="sortByAtoZ"><?= $sortByAtoZ ?></span>
-                        <span class="sortOption" id="sortByZtoA"><?= $sortByZtoA ?></span>
-
                     </div>
                 </div>
             </div>

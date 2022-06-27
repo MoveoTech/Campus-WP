@@ -38,6 +38,10 @@ $(document).ready(function () {
         /** removing extra filters **/
         $('.extraFilter').remove();
 
+        /** deleting ids from hidden div **/
+        const coursesContainer = $('#catalog_courses');
+        coursesContainer.attr("data-value","");
+
     });
 
     /** Click event - adding more filters **/
@@ -68,12 +72,14 @@ $(document).ready(function () {
         const sortByText = $('#sortByText');
         const coursesContainer = $('#catalog_courses').data('value');
         const idsArray = coursesContainer.split(",");
-        /** targeting input to color the selected value  */
-        $('.sortOption').removeClass('active');
-        $(event.target).addClass('active');
-        /** changing button text to the selected value */
-        sortByText.text(sortingValue);
-        sortByAjax(idsArray,sortType);
+        if(coursesContainer.length > 0) {
+            /** targeting input to color the selected value  */
+            $('.sortOption').removeClass('active');
+            $(event.target).addClass('active');
+            /** changing button text to the selected value */
+            sortByText.text(sortingValue);
+            sortByAjax(idsArray,sortType);
+        }
     })
 
     /** checking screen size for web or mobile menu */
@@ -324,7 +330,11 @@ function appendFilteredCourses(coursesData) {
     clickOnCourseInfoButton();
 }
 function updateCoursesCounter(count){
+    const currentLang = getCookie('openedx-language-preference') ? getCookie('openedx-language-preference') : getCookie('wp-wpml_current_language');
     let counterValue = $('#counterValue');
+        if(currentLang == 'ar'){
+          count = arabicNumbersTranslate(count);
+        }
     counterValue.text(count);
 }
 function getCourseResultTags(tags) {
@@ -943,27 +953,14 @@ function sortByAjax(idsArray,sortType){
         'lang' : getCookie('openedx-language-preference'),
         'sortType': sortType,
         'coursesIds':idsArray,
-
     }
-
     jQuery.post(sort_by_courses_ajax.ajaxurl, data, function(response){
         if(response.success){
             const responseData = JSON.parse(response.data);
             const coursesLength = responseData['courses'].length
             if(coursesLength > 0) {
-                // loadCourses(responseData['courses'])
-                // updateCoursesCounter(coursesLength);
                 appendFilteredCourses(responseData['courses']);
-
             }
-            // TO DO - else situation ? let the user know something went wrong
-            // else if(responseData['params'] == null && responseData['second_params'] == null) {
-            //     haveNoResults(false)
-            //     updateCoursesCounter(0);
-            // } else {
-            //     haveNoResults();
-            //     updateCoursesCounter(0);
-            // }
         }
     })
 }
@@ -980,4 +977,16 @@ function getFieldByLanguage(heField, enField, arField, lang) {
     } else {
         return heField;
     }
+}
+
+/** translate arabic numbers */
+
+function arabicNumbersTranslate(count) {
+    /** turning number to string */
+    let countStr = count.toString()
+    let arabicNum= ['۰','۱','۲','۳','۴','۵','۶','۷','۸','۹'];
+    /** replacing each number to there translated number */
+    return countStr.replace(/[0-9]/g, function(w){
+        return arabicNum[+w]
+    });
 }

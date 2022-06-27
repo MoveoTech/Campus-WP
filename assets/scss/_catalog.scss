@@ -88,6 +88,7 @@
   display: flex;
   flex-direction: row;
   min-height: 100px;
+  width: 80%;
 }
 .filtersSection{
   display: flex;
@@ -117,14 +118,12 @@
       position: relative;
       top: 0;
       flex-grow: 0;
-      margin: 0 15px;
       flex-wrap: wrap;
 
       #groupFiltersContainer{
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
-        margin-left: 90px;
       }
 
       .wrapEachFiltergroup {
@@ -158,6 +157,7 @@
         }
       #resetButton{
         cursor: unset;
+        margin-left: 12px;
       }
       .wrapEachFilterButton{
         .filterVector{
@@ -285,11 +285,13 @@
 /* counter + sort by */
 .counterWrap{
   position: relative;
-  margin: 34px auto auto 120px;
+  margin: 34px 10px 0 120px;
+  height: fit-content;
   p{
     font-weight: 400;
     font-size: 14px;
     line-height: 18px;
+    margin:0;
     span{
       font-weight: 700;
     }
@@ -301,15 +303,19 @@
   font-weight: 400;
   font-size: 14px;
   line-height: 18px;
-  height: 31px;
-  border-right:1px solid rgba(0, 0, 0, 0.1);
-  padding-right: 25px;
-  margin: 34px auto auto;
+  height: 38px;
+  #border{
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
+    height: 31px;
+    margin: auto;
+  }
   #sortByButton{
     display: flex;
     flex-direction: row;
     align-items: center;
     cursor: pointer;
+
+    margin-right: 12px;
     p{
       margin: auto;
       width: max-content;
@@ -320,7 +326,7 @@
     flex-direction: column;
     z-index: 3;
     position: absolute;
-    top:28px;
+    top:44.5px;
     overflow-y: auto;
     background: #FFFFFF;
     box-shadow: 0 5px 15px rgba(40, 40, 40, 0.2);
@@ -339,19 +345,11 @@
   }
 }
 /* media query */
-
-//@media (max-width: 1200px) {
-//  .filtersSection{
-//    .allFiltersWrapDiv{
-//      .checkboxFiltersWrap{
-//        .wrapEachFilterTag, .wrapEachFilterButton{
-//          margin-bottom: 10px;
-//        }
-//      }
-//    }
-//  }
-//}
-
+@media (max-width: 1200px) {
+  .filtersWrap{
+    width: 70%;
+  }
+}
 @media (max-width: 992px) {
   .catalog-banner{
     .back-img-1 {
@@ -476,11 +474,30 @@
       transition: transform 0.2s ease-in-out;
     }
   }
-  .filtersSection{
-    .allFiltersWrapDiv {
-      display: none;
+  .filtersWrap{
+    width: 100%;
+    min-height: unset;
+    .filtersSection{
+      width: 100%;
+      margin: 16px 6px 0 0;
+      .wrapEachFiltergroup ,#resetButton {
+        display: none;
+      }
+      .sortByWrapper{
+        .filterVector{
+          display: unset;
+        }
+      }
+      #border{
+        display: none;
+
+      }
     }
   }
+  .counterWrap{
+    margin: 13px 19px 0 0;
+  }
+
   .openFiltersMenu{
     display: unset;
     .filterVector{
