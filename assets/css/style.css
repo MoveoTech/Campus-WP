@@ -6704,6 +6704,9 @@ body.rtl {
 main {
   position: relative; }
 
+.form-control:focus {
+  box-shadow: none; }
+
 .banner-image.gray-part {
   width: 60%;
   height: 100%;
@@ -6889,6 +6892,7 @@ main {
             line-height: 24px;
             margin: 0; }
         .hero-banner .banner-image .hero-container .container .hero-search-form {
+          position: relative;
           z-index: 2;
           display: inline-block; }
           .hero-banner .banner-image .hero-container .container .hero-search-form .search-field.form-control {
@@ -6919,6 +6923,32 @@ main {
             background-repeat: no-repeat;
             background-position: center center;
             z-index: 3; }
+          .hero-banner .banner-image .hero-container .container .hero-search-form .search-error-message {
+            z-index: 3;
+            position: absolute;
+            top: 46px;
+            right: 22px;
+            width: 148px;
+            height: 46px;
+            background: #FFFFFF;
+            box-shadow: 0 5px 15px rgba(40, 40, 40, 0.2);
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 4px 10px;
+            gap: 2px; }
+            .hero-banner .banner-image .hero-container .container .hero-search-form .search-error-message span {
+              flex: none;
+              order: 0;
+              flex-grow: 0;
+              color: #B9090B;
+              font-style: normal;
+              font-weight: 400;
+              font-size: 14px;
+              line-height: 18px;
+              text-align: right; }
 
 @media (max-width: 991px) {
   .hero-banner {
@@ -17440,7 +17470,34 @@ nav.header-nav ul li a {
   opacity: 1; }
 
 .header_wrap .login_search_lang_wrap .search-form {
+  position: relative;
   display: inline-block; }
+  .header_wrap .login_search_lang_wrap .search-form .search-error-message-header {
+    z-index: 3;
+    position: absolute;
+    top: 37px;
+    right: 32px;
+    width: 148px;
+    height: 46px;
+    background: #FFFFFF;
+    box-shadow: 0 5px 15px rgba(40, 40, 40, 0.2);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 4px 10px;
+    gap: 2px; }
+    .header_wrap .login_search_lang_wrap .search-form .search-error-message-header span {
+      flex: none;
+      order: 0;
+      flex-grow: 0;
+      color: #B9090B;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 18px;
+      text-align: right; }
 
 .header_wrap .login_search_lang_wrap .search-field {
   width: 273px;
@@ -20025,6 +20082,7 @@ body .course-item-hover {
       text-align: center;
       margin-bottom: 0; }
   .catalog-banner .hero-search-form {
+    position: relative;
     z-index: 2;
     display: inline-block;
     margin: 15px 0 18px 0; }
@@ -20057,6 +20115,32 @@ body .course-item-hover {
       background-repeat: no-repeat;
       background-position: center center;
       z-index: 3; }
+    .catalog-banner .hero-search-form .search-error-message {
+      z-index: 3;
+      position: absolute;
+      top: 46px;
+      right: 22px;
+      width: 148px;
+      height: 46px;
+      background: #FFFFFF;
+      box-shadow: 0 5px 15px rgba(40, 40, 40, 0.2);
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 4px 10px;
+      gap: 2px; }
+      .catalog-banner .hero-search-form .search-error-message span {
+        flex: none;
+        order: 0;
+        flex-grow: 0;
+        color: #B9090B;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 18px;
+        text-align: right; }
 
 /* Filters menu */
 .filtersWrap {
@@ -20196,7 +20280,7 @@ body .course-item-hover {
           color: #333433;
           text-align: right;
           width: max-content;
-          line-height: 13px;
+          line-height: normal;
           max-width: unset;
           display: -webkit-box;
           overflow: hidden;
@@ -20603,3 +20687,21 @@ body .course-item-hover {
 .wrapCourseContent {
   max-width: 1440px;
   margin: 0 auto; }
+
+.ph-item:before {
+  animation-duration: 1.2s; }
+
+.ph-item {
+  border: none;
+  padding: unset;
+  width: fit-content;
+  justify-content: flex-end;
+  margin-bottom: unset; }
+
+.ph-picture {
+  background-image: url("../../assets/images/less-tags.svg");
+  background-repeat: no-repeat;
+  background-size: auto;
+  background-color: transparent;
+  height: 140px;
+  width: 872px; }

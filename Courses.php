@@ -31,7 +31,7 @@ if($url_params){
         $tag_params = $filters['search']['tags']['Stripe'][0];
         $tag_id = explode('-',$tag_params)[0];
         $tag = pods('tags',$tag_id);
-        $tag_name = getFieldByLanguage($tag->display('name'),$tag->display('english_name'),$tag->display('arabic_name'),$current_language);
+        $tag_name = $tag->display('english_name');
         $filters['search']['tags']['Stripe'][0] = $tag_name;
     }
     $params = getPodsFilterParams($filters);
@@ -52,17 +52,17 @@ $catalog_title = getFieldByLanguage(get_field('catalog_title'), get_field('catal
 $course_attrs = array(
     'class' => 'col-xs-12 col-md-6 col-xl-4 course-item-with-border',
 );
-$idArrayOfBestMatches = array();
+
 $coursesIdArray = [];
 
 $i = 0;
 foreach ($courses->rows as $course) {
-    array_push($idArrayOfBestMatches, $course->id);
     $coursesIdArray[$i] = $course->id;
     $i++;
 }
 
 $coursesIDs = implode(',', $coursesIdArray);
+
 $second_params = getSecondsFiltersParams($filters, $idArrayOfBestMatches);
 $countShow = getFieldByLanguage("מוצגים", "Show", "يتم تقديم", $current_language);
 $countCourses = getFieldByLanguage("קורסים", "courses", "دورة", $current_language);
@@ -78,12 +78,13 @@ if($current_language == 'ar'){
     $arabic_numbers = array('٠','١','٢','٣','٤','٥','٦','٧','٨','٩');
     $countNumber = str_replace($english_numbers, $arabic_numbers, $countNumber);
 }
+
     /** No result translate */
 $no_result_text_he = "לא מצאנו בדיוק את מה שחיפשת אבל אולי יעניין אותך...";
 $no_result_text_en = "We didn't find exactly what you were looking for but maybe you will be interested ...";
 $no_result_text_ar = "لم نعثر على ما كنت تبحث عنه بالضبط ولكن ربما تكون مهتمًا ...";
 
-if(count($oneOrMoreMatches->rows) === 0 && count($courses->rows) === 0){
+if($countNumber === 0){
     $no_results_found = true;
 }
 ?>
@@ -145,20 +146,6 @@ if(count($oneOrMoreMatches->rows) === 0 && count($courses->rows) === 0){
                                         'attrs' => $course_attrs,
                                     )
                                 ));
-                        }
-                        if($oneOrMoreMatches) {
-
-                            while ($oneOrMoreMatches->fetch()) {
-
-                                get_template_part('template', 'parts/Courses/result-course-card',
-                                    array(
-                                        'args' => array(
-                                            'course' => $oneOrMoreMatches,
-                                            'attrs' => $course_attrs,
-                                        )
-                                    )
-                                );
-                            }
                         }
                     }
                     ?>

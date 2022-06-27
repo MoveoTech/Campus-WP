@@ -122,6 +122,10 @@ main {
   position: relative;
 }
 
+.form-control:focus {
+  box-shadow: none;
+}
+
 .banner-image.gray-part {
   width: 60%;
   height: 100%;
@@ -332,6 +336,7 @@ main {
         }
       }
       .hero-search-form {
+        position: relative;
         z-index: 2;
         display: inline-block;
         .search-field.form-control {
@@ -365,6 +370,35 @@ main {
           background-repeat: no-repeat;
           background-position: center center;
           z-index: 3;
+        }
+        .search-error-message {
+          z-index: 3;
+          position: absolute;
+          top: 46px;
+          right: 22px;
+          width: 148px;
+          height: 46px;
+          background: #FFFFFF;
+          box-shadow: 0 5px 15px rgba(40, 40, 40, 0.2);
+          border-radius: 10px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          padding: 4px 10px;
+          gap: 2px;
+
+          span {
+            flex: none;
+            order: 0;
+            flex-grow: 0;
+            color: #B9090B;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 18px;
+            text-align: right;
+          }
         }
       }
     }
