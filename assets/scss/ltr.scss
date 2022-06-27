@@ -1465,14 +1465,13 @@ footer .footer-section{
 /* filter by tag menu */
 
 .filtersSection{
-    margin: 23px 0 14px 100px;
+    margin: 34px 0 auto 100px;
     .allFiltersWrapDiv{
         .checkboxFiltersWrap{
-            #groupFiltersContainer{
-                margin-left: unset;
-                margin-right: 80px;
+            #resetButton{
+                margin-left: 5px;
+                margin-right: 12px;
             }
-
             .filterVector{
                 margin: 0 0 0 7px;
             }
@@ -1480,6 +1479,13 @@ footer .footer-section{
     }
 }
 
+/* sort by */
+.sortByWrapper{
+    #sortByButton{
+        margin-right: unset;
+        margin-left: 12px;
+    }
+}
 /* popup menu - filters */
 .inputsContainer {
     margin: 0 5px 0 5px;
@@ -1561,8 +1567,7 @@ footer .footer-section{
     padding-left: 190px;
 }
 .counterWrap{
-    left: unset;
-    right: 120px;
+    margin: 34px 120px 0 10px;
 }
 .courseResultCard{
     .info-button{
@@ -1602,6 +1607,14 @@ footer .footer-section{
 }
 
 @media (max-width: 768px) {
+    .filtersWrap{
+        .filtersSection{
+            margin: 16px 0 0 6px;
+        }
+    }
+    .counterWrap{
+      margin: 13px 0 0 19px;
+    }
     #coursesBox{
         padding-left: 0;
         padding-right: 10px;

@@ -15,6 +15,7 @@ include locate_template( 'assets/ajax/stripe_data.php' );
 include locate_template( 'assets/ajax/my_courses.php' );
 include locate_template( 'assets/ajax/get_course_popup.php' );
 include locate_template( 'assets/ajax/filter_by_tag.php' );
+include locate_template( 'assets/ajax/sort_by_courses.php' );
 include locate_template( 'assets/ajax/get_tag_data.php' );
 include locate_template( 'assets/ajax/add_filters_to_menu.php' );
 
@@ -126,6 +127,7 @@ function style_of_campus_enqueue() {
     wp_localize_script('home_page_js', 'my_courses_ajax', array('ajaxurl' => admin_url('admin-ajax.php')));
     //filtering tags ajax call
     wp_localize_script('catalog_js', 'filter_by_tag_ajax', array('ajaxurl' => admin_url('admin-ajax.php')));
+    wp_localize_script('catalog_js', 'sort_by_courses_ajax', array('ajaxurl' => admin_url('admin-ajax.php')));
 
 	wp_localize_script( 'ready_js', 'global_vars', array(
 			'link_to_enrollment_api'        => get_field( 'link_to_enrollment_api', 'option' ),
@@ -1401,9 +1403,9 @@ function console_log($output, $with_script_tags = true) {
 
 function getPodsFilterParams($filters = null) {
     $sql = array();
+    global $sitepress;
+    $current_lang = $sitepress->get_current_language();
     if(!$filters) {
-        global $sitepress;
-        $current_lang = $sitepress->get_current_language();
         if($current_lang === 'he'){
             $default_lang = '(t.language LIKE "%Hebrew%")';
         } else if($current_lang === 'en'){
@@ -1536,8 +1538,9 @@ function getPodsFilterParams($filters = null) {
         $sql[] = $tagsQuery;
     };
     }
+    $byName = getFieldByLanguage("t.name", "t.english_name", "t.arabic_name", $current_lang);
     $where = implode(" AND ", $sql);
-    $order .= "t.order DESC";
+    $order .= "t.order DESC," . $byName;
 
     $params = array(
         'select'=> '`t`.*, concat(",",group_concat(`tags`.`english_name` SEPARATOR ","), ",") as `tags_id`',

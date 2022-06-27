@@ -38,6 +38,10 @@ $(document).ready(function () {
         /** removing extra filters **/
         $('.extraFilter').remove();
 
+        /** deleting ids from hidden div **/
+        const coursesContainer = $('#catalog_courses');
+        coursesContainer.attr("data-value","");
+
     });
 
     /** Click event - adding more filters **/
@@ -55,6 +59,28 @@ $(document).ready(function () {
             filterToRemove.remove()
         }
     });
+
+    /** Click event - open 'sort by' menu **/
+    $('#sortByButton').on('click', function (event) {
+        $('#sortByOptions').toggleClass('active');
+    });
+
+    /** Click event - sort by courses **/
+    $('.sortOption').on('click', function (event) {
+        const sortType = event.target.id;
+        const sortingValue = event.target.innerText;
+        const sortByText = $('#sortByText');
+        const coursesContainer = $('#catalog_courses').data('value');
+        const idsArray = coursesContainer.split(",");
+        if(coursesContainer.length > 0) {
+            /** targeting input to color the selected value  */
+            $('.sortOption').removeClass('active');
+            $(event.target).addClass('active');
+            /** changing button text to the selected value */
+            sortByText.text(sortingValue);
+            sortByAjax(idsArray,sortType);
+        }
+    })
 
     /** checking screen size for web or mobile menu */
     slickStripeForMobile();
@@ -100,19 +126,25 @@ $(document).click(function(event) {
 
     let filtergroup = $('.wrapEachFiltergroup');
     let filtersInputs = $(`.inputsContainer`);
-    /** hiding input container when clicking on screen */
-    if (!filtergroup.is(event.target) && !filtergroup.has(event.target).length && !filtersInputs.is(event.target) && !filtersInputs.has(event.target).length) {
+    let sortByButton = $(`#sortByButton`);
+    let sortByOptions = $(`#sortByOptions`);
+
+    /** hiding input container when clicking on screen - when the event.target in not one of the filters menu / inputs */
+    if (!filtergroup.is(event.target) && !filtergroup.has(event.target).length && !filtersInputs.is(event.target) && !filtersInputs.has(event.target).length ) {
         filtersInputs.hide();
+    }
+    /** hiding sort by menu when the event.target in not the sort by menu button */
+    if(!sortByButton.is(event.target) && !sortByButton.has(event.target).length){
+        sortByOptions.removeClass('active');
     }
     /** Checking if the event is a filter group or input container */
     if (filtergroup.is(event.target) || filtergroup.has(event.target).length || filtersInputs.is(event.target) || filtersInputs.has(event.target).length) {
 
         let popupMenuDiv = event.target.closest(".wrapEachFiltergroup").querySelector(".inputsContainer");
-        let extraFilterMenu;
         if((filtersInputs.is(event.target) || filtersInputs.has(event.target).length)){
             /** Closing extra filter menu when adding new extra filter */
             if(event.target.closest(".moreFilters")){
-                extraFilterMenu = event.target.closest(".moreFilters").querySelector(".inputsContainer");
+               let extraFilterMenu = event.target.closest(".moreFilters").querySelector(".inputsContainer");
                 extraFilterMenu.style.display = "none";
             }
             /** hiding input container when clicking on other filter group */
@@ -223,6 +255,8 @@ function slickStripeForMobile() {
 }
 
 function appendFilteredCourses(coursesData) {
+    let idsArray = [];
+    let coursesIdsDiv =  document.getElementById("catalog_courses");
     const edxLang = getCookie('openedx-language-preference');
     const currentLang = edxLang ? edxLang.toLowerCase() : getCookie('wp-wpml_current_language').toLowerCase();
     let coursesBox = document.getElementById("coursesBox");
@@ -234,6 +268,7 @@ function appendFilteredCourses(coursesData) {
 
     coursesData.forEach(item =>{
         let id = item.id;
+        idsArray.push(id);
         let name = item.name;
         let academicInstitution = item.academic_institution ? item.academic_institution : '';
         let tags = getCourseResultTags(item.marketing_tags);
@@ -287,14 +322,18 @@ function appendFilteredCourses(coursesData) {
             '</div>'+
             '</div>';
 
-        output.append(temp)
+        output.append(temp);
     });
     coursesBox.replaceWith(output);
+    coursesIdsDiv.setAttribute("data-value",idsArray);
     clickOnCourseInfoButton();
-
 }
 function updateCoursesCounter(count){
+    const currentLang = getCookie('openedx-language-preference') ? getCookie('openedx-language-preference') : getCookie('wp-wpml_current_language');
     let counterValue = $('#counterValue');
+        if(currentLang == 'ar'){
+          count = arabicNumbersTranslate(count);
+        }
     counterValue.text(count);
 }
 function getCourseResultTags(tags) {
@@ -654,6 +693,7 @@ function filterCoursesAjax(filterData) {
                 appendFilteredCourses(responseData['courses']);
 
             } else if(responseData['params'] == null) {
+
                 haveNoResults(false)
                 updateCoursesCounter(0);
             } else {
@@ -914,6 +954,25 @@ function getCourses() {
 
 }
 
+function sortByAjax(idsArray,sortType){
+
+    let data = {
+        'action': 'sort_by_courses',
+        'lang' : getCookie('openedx-language-preference'),
+        'sortType': sortType,
+        'coursesIds':idsArray,
+    }
+    jQuery.post(sort_by_courses_ajax.ajaxurl, data, function(response){
+        if(response.success){
+            const responseData = JSON.parse(response.data);
+            const coursesLength = responseData['courses'].length
+            if(coursesLength > 0) {
+                appendFilteredCourses(responseData['courses']);
+            }
+        }
+    })
+}
+
 /**
  *  General function for translate
  *  */
@@ -926,4 +985,16 @@ function getFieldByLanguage(heField, enField, arField, lang) {
     } else {
         return heField;
     }
+}
+
+/** translate arabic numbers */
+
+function arabicNumbersTranslate(count) {
+    /** turning number to string */
+    let countStr = count.toString()
+    let arabicNum= ['۰','۱','۲','۳','۴','۵','۶','۷','۸','۹'];
+    /** replacing each number to there translated number */
+    return countStr.replace(/[0-9]/g, function(w){
+        return arabicNum[+w]
+    });
 }
