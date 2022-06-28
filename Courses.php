@@ -63,14 +63,9 @@ foreach ($courses->rows as $course) {
 
 $coursesIDs = implode(',', $coursesIdArray);
 
-$second_params = getSecondsFiltersParams($filters, $idArrayOfBestMatches);
 $countShow = getFieldByLanguage("מוצגים", "Show", "يتم تقديم", $current_language);
 $countCourses = getFieldByLanguage("קורסים", "courses", "دورة", $current_language);
 $countNumber = $courses->total();
-if($second_params) {
-    $oneOrMoreMatches = pods('courses', $second_params);
-    $countNumber += $oneOrMoreMatches->total();
-}
 
 /** translate numbers to arabic */
 if($current_language == 'ar'){
