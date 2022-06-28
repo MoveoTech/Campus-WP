@@ -34,7 +34,6 @@ if($url_params){
         $tag_name = $tag->display('english_name');
         $filters['search']['tags']['Stripe'][0] = $tag_name;
     }
-
     $params = getPodsFilterParams($filters);
 } else {
     $params = getPodsFilterParams();
@@ -63,9 +62,22 @@ foreach ($courses->rows as $course) {
 }
 
 $coursesIDs = implode(',', $coursesIdArray);
+
 $countShow = getFieldByLanguage("מוצגים", "Show", "يتم تقديم", $sitepress->get_current_language());
 $countCourses = getFieldByLanguage("קורסים", "courses", "دورة", $sitepress->get_current_language());
+
 $countNumber = $courses->total();
+if($second_params) {
+    $oneOrMoreMatches = pods('courses', $second_params);
+    $countNumber += $oneOrMoreMatches->total();
+}
+
+/** translate numbers to arabic */
+if($current_language == 'ar'){
+    $english_numbers = array('0','1','2','3','4','5','6','7','8','9');
+    $arabic_numbers = array('٠','١','٢','٣','٤','٥','٦','٧','٨','٩');
+    $countNumber = str_replace($english_numbers, $arabic_numbers, $countNumber);
+}
 
     /** No result translate */
 $no_result_text_he = "לא מצאנו בדיוק את מה שחיפשת אבל אולי יעניין אותך...";
@@ -91,9 +103,10 @@ if($countNumber === 0){
 <div class="wrapCourseContent <?= $my_class ?>">
     <div class="coursesContainer">
         <div class="row justify-content-between catalogPageBox">
-            <div class="filtersSection">
-                <div class="allFiltersWrapDiv">
-                    <?php
+            <div class="filtersWrap">
+                <div class="filtersSection">
+                    <div class="allFiltersWrapDiv">
+                        <?php
                         get_template_part('template', 'parts/Filters/filters-section',
                             array(
                                 'args' => array(
@@ -101,11 +114,12 @@ if($countNumber === 0){
                                     'menuFilters' => $menuFilters,
                                 )
                             ));
-                    ?>
-                </div>
-                <div class="openFiltersMenu">
-                    <span><?= filtersMobileMenuLanguage(); ?></span>
-                    <img class="filterVector" src="<?php echo get_bloginfo('stylesheet_directory'). '/assets/images/vector-black.svg'?>"/>
+                        ?>
+                    </div>
+                    <div class="openFiltersMenu">
+                        <span><?= filtersMobileMenuLanguage(); ?></span>
+                        <img class="filterVector" src="<?php echo get_bloginfo('stylesheet_directory'). '/assets/images/vector-black.svg'?>"/>
+                    </div>
                 </div>
             </div>
             <div class="counterWrap">
@@ -113,7 +127,7 @@ if($countNumber === 0){
             </div>
 
             <div class="catalogWrap">
-                <div hidden id="catalog_courses" value="<?php print_r($coursesIDs); ?>" ></div>
+                <div hidden id="catalog_courses" data-value="<?php print_r($coursesIDs); ?>" ></div>
                 <div id="coursesBox" class="row output-courses coursesResults catalogPageBox">
 
                     <!--. START Number of match courses OR No Results -->
