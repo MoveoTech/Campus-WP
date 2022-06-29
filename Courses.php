@@ -61,6 +61,9 @@ foreach ($courses->rows as $course) {
     $i++;
 }
 
+/** Get just the first 20 courses */
+$courses->rows = array_slice($courses->rows, 0,20);
+
 $coursesIDs = implode(',', $coursesIdArray);
 
 $countShow = getFieldByLanguage("מוצגים", "Show", "يتم تقديم", $current_language);
@@ -123,14 +126,15 @@ if($countNumber === 0){
 
             <div class="catalogWrap">
                 <div hidden id="catalog_courses" data-value="<?php print_r($coursesIDs); ?>" ></div>
+
                 <div id="coursesBox" class="row output-courses coursesResults catalogPageBox">
 
                     <!--. START Number of match courses OR No Results -->
                     <?php if ( $no_results_found ) { ?>
 
-                            <div>
-                                <p class="noResultText"><?= getFieldByLanguage($no_result_text_he, $no_result_text_en, $no_result_text_ar, $current_language) ?></p>
-                            </div>
+                        <div>
+                            <p class="noResultText"><?= getFieldByLanguage($no_result_text_he, $no_result_text_en, $no_result_text_ar, $current_language) ?></p>
+                        </div>
                 <?php } else {
                         while ($courses->fetch()) {
                             get_template_part('template', 'parts/Courses/result-course-card',
@@ -146,11 +150,12 @@ if($countNumber === 0){
                     ?>
                     <!--. END Match Results -->
                 </div>
+                <?php echo getCatalogCoursesSkeleton(); ?>
 
                 <?php
                /** LOAD MORE COURSES BUTTON */
 //                $arialabel_acc = cin_get_str( 'load_more_courses' );
-//                ?>
+                ?>
 <!--                <button id='courses_load_more' class='load-more-wrap' aria-label=--><?//= $arialabel_acc ?><!-- >--><?//= __( 'Load more', 'single_corse' )?><!--</button>-->
                 <?php /** END LOAD MORE COURSES BUTTON */?>
 

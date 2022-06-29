@@ -1,0 +1,41 @@
+$ph-bg:                   #fff !default;
+$ph-color:                #ced4da !default;
+$ph-border-radius:        2px !default;
+$ph-gutter:               30px !default;
+$ph-spacer:               15px !default;
+$ph-avatar-border-radius: 50% !default;
+$ph-animation-duration: 1.2s !default;
+
+
+.catalog-skeleton {
+  display: flex;
+  flex-direction: column;
+  margin: 0 0 45px 0;
+  align-self: center;
+  width: 100%;
+  padding-right: 190px;
+
+  .ph-item:before {
+    animation-duration: $ph-animation-duration;
+  }
+
+  .ph-item {
+    border: none;
+    padding: unset;
+    width: fit-content;
+    justify-content: flex-end;
+    margin-bottom: unset;
+  }
+
+  .ph-picture {
+    background-repeat: no-repeat;
+    background-size: auto;
+    background-color: transparent;
+    height: 140px;
+    width: 872px;
+  }
+
+  .catalog-course-skeleton {
+    background-image: url("../../assets/images/less-tags.svg");
+  }
+}
