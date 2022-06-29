@@ -4,7 +4,6 @@ function filter_by_tag() {
     $filters = $_POST['filters'];
     $type = $_POST['type'];
     $lang = $_POST['lang'] ? $_POST['lang'] : 'he';
-
     if(!$type || ($type != "courses" ))
         wp_send_json_error( 'Error: Invalid data!' );
     if(!$filters || count($filters) <= 0){
