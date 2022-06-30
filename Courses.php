@@ -150,14 +150,9 @@ if($countNumber === 0){
                     ?>
                     <!--. END Match Results -->
                 </div>
-                <?php echo getCatalogCoursesSkeleton(); ?>
 
-                <?php
-               /** LOAD MORE COURSES BUTTON */
-//                $arialabel_acc = cin_get_str( 'load_more_courses' );
-                ?>
-<!--                <button id='courses_load_more' class='load-more-wrap' aria-label=--><?//= $arialabel_acc ?><!-- >--><?//= __( 'Load more', 'single_corse' )?><!--</button>-->
-                <?php /** END LOAD MORE COURSES BUTTON */?>
+                 <!--. LOAD MORE COURSES SKELETONS  -->
+                <?php echo getCatalogCoursesSkeleton(); ?>
 
                 <div class="catalogStripeWrap">
 
