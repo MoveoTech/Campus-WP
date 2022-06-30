@@ -1151,3 +1151,9 @@ footer .footer-section .inners-footer-items {
 /* old course popup */
 .popup_left_side {
   text-align: left; }
+
+/* SKELETONS */
+.catalog-skeleton {
+  align-items: flex-end;
+  transform: scaleX(-1);
+  justify-content: flex-end; }

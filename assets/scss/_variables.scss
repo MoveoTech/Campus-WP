@@ -4,19 +4,25 @@ $ph-border-radius:        2px !default;
 $ph-gutter:               30px !default;
 $ph-spacer:               15px !default;
 $ph-avatar-border-radius: 50% !default;
-$ph-animation-duration: 1.2s !default;
-
+$ph-animation-duration:   1.2s !default;
+$ph-animation-direction:  reverse !default;
 
 .catalog-skeleton {
   display: flex;
   flex-direction: column;
   margin: 0 0 45px 0;
   align-self: center;
+  align-items: flex-start;
   width: 100%;
   padding-right: 190px;
 
+  @media (max-width: 1200px){
+    padding-right: 80px;
+  }
+
   .ph-item:before {
     animation-duration: $ph-animation-duration;
+    animation-direction: $ph-animation-direction;
   }
 
   .ph-item {
@@ -25,6 +31,10 @@ $ph-animation-duration: 1.2s !default;
     width: fit-content;
     justify-content: flex-end;
     margin-bottom: unset;
+
+    @media (max-width: 992px) {
+      width: 100%;
+    }
   }
 
   .ph-picture {
@@ -36,6 +46,12 @@ $ph-animation-duration: 1.2s !default;
   }
 
   .catalog-course-skeleton {
-    background-image: url("../../assets/images/less-tags.svg");
+    background-image: url("../../assets/images/course-skeleton.svg");
+
+    @media (max-width: 768px) {
+      background-image: url("../../assets/images/mobile-course-skeleton.svg");
+      width: 100%;
+      max-width: 872px;
+    }
   }
 }
