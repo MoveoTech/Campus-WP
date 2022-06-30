@@ -73,9 +73,7 @@ $no_result_text_he = "לא מצאנו בדיוק את מה שחיפשת אבל �
 $no_result_text_en = "We didn't find exactly what you were looking for but maybe you will be interested ...";
 $no_result_text_ar = "لم نعثر على ما كنت تبحث عنه بالضبط ولكن ربما تكون مهتمًا ...";
 
-if($countNumber === 0){
-    $no_results_found = true;
-}
+$no_results_found = $countNumber === 0;
 ?>
 
 <div class="catalog-banner">
