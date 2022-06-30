@@ -819,14 +819,13 @@ async function loadCourses(coursesArray = []) {
                 'lang' : getCookie('openedx-language-preference'),
                 'idsArray': coursesToGet,
             }
-            setTimeout(() => {
-                jQuery.post(stripe_data_ajax.ajaxurl, data, function(response){
-                    if(response.success){
-                        const data = JSON.parse(response.data);
-                        appendFilteredCourses(data, true)
-                    }
-                })
-            }, 500)
+
+            jQuery.post(stripe_data_ajax.ajaxurl, data, function(response){
+                if(response.success){
+                    const data = JSON.parse(response.data);
+                    appendFilteredCourses(data, true)
+                }
+            })
         }
     }
 }
