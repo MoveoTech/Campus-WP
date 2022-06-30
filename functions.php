@@ -1391,7 +1391,15 @@ function podsParams($tags_stripe)
 
 }
 
-
+// Daniel Kisos's function - console log in PHP
+function console_log($output, $with_script_tags = true) {
+    $js_code = 'console.log(' . json_encode($output, JSON_HEX_TAG) .
+        ');';
+    if ($with_script_tags) {
+        $js_code = '<script>' . $js_code . '</script>';
+    }
+    echo $js_code;
+}
 
 function getPodsFilterParams($filters = null) {
     $sql = array();
@@ -1533,9 +1541,6 @@ function getPodsFilterParams($filters = null) {
     $byName = getFieldByLanguage("t.name", "t.english_name", "t.arabic_name", $current_lang);
     $where = implode(" AND ", $sql);
     $order .= "t.order DESC," . $byName;
-    if($filters['sortBy'][0] != "sortByRelevance"){
-        $order = sortByQuery($filters['sortBy'][0],$current_lang);
-    }
 
     $params = array(
         'select'=> '`t`.*, concat(",",group_concat(`tags`.`english_name` SEPARATOR ","), ",") as `tags_id`',
@@ -1546,50 +1551,6 @@ function getPodsFilterParams($filters = null) {
         'orderby'=> $order
     );
     return $params;
-}
-
-
-function  getSortByParams($sortType,$coursesIds, $lang) {
-
-    $where = "t.id IN (";
-    $sortBy = sortByQuery($sortType,$lang);
-
-    foreach ($coursesIds as $singleId) {
-        $where = $where . $singleId . ",";
-    }
-    $where = substr_replace($where, ")", -1);
-
-    $params = array(
-        'limit' => -1,
-        'where' => $where,
-        'orderby' => $sortBy,
-    );
-    return $params;
-}
-function sortByQuery($sortType, $lang){
-    $byName = getFieldByLanguage("t.name", "t.english_name", "t.arabic_name", $lang);
-    $sortBy ="";
-
-    switch ($sortType) {
-        case "sortByRelevance":
-            $sortBy = "t.order DESC," . $byName;
-            break;
-        case "sortByNewest":
-            $sortBy = "t.start_date DESC , t.enrollment_start DESC , " . $byName;
-            break;
-        case "sortByOldest":
-            $sortBy = "t.start_date , t.enrollment_start , ". $byName;
-            break;
-        case "sortByAtoZ":
-            $sortBy = $byName . ", t.order , RAND()";
-            break;
-        case "sortByZtoA":
-            $sortBy = $byName . " DESC, t.order , RAND()";
-            break;
-        default:
-            $sortBy = "t.order," . $byName;
-    }
-    return $sortBy;
 }
 
 /**
@@ -1763,15 +1724,4 @@ function getSearchErrorMessage() {
         $text = 'يجب إدخال حرفين على الأقل';
     }
     return $text;
-}
-
-
-// Daniel Kisos's function - console log in PHP
-function console_log($output, $with_script_tags = true) {
-    $js_code = 'console.log(' . json_encode($output, JSON_HEX_TAG) .
-        ');';
-    if ($with_script_tags) {
-        $js_code = '<script>' . $js_code . '</script>';
-    }
-    echo $js_code;
 }
