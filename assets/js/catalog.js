@@ -39,9 +39,14 @@ $(document).ready(function () {
         $('.extraFilter').remove();
 
         /** deleting ids from hidden div **/
-        const coursesContainer = $('#catalog_courses');
-        coursesContainer.attr("data-value","");
-
+        const coursesContainer = document.getElementById('catalog_courses');
+        coursesContainer.setAttribute("data-value",[]);
+        const coursesBox = $('#coursesBox');
+        coursesBox.empty();
+        let sortByText = $('#sortByText').attr("data")
+        if(sortByText !== "sortByRelevance"){
+            sortingByChoise("reset");
+        }
     });
 
     /** Click event - adding more filters **/
@@ -67,18 +72,12 @@ $(document).ready(function () {
 
     /** Click event - sort by courses **/
     $('.sortOption').on('click', function (event) {
-        const sortType = event.target.id;
-        const sortingValue = event.target.innerText;
-        const sortByText = $('#sortByText');
-        const coursesContainer = $('#catalog_courses').data('value');
-        const idsArray = coursesContainer.split(",");
-        if(coursesContainer.length > 0) {
-            /** targeting input to color the selected value  */
-            $('.sortOption').removeClass('active');
-            $(event.target).addClass('active');
-            /** changing button text to the selected value */
-            sortByText.text(sortingValue);
-            sortByAjax(idsArray,sortType);
+        let idSContainer = $('#coursesBox');
+        let containerChildren = idSContainer.children();
+        let hasClass = containerChildren.hasClass("courseResultCard");
+        let childrenLength = containerChildren.length;
+        if(hasClass && childrenLength > 1){
+            sortingByChoise(event)
         }
     })
 
@@ -331,6 +330,11 @@ function appendFilteredCourses(coursesData) {
 function updateCoursesCounter(count){
     const currentLang = getCookie('openedx-language-preference') ? getCookie('openedx-language-preference') : getCookie('wp-wpml_current_language');
     let counterValue = $('#counterValue');
+
+    if(count == 0) {
+        let coursesIdsDiv =  document.getElementById("catalog_courses");
+            coursesIdsDiv.setAttribute("data-value","");
+    }
         if(currentLang == 'ar'){
           count = arabicNumbersTranslate(count);
         }
@@ -676,7 +680,6 @@ function filterCoursesAjax(filterData) {
         tagName = tagName.join('-');
         filterData['search']['tags']['Stripe'][0] = tagName;
     }
-    
     let data = {
         'action': 'filter_by_tag',
         'type' : 'courses',
@@ -870,12 +873,16 @@ function appendSpecialTagToGroup(tag) {
 }
 
 function getCourses() {
-    let filterData = {"search": {}};
+    let filterData = {"search": {},"sortBy": []};
     let tagArray = {};
     let freeSearchData = [];
     let institutionArray = [];
     let certificateArray = [];
     let languageArray = [];
+
+    /** checking if sort by is not defualt */
+    let sortBy = $('#sortByText');
+    filterData.sortBy.push(sortBy.attr("data"));
 
     /** Getting free search value from url params */
     let params = new URLSearchParams(document.location.search);
@@ -928,7 +935,6 @@ function getCourses() {
 
     /** Checking if any filter checked */
     if(Object.keys(tagArray).some(() => { return true; }) || institutionArray.length > 0 || certificateArray.length > 0 || languageArray.length > 0 || Object.keys(freeSearchData).some(() => { return true; })) {
-
         /** checking which filters checked and pushing each array to object (key and values) */
         if(freeSearchData.length > 0) {
             filterData['search']['text_s'] = freeSearchData;
@@ -946,12 +952,39 @@ function getCourses() {
         if(languageArray.length > 0) {
             filterData['search']['language'] = languageArray;
         }
-        filterCoursesAjax(filterData)
+        filterCoursesAjax(filterData);
     } else {
         filterData = [];
-        filterCoursesAjax(filterData)
+        filterCoursesAjax(filterData);
     }
 
+}
+function sortingByChoise(choise){
+    let sortByText = $('#sortByText');
+    let sortType;
+    let sortingValue;
+    /** targeting input to color the selected value  */
+    $('.sortOption').removeClass('active');
+    if(choise === "reset"){
+        const currentLang = getCookie('openedx-language-preference') ? getCookie('openedx-language-preference') : getCookie('wp-wpml_current_language');
+        sortingValue = getFieldByLanguage("סידור לפי רלוונטיות", "Sort by Relevance", "ترتيب بحسب الملائمة", currentLang);
+        sortType = "sortByRelevance";
+        $('#sortByRelevance').addClass('active');
+
+    } else {
+        sortType = choise.target.id;
+        sortingValue = choise.target.innerText;
+        $(choise.target).addClass('active');
+    }
+    /** changing button text to the selected value */
+    sortByText.text(sortingValue);
+    sortByText.attr("data",sortType);
+
+    let coursesContainer = $('#catalog_courses').data('value');
+    if(coursesContainer && choise !== "reset") {
+        const idsArray = coursesContainer.split(",");
+        sortByAjax(idsArray,sortType);
+    }
 }
 
 function sortByAjax(idsArray,sortType){

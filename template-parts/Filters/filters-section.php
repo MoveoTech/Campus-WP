@@ -62,7 +62,7 @@ $sortByZtoA = getFieldByLanguage("סידור לפי ת' עד א'", "Sort by Z to
         <div class="sortByWrapper">
             <span id="border"></span>
             <div id="sortByButton">
-                <p id="sortByText"><?= $sortByRelevance ?></p>
+                <p id="sortByText" data="sortByRelevance"><?= $sortByRelevance ?></p>
                 <img class="filterVector" src="<?php echo get_bloginfo('stylesheet_directory'). '/assets/images/vector-black.svg'?>"/>
             </div>
             <div id="sortByOptions">
