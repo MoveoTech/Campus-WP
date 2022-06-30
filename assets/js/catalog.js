@@ -49,8 +49,8 @@ $(document).ready(function () {
         }
 
         /** deleting ids from hidden div **/
-        const coursesContainer = $('#catalog_courses');
-        coursesContainer.attr("data-value",[]);
+        const coursesContainer = document.getElementById('catalog_courses');
+        coursesContainer.setAttribute("data-value",[]);
         /** delete all courses result **/
         const coursesBox = $('#coursesBox');
         coursesBox.empty();
@@ -309,6 +309,7 @@ function appendFilteredCourses(coursesData, loadedCourses = false) {
 
     firstCoursesToShow.forEach(item =>{
         let id = item.id;
+        idsArray.push(id);
         let name = item.name;
         let academicInstitution = item.academic_institution ? item.academic_institution : '';
         let tags = item.marketing_tags ? getCourseResultTags(item.marketing_tags) : getCourseResultTags(item.tags);
@@ -1048,7 +1049,6 @@ function getCourses() {
 
     /** Checking if any filter checked */
     if(Object.keys(tagArray).some(() => { return true; }) || institutionArray.length > 0 || certificateArray.length > 0 || languageArray.length > 0 || Object.keys(freeSearchData).some(() => { return true; })) {
-
         /** checking which filters checked and pushing each array to object (key and values) */
         if(freeSearchData.length > 0) {
             filterData['search']['text_s'] = freeSearchData;
@@ -1105,7 +1105,7 @@ function sortingByChoise(choise){
     /** changing button text to the selected value */
     sortByText.text(sortingValue);
     sortByText.attr("data",sortType);
-    
+
     sortByAjax(idsContainer,sortType);
 
 }
