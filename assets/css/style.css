@@ -20720,16 +20720,30 @@ body .course-item-hover {
 
 @media (max-width: 992px) {
   .catalog-skeleton .ph-item {
-    width: 100%; } }
+    padding-right: 0;
+    padding-left: 0; } }
 
 @media (max-width: 768px) {
   .catalog-skeleton {
     padding-right: 0;
     padding-left: 5px; }
     .catalog-skeleton .ph-picture {
-      height: 97px; }
-    .catalog-skeleton .catalog-course-skeleton {
-      background-image: url("../../assets/images/mobile-course-skeleton.svg");
-      width: 100%;
-      max-width: 872px;
-      margin-bottom: 25px; } }
+      max-width: 660px;
+      padding-right: 0;
+      background-size: contain;
+      margin-bottom: 0; } }
+
+@media (max-width: 550px) {
+  .catalog-skeleton .ph-picture {
+    max-width: 595px; } }
+
+@media (max-width: 490px) {
+  .catalog-skeleton .ph-item {
+    width: 100%; }
+  .catalog-skeleton .ph-picture {
+    height: 97px; }
+  .catalog-skeleton .catalog-course-skeleton {
+    background-image: url("../../assets/images/mobile-course-skeleton.svg");
+    width: 100%;
+    max-width: 368px;
+    margin-bottom: 25px; } }

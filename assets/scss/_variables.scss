@@ -53,7 +53,8 @@ $ph-mobile-image:         url("../../assets/images/mobile-course-skeleton.svg");
 @media (max-width: 992px) {
   .catalog-skeleton {
     .ph-item {
-      width: 100%;
+      padding-right: 0;
+      padding-left: 0;
     }
   }
 }
@@ -64,13 +65,38 @@ $ph-mobile-image:         url("../../assets/images/mobile-course-skeleton.svg");
     padding-left: 5px;
 
     .ph-picture {
+      max-width: 660px;
+      padding-right: 0;
+      background-size: contain;
+      margin-bottom: 0;
+    }
+
+  }
+}
+
+@media (max-width: 550px) {
+  .catalog-skeleton {
+    .ph-picture {
+      max-width: 595px;
+    }
+  }
+}
+
+@media (max-width: 490px) {
+  .catalog-skeleton {
+
+    .ph-item {
+      width: 100%;
+    }
+
+    .ph-picture {
       height:97px;
     }
 
     .catalog-course-skeleton {
       background-image: $ph-mobile-image;
       width: 100%;
-      max-width: 872px;
+      max-width: 368px;
       margin-bottom: 25px;
     }
   }
