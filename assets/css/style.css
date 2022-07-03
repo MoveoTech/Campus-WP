@@ -20170,7 +20170,7 @@ body .course-item-hover {
     flex-grow: 0; }
     .filtersSection .allFiltersWrapDiv .checkboxFiltersWrap {
       display: flex;
-      flex-direction: row;
+      flex-direction: column;
       justify-content: flex-end;
       padding: 0;
       position: relative;
@@ -20216,6 +20216,21 @@ body .course-item-hover {
         text-align: right;
         color: #333433;
         margin: auto; }
+      .filtersSection .allFiltersWrapDiv .checkboxFiltersWrap #selectedTags {
+        display: flex;
+        flex-direction: row;
+        margin-top: 7px; }
+        .filtersSection .allFiltersWrapDiv .checkboxFiltersWrap #selectedTags .selected-tag {
+          width: fit-content;
+          padding: 2px 10px;
+          background: #141414;
+          border: 1px solid rgba(0, 0, 0, 0.1);
+          border-radius: 10px;
+          color: #fff;
+          font-weight: 600;
+          font-size: 14px;
+          line-height: 18px;
+          margin: 0 5px; }
 
 .filterVectorMobile {
   display: none; }

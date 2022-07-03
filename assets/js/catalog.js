@@ -428,8 +428,15 @@ function appendUrlParams(filters) {
 
 function markCheckboxes(params) {
     let entries = params.entries();
-    let filterItems = $('.filtersInputWeb');
 
+    let filterItems;
+    if($(window).width() <= 768) {
+        filterItems = $('#filtersSectionMobile .checkbox-filter-search');
+    } else {
+        filterItems = $('.filtersSection .checkbox-filter-search');
+    }
+
+    let tagsArr = {};
     for ( entry of entries) {
         if(entry[0] == 'text_s') {
            let inputValue = entry[1].replaceAll(`\\`, "");
@@ -451,11 +458,18 @@ function markCheckboxes(params) {
             if(entry[0] === type ) {
                 let itemValues = entry[1].split(",");
 
+                tagsArr[group] = tagsArr[group] ? tagsArr[group] : [];
+
                 for(let item of itemValues){
                     if(englishValue.split(' ').join('') === item.split(' ').join('')) {
+
                         $(`#${id}`).prop('checked', true)
+
+                        /** Append new selected tag */
+                        tagsArr[group].push($(`#${id}`).val());
                     }
                 }
+
             }
 
             if(entry[0].includes('tags_')) {
@@ -463,15 +477,44 @@ function markCheckboxes(params) {
 
                 if(tagsGroup === group) {
                     let itemValues = entry[1].split(",");
+                    let groupTitle = $(`#${id}`).data('title'); //TODO using for tags.
+                    tagsArr[groupTitle] = tagsArr[groupTitle] ? tagsArr[groupTitle] : [];
 
                     for(let item of itemValues){
                         if(englishValue.toLowerCase() === item.toLowerCase()) {
                             $(`#${id}`).prop('checked', true)
+
+                            /** Append new selected tag */
+                            tagsArr[groupTitle].push($(`#${id}`).val());
                         }
                     }
                 }
             }
         });
+
+
+    }
+
+    /** Append new selected tags to DOM */
+    for(let group in tagsArr) {
+        let selectedTag = document.createElement('div');
+        selectedTag.classList.add('selected-tag');
+
+        let tagText = document.createElement('span');
+        tagText.innerText = group + ': ';
+        selectedTag.append(tagText);
+
+        if(tagsArr[group].length !== 0) {
+            let tagText2 = document.createElement('span');
+            let firstTwoFilters = tagsArr[group].slice(0,2) // display just the first 2 tags
+            tagText2.innerText = firstTwoFilters.join(', ')
+            selectedTag.append(tagText2);
+        }
+
+        if(selectedTag.children.length >= 2) {
+            $('#selectedTags').append(selectedTag)
+        }
+
     }
 
     /** Check if has params in the url */
