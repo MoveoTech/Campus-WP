@@ -242,7 +242,6 @@
   border-radius: 10px;
   margin: 0 5px 0 5px;
   padding: 0 15px 0 0;
-
   .filterInput{
     background: #FFFFFF;
     border-radius: 10px;
@@ -293,6 +292,10 @@
       }
     }
   }
+}
+
+.animate-expand-y {
+  animation: expandY 0.3s ease-in-out forwards;
 }
 
 .checkbox-filter-search:checked ~ .wrap-term-and-sum:before {
@@ -823,4 +826,9 @@
 .wrapCourseContent{
   max-width: 1440px;
   margin: 0 auto;
+}
+
+@keyframes expandY {
+  from {max-height: 44px; }
+  to {max-height: 310px;}
 }

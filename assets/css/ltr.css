@@ -1157,3 +1157,6 @@ footer .footer-section .inners-footer-items {
   align-items: flex-end;
   transform: scaleX(-1);
   justify-content: flex-end; }
+
+.filter-group-skeleton.ph-item:before {
+  animation-direction: normal; }

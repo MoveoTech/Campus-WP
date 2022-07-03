@@ -1,4 +1,4 @@
-$ph-bg:                   #fff !default;
+$ph-bg:                   #F2F2F2 !default;
 $ph-color:                #ced4da !default;
 $ph-border-radius:        2px !default;
 $ph-gutter:               30px !default;
@@ -43,6 +43,22 @@ $ph-mobile-image:         url("../../assets/images/mobile-course-skeleton.svg");
     background-image: $ph-image;
   }
 }
+
+.filter-group-skeleton {
+  background: $ph-bg;
+  box-shadow: 0 5px 15px rgba(40, 40, 40, 0.2);
+  border-radius: 10px;
+  border: none;
+  width: 131px;
+  min-height: 44px;
+  margin-top: 6px;
+}
+
+.filter-group-skeleton.ph-item:before {
+  animation-duration: $ph-animation-duration;
+  animation-direction: $ph-animation-direction;
+}
+
 
 @media (max-width: 1200px){
   .catalog-skeleton {

@@ -692,6 +692,13 @@ function appendMoreFilters(filterData) {
             '</label>';
         container.append(temp);
     });
+
+    /** Add animation class for opening the new filter group */
+    $(`#extraFilter_${filterData.filterId}`).addClass('animate-expand-y')
+
+    /** Hide Skeleton */
+    $(`#extraFilter_${filterId}`).removeClass('ph-item filter-group-skeleton');
+
     filterByTagEvent();
 }
 
@@ -753,7 +760,7 @@ function appendGroupFilter(filterGroupName, filterId) {
         '<img class="filterVector" src="'+vector+'"/>'+
         '</div>'+
         '</div>'+
-        '<div class="inputsContainer catalogFilters" id="extraFilter_'+filterId+'">'+
+        '<div class="ph-item filter-group-skeleton inputsContainer catalogFilters" id="extraFilter_'+filterId+'">'+
         '</div>';
 
     container.insertBefore(temp, addFilterbutton);
