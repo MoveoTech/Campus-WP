@@ -105,6 +105,7 @@ add_action( 'wp_loaded', 'set_user_default_language' );
 
 function style_of_campus_enqueue() {
 	wp_enqueue_style( 'assistant', 'https://fonts.googleapis.com/css?family=Assistant:500,400,600,700,800&amp;subset=hebrew' );
+	wp_enqueue_style( 'skeletons', 'https://unpkg.com/placeholder-loading/dist/css/placeholder-loading.min.css' );
 	wp_enqueue_style( 'style', get_bloginfo( 'stylesheet_directory' ) . '/assets/css/style.css', array(), '1.9.8' );
     global  $sitepress;
     if ( $sitepress->get_current_language() == 'en' ) {
@@ -1724,4 +1725,28 @@ function getSearchErrorMessage() {
         $text = 'يجب إدخال حرفين على الأقل';
     }
     return $text;
+}
+
+function getCatalogCoursesSkeleton() {
+    $output = '';
+    $output .= '
+    <div class="catalog-skeleton">
+    <div style="display: none" class="ph-item course-skeleton">
+    <div class="ph-picture catalog-course-skeleton" ></div>
+  </div>
+   <div style="display: none" class="ph-item course-skeleton ">
+    <div class="ph-picture catalog-course-skeleton" ></div>
+  </div>
+  <div style="display: none" class="ph-item course-skeleton">
+    <div class="ph-picture catalog-course-skeleton" ></div>
+  </div>
+   <div style="display: none" class="ph-item course-skeleton">
+    <div class="ph-picture catalog-course-skeleton" ></div>
+  </div>
+  <div style="display: none" class="ph-item course-skeleton">
+    <div class="ph-picture catalog-course-skeleton" ></div>
+  </div>
+  </div>
+';
+    return $output;
 }

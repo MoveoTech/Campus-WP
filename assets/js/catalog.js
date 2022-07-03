@@ -109,13 +109,14 @@ $(document).ready(function () {
         jQuery('html').addClass('menu_open');
     });
 
-$(".bg-overlay").click(function () {
+    $(".bg-overlay").click(function () {
     closingOverlay()
-})
-
-    $('#courses_load_more').on('click', function () {
-        loadCourses()
     })
+
+    const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+    if(clientHeight + scrollTop >= scrollHeight - 2000) {
+        loadCourses()
+    }
 });
 /** End of document ready */
 
@@ -160,6 +161,18 @@ $(document).click(function(event) {
 
 });
 /** end of jquery */
+
+$(document).scroll(function() {
+
+    /** Load More Result Courses On Catalog Page */
+    const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+
+    if(clientHeight + scrollTop >= scrollHeight - 2000) {
+        loadCourses()
+    }
+})
+
+
 
 function closingOverlay(){
     jQuery(".bg-overlay").removeClass('active');
@@ -254,7 +267,7 @@ function slickStripeForMobile() {
     }
 }
 
-function appendFilteredCourses(coursesData) {
+function appendFilteredCourses(coursesData, loadedCourses = false) {
     let idsArray = [];
     let coursesIdsDiv =  document.getElementById("catalog_courses");
     const edxLang = getCookie('openedx-language-preference');
@@ -267,12 +280,17 @@ function appendFilteredCourses(coursesData) {
     output.classList.add('coursesResults');
 
     coursesData.forEach(item =>{
+        idsArray.push(item.id);
+    })
+
+    let firstCoursesToShow = coursesData.slice(0,20);
+
+    firstCoursesToShow.forEach(item =>{
         let id = item.id;
-        idsArray.push(id);
         let name = item.name;
         let academicInstitution = item.academic_institution ? item.academic_institution : '';
-        let tags = getCourseResultTags(item.marketing_tags);
-        let hoverTags = getHoverTags(item.marketing_tags);
+        let tags = item.marketing_tags ? getCourseResultTags(item.marketing_tags) : getCourseResultTags(item.tags);
+        let hoverTags = item.marketing_tags ? getHoverTags(item.marketing_tags) : getHoverTags(item.tags);
         let image = item.image;
         let duration = item.duration;
         let permalink = item.permalink ? item.permalink : '';
@@ -323,11 +341,21 @@ function appendFilteredCourses(coursesData) {
             '</div>';
 
         output.append(temp);
+        if(loadedCourses) {
+            coursesBox.append(temp)
+        }
     });
-    coursesBox.replaceWith(output);
-    coursesIdsDiv.setAttribute("data-value",idsArray);
+
+    if(!loadedCourses) {
+        coursesBox.replaceWith(output);
+        coursesIdsDiv.setAttribute("data-value",idsArray);
+    }
+
+    $('.course-skeleton').hide();
+
     clickOnCourseInfoButton();
 }
+
 function updateCoursesCounter(count){
     const currentLang = getCookie('openedx-language-preference') ? getCookie('openedx-language-preference') : getCookie('wp-wpml_current_language');
     let counterValue = $('#counterValue');
@@ -336,6 +364,7 @@ function updateCoursesCounter(count){
         }
     counterValue.text(count);
 }
+
 function getCourseResultTags(tags) {
     let tagsHtml = '';
     if(tags.length >=3){
@@ -667,7 +696,7 @@ function appendMoreFilters(filterData) {
 }
 
 /**
- * ajax call
+ * Ajax Call Get Filter Courses
  * */
 function filterCoursesAjax(filterData) {
     appendUrlParams(filterData)
@@ -764,27 +793,37 @@ function openCheckboxEvent() {
 /**
  * Load more courses (not in used 14-04-2022)
  * */
-function loadCourses(coursesArray = []) {
+async function loadCourses(coursesArray = []) {
+
+    /** Check if the skeleton visible*/
+    if(jQuery('.course-skeleton').is(':visible')) return;
+
     if(coursesArray.length > 0){
         appendFilteredCourses(coursesArray)
     } else {
-        let divLength = $('#coursesBox').children()
-        let courses = $('#catalog_courses').attr('value')
-        let coursesIdArray = courses.split(',')
 
-        if(coursesIdArray.length > 15 && coursesIdArray.length > divLength + 1) {
-            coursesToGet = coursesIdArray.slice(divLength + 1, divLength + 16)
+        let divLength = $('#coursesBox').children().length
+        let courses = document.getElementById("catalog_courses").getAttribute('data-value')
+        let coursesIdArray = typeof courses !== 'number' ? courses.split(',') : [courses];
+
+        if(coursesIdArray.length > 20 && coursesIdArray.length > divLength) {
+
+            /** Display Skeleton */
+            $('.course-skeleton').show();
+
+            let coursesToGet = coursesIdArray.slice(divLength, divLength + 20)
+
             let data = {
                 'action': 'stripe_data',
                 'type' : 'courses',
                 'lang' : getCookie('openedx-language-preference'),
-                'idsArray': newCoursesArray,
+                'idsArray': coursesToGet,
             }
 
             jQuery.post(stripe_data_ajax.ajaxurl, data, function(response){
                 if(response.success){
                     const data = JSON.parse(response.data);
-                    //TODO needs to finish th function
+                    appendFilteredCourses(data, true)
                 }
             })
         }

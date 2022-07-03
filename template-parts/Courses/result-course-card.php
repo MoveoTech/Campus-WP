@@ -67,21 +67,22 @@ $attrs['class'] .= $attrs['hybrid_course'] ? ' hybrid_course' : '';
         <?php endif; ?>
     <p class="courseDuration"><?= $duration ?></p>
     </div>
+    <?php get_template_part(
+        'templates/mobileCourse',
+        'popup',
+        array(
+            'args' => array(
+                'image' => $thumb,
+                'title' => $title,
+                'institution' => $institution_name,
+                'tags' => $marketing_feature,
+                'duration' => $duration,
+                'id' => $ID,
+                'url' => $url
+            )
+        )
+    ) ?>
 </div>
 
-<?php get_template_part(
-    'templates/mobileCourse',
-    'popup',
-    array(
-        'args' => array(
-            'image' => $thumb,
-            'title' => $title,
-            'institution' => $institution_name,
-            'tags' => $marketing_feature,
-            'duration' => $duration,
-            'id' => $ID,
-            'url' => $url
-        )
-    )
-) ?>
+
 

@@ -20507,7 +20507,7 @@ body .course-item-hover {
 
 #coursesBox {
   flex-direction: column;
-  margin: 60px 0 45px 0;
+  margin: 60px 0 0 0;
   align-self: center;
   width: 100%;
   padding-right: 190px; }
@@ -20688,20 +20688,62 @@ body .course-item-hover {
   max-width: 1440px;
   margin: 0 auto; }
 
-.ph-item:before {
-  animation-duration: 1.2s; }
+.catalog-skeleton {
+  display: flex;
+  flex-direction: column;
+  margin: 0 0 45px 0;
+  align-self: center;
+  align-items: flex-start;
+  width: 100%;
+  padding-right: 190px; }
+  .catalog-skeleton .ph-item:before {
+    animation-duration: 1.2s;
+    animation-direction: reverse; }
+  .catalog-skeleton .ph-item {
+    border: none;
+    padding: unset;
+    width: fit-content;
+    justify-content: flex-end;
+    margin-bottom: unset; }
+  .catalog-skeleton .ph-picture {
+    background-repeat: no-repeat;
+    background-size: auto;
+    background-color: transparent;
+    height: 140px;
+    width: 872px; }
+  .catalog-skeleton .catalog-course-skeleton {
+    background-image: url("../../assets/images/course-skeleton.svg"); }
 
-.ph-item {
-  border: none;
-  padding: unset;
-  width: fit-content;
-  justify-content: flex-end;
-  margin-bottom: unset; }
+@media (max-width: 1200px) {
+  .catalog-skeleton {
+    padding-right: 80px; } }
 
-.ph-picture {
-  background-image: url("../../assets/images/less-tags.svg");
-  background-repeat: no-repeat;
-  background-size: auto;
-  background-color: transparent;
-  height: 140px;
-  width: 872px; }
+@media (max-width: 992px) {
+  .catalog-skeleton .ph-item {
+    padding-right: 0;
+    padding-left: 0; } }
+
+@media (max-width: 768px) {
+  .catalog-skeleton {
+    padding-right: 0;
+    padding-left: 5px; }
+    .catalog-skeleton .ph-picture {
+      max-width: 660px;
+      padding-right: 0;
+      background-size: contain;
+      margin-bottom: 0; } }
+
+@media (max-width: 550px) {
+  .catalog-skeleton .ph-picture {
+    max-width: 595px; } }
+
+@media (max-width: 490px) {
+  .catalog-skeleton .ph-item {
+    width: 100%; }
+  .catalog-skeleton .ph-picture {
+    height: 97px; }
+  .catalog-skeleton .catalog-course-skeleton {
+    background-image: url("../../assets/images/mobile-course-skeleton.svg");
+    width: 100%;
+    max-width: 368px;
+    margin-bottom: 25px; } }

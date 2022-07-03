@@ -1,0 +1,103 @@
+$ph-bg:                   #fff !default;
+$ph-color:                #ced4da !default;
+$ph-border-radius:        2px !default;
+$ph-gutter:               30px !default;
+$ph-spacer:               15px !default;
+$ph-avatar-border-radius: 50% !default;
+$ph-animation-duration:   1.2s !default;
+$ph-animation-direction:  reverse !default;
+$ph-image:                url("../../assets/images/course-skeleton.svg");
+$ph-mobile-image:         url("../../assets/images/mobile-course-skeleton.svg");
+
+.catalog-skeleton {
+  display: flex;
+  flex-direction: column;
+  margin: 0 0 45px 0;
+  align-self: center;
+  align-items: flex-start;
+  width: 100%;
+  padding-right: 190px;
+
+  .ph-item:before {
+    animation-duration: $ph-animation-duration;
+    animation-direction: $ph-animation-direction;
+  }
+
+  .ph-item {
+    border: none;
+    padding: unset;
+    width: fit-content;
+    justify-content: flex-end;
+    margin-bottom: unset;
+  }
+
+  .ph-picture {
+    background-repeat: no-repeat;
+    background-size: auto;
+    background-color: transparent;
+    height: 140px;
+    width: 872px;
+  }
+
+  .catalog-course-skeleton {
+    background-image: $ph-image;
+  }
+}
+
+@media (max-width: 1200px){
+  .catalog-skeleton {
+    padding-right: 80px;
+  }
+}
+
+@media (max-width: 992px) {
+  .catalog-skeleton {
+    .ph-item {
+      padding-right: 0;
+      padding-left: 0;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .catalog-skeleton {
+    padding-right: 0;
+    padding-left: 5px;
+
+    .ph-picture {
+      max-width: 660px;
+      padding-right: 0;
+      background-size: contain;
+      margin-bottom: 0;
+    }
+
+  }
+}
+
+@media (max-width: 550px) {
+  .catalog-skeleton {
+    .ph-picture {
+      max-width: 595px;
+    }
+  }
+}
+
+@media (max-width: 490px) {
+  .catalog-skeleton {
+
+    .ph-item {
+      width: 100%;
+    }
+
+    .ph-picture {
+      height:97px;
+    }
+
+    .catalog-course-skeleton {
+      background-image: $ph-mobile-image;
+      width: 100%;
+      max-width: 368px;
+      margin-bottom: 25px;
+    }
+  }
+}
