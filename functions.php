@@ -1533,9 +1533,6 @@ function getPodsFilterParams($filters = null) {
     $byName = getFieldByLanguage("t.name", "t.english_name", "t.arabic_name", $current_lang);
     $where = implode(" AND ", $sql);
     $order .= "t.order DESC," . $byName;
-    if($filters['sortBy'][0] != "sortByRelevance"){
-        $order = sortByQuery($filters['sortBy'][0],$current_lang);
-    }
 
     $params = array(
         'select'=> '`t`.*, concat(",",group_concat(`tags`.`english_name` SEPARATOR ","), ",") as `tags_id`',
