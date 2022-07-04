@@ -20,8 +20,15 @@ $components = parse_url($_SERVER['QUERY_STRING']);
 if($components['path']){
     parse_str($components['path'], $url_params);
 }
+
 if($url_params){
-    $filters = getFiltersArray($url_params);
+    if(str_contains($_SERVER['QUERY_STRING'] , 'stripes')){
+        // to do - cutting id from url / key + value
+        $stripe_id= 48120;
+
+    } else {
+        $filters = getFiltersArray($url_params);
+    }
 
     /**
      * Checking if have tag from tags stripe and
