@@ -51,7 +51,6 @@ $(document).ready(function () {
         /** deleting ids from hidden div **/
         const coursesContainer = document.getElementById('catalog_courses');
         coursesContainer.setAttribute("data-value",[]);
-        /** delete all courses result **/
         const coursesBox = $('#coursesBox');
         coursesBox.empty();
         updateCoursesCounter(0);
@@ -378,7 +377,6 @@ function appendFilteredCourses(coursesData, loadedCourses = false) {
 
     clickOnCourseInfoButton();
 }
-
 function updateCoursesCounter(count){
     const currentLang = getCookie('openedx-language-preference') ? getCookie('openedx-language-preference') : getCookie('wp-wpml_current_language');
     let counterValue = $('#counterValue');
@@ -392,7 +390,6 @@ function updateCoursesCounter(count){
         }
     counterValue.text(count);
 }
-
 function getCourseResultTags(tags) {
     let tagsHtml = '';
     if(tags.length >=3){
@@ -761,7 +758,7 @@ function filterCoursesAjax(filterData) {
         tagName = tagName.join('-');
         filterData['search']['tags']['Stripe'][0] = tagName;
     }
-    
+
     let data = {
         'action': 'filter_by_tag',
         'type' : 'courses',
@@ -777,6 +774,7 @@ function filterCoursesAjax(filterData) {
                 appendFilteredCourses(responseData['courses']);
 
             } else if(responseData['params'] == null) {
+
                 haveNoResults(false)
                 updateCoursesCounter(0);
             } else {
