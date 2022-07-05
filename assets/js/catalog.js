@@ -117,6 +117,9 @@ $(document).ready(function () {
     if(clientHeight + scrollTop >= scrollHeight - 2000) {
         loadCourses()
     }
+
+
+    removeSelectedTags();
 });
 /** End of document ready */
 
@@ -172,8 +175,6 @@ $(document).scroll(function() {
     }
 })
 
-
-
 function closingOverlay(){
     jQuery(".bg-overlay").removeClass('active');
     jQuery(".bg-overlay").removeClass('filterMenuOverlay');
@@ -192,7 +193,7 @@ function slickStripeForMobile() {
     if($(window).width() <= 768){
 
         if($('#filtersSectionMobile')){
-            /** Changing classe in filters menu inputs */
+            /** Changing classes in filters menu inputs */
             $('#filtersSectionMobile .checkbox-filter-search').addClass('.checkboxFilterMobile');
 
             /** changing inputs id, for mobile */
@@ -436,7 +437,7 @@ function markCheckboxes(params) {
         filterItems = $('.filtersSection .checkbox-filter-search');
     }
 
-    let tagsArr = {};
+    let tagsObj = {};
     for ( entry of entries) {
         if(entry[0] == 'text_s') {
            let inputValue = entry[1].replaceAll(`\\`, "");
@@ -458,7 +459,7 @@ function markCheckboxes(params) {
             if(entry[0] === type ) {
                 let itemValues = entry[1].split(",");
 
-                tagsArr[group] = tagsArr[group] ? tagsArr[group] : [];
+                tagsObj[group] = tagsObj[group] ? tagsObj[group] : [];
 
                 for(let item of itemValues){
                     if(englishValue.split(' ').join('') === item.split(' ').join('')) {
@@ -466,7 +467,7 @@ function markCheckboxes(params) {
                         $(`#${id}`).prop('checked', true)
 
                         /** Append new selected tag */
-                        tagsArr[group].push($(`#${id}`).val());
+                        tagsObj[group].push($(`#${id}`).val());
                     }
                 }
 
@@ -478,42 +479,20 @@ function markCheckboxes(params) {
                 if(tagsGroup === group) {
                     let itemValues = entry[1].split(",");
                     let groupTitle = $(`#${id}`).data('title'); //TODO using for tags.
-                    tagsArr[groupTitle] = tagsArr[groupTitle] ? tagsArr[groupTitle] : [];
+                    tagsObj[groupTitle] = tagsObj[groupTitle] ? tagsObj[groupTitle] : [];
 
                     for(let item of itemValues){
                         if(englishValue.toLowerCase() === item.toLowerCase()) {
                             $(`#${id}`).prop('checked', true)
 
                             /** Append new selected tag */
-                            tagsArr[groupTitle].push($(`#${id}`).val());
+                            tagsObj[groupTitle].push($(`#${id}`).val());
                         }
                     }
                 }
             }
         });
 
-
-    }
-
-    /** Append new selected tags to DOM */
-    for(let group in tagsArr) {
-        let selectedTag = document.createElement('div');
-        selectedTag.classList.add('selected-tag');
-
-        let tagText = document.createElement('span');
-        tagText.innerText = group + ': ';
-        selectedTag.append(tagText);
-
-        if(tagsArr[group].length !== 0) {
-            let tagText2 = document.createElement('span');
-            let firstTwoFilters = tagsArr[group].slice(0,2) // display just the first 2 tags
-            tagText2.innerText = firstTwoFilters.join(', ')
-            selectedTag.append(tagText2);
-        }
-
-        if(selectedTag.children.length >= 2) {
-            $('#selectedTags').append(selectedTag)
-        }
 
     }
 
@@ -524,6 +503,7 @@ function markCheckboxes(params) {
             let id = element.id;
             let type = $(`#${id}`).data('name');
             let englishValue = $(`#${id}`).data('value');
+            let group = $(`#${id}`).data('group');
 
             if (type === 'language') {
                 let lang;
@@ -541,14 +521,81 @@ function markCheckboxes(params) {
 
                 if (englishValue.includes(lang)) {
                     $(`#${id}`).prop('checked', true)
+
+                    /** Append new selected tag */
+                    tagsObj[group] = tagsObj[group] ? tagsObj[group] : [];
+                    tagsObj[group].push($(`#${id}`).val());
+
                     let currentUrl = window.location.href;
                     let url = new URL(currentUrl);
                     url.searchParams.set(type, lang);
                     window.history.pushState({}, '', url);
+
                 }
             }
         });
     }
+
+    /** Append new selected tags to DOM */
+    appendSelectedTagsToDOM(tagsObj)
+}
+
+function removeSelectedTags() {
+    $('.remove-filters').on('click', function(event) {
+        let filterItems;
+        if($(window).width() <= 768) {
+            filterItems = $('#filtersSectionMobile .checkbox-filter-search');
+        } else {
+            filterItems = $('.filtersSection .checkbox-filter-search');
+        }
+        filterItems.each((index, element) => {
+            let id = element.id;
+            let group = $(`#${id}`).data('group');
+            let groupTitle = $(`#${id}`).data('title');
+            let parentName = event.target.parentElement.getAttribute('data-name')
+            if (group === parentName || groupTitle === parentName) {
+                $(`#${id}`).prop('checked', false)
+                event.target.parentElement.remove()
+            }
+        })
+        getCourses();
+    })
+}
+
+/**
+ *  Append new selected tags to DOM
+ * */
+function appendSelectedTagsToDOM(tagsObj) {
+    let selectedTagsDiv = document.createElement('div');
+    selectedTagsDiv.id = "selectedTags";
+
+    for(let group in tagsObj) {
+        let selectedTag = document.createElement('div');
+        selectedTag.classList.add('selected-tag');
+        selectedTag.dataset.name = group;
+
+        let tagText = document.createElement('span');
+        tagText.innerText = group + ': ';
+        selectedTag.append(tagText);
+
+        if(tagsObj[group].length !== 0) {
+            let tagText2 = document.createElement('span');
+            let firstTwoFilters = tagsObj[group].slice(0,2) // display just the first 2 tags
+            tagText2.innerText = firstTwoFilters.join(', ')
+            selectedTag.append(tagText2);
+        }
+
+        if(selectedTag.children.length >= 2) {
+            let removeFilters = document.createElement('div');
+            removeFilters.classList.add('remove-filters');
+            selectedTag.append(removeFilters);
+            selectedTagsDiv.append(selectedTag)
+        }
+    }
+
+    $('#selectedTags').replaceWith(selectedTagsDiv)
+    removeSelectedTags()
+    filterByTagEvent()
 }
 
 function haveNoResults(afterSearching= true) {
@@ -709,7 +756,7 @@ function appendMoreFilters(filterData) {
     let container = document.getElementById(`extraFilter_${filterId}`);
     let groupFilters = filterData.filtersList;
     let currentLanguage =filterData.language;
-    let groupName = filterData.group ? filterData.group : '';
+    let groupName = filterData.group ? filterData.group : filterData.groupName ? filterData.groupName : '';
 
     groupFilters.forEach(element => {
 
@@ -728,7 +775,7 @@ function appendMoreFilters(filterData) {
         }
         temp.innerHTML =
             '<label class="filterTagLabel" for="'+dataType + '_' + id+'">'+
-            '<input'+ checked +' class="checkbox-filter-search filtersInputWeb" type="checkbox" data-name="'+dataType+'" data-group="'+ groupName +'" data-value="'+urlTitle+'" value="'+name+'" id="'+dataType + '_' + id+'">'+
+            '<input'+ checked +' class="checkbox-filter-search filtersInputWeb" type="checkbox" data-name="'+dataType+'" data-group="'+ groupName +'" data-title="'+ groupName +'" data-value="'+urlTitle+'" value="'+name+'" id="'+dataType + '_' + id+'">'+
             '<div class="wrap-term-and-sum tagNameWrap">'+
             '<span class="term-name">'+name+'</span>'+
             '</div>'+
@@ -981,6 +1028,8 @@ function getCourses() {
         filterItems = $('.filtersSection .checkbox-filter-search');
     }
 
+    let tagsObj = {};
+
     /** Looping all filter items inputs */
     filterItems.each((index, element) => {
         let id = element.id;
@@ -992,24 +1041,39 @@ function getCourses() {
         if(element.checked) {
             switch (type) {
                 case 'tag':
-                    if(tagArray[group]){
-                        tagArray[group].push(englishValue);
-                    } else {
-                        tagArray[group] = [];
-                        tagArray[group].push(englishValue);
-                    }
+                    let groupTitle = $(`#${id}`).data('title');
+                    tagsObj[groupTitle] = tagsObj[groupTitle] ? tagsObj[groupTitle] : [];
+                    tagArray[group] = tagArray[group] ? tagArray[group] : [];
+
+                    tagArray[group].push(englishValue);
+
+                    /** Append new selected tag */
+                    tagsObj[groupTitle].push($(`#${id}`).val());
                     break;
 
                 case 'institution':
+                    console.log(element)
+                    tagsObj[group] = tagsObj[group] ? tagsObj[group] : [];
                     institutionArray.push(englishValue);
+
+                    /** Append new selected tag */
+                    tagsObj[group].push($(`#${id}`).val());
                     break;
 
                 case 'certificate':
+                    tagsObj[group] = tagsObj[group] ? tagsObj[group] : [];
                     certificateArray.push(englishValue);
+
+                    /** Append new selected tag */
+                    tagsObj[group].push($(`#${id}`).val());
                     break;
 
                 case 'language':
+                    tagsObj[group] = tagsObj[group] ? tagsObj[group] : [];
                     languageArray.push(englishValue);
+
+                    /** Append new selected tag */
+                    tagsObj[group].push($(`#${id}`).val());
                     break;
             }
         }
@@ -1041,6 +1105,8 @@ function getCourses() {
         filterCoursesAjax(filterData)
     }
 
+    /** Append new selected tags to DOM */
+    appendSelectedTagsToDOM(tagsObj)
 }
 
 function sortByAjax(idsArray,sortType){

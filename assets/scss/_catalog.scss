@@ -210,10 +210,13 @@
 
         #selectedTags {
           display: flex;
+          flex-wrap: wrap;
           flex-direction: row;
           margin-top: 7px;
 
           .selected-tag {
+            display: flex;
+            align-items: center;
             width: fit-content;
             padding: 2px 10px;
             background: #141414;
@@ -223,7 +226,22 @@
             font-weight: 600;
             font-size: 14px;
             line-height: 18px;
-            margin: 0 5px;
+            margin: 0 5px 15px;
+
+            span {
+              margin-left: 5px;
+            }
+
+            .remove-filters {
+              background-image: url("../images/delete-white-icon.svg");
+              background-repeat: no-repeat;
+              background-size: cover;
+              background-position: center center;
+              width: 5px;
+              height: 5px;
+              margin-right: 2px;
+              cursor: pointer;
+            }
           }
         }
       }
@@ -550,7 +568,15 @@
   .counterWrap{
     margin: 13px 19px 0 0;
   }
-
+  .filtersSection {
+    .allFiltersWrapDiv{
+      .checkboxFiltersWrap{
+        #selectedTags {
+          display: none;
+        }
+      }
+    }
+  }
   .openFiltersMenu{
     display: unset;
     .filterVector{
