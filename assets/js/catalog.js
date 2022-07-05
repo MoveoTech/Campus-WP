@@ -652,6 +652,9 @@ function getFiltersGroups(filterId) {
         if(response.success){
             const responseData = JSON.parse(response.data);
             appendMoreFilters(responseData);
+            setTimeout(() => {
+                $(`#extraFilter_${responseData.filterId}`).removeClass('animate-expand-y')
+            }, 300)
         }
     })
 }
