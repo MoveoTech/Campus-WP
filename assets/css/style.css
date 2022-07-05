@@ -20288,6 +20288,9 @@ body .course-item-hover {
           -webkit-box-orient: vertical;
           height: auto; }
 
+.animate-expand-y {
+  animation: expandY 0.3s ease-in-out forwards; }
+
 .checkbox-filter-search:checked ~ .wrap-term-and-sum:before {
   background-color: black; }
 
@@ -20688,6 +20691,12 @@ body .course-item-hover {
   max-width: 1440px;
   margin: 0 auto; }
 
+@keyframes expandY {
+  from {
+    max-height: 44px; }
+  to {
+    max-height: 310px; } }
+
 .catalog-skeleton {
   display: flex;
   flex-direction: column;
@@ -20713,6 +20722,19 @@ body .course-item-hover {
     width: 872px; }
   .catalog-skeleton .catalog-course-skeleton {
     background-image: url("../../assets/images/course-skeleton.svg"); }
+
+.filter-group-skeleton {
+  background: #F2F2F2;
+  box-shadow: 0 5px 15px rgba(40, 40, 40, 0.2);
+  border-radius: 10px;
+  border: none;
+  width: 131px;
+  min-height: 44px;
+  margin-top: 6px; }
+
+.filter-group-skeleton.ph-item:before {
+  animation-duration: 1.2s;
+  animation-direction: reverse; }
 
 @media (max-width: 1200px) {
   .catalog-skeleton {
