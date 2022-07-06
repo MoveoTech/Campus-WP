@@ -265,6 +265,17 @@
   position: absolute;
   left: 30px;
 
+  .mobile-filters-counter {
+    background: #333433;
+    color: #ffffff;
+    width: 23px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 7px;
+  }
+
   .filterVector{
     margin-bottom: 3px;
   }
@@ -586,7 +597,8 @@
     }
   }
   .openFiltersMenu{
-    display: unset;
+    display: flex;
+    align-items: center;
     .filterVector{
       display: unset;
     }

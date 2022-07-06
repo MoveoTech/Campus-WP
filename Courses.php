@@ -113,6 +113,7 @@ $no_results_found = $countNumber === 0;
                         ?>
                     </div>
                     <div class="openFiltersMenu">
+                        <div class="mobile-filters-counter"></div>
                         <span><?= filtersMobileMenuLanguage(); ?></span>
                         <img class="filterVector" src="<?php echo get_bloginfo('stylesheet_directory'). '/assets/images/vector-black.svg'?>"/>
                     </div>

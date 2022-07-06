@@ -20256,6 +20256,15 @@ body .course-item-hover {
   cursor: pointer;
   position: absolute;
   left: 30px; }
+  .openFiltersMenu .mobile-filters-counter {
+    background: #333433;
+    color: #ffffff;
+    width: 23px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 7px; }
   .openFiltersMenu .filterVector {
     margin-bottom: 3px; }
 
@@ -20508,7 +20517,8 @@ body .course-item-hover {
   .filtersSection .allFiltersWrapDiv .checkboxFiltersWrap #selectedTags {
     display: none; }
   .openFiltersMenu {
-    display: unset; }
+    display: flex;
+    align-items: center; }
     .openFiltersMenu .filterVector {
       display: unset; }
   .filterVector {
