@@ -894,3 +894,20 @@
   from {max-height: 44px; }
   to {max-height: 310px;}
 }
+
+/* custom stripe catalog page */
+.customCatalogBanner{
+  min-height: 145px;
+  max-height: 240px;
+  height: fit-content;
+  .catalog-banner-content{
+    .customCatalogHeader{
+      max-width: 75vw;
+      margin-bottom: 35px;
+      margin-top: 65px;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+}
+
+}

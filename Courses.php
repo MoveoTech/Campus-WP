@@ -11,7 +11,6 @@
 
 global $site_settings, $field, $wp_query, $sitepress, $filter_tags;
 $current_language = $sitepress->get_current_language();
-
 /**
  * CHECK THE QUERY PARAMS
  */
@@ -21,15 +20,10 @@ if($components['path']){
     parse_str($components['path'], $url_params);
 }
 
+$stripeTitle = null;
+$customStripeCatalogPage = false;
 if($url_params){
-    if(str_contains($_SERVER['QUERY_STRING'] , 'stripes')){
-        // to do - cutting id from url / key + value
-        $stripe_id= 48120;
-
-    } else {
-        $filters = getFiltersArray($url_params);
-    }
-
+    $filters = getFiltersArray($url_params);
     /**
      * Checking if have tag from tags stripe and
      * get the current name by tag id
@@ -41,13 +35,25 @@ if($url_params){
         $tag_name = $tag->display('english_name');
         $filters['search']['tags']['Stripe'][0] = $tag_name;
     }
+    /** Checking if url have stripe_id for custom catalog page */
+    if($filters['search']['stripe_id']){
+        $customStripeCatalogPage = true;
+        global $sitepress;
+        $lang = $sitepress->get_current_language();
+        $stripeId = intval($filters['search']['stripe_id'][0]);
+        if($lang != 'he') $stripeTitle = get_field($lang.'_title', $stripeId);
+        if(!$stripeTitle) $stripeTitle = get_field('he_title', $stripeId);
+    }
     $params = getPodsFilterParams($filters);
 } else {
     $params = getPodsFilterParams();
 }
 
 /** PARAMETERS */
-$catalog_stripe_id = get_field('catalog_stripe');
+if(!$customStripeCatalogPage){
+    $catalog_stripe_id = get_field('catalog_stripe');
+}
+
 $menuFilters = get_field('filters');
 $academic_institutions = pods( 'academic_institution', array('limit'   => -1 ));
 $courses = pods( 'courses', $params, true);
@@ -74,7 +80,7 @@ $courses->rows = array_slice($courses->rows, 0,20);
 $coursesIDs = implode(',', $coursesIdArray);
 
 $countShow = getFieldByLanguage("מוצגים", "Show", "يتم تقديم", $current_language);
-$countCourses = getFieldByLanguage("קורסים", "courses", "دورة", $current_language);
+$countCourses = getFieldByLanguage("קורסים", "Courses", "دورة", $current_language);
 $countNumber = $courses->total();
 
 /** translate numbers to arabic */
@@ -92,14 +98,15 @@ $no_result_text_ar = "لم نعثر على ما كنت تبحث عنه بالض�
 $no_results_found = $countNumber === 0;
 ?>
 
-<div class="catalog-banner">
+<div class="catalog-banner <?= $customStripeCatalogPage? "customCatalogBanner": null ?>">
 
     <div class="back-img-1" ></div>
     <div class="back-img-2" ></div>
 
     <div class="catalog-banner-content">
-        <h1 class="catalog-header" style="color: #ffffff"><?=$catalog_title?></h1>
-        <?= get_template_part('templates/hero', 'search') ?>
+        <h1 class="catalog-header <?= $customStripeCatalogPage? "customCatalogHeader": null ?>" style="color: #ffffff"><?= $customStripeCatalogPage? $stripeTitle: $catalog_title?></h1>
+
+        <?= $customStripeCatalogPage? null: get_template_part('templates/hero', 'search') ?>
     </div>
 </div>
 
@@ -162,6 +169,7 @@ $no_results_found = $countNumber === 0;
                  <!--. LOAD MORE COURSES SKELETONS  -->
                 <?php get_template_part('template', 'parts/catalogCourse-skeleton'); ?>
 
+        <?php if($catalog_stripe_id){ ?>
                 <div class="catalogStripeWrap">
 
                     <?php
@@ -179,6 +187,7 @@ $no_results_found = $countNumber === 0;
                     ?>
 
                 </div>
+        <?php } ?>
             </div>
         </div>
     </div>

@@ -17,13 +17,16 @@ $(document).ready(function () {
 
     /** Click event - reset filtering **/
     $('.resetFilterButton').on('click', function (event) {
-
-        jQuery(".filterVectorMobile").removeClass('active');
+        let stripeIdValue = checkURLParams("stripe_id");
         let currentUrl = window.location.href;
         let resetUrl = currentUrl.split('?')[0]
+        if(stripeIdValue){
+            resetUrl = resetUrl + "?stripe_id=" + stripeIdValue;
+        }
         let url = new URL(resetUrl);
         window.history.replaceState({}, '', url);
 
+        jQuery(".filterVectorMobile").removeClass('active');
         let filtersInputs = $('.checkbox-filter-search');
         filtersInputs.each((index, element) => {
             element.checked = false;
@@ -411,16 +414,13 @@ function getCourseResultTags(tags) {
 }
 
 function appendUrlParams(filters) {
-
     let currentUrl = window.location.href;
-    let resetUrl = currentUrl.split('?')[0]
+    let resetUrl = currentUrl.split('?')[0];
     let url = new URL(resetUrl);
-
     if(!filters || filters.length === 0) {
         window.history.replaceState({}, '', url);
         return;
     }
-
     if(filters['search']) {
         let i = 0;
         Object.keys(filters['search']).some((k) => {
@@ -441,7 +441,6 @@ function appendUrlParams(filters) {
                     let key = k ;
                     let valuesArray = filters['search'][k];
                     let valuesString = valuesArray.toString();
-
                     url.searchParams.set(key, valuesString);
                     window.history.pushState({}, '', url);
 
@@ -752,7 +751,17 @@ function appendMoreFilters(filterData) {
  * Ajax Call Get Filter Courses
  * */
 function filterCoursesAjax(filterData) {
-    appendUrlParams(filterData)
+
+    /** Checking if stripe id exist in URL */
+    let stripeIdValue = checkURLParams("stripe_id");
+    if(stripeIdValue){
+        /** Checking if only stripe id exist in URL - if so, rebuild the filter data object */
+        if(!filterData['search']){
+            filterData = {"search": {}};
+        }
+        filterData['search']['stripe_id'] = [parseInt(stripeIdValue)];
+    }
+    appendUrlParams(filterData);
     if(filterData.length != 0 && filterData['search']['tags'] && filterData['search']['tags']['Stripe']){
         let [tagId, ...tagName] = filterData['search']['tags']['Stripe'][0].split('-');
         tagName = tagName.join('-');
@@ -768,13 +777,11 @@ function filterCoursesAjax(filterData) {
     jQuery.post(filter_by_tag_ajax.ajaxurl, data, function(response){
         if(response.success){
             const responseData = JSON.parse(response.data);
-            const coursesLength = responseData['courses'].length
+            const coursesLength = responseData['courses'].length;
             if(coursesLength > 0) {
                 updateCoursesCounter(coursesLength);
                 appendFilteredCourses(responseData['courses']);
-
             } else if(responseData['params'] == null) {
-
                 haveNoResults(false)
                 updateCoursesCounter(0);
             } else {
@@ -979,8 +986,7 @@ function getCourses() {
     }
 
     /** Getting free search value from url params */
-    let params = new URLSearchParams(document.location.search);
-    let searchValue = params.get("text_s");
+    let searchValue = checkURLParams("text_s");
     if(searchValue){
         searchValue = searchValue.replaceAll(`\\`, "");
         freeSearchData.push(searchValue);
@@ -1017,7 +1023,6 @@ function getCourses() {
                     /** Append new selected tag */
                     tagsObj[groupTitle].push($(`#${id}`).val());
                     break;
-
                 case 'institution':
                     tagsObj[group] = tagsObj[group] ? tagsObj[group] : [];
                     institutionArray.push(englishValue);
@@ -1151,4 +1156,9 @@ function arabicNumbersTranslate(count) {
     return countStr.replace(/[0-9]/g, function(w){
         return arabicNum[+w]
     });
+}
+
+function checkURLParams(valueParam) {
+    let params = new URLSearchParams(document.location.search);
+    return params.get(valueParam);
 }
