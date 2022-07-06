@@ -38,13 +38,6 @@ $(document).ready(function () {
         /** removing extra filters **/
         $('.extraFilter').remove();
 
-        /** deleting ids from hidden div **/
-        const coursesContainer = document.getElementById('catalog_courses');
-        coursesContainer.setAttribute("data-value",[]);
-        /** delete all courses result **/
-        const coursesBox = $('#coursesBox');
-        coursesBox.empty();
-
         /** reset sort by button to default */
         const sortByType = $('#sortByText').attr("data");
         if(sortByType !== "sortByRelevance"){
