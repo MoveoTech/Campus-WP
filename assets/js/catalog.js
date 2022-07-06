@@ -37,6 +37,8 @@ $(document).ready(function () {
         }
         /** removing extra filters **/
         $('.extraFilter').remove();
+        $('#morefiltersBox .filterInput').show()
+        $('#morefiltersBox').show()
 
         /** deleting ids from hidden div **/
         const coursesContainer = $('#catalog_courses');
@@ -49,14 +51,20 @@ $(document).ready(function () {
         /**Getting targeted input */
         let filterId = $(event.target).data('value');
         let filterGroupName = event.target.value;
-        /** If element checked appending it to menu, else - remove it */
+        /** If element checked appending it to menu*/
         if(event.target.checked){
             appendGroupFilter(filterGroupName, filterId);
             getFiltersGroups(filterId);
             openCheckboxEvent();
-        } else {
-            let filterToRemove = document.getElementsByClassName(filterId)[0];
-            filterToRemove.remove()
+            $(event.target.parentElement.parentElement).hide()
+            let filtersLength = $('#morefiltersBox .inputsContainer').children().length;
+            let count = 0;
+            $('#morefiltersBox .inputsContainer').children().each((index, element) => {
+                count += element.style.display === "none" ? 1 : 0;
+            })
+            if(count === filtersLength) {
+                $('#morefiltersBox').hide()
+            }
         }
     });
 

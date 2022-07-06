@@ -20181,6 +20181,8 @@ body .course-item-hover {
         display: flex;
         flex-direction: row;
         flex-wrap: wrap; }
+        .filtersSection .allFiltersWrapDiv .checkboxFiltersWrap #groupFiltersContainer #morefiltersBox .inputsContainer .tagNameWrap::before {
+          display: none; }
       .filtersSection .allFiltersWrapDiv .checkboxFiltersWrap .wrapEachFiltergroup {
         position: relative;
         margin-bottom: 10px; }

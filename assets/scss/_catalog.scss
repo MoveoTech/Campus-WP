@@ -154,6 +154,14 @@
           display: flex;
           flex-direction: row;
           flex-wrap: wrap;
+
+          #morefiltersBox {
+            .inputsContainer {
+              .tagNameWrap::before {
+                display: none;
+              }
+            }
+          }
         }
 
         .wrapEachFiltergroup {
@@ -163,7 +171,7 @@
           .extraButtonsWrap{
             display: flex;
           }
-          }
+        }
 
         .wrapEachFilterTag, .wrapEachFilterButton{
           display: flex;
