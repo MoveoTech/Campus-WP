@@ -124,7 +124,7 @@ $(document).ready(function () {
  * hiding filter inputs when clicking on screen or other filter group
  * */
 $(document).click(function(event) {
-
+    if(event.target.classList.contains('filter-group-skeleton')) event.target.style.display = "block";
     let filtergroup = $('.wrapEachFiltergroup');
     let filtersInputs = $(`.inputsContainer`);
     let sortByButton = $(`#sortByButton`);
@@ -132,7 +132,14 @@ $(document).click(function(event) {
 
     /** hiding input container when clicking on screen - when the event.target in not one of the filters menu / inputs */
     if (!filtergroup.is(event.target) && !filtergroup.has(event.target).length && !filtersInputs.is(event.target) && !filtersInputs.has(event.target).length ) {
-        filtersInputs.hide();
+
+        filtersInputs.each((index, element) => {
+            console.log(element.classList.contains('filter-group-skeleton'))
+            if(!element.classList.contains('filter-group-skeleton')){
+                element.style.display = "none";
+            }
+        })
+
     }
     /** hiding sort by menu when the event.target in not the sort by menu button */
     if(!sortByButton.is(event.target) && !sortByButton.has(event.target).length){
@@ -727,12 +734,10 @@ function filterCoursesAjax(filterData) {
             const responseData = JSON.parse(response.data);
             const coursesLength = responseData['courses'].length
             if(coursesLength > 0) {
-                // loadCourses(responseData['courses'])
                 updateCoursesCounter(coursesLength);
                 appendFilteredCourses(responseData['courses']);
 
             } else if(responseData['params'] == null) {
-
                 haveNoResults(false)
                 updateCoursesCounter(0);
             } else {
