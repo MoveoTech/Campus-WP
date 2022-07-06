@@ -566,28 +566,28 @@ function removeSelectedTags() {
  *  Append new selected tags to DOM
  * */
 function appendSelectedTagsToDOM(tagsObj) {
-    let selectedTagsDiv = document.createElement('div');
-    selectedTagsDiv.id = "selectedTags";
-
+    let selectedTagsDiv = $('<div>');
+    selectedTagsDiv.attr('id', 'selectedTags');
     for(let group in tagsObj) {
-        let selectedTag = document.createElement('div');
-        selectedTag.classList.add('selected-tag');
-        selectedTag.dataset.name = group;
 
-        let tagText = document.createElement('span');
-        tagText.innerText = group + ': ';
-        selectedTag.append(tagText);
+        let selectedTag = $('<div>');
+        selectedTag.addClass('selected-tag')
+        selectedTag.attr('data-name', group)
+
+        let tagGroup = $('<span>');
+        tagGroup.text(group + ': ')
+        selectedTag.append(tagGroup);
 
         if(tagsObj[group].length !== 0) {
-            let tagText2 = document.createElement('span');
+            let tagText = $('<span>');
             let firstTwoFilters = tagsObj[group].slice(0,2) // display just the first 2 tags
-            tagText2.innerText = firstTwoFilters.join(', ')
-            selectedTag.append(tagText2);
+            tagText.text(firstTwoFilters.join(', '));
+            selectedTag.append(tagText);
         }
 
         if(selectedTag.children.length >= 2) {
-            let removeFilters = document.createElement('div');
-            removeFilters.classList.add('remove-filters');
+            let removeFilters = $('<div>');
+            removeFilters.addClass('remove-filters')
             selectedTag.append(removeFilters);
             selectedTagsDiv.append(selectedTag)
         }
