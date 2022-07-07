@@ -20170,7 +20170,7 @@ body .course-item-hover {
     flex-grow: 0; }
     .filtersSection .allFiltersWrapDiv .checkboxFiltersWrap {
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
       justify-content: flex-end;
       padding: 0;
       position: relative;
@@ -20181,8 +20181,6 @@ body .course-item-hover {
         display: flex;
         flex-direction: row;
         flex-wrap: wrap; }
-        .filtersSection .allFiltersWrapDiv .checkboxFiltersWrap #groupFiltersContainer #morefiltersBox .inputsContainer .tagNameWrap::before {
-          display: none; }
       .filtersSection .allFiltersWrapDiv .checkboxFiltersWrap .wrapEachFiltergroup {
         position: relative;
         margin-bottom: 10px; }
@@ -20218,35 +20216,6 @@ body .course-item-hover {
         text-align: right;
         color: #333433;
         margin: auto; }
-      .filtersSection .allFiltersWrapDiv .checkboxFiltersWrap #selectedTags {
-        display: flex;
-        flex-wrap: wrap;
-        flex-direction: row;
-        margin-top: 7px; }
-        .filtersSection .allFiltersWrapDiv .checkboxFiltersWrap #selectedTags .selected-tag {
-          display: flex;
-          align-items: center;
-          width: fit-content;
-          padding: 2px 10px;
-          background: #141414;
-          border: 1px solid rgba(0, 0, 0, 0.1);
-          border-radius: 10px;
-          color: #fff;
-          font-weight: 600;
-          font-size: 14px;
-          line-height: 18px;
-          margin: 0 5px 15px; }
-          .filtersSection .allFiltersWrapDiv .checkboxFiltersWrap #selectedTags .selected-tag span {
-            margin-left: 5px; }
-          .filtersSection .allFiltersWrapDiv .checkboxFiltersWrap #selectedTags .selected-tag .remove-filters {
-            background-image: url("../images/delete-white-icon.svg");
-            background-repeat: no-repeat;
-            background-size: cover;
-            background-position: center center;
-            width: 5px;
-            height: 5px;
-            margin-right: 2px;
-            cursor: pointer; }
 
 .filterVectorMobile {
   display: none; }
@@ -20256,15 +20225,6 @@ body .course-item-hover {
   cursor: pointer;
   position: absolute;
   left: 30px; }
-  .openFiltersMenu .mobile-filters-counter {
-    background: #333433;
-    color: #ffffff;
-    width: 23px;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-left: 7px; }
   .openFiltersMenu .filterVector {
     margin-bottom: 3px; }
 
@@ -20514,11 +20474,8 @@ body .course-item-hover {
         display: none; }
   .counterWrap {
     margin: 13px 19px 0 0; }
-  .filtersSection .allFiltersWrapDiv .checkboxFiltersWrap #selectedTags {
-    display: none; }
   .openFiltersMenu {
-    display: flex;
-    align-items: center; }
+    display: unset; }
     .openFiltersMenu .filterVector {
       display: unset; }
   .filterVector {
