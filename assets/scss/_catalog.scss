@@ -907,7 +907,24 @@
       margin-top: 65px;
       text-overflow: ellipsis;
       overflow: hidden;
+      @media (max-width: 992px) {
+        display: unset;
+      }
     }
 }
+}
+@media (max-width: 768px) {
+  .customCatalogBanner{
+    min-height: 95px;
+    max-height: 130px;
+    .catalog-banner-content{
+      .customCatalogHeader{
+        font-size: 26px;
+        line-height: 34px;
+        margin-top: 5px;
+        margin-bottom: 15px;
 
+      }
+    }
+  }
 }

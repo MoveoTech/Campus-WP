@@ -19,7 +19,7 @@ $(document).ready(function () {
     $('.resetFilterButton').on('click', function (event) {
         let stripeIdValue = checkURLParams("stripe_id");
         let currentUrl = window.location.href;
-        let resetUrl = currentUrl.split('?')[0]
+        let resetUrl = currentUrl.split('?')[0];
         if(stripeIdValue){
             resetUrl = resetUrl + "?stripe_id=" + stripeIdValue;
         } else {
