@@ -31,13 +31,20 @@ $(document).ready(function () {
         /** Clear search input fields */
         $('.search-field').val('');
 
+        /** deleting ids from hidden div **/
+        const coursesContainer = $('#catalog_courses');
+        coursesContainer.attr("data-value",[]);
+        /** delete all courses result **/
+        const coursesBox = $('#coursesBox');
+        coursesBox.empty();
+        updateCoursesCounter(0);
         /** Get the initial courses */
-        if(currentUrl.includes('?')){
+        if(url.href.includes('?')){
             getCourses()
         }
         /** removing extra filters **/
         $('.extraFilter').remove();
-
+        
         /** reset sort by button to default */
         const sortByType = $('#sortByText').attr("data");
         if(sortByType !== "sortByRelevance"){
