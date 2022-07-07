@@ -113,7 +113,6 @@ $no_results_found = $countNumber === 0;
                         ?>
                     </div>
                     <div class="openFiltersMenu">
-                        <div class="mobile-filters-counter"></div>
                         <span><?= filtersMobileMenuLanguage(); ?></span>
                         <img class="filterVector" src="<?php echo get_bloginfo('stylesheet_directory'). '/assets/images/vector-black.svg'?>"/>
                     </div>
@@ -151,7 +150,7 @@ $no_results_found = $countNumber === 0;
                 </div>
 
                  <!--. LOAD MORE COURSES SKELETONS  -->
-                <?php echo getCatalogCoursesSkeleton(); ?>
+                <?php get_template_part('template', 'parts/catalogCourse-skeleton'); ?>
 
                 <div class="catalogStripeWrap">
 

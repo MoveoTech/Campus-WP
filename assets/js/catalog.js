@@ -37,8 +37,6 @@ $(document).ready(function () {
         }
         /** removing extra filters **/
         $('.extraFilter').remove();
-        $('#morefiltersBox .filterInput').show()
-        $('#morefiltersBox').show()
 
         /** deleting ids from hidden div **/
         const coursesContainer = $('#catalog_courses');
@@ -51,44 +49,16 @@ $(document).ready(function () {
         /**Getting targeted input */
         let filterId = $(event.target).data('value');
         let filterGroupName = event.target.value;
-        /** If element checked appending it to menu*/
+        /** If element checked appending it to menu, else - remove it */
         if(event.target.checked){
             appendGroupFilter(filterGroupName, filterId);
             getFiltersGroups(filterId);
             openCheckboxEvent();
-            $(event.target.parentElement.parentElement).hide()
-            let filtersLength = $('#morefiltersBox .inputsContainer').children().length;
-            let count = 0;
-            $('#morefiltersBox .inputsContainer').children().each((index, element) => {
-                count += element.style.display === "none" ? 1 : 0;
-            })
-            if(count === filtersLength) {
-                $('#morefiltersBox').hide()
-            }
+        } else {
+            let filterToRemove = document.getElementsByClassName(filterId)[0];
+            filterToRemove.remove()
         }
     });
-
-    /** Click event - open 'sort by' menu **/
-    $('#sortByButton').on('click', function (event) {
-        $('#sortByOptions').toggleClass('active');
-    });
-
-    /** Click event - sort by courses **/
-    $('.sortOption').on('click', function (event) {
-        const sortType = event.target.id;
-        const sortingValue = event.target.innerText;
-        const sortByText = $('#sortByText');
-        const coursesContainer = $('#catalog_courses').data('value');
-        const idsArray = coursesContainer.split(",");
-        if(coursesContainer.length > 0) {
-            /** targeting input to color the selected value  */
-            $('.sortOption').removeClass('active');
-            $(event.target).addClass('active');
-            /** changing button text to the selected value */
-            sortByText.text(sortingValue);
-            sortByAjax(idsArray,sortType);
-        }
-    })
 
     /** checking screen size for web or mobile menu */
     slickStripeForMobile();
@@ -125,9 +95,6 @@ $(document).ready(function () {
     if(clientHeight + scrollTop >= scrollHeight - 2000) {
         loadCourses()
     }
-
-
-    removeSelectedTags();
 });
 /** End of document ready */
 
@@ -138,8 +105,6 @@ $(document).click(function(event) {
     if(event.target.classList.contains('filter-group-skeleton')) event.target.style.display = "block";
     let filtergroup = $('.wrapEachFiltergroup');
     let filtersInputs = $(`.inputsContainer`);
-    let sortByButton = $(`#sortByButton`);
-    let sortByOptions = $(`#sortByOptions`);
 
     /** hiding input container when clicking on screen - when the event.target in not one of the filters menu / inputs */
     if (!filtergroup.is(event.target) && !filtergroup.has(event.target).length && !filtersInputs.is(event.target) && !filtersInputs.has(event.target).length ) {
@@ -152,10 +117,7 @@ $(document).click(function(event) {
         })
 
     }
-    /** hiding sort by menu when the event.target in not the sort by menu button */
-    if(!sortByButton.is(event.target) && !sortByButton.has(event.target).length){
-        sortByOptions.removeClass('active');
-    }
+
     /** Checking if the event is a filter group or input container */
     if (filtergroup.is(event.target) || filtergroup.has(event.target).length || filtersInputs.is(event.target) || filtersInputs.has(event.target).length) {
 
@@ -190,6 +152,8 @@ $(document).scroll(function() {
     }
 })
 
+
+
 function closingOverlay(){
     jQuery(".bg-overlay").removeClass('active');
     jQuery(".bg-overlay").removeClass('filterMenuOverlay');
@@ -208,7 +172,7 @@ function slickStripeForMobile() {
     if($(window).width() <= 768){
 
         if($('#filtersSectionMobile')){
-            /** Changing classes in filters menu inputs */
+            /** Changing classe in filters menu inputs */
             $('#filtersSectionMobile .checkbox-filter-search').addClass('.checkboxFilterMobile');
 
             /** changing inputs id, for mobile */
@@ -444,15 +408,8 @@ function appendUrlParams(filters) {
 
 function markCheckboxes(params) {
     let entries = params.entries();
+    let filterItems = $('.filtersInputWeb');
 
-    let filterItems;
-    if($(window).width() <= 768) {
-        filterItems = $('#filtersSectionMobile .checkbox-filter-search');
-    } else {
-        filterItems = $('.filtersSection .checkbox-filter-search');
-    }
-
-    let tagsObj = {};
     for ( entry of entries) {
         if(entry[0] == 'text_s') {
            let inputValue = entry[1].replaceAll(`\\`, "");
@@ -461,10 +418,8 @@ function markCheckboxes(params) {
 
         if(entry[0] === 'tags_Stripe') {
             const tagId = entry[1].split('-')[0];
-            const currentLang = getCookie('openedx-language-preference') ? getCookie('openedx-language-preference') : getCookie('wp-wpml_current_language');
-            let group_title = getFieldByLanguage('התאמה מיוחדת', 'Customize Tag', 'تناسب خاص', currentLang);
-            appendSpecialGroupFilter(group_title)
-            getTagById(tagId, group_title);
+            appendSpecialGroupFilter()
+            getTagById(tagId);
         }
 
         filterItems.each((index, element) => {
@@ -476,18 +431,11 @@ function markCheckboxes(params) {
             if(entry[0] === type ) {
                 let itemValues = entry[1].split(",");
 
-                tagsObj[group] = tagsObj[group] ? tagsObj[group] : [];
-
                 for(let item of itemValues){
                     if(englishValue.split(' ').join('') === item.split(' ').join('')) {
-
                         $(`#${id}`).prop('checked', true)
-
-                        /** Append new selected tag */
-                        tagsObj[group].push($(`#${id}`).val());
                     }
                 }
-
             }
 
             if(entry[0].includes('tags_')) {
@@ -495,22 +443,15 @@ function markCheckboxes(params) {
 
                 if(tagsGroup === group) {
                     let itemValues = entry[1].split(",");
-                    let groupTitle = $(`#${id}`).data('title'); //TODO using for tags.
-                    tagsObj[groupTitle] = tagsObj[groupTitle] ? tagsObj[groupTitle] : [];
 
                     for(let item of itemValues){
                         if(englishValue.toLowerCase() === item.toLowerCase()) {
                             $(`#${id}`).prop('checked', true)
-
-                            /** Append new selected tag */
-                            tagsObj[groupTitle].push($(`#${id}`).val());
                         }
                     }
                 }
             }
         });
-
-
     }
 
     /** Check if has params in the url */
@@ -520,7 +461,6 @@ function markCheckboxes(params) {
             let id = element.id;
             let type = $(`#${id}`).data('name');
             let englishValue = $(`#${id}`).data('value');
-            let group = $(`#${id}`).data('group');
 
             if (type === 'language') {
                 let lang;
@@ -538,92 +478,14 @@ function markCheckboxes(params) {
 
                 if (englishValue.includes(lang)) {
                     $(`#${id}`).prop('checked', true)
-
-                    /** Append new selected tag */
-                    tagsObj[group] = tagsObj[group] ? tagsObj[group] : [];
-                    tagsObj[group].push($(`#${id}`).val());
-
                     let currentUrl = window.location.href;
                     let url = new URL(currentUrl);
                     url.searchParams.set(type, lang);
                     window.history.pushState({}, '', url);
-
                 }
             }
         });
     }
-
-    /** Append new selected tags to DOM */
-    appendSelectedTagsToDOM(tagsObj)
-}
-
-function removeSelectedTags() {
-    $('.remove-filters').on('click', function(event) {
-        let filterItems;
-        if($(window).width() <= 768) {
-            filterItems = $('#filtersSectionMobile .checkbox-filter-search');
-        } else {
-            filterItems = $('.filtersSection .checkbox-filter-search');
-        }
-        filterItems.each((index, element) => {
-            let id = element.id;
-            let group = $(`#${id}`).data('group');
-            let groupTitle = $(`#${id}`).data('title');
-            let parentName = event.target.parentElement.getAttribute('data-name')
-            if (group === parentName || groupTitle === parentName) {
-                $(`#${id}`).prop('checked', false)
-                event.target.parentElement.remove()
-            }
-        })
-        getCourses();
-    })
-}
-
-/**
- *  Append new selected tags to DOM
- * */
-function appendSelectedTagsToDOM(tagsObj, mobile = false) {
-    let selectedTagsDiv = $('<div>');
-    selectedTagsDiv.attr('id', 'selectedTags');
-    let filterCounter = 0;
-    for(let group in tagsObj) {
-
-        let selectedTag = $('<div>');
-        selectedTag.addClass('selected-tag')
-        selectedTag.attr('data-name', group)
-
-        let tagGroup = $('<span>');
-        tagGroup.text(group + ': ')
-        selectedTag.append(tagGroup);
-
-        if(tagsObj[group].length !== 0) {
-            filterCounter += tagsObj[group].length;
-            let tagText = $('<span>');
-            let firstTwoFilters = tagsObj[group].slice(0,2) /* display just the first 2 tags */
-            tagText.text(firstTwoFilters.join(', '));
-            selectedTag.append(tagText);
-        }
-
-        if(selectedTag.children.length >= 2) {
-            let removeFilters = $('<div>');
-            removeFilters.addClass('remove-filters')
-            selectedTag.append(removeFilters);
-            selectedTagsDiv.append(selectedTag)
-        }
-    }
-    if(filterCounter > 0){
-        if(!$('.mobile-filters-counter').is(':visible')) {
-            $('.mobile-filters-counter').show()
-        }
-        $('.mobile-filters-counter').text(filterCounter)
-    } else {
-        $('.mobile-filters-counter').hide()
-    }
-    if(!mobile){
-        $('#selectedTags').replaceWith(selectedTagsDiv)
-    }
-    removeSelectedTags()
-    filterByTagEvent()
 }
 
 function haveNoResults(afterSearching= true) {
@@ -691,8 +553,6 @@ function filterByTagMobile(){
         /** Getting array of inputs */
         let filterItems = $('.checkbox-filter-search');
 
-        let tagsObj = {};
-
         /** Looping all filter items inputs */
         filterItems.each((index, element) => {
             let id = element.id;
@@ -704,35 +564,26 @@ function filterByTagMobile(){
             if(element.checked) {
                 switch (type) {
                     case 'tag':
-                        let groupTitle = $(`#${id}`).data('title');
-                        tagsObj[groupTitle] = tagsObj[groupTitle] ? tagsObj[groupTitle] : [];
-                        tagArray[group] = tagArray[group] ? tagArray[group] : [];
-                        tagArray[group].push(englishValue);
+                        if(tagArray[group]){
+                            tagArray[group].push(englishValue);
+                        } else {
+                            tagArray[group] = [];
+                            tagArray[group].push(englishValue);
+                        }
 
-                        /** Append new selected tag */
-                        tagsObj[groupTitle].push($(`#${id}`).val());
                         break;
 
                     case 'institution':
-                        tagsObj[group] = tagsObj[group] ? tagsObj[group] : [];
                         institutionArray.push(englishValue);
-                        /** Append new selected tag */
-                        tagsObj[group].push($(`#${id}`).val());
                         break;
 
 
                     case 'certificate':
-                        tagsObj[group] = tagsObj[group] ? tagsObj[group] : [];
                         certificateArray.push(englishValue);
-                        /** Append new selected tag */
-                        tagsObj[group].push($(`#${id}`).val());
                         break;
 
                     case 'language':
-                        tagsObj[group] = tagsObj[group] ? tagsObj[group] : [];
                         languageArray.push(englishValue);
-                        /** Append new selected tag */
-                        tagsObj[group].push($(`#${id}`).val());
                         break;
                 }
             }
@@ -765,9 +616,6 @@ function filterByTagMobile(){
             filterCoursesAjax(filterData);
             closingOverlay();
         }
-
-        /** Append new selected tags to DOM */
-        appendSelectedTagsToDOM(tagsObj, true)
     })}
 /** End of function filterByTagMobile */
 
@@ -801,7 +649,7 @@ function appendMoreFilters(filterData) {
     let container = document.getElementById(`extraFilter_${filterId}`);
     let groupFilters = filterData.filtersList;
     let currentLanguage =filterData.language;
-    let groupName = filterData.group ? filterData.group : filterData.groupName ? filterData.groupName : '';
+    let groupName = filterData.group ? filterData.group : '';
 
     groupFilters.forEach(element => {
 
@@ -820,7 +668,7 @@ function appendMoreFilters(filterData) {
         }
         temp.innerHTML =
             '<label class="filterTagLabel" for="'+dataType + '_' + id+'">'+
-            '<input'+ checked +' class="checkbox-filter-search filtersInputWeb" type="checkbox" data-name="'+dataType+'" data-group="'+ groupName +'" data-title="'+ groupName +'" data-value="'+urlTitle+'" value="'+name+'" id="'+dataType + '_' + id+'">'+
+            '<input'+ checked +' class="checkbox-filter-search filtersInputWeb" type="checkbox" data-name="'+dataType+'" data-group="'+ groupName +'" data-value="'+urlTitle+'" value="'+name+'" id="'+dataType + '_' + id+'">'+
             '<div class="wrap-term-and-sum tagNameWrap">'+
             '<span class="term-name">'+name+'</span>'+
             '</div>'+
@@ -970,7 +818,7 @@ async function loadCourses(coursesArray = []) {
     }
 }
 
-function getTagById(tagId, group_title) {
+function getTagById(tagId) {
     let data = {
         'action': 'get_tag_data',
         'type' : 'tags',
@@ -982,7 +830,7 @@ function getTagById(tagId, group_title) {
         if(response.success) {
             const responseData = JSON.parse(response.data);
             const tag = responseData['tag'];
-            appendSpecialTagToGroup(tag, group_title)
+            appendSpecialTagToGroup(tag)
             openCheckboxEvent();
         }
     })
@@ -991,12 +839,13 @@ function getTagById(tagId, group_title) {
 /**
  *  Append tags stripe special group
  *  */
-function appendSpecialGroupFilter(group_title) {
+function appendSpecialGroupFilter() {
+    const currentLang = getCookie('openedx-language-preference') ? getCookie('openedx-language-preference') : getCookie('wp-wpml_current_language');
     let vector = $('.filterVector').attr('src');
     let mobileVector = $('.filterVectorMobile').attr('src');
     let container = document.getElementById('groupFiltersContainer');
     let mobileContainer = document.getElementById('filtersSectionMobile');
-    let groupTitle = group_title;
+    let groupTitle = getFieldByLanguage('התאמה מיוחדת', 'Customize Tag', 'تناسب خاص', currentLang);
     let addFilterbutton = document.getElementById('morefiltersBox');
     let filterId = 'stripe_tag_filter';
     let temp = document.createElement("div");
@@ -1025,7 +874,7 @@ function appendSpecialGroupFilter(group_title) {
  *  Add tag from tags stripe to special filters group
  *  after tag data return from Ajax call
  *  */
-function appendSpecialTagToGroup(tag, group_title) {
+function appendSpecialTagToGroup(tag) {
     let container = document.getElementById('extraFilter_stripe_tag_filter');
     let temp = document.createElement("div");
     temp.classList.add('filterInput');
@@ -1034,20 +883,15 @@ function appendSpecialTagToGroup(tag, group_title) {
     let englishName = tag['english_name'];
     let tagId = tag['id'];
     let checked = ' checked';
-    let tagsObj = {};
-    tagsObj[group_title] = [name];
 
     temp.innerHTML =
         '<label class="filterTagLabel" for="tag_'+id+'">'+
-        '<input'+ checked +' class="checkbox-filter-search filtersInputWeb" type="checkbox" data-name="tag" data-group="Stripe" data-title="'+ group_title +'" data-value="'+tagId+'-'+englishName+'" value="'+name+'" id="tag_'+id+'">'+
+        '<input'+ checked +' class="checkbox-filter-search filtersInputWeb" type="checkbox" data-name="tag" data-group="Stripe" data-value="'+tagId+'-'+englishName+'" value="'+name+'" id="tag_'+id+'">'+
         '<div class="wrap-term-and-sum tagNameWrap">'+
         '<span class="term-name">'+name+'</span>'+
         '</div>'+
         '</label>';
     container.append(temp);
-
-    /** Append new selected tags to DOM */
-    appendSelectedTagsToDOM(tagsObj)
 
     filterByTagEvent();
 }
@@ -1075,8 +919,6 @@ function getCourses() {
         filterItems = $('.filtersSection .checkbox-filter-search');
     }
 
-    let tagsObj = {};
-
     /** Looping all filter items inputs */
     filterItems.each((index, element) => {
         let id = element.id;
@@ -1088,38 +930,24 @@ function getCourses() {
         if(element.checked) {
             switch (type) {
                 case 'tag':
-                    let groupTitle = $(`#${id}`).data('title');
-                    tagsObj[groupTitle] = tagsObj[groupTitle] ? tagsObj[groupTitle] : [];
-                    tagArray[group] = tagArray[group] ? tagArray[group] : [];
-
-                    tagArray[group].push(englishValue);
-
-                    /** Append new selected tag */
-                    tagsObj[groupTitle].push($(`#${id}`).val());
+                    if(tagArray[group]){
+                        tagArray[group].push(englishValue);
+                    } else {
+                        tagArray[group] = [];
+                        tagArray[group].push(englishValue);
+                    }
                     break;
 
                 case 'institution':
-                    tagsObj[group] = tagsObj[group] ? tagsObj[group] : [];
                     institutionArray.push(englishValue);
-
-                    /** Append new selected tag */
-                    tagsObj[group].push($(`#${id}`).val());
                     break;
 
                 case 'certificate':
-                    tagsObj[group] = tagsObj[group] ? tagsObj[group] : [];
                     certificateArray.push(englishValue);
-
-                    /** Append new selected tag */
-                    tagsObj[group].push($(`#${id}`).val());
                     break;
 
                 case 'language':
-                    tagsObj[group] = tagsObj[group] ? tagsObj[group] : [];
                     languageArray.push(englishValue);
-
-                    /** Append new selected tag */
-                    tagsObj[group].push($(`#${id}`).val());
                     break;
             }
         }
@@ -1151,27 +979,6 @@ function getCourses() {
         filterCoursesAjax(filterData)
     }
 
-    /** Append new selected tags to DOM */
-    appendSelectedTagsToDOM(tagsObj)
-}
-
-function sortByAjax(idsArray,sortType){
-
-    let data = {
-        'action': 'sort_by_courses',
-        'lang' : getCookie('openedx-language-preference'),
-        'sortType': sortType,
-        'coursesIds':idsArray,
-    }
-    jQuery.post(sort_by_courses_ajax.ajaxurl, data, function(response){
-        if(response.success){
-            const responseData = JSON.parse(response.data);
-            const coursesLength = responseData['courses'].length
-            if(coursesLength > 0) {
-                appendFilteredCourses(responseData['courses']);
-            }
-        }
-    })
 }
 
 /**

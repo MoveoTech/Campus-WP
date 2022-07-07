@@ -1027,12 +1027,6 @@ footer .footer-section .inners-footer-items {
     margin-right: 12px; }
   .filtersSection .allFiltersWrapDiv .checkboxFiltersWrap .filterVector {
     margin: 0 0 0 7px; }
-  .filtersSection .allFiltersWrapDiv .checkboxFiltersWrap #selectedTags .selected-tag span {
-    margin-left: unset;
-    margin-right: 5px; }
-  .filtersSection .allFiltersWrapDiv .checkboxFiltersWrap #selectedTags .selected-tag .remove-filters {
-    margin-left: 2px;
-    margin-right: unset; }
 
 /* sort by */
 .sortByWrapper #sortByButton {
@@ -1137,12 +1131,6 @@ footer .footer-section .inners-footer-items {
 .openFiltersMenu {
   left: unset;
   right: 30px; }
-  .openFiltersMenu .mobile-filters-counter {
-    margin-right: 7px;
-    margin-left: unset; }
-  .openFiltersMenu .filterVector {
-    margin-right: unset;
-    margin-left: 7px; }
 
 .filters-mobile-menu-popup {
   transform: translateX(135%); }
