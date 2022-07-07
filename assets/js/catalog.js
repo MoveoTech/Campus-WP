@@ -110,7 +110,6 @@ $(document).click(function(event) {
     if (!filtergroup.is(event.target) && !filtergroup.has(event.target).length && !filtersInputs.is(event.target) && !filtersInputs.has(event.target).length ) {
 
         filtersInputs.each((index, element) => {
-            console.log(element.classList.contains('filter-group-skeleton'))
             if(!element.classList.contains('filter-group-skeleton')){
                 element.style.display = "none";
             }
