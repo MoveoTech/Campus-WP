@@ -60,28 +60,6 @@ $(document).ready(function () {
         }
     });
 
-    /** Click event - open 'sort by' menu **/
-    $('#sortByButton').on('click', function (event) {
-        $('#sortByOptions').toggleClass('active');
-    });
-
-    /** Click event - sort by courses **/
-    $('.sortOption').on('click', function (event) {
-        const sortType = event.target.id;
-        const sortingValue = event.target.innerText;
-        const sortByText = $('#sortByText');
-        const coursesContainer = $('#catalog_courses').data('value');
-        const idsArray = coursesContainer.split(",");
-        if(coursesContainer.length > 0) {
-            /** targeting input to color the selected value  */
-            $('.sortOption').removeClass('active');
-            $(event.target).addClass('active');
-            /** changing button text to the selected value */
-            sortByText.text(sortingValue);
-            sortByAjax(idsArray,sortType);
-        }
-    })
-
     /** checking screen size for web or mobile menu */
     slickStripeForMobile();
     $(window).resize(function() {
@@ -127,8 +105,6 @@ $(document).click(function(event) {
     if(event.target.classList.contains('filter-group-skeleton')) event.target.style.display = "block";
     let filtergroup = $('.wrapEachFiltergroup');
     let filtersInputs = $(`.inputsContainer`);
-    let sortByButton = $(`#sortByButton`);
-    let sortByOptions = $(`#sortByOptions`);
 
     /** hiding input container when clicking on screen - when the event.target in not one of the filters menu / inputs */
     if (!filtergroup.is(event.target) && !filtergroup.has(event.target).length && !filtersInputs.is(event.target) && !filtersInputs.has(event.target).length ) {
@@ -141,10 +117,7 @@ $(document).click(function(event) {
         })
 
     }
-    /** hiding sort by menu when the event.target in not the sort by menu button */
-    if(!sortByButton.is(event.target) && !sortByButton.has(event.target).length){
-        sortByOptions.removeClass('active');
-    }
+
     /** Checking if the event is a filter group or input container */
     if (filtergroup.is(event.target) || filtergroup.has(event.target).length || filtersInputs.is(event.target) || filtersInputs.has(event.target).length) {
 
@@ -1006,25 +979,6 @@ function getCourses() {
         filterCoursesAjax(filterData)
     }
 
-}
-
-function sortByAjax(idsArray,sortType){
-
-    let data = {
-        'action': 'sort_by_courses',
-        'lang' : getCookie('openedx-language-preference'),
-        'sortType': sortType,
-        'coursesIds':idsArray,
-    }
-    jQuery.post(sort_by_courses_ajax.ajaxurl, data, function(response){
-        if(response.success){
-            const responseData = JSON.parse(response.data);
-            const coursesLength = responseData['courses'].length
-            if(coursesLength > 0) {
-                appendFilteredCourses(responseData['courses']);
-            }
-        }
-    })
 }
 
 /**

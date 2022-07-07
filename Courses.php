@@ -150,7 +150,7 @@ $no_results_found = $countNumber === 0;
                 </div>
 
                  <!--. LOAD MORE COURSES SKELETONS  -->
-                <?php echo getCatalogCoursesSkeleton(); ?>
+                <?php get_template_part('template', 'parts/catalogCourse-skeleton'); ?>
 
                 <div class="catalogStripeWrap">
 
