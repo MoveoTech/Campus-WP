@@ -22,6 +22,14 @@ $(document).ready(function () {
         let resetUrl = currentUrl.split('?')[0]
         if(stripeIdValue){
             resetUrl = resetUrl + "?stripe_id=" + stripeIdValue;
+        } else {
+            /** deleting ids from hidden div **/
+            const coursesContainer = $('#catalog_courses');
+            coursesContainer.attr("data-value",[]);
+            /** delete all courses result **/
+            const coursesBox = $('#coursesBox');
+            coursesBox.empty();
+            updateCoursesCounter(0);
         }
         let url = new URL(resetUrl);
         window.history.replaceState({}, '', url);
@@ -35,7 +43,7 @@ $(document).ready(function () {
         $('.search-field').val('');
 
         /** Get the initial courses */
-        if(currentUrl.includes('?')){
+        if(url.href.includes('?')){
             getCourses()
         }
         /** removing extra filters **/
