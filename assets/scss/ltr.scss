@@ -1475,6 +1475,19 @@ footer .footer-section{
             .filterVector{
                 margin: 0 0 0 7px;
             }
+            #selectedTags {
+                .selected-tag {
+                    span {
+                        margin-left: unset;
+                        margin-right: 5px;
+                    }
+
+                    .remove-filters {
+                        margin-left: 2px;
+                        margin-right: unset;
+                    }
+                }
+            }
         }
     }
 }
@@ -1637,6 +1650,15 @@ footer .footer-section{
 .openFiltersMenu{
     left: unset;
     right: 30px;
+    .mobile-filters-counter {
+        margin-right: 7px;
+        margin-left: unset;
+    }
+
+    .filterVector {
+        margin-right: unset;
+        margin-left: 7px;
+    }
 }
 
 .filters-mobile-menu-popup{
