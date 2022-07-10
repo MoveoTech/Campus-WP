@@ -37,8 +37,10 @@ $(document).ready(function () {
         }
         /** removing extra filters **/
         $('.extraFilter').remove();
-        $('#morefiltersBox .filterInput').show()
-        $('#morefiltersBox').show()
+        if ($(window).width() > 768) {
+            $('#morefiltersBox .filterInput').show()
+            $('#morefiltersBox').show()
+        }
 
         /** deleting ids from hidden div **/
         const coursesContainer = $('#catalog_courses');
@@ -551,7 +553,7 @@ function removeSelectedTags() {
 /**
  *  Append new selected tags to DOM
  * */
-function appendSelectedTagsToDOM(tagsObj, mobile = false) {
+function appendSelectedTagsToDOM(tagsObj, isMobile = false) {
     let selectedTagsDiv = $('<div>');
     selectedTagsDiv.attr('id', 'selectedTags');
     let filterCounter = 0;
@@ -588,7 +590,7 @@ function appendSelectedTagsToDOM(tagsObj, mobile = false) {
     } else {
         $('.mobile-filters-counter').hide()
     }
-    if(!mobile){
+    if(!isMobile){
         $('#selectedTags').replaceWith(selectedTagsDiv)
     }
     removeSelectedTags()
@@ -642,101 +644,7 @@ function filterByTagMobile(){
 
     /** click event - targeting each input for filtering */
     $('.buttonFilterWrap').on('click', function (event) {
-        let filterData = {"search": {}};
-        let tagArray = {};
-        let freeSearchData = [];
-        let institutionArray = [];
-        let certificateArray = [];
-        let languageArray = [];
-
-        /** Getting free search value from url params */
-        let params = new URLSearchParams(document.location.search);
-        let searchValue = params.get("text_s");
-        if(searchValue){
-            searchValue = searchValue.replaceAll(`\\`, "");
-            freeSearchData.push(searchValue);
-        }
-
-        /** Getting array of inputs */
-        let filterItems = $('.checkbox-filter-search');
-
-        let tagsObj = {};
-
-        /** Looping all filter items inputs */
-        filterItems.each((index, element) => {
-            let id = element.id;
-            let type = $(`#${id}`).data('name');
-            let group = $(`#${id}`).data('group');
-            let englishValue = $(`#${id}`).data('value');
-
-            /** Checking if value is checked */
-            if(element.checked) {
-                switch (type) {
-                    case 'tag':
-                        let groupTitle = $(`#${id}`).data('title');
-                        tagsObj[groupTitle] = tagsObj[groupTitle] ? tagsObj[groupTitle] : [];
-                        tagArray[group] = tagArray[group] ? tagArray[group] : [];
-                        tagArray[group].push(englishValue);
-
-                        /** Append new selected tag */
-                        tagsObj[groupTitle].push($(`#${id}`).val());
-                        break;
-
-                    case 'institution':
-                        tagsObj[group] = tagsObj[group] ? tagsObj[group] : [];
-                        institutionArray.push(englishValue);
-                        /** Append new selected tag */
-                        tagsObj[group].push($(`#${id}`).val());
-                        break;
-
-
-                    case 'certificate':
-                        tagsObj[group] = tagsObj[group] ? tagsObj[group] : [];
-                        certificateArray.push(englishValue);
-                        /** Append new selected tag */
-                        tagsObj[group].push($(`#${id}`).val());
-                        break;
-
-                    case 'language':
-                        tagsObj[group] = tagsObj[group] ? tagsObj[group] : [];
-                        languageArray.push(englishValue);
-                        /** Append new selected tag */
-                        tagsObj[group].push($(`#${id}`).val());
-                        break;
-                }
-            }
-        });
-
-        /** Checking if any filter checked */
-        if(Object.keys(tagArray).some(() => { return true; }) || institutionArray.length > 0 || certificateArray.length > 0 || languageArray.length > 0 || Object.keys(freeSearchData).some(() => { return true; })) {
-
-            /** checking which filters checked and pushing each array to object (key and values) */
-            if(freeSearchData.length > 0) {
-                filterData['search']['text_s'] = freeSearchData;
-            }
-            if(Object.keys(tagArray).some((k) => { return true; })) {
-                filterData['search']['tags'] = tagArray;
-            }
-            if(institutionArray.length > 0) {
-                filterData['search']['institution'] = institutionArray;
-            }
-
-            if(certificateArray.length > 0) {
-                filterData['search']['certificate'] = certificateArray;
-            }
-            if(languageArray.length > 0) {
-                filterData['search']['language'] = languageArray;
-            }
-            filterCoursesAjax(filterData);
-            closingOverlay();
-        } else {
-            filterData = [];
-            filterCoursesAjax(filterData);
-            closingOverlay();
-        }
-
-        /** Append new selected tags to DOM */
-        appendSelectedTagsToDOM(tagsObj, true)
+        getCourses();
     })}
 /** End of function filterByTagMobile */
 
@@ -1038,8 +946,10 @@ function getCourses() {
     }
     /** Getting array of inputs depend desktop/mobile */
     let filterItems;
+    let isMobile = false;
     if($(window).width() <= 768) {
         filterItems = $('#filtersSectionMobile .checkbox-filter-search');
+        isMobile = true;
     } else {
         filterItems = $('.filtersSection .checkbox-filter-search');
     }
@@ -1115,13 +1025,15 @@ function getCourses() {
             filterData['search']['language'] = languageArray;
         }
         filterCoursesAjax(filterData)
+        isMobile && closingOverlay();
     } else {
         filterData = [];
         filterCoursesAjax(filterData)
+        isMobile && closingOverlay();
     }
 
     /** Append new selected tags to DOM */
-    appendSelectedTagsToDOM(tagsObj)
+    appendSelectedTagsToDOM(tagsObj, isMobile)
 }
 
 /**
