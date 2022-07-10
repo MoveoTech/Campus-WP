@@ -50,6 +50,8 @@ $current_lang = $sitepress->get_current_language();
             <p class="resetFilterButton filterGroupTitle"><?= ResetFiltersLanguage(); ?></p>
         </div>
     </div>
+
+    <div id="selectedTags"></div>
 </div>
 
 <!-- END FILTERS SECTION .-->
