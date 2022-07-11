@@ -20044,10 +20044,11 @@ body .course-item-hover {
 
 /** home stripe connection to catalog */
 .showAllCoursesCard .showCardImg {
-  background: url("../../assets/images/showAllCoursesCard.svg");
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-size: cover; }
+  background: url("../../assets/images/showAllCoursesCard.svg"); }
+
+.showAllCoursesCard .countContainer .countCourses {
+  font-size: 14px;
+  font-weight: 700; }
 
 /* Header */
 .catalog-banner {

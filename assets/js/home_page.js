@@ -958,13 +958,13 @@ function appendShowCoursesMobileButton(stripeId){
         let showAllCoursesCard = jQuery("<div>");
         showAllCoursesCard.addClass('showAllCoursesCard course-stripe-item slick-slide');
         showAllCoursesCard.attr("id",`showAllCoursesCard_${stripeId}`);
-        showAllCoursesCard.attr("href",currentUrl+'/catalog/?stripe_id='+stripeId);
+        // showAllCoursesCard.attr("href",currentUrl+'/catalog/?stripe_id='+stripeId);
         showAllCoursesCard.attr("data-slick-index",7);
         showAllCoursesCard.attr("aria-hidden",true);
         showAllCoursesCard.attr("tabindex",-1);
         showAllCoursesCard.html(
-            '<div class="showCardImg course-img"></div>'+
-            '<div><span>'+coursesCount+'</span></div>'
+            '<div class="showCardImg course-img"><a href='+currentUrl+'/catalog/?stripe_id='+stripeId+' ></a></div>'+
+            '<div class="countContainer"><span class="countCourses">'+coursesCount+'</span></div>'
         );
         stripeContainer.append(showAllCoursesCard);
     }

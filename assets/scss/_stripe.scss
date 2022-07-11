@@ -2288,9 +2288,13 @@ body {
 .showAllCoursesCard{
   .showCardImg{
     background: url("../../assets/images/showAllCoursesCard.svg");
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: cover;
 
+  }
+  .countContainer{
+
+    .countCourses{
+      font-size: 14px;
+      font-weight: 700;
+    }
   }
 }
