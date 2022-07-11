@@ -20042,8 +20042,12 @@ body .course-item-hover {
   to {
     opacity: 1; } }
 
-.ShowAllCoursesCard {
-  background: url("../../assets/images/showAllCoursesCard.svg"); }
+/** home stripe connection to catalog */
+.showAllCoursesCard .showCardImg {
+  background: url("../../assets/images/showAllCoursesCard.svg");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover; }
 
 /* Header */
 .catalog-banner {

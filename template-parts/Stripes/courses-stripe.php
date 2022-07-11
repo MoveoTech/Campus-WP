@@ -9,7 +9,6 @@ global $sitepress;
 $current_language = $sitepress->get_current_language();
 
 $courses_url = home_url('/catalog/?stripe_id=') . $stripe['id'];
-// TO DO - change url slugs
 $countShow = getFieldByLanguage("הצג את", "Show all", "أعرض", $current_language);
 $countCourses = getFieldByLanguage("הקורסים", "Courses", "مساق", $current_language);
 $countNumber = count($stripe['carousel']);
@@ -35,7 +34,7 @@ if($current_language == 'ar'){
                 <p><?php echo $stripe['subtitle'] ?></p>
             <?php endif; ?>
         </div>
-        <div class="show-all-courses"><a href="<?php echo $courses_url ?>"><p> <?php echo $countShow ." ". $countNumber ." ". $countCourses ?></p></a></div>
+        <div class="show-all-courses"><a href="<?php echo $courses_url ?>"><p id="count_<?= $stripe['id']  ?>"> <?php echo $countShow ." ". $countNumber ." ". $countCourses ?></p></a></div>
     </div>
         <?php
     get_template_part('template', 'parts/Stripes/courses-carousel',

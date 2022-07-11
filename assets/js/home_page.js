@@ -25,10 +25,14 @@ jQuery(document).ready(function () {
     jQuery('.courses-stripe').on('afterChange', function (event) {
         const id = event.target.id
         mouseHoverOnCourse()
-        getCoursesAjax(id)
         let width = jQuery(document).width();
-        if(width <= 768) return;
-        changeArrowClass(id)
+        if(width <= 768) {
+            appendShowCoursesMobileButton(id);
+        } else{
+            getCoursesAjax(id);
+            changeArrowClass(id);
+        }
+
     });
 
     jQuery('.goals-slider').on('afterChange', function (event) {
@@ -457,7 +461,6 @@ function getCoursesAjax(id) {
             jQuery(`#${nextButton.id}`).prop('disabled', true);
         }
         let newCoursesArray = coursesIDs.slice(trackLength + 1, (trackLength + 21))
-
         let data = {
             'action': 'stripe_data',
             'type' : 'courses',
@@ -940,4 +943,30 @@ function getCurrentEnvURLs(partURL) {
         'EDX_COURSE_URL': `https://courses${partURL}.campus.gov.il/courses/`,
 
     }
+}
+
+function appendShowCoursesMobileButton(stripeId){
+    const stripeContainer = jQuery(`#${stripeId} .slick-list .slick-track`);
+    const stripechildrens = stripeContainer.children();
+    if(jQuery(`#showAllCoursesCard_${stripeId}`).length <= 0){
+        if(stripechildrens.length >7){
+            const stripeCoursesToRemove = jQuery(`#${stripeId} .slick-list .slick-track :nth-child(1n+8)`);
+            stripeCoursesToRemove.remove(".course-stripe-item");
+        }
+        const coursesCount = jQuery(`#count_${stripeId}`).text();
+        const currentUrl = window.location.href;
+        let showAllCoursesCard = jQuery("<div>");
+        showAllCoursesCard.addClass('showAllCoursesCard course-stripe-item slick-slide');
+        showAllCoursesCard.attr("id",`showAllCoursesCard_${stripeId}`);
+        showAllCoursesCard.attr("href",currentUrl+'/catalog/?stripe_id='+stripeId);
+        showAllCoursesCard.attr("data-slick-index",7);
+        showAllCoursesCard.attr("aria-hidden",true);
+        showAllCoursesCard.attr("tabindex",-1);
+        showAllCoursesCard.html(
+            '<div class="showCardImg course-img"></div>'+
+            '<div><span>'+coursesCount+'</span></div>'
+        );
+        stripeContainer.append(showAllCoursesCard);
+    }
+
 }
