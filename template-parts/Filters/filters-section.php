@@ -74,6 +74,8 @@ $sortByZtoA = getFieldByLanguage("סידור לפי ת' עד א'", "Sort by Z to
             </div>
         </div>
     </div>
+
+    <div id="selectedTags"></div>
 </div>
 
 <!-- END FILTERS SECTION .-->

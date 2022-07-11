@@ -44,6 +44,10 @@ $(document).ready(function () {
         }
         /** removing extra filters **/
         $('.extraFilter').remove();
+        if ($(window).width() > 768) {
+            $('#morefiltersBox .filterInput').show()
+            $('#morefiltersBox').show()
+        }
 
         /** reset sort by button to default */
         const sortByType = $('#sortByText').attr("data");
@@ -57,14 +61,20 @@ $(document).ready(function () {
         /**Getting targeted input */
         let filterId = $(event.target).data('value');
         let filterGroupName = event.target.value;
-        /** If element checked appending it to menu, else - remove it */
+        /** If element checked appending it to menu*/
         if(event.target.checked){
             appendGroupFilter(filterGroupName, filterId);
             getFiltersGroups(filterId);
             openCheckboxEvent();
-        } else {
-            let filterToRemove = document.getElementsByClassName(filterId)[0];
-            filterToRemove.remove()
+            $(event.target.parentElement.parentElement).hide()
+            let filtersLength = $('#morefiltersBox .inputsContainer').children().length;
+            let count = 0;
+            $('#morefiltersBox .inputsContainer').children().each((index, element) => {
+                count += element.style.display === "none" ? 1 : 0;
+            })
+            if(count === filtersLength) {
+                $('#morefiltersBox').hide()
+            }
         }
     });
 
@@ -119,6 +129,9 @@ $(document).ready(function () {
     if(clientHeight + scrollTop >= scrollHeight - 2000) {
         loadCourses()
     }
+
+
+    removeSelectedTags();
 });
 /** End of document ready */
 
@@ -181,8 +194,6 @@ $(document).scroll(function() {
     }
 })
 
-
-
 function closingOverlay(){
     jQuery(".bg-overlay").removeClass('active');
     jQuery(".bg-overlay").removeClass('filterMenuOverlay');
@@ -201,7 +212,7 @@ function slickStripeForMobile() {
     if($(window).width() <= 768){
 
         if($('#filtersSectionMobile')){
-            /** Changing classe in filters menu inputs */
+            /** Changing classes in filters menu inputs */
             $('#filtersSectionMobile .checkbox-filter-search').addClass('.checkboxFilterMobile');
 
             /** changing inputs id, for mobile */
@@ -442,8 +453,15 @@ function appendUrlParams(filters) {
 
 function markCheckboxes(params) {
     let entries = params.entries();
-    let filterItems = $('.filtersInputWeb');
 
+    let filterItems;
+    if($(window).width() <= 768) {
+        filterItems = $('#filtersSectionMobile .checkbox-filter-search');
+    } else {
+        filterItems = $('.filtersSection .checkbox-filter-search');
+    }
+
+    let tagsObj = {};
     for ( entry of entries) {
         if(entry[0] == 'text_s') {
            let inputValue = entry[1].replaceAll(`\\`, "");
@@ -452,8 +470,10 @@ function markCheckboxes(params) {
 
         if(entry[0] === 'tags_Stripe') {
             const tagId = entry[1].split('-')[0];
-            appendSpecialGroupFilter()
-            getTagById(tagId);
+            const currentLang = getCookie('openedx-language-preference') ? getCookie('openedx-language-preference') : getCookie('wp-wpml_current_language');
+            let group_title = getFieldByLanguage('התאמה מיוחדת', 'Customize Tag', 'تناسب خاص', currentLang);
+            appendSpecialGroupFilter(group_title)
+            getTagById(tagId, group_title);
         }
 
         filterItems.each((index, element) => {
@@ -465,9 +485,15 @@ function markCheckboxes(params) {
             if(entry[0] === type ) {
                 let itemValues = entry[1].split(",");
 
+                tagsObj[group] = tagsObj[group] ? tagsObj[group] : [];
+
                 for(let item of itemValues){
                     if(englishValue.split(' ').join('') === item.split(' ').join('')) {
+
                         $(`#${id}`).prop('checked', true)
+
+                        /** Append new selected tag */
+                        tagsObj[group].push($(`#${id}`).val());
                     }
                 }
             }
@@ -477,10 +503,15 @@ function markCheckboxes(params) {
 
                 if(tagsGroup === group) {
                     let itemValues = entry[1].split(",");
+                    let groupTitle = $(`#${id}`).data('title'); //TODO using for tags.
+                    tagsObj[groupTitle] = tagsObj[groupTitle] ? tagsObj[groupTitle] : [];
 
                     for(let item of itemValues){
                         if(englishValue.toLowerCase() === item.toLowerCase()) {
                             $(`#${id}`).prop('checked', true)
+
+                            /** Append new selected tag */
+                            tagsObj[groupTitle].push($(`#${id}`).val());
                         }
                     }
                 }
@@ -495,6 +526,7 @@ function markCheckboxes(params) {
             let id = element.id;
             let type = $(`#${id}`).data('name');
             let englishValue = $(`#${id}`).data('value');
+            let group = $(`#${id}`).data('group');
 
             if (type === 'language') {
                 let lang;
@@ -512,6 +544,11 @@ function markCheckboxes(params) {
 
                 if (englishValue.includes(lang)) {
                     $(`#${id}`).prop('checked', true)
+
+                    /** Append new selected tag */
+                    tagsObj[group] = tagsObj[group] ? tagsObj[group] : [];
+                    tagsObj[group].push($(`#${id}`).val());
+
                     let currentUrl = window.location.href;
                     let url = new URL(currentUrl);
                     url.searchParams.set(type, lang);
@@ -520,6 +557,78 @@ function markCheckboxes(params) {
             }
         });
     }
+
+    /** Append new selected tags to DOM */
+    appendSelectedTagsToDOM(tagsObj)
+}
+
+function removeSelectedTags() {
+    $('.remove-filters').on('click', function(event) {
+        let filterItems;
+        if($(window).width() <= 768) {
+            filterItems = $('#filtersSectionMobile .checkbox-filter-search');
+        } else {
+            filterItems = $('.filtersSection .checkbox-filter-search');
+        }
+        filterItems.each((index, element) => {
+            let id = element.id;
+            let group = $(`#${id}`).data('group');
+            let groupTitle = $(`#${id}`).data('title');
+            let parentName = event.target.parentElement.getAttribute('data-name')
+            if (group === parentName || groupTitle === parentName) {
+                $(`#${id}`).prop('checked', false)
+                event.target.parentElement.remove()
+            }
+        })
+        getCourses();
+    })
+}
+
+/**
+ *  Append new selected tags to DOM
+ * */
+function appendSelectedTagsToDOM(tagsObj, isMobile = false) {
+    let selectedTagsDiv = $('<div>');
+    selectedTagsDiv.attr('id', 'selectedTags');
+    let filterCounter = 0;
+    for(let group in tagsObj) {
+
+        let selectedTag = $('<div>');
+        selectedTag.addClass('selected-tag')
+        selectedTag.attr('data-name', group)
+
+        let tagGroup = $('<span>');
+        tagGroup.text(group + ': ')
+        selectedTag.append(tagGroup);
+
+        if(tagsObj[group].length !== 0) {
+            filterCounter += tagsObj[group].length;
+            let tagText = $('<span>');
+            let firstTwoFilters = tagsObj[group].slice(0,2) /* display just the first 2 tags */
+            tagText.text(firstTwoFilters.join(', '));
+            selectedTag.append(tagText);
+        }
+
+        if(selectedTag.children.length >= 2) {
+            let removeFilters = $('<div>');
+            removeFilters.addClass('remove-filters')
+            selectedTag.append(removeFilters);
+            selectedTagsDiv.append(selectedTag)
+        }
+    }
+    if(filterCounter > 0){
+        if(!$('.mobile-filters-counter').is(':visible')) {
+            $('.mobile-filters-counter').show()
+        }
+        $('.mobile-filters-counter').text(filterCounter)
+    } else {
+        $('.mobile-filters-counter').hide()
+    }
+    if(!isMobile){
+        $('#selectedTags').replaceWith(selectedTagsDiv)
+    }
+    removeSelectedTags()
+    filterByTagEvent()
 }
 
 function haveNoResults(afterSearching= true) {
@@ -569,93 +678,7 @@ function filterByTagMobile(){
 
     /** click event - targeting each input for filtering */
     $('.buttonFilterWrap').on('click', function (event) {
-        let filterData = {"search": {}};
-        let tagArray = {};
-        let freeSearchData = [];
-        let institutionArray = [];
-        let certificateArray = [];
-        let languageArray = [];
-
-        /** reset sort by button to default */
-        const sortByText = $('#sortByText').attr("data");
-        if(sortByText !== "sortByRelevance"){
-            resetSortByButton();
-        }
-
-        /** Getting free search value from url params */
-        let params = new URLSearchParams(document.location.search);
-        let searchValue = params.get("text_s");
-        if(searchValue){
-            searchValue = searchValue.replaceAll(`\\`, "");
-            freeSearchData.push(searchValue);
-        }
-
-        /** Getting array of inputs */
-        let filterItems = $('.checkbox-filter-search');
-
-        /** Looping all filter items inputs */
-        filterItems.each((index, element) => {
-            let id = element.id;
-            let type = $(`#${id}`).data('name');
-            let group = $(`#${id}`).data('group');
-            let englishValue = $(`#${id}`).data('value');
-
-            /** Checking if value is checked */
-            if(element.checked) {
-                switch (type) {
-                    case 'tag':
-                        if(tagArray[group]){
-                            tagArray[group].push(englishValue);
-                        } else {
-                            tagArray[group] = [];
-                            tagArray[group].push(englishValue);
-                        }
-
-                        break;
-
-                    case 'institution':
-                        institutionArray.push(englishValue);
-                        break;
-
-
-                    case 'certificate':
-                        certificateArray.push(englishValue);
-                        break;
-
-                    case 'language':
-                        languageArray.push(englishValue);
-                        break;
-                }
-            }
-        });
-
-        /** Checking if any filter checked */
-        if(Object.keys(tagArray).some(() => { return true; }) || institutionArray.length > 0 || certificateArray.length > 0 || languageArray.length > 0 || Object.keys(freeSearchData).some(() => { return true; })) {
-
-            /** checking which filters checked and pushing each array to object (key and values) */
-            if(freeSearchData.length > 0) {
-                filterData['search']['text_s'] = freeSearchData;
-            }
-            if(Object.keys(tagArray).some((k) => { return true; })) {
-                filterData['search']['tags'] = tagArray;
-            }
-            if(institutionArray.length > 0) {
-                filterData['search']['institution'] = institutionArray;
-            }
-
-            if(certificateArray.length > 0) {
-                filterData['search']['certificate'] = certificateArray;
-            }
-            if(languageArray.length > 0) {
-                filterData['search']['language'] = languageArray;
-            }
-            filterCoursesAjax(filterData);
-            closingOverlay();
-        } else {
-            filterData = [];
-            filterCoursesAjax(filterData);
-            closingOverlay();
-        }
+        getCourses();
     })}
 /** End of function filterByTagMobile */
 
@@ -689,7 +712,7 @@ function appendMoreFilters(filterData) {
     let container = document.getElementById(`extraFilter_${filterId}`);
     let groupFilters = filterData.filtersList;
     let currentLanguage =filterData.language;
-    let groupName = filterData.group ? filterData.group : '';
+    let groupName = filterData.group ? filterData.group : filterData.groupName ? filterData.groupName : '';
 
     groupFilters.forEach(element => {
 
@@ -708,7 +731,7 @@ function appendMoreFilters(filterData) {
         }
         temp.innerHTML =
             '<label class="filterTagLabel" for="'+dataType + '_' + id+'">'+
-            '<input'+ checked +' class="checkbox-filter-search filtersInputWeb" type="checkbox" data-name="'+dataType+'" data-group="'+ groupName +'" data-value="'+urlTitle+'" value="'+name+'" id="'+dataType + '_' + id+'">'+
+            '<input'+ checked +' class="checkbox-filter-search filtersInputWeb" type="checkbox" data-name="'+dataType+'" data-group="'+ groupName +'" data-title="'+ groupName +'" data-value="'+urlTitle+'" value="'+name+'" id="'+dataType + '_' + id+'">'+
             '<div class="wrap-term-and-sum tagNameWrap">'+
             '<span class="term-name">'+name+'</span>'+
             '</div>'+
@@ -858,7 +881,7 @@ async function loadCourses(coursesArray = []) {
     }
 }
 
-function getTagById(tagId) {
+function getTagById(tagId, group_title) {
     let data = {
         'action': 'get_tag_data',
         'type' : 'tags',
@@ -870,7 +893,7 @@ function getTagById(tagId) {
         if(response.success) {
             const responseData = JSON.parse(response.data);
             const tag = responseData['tag'];
-            appendSpecialTagToGroup(tag)
+            appendSpecialTagToGroup(tag, group_title)
             openCheckboxEvent();
         }
     })
@@ -879,13 +902,12 @@ function getTagById(tagId) {
 /**
  *  Append tags stripe special group
  *  */
-function appendSpecialGroupFilter() {
-    const currentLang = getCookie('openedx-language-preference') ? getCookie('openedx-language-preference') : getCookie('wp-wpml_current_language');
+function appendSpecialGroupFilter(group_title) {
     let vector = $('.filterVector').attr('src');
     let mobileVector = $('.filterVectorMobile').attr('src');
     let container = document.getElementById('groupFiltersContainer');
     let mobileContainer = document.getElementById('filtersSectionMobile');
-    let groupTitle = getFieldByLanguage('התאמה מיוחדת', 'Customize Tag', 'تناسب خاص', currentLang);
+    let groupTitle = group_title;
     let addFilterbutton = document.getElementById('morefiltersBox');
     let filterId = 'stripe_tag_filter';
     let temp = document.createElement("div");
@@ -914,7 +936,7 @@ function appendSpecialGroupFilter() {
  *  Add tag from tags stripe to special filters group
  *  after tag data return from Ajax call
  *  */
-function appendSpecialTagToGroup(tag) {
+function appendSpecialTagToGroup(tag, group_title) {
     let container = document.getElementById('extraFilter_stripe_tag_filter');
     let temp = document.createElement("div");
     temp.classList.add('filterInput');
@@ -923,15 +945,20 @@ function appendSpecialTagToGroup(tag) {
     let englishName = tag['english_name'];
     let tagId = tag['id'];
     let checked = ' checked';
+    let tagsObj = {};
+    tagsObj[group_title] = [name];
 
     temp.innerHTML =
         '<label class="filterTagLabel" for="tag_'+id+'">'+
-        '<input'+ checked +' class="checkbox-filter-search filtersInputWeb" type="checkbox" data-name="tag" data-group="Stripe" data-value="'+tagId+'-'+englishName+'" value="'+name+'" id="tag_'+id+'">'+
+        '<input'+ checked +' class="checkbox-filter-search filtersInputWeb" type="checkbox" data-name="tag" data-group="Stripe" data-title="'+ group_title +'" data-value="'+tagId+'-'+englishName+'" value="'+name+'" id="tag_'+id+'">'+
         '<div class="wrap-term-and-sum tagNameWrap">'+
         '<span class="term-name">'+name+'</span>'+
         '</div>'+
         '</label>';
     container.append(temp);
+
+    /** Append new selected tags to DOM */
+    appendSelectedTagsToDOM(tagsObj)
 
     filterByTagEvent();
 }
@@ -959,11 +986,15 @@ function getCourses() {
     }
     /** Getting array of inputs depend desktop/mobile */
     let filterItems;
+    let isMobile = false;
     if($(window).width() <= 768) {
         filterItems = $('#filtersSectionMobile .checkbox-filter-search');
+        isMobile = true;
     } else {
         filterItems = $('.filtersSection .checkbox-filter-search');
     }
+
+    let tagsObj = {};
 
     /** Looping all filter items inputs */
     filterItems.each((index, element) => {
@@ -976,24 +1007,38 @@ function getCourses() {
         if(element.checked) {
             switch (type) {
                 case 'tag':
-                    if(tagArray[group]){
-                        tagArray[group].push(englishValue);
-                    } else {
-                        tagArray[group] = [];
-                        tagArray[group].push(englishValue);
-                    }
+                    let groupTitle = $(`#${id}`).data('title');
+                    tagsObj[groupTitle] = tagsObj[groupTitle] ? tagsObj[groupTitle] : [];
+                    tagArray[group] = tagArray[group] ? tagArray[group] : [];
+
+                    tagArray[group].push(englishValue);
+
+                    /** Append new selected tag */
+                    tagsObj[groupTitle].push($(`#${id}`).val());
                     break;
 
                 case 'institution':
+                    tagsObj[group] = tagsObj[group] ? tagsObj[group] : [];
                     institutionArray.push(englishValue);
+
+                    /** Append new selected tag */
+                    tagsObj[group].push($(`#${id}`).val());
                     break;
 
                 case 'certificate':
+                    tagsObj[group] = tagsObj[group] ? tagsObj[group] : [];
                     certificateArray.push(englishValue);
+
+                    /** Append new selected tag */
+                    tagsObj[group].push($(`#${id}`).val());
                     break;
 
                 case 'language':
+                    tagsObj[group] = tagsObj[group] ? tagsObj[group] : [];
                     languageArray.push(englishValue);
+
+                    /** Append new selected tag */
+                    tagsObj[group].push($(`#${id}`).val());
                     break;
             }
         }
@@ -1019,12 +1064,16 @@ function getCourses() {
         if(languageArray.length > 0) {
             filterData['search']['language'] = languageArray;
         }
-        filterCoursesAjax(filterData);
+        filterCoursesAjax(filterData)
+        isMobile && closingOverlay();
     } else {
         filterData = [];
-        filterCoursesAjax(filterData);
+        filterCoursesAjax(filterData)
+        isMobile && closingOverlay();
     }
 
+    /** Append new selected tags to DOM */
+    appendSelectedTagsToDOM(tagsObj, isMobile)
 }
 function resetSortByButton(){
     const sortByElement = $('#sortByText');
