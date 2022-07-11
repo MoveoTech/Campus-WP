@@ -1402,26 +1402,19 @@ function console_log($output, $with_script_tags = true) {
     echo $js_code;
 }
 
-function  getSortByParams($sortType,$coursesIds, $lang) {
+function getSortByParams($sortType, $coursesIds, $lang) {
 
-    $where = "t.id IN (";
-    $sortBy = sortByQuery($sortType,$lang);
+    $where = "t.id IN (" .  $coursesIds .")";
+    $sortBy = sortByQuery($sortType, $lang);
 
-    foreach ($coursesIds as $singleId) {
-        $where = $where . $singleId . ",";
-    }
-    $where = substr_replace($where, ")", -1);
-
-    $params = array(
+    return array(
         'limit' => -1,
         'where' => $where,
         'orderby' => $sortBy,
     );
-    return $params;
 }
 function sortByQuery($sortType, $lang){
     $byName = getFieldByLanguage("t.name", "t.english_name", "t.arabic_name", $lang);
-    $sortBy ="";
 
     switch ($sortType) {
         case "sortByRelevance":

@@ -1094,8 +1094,7 @@ function sortingByChoise(choise){
     const sortByText = $('#sortByText');
     const sortType = choise.target.id;
     const sortingValue = choise.target.innerText;
-    const coursesContainer = $('#catalog_courses').data('value');
-    const idsArray = coursesContainer.split(",");
+    const idsContainer = $('#catalog_courses').data('value');
 
     /** targeting input to color the selected value  */
     $('.sortOption').removeClass('active');
@@ -1105,17 +1104,17 @@ function sortingByChoise(choise){
     sortByText.text(sortingValue);
     sortByText.attr("data",sortType);
 
-    sortByAjax(idsArray,sortType);
+    sortByAjax(idsContainer,sortType);
 
 }
 
-function sortByAjax(idsArray,sortType){
+function sortByAjax(idsContainer,sortType){
 
     let data = {
         'action': 'sort_by_courses',
         'lang' : getCookie('openedx-language-preference'),
         'sortType': sortType,
-        'coursesIds':idsArray,
+        'coursesIds':idsContainer,
     }
     jQuery.post(sort_by_courses_ajax.ajaxurl, data, function(response){
         if(response.success){
