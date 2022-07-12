@@ -20045,7 +20045,7 @@ body .course-item-hover {
 /** home stripe connection to catalog */
 @media (max-width: 768px) {
   .showAllCoursesCard .showCardImg {
-    background: url("../../assets/images/showAllCoursesCard.svg"); }
+    background-image: url("../../assets/images/showAllCoursesCard.svg"); }
   .showAllCoursesCard .countContainer {
     display: flex;
     justify-content: center;
