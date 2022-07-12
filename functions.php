@@ -15,6 +15,7 @@ include locate_template( 'assets/ajax/stripe_data.php' );
 include locate_template( 'assets/ajax/my_courses.php' );
 include locate_template( 'assets/ajax/get_course_popup.php' );
 include locate_template( 'assets/ajax/filter_by_tag.php' );
+include locate_template( 'assets/ajax/sort_by_courses.php' );
 include locate_template( 'assets/ajax/get_tag_data.php' );
 include locate_template( 'assets/ajax/add_filters_to_menu.php' );
 
@@ -127,6 +128,7 @@ function style_of_campus_enqueue() {
     wp_localize_script('home_page_js', 'my_courses_ajax', array('ajaxurl' => admin_url('admin-ajax.php')));
     //filtering tags ajax call
     wp_localize_script('catalog_js', 'filter_by_tag_ajax', array('ajaxurl' => admin_url('admin-ajax.php')));
+    wp_localize_script('catalog_js', 'sort_by_courses_ajax', array('ajaxurl' => admin_url('admin-ajax.php')));
 
 	wp_localize_script( 'ready_js', 'global_vars', array(
 			'link_to_enrollment_api'        => get_field( 'link_to_enrollment_api', 'option' ),
@@ -1398,6 +1400,42 @@ function console_log($output, $with_script_tags = true) {
         $js_code = '<script>' . $js_code . '</script>';
     }
     echo $js_code;
+}
+
+function getSortByParams($sortType, $coursesIds, $lang) {
+
+    $where = "t.id IN (" .  $coursesIds .")";
+    $sortBy = sortByQuery($sortType, $lang);
+
+    return array(
+        'limit' => -1,
+        'where' => $where,
+        'orderby' => $sortBy,
+    );
+}
+function sortByQuery($sortType, $lang){
+    $byName = getFieldByLanguage("t.name", "t.english_name", "t.arabic_name", $lang);
+
+    switch ($sortType) {
+        case "sortByRelevance":
+            $sortBy = "t.order DESC," . $byName;
+            break;
+        case "sortByNewest":
+            $sortBy = "t.start_date DESC , t.enrollment_start DESC , " . $byName;
+            break;
+        case "sortByOldest":
+            $sortBy = "t.start_date , t.enrollment_start , ". $byName;
+            break;
+        case "sortByAtoZ":
+            $sortBy = $byName . ", t.order , RAND()";
+            break;
+        case "sortByZtoA":
+            $sortBy = $byName . " DESC, t.order , RAND()";
+            break;
+        default:
+            $sortBy = "t.order," . $byName;
+    }
+    return $sortBy;
 }
 
 function replace_first_str($search_str, $replacement_str, $src_str){
