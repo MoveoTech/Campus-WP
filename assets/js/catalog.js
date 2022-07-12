@@ -31,15 +31,8 @@ $(document).ready(function () {
         /** Clear search input fields */
         $('.search-field').val('');
 
-        /** deleting ids from hidden div **/
-        const coursesContainer = $('#catalog_courses');
-        coursesContainer.attr("data-value",[]);
-        /** delete all courses result **/
-        const coursesBox = $('#coursesBox');
-        coursesBox.empty();
-        updateCoursesCounter(0);
         /** Get the initial courses */
-        if(url.href.includes('?')){
+        if(currentUrl.includes('?')){
             getCourses()
         }
         /** removing extra filters **/
@@ -54,6 +47,14 @@ $(document).ready(function () {
         if(sortByType !== "sortByRelevance"){
             resetSortByButton();
         }
+
+        /** deleting ids from hidden div **/
+        const coursesContainer = $('#catalog_courses');
+        coursesContainer.attr("data-value",[]);
+        /** delete all courses result **/
+        const coursesBox = $('#coursesBox');
+        coursesBox.empty();
+        updateCoursesCounter(0);
     });
 
     /** Click event - adding more filters **/
