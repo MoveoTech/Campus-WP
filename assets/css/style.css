@@ -20054,6 +20054,8 @@ body .course-item-hover {
     .showAllCoursesCard .countContainer .countCourses {
       font-size: 14px;
       font-weight: 700; }
+      .showAllCoursesCard .countContainer .countCourses a {
+        color: #000000; }
     .showAllCoursesCard .countContainer .countArrows {
       margin: 0 5px; } }
 

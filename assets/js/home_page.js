@@ -964,7 +964,7 @@ function appendCoursesCardMobileButton(){
             showAllCoursesCard.attr("tabindex",-1);
             showAllCoursesCard.html(
                 '<div class="showCardImg course-img"><a href='+catalogStripeUrl+' ></a></div>'+
-                '<div class="countContainer"><span class="countCourses">'+coursesCount+'</span><span class="countArrows">>></span></div>'
+                '<div class="countContainer"><span class="countCourses"><a href='+catalogStripeUrl+'>'+coursesCount+'</a></span><span class="countArrows">>></span></div>'
             );
             jQuery(`#${stripeId}`).slick('slickAdd',showAllCoursesCard);
         }
