@@ -90,7 +90,8 @@ $(document).ready(function () {
         const containerChildren = idSContainer.children();
         const hasClass = containerChildren.hasClass("courseResultCard");
         const childrenLength = containerChildren.length;
-        if(hasClass && childrenLength > 1){
+        const sortByText = $('#sortByText').attr("data");
+        if(hasClass && childrenLength > 1 && sortByText !== event.target.id){
             sortingByChoise(event);
         }
     })
@@ -1104,7 +1105,7 @@ function sortingByChoise(choise){
     /** changing button text to the selected value */
     sortByText.text(sortingValue);
     sortByText.attr("data",sortType);
-
+    
     sortByAjax(idsContainer,sortType);
 
 }
