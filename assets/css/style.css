@@ -20218,35 +20218,6 @@ body .course-item-hover {
         text-align: right;
         color: #333433;
         margin: auto; }
-      .filtersSection .allFiltersWrapDiv .checkboxFiltersWrap #selectedTags {
-        display: flex;
-        flex-wrap: wrap;
-        flex-direction: row;
-        margin-top: 7px; }
-        .filtersSection .allFiltersWrapDiv .checkboxFiltersWrap #selectedTags .selected-tag {
-          display: flex;
-          align-items: center;
-          width: fit-content;
-          padding: 2px 10px;
-          background: #141414;
-          border: 1px solid rgba(0, 0, 0, 0.1);
-          border-radius: 10px;
-          color: #fff;
-          font-weight: 600;
-          font-size: 14px;
-          line-height: 18px;
-          margin: 0 5px 15px; }
-          .filtersSection .allFiltersWrapDiv .checkboxFiltersWrap #selectedTags .selected-tag span {
-            margin-left: 5px; }
-          .filtersSection .allFiltersWrapDiv .checkboxFiltersWrap #selectedTags .selected-tag .remove-filters {
-            background-image: url("../images/delete-white-icon.svg");
-            background-repeat: no-repeat;
-            background-size: cover;
-            background-position: center center;
-            width: 5px;
-            height: 5px;
-            margin-right: 2px;
-            cursor: pointer; }
 
 .filterVectorMobile {
   display: none; }
@@ -20550,6 +20521,37 @@ body .course-item-hover {
 /* course result presentation */
 .catalogPageBox {
   margin: 0; }
+  .catalogPageBox #selectedTags {
+    width: max-content;
+    max-width: 85%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    margin: 7px 100px 0 0; }
+    .catalogPageBox #selectedTags .selected-tag {
+      display: flex;
+      align-items: center;
+      width: fit-content;
+      padding: 2px 10px;
+      background: #141414;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      color: #fff;
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 18px;
+      margin: 0 5px 15px; }
+      .catalogPageBox #selectedTags .selected-tag span {
+        margin-left: 5px; }
+      .catalogPageBox #selectedTags .selected-tag .remove-filters {
+        background-image: url("../images/delete-white-icon.svg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center center;
+        width: 5px;
+        height: 5px;
+        margin-right: 2px;
+        cursor: pointer; }
 
 #coursesBox {
   flex-direction: column;

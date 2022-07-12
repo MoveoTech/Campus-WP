@@ -123,6 +123,8 @@ $no_results_found = $countNumber === 0;
                 <p><?= $countShow ." " ?> <span id="counterValue"><?= $countNumber ?></span><?= " ". $countCourses ?></p>
             </div>
 
+            <div id="selectedTags"></div>
+
             <div class="catalogWrap">
                 <div hidden id="catalog_courses" data-value="<?php print_r($coursesIDs); ?>" ></div>
 
