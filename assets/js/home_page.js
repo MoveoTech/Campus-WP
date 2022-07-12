@@ -26,13 +26,9 @@ jQuery(document).ready(function () {
         const id = event.target.id
         mouseHoverOnCourse()
         let width = jQuery(document).width();
-        if(width <= 768) {
-            appendShowCoursesMobileButton(id);
-        } else{
+        if(width <= 768) return;
             getCoursesAjax(id);
             changeArrowClass(id);
-        }
-
     });
 
     jQuery('.goals-slider').on('afterChange', function (event) {
@@ -324,6 +320,8 @@ jQuery(document).ready(function () {
             },
         ]
     })
+    let width = jQuery(document).width();
+    if(width <= 768) appendCoursesCardMobileButton();
 
     //Youtube popup
     jQuery('body').on('click', '.open-iframe', function (e) {
@@ -471,13 +469,13 @@ function getCoursesAjax(id) {
         jQuery.post(stripe_data_ajax.ajaxurl, data, function(response){
             if(response.success){
                 const data = JSON.parse(response.data);
-                apppendCourses(data, id);
+                appendCourses(data, id);
             }
         })
     }
 }
 
-function apppendCourses(coursesData, id) {
+function appendCourses(coursesData, id) {
 
     coursesData.forEach(item =>{
         let permalink = item.permalink ? item.permalink : '';
@@ -945,28 +943,30 @@ function getCurrentEnvURLs(partURL) {
     }
 }
 
-function appendShowCoursesMobileButton(stripeId){
-    const stripeContainer = jQuery(`#${stripeId} .slick-list .slick-track`);
-    const stripechildrens = stripeContainer.children();
-    if(jQuery(`#showAllCoursesCard_${stripeId}`).length <= 0){
-        if(stripechildrens.length >7){
-            const stripeCoursesToRemove = jQuery(`#${stripeId} .slick-list .slick-track :nth-child(1n+8)`);
-            stripeCoursesToRemove.remove(".course-stripe-item");
+function appendCoursesCardMobileButton(){
+    const allCoursesStripes = jQuery(`.home-page-courses-stripe .stripe-container .stripe-slider-slick .courses-stripe`);
+    let currentUrl = window.location.href;
+    allCoursesStripes.each((index, element) => {
+        const stripeId = element.id;
+        const stripeContainer = jQuery(`#${element.id} .slick-list .slick-track`);
+        const catalogStripeUrl = currentUrl+'catalog/?stripe_id='+stripeId;
+        if(jQuery(`#showAllCoursesCard_${stripeId}`).length <= 0){
+            if(stripeContainer.children().length >7){
+                const stripeCoursesToRemove = jQuery(`#${stripeId} .slick-list .slick-track :nth-child(1n+8)`);
+                stripeCoursesToRemove.remove(".course-stripe-item");
+            }
+            const coursesCount = jQuery(`#count_${stripeId}`).text();
+            let showAllCoursesCard = jQuery("<div>");
+            showAllCoursesCard.addClass('showAllCoursesCard course-stripe-item slick-slide');
+            showAllCoursesCard.attr("id",`showAllCoursesCard_${stripeId}`);
+            showAllCoursesCard.attr("data-slick-index",7);
+            showAllCoursesCard.attr("aria-hidden",true);
+            showAllCoursesCard.attr("tabindex",-1);
+            showAllCoursesCard.html(
+                '<div class="showCardImg course-img"><a href='+catalogStripeUrl+' ></a></div>'+
+                '<div class="countContainer"><span class="countCourses">'+coursesCount+'</span><span class="countArrows">>></span></div>'
+            );
+            jQuery(`#${stripeId}`).slick('slickAdd',showAllCoursesCard);
         }
-        const coursesCount = jQuery(`#count_${stripeId}`).text();
-        const currentUrl = window.location.href;
-        let showAllCoursesCard = jQuery("<div>");
-        showAllCoursesCard.addClass('showAllCoursesCard course-stripe-item slick-slide');
-        showAllCoursesCard.attr("id",`showAllCoursesCard_${stripeId}`);
-        // showAllCoursesCard.attr("href",currentUrl+'/catalog/?stripe_id='+stripeId);
-        showAllCoursesCard.attr("data-slick-index",7);
-        showAllCoursesCard.attr("aria-hidden",true);
-        showAllCoursesCard.attr("tabindex",-1);
-        showAllCoursesCard.html(
-            '<div class="showCardImg course-img"><a href='+currentUrl+'/catalog/?stripe_id='+stripeId+' ></a></div>'+
-            '<div class="countContainer"><span class="countCourses">'+coursesCount+'</span></div>'
-        );
-        stripeContainer.append(showAllCoursesCard);
-    }
-
+    })
 }

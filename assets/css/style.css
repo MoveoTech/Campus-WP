@@ -20043,12 +20043,19 @@ body .course-item-hover {
     opacity: 1; } }
 
 /** home stripe connection to catalog */
-.showAllCoursesCard .showCardImg {
-  background: url("../../assets/images/showAllCoursesCard.svg"); }
-
-.showAllCoursesCard .countContainer .countCourses {
-  font-size: 14px;
-  font-weight: 700; }
+@media (max-width: 768px) {
+  .showAllCoursesCard .showCardImg {
+    background: url("../../assets/images/showAllCoursesCard.svg"); }
+  .showAllCoursesCard .countContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5px; }
+    .showAllCoursesCard .countContainer .countCourses {
+      font-size: 14px;
+      font-weight: 700; }
+    .showAllCoursesCard .countContainer .countArrows {
+      margin: 0 5px; } }
 
 /* Header */
 .catalog-banner {

@@ -2285,16 +2285,23 @@ body {
 }
 
 /** home stripe connection to catalog */
-.showAllCoursesCard{
-  .showCardImg{
-    background: url("../../assets/images/showAllCoursesCard.svg");
-
-  }
-  .countContainer{
-
-    .countCourses{
-      font-size: 14px;
-      font-weight: 700;
+@media (max-width: 768px){
+  .showAllCoursesCard{
+    .showCardImg{
+      background: url("../../assets/images/showAllCoursesCard.svg");
+    }
+    .countContainer{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 5px;
+      .countCourses{
+        font-size: 14px;
+        font-weight: 700;
+      }
+      .countArrows{
+        margin: 0 5px;
+      }
     }
   }
 }
