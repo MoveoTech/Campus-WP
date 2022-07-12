@@ -51,7 +51,6 @@ $current_lang = $sitepress->get_current_language();
         </div>
     </div>
 
-    <div id="selectedTags"></div>
 </div>
 
 <!-- END FILTERS SECTION .-->

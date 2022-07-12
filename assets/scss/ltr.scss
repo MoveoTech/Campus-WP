@@ -1475,18 +1475,22 @@ footer .footer-section{
             .filterVector{
                 margin: 0 0 0 7px;
             }
-            #selectedTags {
-                .selected-tag {
-                    span {
-                        margin-left: unset;
-                        margin-right: 5px;
-                    }
+        }
+    }
+}
 
-                    .remove-filters {
-                        margin-left: 2px;
-                        margin-right: unset;
-                    }
-                }
+.catalogPageBox{
+    #selectedTags {
+        margin: 7px 0 0 100px;
+        .selected-tag {
+            span {
+                margin-left: unset;
+                margin-right: 5px;
+            }
+
+            .remove-filters {
+                margin-left: 2px;
+                margin-right: unset;
             }
         }
     }

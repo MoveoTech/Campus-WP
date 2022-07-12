@@ -1027,10 +1027,13 @@ footer .footer-section .inners-footer-items {
     margin-right: 12px; }
   .filtersSection .allFiltersWrapDiv .checkboxFiltersWrap .filterVector {
     margin: 0 0 0 7px; }
-  .filtersSection .allFiltersWrapDiv .checkboxFiltersWrap #selectedTags .selected-tag span {
+
+.catalogPageBox #selectedTags {
+  margin: 7px 0 0 100px; }
+  .catalogPageBox #selectedTags .selected-tag span {
     margin-left: unset;
     margin-right: 5px; }
-  .filtersSection .allFiltersWrapDiv .checkboxFiltersWrap #selectedTags .selected-tag .remove-filters {
+  .catalogPageBox #selectedTags .selected-tag .remove-filters {
     margin-left: 2px;
     margin-right: unset; }
 
