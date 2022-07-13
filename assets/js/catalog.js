@@ -85,13 +85,14 @@ $(document).ready(function () {
 
     /** Click event - sort by courses **/
     $('.sortOption').on('click', function (event) {
-        const idSContainer = $('#coursesBox');
-        const containerChildren = idSContainer.children();
+        const coursesContainer = $('#coursesBox');
+        const containerChildren = coursesContainer.children();
         const hasClass = containerChildren.hasClass("courseResultCard");
-        const childrenLength = containerChildren.length;
         const sortByText = $('#sortByText').attr("data");
-        if(hasClass && childrenLength > 1 && sortByText !== event.target.id){
-            sortingByChoise(event);
+        const idsContainer = $('#catalog_courses').data('value');
+        console.log("idsContainer inside click event --- ",idsContainer);
+        if(hasClass && (sortByText !== event.target.id)){
+            sortingByChoise(event,idsContainer);
         }
     })
 
@@ -1091,11 +1092,11 @@ function resetSortByButton(){
     sortByElement.attr("data",sortType);
 }
 
-function sortingByChoise(choise){
+function sortingByChoise(choise,idsContainer){
     const sortByText = $('#sortByText');
     const sortType = choise.target.id;
     const sortingValue = choise.target.innerText;
-    const idsContainer = $('#catalog_courses').data('value');
+
 
     /** targeting input to color the selected value  */
     $('.sortOption').removeClass('active');
@@ -1104,7 +1105,7 @@ function sortingByChoise(choise){
     /** changing button text to the selected value */
     sortByText.text(sortingValue);
     sortByText.attr("data",sortType);
-
+    
     sortByAjax(idsContainer,sortType);
 
 }
