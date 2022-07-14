@@ -20,8 +20,8 @@ if($components['path']){
     parse_str($components['path'], $url_params);
 }
 
-$stripeTitle = null;
-$customStripeCatalogPage = false;
+$stripe_title = null;
+$custom_stripe_catalog_page = false;
 if($url_params){
     $filters = getFiltersArray($url_params);
     /**
@@ -36,13 +36,15 @@ if($url_params){
         $filters['search']['tags']['Stripe'][0] = $tag_name;
     }
     /** Checking if url have stripe_id for custom catalog page */
-    if($filters['search']['stripe_id']){
-        $customStripeCatalogPage = true;
+    if(isset($filters['search']['stripe_id'])){
+        $custom_stripe_catalog_page = true;
         global $sitepress;
         $lang = $sitepress->get_current_language();
-        $stripeId = intval($filters['search']['stripe_id'][0]);
-        if($lang != 'he') $stripeTitle = get_field($lang.'_title', $stripeId);
-        if(!$stripeTitle) $stripeTitle = get_field('he_title', $stripeId);
+        if(isset($filters['search']['stripe_id'][0]) && intval($filters['search']['stripe_id'][0])){
+            $stripe_id = $filters['search']['stripe_id'][0];
+            if($lang != 'he') $stripe_title = get_field($lang.'_title', $stripe_id);
+            if(!$stripe_title) $stripe_title = get_field('he_title', $stripe_id);
+        }
     }
     $params = getPodsFilterParams($filters);
 } else {
@@ -50,11 +52,11 @@ if($url_params){
 }
 
 /** PARAMETERS */
-if(!$customStripeCatalogPage){
+if(!$custom_stripe_catalog_page){
     $catalog_stripe_id = get_field('catalog_stripe');
 }
 
-$menuFilters = get_field('filters');
+$menu_filters = get_field('filters');
 $academic_institutions = pods( 'academic_institution', array('limit'   => -1 ));
 $courses = pods( 'courses', $params, true);
 $academic_name = cin_get_str('Institution_Name');
@@ -66,28 +68,26 @@ $course_attrs = array(
     'class' => 'col-xs-12 col-md-6 col-xl-4 course-item-with-border',
 );
 
-$coursesIdArray = [];
+$courses_id_array = [];
 
 $i = 0;
 foreach ($courses->rows as $course) {
-    $coursesIdArray[$i] = $course->id;
+    $courses_id_array[$i] = $course->id;
     $i++;
 }
 
 /** Get just the first 20 courses */
 $courses->rows = array_slice($courses->rows, 0,20);
 
-$coursesIDs = implode(',', $coursesIdArray);
+$courses_ids = implode(',', $courses_id_array);
 
-$countShow = getFieldByLanguage("מוצגים", "Show", "يتم تقديم", $current_language);
-$countCourses = getFieldByLanguage("קורסים", "Courses", "دورة", $current_language);
-$countNumber = $courses->total();
+$count_show = getFieldByLanguage("מוצגים", "Show", "يتم تقديم", $current_language);
+$count_courses = getFieldByLanguage("קורסים", "Courses", "دورة", $current_language);
+$count_number = $courses->total();
 
 /** translate numbers to arabic */
 if($current_language == 'ar'){
-    $english_numbers = array('0','1','2','3','4','5','6','7','8','9');
-    $arabic_numbers = array('٠','١','٢','٣','٤','٥','٦','٧','٨','٩');
-    $countNumber = str_replace($english_numbers, $arabic_numbers, $countNumber);
+    $count_number = getArabicNumbers($count_number);
 }
 
     /** No result translate */
@@ -95,18 +95,18 @@ $no_result_text_he = "לא מצאנו בדיוק את מה שחיפשת אבל �
 $no_result_text_en = "We didn't find exactly what you were looking for but maybe you will be interested ...";
 $no_result_text_ar = "لم نعثر على ما كنت تبحث عنه بالضبط ولكن ربما تكون مهتمًا ...";
 
-$no_results_found = $countNumber === 0;
+$no_results_found = $count_number === 0;
 ?>
 
-<div class="catalog-banner <?= $customStripeCatalogPage? "customCatalogBanner": null ?>">
+<div class="catalog-banner <?= $custom_stripe_catalog_page? "customCatalogBanner": null ?>">
 
     <div class="back-img-1" ></div>
     <div class="back-img-2" ></div>
 
     <div class="catalog-banner-content">
-        <h1 class="catalog-header <?= $customStripeCatalogPage? "customCatalogHeader": null ?>" style="color: #ffffff"><?= $customStripeCatalogPage? $stripeTitle: $catalog_title?></h1>
+        <h1 class="catalog-header <?= $custom_stripe_catalog_page? "customCatalogHeader": null ?>" style="color: #ffffff"><?= $custom_stripe_catalog_page? $stripe_title: $catalog_title?></h1>
 
-        <?= $customStripeCatalogPage? null: get_template_part('templates/hero', 'search') ?>
+        <?= $custom_stripe_catalog_page? null: get_template_part('templates/hero', 'search') ?>
     </div>
 </div>
 
@@ -121,7 +121,7 @@ $no_results_found = $countNumber === 0;
                             array(
                                 'args' => array(
                                     'academic_filter' => $academic_institutions->data(),
-                                    'menuFilters' => $menuFilters,
+                                    'menuFilters' => $menu_filters,
                                 )
                             ));
                         ?>
@@ -134,13 +134,13 @@ $no_results_found = $countNumber === 0;
                 </div>
             </div>
             <div class="counterWrap">
-                <p><?= $countShow ." " ?> <span id="counterValue"><?= $countNumber ?></span><?= " ". $countCourses ?></p>
+                <p><?= $count_show ." " ?> <span id="counterValue"><?= $count_number ?></span><?= " ". $count_courses ?></p>
             </div>
 
             <div id="selectedTags"></div>
 
             <div class="catalogWrap">
-                <div hidden id="catalog_courses" data-value="<?php print_r($coursesIDs); ?>" ></div>
+                <div hidden id="catalog_courses" data-value="<?php print_r($courses_ids); ?>" ></div>
 
                 <div id="coursesBox" class="row output-courses coursesResults catalogPageBox">
 
@@ -195,15 +195,15 @@ $no_results_found = $countNumber === 0;
 
 <?php
 
-    get_filters_menu($menuFilters);
-function get_filters_menu($menuFilters) {
+    get_filters_menu($menu_filters);
+function get_filters_menu($menu_filters) {
 
     $encoded_path = urlencode($_SERVER['REQUEST_URI']);
     $current = cin_get_str('header_current_languages');
     get_template_part('template', 'parts/Filters/filtersMobileMenu',
         array(
             'args' => array(
-                'menuFilters' => $menuFilters,
+                'menuFilters' => $menu_filters,
                 'encoded_path' => $encoded_path,
                 'currentLanguage' => $current,
 

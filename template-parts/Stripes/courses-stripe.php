@@ -9,15 +9,13 @@ global $sitepress;
 $current_language = $sitepress->get_current_language();
 
 $courses_url = home_url('/catalog/?stripe_id=') . $stripe['id'];
-$countShow = getFieldByLanguage("הצג את", "Show all", "أعرض", $current_language);
-$countCourses = getFieldByLanguage("הקורסים", "Courses", "مساق", $current_language);
-$countNumber = count($stripe['carousel']);
+$count_show = getFieldByLanguage("הצג את", "Show all", "أعرض", $current_language);
+$count_courses = getFieldByLanguage("הקורסים", "Courses", "مساق", $current_language);
+$count_number = count($stripe['carousel']);
 
 /** translate numbers to arabic */
 if($current_language == 'ar'){
-    $english_numbers = array('0','1','2','3','4','5','6','7','8','9');
-    $arabic_numbers = array('٠','١','٢','٣','٤','٥','٦','٧','٨','٩');
-    $countNumber = str_replace($english_numbers, $arabic_numbers, $countNumber);
+    $count_number = getArabicNumbers($count_number);
 }
 
 ?>
@@ -34,7 +32,7 @@ if($current_language == 'ar'){
                 <p><?php echo $stripe['subtitle'] ?></p>
             <?php endif; ?>
         </div>
-        <div class="show-all-courses"><a href="<?php echo $courses_url ?>"><p id="count_<?= $stripe['id']  ?>"> <?php echo $countShow ." ". $countNumber ." ". $countCourses ?></p></a></div>
+        <div class="show-all-courses"><a href="<?php echo $courses_url ?>"><p id="count_<?= $stripe['id']  ?>"> <?php echo $count_show ." ". $count_number ." ". $count_courses ?></p></a></div>
     </div>
         <?php
     get_template_part('template', 'parts/Stripes/courses-carousel',
