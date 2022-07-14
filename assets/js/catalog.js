@@ -319,7 +319,6 @@ function appendFilteredCourses(coursesData, loadedCourses = false) {
 
     firstCoursesToShow.forEach(item =>{
         let id = item.id;
-        idsArray.push(id);
         let name = item.name;
         let academicInstitution = item.academic_institution ? item.academic_institution : '';
         let tags = item.marketing_tags ? getCourseResultTags(item.marketing_tags) : getCourseResultTags(item.tags);
