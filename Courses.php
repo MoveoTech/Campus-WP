@@ -52,9 +52,15 @@ if($url_params){
 }
 
 /** PARAMETERS */
+
+$catalog_banner_classes = ['catalog-banner'];
 if(!$custom_stripe_catalog_page){
     $catalog_stripe_id = get_field('catalog_stripe');
+    array_push($catalog_banner_classes,'customCatalogBanner');
+    $catalog_banner_classes = implode(',', $catalog_banner_classes);
 }
+
+
 
 $menu_filters = get_field('filters');
 $academic_institutions = pods( 'academic_institution', array('limit'   => -1 ));
