@@ -26,20 +26,42 @@ include locate_template( 'assets/ajax/add_filters_to_menu.php' );
 
 if ( function_exists( 'acf_add_options_page' ) ) {
 
-	$option_page = acf_add_options_page( array(
-		'page_title' => 'Option Page Campus',
-		'menu_slug'  => 'option-page-campus',
-		'capability' => 'edit_posts',
-		'redirect'   => false
-	) );
+    $configuration_page = acf_add_options_page( array(
+        'page_title' => 'Site Configuration Campus',
+        'menu_title' => 'Site Configuration',
+        'update_button' => __('Update Configurations', 'acf'),
+        'updated_message' => __("Configurations Updated", 'acf'),
+        'menu_slug'  => 'configuration-page-campus',
+        'capability' => 'edit_posts',
+        'redirect'   => false
+    ));
 
-	acf_add_options_page( array(
-		'page_title'  => 'Events Global Settings',
-		'menu_slug'   => 'events_global_settings',
-		'capability'  => 'edit_posts',
-		'parent_slug' => 'edit.php?post_type=event',
-		'post_id'     => 'events_global_settings'
-	) );
+    $page_404 = acf_add_options_sub_page(array(
+        'page_title' => 'Page 404',
+        'menu_title' => 'Page 404',
+        'menu_slug'  => 'page-404',
+        'parent_slug' => $configuration_page['menu_slug'],
+        'capability' => 'edit_posts',
+        'redirect'   => false
+    ));
+
+    $header = acf_add_options_sub_page(array(
+        'page_title' => 'Header Settings',
+        'menu_title' => 'Header Settings',
+        'menu_slug'  => 'header-settings',
+        'parent_slug' => $configuration_page['menu_slug'],
+        'capability' => 'edit_posts',
+        'redirect'   => false
+    ));
+
+    $footer = acf_add_options_sub_page(array(
+        'page_title' => 'Footer Settings',
+        'menu_title' => 'Footer Settings',
+        'menu_slug'  => 'footer-settings',
+        'parent_slug' => $configuration_page['menu_slug'],
+        'capability' => 'edit_posts',
+        'redirect'   => false
+    ));
 }
 
 /**
