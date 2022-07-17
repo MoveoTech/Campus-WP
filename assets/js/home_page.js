@@ -15,7 +15,6 @@ jQuery(document).ready(function () {
     }
     //Course Card
     mouseHoverOnCourse()
-
     clickOnCourseInfoButton()
 
     //reload new courses
@@ -25,22 +24,19 @@ jQuery(document).ready(function () {
     jQuery('.courses-stripe').on('afterChange', function (event) {
         const id = event.target.id
         mouseHoverOnCourse()
-        getCoursesAjax(id)
-        let width = jQuery(document).width();
-        if(width <= 768) return;
-        changeArrowClass(id)
+        if(campusUtils.isMobile()) return;
+            getCoursesAjax(id);
+            changeArrowClass(id);
     });
 
     jQuery('.goals-slider').on('afterChange', function (event) {
-        let width = jQuery(document).width();
-        if(width <= 768) return;
+        if(campusUtils.isMobile()) return;
         const id = event.target.id
         changeArrowClass(id)
     })
 
     jQuery('#myCoursesStripeId').on('afterChange', function (event) {
-        let width = jQuery(document).width();
-        if(width <= 768) return;
+        if(campusUtils.isMobile()) return;
         const id = event.target.id
         changeArrowClass(id)
     })
@@ -320,6 +316,9 @@ jQuery(document).ready(function () {
             },
         ]
     })
+    if(campusUtils.isMobile()){
+        appendCoursesCardMobileButton();
+    }
 
     //Youtube popup
     jQuery('body').on('click', '.open-iframe', function (e) {
@@ -457,7 +456,6 @@ function getCoursesAjax(id) {
             jQuery(`#${nextButton.id}`).prop('disabled', true);
         }
         let newCoursesArray = coursesIDs.slice(trackLength + 1, (trackLength + 21))
-
         let data = {
             'action': 'stripe_data',
             'type' : 'courses',
@@ -468,13 +466,13 @@ function getCoursesAjax(id) {
         jQuery.post(stripe_data_ajax.ajaxurl, data, function(response){
             if(response.success){
                 const data = JSON.parse(response.data);
-                apppendCourses(data, id);
+                appendCourses(data, id);
             }
         })
     }
 }
 
-function apppendCourses(coursesData, id) {
+function appendCourses(coursesData, id) {
 
     coursesData.forEach(item =>{
         let permalink = item.permalink ? item.permalink : '';
@@ -765,13 +763,11 @@ function changeArrowClass(id, type=null) {
     } else {
         jQuery(`#${id}`).children('.slick-prev')[0].classList.remove('activate');
     }
-
-    let width = jQuery(document).width();
     let index = 3;
-    if(width < 992) index = 2;
+    if(campusUtils.isTablet()) index = 2;
     if (type == 'testimonials') {
         index = 2;
-        if(width < 992) index = 1;
+        if(campusUtils.isTablet()) index = 1;
     }
     if(trackLength - currentIndex <= index) {
         jQuery(`#${id}`).children('.slick-next')[0].classList.add('off');
@@ -795,7 +791,7 @@ function mouseHoverOnCourse() {
         }
         enterTimer = setTimeout(function() {
             let width = document.documentElement.clientWidth;
-            if(width > 768) {
+            if(!campusUtils.isMobile()) {
                 let id = event.target.id;
                 if(id == '') { id = event.target.parentElement.id;}
                 if(id == '') { id = event.target.parentElement.parentElement.id;}
@@ -807,7 +803,7 @@ function mouseHoverOnCourse() {
                 let left;
                 if(width > 1200) {
                      left = parentElem.offset().left - 12;
-                } else if(width > 768 && width <= 1200) {
+                } else if(!campusUtils.isMobile() && width <= 1200) {
                     left = parentElem.offset().left - 30;
                 } else {
                     left = parentElem.offset().left - 20;
@@ -940,4 +936,32 @@ function getCurrentEnvURLs(partURL) {
         'EDX_COURSE_URL': `https://courses${partURL}.campus.gov.il/courses/`,
 
     }
+}
+
+function appendCoursesCardMobileButton(){
+    const allCoursesStripes = jQuery(`.home-page-courses-stripe .stripe-container .stripe-slider-slick .courses-stripe`);
+    let currentUrl = window.location.href;
+    allCoursesStripes.each((index, element) => {
+        const stripeId = element.id;
+        const stripeContainer = jQuery(`#${element.id} .slick-list .slick-track`);
+        const catalogStripeUrl = currentUrl+'catalog/?stripe_id='+stripeId;
+        if(jQuery(`#showAllCoursesCard_${stripeId}`).length <= 0){
+            if(stripeContainer.children().length >7){
+                const stripeCoursesToRemove = jQuery(`#${stripeId} .slick-list .slick-track :nth-child(1n+8)`);
+                stripeCoursesToRemove.remove(".course-stripe-item");
+            }
+            const coursesCount = jQuery(`#count_${stripeId}`).text();
+            let showAllCoursesCard = jQuery("<div>");
+            showAllCoursesCard.addClass('showAllCoursesCard course-stripe-item slick-slide');
+            showAllCoursesCard.attr("id",`showAllCoursesCard_${stripeId}`);
+            showAllCoursesCard.attr("data-slick-index",7);
+            showAllCoursesCard.attr("aria-hidden",true);
+            showAllCoursesCard.attr("tabindex",-1);
+            showAllCoursesCard.html(
+                '<div class="showCardImg course-img"><a href='+catalogStripeUrl+' ></a></div>'+
+                '<div class="countContainer"><span class="countCourses"><a href='+catalogStripeUrl+'>'+coursesCount+'</a></span><span class="countArrows">>></span></div>'
+            );
+            jQuery(`#${stripeId}`).slick('slickAdd',showAllCoursesCard);
+        }
+    })
 }

@@ -1447,6 +1447,7 @@ function enroll(json) {
 
     xhr.send(JSON.stringify(json));
 }
+
 // added by Sapir - append title on browser tab on single pages
 function appendTabTitleOnSinglePage() {
     if(jQuery('#singleCourseTemplate')[0]){

@@ -46,9 +46,9 @@ function getFiltersArray($paramsArray) {
 
 function getPodsFilterParams($filters = null) {
     $sql = array();
+    global $sitepress;
+    $current_lang = $sitepress->get_current_language();
     if(!$filters) {
-        global $sitepress;
-        $current_lang = $sitepress->get_current_language();
         if($current_lang === 'he'){
             $default_lang = '(t.language LIKE "%Hebrew%")';
         } else if($current_lang === 'en'){
@@ -112,7 +112,7 @@ function getPodsFilterParams($filters = null) {
                 $search_orderBy[] = $orderBy_text;
             }
 
-            $singleSearchQuery = "(" . implode(' OR ', $sqlSearch) . ")" ;
+            $singleSearchQuery = implode(' OR ', $sqlSearch) ;
             $sql[] = $singleSearchQuery;
             $order .= "(" . implode('+', $search_orderBy) . ") DESC, " ;
         }
@@ -176,13 +176,29 @@ function getPodsFilterParams($filters = null) {
                 $sqlTags[] ="(" . implode('OR', $sqlGroupTags) . ")" ;
             }
 
-            $tagsQuery = implode(' OR ', $sqlTags) ;
-            $having =  implode(' AND ', $havOr)  ;
+            $tagsQuery = implode(' OR ', $sqlTags);
+            $having =  implode(' AND ', $havOr);
             $sql[] = $tagsQuery;
         };
+        /** checking if its stripes custom catalog page */
+        if(isset($filters['search']['stripe_id'])){
+            $stripeId = intval($filters['search']['stripe_id'][0]);
+            $coursesIds = get_field('courses', $stripeId);
+            /** if no courses return from stripe id - return params false and 404 page */
+            if(!$coursesIds){
+                return false;
+            }
+            $stripeQuery = "t.id IN (";
+            foreach ($coursesIds as $singleId) {
+                $stripeQuery .= $singleId . ",";
+            }
+            $stripeQuery = substr_replace($stripeQuery, ")", -1);
+            $sql[] = '(' . $stripeQuery . ')';
+        }
     }
+    $byName = getFieldByLanguage("t.name", "t.english_name", "t.arabic_name", $current_lang);
     $where = implode(" AND ", $sql);
-    $order .= "t.order DESC";
+    $order .= "t.order DESC," . $byName;
 
     $params = array(
         'select'=> '`t`.*, concat(",",group_concat(`tags`.`english_name` SEPARATOR ","), ",") as `tags_id`',

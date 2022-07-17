@@ -1,7 +1,5 @@
 $= jQuery.noConflict();
-
 $(document).ready(function () {
-
     let params = new URLSearchParams(document.location.search);
     /** Mark selected checkboxes */
     markCheckboxes(params)
@@ -17,13 +15,23 @@ $(document).ready(function () {
 
     /** Click event - reset filtering **/
     $('.resetFilterButton').on('click', function (event) {
-
-        jQuery(".filterVectorMobile").removeClass('active');
+        let stripeIdValue = getSearchParams("stripe_id");
         let currentUrl = window.location.href;
-        let resetUrl = currentUrl.split('?')[0]
+        let resetUrl = currentUrl.split('?')[0];
+        if(stripeIdValue){
+            resetUrl = resetUrl + "?stripe_id=" + stripeIdValue;
+        } else {
+            /** deleting ids from hidden div **/
+            const coursesContainer = $('#catalog_courses');
+            coursesContainer.attr("data-value",[]);
+            /** delete all courses result **/
+            const coursesBox = $('#coursesBox');
+            coursesBox.empty();
+            updateCoursesCounter(0);
+        }
         let url = new URL(resetUrl);
         window.history.replaceState({}, '', url);
-
+        jQuery(".filterVectorMobile").removeClass('active');
         let filtersInputs = $('.checkbox-filter-search');
         filtersInputs.each((index, element) => {
             element.checked = false;
@@ -37,24 +45,15 @@ $(document).ready(function () {
         }
         /** removing extra filters **/
         $('.extraFilter').remove();
-        if ($(window).width() > 768) {
+        if (!campusUtils.isMobile()) {
             $('#morefiltersBox .filterInput').show()
             $('#morefiltersBox').show()
         }
-
         /** reset sort by button to default */
         const sortByType = $('#sortByText').attr("data");
         if(sortByType !== "sortByRelevance"){
             resetSortByButton();
         }
-
-        /** deleting ids from hidden div **/
-        const coursesContainer = $('#catalog_courses');
-        coursesContainer.attr("data-value",[]);
-        /** delete all courses result **/
-        const coursesBox = $('#coursesBox');
-        coursesBox.empty();
-        updateCoursesCounter(0);
     });
 
     /** Click event - adding more filters **/
@@ -211,7 +210,7 @@ function closingOverlay(){
 }
 
 function slickStripeForMobile() {
-    if($(window).width() <= 768){
+    if(campusUtils.isMobile()){
 
         if($('#filtersSectionMobile')){
             /** Changing classes in filters menu inputs */
@@ -377,7 +376,6 @@ function appendFilteredCourses(coursesData, loadedCourses = false) {
 
     clickOnCourseInfoButton();
 }
-
 function updateCoursesCounter(count){
     const currentLang = getCookie('openedx-language-preference') ? getCookie('openedx-language-preference') : getCookie('wp-wpml_current_language');
     let counterValue = $('#counterValue');
@@ -391,7 +389,6 @@ function updateCoursesCounter(count){
         }
     counterValue.text(count);
 }
-
 function getCourseResultTags(tags) {
     let tagsHtml = '';
     if(tags.length >=3){
@@ -413,16 +410,13 @@ function getCourseResultTags(tags) {
 }
 
 function appendUrlParams(filters) {
-
     let currentUrl = window.location.href;
-    let resetUrl = currentUrl.split('?')[0]
+    let resetUrl = currentUrl.split('?')[0];
     let url = new URL(resetUrl);
-
     if(!filters || filters.length === 0) {
         window.history.replaceState({}, '', url);
         return;
     }
-
     if(filters['search']) {
         let i = 0;
         Object.keys(filters['search']).some((k) => {
@@ -443,7 +437,6 @@ function appendUrlParams(filters) {
                     let key = k ;
                     let valuesArray = filters['search'][k];
                     let valuesString = valuesArray.toString();
-
                     url.searchParams.set(key, valuesString);
                     window.history.pushState({}, '', url);
 
@@ -457,7 +450,7 @@ function markCheckboxes(params) {
     let entries = params.entries();
 
     let filterItems;
-    if($(window).width() <= 768) {
+    if(campusUtils.isMobile()) {
         filterItems = $('#filtersSectionMobile .checkbox-filter-search');
     } else {
         filterItems = $('.filtersSection .checkbox-filter-search');
@@ -567,7 +560,7 @@ function markCheckboxes(params) {
 function removeSelectedTags() {
     $('.remove-filters').on('click', function(event) {
         let filterItems;
-        if($(window).width() <= 768) {
+        if(campusUtils.isMobile()) {
             filterItems = $('#filtersSectionMobile .checkbox-filter-search');
         } else {
             filterItems = $('.filtersSection .checkbox-filter-search');
@@ -754,13 +747,23 @@ function appendMoreFilters(filterData) {
  * Ajax Call Get Filter Courses
  * */
 function filterCoursesAjax(filterData) {
-    appendUrlParams(filterData)
+
+    /** Checking if stripe id exist in URL */
+    let stripeIdValue = getSearchParams("stripe_id");
+    if(stripeIdValue){
+        /** Checking if only stripe id exist in URL - if so, rebuild the filter data object */
+        if(!filterData['search']){
+            filterData['search'] = {};
+        }
+        filterData['search']['stripe_id'] = [parseInt(stripeIdValue)];
+    }
+    appendUrlParams(filterData);
     if(filterData.length != 0 && filterData['search']['tags'] && filterData['search']['tags']['Stripe']){
         let [tagId, ...tagName] = filterData['search']['tags']['Stripe'][0].split('-');
         tagName = tagName.join('-');
         filterData['search']['tags']['Stripe'][0] = tagName;
     }
-    
+
     let data = {
         'action': 'filter_by_tag',
         'type' : 'courses',
@@ -770,11 +773,10 @@ function filterCoursesAjax(filterData) {
     jQuery.post(filter_by_tag_ajax.ajaxurl, data, function(response){
         if(response.success){
             const responseData = JSON.parse(response.data);
-            const coursesLength = responseData['courses'].length
+            const coursesLength = responseData['courses'].length;
             if(coursesLength > 0) {
                 updateCoursesCounter(coursesLength);
                 appendFilteredCourses(responseData['courses']);
-
             } else if(responseData['params'] == null) {
                 haveNoResults(false)
                 updateCoursesCounter(0);
@@ -929,7 +931,7 @@ function appendSpecialGroupFilter(group_title) {
         '</div>';
 
     container.insertBefore(temp, addFilterbutton);
-    if($(window).width() <= 768){
+    if(campusUtils.isMobile()){
         mobileContainer.append(temp);
     }
 }
@@ -980,8 +982,7 @@ function getCourses() {
     }
 
     /** Getting free search value from url params */
-    let params = new URLSearchParams(document.location.search);
-    let searchValue = params.get("text_s");
+    let searchValue = getSearchParams("text_s");
     if(searchValue){
         searchValue = searchValue.replaceAll(`\\`, "");
         freeSearchData.push(searchValue);
@@ -989,7 +990,7 @@ function getCourses() {
     /** Getting array of inputs depend desktop/mobile */
     let filterItems;
     let isMobile = false;
-    if($(window).width() <= 768) {
+    if(campusUtils.isMobile()) {
         filterItems = $('#filtersSectionMobile .checkbox-filter-search');
         isMobile = true;
     } else {
@@ -1018,7 +1019,6 @@ function getCourses() {
                     /** Append new selected tag */
                     tagsObj[groupTitle].push($(`#${id}`).val());
                     break;
-
                 case 'institution':
                     tagsObj[group] = tagsObj[group] ? tagsObj[group] : [];
                     institutionArray.push(englishValue);
@@ -1048,7 +1048,6 @@ function getCourses() {
 
     /** Checking if any filter checked */
     if(Object.keys(tagArray).some(() => { return true; }) || institutionArray.length > 0 || certificateArray.length > 0 || languageArray.length > 0 || Object.keys(freeSearchData).some(() => { return true; })) {
-
         /** checking which filters checked and pushing each array to object (key and values) */
         if(freeSearchData.length > 0) {
             filterData['search']['text_s'] = freeSearchData;
@@ -1069,7 +1068,7 @@ function getCourses() {
         filterCoursesAjax(filterData)
         isMobile && closingOverlay();
     } else {
-        filterData = [];
+        filterData = {};
         filterCoursesAjax(filterData)
         isMobile && closingOverlay();
     }
@@ -1105,7 +1104,7 @@ function sortingByChoise(choise){
     /** changing button text to the selected value */
     sortByText.text(sortingValue);
     sortByText.attr("data",sortType);
-    
+
     sortByAjax(idsContainer,sortType);
 
 }
@@ -1153,4 +1152,9 @@ function arabicNumbersTranslate(count) {
     return countStr.replace(/[0-9]/g, function(w){
         return arabicNum[+w]
     });
+}
+
+function getSearchParams(valueParam) {
+    let params = new URLSearchParams(document.location.search);
+    return params.get(valueParam);
 }

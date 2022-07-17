@@ -20042,6 +20042,23 @@ body .course-item-hover {
   to {
     opacity: 1; } }
 
+/** home stripe connection to catalog */
+@media (max-width: 768px) {
+  .showAllCoursesCard .showCardImg {
+    background-image: url("../../assets/images/showAllCoursesCard.svg"); }
+  .showAllCoursesCard .countContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5px; }
+    .showAllCoursesCard .countContainer .countCourses {
+      font-size: 14px;
+      font-weight: 700; }
+      .showAllCoursesCard .countContainer .countCourses a {
+        color: #000000; }
+    .showAllCoursesCard .countContainer .countArrows {
+      margin: 0 5px; } }
+
 /* Header */
 .catalog-banner {
   height: 194px;
@@ -20814,3 +20831,27 @@ body .course-item-hover {
     width: 100%;
     max-width: 368px;
     margin-bottom: 25px; } }
+/* custom stripe catalog page */
+.customCatalogBanner {
+  min-height: 145px;
+  max-height: 240px;
+  height: fit-content; }
+  .customCatalogBanner .catalog-banner-content .customCatalogHeader {
+    max-width: 75vw;
+    margin-bottom: 35px;
+    margin-top: 65px;
+    text-overflow: ellipsis;
+    overflow: hidden; }
+    @media (max-width: 992px) {
+      .customCatalogBanner .catalog-banner-content .customCatalogHeader {
+        display: unset; } }
+
+@media (max-width: 768px) {
+  .customCatalogBanner {
+    min-height: 95px;
+    max-height: 130px; }
+    .customCatalogBanner .catalog-banner-content .customCatalogHeader {
+      font-size: 26px;
+      line-height: 34px;
+      margin-top: 5px;
+      margin-bottom: 15px; } }

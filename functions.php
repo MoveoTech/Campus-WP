@@ -111,7 +111,7 @@ function style_of_campus_enqueue() {
     if ( $sitepress->get_current_language() == 'en' ) {
         wp_enqueue_style( 'css_ltr_css', get_bloginfo( 'stylesheet_directory' ) . '/assets/css/ltr.css', null, '1.9.8' );
     }
-
+    wp_enqueue_script('utils_js', get_bloginfo( 'stylesheet_directory' ) . '/assets/js/utils.js', array('jquery'), '5.9.2');
 	wp_enqueue_script( 'popper_js', 'https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js' );
 	wp_enqueue_script( 'slick_js', '//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js', array( 'jquery' ) );
 	wp_enqueue_script( 'cookie_js', '//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js', array( 'jquery' ) );
@@ -120,7 +120,7 @@ function style_of_campus_enqueue() {
 		'slick_js',
 		'cookie_js'
 	), '1.2.15' );
-	wp_enqueue_script( 'bootstrap_js', get_bloginfo( 'stylesheet_directory' ) . '/assets/js/bootstrap.min.js' );
+    wp_enqueue_script( 'bootstrap_js', get_bloginfo( 'stylesheet_directory' ) . '/assets/js/bootstrap.min.js' );
     wp_enqueue_script('search_js', get_bloginfo( 'stylesheet_directory' ) . '/assets/js/search.js', array('jquery'));
     wp_enqueue_script('catalog_js', get_bloginfo( 'stylesheet_directory' ) . '/assets/js/catalog.js', array('jquery'),'5.9.2');
     wp_enqueue_script('home_page_js', get_bloginfo( 'stylesheet_directory' ) . '/assets/js/home_page.js', array('jquery'), '5.9.2');
@@ -1227,32 +1227,6 @@ function filtersMobileMenuLanguage() {
     return $text;
 }
 
-function more_courses_text($carousel) {
-    global $sitepress;
-    $current = $sitepress->get_current_language();
-    $text = '';
-    if ($current === 'he') {
-        $text .= 'לקטלוג הקורסים';
-//            $text .= 'הצג  את ';
-//            $text .= count($carousel);
-//            $text .= ' הקורסים';
-        }
-    if ($current === 'en') {
-        $text .= 'Course Catalog';
-//            $text .= 'View the ';
-//            $text .= count($carousel);
-//            $text .= ' courses';
-        }
-    if ($current === 'ar') {
-        $text .= 'كتالوج الدورة';
-//            $text .= 'استعرض ';
-//            $text .= count($carousel);
-//            $text .= ' دورات';
-        }
-
-    return $text;
-}
-
 function getFieldByLanguage($heField, $enField, $arField, $lang)
 {
 
@@ -1470,6 +1444,11 @@ function getSearchErrorMessage() {
     return $text;
 }
 
+function getArabicNumbers($english_count){
+    $english_numbers = array('0','1','2','3','4','5','6','7','8','9');
+    $arabic_numbers = array('٠','١','٢','٣','٤','٥','٦','٧','٨','٩');
+    return str_replace($english_numbers, $arabic_numbers, $english_count);
+}
 
 /** =================================== **/
 /*                                      **/
