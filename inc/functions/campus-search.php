@@ -184,6 +184,10 @@ function getPodsFilterParams($filters = null) {
         if(isset($filters['search']['stripe_id'])){
             $stripeId = intval($filters['search']['stripe_id'][0]);
             $coursesIds = get_field('courses', $stripeId);
+            /** if no courses return from stripe id - return params false and 404 page */
+            if(!$coursesIds){
+                return false;
+            }
             $stripeQuery = "t.id IN (";
             foreach ($coursesIds as $singleId) {
                 $stripeQuery .= $singleId . ",";

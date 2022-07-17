@@ -1,6 +1,4 @@
 "use strict";
-// import {isMobile, isTablet} from './utils';
-// import ('./utils.js');
 jQuery(document).ready(function () {
     const envPartURL = env();
     const envURLs = getCurrentEnvURLs(envPartURL);
@@ -26,19 +24,19 @@ jQuery(document).ready(function () {
     jQuery('.courses-stripe').on('afterChange', function (event) {
         const id = event.target.id
         mouseHoverOnCourse()
-        if(isMobile()) return;
+        if(campusUtils.isMobile()) return;
             getCoursesAjax(id);
             changeArrowClass(id);
     });
 
     jQuery('.goals-slider').on('afterChange', function (event) {
-        if(isMobile()) return;
+        if(campusUtils.isMobile()) return;
         const id = event.target.id
         changeArrowClass(id)
     })
 
     jQuery('#myCoursesStripeId').on('afterChange', function (event) {
-        if(isMobile()) return;
+        if(campusUtils.isMobile()) return;
         const id = event.target.id
         changeArrowClass(id)
     })
@@ -318,7 +316,7 @@ jQuery(document).ready(function () {
             },
         ]
     })
-    if(isMobile()){
+    if(campusUtils.isMobile()){
         appendCoursesCardMobileButton();
     }
 
@@ -766,10 +764,10 @@ function changeArrowClass(id, type=null) {
         jQuery(`#${id}`).children('.slick-prev')[0].classList.remove('activate');
     }
     let index = 3;
-    if(isTablet()) index = 2;
+    if(campusUtils.isTablet()) index = 2;
     if (type == 'testimonials') {
         index = 2;
-        if(isTablet()) index = 1;
+        if(campusUtils.isTablet()) index = 1;
     }
     if(trackLength - currentIndex <= index) {
         jQuery(`#${id}`).children('.slick-next')[0].classList.add('off');
@@ -793,7 +791,7 @@ function mouseHoverOnCourse() {
         }
         enterTimer = setTimeout(function() {
             let width = document.documentElement.clientWidth;
-            if(!isMobile()) {
+            if(!campusUtils.isMobile()) {
                 let id = event.target.id;
                 if(id == '') { id = event.target.parentElement.id;}
                 if(id == '') { id = event.target.parentElement.parentElement.id;}
@@ -805,7 +803,7 @@ function mouseHoverOnCourse() {
                 let left;
                 if(width > 1200) {
                      left = parentElem.offset().left - 12;
-                } else if(!isMobile() && width <= 1200) {
+                } else if(!campusUtils.isMobile() && width <= 1200) {
                     left = parentElem.offset().left - 30;
                 } else {
                     left = parentElem.offset().left - 20;

@@ -1,5 +1,4 @@
 $= jQuery.noConflict();
-import {isMobile} from './utils.js';
 $(document).ready(function () {
     let params = new URLSearchParams(document.location.search);
     /** Mark selected checkboxes */
@@ -46,7 +45,7 @@ $(document).ready(function () {
         }
         /** removing extra filters **/
         $('.extraFilter').remove();
-        if (!isMobile()) {
+        if (!campusUtils.isMobile()) {
             $('#morefiltersBox .filterInput').show()
             $('#morefiltersBox').show()
         }
@@ -211,7 +210,7 @@ function closingOverlay(){
 }
 
 function slickStripeForMobile() {
-    if(isMobile()){
+    if(campusUtils.isMobile()){
 
         if($('#filtersSectionMobile')){
             /** Changing classes in filters menu inputs */
@@ -451,7 +450,7 @@ function markCheckboxes(params) {
     let entries = params.entries();
 
     let filterItems;
-    if(isMobile()) {
+    if(campusUtils.isMobile()) {
         filterItems = $('#filtersSectionMobile .checkbox-filter-search');
     } else {
         filterItems = $('.filtersSection .checkbox-filter-search');
@@ -561,7 +560,7 @@ function markCheckboxes(params) {
 function removeSelectedTags() {
     $('.remove-filters').on('click', function(event) {
         let filterItems;
-        if(isMobile()) {
+        if(campusUtils.isMobile()) {
             filterItems = $('#filtersSectionMobile .checkbox-filter-search');
         } else {
             filterItems = $('.filtersSection .checkbox-filter-search');
@@ -932,7 +931,7 @@ function appendSpecialGroupFilter(group_title) {
         '</div>';
 
     container.insertBefore(temp, addFilterbutton);
-    if(isMobile()){
+    if(campusUtils.isMobile()){
         mobileContainer.append(temp);
     }
 }
@@ -991,7 +990,7 @@ function getCourses() {
     /** Getting array of inputs depend desktop/mobile */
     let filterItems;
     let isMobile = false;
-    if(isMobile()) {
+    if(campusUtils.isMobile()) {
         filterItems = $('#filtersSectionMobile .checkbox-filter-search');
         isMobile = true;
     } else {

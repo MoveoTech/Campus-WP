@@ -47,6 +47,14 @@ if($url_params){
         }
     }
     $params = getPodsFilterParams($filters);
+    /** if stripe id not exist and no courses found - return 404 page */
+    if(!$params){
+        $wp_query->set_404();
+        status_header( 404 );
+        get_template_part( 404 );
+        include locate_template( 'templates/footer.php' );
+        exit();
+    }
 } else {
     $params = getPodsFilterParams();
 }
@@ -80,7 +88,6 @@ $course_attrs = array(
 );
 
 $courses_id_array = [];
-
 $i = 0;
 foreach ($courses->rows as $course) {
     $courses_id_array[$i] = $course->id;
@@ -100,7 +107,6 @@ $count_number = $courses->total();
 if($current_language == 'ar'){
     $count_number = getArabicNumbers($count_number);
 }
-
     /** No result translate */
 $no_result_text_he = "לא מצאנו בדיוק את מה שחיפשת אבל אולי יעניין אותך...";
 $no_result_text_en = "We didn't find exactly what you were looking for but maybe you will be interested ...";
