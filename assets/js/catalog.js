@@ -748,12 +748,13 @@ function filterCoursesAjax(filterData) {
         filterData['search']['stripe_id'] = [parseInt(stripeIdValue)];
     }
     appendUrlParams(filterData);
-    if(filterData.length != 0 && filterData['search']['tags'] && filterData['search']['tags']['Stripe']){
-        let [tagId, ...tagName] = filterData['search']['tags']['Stripe'][0].split('-');
-        tagName = tagName.join('-');
-        filterData['search']['tags']['Stripe'][0] = tagName;
+    if(filterData['search']){
+        if(filterData.length != 0 && filterData['search']['tags'] && filterData['search']['tags']['Stripe']){
+            let [tagId, ...tagName] = filterData['search']['tags']['Stripe'][0].split('-');
+            tagName = tagName.join('-');
+            filterData['search']['tags']['Stripe'][0] = tagName;
+        }
     }
-
     let data = {
         'action': 'filter_by_tag',
         'type' : 'courses',
