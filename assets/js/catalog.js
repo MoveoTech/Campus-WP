@@ -1,5 +1,5 @@
 $= jQuery.noConflict();
-
+import {isMobile} from './utils';
 $(document).ready(function () {
 
     let params = new URLSearchParams(document.location.search);
@@ -17,7 +17,7 @@ $(document).ready(function () {
 
     /** Click event - reset filtering **/
     $('.resetFilterButton').on('click', function (event) {
-        let stripeIdValue = checkURLParams("stripe_id");
+        let stripeIdValue = getSearchParams("stripe_id");
         let currentUrl = window.location.href;
         let resetUrl = currentUrl.split('?')[0];
         if(stripeIdValue){
@@ -33,7 +33,6 @@ $(document).ready(function () {
         }
         let url = new URL(resetUrl);
         window.history.replaceState({}, '', url);
-
         jQuery(".filterVectorMobile").removeClass('active');
         let filtersInputs = $('.checkbox-filter-search');
         filtersInputs.each((index, element) => {
@@ -43,28 +42,20 @@ $(document).ready(function () {
         $('.search-field').val('');
 
         /** Get the initial courses */
-        if(url.href.includes('?')){
+        if(currentUrl.includes('?')){
             getCourses()
         }
         /** removing extra filters **/
         $('.extraFilter').remove();
-        if ($(window).width() > 768) {
+        if (!isMobile(768)) {
             $('#morefiltersBox .filterInput').show()
             $('#morefiltersBox').show()
         }
-
         /** reset sort by button to default */
         const sortByType = $('#sortByText').attr("data");
         if(sortByType !== "sortByRelevance"){
             resetSortByButton();
         }
-
-        /** deleting ids from hidden div **/
-        const coursesContainer = document.getElementById('catalog_courses');
-        coursesContainer.setAttribute("data-value",[]);
-        const coursesBox = $('#coursesBox');
-        coursesBox.empty();
-        updateCoursesCounter(0);
     });
 
     /** Click event - adding more filters **/
@@ -760,11 +751,11 @@ function appendMoreFilters(filterData) {
 function filterCoursesAjax(filterData) {
 
     /** Checking if stripe id exist in URL */
-    let stripeIdValue = checkURLParams("stripe_id");
+    let stripeIdValue = getSearchParams("stripe_id");
     if(stripeIdValue){
         /** Checking if only stripe id exist in URL - if so, rebuild the filter data object */
         if(!filterData['search']){
-            filterData = {"search": {}};
+            filterData['search'] = {};
         }
         filterData['search']['stripe_id'] = [parseInt(stripeIdValue)];
     }
@@ -993,7 +984,7 @@ function getCourses() {
     }
 
     /** Getting free search value from url params */
-    let searchValue = checkURLParams("text_s");
+    let searchValue = getSearchParams("text_s");
     if(searchValue){
         searchValue = searchValue.replaceAll(`\\`, "");
         freeSearchData.push(searchValue);
@@ -1079,7 +1070,7 @@ function getCourses() {
         filterCoursesAjax(filterData)
         isMobile && closingOverlay();
     } else {
-        filterData = [];
+        filterData = {};
         filterCoursesAjax(filterData)
         isMobile && closingOverlay();
     }
@@ -1165,7 +1156,7 @@ function arabicNumbersTranslate(count) {
     });
 }
 
-function checkURLParams(valueParam) {
+function getSearchParams(valueParam) {
     let params = new URLSearchParams(document.location.search);
     return params.get(valueParam);
 }

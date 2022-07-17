@@ -1,4 +1,5 @@
 "use strict";
+import {isMobile} from './utils';
 jQuery(document).ready(function () {
     const envPartURL = env();
     const envURLs = getCurrentEnvURLs(envPartURL);
@@ -15,7 +16,6 @@ jQuery(document).ready(function () {
     }
     //Course Card
     mouseHoverOnCourse()
-
     clickOnCourseInfoButton()
 
     //reload new courses
@@ -25,29 +25,25 @@ jQuery(document).ready(function () {
     jQuery('.courses-stripe').on('afterChange', function (event) {
         const id = event.target.id
         mouseHoverOnCourse()
-        let width = jQuery(document).width();
-        if(width <= 768) return;
+        if(isMobile(768)) return;
             getCoursesAjax(id);
             changeArrowClass(id);
     });
 
     jQuery('.goals-slider').on('afterChange', function (event) {
-        let width = jQuery(document).width();
-        if(width <= 768) return;
+        if(isMobile(768)) return;
         const id = event.target.id
         changeArrowClass(id)
     })
 
     jQuery('#myCoursesStripeId').on('afterChange', function (event) {
-        let width = jQuery(document).width();
-        if(width <= 768) return;
+        if(isMobile(768)) return;
         const id = event.target.id
         changeArrowClass(id)
     })
 
     jQuery('.testimonials-slider').on('afterChange', function (event) {
-        let width = jQuery(document).width();
-        if(width < 650) return;
+        if(isMobile(649)) return;
         const id = event.target.id
         changeArrowClass(id, 'testimonials');
     })
@@ -320,8 +316,9 @@ jQuery(document).ready(function () {
             },
         ]
     })
-    let width = jQuery(document).width();
-    if(width <= 768) appendCoursesCardMobileButton();
+    if(isMobile(768)){
+        appendCoursesCardMobileButton();
+    }
 
     //Youtube popup
     jQuery('body').on('click', '.open-iframe', function (e) {
@@ -766,13 +763,11 @@ function changeArrowClass(id, type=null) {
     } else {
         jQuery(`#${id}`).children('.slick-prev')[0].classList.remove('activate');
     }
-
-    let width = jQuery(document).width();
     let index = 3;
-    if(width < 992) index = 2;
+    if(isMobile(991)) index = 2;
     if (type == 'testimonials') {
         index = 2;
-        if(width < 992) index = 1;
+        if(isMobile(991)) index = 1;
     }
     if(trackLength - currentIndex <= index) {
         jQuery(`#${id}`).children('.slick-next')[0].classList.add('off');
@@ -795,8 +790,7 @@ function mouseHoverOnCourse() {
             oldHoverElement.css('inset', 'unset');
         }
         enterTimer = setTimeout(function() {
-            let width = document.documentElement.clientWidth;
-            if(width > 768) {
+            if(!isMobile(768)) {
                 let id = event.target.id;
                 if(id == '') { id = event.target.parentElement.id;}
                 if(id == '') { id = event.target.parentElement.parentElement.id;}
@@ -806,9 +800,9 @@ function mouseHoverOnCourse() {
                 let parentElem = jQuery(`#${id}`);
                 let top = parentElem.offset().top - 5;
                 let left;
-                if(width > 1200) {
+                if(!isMobile(1200)) {
                      left = parentElem.offset().left - 12;
-                } else if(width > 768 && width <= 1200) {
+                } else if(!isMobile(768) && isMobile(1200)) {
                     left = parentElem.offset().left - 30;
                 } else {
                     left = parentElem.offset().left - 20;
@@ -910,8 +904,7 @@ function getDesktopTags(tags) {
 }
 
 function goalGradient() {
-    let width = jQuery(window).width();
-    if(width > 710) return;
+    if(!isMobile(710)) return;
     let goalDiv = document.createElement('div');
     goalDiv.className = 'goal-stripe-gradient';
     jQuery('.goals-slider').children('div.slick-list')[0].append(goalDiv);

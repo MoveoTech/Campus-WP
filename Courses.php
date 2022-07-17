@@ -53,14 +53,20 @@ if($url_params){
 
 /** PARAMETERS */
 
-$catalog_banner_classes = ['catalog-banner'];
+/** getting Catalog banner classes */
+$catalog_banner_classes_array = ['catalog-banner'];
+$banner_header_classes_array = ['catalog-header'];
 if(!$custom_stripe_catalog_page){
     $catalog_stripe_id = get_field('catalog_stripe');
-    array_push($catalog_banner_classes,'customCatalogBanner');
-    $catalog_banner_classes = implode(',', $catalog_banner_classes);
+    $catalog_banner_classes = $catalog_banner_classes_array[0];
+    $banner_header_classes = $banner_header_classes_array[0];
+} else {
+    array_push($catalog_banner_classes_array,'customCatalogBanner');
+    $catalog_banner_classes = implode(' ', $catalog_banner_classes_array);
+
+    array_push($banner_header_classes_array,'customCatalogHeader');
+    $banner_header_classes = implode(' ', $banner_header_classes_array);
 }
-
-
 
 $menu_filters = get_field('filters');
 $academic_institutions = pods( 'academic_institution', array('limit'   => -1 ));
@@ -104,15 +110,19 @@ $no_result_text_ar = "لم نعثر على ما كنت تبحث عنه بالض�
 $no_results_found = $count_number === 0;
 ?>
 
-<div class="catalog-banner <?= $custom_stripe_catalog_page? "customCatalogBanner": null ?>">
+<div class="<?= $catalog_banner_classes ?>">
 
     <div class="back-img-1" ></div>
     <div class="back-img-2" ></div>
 
     <div class="catalog-banner-content">
-        <h1 class="catalog-header <?= $custom_stripe_catalog_page? "customCatalogHeader": null ?>" style="color: #ffffff"><?= $custom_stripe_catalog_page? $stripe_title: $catalog_title?></h1>
+        <h1 class="<?= $banner_header_classes ?>"><?= $custom_stripe_catalog_page? $stripe_title: $catalog_title?></h1>
 
-        <?= $custom_stripe_catalog_page? null: get_template_part('templates/hero', 'search') ?>
+        <?php
+        if(!$custom_stripe_catalog_page) {
+            get_template_part('templates/hero', 'search');
+        }
+        ?>
     </div>
 </div>
 
