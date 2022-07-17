@@ -1,7 +1,6 @@
 $= jQuery.noConflict();
-import {isMobile} from './utils';
+import {isMobile} from './utils.js';
 $(document).ready(function () {
-
     let params = new URLSearchParams(document.location.search);
     /** Mark selected checkboxes */
     markCheckboxes(params)
@@ -47,7 +46,7 @@ $(document).ready(function () {
         }
         /** removing extra filters **/
         $('.extraFilter').remove();
-        if (!isMobile(768)) {
+        if (!isMobile()) {
             $('#morefiltersBox .filterInput').show()
             $('#morefiltersBox').show()
         }
@@ -212,7 +211,7 @@ function closingOverlay(){
 }
 
 function slickStripeForMobile() {
-    if($(window).width() <= 768){
+    if(isMobile()){
 
         if($('#filtersSectionMobile')){
             /** Changing classes in filters menu inputs */
@@ -452,7 +451,7 @@ function markCheckboxes(params) {
     let entries = params.entries();
 
     let filterItems;
-    if($(window).width() <= 768) {
+    if(isMobile()) {
         filterItems = $('#filtersSectionMobile .checkbox-filter-search');
     } else {
         filterItems = $('.filtersSection .checkbox-filter-search');
@@ -562,7 +561,7 @@ function markCheckboxes(params) {
 function removeSelectedTags() {
     $('.remove-filters').on('click', function(event) {
         let filterItems;
-        if($(window).width() <= 768) {
+        if(isMobile()) {
             filterItems = $('#filtersSectionMobile .checkbox-filter-search');
         } else {
             filterItems = $('.filtersSection .checkbox-filter-search');
@@ -933,7 +932,7 @@ function appendSpecialGroupFilter(group_title) {
         '</div>';
 
     container.insertBefore(temp, addFilterbutton);
-    if($(window).width() <= 768){
+    if(isMobile()){
         mobileContainer.append(temp);
     }
 }
@@ -992,7 +991,7 @@ function getCourses() {
     /** Getting array of inputs depend desktop/mobile */
     let filterItems;
     let isMobile = false;
-    if($(window).width() <= 768) {
+    if(isMobile()) {
         filterItems = $('#filtersSectionMobile .checkbox-filter-search');
         isMobile = true;
     } else {

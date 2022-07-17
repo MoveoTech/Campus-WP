@@ -1,5 +1,6 @@
 "use strict";
-import {isMobile} from './utils';
+// import {isMobile, isTablet} from './utils';
+// import ('./utils.js');
 jQuery(document).ready(function () {
     const envPartURL = env();
     const envURLs = getCurrentEnvURLs(envPartURL);
@@ -25,25 +26,26 @@ jQuery(document).ready(function () {
     jQuery('.courses-stripe').on('afterChange', function (event) {
         const id = event.target.id
         mouseHoverOnCourse()
-        if(isMobile(768)) return;
+        if(isMobile()) return;
             getCoursesAjax(id);
             changeArrowClass(id);
     });
 
     jQuery('.goals-slider').on('afterChange', function (event) {
-        if(isMobile(768)) return;
+        if(isMobile()) return;
         const id = event.target.id
         changeArrowClass(id)
     })
 
     jQuery('#myCoursesStripeId').on('afterChange', function (event) {
-        if(isMobile(768)) return;
+        if(isMobile()) return;
         const id = event.target.id
         changeArrowClass(id)
     })
 
     jQuery('.testimonials-slider').on('afterChange', function (event) {
-        if(isMobile(649)) return;
+        let width = jQuery(document).width();
+        if(width < 650) return;
         const id = event.target.id
         changeArrowClass(id, 'testimonials');
     })
@@ -316,7 +318,7 @@ jQuery(document).ready(function () {
             },
         ]
     })
-    if(isMobile(768)){
+    if(isMobile()){
         appendCoursesCardMobileButton();
     }
 
@@ -764,10 +766,10 @@ function changeArrowClass(id, type=null) {
         jQuery(`#${id}`).children('.slick-prev')[0].classList.remove('activate');
     }
     let index = 3;
-    if(isMobile(991)) index = 2;
+    if(isTablet()) index = 2;
     if (type == 'testimonials') {
         index = 2;
-        if(isMobile(991)) index = 1;
+        if(isTablet()) index = 1;
     }
     if(trackLength - currentIndex <= index) {
         jQuery(`#${id}`).children('.slick-next')[0].classList.add('off');
@@ -790,7 +792,8 @@ function mouseHoverOnCourse() {
             oldHoverElement.css('inset', 'unset');
         }
         enterTimer = setTimeout(function() {
-            if(!isMobile(768)) {
+            let width = document.documentElement.clientWidth;
+            if(!isMobile()) {
                 let id = event.target.id;
                 if(id == '') { id = event.target.parentElement.id;}
                 if(id == '') { id = event.target.parentElement.parentElement.id;}
@@ -800,9 +803,9 @@ function mouseHoverOnCourse() {
                 let parentElem = jQuery(`#${id}`);
                 let top = parentElem.offset().top - 5;
                 let left;
-                if(!isMobile(1200)) {
+                if(width > 1200) {
                      left = parentElem.offset().left - 12;
-                } else if(!isMobile(768) && isMobile(1200)) {
+                } else if(!isMobile() && width <= 1200) {
                     left = parentElem.offset().left - 30;
                 } else {
                     left = parentElem.offset().left - 20;
@@ -904,7 +907,8 @@ function getDesktopTags(tags) {
 }
 
 function goalGradient() {
-    if(!isMobile(710)) return;
+    let width = jQuery(window).width();
+    if(width > 710) return;
     let goalDiv = document.createElement('div');
     goalDiv.className = 'goal-stripe-gradient';
     jQuery('.goals-slider').children('div.slick-list')[0].append(goalDiv);

@@ -53,20 +53,20 @@ if($url_params){
 
 /** PARAMETERS */
 
-/** getting Catalog banner classes */
-$catalog_banner_classes_array = ['catalog-banner'];
-$banner_header_classes_array = ['catalog-header'];
-if(!$custom_stripe_catalog_page){
-    $catalog_stripe_id = get_field('catalog_stripe');
-    $catalog_banner_classes = $catalog_banner_classes_array[0];
-    $banner_header_classes = $banner_header_classes_array[0];
-} else {
-    array_push($catalog_banner_classes_array,'customCatalogBanner');
-    $catalog_banner_classes = implode(' ', $catalog_banner_classes_array);
+/** getting Catalog banner classes + catalog title */
+$catalog_banner_classes = ['catalog-banner'];
+$banner_header_classes = ['catalog-header'];
 
-    array_push($banner_header_classes_array,'customCatalogHeader');
-    $banner_header_classes = implode(' ', $banner_header_classes_array);
+if($custom_stripe_catalog_page){
+    array_push($catalog_banner_classes,'customCatalogBanner');
+    array_push($banner_header_classes,'customCatalogHeader');
+    $catalog_title = $stripe_title;
+} else {
+    $catalog_stripe_id = get_field('catalog_stripe');
+    $catalog_title = getFieldByLanguage(get_field('catalog_title'), get_field('catalog_english_title'), get_field('catalog_arabic_title'), $sitepress->get_current_language());
 }
+$catalog_banner_classes = implode(' ', $catalog_banner_classes);
+$banner_header_classes = implode(' ', $banner_header_classes);
 
 $menu_filters = get_field('filters');
 $academic_institutions = pods( 'academic_institution', array('limit'   => -1 ));
@@ -75,7 +75,6 @@ $academic_name = cin_get_str('Institution_Name');
 $choose_str = __('Choose Institution', 'single_corse');
 $title_str = cin_get_str( 'filter_courses_title_ajax' );
 $my_class = "ajax_filter";
-$catalog_title = getFieldByLanguage(get_field('catalog_title'), get_field('catalog_english_title'), get_field('catalog_arabic_title'), $sitepress->get_current_language());
 $course_attrs = array(
     'class' => 'col-xs-12 col-md-6 col-xl-4 course-item-with-border',
 );
@@ -116,7 +115,7 @@ $no_results_found = $count_number === 0;
     <div class="back-img-2" ></div>
 
     <div class="catalog-banner-content">
-        <h1 class="<?= $banner_header_classes ?>"><?= $custom_stripe_catalog_page? $stripe_title: $catalog_title?></h1>
+        <h1 class="<?= $banner_header_classes ?>"><?= $catalog_title?></h1>
 
         <?php
         if(!$custom_stripe_catalog_page) {
@@ -185,7 +184,7 @@ $no_results_found = $count_number === 0;
                  <!--. LOAD MORE COURSES SKELETONS  -->
                 <?php get_template_part('template', 'parts/catalogCourse-skeleton'); ?>
 
-        <?php if($catalog_stripe_id){ ?>
+        <?php if(isset($catalog_stripe_id)){ ?>
                 <div class="catalogStripeWrap">
 
                     <?php

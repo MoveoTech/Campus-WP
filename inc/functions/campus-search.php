@@ -181,7 +181,7 @@ function getPodsFilterParams($filters = null) {
             $sql[] = $tagsQuery;
         };
         /** checking if its stripes custom catalog page */
-        if($filters['search']['stripe_id']){
+        if(isset($filters['search']['stripe_id'])){
             $stripeId = intval($filters['search']['stripe_id'][0]);
             $coursesIds = get_field('courses', $stripeId);
             $stripeQuery = "t.id IN (";

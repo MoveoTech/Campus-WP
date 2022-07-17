@@ -1,7 +1,6 @@
 //carusel slick to institution logos - home page
 import('./scrolling.js')
 import('./user_menu.js')
-import {isMobile} from './utils';
 var current_lang = jQuery('#current_lang').val();
 var is_rtl = !(jQuery('html[lang = "en-US"]').length > 0);
 var prevSlick = '<button type="button" class="slick-prev slick-button" tabindex="-1" aria-label="' + global_vars.prev_btn_text + '"></button>';
