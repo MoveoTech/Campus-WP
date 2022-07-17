@@ -85,15 +85,7 @@ $(document).ready(function () {
 
     /** Click event - sort by courses **/
     $('.sortOption').on('click', function (event) {
-        const coursesContainer = $('#coursesBox');
-        const containerChildren = coursesContainer.children();
-        const hasClass = containerChildren.hasClass("courseResultCard");
-        const sortByText = $('#sortByText').attr("data");
-        const idsContainer = $('#catalog_courses').data('value');
-        console.log("idsContainer inside click event --- ",idsContainer);
-        if(hasClass && (sortByText !== event.target.id)){
-            sortingByChoise(event,idsContainer);
-        }
+            sortingByChoise(event);
     })
 
     /** checking screen size for web or mobile menu */
@@ -291,16 +283,15 @@ function slickStripeForMobile() {
 
 function appendFilteredCourses(coursesData, loadedCourses = false) {
     let idsArray = [];
-    let coursesIdsDiv =  document.getElementById("catalog_courses");
+    let coursesIdsDiv =  $("#catalog_courses");
     const edxLang = getCookie('openedx-language-preference');
     const currentLang = edxLang ? edxLang.toLowerCase() : getCookie('wp-wpml_current_language').toLowerCase();
-    let coursesBox = document.getElementById("coursesBox");
+    let coursesBox = $("#coursesBox");
     let output = document.createElement("div");
     output.id = 'coursesBox';
     output.classList.add('row');
     output.classList.add('output-courses');
     output.classList.add('coursesResults');
-
     coursesData.forEach(item =>{
         idsArray.push(item.id);
     })
@@ -370,11 +361,9 @@ function appendFilteredCourses(coursesData, loadedCourses = false) {
 
     if(!loadedCourses) {
         coursesBox.replaceWith(output);
-        coursesIdsDiv.setAttribute("data-value",idsArray);
+        coursesIdsDiv.attr("data-value",idsArray.join());
     }
-
     $('.course-skeleton').hide();
-
     clickOnCourseInfoButton();
 }
 function updateCoursesCounter(count){
@@ -1092,21 +1081,32 @@ function resetSortByButton(){
     sortByElement.attr("data",sortType);
 }
 
-function sortingByChoise(choise,idsContainer){
-    const sortByText = $('#sortByText');
-    const sortType = choise.target.id;
-    const sortingValue = choise.target.innerText;
+function sortingByChoise(event){
+    const coursesContainer = $('#coursesBox');
+    const containerChildren = coursesContainer.children();
+    const hasClass = containerChildren.hasClass("courseResultCard");
+    const sortByTextAttr = $('#sortByText').attr("data");
+
+    if(hasClass && (sortByTextAttr !== event.target.id)) {
+        const sortByText = $('#sortByText');
+        const sortType = event.target.id;
+        const sortingValue = event.target.innerText;
+
+        /** targeting input to color the selected value  */
+        $('.sortOption').removeClass('active');
+        $(event.target).addClass('active');
+
+        /** changing button text to the selected value */
+        sortByText.text(sortingValue);
+        sortByText.attr("data",sortType);
+
+        if(containerChildren.length > 1){
+            const idsContainer = $('#catalog_courses').attr('data-value');
+            sortByAjax(idsContainer,sortType);
+        }
+    }
 
 
-    /** targeting input to color the selected value  */
-    $('.sortOption').removeClass('active');
-    $(choise.target).addClass('active');
-
-    /** changing button text to the selected value */
-    sortByText.text(sortingValue);
-    sortByText.attr("data",sortType);
-    
-    sortByAjax(idsContainer,sortType);
 
 }
 
