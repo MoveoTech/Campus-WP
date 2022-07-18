@@ -4,6 +4,9 @@ $user_name = get_user_hello();
 $user_login = get_user_login();
 $user_menu = get_user_menu();
 echo get_no_script_tags();
+
+$language_short = __('en', 'Menus_general');
+
 ?>
     <header class="above-banner header_section header_wrap" role="above_banner">
         <div class="flex-div">
@@ -72,7 +75,7 @@ echo get_no_script_tags();
                     </div>
                 </div>
                 <div class="header_login lang languages_menu_wrap">
-                    <?= lang_button(); ?>
+                    <button role="combobox" aria-expanded="false" class="dropdown_langs_btn"><?= $language_short ?></button>
                     <div class="menu-language-menu-container">
                         <ul id="menu-language-menu-1" class="nav-lang">
                             <li id="wpml-ls-item-he" class="wpml-ls-menu-item wpml-ls-item-he <?= current_active_lang( 'he' ) ?>"><a href="<?= get_lang_url( 'he' ) ?>"><span class="wpml-ls-native">עב</span></a></li>
@@ -108,82 +111,25 @@ function get_user_login()
     global $sitepress;
     $encoded_path = urlencode($_SERVER['REQUEST_URI']);
     $current_lang = $sitepress->get_current_language();
-    if ($current_lang === 'en') :
-        {
-            $login = 'Log in';
-            $register = 'Register';
-        }
-    elseif ($current_lang === 'he') :
-        {
-            $login = 'התחברות';
-            $register = 'הרשמה';
-        }
-    elseif ($current_lang === 'ar') :
-        {
-            $login = 'تسجيل الدخول';
-            $register = 'تسجيل';
-        }
-    endif;
+    $login = __('Log in', 'Menus_general');
+    $register = __('Register', 'Menus_general');
 
     return '
     <div class="header_login has_profile_icon">
         <a class="login-item"
-           href="'. get_field('link_to_login_and_register', 'option') .'/login?next=/home' . $encoded_path .'">'. __($login, 'single_corse') .'</a>
+           href="'. get_field('link_to_login_and_register', 'option') .'/login?next=/home' . $encoded_path .'">'.$login .'</a>
         <a class="register-item signin_'.$current_lang.'"
-           href="'. get_field('link_to_login_and_register', 'option') .'/register?next=/home' . $encoded_path .'"> ' . __($register, 'single_corse') .'</a>
+           href="'. get_field('link_to_login_and_register', 'option') .'/register?next=/home' . $encoded_path .'"> ' . $register .'</a>
     </div>';
 }
-function lang_button()
-{
-    $current = cin_get_str('header_current_languages');
-    if ($current === 'עברית') :
-        {
-            $new = 'עב';
-        }
-    elseif ($current === 'English') :
-        {
-            $new = 'en';
-        }
-    elseif ($current === 'العربية') :
-        {
-            $new = 'ar';
-        }
-    endif;
 
-    return '
-     
-                 <button role="combobox" aria-expanded="false" class="dropdown_langs_btn">' . $new .'</button>
-
-     ';
-}
 function get_user_menu() {
     global $sitepress;
     $current = $sitepress->get_current_language();
-
-    if ($current === 'he') :
-        {
-            $language = 'שינוי שפה';
-            $profile = 'פרופיל';
-            $controlpanel = 'לוח בקרה';
-            $logout = 'התנתקות';
-        }
-    elseif ($current === 'en') :
-        {
-            $language = 'Change Language';
-            $profile = 'Profile';
-            $controlpanel = 'Control Panel';
-            $logout = 'Log out';
-
-
-        }
-    elseif ($current === 'ar') :
-        {
-            $language = 'تغيير اللغة';
-            $profile = 'الملف الشخصي';
-            $controlpanel = 'لوحة المراقبة';
-            $logout = 'تسجيل خروج';
-        }
-    endif;
+    $language = __('Change Language', 'Menus_general');
+    $profile = __('Profile', 'Menus_general');
+    $controlpanel = __('Control Panel', 'Menus_general');
+    $logout = __('Log out', 'Menus_general');
 
     return '
     <ul id="menu-user-menu-1" class="nav-user">

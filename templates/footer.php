@@ -158,35 +158,14 @@ $mobile_menu = get_mobile_menu();
 <?php
 function get_mobile_menu() {
     $encoded_path = urlencode($_SERVER['REQUEST_URI']);
-    $current = cin_get_str('header_current_languages');
-    if ($current === 'עברית') :
-        {
-            $courses = 'הקורסים שלי';
-            $language = 'שינוי שפה';
-            $profile = 'פרופיל';
-            $controlpanel = 'לוח בקרה';
-            $logout = 'התנתקות';
-            $loginRegister = 'התחברות / הרשמה';
-        }
-    elseif ($current === 'English') :
-        {
-            $courses = 'My Courses';
-            $language = 'Change Language';
-            $profile = 'Profile';
-            $controlpanel = 'Control Panel';
-            $logout = 'Log out';
-            $loginRegister = 'Login / Register';
-        }
-    elseif ($current === 'العربية') :
-        {
-            $courses = 'دوراتي';
-            $language = 'تغيير اللغة';
-            $profile = 'الملف الشخصي';
-            $controlpanel = 'لوحة المراقبة';
-            $logout = 'تسجيل خروج';
-            $loginRegister = 'تسجيل الدخول / تسجيل';
-        }
-    endif;
+    $login = __('Log in', 'Menus_general');
+    $register = __('Register', 'Menus_general');
+    $loginRegister = $login.' / '.$register;
+    $logout = __('Log out', 'Menus_general');
+    $courses = __('My Courses', 'Menus_general');
+    $language = __('Change Language', 'Menus_general');
+    $profile = __('Profile', 'Menus_general');
+    $controlpanel = __('Control Panel', 'Menus_general');
 
     return '
     <ul id="menu-mobile-menu-1" class="nav-mobile">

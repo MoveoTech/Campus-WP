@@ -6,6 +6,7 @@ $filter = wp_parse_args(
 
 global $sitepress;
 $moreFilters = $filter['filters'];
+$adding_filter_button = __("Adding Filter", "Catalog_page")
 ?>
 
 <div id="morefiltersBox" class="moreFilters wrapEachFiltergroup">
@@ -14,7 +15,7 @@ $moreFilters = $filter['filters'];
 
         <div class="wrapEachFilterButton">
             <div class="buttonWrap" >
-                <p class="filterGroupTitle"><?= addingMoreFiltersLanguage(); ?></p>
+                <p class="filterGroupTitle"><?= $adding_filter_button ?></p>
                 <img class="filterVector" src="<?php echo get_bloginfo('stylesheet_directory'). '/assets/images/plus-sign.svg'?>"/>
             </div>
         </div>

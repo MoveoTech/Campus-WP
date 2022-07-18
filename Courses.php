@@ -99,18 +99,19 @@ $courses->rows = array_slice($courses->rows, 0,20);
 
 $courses_ids = implode(',', $courses_id_array);
 
-$count_show = getFieldByLanguage("מוצגים", "Show", "يتم تقديم", $current_language);
-$count_courses = getFieldByLanguage("קורסים", "Courses", "دورة", $current_language);
+$count_show = __('Show', 'Catalog_page');
+$count_courses = __('Courses', 'Catalog_page');
 $count_number = $courses->total();
+$mobile_menu_filter_button = __("Filter", "Catalog_page");
+
 
 /** translate numbers to arabic */
 if($current_language == 'ar'){
     $count_number = getArabicNumbers($count_number);
 }
     /** No result translate */
-$no_result_text_he = "לא מצאנו בדיוק את מה שחיפשת אבל אולי יעניין אותך...";
-$no_result_text_en = "We didn't find exactly what you were looking for but maybe you will be interested ...";
-$no_result_text_ar = "لم نعثر على ما كنت تبحث عنه بالضبط ولكن ربما تكون مهتمًا ...";
+
+$no_result_text = __("We didn't find exactly what you were looking for but maybe you will be interested ...", 'Catalog_page');
 
 $no_results_found = $count_number === 0;
 ?>
@@ -149,7 +150,7 @@ $no_results_found = $count_number === 0;
                     </div>
                     <div class="openFiltersMenu">
                         <div class="mobile-filters-counter"></div>
-                        <span><?= filtersMobileMenuLanguage(); ?></span>
+                        <span><?= $mobile_menu_filter_button ?></span>
                         <img class="filterVector" src="<?php echo get_bloginfo('stylesheet_directory'). '/assets/images/vector-black.svg'?>"/>
                     </div>
                 </div>
@@ -169,7 +170,7 @@ $no_results_found = $count_number === 0;
                     <?php if ( $no_results_found ) { ?>
 
                         <div>
-                            <p class="noResultText"><?= getFieldByLanguage($no_result_text_he, $no_result_text_en, $no_result_text_ar, $current_language) ?></p>
+                            <p class="noResultText"><?= $no_result_text ?></p>
                         </div>
                 <?php } else {
                         while ($courses->fetch()) {

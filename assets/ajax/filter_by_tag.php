@@ -45,7 +45,7 @@ function filteredCoursesData($filteredCourse,$lang){
         'permalink' => $filteredCourse->display('permalink'),
         'id' => $filteredCourse->display('ID'),
         'duration' => $filteredCourse->display('duration'),
-        'buttonText' => course_popup_button_text()
+        'buttonText' => __('Go to course page', 'Catalog_page')
     );
 }
 

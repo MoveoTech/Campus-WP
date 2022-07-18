@@ -50,7 +50,7 @@
     </div>
     <div class="popup-footer">
         <a href="<?php echo $url ?>">
-            <span><?php echo course_popup_button_text(); ?></span>
+            <span><?= __('Go to course page', 'Catalog_page') ?></span>
         </a>
     </div>
 </div>

@@ -64,7 +64,7 @@ function coursesData($data, $lang){
         'id' => $data->display('ID'),
         'course_id_edx' => $data->display('course_id_edx'),
         'duration' => $data->display('duration'),
-        'button_text' => course_popup_button_text()
+        'button_text' => __('Go to course page', 'Catalog_page')
     );
 }
 

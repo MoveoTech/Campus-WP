@@ -13,12 +13,16 @@ $filters = $filtersList['menuFilters'];
 $academic_name = cin_get_str('Institution_Name');
 $current_lang = $sitepress->get_current_language();
 
+$reset_filter_button = __("Reset Filters", "Catalog_page");
+
 /** sort by translate */
-$sortByRelevance = getFieldByLanguage("סידור לפי רלוונטיות", "Sort by Relevance", "ترتيب بحسب الملائمة", $current_lang);
-$sortByNewest = getFieldByLanguage("סידור לפי החדש ביותר", "Sort by The Newest", "ترتيب بحسب المساق الأجدد", $current_lang);
-$sortByOldest = getFieldByLanguage("סידור לפי הישן ביותר", "Sort by The Oldest", "ترتيب بحسب المساق الأقدم", $current_lang);
-$sortByAtoZ = getFieldByLanguage("סידור לפי א' עד ת'", "Sort by A to Z", "ترتيب من الألف الى الياء", $current_lang);
-$sortByZtoA = getFieldByLanguage("סידור לפי ת' עד א'", "Sort by Z to A", " ترتيب من الياء الى ألألف", $current_lang);
+$sortByRelevance = __( "Sort by Relevance","Catalog_page");
+$sortByNewest = __( "Sort by The Newest", "Catalog_page");
+$sortByOldest = __( "Sort by The Oldest","Catalog_page");
+$sortByAtoZ = __( "Sort by A to Z", "Catalog_page");
+$sortByZtoA = __( "Sort by Z to A", "Catalog_page");
+
+
 
 ?>
 
@@ -55,7 +59,7 @@ $sortByZtoA = getFieldByLanguage("סידור לפי ת' עד א'", "Sort by Z to
         } ?>
 
         <div class="wrapEachFilterButton" id="resetButton">
-            <p class="resetFilterButton filterGroupTitle"><?= ResetFiltersLanguage(); ?></p>
+            <p class="resetFilterButton filterGroupTitle"><?= $reset_filter_button ?></p>
         </div>
 
         <!--order by section-->

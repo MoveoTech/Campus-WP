@@ -9,8 +9,9 @@ global $sitepress;
 $current_language = $sitepress->get_current_language();
 
 $courses_url = home_url('/catalog/?stripe_id=') . $stripe['id'];
-$count_show = getFieldByLanguage("הצג את", "Show all", "أعرض", $current_language);
-$count_courses = getFieldByLanguage("הקורסים", "Courses", "مساق", $current_language);
+
+$count_show = __('Show all', 'Stripes');
+$count_courses = __('Courses', 'Stripes');
 $count_number = count($stripe['carousel']);
 
 /** translate numbers to arabic */
