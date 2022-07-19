@@ -158,14 +158,14 @@ $mobile_menu = get_mobile_menu();
 <?php
 function get_mobile_menu() {
     $encoded_path = urlencode($_SERVER['REQUEST_URI']);
-    $login = __('Log in', 'Menus_general');
-    $register = __('Register', 'Menus_general');
+    $login = __('Log in', 'General');
+    $register = __('Register', 'General');
     $loginRegister = $login.' / '.$register;
-    $logout = __('Log out', 'Menus_general');
-    $courses = __('My Courses', 'Menus_general');
-    $language = __('Change Language', 'Menus_general');
-    $profile = __('Profile', 'Menus_general');
-    $controlpanel = __('Control Panel', 'Menus_general');
+    $logout = __('Log out', 'General');
+    $courses = __('My Courses', 'General');
+    $language = __('Change Language', 'General');
+    $profile = __('Profile', 'General');
+    $controlpanel = __('Control Panel', 'General');
 
     return '
     <ul id="menu-mobile-menu-1" class="nav-mobile">

@@ -5,7 +5,7 @@ $user_login = get_user_login();
 $user_menu = get_user_menu();
 echo get_no_script_tags();
 
-$language_short = __('en', 'Menus_general');
+$language_short = __('en', 'General');
 
 ?>
     <header class="above-banner header_section header_wrap" role="above_banner">
@@ -111,8 +111,8 @@ function get_user_login()
     global $sitepress;
     $encoded_path = urlencode($_SERVER['REQUEST_URI']);
     $current_lang = $sitepress->get_current_language();
-    $login = __('Log in', 'Menus_general');
-    $register = __('Register', 'Menus_general');
+    $login = __('Log in', 'General');
+    $register = __('Register', 'General');
 
     return '
     <div class="header_login has_profile_icon">
@@ -126,10 +126,10 @@ function get_user_login()
 function get_user_menu() {
     global $sitepress;
     $current = $sitepress->get_current_language();
-    $language = __('Change Language', 'Menus_general');
-    $profile = __('Profile', 'Menus_general');
-    $controlpanel = __('Control Panel', 'Menus_general');
-    $logout = __('Log out', 'Menus_general');
+    $language = __('Change Language', 'General');
+    $profile = __('Profile', 'General');
+    $controlpanel = __('Control Panel', 'General');
+    $logout = __('Log out', 'General');
 
     return '
     <ul id="menu-user-menu-1" class="nav-user">
