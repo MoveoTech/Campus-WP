@@ -403,7 +403,7 @@ function appendUrlParams(filters) {
     let currentUrl = window.location.href;
     let resetUrl = currentUrl.split('?')[0];
     let url = new URL(resetUrl);
-    if(!filters || filters.length === 0) {
+    if(!filters['search'] || filters === {}) {
         window.history.replaceState({}, '', url);
         return;
     }
@@ -416,14 +416,12 @@ function appendUrlParams(filters) {
                     let key = k + '_' + tag;
                     let valuesArray = filters['search'][k][tag];
                     let valuesString = valuesArray.toString();
-
                     url.searchParams.set(key, valuesString);
                     window.history.pushState({}, '', url);
                     i++
                 })
             } else {
                 Object.keys(filters['search'][k]).some(() => {
-
                     let key = k ;
                     let valuesArray = filters['search'][k];
                     let valuesString = valuesArray.toString();
