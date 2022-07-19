@@ -403,7 +403,7 @@ function appendUrlParams(filters) {
     let currentUrl = window.location.href;
     let resetUrl = currentUrl.split('?')[0];
     let url = new URL(resetUrl);
-    if(!filters['search'] || filters === {}) {
+    if( Object.keys(filters).length === 0) {
         window.history.replaceState({}, '', url);
         return;
     }
@@ -436,7 +436,6 @@ function appendUrlParams(filters) {
 
 function markCheckboxes(params) {
     let entries = params.entries();
-
     let filterItems;
     if(campusUtils.isMobile()) {
         filterItems = $('#filtersSectionMobile .checkbox-filter-search');
@@ -455,7 +454,7 @@ function markCheckboxes(params) {
             const tagId = entry[1].split('-')[0];
             const currentLang = getCookie('openedx-language-preference') ? getCookie('openedx-language-preference') : getCookie('wp-wpml_current_language');
             let group_title = getFieldByLanguage('התאמה מיוחדת', 'Customize Tag', 'تناسب خاص', currentLang);
-            appendSpecialGroupFilter(group_title)
+            appendSpecialGroupFilter(group_title);
             getTagById(tagId, group_title);
         }
 
