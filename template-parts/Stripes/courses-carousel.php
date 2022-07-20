@@ -2,6 +2,7 @@
 $stripe = wp_parse_args(
     $args["args"]
 );
+use Campus\Campus_Card_Program;
 
 if(empty($stripe) || empty($stripe['id']) || empty($stripe['courses']) || count($stripe['courses']) < 1 )
     return;
@@ -11,12 +12,19 @@ $courses_slice = array_slice($stripe['courses'], 0, 12);
 $courses = pods( 'courses', podsParams($courses_slice));
 /** single pages slug */
 $single_course_slug = 'onlinecourse/';
+
+$program_id = '1';
+$stripe_id = $stripe['id'];
+$program_card = new Campus_Card_Program($program_id, $stripe_id);
+//$program_card->getStripeCard($program_id , $stripe_id);
 ?>
 
 <div class="stripe-slider-slick">
     <div hidden id="<?php echo $stripe['id'] . "courses" ?>" value="<?php  print_r(json_encode($stripe['courses'])); ?>" ></div>
     <div id="<?php echo $stripe['id'] ?>" class="courses-stripe <?php echo ($stripe['type'] && $stripe['type'] == 'nerative' ) ? 'nerative-class' : '' ?>">
     <?php
+    $program_card->getStripeCard($program_id , $stripe_id);
+
     while ($courses->fetch()) {
         $hide_in_site = strtolower($courses->display('hide_in_site'));
         if($hide_in_site == 'no'){

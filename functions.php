@@ -19,6 +19,24 @@ include locate_template( 'assets/ajax/sort_by_courses.php' );
 include locate_template( 'assets/ajax/get_tag_data.php' );
 include locate_template( 'assets/ajax/add_filters_to_menu.php' );
 
+
+/* =================================== */
+/*                                      **/
+/*          Base Card                   **/
+/*                                      **/
+/* =================================== */
+
+require_once get_theme_file_path( 'inc/classes/cards/class-campus-card-base.php' );
+
+
+/* =================================== */
+/*                                      **/
+/*         Program Card                 **/
+/*                                      **/
+/* =================================== */
+
+require_once get_theme_file_path( 'inc/classes/cards/class-campus-card-program.php' );
+
 /**
  * Daat Ester
  * Adding option page to header and footer
