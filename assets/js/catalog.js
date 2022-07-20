@@ -315,7 +315,7 @@ function appendFilteredCourses(coursesData, loadedCourses = false) {
         let buttonText = item.buttonText;
 
         if(academicInstitution){
-            institutionName = '<p class="institutionName">'+ academicInstitution +' </p>'
+            academicInstitution = '<p class="institutionName">'+ academicInstitution +' </p>'
         }
         let temp = document.createElement("div");
         temp.classList.add('courseResultCard');
@@ -327,7 +327,7 @@ function appendFilteredCourses(coursesData, loadedCourses = false) {
             '<span class="info-button"></span></div>'+
             '<div class="itemContent">'+
             '<h3 ><a href="'+ url +'">'+name+'</a></h3>'
-            +institutionName+
+            +academicInstitution+
             '<div class="tagsDiv">'+tags+ '</div>'+
             '<p class="courseDuration">'+duration+ '</p>'+
             '</div>'+
@@ -340,7 +340,7 @@ function appendFilteredCourses(coursesData, loadedCourses = false) {
             '<div class="course-details">'+
             '<div class="course-header"">'+
             '<h3 ><a href="'+ url +'">'+name+'</a></h3>'
-            +institutionName+
+            +academicInstitution+
             '</div>'+
             '<div class="tags-div">'+ hoverTags +'</div>'+
             '<div class="details">'+
