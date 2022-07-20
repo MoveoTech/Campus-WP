@@ -112,7 +112,7 @@ function getPodsFilterParams($filters = null) {
                 $search_orderBy[] = $orderBy_text;
             }
 
-            $singleSearchQuery = implode(' OR ', $sqlSearch) ;
+            $singleSearchQuery = "(" . implode(' OR ', $sqlSearch) . ")" ;
             $sql[] = $singleSearchQuery;
             $order .= "(" . implode('+', $search_orderBy) . ") DESC, " ;
         }
