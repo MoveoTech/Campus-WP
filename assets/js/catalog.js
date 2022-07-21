@@ -366,6 +366,7 @@ function appendFilteredCourses(coursesData, loadedCourses = false) {
     $('.course-skeleton').hide();
     clickOnCourseInfoButton();
 }
+
 function updateCoursesCounter(count){
     const currentLang = getCookie('openedx-language-preference') ? getCookie('openedx-language-preference') : getCookie('wp-wpml_current_language');
     let counterValue = $('#counterValue');
@@ -379,6 +380,7 @@ function updateCoursesCounter(count){
         }
     counterValue.text(count);
 }
+
 function getCourseResultTags(tags) {
     let tagsHtml = '';
     if(tags.length >=3){
@@ -437,6 +439,8 @@ function appendUrlParams(filters) {
 function markCheckboxes(params) {
     let entries = params.entries();
     let filterItems;
+    let hasTagStripe = false;
+
     if(campusUtils.isMobile()) {
         filterItems = $('#filtersSectionMobile .checkbox-filter-search');
     } else {
@@ -444,18 +448,51 @@ function markCheckboxes(params) {
     }
 
     let tagsObj = {};
+
+    /** Check if has params in the url */
+    if(!params.entries().next().value) {
+        const currentLang = getCookie('openedx-language-preference') ? getCookie('openedx-language-preference') : getCookie('wp-wpml_current_language');
+        filterItems.each((index, element) => {
+            let id = element.id;
+            let type = $(`#${id}`).data('name');
+            let englishValue = $(`#${id}`).data('value');
+            let group = $(`#${id}`).data('group');
+
+            if (type === 'language') {
+                let lang;
+                switch (currentLang) {
+                    case 'he':
+                        lang = 'Hebrew';
+                        break;
+                    case 'en':
+                        lang = 'English';
+                        break;
+                    case 'ar':
+                        lang = 'Arabic';
+                        break;
+                }
+
+                if (englishValue.includes(lang)) {
+                    $(`#${id}`).prop('checked', true)
+
+                    /** Append new selected tag */
+                    tagsObj[group] = tagsObj[group] ? tagsObj[group] : [];
+                    tagsObj[group].push($(`#${id}`).val());
+
+                    let currentUrl = window.location.href;
+                    let url = new URL(currentUrl);
+                    url.searchParams.set(type, lang);
+                    window.history.pushState({}, '', url);
+                }
+            }
+        });
+    }
+
     for ( entry of entries) {
+
         if(entry[0] == 'text_s') {
            let inputValue = entry[1].replaceAll(`\\`, "");
             $('.search-field').val(inputValue);
-        }
-
-        if(entry[0] === 'tags_Stripe') {
-            const tagId = entry[1].split('-')[0];
-            const currentLang = getCookie('openedx-language-preference') ? getCookie('openedx-language-preference') : getCookie('wp-wpml_current_language');
-            let group_title = getFieldByLanguage('התאמה מיוחדת', 'Customize Tag', 'تناسب خاص', currentLang);
-            appendSpecialGroupFilter(group_title);
-            getTagById(tagId, group_title);
         }
 
         filterItems.each((index, element) => {
@@ -499,49 +536,25 @@ function markCheckboxes(params) {
                 }
             }
         });
+
+        if(entry[0] === 'tags_Stripe') {
+            hasTagStripe = true;
+            const tagId = entry[1].split('-')[0];
+            const currentLang = getCookie('openedx-language-preference') ? getCookie('openedx-language-preference') : getCookie('wp-wpml_current_language');
+            let group_title = getFieldByLanguage('התאמה מיוחדת', 'Custom Tag', 'تناسب خاص', currentLang);
+            appendSpecialGroupFilter(group_title);
+            getTagById(tagId, group_title, tagsObj);
+        }
+
+    }
+    
+    if(!hasTagStripe) {
+
+        /** Append new selected tags to DOM */
+        appendSelectedTagsToDOM(tagsObj)
+
     }
 
-    /** Check if has params in the url */
-    if(!params.entries().next().value) {
-        const currentLang = getCookie('openedx-language-preference') ? getCookie('openedx-language-preference') : getCookie('wp-wpml_current_language');
-        filterItems.each((index, element) => {
-            let id = element.id;
-            let type = $(`#${id}`).data('name');
-            let englishValue = $(`#${id}`).data('value');
-            let group = $(`#${id}`).data('group');
-
-            if (type === 'language') {
-                let lang;
-                switch (currentLang) {
-                    case 'he':
-                        lang = 'Hebrew';
-                        break;
-                    case 'en':
-                        lang = 'English';
-                        break;
-                    case 'ar':
-                        lang = 'Arabic';
-                        break;
-                }
-
-                if (englishValue.includes(lang)) {
-                    $(`#${id}`).prop('checked', true)
-
-                    /** Append new selected tag */
-                    tagsObj[group] = tagsObj[group] ? tagsObj[group] : [];
-                    tagsObj[group].push($(`#${id}`).val());
-
-                    let currentUrl = window.location.href;
-                    let url = new URL(currentUrl);
-                    url.searchParams.set(type, lang);
-                    window.history.pushState({}, '', url);
-                }
-            }
-        });
-    }
-
-    /** Append new selected tags to DOM */
-    appendSelectedTagsToDOM(tagsObj)
 }
 
 function removeSelectedTags() {
@@ -598,18 +611,26 @@ function appendSelectedTagsToDOM(tagsObj, isMobile = false) {
             selectedTagsDiv.append(selectedTag)
         }
     }
+
     if(filterCounter > 0){
+
         if(!$('.mobile-filters-counter').is(':visible')) {
             $('.mobile-filters-counter').show()
         }
         $('.mobile-filters-counter').text(filterCounter)
+
     } else {
+
         $('.mobile-filters-counter').hide()
+
     }
+
     if(!isMobile){
         $('#selectedTags').replaceWith(selectedTagsDiv)
     }
+
     removeSelectedTags()
+
     filterByTagEvent()
 }
 
@@ -873,7 +894,7 @@ async function loadCourses(coursesArray = []) {
     }
 }
 
-function getTagById(tagId, group_title) {
+function getTagById(tagId, group_title, tagsObj) {
     let data = {
         'action': 'get_tag_data',
         'type' : 'tags',
@@ -885,7 +906,7 @@ function getTagById(tagId, group_title) {
         if(response.success) {
             const responseData = JSON.parse(response.data);
             const tag = responseData['tag'];
-            appendSpecialTagToGroup(tag, group_title)
+            appendSpecialTagToGroup(tag, group_title, tagsObj)
             openCheckboxEvent();
         }
     })
@@ -928,7 +949,7 @@ function appendSpecialGroupFilter(group_title) {
  *  Add tag from tags stripe to special filters group
  *  after tag data return from Ajax call
  *  */
-function appendSpecialTagToGroup(tag, group_title) {
+function appendSpecialTagToGroup(tag, group_title, tagsObj) {
     let container = document.getElementById('extraFilter_stripe_tag_filter');
     let temp = document.createElement("div");
     temp.classList.add('filterInput');
@@ -937,7 +958,6 @@ function appendSpecialTagToGroup(tag, group_title) {
     let englishName = tag['english_name'];
     let tagId = tag['id'];
     let checked = ' checked';
-    let tagsObj = {};
     tagsObj[group_title] = [name];
 
     temp.innerHTML =
@@ -1064,6 +1084,7 @@ function getCourses() {
     /** Append new selected tags to DOM */
     appendSelectedTagsToDOM(tagsObj, isMobile)
 }
+
 function resetSortByButton(){
     const sortByElement = $('#sortByText');
     const currentLang = getCookie('openedx-language-preference') ? getCookie('openedx-language-preference') : getCookie('wp-wpml_current_language');
