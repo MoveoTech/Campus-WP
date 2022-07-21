@@ -439,6 +439,8 @@ function appendUrlParams(filters) {
 function markCheckboxes(params) {
     let entries = params.entries();
     let filterItems;
+    let hasTagStripe = false;
+
     if(campusUtils.isMobile()) {
         filterItems = $('#filtersSectionMobile .checkbox-filter-search');
     } else {
@@ -446,7 +448,48 @@ function markCheckboxes(params) {
     }
 
     let tagsObj = {};
+
+    /** Check if has params in the url */
+    if(!params.entries().next().value) {
+        const currentLang = getCookie('openedx-language-preference') ? getCookie('openedx-language-preference') : getCookie('wp-wpml_current_language');
+        filterItems.each((index, element) => {
+            let id = element.id;
+            let type = $(`#${id}`).data('name');
+            let englishValue = $(`#${id}`).data('value');
+            let group = $(`#${id}`).data('group');
+
+            if (type === 'language') {
+                let lang;
+                switch (currentLang) {
+                    case 'he':
+                        lang = 'Hebrew';
+                        break;
+                    case 'en':
+                        lang = 'English';
+                        break;
+                    case 'ar':
+                        lang = 'Arabic';
+                        break;
+                }
+
+                if (englishValue.includes(lang)) {
+                    $(`#${id}`).prop('checked', true)
+
+                    /** Append new selected tag */
+                    tagsObj[group] = tagsObj[group] ? tagsObj[group] : [];
+                    tagsObj[group].push($(`#${id}`).val());
+
+                    let currentUrl = window.location.href;
+                    let url = new URL(currentUrl);
+                    url.searchParams.set(type, lang);
+                    window.history.pushState({}, '', url);
+                }
+            }
+        });
+    }
+
     for ( entry of entries) {
+
         if(entry[0] == 'text_s') {
            let inputValue = entry[1].replaceAll(`\\`, "");
             $('.search-field').val(inputValue);
@@ -493,60 +536,24 @@ function markCheckboxes(params) {
                 }
             }
         });
+
+        if(entry[0] === 'tags_Stripe') {
+            hasTagStripe = true;
+            const tagId = entry[1].split('-')[0];
+            const currentLang = getCookie('openedx-language-preference') ? getCookie('openedx-language-preference') : getCookie('wp-wpml_current_language');
+            let group_title = getFieldByLanguage('התאמה מיוחדת', 'Customize Tag', 'تناسب خاص', currentLang);
+            appendSpecialGroupFilter(group_title);
+            getTagById(tagId, group_title, tagsObj);
+        }
+
     }
-
-    /** Check if has params in the url */
-    if(!params.entries().next().value) {
-        const currentLang = getCookie('openedx-language-preference') ? getCookie('openedx-language-preference') : getCookie('wp-wpml_current_language');
-        filterItems.each((index, element) => {
-            let id = element.id;
-            let type = $(`#${id}`).data('name');
-            let englishValue = $(`#${id}`).data('value');
-            let group = $(`#${id}`).data('group');
-
-            if (type === 'language') {
-                let lang;
-                switch (currentLang) {
-                    case 'he':
-                        lang = 'Hebrew';
-                        break;
-                    case 'en':
-                        lang = 'English';
-                        break;
-                    case 'ar':
-                        lang = 'Arabic';
-                        break;
-                }
-
-                if (englishValue.includes(lang)) {
-                    $(`#${id}`).prop('checked', true)
-
-                    /** Append new selected tag */
-                    tagsObj[group] = tagsObj[group] ? tagsObj[group] : [];
-                    tagsObj[group].push($(`#${id}`).val());
-
-                    let currentUrl = window.location.href;
-                    let url = new URL(currentUrl);
-                    url.searchParams.set(type, lang);
-                    window.history.pushState({}, '', url);
-                }
-            }
-        });
-    }
-
-    if(entry[0] === 'tags_Stripe') {
-        const tagId = entry[1].split('-')[0];
-        const currentLang = getCookie('openedx-language-preference') ? getCookie('openedx-language-preference') : getCookie('wp-wpml_current_language');
-        let group_title = getFieldByLanguage('התאמה מיוחדת', 'Customize Tag', 'تناسب خاص', currentLang);
-        appendSpecialGroupFilter(group_title);
-        getTagById(tagId, group_title, tagsObj);
-    } else {
+    
+    if(!hasTagStripe) {
 
         /** Append new selected tags to DOM */
         appendSelectedTagsToDOM(tagsObj)
 
     }
-
 
 }
 
