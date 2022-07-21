@@ -17,7 +17,6 @@ $count_number = count($stripe['carousel']);
 if($current_language == 'ar'){
     $count_number = getArabicNumbers($count_number);
 }
-
 ?>
 
 <div class="home-page-courses-stripe">

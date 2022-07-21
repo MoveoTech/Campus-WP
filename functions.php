@@ -26,7 +26,7 @@ include locate_template( 'assets/ajax/add_filters_to_menu.php' );
 /*                                      **/
 /* =================================== */
 
-require_once get_theme_file_path( 'inc/classes/cards/class-campus-card-base.php' );
+require_once get_theme_file_path( 'inc/classes/cards/class-campus-card.php' );
 
 
 /* =================================== */
